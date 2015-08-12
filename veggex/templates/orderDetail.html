@@ -1,0 +1,65 @@
+ {% extends 'base.html' %}
+    {%block content%}
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                  <li><a href="#">Home</a></li>
+                  <li class="active">Shopping Cart</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description"></td>
+                            <td class="seller">Qty</td>
+                            <td class="price">Rate</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {% for orderitem in orderitems %}
+                        <tr>
+                            <td class="cart_product">
+                                <a href=""><img src="{{orderitemitem.product.coverphoto.url}}" width="35" height="35" alt=""></a>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">{{orderitemitem.product.name}}</a></h4>
+                                <div style="width:500"><p>{{orderitemitem.product.description}}<p></div>
+                            </td>
+                            <td class="cart_price">
+                                <p>{{orderitem.qtyInUnits}} x {{orderitem.unit}}</p>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price"><b>{{orderitem.priceAtThatTime}}</b> per  {{orderitem.unit}} </p>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+
+    <section id="do_action">
+        <div class="container">
+            <div class="heading">
+                <h3>order total details</h3>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="total_area">
+                        <ul>
+                            <li>Total <span>{{order.subtotal}}</span></li>
+                        </ul>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/#do_action-->
+    {%endblock%}
