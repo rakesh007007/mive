@@ -25,7 +25,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
         fields = ('product_id', 'name', 'description',
-                  'category', 'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','seller','coverphotourl','origin')
+                  'category', 'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','coverphotourl','origin')
 class CartitemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Cartitem
@@ -35,6 +35,3 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
 class OrderitemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Orderitem
-class SellerSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model =Seller

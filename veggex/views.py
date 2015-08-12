@@ -162,14 +162,6 @@ class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-class SellerViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
-    queryset = Seller.objects.all()
-    serializer_class = SellerSerializer
 def get_or_create_csrf_token(request):
 
     token = request.META.get('CSRF_COOKIE', None)

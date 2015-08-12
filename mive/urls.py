@@ -13,7 +13,6 @@ router.register(r'api/cart', views.CartViewSet)
 router.register(r'api/cartitem', views.CartitemViewSet)
 router.register(r'api/order', views.OrderViewSet)
 router.register(r'api/orderditem', views.OrderitemViewSet)
-router.register(r'api/seller', views.SellerViewSet)
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^authtoken/', views.TestView.as_view(), name='auth-view'),
