@@ -52,8 +52,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+PROJECT_ROOT = os.path.dirname(__file__)
 
-MEDIA_ROOT = "media/"
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = 'media/'
 
 ROOT_URLCONF = 'mive.urls'
