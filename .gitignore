@@ -1,3 +1,9 @@
 media/
 static/
 env/
+env
+bin/
+include/
+lib/
+local/
+pip-selfcheck.json
