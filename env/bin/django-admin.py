@@ -1,4 +1,4 @@
-#!/home/devrakx/Desktop/startup/env/bin/python
+#!/home/devrakx/Desktop/bkp/host/mive/env/bin/python
 from django.core import management
 
 if __name__ == "__main__":

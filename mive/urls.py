@@ -5,22 +5,24 @@ from veggex import views
 from django.contrib.staticfiles.urls import *
 from mive.settings import *
 router = routers.DefaultRouter()
-router.register(r'api/address', views.AddressViewSet)
-router.register(r'api/category', views.CategoryViewSet)
-router.register(r'api/product', views.ProductViewSet)
-router.register(r'api/user', views.UserViewSet)
-router.register(r'api/cart', views.CartViewSet)
-router.register(r'api/cartitem', views.CartitemViewSet)
-router.register(r'api/order', views.OrderViewSet)
-router.register(r'api/orderditem', views.OrderitemViewSet)
+router.register(r'address', views.AddressViewSet)
+router.register(r'category', views.CategoryViewSet)
+router.register(r'product', views.ProductViewSet)
+router.register(r'user', views.UserViewSet)
+router.register(r'cart', views.CartViewSet)
+router.register(r'cartitem', views.CartitemViewSet)
+router.register(r'order', views.OrderViewSet)
+router.register(r'orderditem', views.OrderitemViewSet)
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^authtoken/', views.TestView.as_view(), name='auth-view'),
     url(r'^api/login', views.UserLoginView.as_view(), name='login-view'),
     url(r'^try', views.tryy),
-    url(r'^', include(router.urls)),
+    url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^login', views.login),
+     url(r'^index/', views.main),
+     url(r'^index.html/', views.main),
     url(r'^logPost', views.logPost),
     url(r'^logout', views.logout),
     url(r'^main', views.main),

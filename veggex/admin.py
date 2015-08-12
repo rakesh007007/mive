@@ -11,3 +11,7 @@ admin.site.register(Cart)
 admin.site.register(Cartitem)
 admin.site.register(Order)
 admin.site.register(Orderitem)
+admin.site.register(Seller)
+admin.site.register(Mandi)
+
+

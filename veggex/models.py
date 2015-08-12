@@ -43,6 +43,15 @@ class User(models.Model):
 
     def __unicode__(self):
     	return str(self.nameOfInstitution)
+class Mandi(models.Model):
+    mandi_id = models.AutoField(primary_key=True)
+    nameOfMandi = models.CharField(max_length=300, blank=False, null=False)
+    description =models.TextField(blank=False, null=False)
+    Photo = models.ImageField(blank=True,null=True)
+    address = models.ForeignKey(Address, blank=True, null=True)
+
+    def __unicode__(self):
+    	return str(self.nameOfMandi)
 class Seller(models.Model):
     seller_id = models.AutoField(primary_key=True)
     nameOfSeller = models.CharField(max_length=300, blank=False, null=False)
@@ -50,9 +59,10 @@ class Seller(models.Model):
     mobileNo = models.BigIntegerField(blank=False,null=False)
     profilePhoto = models.ImageField(blank=True,null=True)
     address = models.ForeignKey(Address, blank=True, null=True)
+    mandi = models.ForeignKey(Mandi,blank=True,null=True)
 
     def __unicode__(self):
-    	return str(self.nameOfInstitution)
+    	return str(self.nameOfSeller)
 class Category(models.Model):
 	category_id = models.AutoField(primary_key=True)
 	name=models.CharField(max_length=300,blank=False,null=False)

@@ -1,4 +1,4 @@
-#!/home/devrakx/Desktop/startup/env/bin/python
+#!/home/devrakx/Desktop/bkp/host/mive/env/bin/python
 #
 # The Python Imaging Library
 # $Id$
