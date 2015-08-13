@@ -121,3 +121,5 @@ class Orderitem(models.Model):
 class Subscribe(models.Model):
 	id = models.AutoField(primary_key=True)
 	email = models.TextField(blank=False,null=False)
+	def __unicode__(self):
+		return str(self.email)
