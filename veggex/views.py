@@ -81,13 +81,17 @@ class UserLoginView(APIView):
 		mobile = request.data['mobile']
 		print(mobile)
 		print 'yo request coming'
-		password = request.data['password']
-		u= User.objects.filter(mobileNo=mobile).filter(password=password)
-		userselized = str(u[0])
-		if(len(u)>0):
-			return Response({'result': "true",'user':u[0].user_id})
-		else:
+		try:
+			password = request.data['password']
+			u= User.objects.filter(mobileNo=mobile).filter(password=password)
+			userselized = str(u[0])
+			if(len(u)>0):
+				return Response({'result': "true",'user':u[0].user_id})
+			else:
+				return Response({'result': "false"})
+		except:
 			return Response({'result': "false"})
+
 		if "mobile" not in data or "password" not in data:
 			return Response('Wrong credentials',status=status.HTTP_401_UNAUTHORIZED)
 class AddressViewSet(viewsets.ModelViewSet):
