@@ -35,7 +35,7 @@ urlpatterns = [
     url(r'^makeOrder', views.makeOrder),
     url(r'^seeOrder', views.seeOrder),
     url(r'^account', views.account),
-    url(r'^', views.tryy),
+    url(r'^$', views.tryy),
 
 
 ]
