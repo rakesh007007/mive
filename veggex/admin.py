@@ -13,5 +13,6 @@ admin.site.register(Order)
 admin.site.register(Orderitem)
 admin.site.register(Seller)
 admin.site.register(Mandi)
+admin.site.register(Subscribe)
 
 

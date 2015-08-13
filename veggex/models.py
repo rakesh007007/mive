@@ -118,3 +118,6 @@ class Orderitem(models.Model):
 	priceType = models.CharField(max_length=200,choices=priceType)
 	priceAtThatTime = models.IntegerField()
 	product = models.ForeignKey(Product,blank=False,null=False)
+class Subscribe(models.Model):
+	id = models.AutoField(primary_key=True)
+	email = models.TextField(blank=False,null=False)

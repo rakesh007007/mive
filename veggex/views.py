@@ -190,7 +190,13 @@ def orderDetail(request):
 		orderitems = Orderitem.objects.filter(order=order)
 		return TemplateResponse(request, 'orderDetail.html',{'orderitems':orderitems,'order':order,'csrf_token':get_or_create_csrf_token(request)})
 def tryy(request):
-	return TemplateResponse(request, 'tryy.html',{'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'webuild/index.html',{'csrf_token':get_or_create_csrf_token(request)})
+def subscribe(request):
+	email =request.POST['email']
+	subscribe=Subscribe()
+	subscribe.email = email
+	subscribe.save()
+	return HttpResponse('Thank you!will get back to you')
 def checklogin(request):
 	if ('loggedin' not in request.session):
 		return False

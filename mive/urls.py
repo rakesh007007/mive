@@ -17,11 +17,11 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^authtoken/', views.TestView.as_view(), name='auth-view'),
     url(r'^api/login', views.UserLoginView.as_view(), name='login-view'),
-    url(r'^try', views.tryy),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^login', views.login),
-     url(r'^index/', views.main),
+    url(r'^subscribe', views.subscribe),
+    url(r'^index/', views.tryy),
      url(r'^index.html/', views.main),
     url(r'^logPost', views.logPost),
     url(r'^logout', views.logout),
@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^makeOrder', views.makeOrder),
     url(r'^seeOrder', views.seeOrder),
     url(r'^account', views.account),
+    url(r'^', views.tryy),
 
 
 ]
