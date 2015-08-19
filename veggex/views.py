@@ -260,9 +260,10 @@ class UserLoginView(APIView):
 		print 'yo request coming'
 		try:
 			password = request.data['password']
-			u= User.objects.filter(mobileNo=mobile).filter(password=password)
-			userselized = str(u[0])
-			if(len(u)>0):
+			#u= User.objects.filter(mobileNo=mobile).filter(password=password)
+			u= User.objects.filter(mobileNo=mobile)
+			if(check_password(password,u[0].password)):
+				userselized = str(u[0])
 				return Response({'result': "true",'user':u[0].user_id})
 			else:
 				return Response({'result': "false"})
