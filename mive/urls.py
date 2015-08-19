@@ -12,14 +12,18 @@ router.register(r'user', views.UserViewSet)
 router.register(r'cart', views.CartViewSet)
 router.register(r'cartitem', views.CartitemViewSet)
 router.register(r'order', views.OrderViewSet)
-router.register(r'orderditem', views.OrderitemViewSet)
+router.register(r'orderitem', views.OrderitemViewSet)
+router.register(r'seller', views.SellerViewSet)
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^authtoken/', views.TestView.as_view(), name='auth-view'),
     url(r'^api/login', views.UserLoginView.as_view(), name='login-view'),
+    #url(r'^api/custom/product/', views.UserLoginView.as_view(), name='login-view'),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^login', views.login),
+    url('^api/test2/', views.Test2View.as_view()),
+    url('^api/test3/', views.Test3View.as_view(),name='rakesh'),
     url(r'^subscribe', views.subscribe),
     url(r'^index/', views.tryy),
      url(r'^index.html/', views.main),
@@ -36,6 +40,15 @@ urlpatterns = [
     url(r'^seeOrder', views.seeOrder),
     url(r'^account', views.account),
     url(r'^$', views.tryy),
+    url('^api/product/category/(?P<pid>.+)/$', views.ProductsByCategoryList.as_view()),
+    url('^api/cart/cartitems/(?P<cartid>.+)/$', views.ItemsOfCartList.as_view()),
+    url('^api/user/orders/(?P<userid>.+)/$', views.OrdersOfUserList.as_view()),
+    url('^api/order/items/(?P<orderid>.+)/$', views.ItemsOfOrderList.as_view()),
+    url('^api/user/customcategory/(?P<userid>.+)/$', views.CustomCategoryProductsList.as_view()),
+    url('^api/addtocart/$', views.ApiAddToCart.as_view()),
+    url('^api/updatecart/$', views.ApiUpdateCart.as_view()),
+    url('^api/makeorder/$', views.ApiMakeOrder.as_view()),
+
 
 
 ]

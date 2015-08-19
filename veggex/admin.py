@@ -14,5 +14,7 @@ admin.site.register(Orderitem)
 admin.site.register(Seller)
 admin.site.register(Mandi)
 admin.site.register(Subscribe)
+admin.site.register(CustomCategoryProducts)
+admin.site.register(Accartitem)
 
 

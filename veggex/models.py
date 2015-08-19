@@ -15,9 +15,22 @@ priceType =(
 	('as per mandi rates','as per mandi rates'),
 	('custom rates','custom rates'),
 	)
+categoryType =(
+	('custom','custom'),
+	('normal','normal'),
+	)
 class AutoDateTimeField(models.DateTimeField):
     def pre_save(self, model_instance, add):
         return timezone.now()
+class Category(models.Model):
+	category_id = models.AutoField(primary_key=True)
+	name=models.CharField(max_length=300,blank=False,null=False)
+	coverphoto = models.ImageField(blank=True,null=True)
+	description =models.CharField(max_length=300,blank=False,null=False)
+	def coverphotourl(self):
+		return self.coverphoto.url
+	def __unicode__(self):
+		return str(self.name)
 class Address(models.Model):
 	address_id = models.AutoField(primary_key=True)
 	area=models.CharField(max_length=300, blank=False, null=False)
@@ -26,20 +39,27 @@ class Address(models.Model):
 	pincode=models.IntegerField(blank=False,null=False)
 	def __unicode__(self):
 		return str(self.address_id)
-
+class Cart(models.Model):
+	cart_id = models.AutoField(primary_key=True)
+	#check this time thing
+	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
     nameOfInstitution = models.CharField(max_length=300, blank=False, null=False)
     nameOfOwner = models.CharField(max_length=300, blank=False, null=False)
     institutionType = models.CharField(max_length=300,choices = institutionTypeChoices , blank=False, null=False)
     mailId =models.CharField(max_length=300, blank=False, null=False)
-    mobileNo = models.BigIntegerField(blank=False,null=False)
+    mobileNo = models.BigIntegerField(blank=False,null=False,unique=True)
     password = models.CharField(max_length=300, blank=False, null=False)
     gpsLocation = models.CharField(max_length=300,blank=True,null=True)
     profilePhoto = models.ImageField(blank=True,null=True)
     address = models.ForeignKey(Address, blank=True, null=True)
+    cart =models.ForeignKey(Cart,blank=False,null=False)
     def profilephotourl(self):
     	return self.profilePhoto.url
+    def cartId(self):
+    	return self.cart.cart_id
 
     def __unicode__(self):
     	return str(self.nameOfInstitution)
@@ -63,15 +83,6 @@ class Seller(models.Model):
 
     def __unicode__(self):
     	return str(self.nameOfSeller)
-class Category(models.Model):
-	category_id = models.AutoField(primary_key=True)
-	name=models.CharField(max_length=300,blank=False,null=False)
-	coverphoto = models.ImageField(blank=True,null=True)
-	description =models.CharField(max_length=300,blank=False,null=False)
-	def coverphotourl(self):
-		return self.coverphoto.url
-	def __unicode__(self):
-		return str(self.name)
 class Product(models.Model):
 	product_id = models.AutoField(primary_key=True)
 	name=models.CharField(max_length=300,blank=False,null=False)
@@ -89,19 +100,27 @@ class Product(models.Model):
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
 	def coverphotourl(self):
 		return self.coverphoto.url
+	def productId(self):
+		return self.product.product_id
 	def __unicode__(self):
 		return str(self.name)
-class Cart(models.Model):
-	cart_id = models.AutoField(primary_key=True)
-	user=models.ForeignKey(User,blank=False,null=False)
-	#check this time thing
-	timeOfCreate = AutoDateTimeField(default=timezone.now)
-	timeOfUpdate =AutoDateTimeField(default=timezone.now)
+class CustomCategoryProducts(models.Model):
+	Uid=models.AutoField(primary_key=True)
+	user = models.OneToOneField(User,blank=False,null=False)
+	product = models.ManyToManyField(Product, blank=False, null=False)
+	def __unicode__(self):
+		return str(self.user.nameOfOwner)
 class Cartitem(models.Model):
 	cartitem_id = models.AutoField(primary_key=True)
 	cart=models.ForeignKey(Cart,blank=False,null=False)
 	qtyInUnits = models.IntegerField()
 	product = models.ForeignKey(Product,blank=False,null=False)
+class Accartitem(models.Model):
+	accartitem_id = models.AutoField(primary_key=True)
+	cart=models.ForeignKey(Cart,blank=False,null=False)
+	qtyInUnits = models.IntegerField()
+	product = models.ForeignKey(Product,blank=False,null=False)
+	resason = models.TextField(blank=True,null=True)
 class Order(models.Model):
 	order_id = models.AutoField(primary_key=True)
 	user=models.ForeignKey(User,blank=False,null=False)
