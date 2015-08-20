@@ -1,0 +1,67 @@
+API Details:
+1. get products of a category:
+   request :get
+   end point: api/product/category/{categoryId}/
+
+2. get items of cart:
+   request: get
+   end point: api/cart/cartitems/{cartId}/
+
+3. add to cart :
+   request : post
+   end point : api/addtocart/
+   body :
+         {
+          "cartId":"{cartId}",
+          "userId":"{userId}",
+          "items":
+                  {
+                  "1":{
+                       "qty":"{quantity}",
+                       "productId":"{productId}"
+
+                       }
+                   "2": ......similar
+                   "3"   .....similar
+                   #add as many products as you want
+
+                  }
+
+         }
+4. update cart :
+   request : post
+   end point : api/updatecart/
+   body :
+         {
+          "cartId":"{cartId}",
+          "userId":"{userId}",
+          "items":
+                  {
+                  "1":{
+                       "qty":"{quantity}",
+                       "itemId":"{itemId}"
+
+                       }
+                   "2": ......similar
+                   "3"   .....similar
+                   #add as many products as you want
+
+                  }
+
+         }
+ 5. make order
+      request:post
+      end point : api/makeorder/
+      body:
+           {
+           "userId":"{userId}",
+           "cartId" :"{cartId}"
+
+           }
+6. orders of a user
+     request : get
+     end point api/user/orders/{orderId}/
+7. items of a order
+    request : get
+    end point api/order/items/{orderId}
+
