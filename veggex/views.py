@@ -41,13 +41,15 @@ class ProductsByCategoryList(generics.ListAPIView):
         This view should return a list of all the purchases for
         the user as determined by the username portion of the URL.
         """
-        pid = self.kwargs['pid']
-        print 'yo'+pid
-        pid= (int)(pid)
-        category = Category.objects.get(category_id=pid)
-        print category
-        return Product.objects.filter(category=category)
-        #return Purchase.objects.filter(purchaser__username=username)
+        try:
+        	pid = self.kwargs['pid']
+	        print 'yo'+pid
+	        pid= (int)(pid)
+	        category = Category.objects.get(category_id=pid)
+	        print category
+	        return Product.objects.filter(category=category)
+        except:
+        	print 'error in ProductsByCategoryList'
 class ItemsOfCartList(generics.ListAPIView):
     serializer_class = ItemsOfCartSerializer
 
@@ -56,10 +58,13 @@ class ItemsOfCartList(generics.ListAPIView):
         This view should return a list of all the purchases for
         the user as determined by the username portion of the URL.
         """
-        cartId = self.kwargs['cartid']
-        cartId= (int)(cartId)
-        cart = Cart.objects.get(cart_id=cartId)
-        return Cartitem.objects.filter(cart=cart)
+        try:
+        	cartId = self.kwargs['cartid']
+	        cartId= (int)(cartId)
+	        cart = Cart.objects.get(cart_id=cartId)
+	        return Cartitem.objects.filter(cart=cart)
+        except:
+        	print 'error in ItemsOfCartList'
         #return Purchase.objects.filter(purchaser__username=username)
 class OrdersOfUserList(generics.ListAPIView):
     serializer_class = OrdersOfUserSerializer
@@ -69,10 +74,13 @@ class OrdersOfUserList(generics.ListAPIView):
         This view should return a list of all the purchases for
         the user as determined by the username portion of the URL.
         """
-        userId = self.kwargs['userid']
-        userId= (int)(userId)
-        user = User.objects.get(user_id=userId)
-        return Order.objects.filter(user=user)
+        try:
+        	userId = self.kwargs['userid']
+	        userId= (int)(userId)
+	        user = User.objects.get(user_id=userId)
+	        return Order.objects.filter(user=user)
+        except:
+        	print 'Error in OrdersOfUserList'
         #return Purchase.objects.filter(purchaser__username=username)
 class ItemsOfOrderList(generics.ListAPIView):
     serializer_class = ItemsOfOrderSerializer
@@ -82,10 +90,13 @@ class ItemsOfOrderList(generics.ListAPIView):
         This view should return a list of all the purchases for
         the user as determined by the username portion of the URL.
         """
-        orderId = self.kwargs['orderid']
-        orderId= (int)(orderId)
-        order = Order.objects.get(order_id=orderId)
-        return Orderitem.objects.filter(order=order)
+        try:
+        	orderId = self.kwargs['orderid']
+	        orderId= (int)(orderId)
+	        order = Order.objects.get(order_id=orderId)
+	        return Orderitem.objects.filter(order=order)
+        except:
+        	print 'error in ItemsOfOrderList'
         #return Purchase.objects.filter(purchaser__username=username)
 class CustomCategoryProductsList(generics.ListAPIView):
     serializer_class = CustomCategoryProductsSerializer
@@ -95,10 +106,13 @@ class CustomCategoryProductsList(generics.ListAPIView):
         This view should return a list of all the purchases for
         the user as determined by the username portion of the URL.
         """
-        userId = self.kwargs['userid']
-        userId= (int)(userId)
-        user = User.objects.get(user_id=userId)
-        return CustomCategoryProducts.objects.filter(user=user)
+        try:
+        	userId = self.kwargs['userid']
+	        userId= (int)(userId)
+	        user = User.objects.get(user_id=userId)
+	        return CustomCategoryProducts.objects.filter(user=user)
+        except:
+        	print 'error in CustomCategoryProductsList'
         #.raw('select * from veggex_customcategoryproducts natural join veggex_customcategoryproducts_product natural join veggex_product')
         #return Purchase.objects.filter(purchaser__username=username)
 class TestView(APIView):
@@ -145,15 +159,19 @@ class TestView(APIView):
 #test 3 is for custom category thing
 class Test3View(APIView):
 	def post(self, request, format=None):
-		pid = request.POST['uid']
-		user=User.objects.get(user_id=pid);
-		import json
-		a=CustomCategoryProducts.objects.get(user=user)
-		t= a.product.all()
-		print t
-		data = CoreSez.serialize("json", [a,])
-		print data
-		return Response(data)
+		try:
+			pid = request.POST['uid']
+			user=User.objects.get(user_id=pid);
+			import json
+			a=CustomCategoryProducts.objects.get(user=user)
+			t= a.product.all()
+			print t
+			data = CoreSez.serialize("json", [a,])
+			print data
+			return Response(data)
+		except:
+			return Response({"status":"error"})
+		
 		#return Response(data)
 class ApiAddToCart(APIView):
 	def post(self, request, format=None):
@@ -209,7 +227,7 @@ class ApiUpdateCart(APIView):
 					item.save()
 			return Response([{"status":"success"}])
 		except Exception,e:
-			return Response(e)
+			return Response([{"status":"error"}])
 class ApiMakeOrder(APIView):
 	def post(self, request, format=None):
 		try:
@@ -246,7 +264,7 @@ class ApiMakeOrder(APIView):
 				Cartitem.objects.filter(cart=cart).delete()
 				return Response([{"status":"success","orderId":order_id}])
 		except Exception,e:
-			return Response(e)
+			return Response([{"status":"error"}])
 class UserLoginView(APIView):
 	def get(self,request,format=None):
 		return Response({'detail': "Post request on this url for user authentication check with mobile and password in body"})
@@ -386,6 +404,8 @@ def get_or_create_csrf_token(request):
         request.META['CSRF_COOKIE'] = token
     request.META['CSRF_COOKIE_USED'] = True
     return token
+def landing(request):
+			return TemplateResponse(request, 'html/index.html',{'csrf_token':get_or_create_csrf_token(request)})
 def getTotal(cartitems):
     total=0
     for itemm in cartitems:

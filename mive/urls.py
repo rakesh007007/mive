@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^main', views.main),
     url(r'^categoryView', views.categoryView),
     url(r'^addtocart', views.addtocart),
+    url(r'^landing', views.landing),
     url(r'^cart', views.cart),
     url(r'^orderDetail', views.orderDetail),
     url(r'^removeItemPost', views.removeItemPost),

@@ -29,6 +29,8 @@ class Category(models.Model):
 	description =models.CharField(max_length=300,blank=False,null=False)
 	def coverphotourl(self):
 		return self.coverphoto.url
+	def categoryId(self):
+		return self.category_id
 	def __unicode__(self):
 		return str(self.name)
 class Address(models.Model):
@@ -39,6 +41,8 @@ class Address(models.Model):
 	pincode=models.IntegerField(blank=False,null=False)
 	def __unicode__(self):
 		return str(self.address_id)
+	def addressId(self):
+		return self.address_id
 class Cart(models.Model):
 	cart_id = models.AutoField(primary_key=True)
 	#check this time thing
@@ -60,6 +64,10 @@ class User(models.Model):
     	return self.profilePhoto.url
     def cartId(self):
     	return self.cart.cart_id
+    def userId(self):
+		return self.user_id
+    def addressId(self):
+		return self.address.address_id
 
     def __unicode__(self):
     	return str(self.nameOfInstitution)
@@ -115,6 +123,8 @@ class Cartitem(models.Model):
 	cart=models.ForeignKey(Cart,blank=False,null=False)
 	qtyInUnits = models.IntegerField()
 	product = models.ForeignKey(Product,blank=False,null=False)
+	def cartItemId(self):
+		return self.cartitem_id
 class Accartitem(models.Model):
 	accartitem_id = models.AutoField(primary_key=True)
 	cart=models.ForeignKey(Cart,blank=False,null=False)
@@ -129,6 +139,8 @@ class Order(models.Model):
 	payment_mode = models.CharField(max_length=200,blank=True,null=True)
 	subtotal=models.IntegerField(blank=True,null=True)
 	status = models.CharField(max_length=200,default='PLACED')
+	def orderId(self):
+		return self.order_id
 class Orderitem(models.Model):
 	orderitem_id = models.AutoField(primary_key=True)
 	order=models.ForeignKey(Order,blank=False,null=False)
@@ -137,6 +149,8 @@ class Orderitem(models.Model):
 	priceType = models.CharField(max_length=200,choices=priceType)
 	priceAtThatTime = models.IntegerField()
 	product = models.ForeignKey(Product,blank=False,null=False)
+	def orderItemId(self):
+		return self.orderitem_id
 class Subscribe(models.Model):
 	id = models.AutoField(primary_key=True)
 	email = models.TextField(blank=False,null=False)
