@@ -118,9 +118,9 @@ a:hover a:focus {
     bottom: 0px;
     margin-right: -19px;
 }
-#quote-carousel .carousel-indicators li {
-    width: 10px;
-    height: 10px;
+#quote-carousel1 .carousel-indicators1 li {
+    width: 20px;
+    height: 20px;
     margin: 5px;
     cursor: pointer;
     border: 1px solid #CCC;
@@ -129,10 +129,30 @@ a:hover a:focus {
     overflow: hidden;
     transition: all 0.4s;
 }
+#quote-carousel1 .carousel-indicators1 .active {
+    background: #333333;
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
+    border-color: #f33;
+    opacity: 1;
+    overflow: hidden;
+}
+#quote-carousel .carousel-indicators li {
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    cursor: pointer;
+    border: 4px solid #CCC;
+    border-radius: 100px;
+    opacity: 0.4;
+    overflow: hidden;
+    transition: all 0.4s;
+}
 #quote-carousel .carousel-indicators .active {
     background: #333333;
-    width: 15px;
-    height: 15px;
+    width: 55px;
+    height: 55px;
     border-radius: 30px;
     border-color: #f33;
     opacity: 1;
@@ -554,15 +574,12 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
   </div>
 </div>
 <!-- Testimonil thing -->
-<head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-</head>
 <div class="container">
 <div class="row">
                     <div class="col-md-12" data-wow-delay="0.2s">
                     <br><br>
                     <center><h2>WHAT DRIVES US</h2></center>
-                        <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                        <div class="carousel slide hidden-xs hidden-sm" data-ride="carousel" id="quote-carousel">
                             <!-- Bottom Carousel Indicators -->
                             <ol class="carousel-indicators">
                                 <li data-target="#quote-carousel" data-slide-to="0" class="active"><img class="img-responsive " src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="">
@@ -615,8 +632,60 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                             </div>
 
                             <!-- Carousel Buttons Next/Prev -->
-                            <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
-                            <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+                        </div>
+                         <div class="carousel1 slide hidden-md hidden-lg hidden-xl" data-ride="carousel" id="quote-carousel1">
+                            <!-- Bottom Carousel Indicators -->
+                            <ol class="carousel-indicators1">
+                                <li data-target="#quote-carousel" data-slide-to="0" class="active"><img class="img-responsive " src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="">
+                                </li>
+                                <li data-target="#quote-carousel" data-slide-to="1"><img class="img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/rssems/128.jpg" alt="">
+                                </li>
+                                <li data-target="#quote-carousel" data-slide-to="2"><img class="img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg" alt="">
+                                </li>
+                            </ol>
+
+                            <!-- Carousel Slides / Quotes -->
+                            <div class="carousel-inner text-center">
+
+                                <!-- Quote 1 -->
+                                <div class="item active">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. !</p>
+                                                <small>Someone famous</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                                <!-- Quote 2 -->
+                                <div class="item">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                                                <small>Someone famous</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                                <!-- Quote 3 -->
+                                <div class="item">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. .</p>
+                                                <small>Someone famous</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                            </div>
+
+                            <!-- Carousel Buttons Next/Prev -->
                         </div>
                     </div>
                 </div>
