@@ -4,6 +4,7 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <style>
+  body { padding-top: 20px; }
 #myCarousel .nav a small {
     display:block;
 }
@@ -85,12 +86,13 @@ a:hover a:focus {
 }
   </style>
   <!--style for testimonial -->
-<style>
-  /* Carousel */
+
+  <style>
+/* Carousel */
 
 #quote-carousel {
-    padding: 0 10px 2px 10px;
-    margin-top: 31px;
+    padding: 0 10px 30px 10px;
+    margin-top: 30px;
     /* Control buttons  */
     /* Previous button  */
     /* Next button  */
@@ -116,30 +118,36 @@ a:hover a:focus {
     bottom: 0px;
     margin-right: -19px;
 }
-@media (min-width: 992px) and (max-width: 1200px) {
-#quote-carousel .carousel-indicators li {
-    width: 45px;
-    height: 45px;
-    margin: 5px;
-    cursor: pointer;
-    border: 2px solid #CCC;
-    border-radius: 50px;
-    opacity: 0.4;
-    overflow: hidden;
-    transition: all 0.4s;
+
+#quote-carousel1 {
+    padding: 0 10px 30px 10px;
+    margin-top: 30px;
+    /* Control buttons  */
+    /* Previous button  */
+    /* Next button  */
+    /* Changes the position of the indicators */
+    /* Changes the color of the indicators */
 }
-#quote-carousel .carousel-indicators .active {
-    background: #333333;
-    width: 55px;
-    height: 55px;
-    border-radius: 100px;
-    border-color: #f33;
-    opacity: 1;
-    overflow: hidden;
+#quote-carousel1 .carousel-control1 {
+    background: none;
+    color: #CACACA;
+    font-size: 2.3em;
+    text-shadow: none;
+    margin-top: 10px;
 }
+#quote-carousel1 .carousel-control.left1 {
+    left: -60px;
 }
-@media (min-width: 480px) and (max-width: 768px) {
-#quote-carousel .carousel-indicators li {
+#quote-carousel1 .carousel-control.right1 {
+    right: -60px;
+}
+#quote-carousel1 .carousel-indicators1 {
+    right: 50%;
+    top: auto;
+    bottom: 0px;
+    margin-right: -19px;
+}
+#quote-carousel1 .carousel-indicators1 li {
     width: 10px;
     height: 10px;
     margin: 5px;
@@ -150,15 +158,34 @@ a:hover a:focus {
     overflow: hidden;
     transition: all 0.4s;
 }
-#quote-carousel .carousel-indicators .active {
+#quote-carousel1 .carousel-indicators1 .active {
     background: #333333;
     width: 15px;
     height: 15px;
-    border-radius: 60px;
+    border-radius: 30px;
     border-color: #f33;
     opacity: 1;
     overflow: hidden;
 }
+#quote-carousel .carousel-indicators li {
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    cursor: pointer;
+    border: 4px solid #CCC;
+    border-radius: 100px;
+    opacity: 0.4;
+    overflow: hidden;
+    transition: all 0.4s;
+}
+#quote-carousel .carousel-indicators .active {
+    background: #333333;
+    width: 55px;
+    height: 55px;
+    border-radius: 30px;
+    border-color: #f33;
+    opacity: 1;
+    overflow: hidden;
 }
 .carousel-inner {
     min-height: 300px;
@@ -173,8 +200,20 @@ a:hover a:focus {
     float: left;
     margin-right: 10px;
 }
-</style>
-  
+.carousel-inner1 {
+    min-height: 300px;
+}
+.item1 blockquote {
+    border-left: none;
+    margin: 0;
+}
+.item1 blockquote p:before {
+    content: "\f10d";
+    font-family: 'Fontawesome';
+    float: left;
+    margin-right: 10px;
+}
+  </style>
   <style>
  @import url(http://fonts.googleapis.com/css?family=Roboto);
 
@@ -276,6 +315,7 @@ a:hover a:focus {
   <!-- styyle for team -->
   <style>
    @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css);
+body { padding-top: 60px; }
 .nav.nav-justified > li > a { position: relative; }
 .nav.nav-justified > li > a:hover,
 .nav.nav-justified > li > a:focus { background-color: transparent; }
@@ -497,7 +537,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
 <!-- App icons -->
 <!-- Team page thing -->
 
-<div class="[ container text-center hidden-xs hidden-sm ]" >
+<div class="[ container text-center  hidden-sm hidden-xs ]" >
   <div class="[ row ]">
     <div class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 ]" role="tabpanel">
             <div class="[ col-xs-4 col-sm-12 ]">
@@ -512,7 +552,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                     </li>
                     <li role="presentation" class="">
                         <a href="#daksh" aria-controls="daksh" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/annapickard/128.jpg"/>
+                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/dakshbhagya/128.jpg" />
                             <span class="quote"><i class="fa fa-quote-left"></i></span>
                         </a>
                     </li>
@@ -575,11 +615,13 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
         </div>
   </div>
 </div>
-<!-- testimonia -->
+<!-- Testimonil thing -->
 <div class="container">
 <div class="row">
                     <div class="col-md-12" data-wow-delay="0.2s">
-                        <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                    <br><br>
+                    <center><h2>WHAT DRIVES US</h2></center>
+                        <div class="carousel slide hidden-xs hidden-sm" data-ride="carousel" id="quote-carousel">
                             <!-- Bottom Carousel Indicators -->
                             <ol class="carousel-indicators">
                                 <li data-target="#quote-carousel" data-slide-to="0" class="active"><img class="img-responsive " src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="">
@@ -632,10 +674,65 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                             </div>
 
                             <!-- Carousel Buttons Next/Prev -->
+                        </div>
+                         <div class="carousel1 slide hidden-md hidden-lg hidden-xl" data-ride="carousel" id="quote-carousel1">
+                            <!-- Bottom Carousel Indicators -->
+                            <ol class="carousel-indicators1">
+                                <li data-target="#quote-carousel" data-slide-to="0" class="active"><img class="img-responsive " src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="">
+                                </li>
+                                <li data-target="#quote-carousel" data-slide-to="1"><img class="img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/rssems/128.jpg" alt="">
+                                </li>
+                                <li data-target="#quote-carousel" data-slide-to="2"><img class="img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg" alt="">
+                                </li>
+                            </ol>
+
+                            <!-- Carousel Slides / Quotes -->
+                            <div class="carousel-inner1 text-center">
+
+                                <!-- Quote 1 -->
+                                <div class="item1 active">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. !</p>
+                                                <small>Someone famous</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                                <!-- Quote 2 -->
+                                <div class="item1">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                                                <small>Someone famous</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                                <!-- Quote 3 -->
+                                <div class="item1">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. .</p>
+                                                <small>Someone famous</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                            </div>
+
+                            <!-- Carousel Buttons Next/Prev -->
+                        </div>
                     </div>
                 </div>
 </div>
-
+<hr class="divider"/>
 <!-- login model thing -->
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
