@@ -15,6 +15,7 @@ from veggex.models import *
 from mive.settings import *
 from django.contrib.sessions.backends.db import SessionStore
 from django.shortcuts import redirect
+import json
 import logging
 from django.core.files.storage import default_storage
 logger = logging.getLogger(__name__)
@@ -97,6 +98,34 @@ class ItemsOfOrderList(generics.ListAPIView):
 	        return Orderitem.objects.filter(order=order)
         except:
         	print 'error in ItemsOfOrderList'
+        #return Purchase.objects.filter(purchaser__username=username)
+class ApiSearchList(APIView):
+
+    def get(self, request, format=None):
+        """
+        This view should return a list of all the purchases for
+        the user as determined by the username portion of the URL.
+        """
+        try:
+        	searchtext = request.GET['searchtext']
+        	tex = str(searchtext)
+        	print tex
+	        resultCategory = Product.objects.filter(category__name__icontains = tex)
+	        resultCategory = CoreSez.serialize("json",resultCategory)
+	        resultName = Product.objects.filter(seller__nameOfSeller__icontains = tex)
+	        resultname = CoreSez.serialize("json",resultName)
+	        resultSeller = Product.objects.filter(name__icontains = tex)
+	        resultSeller = CoreSez.serialize("json",resultSeller)
+	        resultOrigin = Product.objects.filter(origin__icontains = tex)
+	        resultOrigin = CoreSez.serialize("json",resultOrigin)
+	        resultDescription = Product.objects.filter(description__icontains=tex)
+	        resultDescription = CoreSez.serialize("json",resultDescription)
+	        struct = json.loads(resultDescription)
+	        resultDescription = json.dumps(struct)
+	        return Response({"resultCategory":resultCategory,"resultName":resultName,"resultSeller":resultSeller,"resultOrigin":resultOrigin,"resultDescription":resultDescription})
+        except Exception, e:
+        	print 'error in ItemsOfOrderList'
+        	return Response(e)
         #return Purchase.objects.filter(purchaser__username=username)
 class CustomCategoryProductsList(generics.ListAPIView):
     serializer_class = CustomCategoryProductsSerializer
@@ -438,6 +467,18 @@ def checklogin(request):
 		return False
 	else:
 		return True
+def search(request):
+	tex = request.POST['tex']
+	print tex;
+	resultCategory = Product.objects.filter(category__name__icontains = tex)
+	resultName = Product.objects.filter(seller__nameOfSeller__icontains = tex)
+	resultSeller = Product.objects.filter(name__icontains = tex)
+	resultOrigin = Product.objects.filter(origin__icontains = tex)
+	resultDescription = Product.objects.filter(description__icontains=tex)
+	return TemplateResponse(request, 'searchResults.html',{'resultCategory':resultCategory,'resultSeller':resultSeller,'resultOrigin':resultOrigin,'resultName':resultName,'resultDescription':resultDescription,'csrf_token':get_or_create_csrf_token(request)})
+def searchForm(request):
+	return TemplateResponse(request, 'search.html',{'csrf_token':get_or_create_csrf_token(request)})
+
 def logPost(request):
 	mobile = request.POST['mobile']
 	password = request.POST['password']
@@ -465,7 +506,7 @@ def main(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
 	categories =Category.objects.all()
-	return TemplateResponse(request, 'main.html',{'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'index.html',{'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
 def get_or_create_cart(user):
 	cart = Cart.objects.filter(user=user)
 	if(len(cart)==1):

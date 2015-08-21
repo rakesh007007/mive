@@ -40,15 +40,19 @@ urlpatterns = [
     url(r'^makeOrder', views.makeOrder),
     url(r'^seeOrder', views.seeOrder),
     url(r'^account', views.account),
+    url(r'^searchForm', views.searchForm),
+    url(r'^search', views.search),
     url(r'^$', views.tryy),
     url('^api/product/category/(?P<pid>.+)/$', views.ProductsByCategoryList.as_view()),
     url('^api/cart/cartitems/(?P<cartid>.+)/$', views.ItemsOfCartList.as_view()),
     url('^api/user/orders/(?P<userid>.+)/$', views.OrdersOfUserList.as_view()),
     url('^api/order/items/(?P<orderid>.+)/$', views.ItemsOfOrderList.as_view()),
     url('^api/user/customcategory/(?P<userid>.+)/$', views.CustomCategoryProductsList.as_view()),
+    url('^api/search/$', views.ApiSearchList.as_view()),
     url('^api/addtocart/$', views.ApiAddToCart.as_view()),
     url('^api/updatecart/$', views.ApiUpdateCart.as_view()),
     url('^api/makeorder/$', views.ApiMakeOrder.as_view()),
+
 
 
 
