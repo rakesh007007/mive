@@ -104,7 +104,7 @@ a:hover a:focus {
     color: #CACACA;
     font-size: 2.3em;
     text-shadow: none;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 #quote-carousel .carousel-control.left {
     left: -60px;
@@ -119,11 +119,11 @@ a:hover a:focus {
     margin-right: -19px;
 }
 #quote-carousel .carousel-indicators li {
-    width: 70px;
-    height: 70px;
+    width: 10px;
+    height: 10px;
     margin: 5px;
     cursor: pointer;
-    border: 4px solid #CCC;
+    border: 1px solid #CCC;
     border-radius: 50px;
     opacity: 0.4;
     overflow: hidden;
@@ -131,9 +131,9 @@ a:hover a:focus {
 }
 #quote-carousel .carousel-indicators .active {
     background: #333333;
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
+    width: 15px;
+    height: 15px;
+    border-radius: 30px;
     border-color: #f33;
     opacity: 1;
     overflow: hidden;
@@ -381,7 +381,7 @@ body { padding-top: 60px; }
                         </span>
                     </span>
                     <span class="item-right">
-                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                        <button hidden-xsclass="btn btn-xs btn-danger pull-right">x</button>
                     </span>
                 </span>
               </li>
@@ -462,11 +462,11 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
   <center>
   <div class="container">
   <div vlass="row">
-  <div class="col-md-3"></div>
-    <div class="col-md-8">
-      <img src="images/phone.png">
+  <div class="col-md-3 col-sm-12"></div>
+    <div class="col-md-8 col-sm-12">
+      <img src="images/phone.png" class="img-responsive">
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-md-1 col-sm-12"></div>
   </div>
 </div>
 </center>
@@ -475,9 +475,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
 <!-- App icons -->
 <!-- Team page thing -->
 
-<div class="[ container text-center ]">
-</div>
-<div class="[ container text-center ]">
+<div class="[ container text-center  hidden-sm hidden-xs ]" >
   <div class="[ row ]">
     <div class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 ]" role="tabpanel">
             <div class="[ col-xs-4 col-sm-12 ]">
@@ -486,25 +484,25 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                 <ul class="[ nav nav-justified ]" id="nav-tabs" role="tablist">
                     <li role="presentation" class="active">
                         <a href="#dustin" aria-controls="dustin" role="tab" data-toggle="tab">
-                            <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dustinlamont/128.jpg" />
+                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/dustinlamont/128.jpg" />
                             <span class="quote"><i class="fa fa-quote-left"></i></span>
                         </a>
                     </li>
                     <li role="presentation" class="">
                         <a href="#daksh" aria-controls="daksh" role="tab" data-toggle="tab">
-                            <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dakshbhagya/128.jpg" />
+                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/dakshbhagya/128.jpg" />
                             <span class="quote"><i class="fa fa-quote-left"></i></span>
                         </a>
                     </li>
                     <li role="presentation" class="">
                         <a href="#anna" aria-controls="anna" role="tab" data-toggle="tab">
-                            <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/annapickard/128.jpg" />
+                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/annapickard/128.jpg" />
                             <span class="quote"><i class="fa fa-quote-left"></i></span>
                         </a>
                     </li>
                     <li role="presentation" class="">
                         <a href="#wafer" aria-controls="wafer" role="tab" data-toggle="tab">
-                            <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/waferbaby/128.jpg" />
+                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/waferbaby/128.jpg" />
                             <span class="quote"><i class="fa fa-quote-left"></i></span>
                         </a>
                     </li>
@@ -512,7 +510,8 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
             </div>
             <div class="[ col-xs-8 col-sm-12 ]">
                 <!-- Tab panes -->
-                <div class="tab-content" id="tabs-collapse">            
+                <div class="tab-content" id="tabs-collapse"> 
+                <center>           
                     <div role="tabpanel" class="tab-pane fade in active" id="dustin">
                         <div class="tab-inner">                    
                             <p class="lead">Etiam tincidunt enim et pretium efficitur. Donec auctor leo sollicitudin eros iaculis sollicitudin.</p>
@@ -521,6 +520,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                             <p><em class="text-capitalize"> Senior web developer</em> at <a href="#">Apple</a></p>                 
                         </div>
                     </div>
+                    </center>
                     
                     <div role="tabpanel" class="tab-pane fade" id="daksh">
                         <div class="tab-inner">
