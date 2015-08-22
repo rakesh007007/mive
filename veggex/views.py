@@ -443,7 +443,7 @@ def getTotal(cartitems):
 
 def login(request):
 	if ('loggedin' not in request.session):
-		return TemplateResponse(request, 'login.html',{'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
 	else:
 		return redirect('/main')
 def orderDetail(request):
@@ -506,7 +506,7 @@ def main(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
 	categories =Category.objects.all()
-	return TemplateResponse(request, 'index.html',{'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'new/index.html',{'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
 def get_or_create_cart(user):
 	cart = Cart.objects.filter(user=user)
 	if(len(cart)==1):
