@@ -4,6 +4,9 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <style>
+  .navbar-brand {
+    padding-top: 10px !important;
+}
    .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
     color: #ffffff;
     background-color: #13c0ba !important;
@@ -36,6 +39,9 @@
   </style>
   
   <style>
+  body, button, input, select, textarea {
+    font-family: din,Calibri,Cantarell,sans-serif !important;
+}
   ul.dropdown-cart{
     min-width:250px;
 }
@@ -88,6 +94,75 @@ a:hover a:focus {
     color: #000000;
     background-color: #ffffff;
 }
+  </style>
+  <!-- circle button -->
+  <style>
+  body{margin:40px;}
+
+
+  .input-circle {
+    text-align: center !important;
+    font-size: 10px !important;
+    line-height: 1.428571429 !important;
+    border:0 !important;
+    border-style:0 !important;
+    outline:none !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none !important;
+    cursor:default;
+  }
+  .input-circle:hover {
+    text-align: center !important;
+    font-size: 10px !important;
+    line-height: 1.428571429 !important;
+    border:0 !important;
+    border-style:0 !important;
+    outline:none !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none !important;
+    color:transparent !important;
+    cursor:default;
+  }
+  .input-circle:focus {
+    text-align: center !important;
+    font-size: 10px !important;
+    line-height: 1.428571429 !important;
+    border:0 !important;
+    border-style:0 !important;
+    outline:none !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none !important;
+    color:transparent !important;
+    cursor:default;
+  }
+  .btn-circle {
+    width: 30px !important;
+    height: 30px !important;
+    text-align: center !important;
+    font-size: 6px !important;
+    line-height: 1.428571429 !important;
+    border-radius: 15px !important;
+  }
+  .btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+  }
+  .btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 35px;
+  }
+
   </style>
   <!--style for testimonial -->
 <style>
@@ -585,13 +660,13 @@ a:hover a:focus {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Mive</a>
+      <a class="navbar-brand" href="#"><img style="height:52px;width:52px" src="rstatic/new/images/mivelogo.png"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#aboutmive">About</a></li>
+        <li><a href="#aboutmive">About</a></li>
         <li><a href="#teammive">Team</a></li>
         <li><a data-toggle="modal" data-target="#contact" data-original-title>
           Contact
@@ -665,8 +740,8 @@ a:hover a:focus {
 <center><div class="container">
   <div class="row" style="background:none">
   <br><br>
-    <h2>About Mive</h2> 
-    <p>Flipkart is an e-commerce company founded in 2007 by Sachin Bansal and Binny Bansal. It is registered in Singapore and it operates in India, where it is headquartered in Bangalore, Karnataka.[4] Flipkart has launched its own product range under the name "DigiFlip" with products including tablets, USBs, and laptop bags.[5][6][7]
+    <h2 style="color: #4582ec">About Mive</h2> 
+    <p >Flipkart is an e-commerce company founded in 2007 by Sachin Bansal and Binny Bansal. It is registered in Singapore and it operates in India, where it is headquartered in Bangalore, Karnataka.[4] Flipkart has launched its own product range under the name "DigiFlip" with products including tablets, USBs, and laptop bags.[5][6][7]
 
 In May 2014, Flipkart received $210 million from DST Global, in July 2014 it raised $1 billion led by existing investors Tiger Global and South Africa's media group Naspers and in May 2015 it raised $550 million from some of its existing investors. Flipkart's last fundraising round in May 2015 had pegged its valuation at $15 billion.[8]</p> 
   </div>
@@ -724,7 +799,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                                           </span>
                                           <input type="text" class="form-control text-center input-sm" value="1">
                                           <span class="input-group-btn">
-                                            <a href="#" class="btn btn-default   btn-sm" data-dir="up"><span class="glyphicon glyphicon-plus"></span></a>
+                                            <button href="#" class="btn btn-default   btn-sm" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                           </span>
                                         </div>
                                     </div>
@@ -752,13 +827,13 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                                             <h5 class="price-text-color">
                                                 $249.99</h5>
                                         </div>
-                                        <div class="input-group number-spinner">
+                                        <div class="input-group number-spinner" >
                                           <span class="input-group-btn">
-                                            <button class="btn btn-default btn-sm" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                                           </span>
-                                          <input type="text" class="form-control text-center input-sm" value="1">
+                                          <input type="text  	" class="form-control text-center input-circle" style="border:none" value="1">
                                           <span class="input-group-btn">
-                                            <button class="btn btn-default   btn-sm" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                           </span>
                                         </div>
                                     </div>
