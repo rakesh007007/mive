@@ -1,5 +1,4 @@
 /*random on top*/
-
 .btn-mive {
   
   background: #13c0ba;
@@ -70,8 +69,11 @@ ul.dropdown-cart li .item:hover{
     background-color:#f3f3f3;
 }
 body {
-    font-size: 19px !important;
+    font-size: 20px ;
     line-height: 20px !important;
+}
+.price>p{
+   font-size:13px !important;
 }
 ul.dropdown-cart li .item:after{
     visibility: hidden;
@@ -230,6 +232,9 @@ a, a:hover a:focus {
     overflow: hidden;
 }
 }
+.carousel-inner {
+    min-height: 300px;
+}
 .item blockquote {
     border-left: none;
     margin: 0;
@@ -278,7 +283,6 @@ a, a:hover a:focus {
 @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
 .col-item
 {
-    border: 1px solid #E1E1E1;
     border-radius: 5px;
     background: #FFF;
 }
@@ -305,7 +309,6 @@ a, a:hover a:focus {
     margin-top: 5px;@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
 .col-item
 {
-    border: 1px solid #E1E1E1;
     border-radius: 5px;
     background: #FFF;
 }
@@ -359,10 +362,7 @@ a, a:hover a:focus {
     height: 52px;
 }
 
-.col-item .separator
-{
-    border-top: 1px solid #E1E1E1;
-}
+
 
 .clear-left
 {
@@ -436,10 +436,6 @@ a, a:hover a:focus {
     height: 52px;
 }
 
-.col-item .separator
-{
-    border-top: 1px solid #E1E1E1;
-}
 
 .clear-left
 {
