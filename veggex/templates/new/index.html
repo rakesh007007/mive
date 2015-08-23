@@ -14,18 +14,15 @@
   var browd =BrowserDetect()
      $( document ).ready(function() {
   // Handler for .ready() called
-  if(browd!='Chrome' && browd!='Firefox' && browd!='IE' ){
-    $('.navtoggle')[0].style.display="block";
-  }
-  else{
+  
     $(window).on("scroll",function(){
-      if (($(document).height())- ($(document).scrollTop())>2160) {
+      if (($(document).scrollTop())<50) {
     $('.navtoggle')[0].style.display="none";
   }
   else{
    $('.navtoggle')[0].style.display="block";
    console.log('scrolled')}
-}); }
+}); 
 });
  
    
@@ -178,7 +175,7 @@
   </style>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top hidden-sm hidden-xs navtoggle" style="opacity:0.95;display:none" id="rakeshnavtop">
+<nav class="navbar navbar-default navbar-fixed-top navtoggle" style="opacity:0.95;display:none" id="rakeshnavtop">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
