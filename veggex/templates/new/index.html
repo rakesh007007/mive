@@ -10,6 +10,53 @@
   <script src="rstatic/new/js/jquery.min.js"></script>
   <script src="rstatic/new/js/bootstrap.min.js"></script>
   <style>
+   @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css);
+  .nav.nav-justified > li > a { position: relative; }
+  .nav.nav-justified > li > a:hover,
+  .nav.nav-justified > li > a:focus { background-color: transparent; }
+  .nav.nav-justified > li > a > .quote {
+      position: absolute;
+      left: 0px;
+      top: 0;
+      opacity: 0;
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      background-color: #13c0ba;
+      border-radius: 15px;
+      color: #fff;  
+  }
+  .nav.nav-justified > li.active > a > .quote { opacity: 1; }
+  .nav.nav-justified > li > a > img { box-shadow: 0 0 0 5px #13c0ba; }
+  .nav.nav-justified > li > a > img { 
+      max-width: 100%; 
+      opacity: .3; 
+      -webkit-transform: scale(.8,.8);
+              transform: scale(.8,.8);
+      -webkit-transition: all 0.3s 0s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+              transition: all 0.3s 0s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .nav.nav-justified > li.active > a > img,
+  .nav.nav-justified > li:hover > a > img,
+  .nav.nav-justified > li:focus > a > img { 
+      opacity: 1; 
+      -webkit-transform: none;
+              transform: none;
+      -webkit-transition: all 0.3s 0s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+              transition: all 0.3s 0s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .tab-pane .tab-inner { padding: 30px 0 20px; }
+
+  @media (min-width: 768px) {
+      .nav.nav-justified > li > a > .quote {
+          left: auto;
+          top: auto;
+          right: 20px;
+          bottom: 0px;
+      }  
+  }
+  </style>
+  <style>
   @import url(http://fonts.googleapis.com/css?family=Roboto);
 
 /****** LOGIN MODAL ******/
@@ -78,7 +125,7 @@
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #4d90fe;
+  background-color:#13c0ba;
   padding: 17px 0px;
   font-family: roboto;
   font-size: 14px;
@@ -89,7 +136,7 @@
   /* border: 1px solid #2f5bb7; */
   border: 0px;
   text-shadow: 0 1px rgba(0,0,0,0.3);
-  background-color: #357ae8;
+  background-color: #3fad46;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
 
@@ -110,7 +157,7 @@
   </style>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" style="opacity:0.9">
+<nav class="navbar navbar-default navbar-fixed-top" style="opacity:0.9" id="rakeshnavtop">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -135,8 +182,8 @@
       </ul>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li> <a href="#" data-toggle="modal" data-target="#login-modal">Shop</a></li>
-        <li> <a href="#"><i>Get App</i></a></li>
+        <li> <a href="#" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#login-modal">Shop</a></li>
+        <li> <a href="#"><img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/google_play.png" style="width:30px;height:30px"><i>Get App</i></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -186,7 +233,7 @@
       </div><!-- End Carousel Inner -->
 
 
-      <ul class="nav nav-pills nav-justified">
+      <ul class="nav nav-pills nav-justified" id="yadavjinav">
           <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">About<small>Lorem ipsum dolor sit</small></a></li>
           <li data-target="#myCarousel" data-slide-to="1"><a href="#">Projects<small>Lorem ipsum dolor sit</small></a></li>
           <li data-target="#myCarousel" data-slide-to="2"><a href="#">Portfolio<small>Lorem ipsum dolor sit</small></a></li>
@@ -564,7 +611,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                         <div class="panel-footer" style="margin-bottom:-14px;">
                             <input type="submit" class="btn btn-success" value="Send"/>
                                 <!--<span class="glyphicon glyphicon-ok"></span>-->
-                            <input type="reset" class="btn btn-danger" value="Clear" />
+                            <input type="reset" class="btn btn-mive" value="Clear" />
                                 <!--<span class="glyphicon glyphicon-remove"></span>-->
                             <button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
                         </div>
@@ -694,7 +741,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
         <div class="modal-dialog">
         <div class="loginmodal-container">
           <h1>Login</h1><br>
-          <form>
+          <form type="post" action="logPost">
           <input type="text" name="mobile" placeholder="Mobile No.">
           <input type="password" name="pass" placeholder="Password">
           <input type="submit" name="login" class="login loginmodal-submit" value="Login">
