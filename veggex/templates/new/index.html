@@ -289,10 +289,10 @@
       <ul class="nav navbar-nav">
         <li><a href="#aboutmive">About</a></li>
         <li><a href="#teammive">Team</a></li>
-        <li><a data-toggle="modal" data-target="#contact" data-original-title>
+        <li><a href="#contactmive">
           Contact
         </a></li>
-        <li><a href="#">Career</a></li>
+        <li><a data-toggle="modal" data-target="#contact" data-original-title>Careers</a></li>
       </ul>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -352,7 +352,7 @@
         </div>
 
 <!-- About Mive Thing -->
-<center><div class="container">
+<center><div class="container" id="aboutmive">
   <div class="row" style="background:none">
   <div class="col-md-2"></div>
   <div class="col-md-8">
@@ -713,7 +713,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span> Any questions? Feel free to contact us.</h4>
+                        <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span>Please provide your details so we can contact you.</h4>
                     </div>
                     <form action="#" method="post" accept-charset="utf-8">
                     <div class="modal-body" style="padding: 5px;">
@@ -736,8 +736,13 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                    Resume:<input class="form-control" name="subject" placeholder="Subject" type="file" required />
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <textarea style="resize:vertical;" class="form-control" placeholder="Message..." rows="6" name="comment" required></textarea>
+                                    <textarea style="resize:vertical;" class="form-control" placeholder="Cover letter..." rows="6" name="comment" required></textarea>
                                 </div>
                             </div>
                         </div>  
@@ -874,7 +879,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
 
 <!-- Social Footer, Single Coloured -->
 
-<div class="container">
+<div class="container" id="contactmive">
 <div class="row">
 <div class="col-md-5">
     <div class="form-area">  
