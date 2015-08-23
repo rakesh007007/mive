@@ -173,9 +173,105 @@
 }
 
   </style>
+  <style>
+  .center-block {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-group .icon-addon .form-control {
+    border-radius: 0;
+}
+
+.icon-addon {
+    position: relative;
+    color: #555;
+    display: block;
+}
+
+.icon-addon:after,
+.icon-addon:before {
+    display: table;
+    content: " ";
+}
+
+.icon-addon:after {
+    clear: both;
+}
+
+.icon-addon.addon-md .glyphicon,
+.icon-addon .glyphicon, 
+.icon-addon.addon-md .fa,
+.icon-addon .fa {
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    font-size: 14px;
+    width: 20px;
+    margin-left: -2.5px;
+    text-align: center;
+    padding: 10px 0;
+    top: 1px
+}
+
+.icon-addon.addon-lg .form-control {
+    line-height: 1.33;
+    height: 46px !important;
+    font-size: 18px;
+    padding: 10px 16px 10px 40px;
+}
+
+.icon-addon.addon-sm .form-control {
+    height: 30px !important;
+    padding: 5px 10px 5px 28px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.icon-addon.addon-lg .fa,
+.icon-addon.addon-lg .glyphicon {
+    font-size: 18px;
+    margin-left: 0;
+    left: 11px;
+    top: 4px;
+}
+
+.icon-addon.addon-md .form-control,
+.icon-addon .form-control {
+    padding-left: 30px;
+    float: left;
+    font-weight: normal;
+}
+
+.icon-addon.addon-sm .fa,
+.icon-addon.addon-sm .glyphicon {
+    margin-left: 0;
+    font-size: 12px;
+    left: 5px;
+    top: -1px
+}
+.input-group-lg>.input-group-btn>.btn-mive2 {
+    height: 46px;
+    padding: 14px 16px;
+    font-size: 20px;
+    line-height: 1.33;
+    background-color: #13c0ba;
+    color:#ffffff;
+}
+
+.icon-addon .form-control:focus + .glyphicon,
+.icon-addon:hover .glyphicon,
+.icon-addon .form-control:focus + .fa,
+.icon-addon:hover .fa {
+    color: #2580db;
+}
+  </style>
+
+   <link rel="stylesheet" href="rstatic/new/css/cover.css">
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top navtoggle" style="opacity:0.95;display:none" id="rakeshnavtop">
+<nav class="navbar navbar-default navbar-fixed-top navtoggle" style="opacity:0.98;border:none" id="rakeshnavtop">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -206,88 +302,94 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-<div class="container-fluid" id="rakeshfluid">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-      
-        <div class="item active">
-          <img src="http://amaz.com.pe/img/amaz_001.jpg" style="width:1400px" class="">
-           <div class="carousel-caption">
-            <img class="img-responisve img hidden-sm hidden-xs"src="rstatic/new/images/mivelogo.png" style="width:130px;height:130px">
-            <h3>Mive For Juice centers</h3>
-
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p>
-          </div>
-        </div><!-- End Item -->
- 
-         <div class="item">
-         <img src="http://amaz.com.pe/img/amaz_001.jpg" style="width:1400px" class="img">
-           <div class="carousel-caption">
-            <img class="img-responisve img hidden-sm hidden-xs"src="rstatic/new/images/mivelogo.png" style="width:130px;height:130px">
-            <h3>Mive For Juice centers</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p>
-          </div>
-        </div><!-- End Item -->
+<div class="container-fluid full hidden-md hidden-lg" >
+  <div class="row">
+    <div class="col-xs-12 col-sm-12">
+    <br><br><br><br><br>
+      <img style="" src="https://www.tinyowl.com/img/home/android.png" class="img img-responsive"><br><br>
         
-        <div class="item">
-          <img src="http://amaz.com.pe/img/amaz_001.jpg" style="width:1400px" class="img">
-           <div class="carousel-caption">
-            <img class="img-responisve img hidden-sm hidden-xs"src="rstatic/new/images/mivelogo.png" style="width:130px;height:130px">
-            <h3>Mive For Juice centers</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p>
-          </div>
-        </div><!-- End Item -->
-        
-        <div class="item">
-          <img src="http://amaz.com.pe/img/amaz_001.jpg" style="width:1400px" class="img">
-           <div class="carousel-caption">
-            <img class="img-responisve img hidden-sm hidden-xs"src="rstatic/new/images/mivelogo.png" style="width:130px;height:130px">
-            <h3>Mive For Juice centers</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-          </div>
-        </div><!-- End Item -->
-                
-      </div><!-- End Carousel Inner -->
-
-
-      <ul class="nav nav-pills nav-justified" id="yadavjinav">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">About<small>Lorem ipsum dolor sit</small></a></li>
-          <li data-target="#myCarousel" data-slide-to="1"><a href="#">Projects<small>Lorem ipsum dolor sit</small></a></li>
-          <li data-target="#myCarousel" data-slide-to="2"><a href="#">Portfolio<small>Lorem ipsum dolor sit</small></a></li>
-          <li data-target="#myCarousel" data-slide-to="3"><a href="#">Services<small>Lorem ipsum dolor sit</small></a></li>
-        </ul>
-
-
-    </div><!-- End Carousel -->
+        <div class="form-group">
+                <div class="input-group input-group-lg">
+                    
+                    <div class="icon-addon addon-lg">
+                        <input type="text" placeholder="Mobile" class="form-control" id="Email">
+                        <label for="Email" class="glyphicon glyphicon-phone" rel="tooltip" title="Mobile"></label>
+                    </div>
+                    <span class="input-group-btn">
+                        <button class="btn-mive2 btn" type="button">Get App!</button>
+                    </span>
+                </div>
+            </div>
+    </div>
+  </div>
 </div>
+<div class="container-fluid full hidden-sm hidden-xs" style="height:800px" >
+    <div class="row"></div>
+    <div class="row">
+      
+    </div>
+      <div class="col-md-6" style="padding-left:40px;margin-top:100px;">
+        <img src="https://www.tinyowl.com/img/misc/phone.png" style="height:700px">
+      </div>
+      <div class="col-md-4" style="margin-top:390px;" >
+        <img style="" src="https://www.tinyowl.com/img/home/android.png" class="img img-responsive"><br><br>
+        
+        <div class="form-group">
+                <div class="input-group input-group-lg">
+                    
+                    <div class="icon-addon addon-lg">
+                        <input type="text" placeholder="Mobile" class="form-control" id="Email">
+                        <label for="Email" class="glyphicon glyphicon-phone" rel="tooltip" title="Mobile"></label>
+                    </div>
+                    <span class="input-group-btn">
+                        <button class="btn-mive2 btn" type="button">Get App!</button>
+                    </span>
+                </div>
+            </div>
+        
+      </div>
+    </div>
+        </div>
+
 <!-- About Mive Thing -->
 <center><div class="container">
   <div class="row" style="background:none">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
   <br><br>
-    <h2 style="color: #4582ec">About Mive</h2> 
+    <h3>About Mive</h3> 
     <p >Flipkart is an e-commerce company founded in 2007 by Sachin Bansal and Binny Bansal. It is registered in Singapore and it operates in India, where it is headquartered in Bangalore, Karnataka.[4] Flipkart has launched its own product range under the name "DigiFlip" with products including tablets, USBs, and laptop bags.[5][6][7]
 
 In May 2014, Flipkart received $210 million from DST Global, in July 2014 it raised $1 billion led by existing investors Tiger Global and South Africa's media group Naspers and in May 2015 it raised $550 million from some of its existing investors. Flipkart's last fundraising round in May 2015 had pegged its valuation at $15 billion.[8]</p> 
-  </div>
-  </div>
-  <center>
-  <div class="container" id="aboutmive">
-  <div vlass="row">
-  <div class="col-md-3 col-sm-12"></div>
-    <div class="col-md-8 col-sm-12">
-      <img src="rstatic/new/images/phone.png" class="img-responsive">
-    </div>
-    <div class="col-md-1 col-sm-12"></div>
-  </div>
 </div>
-</center>
-
-</center>
+<div class="col-md-2"></div>
+  </div>
+  </div>
+  </center>
+  <div class="container" id="mivecategories">
+  <div class="row" style="background:none">
+   
+  </div>
+  <div class="col-md-1 hidden-sm -hidden-xs"></div>
+  <div class="col-md-5 col-sm-12 col-xs-12">
+  <div class="row">
+    <br><br>
+     <img src="rstatic/new/images/fruits.png">
+    <h3>Buy Fruits</h3> 
+    <p >Flipkart is an e-commerce company founded in 2007 by Sachin Bansal and Binny Bansal. It is registered in Singapore and it operates in </p> 
+  </div>
+  </div>
+  <div class="col-md-1 hidden-sm hidden-xs"></div>
+  <div class="col-md-5 col-sm-12 col-xs-12" style="margin-left:0px">
+  <br><br>
+      <img src="rstatic/new/images/vegetables.png">
+    <h3>Buy Vegetables</h3> 
+    <p >Flipkart is an e-commerce company founded in 2007 by Sachin Bansal and Binny Bansal. It is registered in Singapore and it operates in</p>
+</div>
+  </div>
+  </div>
 <!-- products page -->
-
+<!--
 <div class="container">
     <div class="row">
         <div class="row">
@@ -299,11 +401,9 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                     Some of our popular Products</h2><br>
             </div>
             <div class="col-md-3">
-                <!-- Controls -->
             </div>
         </div>
         <div id="carousel-example" class="carousel slide" data-ride="carousel">
-            <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="row">
@@ -521,6 +621,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
         </div>
     </div>
     </div>
+    -->
 
 <!-- Team page thing -->
 
@@ -602,66 +703,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
   </div>
 </div>
 <!-- testimonia -->
-<div class="container" id="mivetestimonial">
-<div class="row">
-                    <div class="col-md-12" data-wow-delay="0.2s">
-                        <div class="carousel slide" data-ride="carousel" id="quote-carousel">
-                            <!-- Bottom Carousel Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#quote-carousel" data-slide-to="0" class="active"><img class="img-responsive " src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="">
-                                </li>
-                                <li data-target="#quote-carousel" data-slide-to="1"><img class="img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/rssems/128.jpg" alt="">
-                                </li>
-                                <li data-target="#quote-carousel" data-slide-to="2"><img class="img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg" alt="">
-                                </li>
-                            </ol>
 
-                            <!-- Carousel Slides / Quotes -->
-                            <div class="carousel-inner text-center">
-
-                                <!-- Quote 1 -->
-
-                                <div class="item active">
-                                    <blockquote>
-                                        <div class="row">
-                                            <div class="col-sm-8 col-sm-offset-2">
-
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. !</p>
-                                                <small>Someone famous</small>
-                                            </div>
-                                        </div>
-                                    </blockquote>
-                                </div>
-                                <!-- Quote 2 -->
-                                <div class="item">
-                                    <blockquote>
-                                        <div class="row">
-                                            <div class="col-sm-8 col-sm-offset-2">
-
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                                                <small>Someone famous</small>
-                                            </div>
-                                        </div>
-                                    </blockquote>
-                                </div>
-                                <!-- Quote 3 -->
-                                <div class="item">
-                                    <blockquote>
-                                        <div class="row">
-                                            <div class="col-sm-8 col-sm-offset-2">
-
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. .</p>
-                                                <small>Someone famous</small>
-                                            </div>
-                                        </div>
-                                    </blockquote>
-                                </div>
-                            </div>
-
-                            <!-- Carousel Buttons Next/Prev -->
-                    </div>
-                </div>
-</div>
 <!-- Contact thing-->
 <div class="container" >
 	<div class="row">
@@ -832,21 +874,62 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
 
 <!-- Social Footer, Single Coloured -->
 
-<div class="container-fluid">
+<div class="container">
+<div class="row">
+<div class="col-md-5">
+    <div class="form-area">  
+        <form role="form">
+        <br style="clear:both">
+                    <h3 style="margin-bottom: 25px; text-align: center;">Contact Form</h3>
+            <div class="form-group">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+          </div>
+                    <div class="form-group">
+                    <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7"></textarea>
+                    </div>
+            
+        <button type="button" id="submit" name="submit" class="btn btn-mive pull-right" style="color:#ffffff">Submit Form</button>
+        </form>
+    </div>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-5">
+    <div class="form-area">  
+    <form role="form" style="padding-top:100px;">
+        <br style="clear:both">             
+      <p class="txt-railway"><span class="glyphicon glyphicon-phone"></span>+91-8377950711</p>
+      <p class="txt-railway"><span class="glyphicon glyphicon-envelope"></span>info@mive.in</p>
+      <address>
+          <strong>Hythe Window Cleaning</strong><br>
+          15 Springfield Way<br>
+          Hythe<br>
+          Kent<br>
+          United Kingdon<br>
+          CT21 5SH<br>
+          <abbr title="Phone">P:</abbr> 01234 567 890
+        </address>
+      </form>
+    </div>
+    </div>
+    </div>
+</div>
     <hr>
-        <div class="col-md-8">
-            <p class="txt-railway">Copyright © Mive Technology Pvt. Ltd.</p>
-           
-</div>
-<div class="col-md-2">
-            <p class="txt-railway">+91-8377950711</p>
-           
-</div>
-<div class="col-md-2">
-            <p class="txt-railway">info@mive.in</p>
-           
-</div>
-    <hr>
+    <div class="container">
+     <div class="col-md-3"></div>
+    <div class="col-md-6">
+    <div class="copyright">Copyright © Mive Technology Pvt. Ltd.</div>
+    </div>
+     <div class="col-md-3"></div>
+    </div>
 
 <!-- login model thing -->
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">

@@ -3,6 +3,15 @@
   
   background: #13c0ba;
 }
+#mivecategories>a:hover a:focus {
+    color:#000000 !important;
+    background:#000 !important;
+}
+body>.fontmive {
+    font-size: 20px ;
+    color:#13c0ba !important;
+}
+
 
 .panel-primary>.panel-heading {
     color: #ffffff;
@@ -54,8 +63,13 @@
 
 /*cart thing*/
 
-body, button, input, select, textarea {
-    font-family: din,Calibri,Cantarell,sans-serif !important;
+body {
+    background: #ffffff;
+    color: #777777;
+    font: 14px/21px "Montserrat", sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
 }
   ul.dropdown-cart{
     min-width:250px;
@@ -104,7 +118,7 @@ ul.dropdown-cart li .item-right button{
     margin-top:14px;
 
 }
-a, a:hover a:focus {
+a:hover a:focus {
     color:#ffffff;
 }
 #rakeshnavtop>a{
@@ -160,91 +174,6 @@ a, a:hover a:focus {
 
 /*testimonial*/
 
-#quote-carousel {
-    padding: 0 10px 2px 10px;
-    margin-top: 31px;
-    /* Control buttons  */
-    /* Previous button  */
-    /* Next button  */
-    /* Changes the position of the indicators */
-    /* Changes the color of the indicators */
-}
-#quote-carousel .carousel-control {
-    background: none;
-    color: #CACACA;
-    font-size: 2.3em;
-    text-shadow: none;
-    margin-top: 10px;
-}
-#quote-carousel .carousel-control.left {
-    left: -60px;
-}
-#quote-carousel .carousel-control.right {
-    right: -60px;
-}
-#quote-carousel .carousel-indicators {
-    right: 50%;
-    top: auto;
-    bottom: 0px;
-    margin-right: -19px;
-}
-@media (min-width: 770px) and (max-width: 3000px) {
-#quote-carousel .carousel-indicators li {
-    width: 45px;
-    height: 45px;
-    margin: 5px;
-    cursor: pointer;
-    border: 2px solid #CCC;
-    border-radius: 50px;
-    opacity: 0.4;
-    overflow: hidden;
-    transition: all 0.4s;
-}
-#quote-carousel .carousel-indicators .active {
-    background: #333333;
-    width: 55px;
-    height: 55px;
-    border-radius: 100px;
-    border-color: #f33;
-    opacity: 1;
-    overflow: hidden;
-}
-}
-@media (min-width: 200px) and (max-width: 768px) {
-#quote-carousel .carousel-indicators li {
-    width: 10px;
-    height: 10px;
-    margin: 5px;
-    cursor: pointer;
-    border: 1px solid #CCC;
-    border-radius: 50px;
-    opacity: 0.4;
-    overflow: hidden;
-    transition: all 0.4s;
-}
-#quote-carousel .carousel-indicators .active {
-    background: #333333;
-    width: 15px;
-    height: 15px;
-    border-radius: 60px;
-    border-color: #f33;
-    opacity: 1;
-    overflow: hidden;
-}
-}
-.carousel-inner {
-    min-height: 300px;
-}
-.item blockquote {
-    border-left: none;
-    margin: 0;
-}
-.item blockquote p:before {
-    content: "\f10d";
-    font-family: 'Fontawesome';
-    float: left;
-    margin-right: 10px;
-}
 
 /*contact */
 

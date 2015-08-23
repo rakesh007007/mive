@@ -5,13 +5,13 @@
  */
 
 body {
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 0px;
+	margin-bottom:0px;
 	background: none;
 }
 
 .full {
-  background: url(http://www.desktopwallpaperhd.net/wallpapers/8/3/background-images-wallpaper-vegetables-food-88035.jpg) no-repeat center center fixed; 
+  background: url(https://www.tinyowl.com/img/backgrounds/home.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
