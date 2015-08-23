@@ -10,9 +10,23 @@
   <script src="rstatic/new/js/jquery.min.js"></script>
   <script src="rstatic/new/js/bootstrap.min.js"></script>
   <script src="rstatic/new/js/detect.js"></script>
+  <link rel="stylesheet" href="rstatic/new/css/pnotify.custom.min.css">
+  <script src="rstatic/new/js/pnotify.custom.min.js"></script>
+  <script type="text/javascript">
+  function mivenotify(type,title,text){
+    new PNotify({
+      title: title,
+      text:text,
+      type: type,
+      hide:true
+  });
+
+  }
+  </script>
   <script>
   var browd =BrowserDetect()
      $( document ).ready(function() {
+      mivenotify('success','Welcome!','Mive will release soon!!');
   // Handler for .ready() called
   
     $(window).on("scroll",function(){
@@ -292,12 +306,12 @@
         <li><a href="#contactmive">
           Contact
         </a></li>
-        <li><a data-toggle="modal" data-target="#contact" data-original-title>Careers</a></li>
+        <li><a data-toggle="modal" onclick="mivenotify('success','Hello','Please provide your details in given form')" data-target="#contact" data-original-title>Careers</a></li>
       </ul>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li> <a href="#" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#login-modal">Shop</a></li>
-        <li> <a href="#"><img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/google_play.png" style="width:30px;height:30px"><i>Get App</i></a></li>
+        <li> <a href="#" class="btn btn-primary btn-outline">Shop</a></li>
+        <li> <a onclick="mivenotify('error','Sorry','Mive will release soon')"><img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/google_play.png" style="width:30px;height:30px"><i>Get App</i></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -358,9 +372,11 @@
   <div class="col-md-8">
   <br><br>
     <h3>About Mive</h3> 
-    <p >Flipkart is an e-commerce company founded in 2007 by Sachin Bansal and Binny Bansal. It is registered in Singapore and it operates in India, where it is headquartered in Bangalore, Karnataka.[4] Flipkart has launched its own product range under the name "DigiFlip" with products including tablets, USBs, and laptop bags.[5][6][7]
-
-In May 2014, Flipkart received $210 million from DST Global, in July 2014 it raised $1 billion led by existing investors Tiger Global and South Africa's media group Naspers and in May 2015 it raised $550 million from some of its existing investors. Flipkart's last fundraising round in May 2015 had pegged its valuation at $15 billion.[8]</p> 
+    <p >MIVE is a B2B marketplace that aims to reach out to all the unorganized fruits and vegetables foodchains across the nation and make the tedious task of stock procurement hassle free through the extensive use of technology. Anyone can procure stock with least possible efforts by using MIVE Android Application or by simply using MIVE WebApp</p> 
+    
+    <h4><i>No more travelling and facing the hassles of wholesale markets or mandis</i> </h4>
+      MIVE assures Best & Fresh Stock at best prices available in mandi & timely delivered as per the requirements of buyers. The advanced logistics enables timely delivery at doorstep with ulmost care of stock. Thus with MIVE one not only save time and money but also reduces the human effort which could be utilized for some other productive work.
+    </p>
 </div>
 <div class="col-md-2"></div>
   </div>
@@ -376,7 +392,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
     <br><br>
      <img src="rstatic/new/images/fruits.png">
     <h3>Buy Fruits</h3> 
-    <p >Flipkart is an e-commerce company founded in 2007 by Sachin Bansal and Binny Bansal. It is registered in Singapore and it operates in </p> 
+    <p >Now get Fruits delivered at your business location. Mive,now brings you the convenience of ordering online or on phone</p> 
   </div>
   </div>
   <div class="col-md-1 hidden-sm hidden-xs"></div>
@@ -384,7 +400,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
   <br><br>
       <img src="rstatic/new/images/vegetables.png">
     <h3>Buy Vegetables</h3> 
-    <p >Flipkart is an e-commerce company founded in 2007 by Sachin Bansal and Binny Bansal. It is registered in Singapore and it operates in</p>
+    <p >Now famillies and businesses can get bulk vegetables delivered at doorstep. Why pay more when you can get things on <u>mandi rates<u></p>
 </div>
   </div>
   </div>
@@ -634,7 +650,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                 <ul class="[ nav nav-justified ]" id="nav-tabs" role="tablist">
                     <li role="presentation">
                         <a href="#dustin" aria-controls="dustin" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/dustinlamont/128.jpg" />
+                            <img class="img-circle img-responsive" src="rstatic/new/images/team/rak.jpg"/>
                             <span class="quote"><i class="fa fa-quote-left"></i></span>
                         </a>
                     </li>
@@ -666,8 +682,8 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                         <div class="tab-inner">                    
                             <p class="lead">Etiam tincidunt enim et pretium efficitur. Donec auctor leo sollicitudin eros iaculis sollicitudin.</p>
                             <hr>
-                            <p><strong class="text-uppercase">Dustin Lamont</strong></p>
-                            <p><em class="text-capitalize"> Senior web developer</em> at <a href="#">Apple</a></p>                 
+                            <p><strong class="text-uppercase">Rakesh Yadav</strong></p>
+                            <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>                 
                         </div>
                     </div>
                     
@@ -676,7 +692,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                             <p class="lead">Suspendisse dictum gravida est, nec consequat tortor venenatis a. Suspendisse vitae venenatis sapien.</p>
                             <hr>
                             <p><strong class="text-uppercase">Daksh Bhagya</strong></p>
-                            <p><em class="text-capitalize"> UX designer</em> at <a href="#">Google</a></p>
+                            <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>
                         </div>
                     </div>
                     
@@ -685,7 +701,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                             <p class="lead">Nullam suscipit ante ac arcu placerat, nec sagittis quam volutpat. Vestibulum aliquam facilisis velit ut ultrices.</p>
                             <hr>
                             <p><strong class="text-uppercase">Anna Pickard</strong></p>
-                            <p><em class="text-capitalize"> Master web developer</em> at <a href="#">Intel</a></p>
+                            <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>
                         </div> 
                     </div>
                     
@@ -694,7 +710,7 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
                             <p class="lead"> Fusce erat libero, fermentum quis sollicitudin id, venenatis nec felis. Morbi sollicitudin gravida finibus.</p>
                             <hr>
                             <p><strong class="text-uppercase">Wafer Baby</strong></p>
-                            <p><em class="text-capitalize"> Web designer</em> at <a href="#">Microsoft</a></p>
+                           <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>
                         </div>
                     </div>
                 </div>
@@ -894,9 +910,6 @@ In May 2014, Flipkart received $210 million from DST Global, in July 2014 it rai
           </div>
           <div class="form-group">
             <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" required>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
           </div>
                     <div class="form-group">
                     <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7"></textarea>
