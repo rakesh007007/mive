@@ -9,6 +9,21 @@
   <link rel="stylesheet" href="rstatic/new/css/master.css">
   <script src="rstatic/new/js/jquery.min.js"></script>
   <script src="rstatic/new/js/bootstrap.min.js"></script>
+  <script>
+  $( document ).ready(function() {
+  // Handler for .ready() called.
+    $(window).on("scroll",function(){
+      if (($(document).height())- ($(document).scrollTop())>2160) {
+    $('.navtoggle')[0].style.display="none";
+  }
+  else{
+   $('.navtoggle')[0].style.display="block";
+   console.log('scrolled')}
+}); 
+});
+ 
+   
+  </script>
   <style>
    @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css);
   .nav.nav-justified > li > a { position: relative; }
@@ -157,7 +172,38 @@
   </style>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" style="opacity:0.9" id="rakeshnavtop">
+<nav class="navbar navbar-default navbar-fixed-top hidden-sm hidden-xs navtoggle" style="opacity:0.95;display:none" id="rakeshnavtop">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><img style="height:52px;width:52px" src="rstatic/new/images/mivelogo.png" class="img img-responsive"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#aboutmive">About</a></li>
+        <li><a href="#teammive">Team</a></li>
+        <li><a data-toggle="modal" data-target="#contact" data-original-title>
+          Contact
+        </a></li>
+        <li><a href="#">Career</a></li>
+      </ul>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li> <a href="#" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#login-modal">Shop</a></li>
+        <li> <a href="#"><img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/google_play.png" style="width:30px;height:30px"><i>Get App</i></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<nav class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg" style="opacity:0.95;display:block" id="rakeshnavtop">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -196,7 +242,7 @@
       <div class="carousel-inner">
       
         <div class="item active">
-          <img src="http://simcoeorganics.com/wp-content/uploads/2012/08/stockfresh_661986_fruit-and-vegetables-isolated-on-a-white-background_sizeS.jpg" height="50%">
+          <img src="http://amaz.com.pe/img/amaz_001.jpg" style="width:1400px" class="img img-responsive">
            <div class="carousel-caption">
             <img class="img-responisve img hidden-sm hidden-xs"src="rstatic/new/images/mivelogo.png" style="width:130px;height:130px">
             <h3>Mive For Juice centers</h3>
@@ -206,7 +252,7 @@
         </div><!-- End Item -->
  
          <div class="item">
-          <img src="http://simcoeorganics.com/wp-content/uploads/2012/08/stockfresh_661986_fruit-and-vegetables-isolated-on-a-white-background_sizeS.jpg">
+         <img src="http://amaz.com.pe/img/amaz_001.jpg" style="width:1400px" class="img img-responsive">
            <div class="carousel-caption">
             <img class="img-responisve img hidden-sm hidden-xs"src="rstatic/new/images/mivelogo.png" style="width:130px;height:130px">
             <h3>Mive For Juice centers</h3>
@@ -215,7 +261,7 @@
         </div><!-- End Item -->
         
         <div class="item">
-          <img src="http://simcoeorganics.com/wp-content/uploads/2012/08/stockfresh_661986_fruit-and-vegetables-isolated-on-a-white-background_sizeS.jpg">
+          <img src="http://amaz.com.pe/img/amaz_001.jpg" style="width:1400px" class="img img-responsive">
            <div class="carousel-caption">
             <img class="img-responisve img hidden-sm hidden-xs"src="rstatic/new/images/mivelogo.png" style="width:130px;height:130px">
             <h3>Mive For Juice centers</h3>
@@ -224,7 +270,7 @@
         </div><!-- End Item -->
         
         <div class="item">
-          <img src="http://simcoeorganics.com/wp-content/uploads/2012/08/stockfresh_661986_fruit-and-vegetables-isolated-on-a-white-background_sizeS.jpg">
+          <img src="http://amaz.com.pe/img/amaz_001.jpg" style="width:1400px" class="img img-responsive">
            <div class="carousel-caption">
             <img class="img-responisve img hidden-sm hidden-xs"src="rstatic/new/images/mivelogo.png" style="width:130px;height:130px">
             <h3>Mive For Juice centers</h3>
