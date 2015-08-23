@@ -9,9 +9,15 @@
   <link rel="stylesheet" href="rstatic/new/css/master.css">
   <script src="rstatic/new/js/jquery.min.js"></script>
   <script src="rstatic/new/js/bootstrap.min.js"></script>
+  <script src="rstatic/new/js/detect.js"></script>
   <script>
-  $( document ).ready(function() {
-  // Handler for .ready() called.
+  var browd =BrowserDetect()
+     $( document ).ready(function() {
+  // Handler for .ready() called
+  if(browd!='Chrome' && browd!='Firefox' && browd!='IE' ){
+    $('.navtoggle')[0].style.display="block";
+  }
+  else{
     $(window).on("scroll",function(){
       if (($(document).height())- ($(document).scrollTop())>2160) {
     $('.navtoggle')[0].style.display="none";
@@ -19,7 +25,7 @@
   else{
    $('.navtoggle')[0].style.display="block";
    console.log('scrolled')}
-}); 
+}); }
 });
  
    
@@ -173,37 +179,6 @@
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top hidden-sm hidden-xs navtoggle" style="opacity:0.95;display:none" id="rakeshnavtop">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><img style="height:52px;width:52px" src="rstatic/new/images/mivelogo.png" class="img img-responsive"></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="#aboutmive">About</a></li>
-        <li><a href="#teammive">Team</a></li>
-        <li><a data-toggle="modal" data-target="#contact" data-original-title>
-          Contact
-        </a></li>
-        <li><a href="#">Career</a></li>
-      </ul>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li> <a href="#" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#login-modal">Shop</a></li>
-        <li> <a href="#"><img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/google_play.png" style="width:30px;height:30px"><i>Get App</i></a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-<nav class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg" style="opacity:0.95;display:block" id="rakeshnavtop">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
