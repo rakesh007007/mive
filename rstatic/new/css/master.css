@@ -1,4 +1,5 @@
 /*random on top*/
+
 .btn-mive {
   
   background: #13c0ba;
@@ -228,9 +229,6 @@ a, a:hover a:focus {
     opacity: 1;
     overflow: hidden;
 }
-}
-.carousel-inner {
-    min-height: 300px;
 }
 .item blockquote {
     border-left: none;
