@@ -303,111 +303,91 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#aboutmive">About</a></li>
-        <li><a href="#teammive">Team</a></li>
+        <li><a href="#aboutmive">Home</a></li>
+        <li><a href="#teammive">vegetables</a></li>
         <li><a href="#contactmive">
-          Contact
+          Fruits
         </a></li>
-        <li><a data-toggle="modal" onclick="mivenotify('success','Hello','Please provide your details in given form')" data-target="#contact" data-original-title>Careers</a></li>
       </ul>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li> <a href="#" class="btn btn-primary btn-outline">Shop</a></li>
-        <li> <a onclick="mivenotify('error','Sorry','Mive will release soon')"><img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/google_play.png" style="width:30px;height:30px"><i>Get App</i></a></li>
+        <li class="dropdown">
+       
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 7 - Items<span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-cart" role="menu">
+              <li>
+                  <span class="item">
+                    <span class="item-left">
+                        <img src="http://lorempixel.com/50/50/" alt="" />
+                        <span class="item-info">
+                            <span>Item name</span>
+                            <span>23$</span>
+                        </span>
+                    </span>
+                    <span class="item-right">
+                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                    </span>
+                </span>
+              </li>
+              <li>
+                  <span class="item">
+                    <span class="item-left">
+                        <img src="http://lorempixel.com/50/50/" alt="" />
+                        <span class="item-info">
+                            <span>Item name</span>
+                            <span>23$</span>
+                        </span>
+                    </span>
+                    <span class="item-right">
+                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                    </span>
+                </span>
+              </li>
+              <li>
+                  <span class="item">
+                    <span class="item-left">
+                        <img src="http://lorempixel.com/50/50/" alt="" />
+                        <span class="item-info">
+                            <span>Item name</span>
+                            <span>23$</span>
+                        </span>
+                    </span>
+                    <span class="item-right">
+                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                    </span>
+                </span>
+              </li>
+              <li class="divider"></li>
+              <li><a class="text-center" href="">View Cart</a></li>
+          </ul>
+        </li>
+        <li> <a href="#" data-toggle="modal" data-target="#login-modal"> <span class="glyphicon glyphicon-user"></span> Login</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="container-fluid full hidden-md hidden-lg" >
-  <div class="row">
-    <div class="col-xs-12 col-sm-12">
-    <br><br><br><br><br>
-      <img style="" src="https://www.tinyowl.com/img/home/android.png" class="img img-responsive"><br><br>
-        
-        <div class="form-group">
-                <div class="input-group input-group-lg">
-                    
-                    <div class="icon-addon addon-lg">
-                        <input type="text" placeholder="Mobile" class="form-control" id="Email">
-                        <label for="Email" class="glyphicon glyphicon-phone" rel="tooltip" title="Mobile"></label>
-                    </div>
-                    <span class="input-group-btn">
-                        <button class="btn-mive2 btn" type="button">Get App!</button>
-                    </span>
-                </div>
-            </div>
-    </div>
-  </div>
-</div>
-<div class="container-fluid full hidden-sm hidden-xs" style="height:800px" >
-    <div class="row"></div>
+<div class="container-fluid full" style="height:400px" >
     <div class="row">
       
     </div>
-      <div class="col-md-6" style="padding-left:40px;margin-top:100px;">
-        <img src="https://www.tinyowl.com/img/misc/phone.png" style="height:700px">
+      <div class="col-md-3" style="padding-left:40px;margin-top:0px;">
       </div>
-      <div class="col-md-4" style="margin-top:390px;" >
-        <img style="" src="https://www.tinyowl.com/img/home/android.png" class="img img-responsive"><br><br>
-        
-        <div class="form-group">
-                <div class="input-group input-group-lg">
-                    
-                    <div class="icon-addon addon-lg">
-                        <input type="text" placeholder="Mobile" class="form-control" id="Email">
-                        <label for="Email" class="glyphicon glyphicon-phone" rel="tooltip" title="Mobile"></label>
-                    </div>
-                    <span class="input-group-btn">
-                        <button class="btn-mive2 btn" type="button">Get App!</button>
-                    </span>
-                </div>
-            </div>
-        
+      <div class="col-md-6" style="margin-top:240px;">
+            <div class="input-group custom-search-form">
+              <input type="text" class="form-control" style="height:60px" placeholder="Search Fruits and Vegetables">
+              <span class="input-group-btn" style="color:#13c0ba;">
+              <button style="height:60px;color:#ffffff;background:#13c0ba;" class="btn btn-mive2  " type="button">
+              <span class="glyphicon glyphicon-search"></span>
+             </button>
+             </span>
+             </div><!-- /input-group -->
+        </div>
+        <div class="col-md-3" style="padding-left:40px;margin-top:100px;">
       </div>
     </div>
         </div>
 
-<!-- About Mive Thing -->
-<center><div class="container" id="aboutmive">
-  <div class="row" style="background:none">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-  <br><br>
-    <h3>About Mive</h3> 
-    <p >MIVE is a B2B marketplace that aims to reach out to all the unorganized fruits and vegetables foodchains across the nation and make the tedious task of stock procurement hassle free through the extensive use of technology. Anyone can procure stock with least possible efforts by using MIVE Android Application or by simply using MIVE WebApp</p> 
-    
-    <h4><i>No more travelling and facing the hassles of wholesale markets or mandis</i> </h4>
-      MIVE assures Best & Fresh Stock at best prices available in mandi & timely delivered as per the requirements of buyers. The advanced logistics enables timely delivery at doorstep with ulmost care of stock. Thus with MIVE one not only save time and money but also reduces the human effort which could be utilized for some other productive work.
-    </p>
-</div>
-<div class="col-md-2"></div>
-  </div>
-  </div>
-  </center>
-  <div class="container" id="mivecategories">
-  <div class="row" style="background:none">
-   
-  </div>
-  <div class="col-md-1 hidden-sm -hidden-xs"></div>
-  <div class="col-md-5 col-sm-12 col-xs-12">
-  <div class="row">
-    <br><br>
-     <img src="rstatic/new/images/fruits.png">
-    <h3>Buy Fruits</h3> 
-    <p >Now get Fruits delivered at your business location. Mive,now brings you the convenience of ordering online or on phone</p> 
-  </div>
-  </div>
-  <div class="col-md-1 hidden-sm hidden-xs"></div>
-  <div class="col-md-5 col-sm-12 col-xs-12" style="margin-left:0px">
-  <br><br>
-      <img src="rstatic/new/images/vegetables.png">
-    <h3>Buy Vegetables</h3> 
-    <p >Now famillies and businesses can get bulk vegetables delivered at doorstep. Why pay more when you can get things on <u>mandi rates<u></p>
-</div>
-  </div>
-  </div>
 <!-- products page -->
-<!--
 <div class="container">
     <div class="row">
         <div class="row">
@@ -425,212 +405,242 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="row">
-                        <div class="col-sm-3 col-md-2">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                Product</p>
-                                        </div>
-                                         <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                $249.99</p>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                       <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-md-2">
+
+                        <div class="col-sm-3 col-md-4">
                             <div class="col-item">
                                 <div class="photo">
                                     <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
                                 </div>
                                 <div class="info">
+                                <div class="row">
+                                         <center><div class="price col-md-9 col-sm-6">
+                                            
+                                            <h5 class="price-text-color">tmaatar</h5>
+                                        </div></center>
+                                    </div>
                                     <div class="row">
                                         <div class="price col-md-6 col-sm-6">
                                             
                                             <p class="price-text-color">
                                                 Product</p>
+                                            <p class="">
+                                                <a>250 gm</a></p>
                                         </div>
                                          <div class="price col-md-6 col-sm-6">
                                             
                                             <p class="price-text-color">
                                                 $249.99</p>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                       <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-md-2">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img-responsive img" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                Product</p>
-                                        </div>
-                                         <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                $249.99</p>
+                                            <p class="">
+                                                <a>Details</a></p>
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                    <div class="col-md-6 cols-sm-6">
                                     <div class="separator clear-left">
                                        <div class="input-group number-spinner" >
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                                           </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                           </span>
+                                          <input type="text" class="form-control text-center input-circle"value="1">
+                                          
                                         </div>
                                     </div>
+                                    </div>
+                                   <div class="col-md-5 col-sm-5">
+                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   </div>
+                                   <div class="col-md-1 col-sm-">
+                                   </div>
+
+
+                                    </div>
+
                                     <div class="clearfix">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                         <div class="col-sm-3 col-md-2">
+                        <div class="col-sm-3 col-md-4">
                             <div class="col-item">
                                 <div class="photo">
-                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" />
+                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
                                 </div>
                                 <div class="info">
+                                <div class="row">
+                                         <center><div class="price col-md-9 col-sm-6">
+                                            
+                                            <h5 class="price-text-color">tmaatar</h5>
+                                        </div></center>
+                                    </div>
                                     <div class="row">
                                         <div class="price col-md-6 col-sm-6">
                                             
                                             <p class="price-text-color">
                                                 Product</p>
+                                            <p class="">
+                                                <a>250 gm</a></p>
                                         </div>
                                          <div class="price col-md-6 col-sm-6">
                                             
                                             <p class="price-text-color">
                                                 $249.99</p>
+                                            <p class="">
+                                                <a>Details</a></p>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                    <div class="col-md-6 cols-sm-6">
                                     <div class="separator clear-left">
                                        <div class="input-group number-spinner" >
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                                           </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                           </span>
+                                          <input type="text" class="form-control text-center input-circle"value="1">
+                                          
                                         </div>
                                     </div>
+                                    </div>
+                                   <div class="col-md-5 col-sm-5">
+                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   </div>
+                                   <div class="col-md-1 col-sm-">
+                                   </div>
+
+
+                                    </div>
+
                                     <div class="clearfix">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                       <div class="col-sm-3 col-md-2">
+                        <div class="col-sm-3 col-md-4">
                             <div class="col-item">
                                 <div class="photo">
-                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" />
+                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
                                 </div>
                                 <div class="info">
+                                <div class="row">
+                                         <center><div class="price col-md-9 col-sm-6">
+                                            
+                                            <h5 class="price-text-color">tmaatar</h5>
+                                        </div></center>
+                                    </div>
                                     <div class="row">
                                         <div class="price col-md-6 col-sm-6">
                                             
                                             <p class="price-text-color">
                                                 Product</p>
+                                            <p class="">
+                                                <a>250 gm</a></p>
                                         </div>
                                          <div class="price col-md-6 col-sm-6">
                                             
                                             <p class="price-text-color">
                                                 $249.99</p>
+                                            <p class="">
+                                                <a>Details</a></p>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                    <div class="col-md-6 cols-sm-6">
                                     <div class="separator clear-left">
                                        <div class="input-group number-spinner" >
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                                           </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                           </span>
+                                          <input type="text" class="form-control text-center input-circle"value="1">
+                                          
                                         </div>
                                     </div>
+                                    </div>
+                                   <div class="col-md-5 col-sm-5">
+                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   </div>
+                                   <div class="col-md-1 col-sm-">
+                                   </div>
+
+
+                                    </div>
+
                                     <div class="clearfix">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-3 col-md-4">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
+                                </div>
+                                <div class="info">
+                                <div class="row">
+                                         <center><div class="price col-md-9 col-sm-6">
+                                            
+                                            <h5 class="price-text-color">tmaatar</h5>
+                                        </div></center>
+                                    </div>
+                                    <div class="row">
+                                        <div class="price col-md-6 col-sm-6">
+                                            
+                                            <p class="price-text-color">
+                                                Product</p>
+                                            <p class="">
+                                                <a>250 gm</a></p>
+                                        </div>
+                                         <div class="price col-md-6 col-sm-6">
+                                            
+                                            <p class="price-text-color">
+                                                $249.99</p>
+                                            <p class="">
+                                                <a>Details</a></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                    <div class="col-md-6 cols-sm-6">
+                                    <div class="separator clear-left">
+                                       <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                          <input type="text" class="form-control text-center input-circle"value="1">
+                                          
+                                        </div>
+                                    </div>
+                                    </div>
+                                   <div class="col-md-5 col-sm-5">
+                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   </div>
+                                   <div class="col-md-1 col-sm-">
+                                   </div>
+
+
+                                    </div>
+
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>               
                        
-                            <div class="col-sm-3 col-md-2">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                Product</p>
-                                        </div>
-                                         <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                $249.99</p>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                       <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -639,88 +649,10 @@
         </div>
     </div>
     </div>
-    -->
 
 <!-- Team page thing -->
 
-<div class="[ container text-center hidden-xs hidden-sm ]" id="teammive" >
-  <div class="[ row ]">
-    <div class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 ]" role="tabpanel">
-            <div class="[ col-xs-4 col-sm-12 ]">
-                <!-- Nav tabs -->
-                <br><br><h2>Team Mive</h2> 
-                <ul class="[ nav nav-justified ]" id="nav-tabs" role="tablist">
-                    <li role="presentation">
-                        <a href="#dustin" aria-controls="dustin" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="rstatic/new/images/team/rak.jpg"/>
-                            <span class="quote"><i class="fa fa-quote-left"></i></span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="active">
-                        <a href="#daksh" aria-controls="daksh" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/annapickard/128.jpg"/>
-                            <span class="quote"><i class="fa fa-quote-left"></i></span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="">
-                        <a href="#anna" aria-controls="anna" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/annapickard/128.jpg" />
-                            <span class="quote"><i class="fa fa-quote-left"></i></span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="">
-                        <a href="#wafer" aria-controls="wafer" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/waferbaby/128.jpg" />
-                            <span class="quote"><i class="fa fa-quote-left"></i></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="[ col-xs-8 col-sm-12 ]">
-                <!-- Tab panes -->
-                <div class="tab-content" id="tabs-collapse"> 
-                         
-                    <div role="tabpanel" class="tab-pane fade in active" id="dustin">
-                        <div class="tab-inner">                    
-                            <p class="lead">Etiam tincidunt enim et pretium efficitur. Donec auctor leo sollicitudin eros iaculis sollicitudin.</p>
-                            <hr>
-                            <p><strong class="text-uppercase">Rakesh Yadav</strong></p>
-                            <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>                 
-                        </div>
-                    </div>
-                    
-                    <div role="tabpanel" class="tab-pane fade" id="daksh">
-                        <div class="tab-inner">
-                            <p class="lead">Suspendisse dictum gravida est, nec consequat tortor venenatis a. Suspendisse vitae venenatis sapien.</p>
-                            <hr>
-                            <p><strong class="text-uppercase">Daksh Bhagya</strong></p>
-                            <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>
-                        </div>
-                    </div>
-                    
-                    <div role="tabpanel" class="tab-pane fade" id="anna">
-                        <div class="tab-inner">
-                            <p class="lead">Nullam suscipit ante ac arcu placerat, nec sagittis quam volutpat. Vestibulum aliquam facilisis velit ut ultrices.</p>
-                            <hr>
-                            <p><strong class="text-uppercase">Anna Pickard</strong></p>
-                            <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>
-                        </div> 
-                    </div>
-                    
-                    <div role="tabpanel" class="tab-pane fade" id="wafer">
-                        <div class="tab-inner">
-                            <p class="lead"> Fusce erat libero, fermentum quis sollicitudin id, venenatis nec felis. Morbi sollicitudin gravida finibus.</p>
-                            <hr>
-                            <p><strong class="text-uppercase">Wafer Baby</strong></p>
-                           <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>        
-        </div>
-  </div>
-</div>
-<!-- testimonia -->
+
 
 <!-- Contact thing-->
 <div class="container" >
@@ -897,51 +829,7 @@
 
 <!-- Social Footer, Single Coloured -->
 
-<div class="container" id="contactmive">
-<div class="row">
-<div class="col-md-5">
-    <div class="form-area">  
-        <form role="form">
-        <br style="clear:both">
-                    <h3 style="margin-bottom: 25px; text-align: center;">Contact Form</h3>
-            <div class="form-group">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" required>
-          </div>
-                    <div class="form-group">
-                    <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7"></textarea>
-                    </div>
-            
-        <button type="button" id="submit" name="submit" class="btn btn-mive pull-right" style="color:#ffffff">Submit Form</button>
-        </form>
-    </div>
-    </div>
-    <div class="col-md-2"></div>
-    <div class="col-md-5">
-    <div class="form-area">  
-    <form role="form" style="padding-top:100px;">
-        <br style="clear:both">             
-      <p class="txt-railway"><span class="glyphicon glyphicon-phone"></span>+91-8377950711</p>
-      <p class="txt-railway"><span class="glyphicon glyphicon-envelope"></span>info@mive.in</p>
-      <address>
-          <strong>Hythe Window Cleaning</strong><br>
-          15 Springfield Way<br>
-          Hythe<br>
-          Kent<br>
-          United Kingdon<br>
-          CT21 5SH<br>
-          <abbr title="Phone">P:</abbr> 01234 567 890
-        </address>
-      </form>
-    </div>
-    </div>
-    </div>
-</div>
+
     <hr>
     <div class="container">
      <div class="col-md-3"></div>
