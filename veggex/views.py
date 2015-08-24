@@ -479,35 +479,67 @@ def search(request):
 	return TemplateResponse(request, 'searchResults.html',{'resultCategory':resultCategory,'resultSeller':resultSeller,'resultOrigin':resultOrigin,'resultName':resultName,'resultDescription':resultDescription,'csrf_token':get_or_create_csrf_token(request)})
 def searchForm(request):
 	return TemplateResponse(request, 'search.html',{'csrf_token':get_or_create_csrf_token(request)})
-
 def logPost(request):
-	mobile = request.POST['mobile']
-	password = request.POST['password']
-	print make_password(password)
-	u= User.objects.filter(mobileNo=mobile)
-	if(check_password(password,u[0].password)):
-		request.session['loggedin']=True
-		request.session['mobile'] = mobile
-		return redirect('/main')
-	else:
-		return redirect('/login')
+    mobile=request.POST['mobile']
+    password = request.POST['password']
+    u = User.objects.filter(mobileNo=mobile)
+    uu=Cart.objects.raw('select * from `veggex_cart` natural join `veggex_user` where mobileNo='+str(mobile))
+    if(check_password(password,u[0].password)):
+        request.session['loggedin']=True
+        request.session['mobile']=mobile
+        request.session['miveuser']=u[0].user_id
+        cartz = CoreSez.serialize('json',uu)
+        cart = u[0].cart
+        uz = CoreSez.serialize('json',u)
+        #one extra db query remove it when you are free
+        #cart = Cart.objects.filter(cart_id=cart.cart_id)
+        #cartz = CoreSez.serialize('json',list(cart))
+        d = Product.objects.raw('select * from `veggex_cartitem` natural join `veggex_product` where cart_id='+str(cart.cart_id))
+        #cartitems = Cartitem.objects.filter(cart=cart).values('product')
+        #cartsz = CoreSez.serialize('json',cart)
+        #cartitemsz = CoreSez.serialize('json',list(cartitems))
+        p=CoreSez.serialize('json',d)
+        final = {"cartItems":p,"cart":cartz,"user":uz}
+        final = json.dumps([final,])
+        return HttpResponse(final)
+    else:
+        return HttpResponse('Invalid Login credentials')
 def logout(request):
 	 if('loggedin' in request.session):
 	 	 del request.session['loggedin']
 	 if('mobile' in request.session):
 	 	del request.session['mobile'] 
-	 return TemplateResponse(request, 'logout.html',{'csrf_token':get_or_create_csrf_token(request)})
+	 return redirect('/main')
 def account(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
 	mobile =request.session['mobile']
 	user = User.objects.get(mobileNo=mobile)
-	return TemplateResponse(request, 'account.html',{'user':user,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'account.html',{"user":user,'csrf_token':get_or_create_csrf_token(request)})
 def main(request):
-	if(checklogin(request)==False):
-		return redirect('/login')
-	categories =Category.objects.all()
-	return TemplateResponse(request, 'new/index.html',{'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
+    if(checklogin(request)==False):
+        miveuser='none'
+        cart='none'
+        customproducts='none'
+        cartItems=[]
+        totalItems=0
+        categories = Category.objects.all()
+        products = Product.objects.all()
+        return TemplateResponse(request, 'new/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+    else:
+        miveuserId = request.session['miveuser']
+        miveuser = User.objects.get(user_id=int(miveuserId))
+        cart = miveuser.cart
+        cartItems = Cartitem.objects.filter(cart=cart)
+        totalItems = len(cartItems)
+        customproducts='none'
+        allProducts = Product.objects.all()
+        vegetableProducts = Product.objects.filter(category_id=1)
+        fruitproducts = Product.objects.filter(category_id=2)
+        products = Product.objects.all()
+        categories = Category.objects.all()
+        return TemplateResponse(request, 'new/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+
 def get_or_create_cart(user):
 	cart = Cart.objects.filter(user=user)
 	if(len(cart)==1):

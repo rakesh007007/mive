@@ -32,11 +32,11 @@
       if($.cookie('visitedmive')==undefined){
         console.log('ting')
         $.cookie('visitedmive','true')
-        //mivenotify('success','Welcome!','Mive will release soon!!');
+        mivenotify('success','Welcome!','Mive will release soon!!');
       }
       else{
          console.log('ting')
-         //mivenotify('success','Welcome back!','Mive will release soon!!');
+         mivenotify('success','Welcome back!','Mive will release soon!!');
       }
       
   // Handler for .ready() called
@@ -313,16 +313,15 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> {{totalItems}} Item<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 7 - Items<span class="caret"></span></a>
           <ul class="dropdown-menu dropdown-cart" role="menu">
-          {%for item in cartItems%}
               <li>
                   <span class="item">
                     <span class="item-left">
-                        <img style="width:50px;height:50px" src="{{item.product.coverphoto.url}}" alt="" />
+                        <img src="http://lorempixel.com/50/50/" alt="" />
                         <span class="item-info">
-                            <span>{{item.product.name}}</span>
-                            <span>{{item.product.pricePerUnit}}$ x {{item.qtyInUnits}}</span>
+                            <span>Item name</span>
+                            <span>23$</span>
                         </span>
                     </span>
                     <span class="item-right">
@@ -330,37 +329,47 @@
                     </span>
                 </span>
               </li>
-             {%endfor%}
-             {%if totalItems = 0 %}
-               <li class="divider"></li>
-              <li><p class="text-center" href="">Empty</p></li>
-             {% else %}
-             <li class="divider"></li>
+              <li>
+                  <span class="item">
+                    <span class="item-left">
+                        <img src="http://lorempixel.com/50/50/" alt="" />
+                        <span class="item-info">
+                            <span>Item name</span>
+                            <span>23$</span>
+                        </span>
+                    </span>
+                    <span class="item-right">
+                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                    </span>
+                </span>
+              </li>
+              <li>
+                  <span class="item">
+                    <span class="item-left">
+                        <img src="http://lorempixel.com/50/50/" alt="" />
+                        <span class="item-info">
+                            <span>Item name</span>
+                            <span>23$</span>
+                        </span>
+                    </span>
+                    <span class="item-right">
+                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                    </span>
+                </span>
+              </li>
+              <li class="divider"></li>
               <li><a class="text-center" href="">View Cart</a></li>
-             {% endif %}
-              
           </ul>
         </li>
-        {% if miveuser = 'none'%}
         <li id="loginbutton"> <a href="#" data-toggle="modal"  data-target="#login-modal"> <span class="glyphicon glyphicon-user"></span> Login</a></li>
-        <li id="userbutton" style="display:none" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">{{miveuser.nameOfInstitution}} <b class="caret"></b></a>
+         <li id="userbutton" style="display:none" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">User <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a id="userdetails" href="user/details"><i class="icon-cog"></i>Details</a></li>
                             <li><a id="userorders" href="user/prders"><i class="icon-envelope"></i>Orders</a></li>
                             <li  class="divider"></li>
-                            <li><a id="userlogout" href="logout"><i class="icon-off"></i> Logout</a></li>
+                            <li><a id="userlogout" href="user/logout"><i class="icon-off"></i> Logout</a></li>
                         </ul>
                     </li>
-        {%else%}
-         <li id="userbutton" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">{{miveuser.nameOfInstitution}} <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a id="userdetails" href="user/details"><i class="icon-cog"></i>Details</a></li>
-                            <li><a id="userorders" href="user/prders"><i class="icon-envelope"></i>Orders</a></li>
-                            <li  class="divider"></li>
-                            <li><a id="userlogout" href="logout"><i class="icon-off"></i> Logout</a></li>
-                        </ul>
-                    </li>
-        {%endif%}
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -387,17 +396,15 @@
         </div>
 
 <!-- products page -->
-<div class="container hidden-xs hidden-sm">
+<div class="container hidden-xs hidden-md">
     <div class="row">
         <div class="row">
             <div class="col-md-9">
             <br>
             <br>
             <br>
-               <ul class="breadcrumb" style="background:none">
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Products</a></li>
-              </ul>
+                <h2>
+                    Some of our popular Products</h2><br>
             </div>
             <div class="col-md-3">
             </div>
@@ -406,7 +413,6 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="row">
-                    {%for product in products%}
                     <div class="col-sm-3 col-md-3">
                             <div class="col-item">
                                 <div class="photo">
@@ -415,19 +421,20 @@
                                 <div class="info">
                                          <center><div class="price col-md-9 col-sm-12">
                                             
+                                            <h5 class="price-text-color">tmaatar</h5>
                                         </div></center>
                                     <div class="row">
                                         <div class="price col-md-6 col-sm-6">
                                             
                                             <p class="price-text-color">
-                                                {{product.name}}</p>
+                                                Product</p>
                                             <p class="">
-                                                <a>{{product.unit}}</a></p>
+                                                <a>250 gm</a></p>
                                         </div>
                                          <div class="price col-md-6 col-sm-6">
                                             
                                             <p class="price-text-color">
-                                                {{product.pricePerUnit}}</p>
+                                                $249.99</p>
                                             <p class="">
                                                 <a>Details</a></p>
                                         </div>
@@ -449,7 +456,7 @@
                                     </div>
                                     </div>
                                    <div class="col-md-5 col-sm-5">
-                                   <p><a><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
                                    </div>
                                    <div class="col-md-1 col-sm-">
                                    </div>
@@ -462,10 +469,177 @@
                                 </div>
                             </div>
                         </div>
-                        {%endfor%}
-                       
+                        <div class="col-sm-3 col-md-3">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
+                                </div>
+                                <div class="info">
+                                         <center><div class="price col-md-9 col-sm-12">
+                                            
+                                            <h5 class="price-text-color">tmaatar</h5>
+                                        </div></center>
+                                    <div class="row">
+                                        <div class="price col-md-6 col-sm-6">
+                                            
+                                            <p class="price-text-color">
+                                                Product</p>
+                                            <p class="">
+                                                <a>250 gm</a></p>
+                                        </div>
+                                         <div class="price col-md-6 col-sm-6">
+                                            
+                                            <p class="price-text-color">
+                                                $249.99</p>
+                                            <p class="">
+                                                <a>Details</a></p>
+                                        </div>
+                                    </div>
 
-                                  
+                                    <div class="row">
+                                    <div class="col-md-6 cols-sm-6">
+                                    <div class="separator clear-left">
+                                       <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                          <input type="text" class="form-control text-center input-circle"value="1">
+                                          
+                                        </div>
+                                    </div>
+                                    </div>
+                                   <div class="col-md-5 col-sm-5">
+                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   </div>
+                                   <div class="col-md-1 col-sm-">
+                                   </div>
+
+
+                                    </div>
+
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-md-3">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
+                                </div>
+                                <div class="info">
+                                         <center><div class="price col-md-9 col-sm-12">
+                                            
+                                            <h5 class="price-text-color">tmaatar</h5>
+                                        </div></center>
+                                    <div class="row">
+                                        <div class="price col-md-6 col-sm-6">
+                                            
+                                            <p class="price-text-color">
+                                                Product</p>
+                                            <p class="">
+                                                <a>250 gm</a></p>
+                                        </div>
+                                         <div class="price col-md-6 col-sm-6">
+                                            
+                                            <p class="price-text-color">
+                                                $249.99</p>
+                                            <p class="">
+                                                <a>Details</a></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                    <div class="col-md-6 cols-sm-6">
+                                    <div class="separator clear-left">
+                                       <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                          <input type="text" class="form-control text-center input-circle"value="1">
+                                          
+                                        </div>
+                                    </div>
+                                    </div>
+                                   <div class="col-md-5 col-sm-5">
+                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   </div>
+                                   <div class="col-md-1 col-sm-">
+                                   </div>
+
+
+                                    </div>
+
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
+                                </div>
+                                <div class="info">
+                                <div class="row">
+                                         <center><div class="price col-md-9 col-sm-6">
+                                            
+                                            <h5 class="price-text-color">tmaatar</h5>
+                                        </div></center>
+                                    </div>
+                                    <div class="row">
+                                        <div class="price col-md-6 col-sm-6">
+                                            
+                                            <p class="price-text-color">
+                                                Product</p>
+                                            <p class="">
+                                                <a>250 gm</a></p>
+                                        </div>
+                                         <div class="price col-md-6 col-sm-6">
+                                            
+                                            <p class="price-text-color">
+                                                $249.99</p>
+                                            <p class="">
+                                                <a>Details</a></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                    <div class="col-md-6 cols-sm-6">
+                                    <div class="separator clear-left">
+                                       <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                          <input type="text" class="form-control text-center input-circle"value="1">
+                                          
+                                        </div>
+                                    </div>
+                                    </div>
+                                   <div class="col-md-5 col-sm-5">
+                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   </div>
+                                   <div class="col-md-1 col-sm-">
+                                   </div>
+
+
+                                    </div>
+
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>               
                        
                             
                             
@@ -480,15 +654,14 @@
 
     <!-- product page for mobiles -->
     <div class="container-fluid hidden-md hidden-lg hidden-xl">
-    {%for product in products%}
       <div class="row">
         <div class="col-sm-6 col-xs-6">
           <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" style="height:150px;width:150px" class="img img-responsive">
         </div>
         <div class="col-sm-5 col-xs-5">
-                  <div><h6 class="price-text-color">{{product.name}}</h6></div>
+                  <div><h6 class="price-text-color">tmaatar</h6></div>
 
-        <div><p style="font-size: 6px;" class="price-text-color">Rate:{{product.pricePerUnit}}/{{product.unit}}</p></div>
+        <div><p style="font-size: 10px;" class="price-text-color">Rate:500/kg</p></div>
         <a class="product-a" title="Add to Cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
         <a class="product-a"><span class="glyphicon glyphicon-th"></span></a>
         <div class="input-group number-spinner" >
@@ -503,16 +676,77 @@
                                         </div>
         </div>
       </div>
-      {%endfor%}
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" style="height:150px;width:150px" class="img img-responsive">
+        </div>
+        <div class="col-sm-5 col-xs-5">
+                  <div><h6 class="price-text-color">tmaatar</h6></div>
+
+        <div><p style="font-size: 6px;" class="price-text-color">Rate:500/kg</p></div>
+        <a class="product-a" title="Add to Cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+        <a  class="product-a"><span class="glyphicon glyphicon-th"></span></a>
+        <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                          <input type="text" class="form-control text-center input-circle"value="1">
+                                          
+                                        </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" style="height:150px;width:150px" class="img img-responsive">
+        </div>
+        <div class="col-sm-5 col-xs-5">
+                  <div><h6 class="price-text-color">tmaatar</h6></div>
+
+        <div><p style="font-size: 6px;" class="price-text-color">Rate:500/kg</p></div>
+        <a class="product-a" title="Add to Cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+        <a class="product-a"><span class="glyphicon glyphicon-th"></span></a>
+        <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                          <input type="text" class="form-control text-center input-circle"value="1">
+                                          
+                                        </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" style="height:150px;width:150px" class="img img-responsive">
+        </div>
+        <div class="col-sm-5 col-xs-5">
+                  <div><h6 class="price-text-color">tmaatar</h6></div>
+
+        <div><p style="font-size: 6px;" class="price-text-color">Rate:500/kg</p></div>
+        <a class="product-a" title="Add to Cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+        <a class="product-a"><span class="glyphicon glyphicon-th"></span></a>
+        <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                          <input type="text" class="form-control text-center input-circle"value="1">
+                                          
+                                        </div>
+        </div>
+      </div>
     </div>
 
 <!-- inbox gmail-->
 <div style="position:fixed;bottom:10px;right:5px;">
- {% if miveuser = 'none'%}
-  <button class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart">0$</span></button>
-  {% else %}
-  <button class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart">{{miveuser.cart.cartTotal}}$<span></button>
-    {% endif %}
+  <button class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart">50$</span></button>
 </div>
 
 <br />
@@ -603,22 +837,18 @@ $("#mivelogin").submit(function(event) {
            data: $("#mivelogin").serialize(), // serializes the form's elements.
            success: function(data)
            {
+               alert(data);
                mivenotify('success',data,'result')
-                $('#login-modal').modal('toggle')
+               $('#login-modal').modal('toggle')
                $('#loginbutton')[0].style.display="none";
                $('#userbutton')[0].style.display="block"
                var obj = jQuery.parseJSON(data);
-               cartItems = jQuery.parseJSON(obj[0]['cartItems'])
-               user = jQuery.parseJSON(obj[0]['user'])
-               cart = jQuery.parseJSON(obj[0]['cart'])
-               finaluser =user[0]["fields"]
-               finalcart = cart[0]["fields"]
-               finalcartItems = cartItems[0]["fields"]
-               window.rakesh =user;
-               console.log('reached')
-               $('#username').text(finaluser['nameOfOwner'])
-               $('#userdetails').attr('href','user/details/'+finaluser['mobileNo'])
-               $('#userorders').attr('href','user/orders/'+finaluser['mobileNo'])
+               window.rakesh =obj;
+               objfields = obj[0]['fields']
+               $('#username').text(objfields['nameOfOwner'])
+               $('#userdetails').attr('href','user/details/'+objfields['mobileNo'])
+               $('#userorders').attr('href','user/orders/'+objfields['mobileNo'])
+               $('#userlogout').attr('href','user/logout/'+objfields['mobileNo'])
                 // show response from the php script.
            },
            error: function(jqXHR, textStatus, errorThrown)

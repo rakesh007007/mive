@@ -48,6 +48,7 @@ class Cart(models.Model):
 	#check this time thing
 	timeOfCreate = AutoDateTimeField(default=timezone.now)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now)
+	cartTotal = models.IntegerField(default=0)
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
     nameOfInstitution = models.CharField(max_length=300, blank=False, null=False)

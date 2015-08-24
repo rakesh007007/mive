@@ -1,4 +1,22 @@
 /*random on top*/
+.glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+.product-a{
+	font-size:30px;
+	color:#13c0ba;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg); }
+    to { transform: scale(1) rotate(360deg); }
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
 .btn-mive {
   
   background: #13c0ba;
@@ -60,6 +78,8 @@ body>.fontmive {
      margin-left: 0 !important;
      margin-top: 0 !important;
 }
+/*gmail inbox thing*/
+
 
 /*cart thing*/
 
@@ -137,6 +157,14 @@ a:hover a:focus {
     font-size: 6px !important;
     line-height: 1.428571429 !important;
     border-radius: 15px !important;
+  }
+  .btn-circle-big {
+    width: 60px !important;
+    height: 60px !important;
+    text-align: center !important;
+    font-size: 6px !important;
+    line-height: 1.428571429 !important;
+    border-radius: 30px !important;
   }
   .input-circle{
   background: transparent;
