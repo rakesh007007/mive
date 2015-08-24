@@ -27,15 +27,7 @@
   <script>
   var browd =BrowserDetect()
      $( document ).ready(function() {
-      if($.cookie('visitedmive')==undefined){
-        console.log('ting')
-        $.cookie('visitedmive','true')
-        mivenotify('success','Welcome!','Mive will release soon!!');
-      }
-      else{
-         console.log('ting')
-         mivenotify('success','Welcome back!','Mive will release soon!!');
-      }
+      
       
   // Handler for .ready() called
   
@@ -311,15 +303,15 @@
       </ul>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a> <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, User <b class="caret"></b></a>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
-                            <li><a href="/help/support"><i class="icon-envelope"></i> Contact Support</a></li>
+                            <li><a href="/user/preferences"><i class="icon-cog"></i>Details</a></li>
+                            <li><a href="/help/support"><i class="icon-envelope"></i>Orders</a></li>
                             <li class="divider"></li>
                             <li><a href="/auth/logout"><i class="icon-off"></i> Logout</a></li>
                         </ul>
-                    </li></a>
+                    </li>
+        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 7 - Items<span class="caret"></span></a>
           <ul class="dropdown-menu dropdown-cart" role="menu">
               <li>
@@ -368,380 +360,10 @@
               <li><a class="text-center" href="">View Cart</a></li>
           </ul>
         </li>
-        <li> <a href="#" data-toggle="modal" data-target="#login-modal"> <span class="glyphicon glyphicon-user"></span> Login</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="container-fluid full" style="height:400px" >
-    <div class="row">
-      
-    </div>
-      <div class="col-md-3" style="padding-left:40px;margin-top:0px;">
-      </div>
-      <div class="col-md-6" style="margin-top:240px;">
-            <div class="input-group custom-search-form">
-              <input type="text" class="form-control" style="height:60px" placeholder="Search Fruits and Vegetables">
-              <span class="input-group-btn" style="color:#13c0ba;">
-              <button style="height:60px;color:#ffffff;background:#13c0ba;" class="btn btn-mive2  " type="button">
-              <span class="glyphicon glyphicon-search"></span>
-             </button>
-             </span>
-             </div><!-- /input-group -->
-        </div>
-        <div class="col-md-3" style="padding-left:40px;margin-top:100px;">
-      </div>
-    </div>
-        </div>
-
-<!-- products page -->
-<div class="container hidden-xs hidden-md">
-    <div class="row">
-        <div class="row">
-            <div class="col-md-9">
-            <br>
-            <br>
-            <br>
-                <h2>
-                    Some of our popular Products</h2><br>
-            </div>
-            <div class="col-md-3">
-            </div>
-        </div>
-        <div id="carousel-example" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="row">
-                    <div class="col-sm-3 col-md-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
-                                </div>
-                                <div class="info">
-                                         <center><div class="price col-md-9 col-sm-12">
-                                            
-                                            <h5 class="price-text-color">tmaatar</h5>
-                                        </div></center>
-                                    <div class="row">
-                                        <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                Product</p>
-                                            <p class="">
-                                                <a>250 gm</a></p>
-                                        </div>
-                                         <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                $249.99</p>
-                                            <p class="">
-                                                <a>Details</a></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                    <div class="col-md-6 cols-sm-6">
-                                    <div class="separator clear-left">
-                                       <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          
-                                        </div>
-                                    </div>
-                                    </div>
-                                   <div class="col-md-5 col-sm-5">
-                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
-                                   </div>
-                                   <div class="col-md-1 col-sm-">
-                                   </div>
-
-
-                                    </div>
-
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-md-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
-                                </div>
-                                <div class="info">
-                                         <center><div class="price col-md-9 col-sm-12">
-                                            
-                                            <h5 class="price-text-color">tmaatar</h5>
-                                        </div></center>
-                                    <div class="row">
-                                        <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                Product</p>
-                                            <p class="">
-                                                <a>250 gm</a></p>
-                                        </div>
-                                         <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                $249.99</p>
-                                            <p class="">
-                                                <a>Details</a></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                    <div class="col-md-6 cols-sm-6">
-                                    <div class="separator clear-left">
-                                       <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          
-                                        </div>
-                                    </div>
-                                    </div>
-                                   <div class="col-md-5 col-sm-5">
-                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
-                                   </div>
-                                   <div class="col-md-1 col-sm-">
-                                   </div>
-
-
-                                    </div>
-
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3 col-md-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
-                                </div>
-                                <div class="info">
-                                         <center><div class="price col-md-9 col-sm-12">
-                                            
-                                            <h5 class="price-text-color">tmaatar</h5>
-                                        </div></center>
-                                    <div class="row">
-                                        <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                Product</p>
-                                            <p class="">
-                                                <a>250 gm</a></p>
-                                        </div>
-                                         <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                $249.99</p>
-                                            <p class="">
-                                                <a>Details</a></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                    <div class="col-md-6 cols-sm-6">
-                                    <div class="separator clear-left">
-                                       <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          
-                                        </div>
-                                    </div>
-                                    </div>
-                                   <div class="col-md-5 col-sm-5">
-                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
-                                   </div>
-                                   <div class="col-md-1 col-sm-">
-                                   </div>
-
-
-                                    </div>
-
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-md-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
-                                </div>
-                                <div class="info">
-                                <div class="row">
-                                         <center><div class="price col-md-9 col-sm-6">
-                                            
-                                            <h5 class="price-text-color">tmaatar</h5>
-                                        </div></center>
-                                    </div>
-                                    <div class="row">
-                                        <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                Product</p>
-                                            <p class="">
-                                                <a>250 gm</a></p>
-                                        </div>
-                                         <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                $249.99</p>
-                                            <p class="">
-                                                <a>Details</a></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                    <div class="col-md-6 cols-sm-6">
-                                    <div class="separator clear-left">
-                                       <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          
-                                        </div>
-                                    </div>
-                                    </div>
-                                   <div class="col-md-5 col-sm-5">
-                                   <p><a>Add <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
-                                   </div>
-                                   <div class="col-md-1 col-sm-">
-                                   </div>
-
-
-                                    </div>
-
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>               
-                       
-                            
-                            
-                        </div>
-                    </div>
-                </div>
-                                
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!-- product page for mobiles -->
-    <div class="container-fluid hidden-md hidden-lg hidden-xl">
-      <div class="row">
-        <div class="col-sm-6 col-xs-6">
-          <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" style="height:150px;width:150px" class="img img-responsive">
-        </div>
-        <div class="col-sm-5 col-xs-5">
-                  <div><h6 class="price-text-color">tmaatar</h6></div>
-
-        <div><p style="font-size: 6px;" class="price-text-color">Rate:500/kg</p></div>
-        <a title="Add to Cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-        <a><span class="glyphicon glyphicon-th"></span></a>
-        <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          
-                                        </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-xs-6">
-          <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" style="height:150px;width:150px" class="img img-responsive">
-        </div>
-        <div class="col-sm-5 col-xs-5">
-                  <div><h6 class="price-text-color">tmaatar</h6></div>
-
-        <div><p style="font-size: 6px;" class="price-text-color">Rate:500/kg</p></div>
-        <a title="Add to Cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-        <a><span class="glyphicon glyphicon-th"></span></a>
-        <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          
-                                        </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-xs-6">
-          <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" style="height:150px;width:150px" class="img img-responsive">
-        </div>
-        <div class="col-sm-5 col-xs-5">
-                  <div><h6 class="price-text-color">tmaatar</h6></div>
-
-        <div><p style="font-size: 6px;" class="price-text-color">Rate:500/kg</p></div>
-        <a title="Add to Cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-        <a><span class="glyphicon glyphicon-th"></span></a>
-        <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          
-                                        </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-xs-6">
-          <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" style="height:150px;width:150px" class="img img-responsive">
-        </div>
-        <div class="col-sm-5 col-xs-5">
-                  <div><h6 class="price-text-color">tmaatar</h6></div>
-
-        <div><p style="font-size: 6px;" class="price-text-color">Rate:500/kg</p></div>
-        <a title="Add to Cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-        <a><span class="glyphicon glyphicon-th"></span></a>
-        <div class="input-group number-spinner" >
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                          </span>
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                          </span>
-                                          <input type="text" class="form-control text-center input-circle"value="1">
-                                          
-                                        </div>
-        </div>
-      </div>
-    </div>
 
 <!-- Team page thing -->
 
@@ -915,6 +537,105 @@
           </div>
         </div>
 	</div>    
+</div>
+<div class="container">
+  <div class="row">
+    
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+  <br><br>
+    <div class="col-xs-12 col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <div class="row">
+              <div class="col-xs-12">
+                <h5><span style=""class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+              </div>
+              <div class="col-xs-6">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-2"><img class="img-responsive hidden-sm hidden-xs" src="http://placehold.it/100x70">
+            </div>
+            <div class="col-xs-4">
+              <h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
+            </div>
+            <div class="col-xs-6">
+              <div class="col-xs-6 text-right">
+                <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
+              </div>
+              <div class="col-xs-4">
+                <input type="text" class="form-control input-sm" value="1">
+              </div>
+              <div class="col-xs-2">
+                <button type="button" class="btn btn-link btn-xs">
+                  <span class="glyphicon glyphicon-trash"> </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-2"><img  class="img-responsive hidden-sm hidden-xs" src="http://placehold.it/100x70">
+            </div>
+            <div class="col-xs-4">
+              <h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
+            </div>
+            <div class="col-xs-6">
+              <div class="col-xs-6 text-right">
+                <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
+              </div>
+              <div class="col-xs-4">
+                <input type="text" class="form-control input-sm" value="1">
+              </div>
+              <div class="col-xs-2">
+                <button type="button" class="btn btn-link btn-xs">
+                  <span class="glyphicon glyphicon-trash"> </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="text-center">
+              <div class="col-xs-9">
+              </div>
+              <div class="col-xs-3">
+                <button type="button" class="btn btn-default btn-sm btn-block hidden-xs hidden-sm">
+                  Update cart
+                </button>
+                <a style="font-size:10px" class="hidden-md hidden-lg hidden-sm hidden-xl">
+                  Update
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row text-center">
+            <div class="col-xs-9">
+              <p style="font-size:10px" class="text-right">Total <strong>$50.00</strong></p>
+            </div>
+            <div class="col-xs-3">
+              <button type="button" class="btn btn-success btn-block hidden-xs hidden-sm">
+                Checkout
+              </button>
+               <a style="font-size:10px"class="hidden-md hidden-lg hidden-xl">
+                  checkout
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- social icons and footer -->
 
