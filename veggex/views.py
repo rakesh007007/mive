@@ -553,12 +553,29 @@ def get_or_create_cart(user):
 		cart.save()
 		return cart
 def categoryView(request):
-	if(checklogin(request)==False):
-		return redirect('/login')
 	categoryId=request.GET['categoryId']
 	category = Category.objects.get(category_id=categoryId)
 	products = Product.objects.filter(category=category)
-	return TemplateResponse(request, 'categoryView.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
+	if(checklogin(request)==False):
+		miveuser='none'
+		cart='none'
+		customproducts='none'
+		cartItems=[]
+		totalItems=0
+		categories = Category.objects.all()
+		return TemplateResponse(request, 'new/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+	else:
+		miveuserId = request.session['miveuser']
+		miveuser = User.objects.get(user_id=int(miveuserId))
+		cart = miveuser.cart
+		cartItems = Cartitem.objects.filter(cart=cart)
+		totalItems = len(cartItems)
+		customproducts='none'
+		allProducts = Product.objects.all()
+		vegetableProducts = Product.objects.filter(category_id=1)
+		fruitproducts = Product.objects.filter(category_id=2)
+		categories = Category.objects.all()
+		return TemplateResponse(request, 'new/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def addtocart(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -570,19 +587,32 @@ def addtocart(request):
 	qty = request.POST['qty']
 	cart = user.cart
 	price = product.pricePerUnit
-	cartitem=Cartitem()
-	cartitem.cart=cart
-	cartitem.qtyInUnits = qty
-	cartitem.product=product
-	cart.cartTotal = cart.cartTotal+int(qty)*int(price)
-	cart.save()
-	cartitem.save()
+	check = Cartitem.objects.filter(cart=cart).filter(product=product)
+	if(len(check)>0):
+		previtem = Cartitem.objects.get(cartitem_id=check[0].cartitem_id)
+		previtem.qtyInUnits = previtem.qtyInUnits+int(qty)
+		cart.cartTotal = cart.cartTotal+int(qty)*int(price)
+		previtem.save()
+		cart.save()
+	else:
+		cartitem=Cartitem()
+		cartitem.cart=cart
+		cartitem.qtyInUnits = qty
+		cartitem.product=product
+		cart.cartTotal = cart.cartTotal+int(qty)*int(price)
+		cart.save()
+		cartitem.save()
 	return redirect('/cart')
 def removeItemPost(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
 	itemId = request.POST['item_id']
-	Cartitem.objects.filter(cartitem_id=itemId).delete()
+	itemId = int(itemId)
+	item = Cartitem.objects.get(cartitem_id=itemId)
+	cart = item.cart
+	cart.cartTotal = cart.cartTotal-item.product.pricePerUnit*item.qtyInUnits
+	cart.save()
+	item.delete()
 	return redirect('/cart')
 def orderStep1(request):
 	if ('loggedin' not in request.session):
@@ -637,14 +667,11 @@ def cart(request):
 		return redirect('/login')
 	mobile=request.session['mobile']
 	user = User.objects.get(mobileNo=mobile)
-	cart = get_or_create_cart(user)
-	cartitems = Cartitem.objects.filter(cart=cart)
+	miveuser=user
+	cart=user.cart
+	cartItems=Cartitem.objects.filter(cart=cart)
+	totalItems=len(cartItems)
 	shippingCost=0
-	if(len(cartitems)>0):
-		noitem=0
-	else:
-		noitem=1
-	carttotal=getTotal(cartitems)
-	return TemplateResponse(request, 'cart.html',{'noitem':noitem,'carttotal':carttotal,'shippingCost':shippingCost,'cartitems':cartitems,'cart':cart,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'new/cart.html',{'totalItems':totalItems,'miveuser':miveuser,'cart':cart,'shippingCost':shippingCost,'cartItems':cartItems,'csrf_token':get_or_create_csrf_token(request)})
 
 

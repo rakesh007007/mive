@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^logPost', views.logPost),
     url(r'^logout', views.logout),
     url(r'^main', views.main),
-    url(r'^categoryView', views.categoryView),
+    url(r'^category/', views.categoryView),
     url(r'^addtocart', views.addtocart),
     url(r'^landing', views.landing),
     url(r'^cart', views.cart),
