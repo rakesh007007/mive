@@ -1,4 +1,25 @@
 {% extends 'new/base.html' %}
+{% block headbl %}
+ <script type="text/javascript">
+  var browd =BrowserDetect()
+     $( document ).ready(function() {
+      if($.cookie('visitedmive')==undefined){
+        console.log('ting')
+        $.cookie('visitedmive',1)
+        mivenotify('success','Welcome!','Mive will release soon!!');
+      }
+      else{
+         console.log('ting')
+         mivenotify('success','Welcome back!','Mive will release soon!!');
+      }
+      
+  // Handler for .ready() called
+  
+});
+ 
+   
+  </script>
+{%endblock%}
 {% block search-full%}
 <div class="container-fluid full" style="height:400px" >
     <div class="row">
@@ -47,7 +68,7 @@
                     <div class="col-sm-3 col-md-3">
                             <div class="col-item">
                                 <div class="photo">
-                                    <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" alt="a" class="img img-responsive" />
+                                    <img src="/{{product.coverphoto.url}}" alt="a" class="img img-responsive" />
                                 </div>
                                 <div class="info">
                                          <center><div class="price col-md-9 col-sm-12">
@@ -62,11 +83,11 @@
                                                 <a>{{product.unit}}</a></p>
                                         </div>
                                          <div class="price col-md-6 col-sm-6">
-                                            
-                                            <p class="price-text-color">
-                                                {{product.pricePerUnit}}</p>
                                             <p class="">
                                                 <a>Details</a></p>
+                                            <p class="price-text-color">
+                                                {{product.pricePerUnit}}$</p>
+                                            
                                         </div>
                                     </div>
 
@@ -80,7 +101,7 @@
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                           </span>
-                                          <form method="post" action="addtocart" id="productsubmit-{{product.product_id}}">
+                                          <form method="post" action="/addtocart" id="productsubmit-{{product.product_id}}">
                                           <input type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty">
                                           {%csrf_token%}
                                           <input type="hidden" name="productId" value="{{product.product_id}}">
@@ -90,7 +111,7 @@
                                     </div>
                                     </div>
                                    <div class="col-md-5 col-sm-5">
-                                   <p><a data-mive="#productsubmit-{{product.product_id}}" class="product1submit"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   <p><a href="#" data-mive="#productsubmit-{{product.product_id}}" class="product1submit"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
                                    </div>
                                    <div class="col-md-1 col-sm-">
                                    </div>
@@ -124,13 +145,13 @@
     {%for product in products%}
       <div class="row">
         <div class="col-sm-6 col-xs-6">
-          <img src="http://vectorboom.com/TUTORIALS/Tomato/0.jpg" style="height:150px;width:150px" class="img img-responsive">
+          <img src="/{{product.coverphoto.url}}" style="height:150px;width:150px" class="img img-responsive">
         </div>
         <div class="col-sm-5 col-xs-5">
                   <div><h6 class="price-text-color">{{product.name}}</h6></div>
 
         <div><p style="font-size: 6px;" class="price-text-color">Rate:{{product.pricePerUnit}}/{{product.unit}}</p></div>
-        <a class="product-a product1submit" data-mive="#productsubmit-{{product.product_id}}" title="Add to Cart"><span class="glyphicon glyphicon-shopping-cart" ></span></a>
+        <a href="#" class="product-a product1submit" data-mive="#productsubmit-{{product.product_id}}" title="Add to Cart"><span class="glyphicon glyphicon-shopping-cart" ></span></a>
         <a class="product-a"><span class="glyphicon glyphicon-th"></span></a>
         <div class="input-group number-spinner" >
                                           <span class="input-group-btn">
@@ -139,7 +160,7 @@
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                           </span>
-                                          <form id="productsubmit-{{product.product_id}}" method="post" class="productform" action="addtocart">
+                                          <form id="productsubmit-{{product.product_id}}" method="post" class="productform" action="/addtocart">
                                           <input type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty">
                                           {%csrf_token%}
                                           <input type="hidden" name="productId" value="{{product.product_id}}">
@@ -150,5 +171,6 @@
       </div>
       {%endfor%}
     </div>
+
 
 {%endblock%}

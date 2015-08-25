@@ -554,8 +554,10 @@ def get_or_create_cart(user):
 		return cart
 def categoryView(request):
 	categoryId=request.GET['categoryId']
+	categoryId = int(categoryId)
 	category = Category.objects.get(category_id=categoryId)
 	products = Product.objects.filter(category=category)
+	print('hola apache rakesh')
 	if(checklogin(request)==False):
 		miveuser='none'
 		cart='none'

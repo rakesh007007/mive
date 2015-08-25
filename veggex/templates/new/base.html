@@ -5,20 +5,20 @@
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="rstatic/new/css/readable/bootstrap.min.css">
-  <link rel="stylesheet" href="rstatic/new/css/master.css">
-  <script src="rstatic/new/js/jquery.min.js"></script>
-  <script src="rstatic/new/js/bootstrap.min.js"></script>
-  <script src="rstatic/new/js/detect.js"></script>
-  <link rel="stylesheet" href="rstatic/new/css/pnotify.custom.min.css">
-  <script src="rstatic/new/js/pnotify.custom.min.js"></script>
-  <script src="rstatic/new/js/jquery.cookie.js"></script>
+  <link rel="stylesheet" href="/rstatic/new/css/readable/bootstrap.min.css">
+  <link rel="stylesheet" href="/rstatic/new/css/master.css">
+  <script src="/rstatic/new/js/jquery.min.js"></script>
+  <script src="/rstatic/new/js/bootstrap.min.js"></script>
+  <script src="/rstatic/new/js/detect.js"></script>
+  <link rel="stylesheet" href="/rstatic/new/css/pnotify.custom.min.css">
+  <script src="/rstatic/new/js/pnotify.custom.min.js"></script>
+  <script src="/rstatic/new/js/jquery.cookie.js"></script>
   <script type="text/javascript">
-  function mivenotify(type,title,text){
+  function mivenotify(type,title,text,delay){
     new PNotify({
       title: title,
       text:text,
-      delay:1500,
+      delay:2500,
       type: type,
       styling: "bootstrap3",
       hide:true
@@ -26,25 +26,9 @@
 
   }
   </script>
-  <script>
-  var browd =BrowserDetect()
-     $( document ).ready(function() {
-      if($.cookie('visitedmive')==undefined){
-        console.log('ting')
-        $.cookie('visitedmive','true')
-        //mivenotify('success','Welcome!','Mive will release soon!!');
-      }
-      else{
-         console.log('ting')
-         //mivenotify('success','Welcome back!','Mive will release soon!!');
-      }
-      
-  // Handler for .ready() called
+  {% block headbl %}
+  {% endblock %}
   
-});
- 
-   
-  </script>
   <style>
    @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css);
   .nav.nav-justified > li > a { position: relative; }
@@ -332,7 +316,7 @@
   }
   </style>
 
-   <link rel="stylesheet" href="rstatic/new/css/cover.css">
+   <link rel="stylesheet" href="/rstatic/new/css/cover.css">
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top navtoggle" style="opacity:0.98;border:none" id="rakeshnavtop">
@@ -345,13 +329,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><img style="height:52px;width:52px" src="rstatic/new/images/mivelogo.png" class="img img-responsive"></a>
+      <a class="navbar-brand" href="#"><img style="height:52px;width:52px" src="/rstatic/new/images/mivelogo.png" class="img img-responsive"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="main">Home</a></li>
+        <li><a href="/main">Home</a></li>
         {%for categ in categories%}
         <li><a href="category?categoryId={{categ.category_id}}">{{categ.name}}</a></li>
         {%endfor%}
@@ -366,14 +350,19 @@
               <li>
                   <span class="item">
                     <span class="item-left">
-                        <img style="width:50px;height:50px" src="{{item.product.coverphoto.url}}" alt="" />
+                        <img style="width:50px;height:50px" src="/{{item.product.coverphoto.url}}" alt="" />
                         <span class="item-info">
                             <span>{{item.product.name}}</span>
                             <span>{{item.product.pricePerUnit}}$ x {{item.qtyInUnits}}</span>
                         </span>
                     </span>
-                    <span class="item-right">
-                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                    <span class="item-right"><form method="post" action="/removeItemPost">
+                        {%csrf_token%}
+                        <input type="hidden" name="item_id" value="{{item.cartitem_id}}">
+                        <button type="submit" class="btn btn-link btn-xs">
+                          <span class="glyphicon glyphicon-trash"> </span>
+                        </button>
+                        </form>
                     </span>
                 </span>
               </li>
@@ -383,7 +372,7 @@
               <li><p class="text-center" href="">Empty</p></li>
              {% else %}
              <li class="divider"></li>
-              <li><a class="text-center" href="">View Cart</a></li>
+              <li><a class="text-center" href="/cart">View Cart</a></li>
              {% endif %}
               
           </ul>
@@ -420,9 +409,9 @@
 <!-- inbox gmail-->
 <div style="position:fixed;bottom:10px;right:5px;">
  {% if miveuser = 'none'%}
-  <button class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
+  <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
   {% else %}
-  <button class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">{{miveuser.cart.cartTotal}}$<span></button>
+  <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">{{miveuser.cart.cartTotal}}$<span></button>
     {% endif %}
 </div>
 
