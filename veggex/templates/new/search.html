@@ -218,7 +218,7 @@
 
     <!-- product page for mobiles -->
     <div class="container-fluid hidden-md hidden-lg hidden-xl">
-    {%for product in products%}
+    {%for product in resultName%}
       <div class="row">
         <div class="col-sm-6 col-xs-6">
           <img src="/{{product.coverphoto.url}}" style="height:150px;width:150px" class="img img-responsive">
@@ -246,6 +246,38 @@
         </div>
       </div>
       {%endfor%}
+      {%for product in resultDescription%}
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <img src="/{{product.coverphoto.url}}" style="height:150px;width:150px" class="img img-responsive">
+        </div>
+        <div class="col-sm-5 col-xs-5">
+                  <div><h6 class="price-text-color">{{product.name}}</h6></div>
+
+        <div><p style="font-size: 6px;" class="price-text-color">Rate:{{product.pricePerUnit}}/{{product.unit}}</p></div>
+        <a href="#" class="product-a product1submit" data-mive="#productsubmit-{{product.product_id}}" title="Add to Cart"><span class="glyphicon glyphicon-shopping-cart" ></span></a>
+        <a class="product-a"><span class="glyphicon glyphicon-th"></span></a>
+        <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                          <form id="productsubmit-{{product.product_id}}" method="post" class="productform" action="/addtocart">
+                                          <input type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty">
+                                          {%csrf_token%}
+                                          <input type="hidden" name="productId" value="{{product.product_id}}">
+                                          </form>
+                                          
+                                        </div>
+        </div>
+      </div>
+      {%endfor%}
+      {%if results = 0%}
+      <center><h3>     No results found!!</h3></center>
+      {%endif%}
+   
     </div>
 
 
