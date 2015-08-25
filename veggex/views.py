@@ -469,13 +469,32 @@ def checklogin(request):
 	else:
 		return True
 def search(request):
-	tex = request.POST['tex']
+	tex = request.POST['searchtext']
 	print tex;
-	resultCategory = Product.objects.filter(category__name__icontains = tex)
-	resultName = Product.objects.filter(seller__nameOfSeller__icontains = tex)
-	resultSeller = Product.objects.filter(name__icontains = tex)
-	resultOrigin = Product.objects.filter(origin__icontains = tex)
-	resultDescription = Product.objects.filter(description__icontains=tex)
+	resultName = Product.objects.filter(name__icontains = tex)
+	resultNameValues = Product.objects.filter(name__icontains = tex).values('product_id') 
+	resultDescription = Product.objects.filter(description__icontains=tex).exclude(product_id__in=resultNameValues)
+	if len(resultName)==0 and len(resultDescription)==0:
+		results=0
+	else:
+		results=1
+	if(checklogin(request)==False):
+		miveuser='none'
+		cart='none'
+		customproducts='none'
+		cartItems=[]
+		totalItems=0
+		categories = Category.objects.all()
+		return TemplateResponse(request, 'new/search.html',{'resultName':resultName,'resultDescription':resultDescription,'results':results,'cartItems':cartItems,'totalItems':totalItems,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+	else:
+		miveuserId = request.session['miveuser']
+		miveuser = User.objects.get(user_id=int(miveuserId))
+		cart = miveuser.cart
+		cartItems = Cartitem.objects.filter(cart=cart)
+		totalItems = len(cartItems)
+		customproducts='none'
+		categories = Category.objects.all()
+		return TemplateResponse(request, 'new/search.html',{'resultName':resultName,'resultDescription':resultDescription,'results':results,'cartItems':cartItems,'totalItems':totalItems,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 	return TemplateResponse(request, 'searchResults.html',{'resultCategory':resultCategory,'resultSeller':resultSeller,'resultOrigin':resultOrigin,'resultName':resultName,'resultDescription':resultDescription,'csrf_token':get_or_create_csrf_token(request)})
 def searchForm(request):
 	return TemplateResponse(request, 'search.html',{'csrf_token':get_or_create_csrf_token(request)})
