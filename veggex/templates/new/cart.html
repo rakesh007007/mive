@@ -40,18 +40,23 @@
          alert(Date() + 14400)
          console.log('min delivery time is 4 hours please select time greayer')
          mivenotify('error', 'Select Proper Time', 'Please select proper order time,delivery time should be greater than 10 hours')
+         $('body').removeClass("loading");
          $('#datetime').focus()
      } else {
          var url = "/makeOrder"; // the script where you handle the form input.
+        $('body').addClass("loading"); 
+       $('#myModal').modal('toggle')
          $.ajax({
              type: "POST",
              url: url,
              data: $("#orderdata").serialize(), // serializes the form's elements.
              success: function(data) {
-                 $('#myModal').modal('toggle')
                  console.log('order confirmed')
                  $('body').load('/cart',function(){
                    mivenotify('success','Order Id:'+data, 'Thank You, Your Order has been placed')
+                     $('body').removeClass("loading");
+
+
 
                  })
              }
@@ -197,8 +202,6 @@
   </div>
 </div>
 </div>
-
-
 
 
 
