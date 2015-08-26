@@ -11,7 +11,7 @@ body {
 }
 
 .full {
-  background: url(https://www.tinyowl.com/img/backgrounds/home.jpg) no-repeat center center fixed; 
+  background: url(/rstatic/new/images/home.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

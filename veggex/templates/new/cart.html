@@ -9,7 +9,7 @@
     filter: blur(15px);
 }
   
-.modal-backdrop {background: #ffffff;}
+.modal-backdrop {background: #f7f7f7;}
 
 .close {
     font-size: 50px;
@@ -181,7 +181,7 @@
         {%csrf_token%}
         <div class="form-group">
                 <div class='input-group date' id='datetimepicker5'>
-                    <input type='text' class="form-control" id="datetime" />
+                    <input type='text' class="form-control" autofocus id="datetime" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -191,14 +191,14 @@
         </form>
         <hr>
         <button class="btn btn-primary btn-lg has-spinner" data-loading-text="Loading..." type="button" onclick="click2(this)"  id="orderconfirm">
-          <span class="spinner"><i class="icon-spin icon-refresh"></i></span>
           Confirm Order
         </button>
       </div>
-    </div>
   </div>
 </div>
 </div>
+
+
 
 
 
