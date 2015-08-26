@@ -52,9 +52,9 @@
              data: $("#orderdata").serialize(), // serializes the form's elements.
              success: function(data) {
                  console.log('order confirmed')
+                 $('body').removeClass("loading");
                  $('body').load('/cart',function(){
                    mivenotify('success','Order Id:'+data, 'Thank You, Your Order has been placed')
-                     $('body').removeClass("loading");
 
 
 
