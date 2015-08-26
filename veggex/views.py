@@ -469,7 +469,7 @@ def orderDetail(request):
 		order_id = request.GET['orderId']
 		order = Order.objects.get(order_id=order_id)
 		orderItems = Orderitem.objects.filter(order=order)
-		return TemplateResponse(request, 'new/orderDetail.html',{'orderItems':orderItems,'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'order':order,'miveuser':miveuser,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'new/orderDetail.html',{'categories':categories,'orderItems':orderItems,'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'order':order,'miveuser':miveuser,'csrf_token':get_or_create_csrf_token(request)})
 def ajaxorderDetail(request):
 	if ('loggedin' not in request.session):
 		return TemplateResponse(request, 'login.html',{'csrf_token':get_or_create_csrf_token(request)})
@@ -705,7 +705,7 @@ def seeOrder(request):
 		mobile = request.session['mobile']
 		user =miveuser
 		orders = Order.objects.filter(user=user)
-		return TemplateResponse(request, 'new/order.html',{'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'new/order.html',{'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
 def makeOrder(request):
 	if ('loggedin' not in request.session):
 		return 'not logged in' 
@@ -757,6 +757,7 @@ def cart(request):
 	cartItems=Cartitem.objects.filter(cart=cart)
 	totalItems=len(cartItems)
 	shippingCost=0
-	return TemplateResponse(request, 'new/cart.html',{'totalItems':totalItems,'miveuser':miveuser,'cart':cart,'shippingCost':shippingCost,'cartItems':cartItems,'csrf_token':get_or_create_csrf_token(request)})
+	categories = Category.objects.all()
+	return TemplateResponse(request, 'new/cart.html',{'totalItems':totalItems,'miveuser':miveuser,'cart':cart,'shippingCost':shippingCost,'cartItems':cartItems,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
 
 

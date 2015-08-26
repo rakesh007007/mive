@@ -24,13 +24,12 @@
     mivenotification = new PNotify({
       title: title,
       text:text,
-      delay:5500,
+      delay:2500,
       type: type,
       styling: "bootstrap3",
-      hide:true  });
-    mivenotification.get().click(function() {
-    mivenotification.remove();
-});
+      hide:true});
+     mivenotification.get().click(function() {
+     mivenotification.remove();})
 
   }
   </script>
@@ -510,12 +509,27 @@ $(document).on('click', '.number-spinner button', function () {
 <script type="text/javascript">
 $(".product1submit").click(function(event) {
    event.preventDefault();
+   {% if miveuser = 'none' %}
+   mivenotify('error','Login required','please login to add products to cart')
+   console.log('user not loggedin')
+   $('#login-modal').modal('toggle')
+   mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+   return
+   {% else %}
     rak = $(this).attr('data-mive')
     console.log(rak)
     $(rak).submit()
+
+   {%endif %}
 });
 $('.inboxcart').click(function(event){
+  {% if miveuser = 'none' %}
+  mivenotify('error','Login required','please login to see cart')
+  mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+  $('#login-modal').modal('toggle')
+  {% else %}
   location = '/cart'
+  {%endif %}
 })
 /*
 $("#mivelogin").submit(function(event) {
@@ -606,5 +620,7 @@ $("#mivelogin").submit(function(event) {
     });
 });
 </script>
+{%block jsblock%}
+{%endblock%}
 </body>
 </html>

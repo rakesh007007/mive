@@ -17,68 +17,6 @@
 }
  </style>
 <link rel="stylesheet" href="/rstatic/new/css/bootstrap-datetimepicker.css">
-{% if totalItems = 0 %}
-<script>
-  mivenotify('success','Mive Notification','Your Cart is Empty')
-  console.log('yayy')
-  {% endif%}
-  </script>
-<script type="text/javascript">
-  function click2() {
-     var x = ($('#datetime').val())
-     xt = new Date(x)
-     if (x == '') {
-         mivenotify('notice', 'Provide input', 'Delivery time is empty')
-         return false;
-     }
-     currentTime = new Date()
-     console.log(xt < new Date())
-     tright = currentTime.getTime() + 14400
-     tleft = xt.getTime()
-     console.log('tright', tright)
-     console.log('tleft', tleft)
-     console.log('result', tright < tleft)
-
-     if (xt.getTime() < (currentTime.getTime() + 14400) == true) {
-         alert(Date() + 14400)
-         console.log('min delivery time is 4 hours please select time greayer')
-         mivenotify('error', 'Select Proper Time', 'Please select proper order time,delivery time should be greater than 10 hours')
-         $('body').removeClass("loading");
-         $('#datetime').focus()
-     } else {
-         var url = "/makeOrder"; // the script where you handle the form input.
-        $('body').addClass("loading"); 
-       $('#myModal').modal('toggle')
-         $.ajax({
-             type: "POST",
-             url: url,
-             data: $("#orderdata").serialize(), // serializes the form's elements.
-             success: function(data) {
-                 console.log('order confirmed')
-                 $('body').removeClass("loading");
-                 $('body').load('/cart',function(){
-                   mivenotify('success','Order Id:'+data, 'Thank You, Your Order has been placed')
-
-
-
-                 })
-             }
-         });
-     }}
-</script>
-<script type="text/javascript">
-            $(function () {
-                $('#datetimepicker5').datetimepicker({
-                    defaultDate: new Date(),
-                    disabledDates: [
-                        moment("12/25/2013"),
-                        new Date(2013, 11 - 1, 21),
-                        new Date()
-                    ],
-                    minDate:new Date()+500000000000000
-                });
-            });
-        </script>
  <script type="text/javascript" src="/rstatic/new/js/moment.js"></script>
  <script type="text/javascript" src="/rstatic/new/js/bootstrap-datetimepicker.js"></script>
  {%endblock%}
@@ -208,6 +146,69 @@
 
 
 
+
+{% endblock %}
+{% block jsblock %}
+<script type="text/javascript">
+  mivenotify('success','Mive Notification','Your Cart is Empty')
+  console.log('yayy')
+</script>
+<script type="text/javascript">
+  function click2() {
+     var x = ($('#datetime').val())
+     xt = new Date(x)
+     if (x == '') {
+         mivenotify('notice', 'Provide input', 'Delivery time is empty')
+         return false;
+     }
+     currentTime = new Date()
+     console.log(xt < new Date())
+     tright = currentTime.getTime() + 14400
+     tleft = xt.getTime()
+     console.log('tright', tright)
+     console.log('tleft', tleft)
+     console.log('result', tright < tleft)
+
+     if (xt.getTime() < (currentTime.getTime() + 14400) == true) {
+         alert(Date() + 14400)
+         console.log('min delivery time is 4 hours please select time greayer')
+         mivenotify('error', 'Select Proper Time', 'Please select proper order time,delivery time should be greater than 10 hours')
+         $('body').removeClass("loading");
+         $('#datetime').focus()
+     } else {
+         var url = "/makeOrder"; // the script where you handle the form input.
+        $('body').addClass("loading"); 
+       $('#myModal').modal('toggle')
+         $.ajax({
+             type: "POST",
+             url: url,
+             data: $("#orderdata").serialize(), // serializes the form's elements.
+             success: function(data) {
+                 console.log('order confirmed')
+                 $('body').removeClass("loading");
+                 $('body').load('/cart',function(){
+                   mivenotify('success','Order Id:'+data, 'Thank You, Your Order has been placed')
+
+
+
+                 })
+             }
+         });
+     }}
+</script>
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker5').datetimepicker({
+                    defaultDate: new Date(),
+                    disabledDates: [
+                        moment("12/25/2013"),
+                        new Date(2013, 11 - 1, 21),
+                        new Date()
+                    ],
+                    minDate:new Date()+500000000000000
+                });
+            });
+        </script>
 
 {% endblock %}
 
