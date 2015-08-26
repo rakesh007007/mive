@@ -31,7 +31,7 @@
       <div class="col-md-6" style="margin-top:240px;">
       <form method="post" action="/search" data-toggle="tooltip" title="Search Fruits and Vegetables">
             <div class="input-group custom-search-form">
-              <input type="text" class="form-control" style="height:60px" placeholder="Search Fruits and Vegetables" name="searchtext">
+              <input type="text" class="form-control" style="height:60px" placeholder="Search Fruits and Vegetables" autocomplete="off" spellcheck="false" name="searchtext">
               {%csrf_token%}
               <span class="input-group-btn" style="color:#13c0ba;">
               <button type="submit" style="height:60px;color:#ffffff;background:#13c0ba;" class="btn btn-mive2  " type="button">

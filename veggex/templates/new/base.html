@@ -12,10 +12,15 @@
   <link rel="stylesheet" href="/rstatic/new/css/pnotify.custom.min.css">
   <script src="/rstatic/new/js/pnotify.custom.min.js"></script>
   <script src="/rstatic/new/js/jquery.cookie.js"></script>
+  <script src="/rstatic/new/js/typeahead.bundle.js"></script>
   <link href="rstatic/new/css/font-awesome.css" rel="stylesheet">
   <script type="text/javascript">
   $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
+    $('[data-toggle="tooltip"]').tooltip();
+    $('#searchtext').typeahead({
+      name: 'accounts',
+      local: ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen']
+    });
 });
   </script>
   

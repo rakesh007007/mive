@@ -733,6 +733,7 @@ def makeOrder(request):
 				rak.product = itemn.product
 				rak.unit=itemn.product.unit
 				rak.qtyInUnits = itemn.qtyInUnits
+				miveuser=user
 				rak.priceType = itemn.product.priceType
 				rak.priceAtThatTime = itemn.product.pricePerUnit
 				rak.order = order
@@ -746,7 +747,8 @@ def makeOrder(request):
 			totalItems=len(cartItems)
 			shippingCost=0
 			categories = Category.objects.all()
-			return HttpResponse(order_id)
+			return TemplateResponse(request, 'new/ordercomplete.html',{'order_id':order_id,'totalItems':totalItems,'miveuser':miveuser,'cart':cart,'shippingCost':shippingCost,'cartItems':cartItems,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
+
 def cart(request):
 	if(checklogin(request)==False):
 		return redirect('/login')

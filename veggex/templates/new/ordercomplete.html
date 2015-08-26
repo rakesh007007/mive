@@ -150,7 +150,7 @@
 {% endblock %}
 {% block jsblock %}
 <script type="text/javascript">
-  mivenotify('success','Mive Notification','Your Cart is Empty')
+  mivenotify('success','Order Id:{{order_id}}','Your order has been placed successfully details has been sent on your registered mail and mobile')
   console.log('yayy')
 </script>
 <script type="text/javascript">
@@ -186,7 +186,12 @@
              success: function(data) {
                  console.log('order confirmed')
                  $('body').removeClass("loading");
-                 $('body').html(data)
+                 $('body').load('/cart',function(){
+                   mivenotify('success','Order Id:'+data, 'Thank You, Your Order has been placed')
+
+
+
+                 })
              }
          });
      }}
