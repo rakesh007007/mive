@@ -3,7 +3,6 @@
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/rstatic/new/css/readable/bootstrap.min.css">
   <link rel="stylesheet" href="/rstatic/new/css/master.css">
@@ -13,16 +12,27 @@
   <link rel="stylesheet" href="/rstatic/new/css/pnotify.custom.min.css">
   <script src="/rstatic/new/js/pnotify.custom.min.js"></script>
   <script src="/rstatic/new/js/jquery.cookie.js"></script>
+  <link href="rstatic/new/css/font-awesome.css" rel="stylesheet">
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+  </script>
+  
   <script type="text/javascript">
   function mivenotify(type,title,text,delay){
-    new PNotify({
+    mivenotification = new PNotify({
       title: title,
       text:text,
       delay:2500,
       type: type,
       styling: "bootstrap3",
-      hide:true
+      hide:true,
+      stack :{"dir1": "down", "dir2": "left", "push": "bottom", "spacing1": 25, "spacing2": 25, context: $("body")}
   });
+    mivenotification.get().click(function() {
+    mivenotification.remove();
+});
 
   }
   </script>
@@ -323,11 +333,12 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <button type="button" style="background:#13c0ba;color:#13c0ba" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#"><img style="height:52px;width:52px" src="/rstatic/new/images/mivelogo.png" class="img img-responsive"></a>
     </div>
@@ -381,8 +392,8 @@
         <li id="loginbutton"> <a href="#" data-toggle="modal"  data-target="#login-modal"> <span class="glyphicon glyphicon-user"></span> Login</a></li>
         <li id="userbutton" style="display:none" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">{{miveuser.nameOfInstitution}} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a id="userdetails" href="user/details"><i class="icon-cog"></i>Details</a></li>
-                            <li><a id="userorders" href="user/prders"><i class="icon-envelope"></i>Orders</a></li>
+                            <li><a id="userdetails" href="/account"><i class="icon-user"></i>Details</a></li>
+                            <li><a id="userorders" href="/seeOrder"><i class="icon-envelope"></i>Orders</a></li>
                             <li  class="divider"></li>
                             <li><a id="userlogout" href="logout"><i class="icon-off"></i> Logout</a></li>
                         </ul>
@@ -390,8 +401,8 @@
         {%else%}
          <li id="userbutton" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">{{miveuser.nameOfInstitution}} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a id="userdetails" href="user/details"><i class="icon-cog"></i>Details</a></li>
-                            <li><a id="userorders" href="user/prders"><i class="icon-envelope"></i>Orders</a></li>
+                            <li><a id="userdetails" href="/account"><i class="icon-user"></i> Details</a></li>
+                            <li><a id="userorders" href="/seeOrder"><i class="icon-envelope"></i> Orders</a></li>
                             <li  class="divider"></li>
                             <li><a id="userlogout" href="logout"><i class="icon-off"></i> Logout</a></li>
                         </ul>
@@ -409,7 +420,7 @@
 {% endblock %}
 
 <!-- inbox gmail-->
-<div style="position:fixed;bottom:10px;right:5px;">
+<div style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Click on me for cart details">
  {% if miveuser = 'none'%}
   <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
   {% else %}

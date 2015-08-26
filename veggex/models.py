@@ -140,6 +140,7 @@ class Order(models.Model):
 	payment_mode = models.CharField(max_length=200,blank=True,null=True)
 	subtotal=models.IntegerField(blank=True,null=True)
 	status = models.CharField(max_length=200,default='PLACED')
+	deliveryTime = models.TextField(blank=True,null=True)
 	def orderId(self):
 		return self.order_id
 class Orderitem(models.Model):

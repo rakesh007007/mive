@@ -1,0 +1,180 @@
+ {% extends 'new/base.html' %}
+ {%block headbl%}
+ <style type="text/css">
+ body.modal-open #wrap{
+    -webkit-filter: blur(7px);
+    -moz-filter: blur(15px);
+    -o-filter: blur(15px);
+    -ms-filter: blur(15px);
+    filter: blur(15px);
+}
+  
+.modal-backdrop {background: #ffffff;}
+
+.close {
+    font-size: 50px;
+    display:block;
+}
+ </style>
+ <style>
+ .user-row {
+    margin-bottom: 14px;
+}
+
+.user-row:last-child {
+    margin-bottom: 0;
+}
+
+.dropdown-user {
+    margin: 13px 0;
+    padding: 5px;
+    height: 100%;
+}
+
+.dropdown-user:hover {
+    cursor: pointer;
+}
+
+.table-user-information > tbody > tr {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table-user-information > tbody > tr:first-child {
+    border-top: 0;
+}
+
+
+.table-user-information > tbody > tr > td {
+    border-top: 0;
+}
+.toppad
+{margin-top:20px;
+}
+
+ </style>
+ <script>
+ $(document).ready(function() {
+    var panels = $('.user-infos');
+    var panelsButton = $('.dropdown-user');
+    panels.hide();
+
+    //Click dropdown
+    panelsButton.click(function() {
+        //get data-for attribute
+        var dataFor = $(this).attr('data-for');
+        var idFor = $(dataFor);
+
+        //current button
+        var currentButton = $(this);
+        idFor.slideToggle(400, function() {
+            //Completed slidetoggle
+            if(idFor.is(':visible'))
+            {
+                currentButton.html('<i class="glyphicon glyphicon-chevron-up text-muted"></i>');
+            }
+            else
+            {
+                currentButton.html('<i class="glyphicon glyphicon-chevron-down text-muted"></i>');
+            }
+        })
+    });
+
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+});
+ </script>
+<link rel="stylesheet" href="/rstatic/new/css/bootstrap-datetimepicker.css">
+
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker5').datetimepicker({
+                    defaultDate: new Date(),
+                    disabledDates: [
+                        moment("12/25/2013"),
+                        new Date(2013, 11 - 1, 21),
+                        new Date()
+                    ],
+                    minDate:new Date()+500000000000000
+                });
+            });
+        </script>
+ <script type="text/javascript" src="/rstatic/new/js/moment.js"></script>
+ <script type="text/javascript" src="/rstatic/new/js/bootstrap-datetimepicker.js"></script>
+ {%endblock%}
+{% block content%}
+<div class="container" style="padding-top:70px">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1" >
+   
+   
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{miveuser.nameOfInstitution}}</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="{{miveuser.profilePhoto.url}}" class="img-circle img-responsive"> </div>
+                
+                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
+                  <dl>
+                    <dt>DEPARTMENT:</dt>
+                    <dd>Administrator</dd>
+                    <dt>HIRE DATE</dt>
+                    <dd>11/12/2013</dd>
+                    <dt>DATE OF BIRTH</dt>
+                       <dd>11/12/2013</dd>
+                    <dt>GENDER</dt>
+                    <dd>Male</dd>
+                  </dl>
+                </div>-->
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Owner:</td>
+                        <td>{{miveuser.nameOfOwner}}</td>
+                      </tr>
+                      <tr>
+                        <td>Type:</td>
+                        <td>{{miveuser.institutionType}}</td>
+                      </tr>
+                      <tr>
+                        <td>Mail Id</td>
+                        <td>{{miveuser.mailId}}</td>
+                      </tr>
+                   
+                         <tr>
+                             <tr>
+                        <td>Mobile</td>
+                        <td>{{miveuser.mobileNo}}</td>
+                      </tr>
+                        <tr>
+                        <td>Address</td>
+                        <td>{{miveuser.address.area}},{{miveuser.address.city}}<br>{{miveuser.address.state}}, {{miveuser.address.pincode}}</td>
+                      </tr>
+                    </tbody>
+                  </table>                  
+                </div>
+              </div>
+            </div>
+                 <div class="panel-footer">
+                        <a data-original-title="Contact Support" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                        <span class="pull-right">
+                            <a href="edit.html" data-original-title="Edit  Address" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                        </span>
+                    </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}
+
+<!-- Social Footer, Single Coloured -->
+
+
+   
