@@ -17,10 +17,13 @@
 }
  </style>
 <link rel="stylesheet" href="/rstatic/new/css/bootstrap-datetimepicker.css">
+{% if totalItems = 0 %}
+<script>
+  mivenotify('success','Mive Notification','Your Cart is Empty')
+  console.log('yayy')
+  {% endif%}
+  </script>
 <script type="text/javascript">
-  $('#orderconfirm').click(function(e){
-    var SendButton = $(e.target);
-});
   function click2() {
      var x = ($('#datetime').val())
      xt = new Date(x)

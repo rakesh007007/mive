@@ -24,12 +24,10 @@
     mivenotification = new PNotify({
       title: title,
       text:text,
-      delay:2500,
+      delay:5500,
       type: type,
       styling: "bootstrap3",
-      hide:true,
-      stack :{"dir1": "down", "dir2": "left", "push": "bottom", "spacing1": 25, "spacing2": 25, context: $("body")}
-  });
+      hide:true  });
     mivenotification.get().click(function() {
     mivenotification.remove();
 });
@@ -420,9 +418,9 @@
 {% endblock %}
 
 <!-- inbox gmail-->
-<div style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Click on me for cart details">
+<div style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Click on me for cart details" class="inboxcart">
  {% if miveuser = 'none'%}
-  <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
+  <button  href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
   {% else %}
   <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">{{miveuser.cart.cartTotal}}$<span></button>
     {% endif %}
@@ -508,6 +506,7 @@ $(document).on('click', '.number-spinner button', function () {
 </script>
 <!-- jquery for user login-->
 
+
 <script type="text/javascript">
 $(".product1submit").click(function(event) {
    event.preventDefault();
@@ -515,6 +514,9 @@ $(".product1submit").click(function(event) {
     console.log(rak)
     $(rak).submit()
 });
+$('.inboxcart').click(function(event){
+  location = '/cart'
+})
 /*
 $("#mivelogin").submit(function(event) {
     event.preventDefault();

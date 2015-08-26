@@ -1,0 +1,169 @@
+{% extends 'new/base.html' %}
+{% block headbl %}
+{%endblock%}
+{% block search-full%}
+<div class="container-fluid full" style="height:400px" >
+    <div class="row">
+      
+    </div>
+      <div class="col-md-3" style="padding-left:40px;margin-top:0px;">
+      </div>
+      <div class="col-md-6" style="margin-top:240px;">
+      <form method="post" action="/search" data-toggle="tooltip" title="Search Fruits and Vegetables">
+            <div class="input-group custom-search-form">
+              <input type="text" class="form-control" style="height:60px" placeholder="Search Fruits and Vegetables" name="searchtext">
+              {%csrf_token%}
+              <span class="input-group-btn" style="color:#13c0ba;">
+              <button type="submit" style="height:60px;color:#ffffff;background:#13c0ba;" class="btn btn-mive2  " type="button">
+              <span class="glyphicon glyphicon-search"></span>
+             </button>
+             </span>
+
+             </div><!-- /input-group -->
+             </form>
+        </div>
+        <div class="col-md-3" style="padding-left:40px;margin-top:100px;">
+      </div>
+    </div>
+        </div>
+  {%endblock%}
+
+<!-- products page -->
+{%block bread%}
+            <div class="container">
+            <div class="row">
+            <div class="col-md-6">
+               <ul class="breadcrumb" style="background:none">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">Products</a></li>
+              </ul>
+              </div>
+              </div></div>
+
+  {%endblock %}
+
+{%block content%}
+<div class="container hidden-xs hidden-sm">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-9">
+            <br>
+            <br>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div id="carousel-example" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                    {%for product in products%}
+                    <div class="col-sm-3 col-md-3 col-md-offset-0"  style="float:left">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img data-toggle="tooltip" data-placement="bottom" title="{{product.name}}" src="/{{product.coverphoto.url}}" alt="a" class="img img-responsive" style="width:200px;height:200px" />
+                                </div>
+                                <div class="info">
+                                         <center><div class="price col-md-9 col-sm-12">
+                                            
+                                        </div></center>
+                                    <div class="row">
+                                        <div class="price col-md-6 col-sm-6">
+                                            
+                                            <p class="price-text-color">
+                                                {{product.name}}</p>
+                                            <p class="">
+                                                <a>{{product.unit}}</a></p>
+                                        </div>
+                                         <div class="price col-md-6 col-sm-6">
+                                            <p class="">
+                                                <a onclick="mivenotify('notice','Mive Notification','We are working on this feature')">Details</a></p>
+                                            <p class="price-text-color">
+                                                {{product.pricePerUnit}}$</p>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                    <div class="col-md-6 cols-sm-6">
+                                    <div class="separator clear-left">
+                                       <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                          <span class="input-group-btn">
+                                            <button data-toggle="tooltip" title="If large qty edit qty directly " class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                          <form method="post" action="/addtocart" id="productsubmit-{{product.product_id}}">
+                                          <input data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty">
+                                          {%csrf_token%}
+                                          <input type="hidden" name="productId" value="{{product.product_id}}">
+                                          </form>
+                                          
+                                        </div>
+                                    </div>
+                                    </div>
+                                   <div class="col-md-5 col-sm-5">
+                                   <p><a href="#" data-original-title="Add to Cart" data-toggle="tooltip" data-mive="#productsubmit-{{product.product_id}}" class="product1submit"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   </div>
+                                   <div class="col-md-1 col-sm-">
+                                   </div>
+
+
+                                    </div>
+
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                       
+
+                                  
+                       
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                                
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- product page for mobiles -->
+    <div class="container-fluid hidden-md hidden-lg hidden-xl">
+    {%for product in products%}
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <img src="/{{product.coverphoto.url}}" style="height:150px;width:150px" class="img img-responsive">
+        </div>
+        <div class="col-sm-5 col-xs-5">
+                  <div><h6 class="price-text-color">{{product.name}}</h6></div>
+
+        <div><p style="font-size: 6px;" class="price-text-color">Rate:{{product.pricePerUnit}}/{{product.unit}}</p></div>
+        <a href="#" class="product-a product1submit" data-mive="#productsubmit-{{product.product_id}}" data-original-title="Contact Support" data-toggle="tooltip" title="Add to Cart"><span class="glyphicon glyphicon-shopping-cart" ></span></a>
+        <a onclick="mivenotify('notice','Mive Notification','We are working on this feature')" class="product-a" data-toggle="tooltip" title="Details"><span class="glyphicon glyphicon-th"></span></a>
+        <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                          <form id="productsubmit-{{product.product_id}}" method="post" class="productform" action="/addtocart">
+                                          <input data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty">
+                                          {%csrf_token%}
+                                          <input type="hidden" name="productId" value="{{product.product_id}}">
+                                          </form>
+                                          
+                                        </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+
+
+{%endblock%}
