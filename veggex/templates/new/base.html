@@ -566,7 +566,9 @@ $('body').on('click',".product1submit",function(event) {
             $('div[data-miveimg='+rak+'][mobile='+mob+']').html(piku)
             mivenotify('success','Item added','Item has been added to cart')
            },
-           error:function(data){console.log(data)}
+           error:function(data){console.log(data)
+           mivenotify('error','Item add','Error ocuured while processing your request')
+           }
          });
    {%endif %}
 });
@@ -589,9 +591,11 @@ $('body').on('submit',".itemdelete",function(event) {
            {console.log('item has been removed from cart');
              $('#rakeshnavtop').html(data)
             $('span[data-miveimg='+datamiveimg+']').html(piku)
-            mivenotify('success','Item added','Item has been added to cart')
+            mivenotify('notice','Item Removed','Item has been removed from cart')
            },
-           error:function(data){console.log(data)}
+           error:function(data){console.log(data)
+           mivenotify('error','Item remove','error while processing your request please contact support@mive.in')
+           }
          });
 });
 //end
