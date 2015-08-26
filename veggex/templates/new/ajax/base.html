@@ -1,0 +1,297 @@
+<nav class="navbar navbar-default navbar-fixed-top navtoggle" style="opacity:0.98;border:none" id="rakeshnavtop">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" style="background:#13c0ba;color:#13c0ba" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><img style="height:52px;width:52px" src="/rstatic/new/images/mivelogo.png" class="img img-responsive"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/main">Home</a></li>
+        {%for categ in categories%}
+        <li><a href="category?categoryId={{categ.category_id}}">{{categ.name}}</a></li>
+        {%endfor%}
+      </ul>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> {{totalItems}} Item<span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-cart"  id="cartcontainer" role="menu">
+          {%for item in cartItems%}
+              <li>
+                  <span class="item">
+                    <span class="item-left">
+                        <img style="width:50px;height:50px" src="/{{item.product.coverphoto.url}}" alt="" />
+                        <span class="item-info">
+                            <span>{{item.product.name}}</span>
+                            <span>{{item.product.pricePerUnit}}$ x {{item.qtyInUnits}}</span>
+                        </span>
+                    </span>
+                    <span class="item-right" data-miveimg="itemdelete-{{item.cartitem_id}}">
+                    <form method="post" action="/removeItemPost">
+                        {%csrf_token%}
+                        <input type="hidden" name="item_id" value="{{item.cartitem_id}}">
+                        <button type="submit"  id="itemdelete-{{item.cartitem_id}}" class="btn btn-link btn-xs itemdelte">
+                          <span class="glyphicon glyphicon-trash"> </span>
+                        </button>
+                        </form>
+                    </span>
+                </span>
+              </li>
+             {%endfor%}
+             {%if totalItems = 0 %}
+               <li class="divider"></li>
+              <li><p class="text-center" href="">Empty</p></li>
+             {% else %}
+             <li class="divider"></li>
+              <li><a class="text-center" href="/cart">View Cart</a></li>
+             {% endif %}
+              
+          </ul>
+        </li>
+        {% if miveuser = 'none'%}
+        <li id="loginbutton"> <a href="#" data-toggle="modal"  data-target="#login-modal"> <span class="glyphicon glyphicon-user"></span> Login</a></li>
+        <li id="userbutton" style="display:none" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">{{miveuser.nameOfInstitution}} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="userdetails" href="/account"><i class="icon-user"></i>Details</a></li>
+                            <li><a id="userorders" href="/seeOrder"><i class="icon-envelope"></i>Orders</a></li>
+                            <li  class="divider"></li>
+                            <li><a id="userlogout" href="logout"><i class="icon-off"></i> Logout</a></li>
+                        </ul>
+                    </li>
+        {%else%}
+         <li id="userbutton" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">{{miveuser.nameOfInstitution}} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="userdetails" href="/account"><i class="icon-user"></i> Details</a></li>
+                            <li><a id="userorders" href="/seeOrder"><i class="icon-envelope"></i> Orders</a></li>
+                            <li  class="divider"></li>
+                            <li><a id="userlogout" href="logout"><i class="icon-off"></i> Logout</a></li>
+                        </ul>
+                    </li>
+        {%endif%}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+{% block bread %}
+{% endblock %}
+{% block search-full%}
+{% endblock%}
+{% block content%}
+{% endblock %}
+
+<!-- inbox gmail-->
+<div style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Click on me for cart details" class="inboxcart">
+ {% if miveuser = 'none'%}
+  <button  href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
+  {% else %}
+  <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">{{miveuser.cart.cartTotal}}$<span></button>
+    {% endif %}
+</div>
+
+<br />
+
+<!-- Social Footer, Single Coloured -->
+
+
+    <hr>
+    <div class="container">
+     <div class="col-md-3"></div>
+    <div class="col-md-6">
+    <div class="copyright">Copyright © Mive Technology Pvt. Ltd.</div>
+    </div>
+     <div class="col-md-3"></div>
+    </div>
+
+<!-- login model thing -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+        <div class="modal-dialog">
+        <div class="loginmodal-container">
+          <h1>Login</h1><br>
+          <form method="post" novalidate id="mivelogin" action="logPost">
+          {% csrf_token%}
+          <input type="text" name="mobile" placeholder="Mobile No">
+          <input type="password" name="password" placeholder="Password">
+          <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+          </form>
+          
+          <div class="login-help">
+          <a href="#">Register</a> - <a href="#">Forgot Password</a>
+          </div>
+        </div>
+      </div>
+      </div>
+<div class="modalloading"></div>
+
+<!-- js for qty selector -->
+<script type="text/javascript">
+$(document).on('click', '.number-spinner button', function () {    
+  var btn = $(this),
+    oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+    newVal = 0;
+  
+  if (btn.attr('data-dir') == 'up') {
+    newVal = parseInt(oldValue) + 1;
+  } else {
+    if (oldValue > 1) {
+      newVal = parseInt(oldValue) - 1;
+    } else {
+      newVal = 1;
+    }
+  }
+  btn.closest('.number-spinner').find('.inputproductqty').val(newVal);
+});
+</script>
+<script type="text/javascript">
+  $(document).ready( function() {
+    $('#myCarousel').carousel({
+    interval:   4000
+  });
+  
+  var clickEvent = false;
+  $('#myCarousel').on('click', '.nav a', function() {
+      clickEvent = true;
+      $('.nav li').removeClass('active');
+      $(this).parent().addClass('active');    
+  }).on('slid.bs.carousel', function(e) {
+    if(!clickEvent) {
+      var count = $('.nav').children().length -1;
+      var current = $('.nav li.active');
+      current.removeClass('active').next().addClass('active');
+      var id = parseInt(current.data('slide-to'));
+      if(count == id) {
+        $('.nav li').first().addClass('active');  
+      }
+    }
+    clickEvent = false;
+  });
+});
+</script>
+<!-- jquery for user login-->
+
+
+<script type="text/javascript">
+$(".product1submit").click(function(event) {
+   event.preventDefault();
+   {% if miveuser = 'none' %}
+   mivenotify('error','Login required','please login to add products to cart')
+   console.log('user not loggedin')
+   $('#login-modal').modal('toggle')
+   mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+   return
+   {% else %}
+    rak = $(this).attr('data-mive')
+    console.log(rak)
+    $(rak).submit()
+
+   {%endif %}
+});
+$('.inboxcart').click(function(event){
+  {% if miveuser = 'none' %}
+  mivenotify('error','Login required','please login to see cart')
+  mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+  $('#login-modal').modal('toggle')
+  {% else %}
+  location = '/cart'
+  {%endif %}
+})
+/*
+$("#mivelogin").submit(function(event) {
+    event.preventDefault();
+    var url = "logPost"; // the script where you handle the form input.
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $("#mivelogin").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               mivenotify('success',data,'result')
+                $('#login-modal').modal('toggle')
+               $('#loginbutton')[0].style.display="none";
+               $('#userbutton')[0].style.display="block"
+               var obj = jQuery.parseJSON(data);
+               cartItems = jQuery.parseJSON(obj[0]['cartItems'])
+               user = jQuery.parseJSON(obj[0]['user'])
+               cart = jQuery.parseJSON(obj[0]['cart'])
+               finaluser =user[0]["fields"]
+               finalcart = cart[0]["fields"]
+               finalcartItems = cartItems
+               window.rakesh =finalcartItems;
+               console.log('reached')
+               $('#username').text(finaluser['nameOfOwner'])
+               $('#inboxspan').text(finalcart['cartTotal']+'$')
+               $('#userdetails').attr('href','user/details/'+finaluser['mobileNo'])
+               $('#userorders').attr('href','user/orders/'+finaluser['mobileNo'])
+                // show response from the php script.
+              len =finalcartItems.length;
+              str = ''
+              for(i=0;i<2;i++){
+                console.log(cartItems[i]['fields'])
+                item = cartItems[i]['fields']
+                name=item["name"]
+                pricePerUnit = item["pricePerUnit"]
+                qtyInUnits = item["qtyInUnits"]
+                photo='media'+item['coverphoto'].substring(1)
+                console.log(photo)
+                $('#hiddenphoto').attr('src',photo)
+                $('#hiddenname').html(name)
+                $('#hiddenpriceqty').html(pricePerUnit+" x"+qtyInUnits)
+                basestr = $('#hiddencart')
+                console.log(basestr)
+              }           },
+           error: function(jqXHR, textStatus, errorThrown)
+            {
+            console.log(textStatus, errorThrown);
+            mivenotify('Login Failed',textStatus,errorThrown)
+
+            }
+         });
+         
+
+    return false; // avoid to execute the actual submit of the form.
+});
+
+*/
+
+</script>
+<script>
+	
+	$(document).ready(function() {
+    var panels = $('.vote-results');
+    var panelsButton = $('.dropdown-results');
+    panels.hide();
+
+    //Click dropdown
+    panelsButton.click(function() {
+        //get data-for attribute
+        var dataFor = $(this).attr('data-for');
+        var idFor = $(dataFor);
+
+        //current button
+        var currentButton = $(this);
+        idFor.slideToggle(400, function() {
+            //Completed slidetoggle
+            if(idFor.is(':visible'))
+            {
+                currentButton.html('Hide Results');
+            }
+            else
+            {
+                currentButton.html('View Results');
+            }
+        })
+    });
+});
+</script>
+{%block jsblock%}
+{%endblock%}

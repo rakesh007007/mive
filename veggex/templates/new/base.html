@@ -331,7 +331,55 @@
    <link rel="stylesheet" href="/rstatic/new/css/cover.css">
 </head>
 <body>
+{% block bread %}
+{% endblock %}
+{% block search-full%}
+{% endblock%}
+{% block content%}
+{% endblock %}
+
+
+<br />
+
+<!-- Social Footer, Single Coloured -->
+
+
+    <hr>
+    <div class="container">
+     <div class="col-md-3"></div>
+    <div class="col-md-6">
+    <div class="copyright">Copyright © Mive Technology Pvt. Ltd.</div>
+    </div>
+     <div class="col-md-3"></div>
+    </div>
+
+<!-- login model thing -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+        <div class="modal-dialog">
+        <div class="loginmodal-container">
+          <h1>Login</h1><br>
+          <form method="post" novalidate id="mivelogin" action="logPost">
+          {% csrf_token%}
+          <input type="text" name="mobile" placeholder="Mobile No">
+          <input type="password" name="password" placeholder="Password">
+          <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+          </form>
+          
+          <div class="login-help">
+          <a href="#">Register</a> - <a href="#">Forgot Password</a>
+          </div>
+        </div>
+      </div>
+      </div>
 <nav class="navbar navbar-default navbar-fixed-top navtoggle" style="opacity:0.98;border:none" id="rakeshnavtop">
+<!-- inbox gmail-->
+<div style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Click on me for cart details" class="inboxcart">
+ {% if miveuser = 'none'%}
+  <button  href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
+  {% else %}
+  <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">{{miveuser.cart.cartTotal}}$<span></button>
+    {% endif %}
+</div>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -369,10 +417,11 @@
                             <span>{{item.product.pricePerUnit}}$ x {{item.qtyInUnits}}</span>
                         </span>
                     </span>
-                    <span class="item-right"><form method="post" action="/removeItemPost">
+                    <span class="item-right" data-miveimg="itemdelete-{{item.cartitem_id}}">
+                    <form method="post" data-mive="itemdelete-{{item.cartitem_id}}" action="/ajaxremoveItemPost" class="itemdelete">
                         {%csrf_token%}
                         <input type="hidden" name="item_id" value="{{item.cartitem_id}}">
-                        <button type="submit" class="btn btn-link btn-xs">
+                        <button type="submit"  id="itemdelete-{{item.cartitem_id}}" class="btn btn-link btn-xs">
                           <span class="glyphicon glyphicon-trash"> </span>
                         </button>
                         </form>
@@ -414,54 +463,6 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-{% block bread %}
-{% endblock %}
-{% block search-full%}
-{% endblock%}
-{% block content%}
-{% endblock %}
-
-<!-- inbox gmail-->
-<div style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Click on me for cart details" class="inboxcart">
- {% if miveuser = 'none'%}
-  <button  href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
-  {% else %}
-  <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">{{miveuser.cart.cartTotal}}$<span></button>
-    {% endif %}
-</div>
-
-<br />
-
-<!-- Social Footer, Single Coloured -->
-
-
-    <hr>
-    <div class="container">
-     <div class="col-md-3"></div>
-    <div class="col-md-6">
-    <div class="copyright">Copyright © Mive Technology Pvt. Ltd.</div>
-    </div>
-     <div class="col-md-3"></div>
-    </div>
-
-<!-- login model thing -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
-        <div class="modal-dialog">
-        <div class="loginmodal-container">
-          <h1>Login</h1><br>
-          <form method="post" novalidate id="mivelogin" action="logPost">
-          {% csrf_token%}
-          <input type="text" name="mobile" placeholder="Mobile No">
-          <input type="password" name="password" placeholder="Password">
-          <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-          </form>
-          
-          <div class="login-help">
-          <a href="#">Register</a> - <a href="#">Forgot Password</a>
-          </div>
-        </div>
-      </div>
-      </div>
 <div class="modalloading"></div>
 
 <!-- js for qty selector -->
@@ -508,11 +509,38 @@ $(document).on('click', '.number-spinner button', function () {
   });
 });
 </script>
-<!-- jquery for user login-->
+<script>
+	
+	$(document).ready(function() {
+    var panels = $('.vote-results');
+    var panelsButton = $('.dropdown-results');
+    panels.hide();
 
+    //Click dropdown
+    panelsButton.click(function() {
+        //get data-for attribute
+        var dataFor = $(this).attr('data-for');
+        var idFor = $(dataFor);
 
+        //current button
+        var currentButton = $(this);
+        idFor.slideToggle(400, function() {
+            //Completed slidetoggle
+            if(idFor.is(':visible'))
+            {
+                currentButton.html('Hide Results');
+            }
+            else
+            {
+                currentButton.html('View Results');
+            }
+        })
+    });
+});
+</script>
 <script type="text/javascript">
-$(".product1submit").click(function(event) {
+//code for product add
+$('body').on('click',".product1submit",function(event) {
    event.preventDefault();
    {% if miveuser = 'none' %}
    mivenotify('error','Login required','please login to add products to cart')
@@ -522,12 +550,53 @@ $(".product1submit").click(function(event) {
    return
    {% else %}
     rak = $(this).attr('data-mive')
+    mob = $(this).attr('mobile')
     console.log(rak)
-    $(rak).submit()
-
+    //$(rak).submit()
+    piku=$('div[data-miveimg='+rak+'][mobile='+mob+']').html()
+    $('div[data-miveimg='+rak+'][mobile='+mob+']').html("<img src='rstatic/new/images/282.GIF'>")
+    console.log(piku)
+    $.ajax({
+           type: "POST",
+           url: '/ajaxaddtocart',
+           data: $(rak).serialize(), // serializes the form's elements.
+           success: function(data)
+           {console.log('item has been added to cart');
+             $('#rakeshnavtop').html(data)
+            $('div[data-miveimg='+rak+'][mobile='+mob+']').html(piku)
+            mivenotify('success','Item added','Item has been added to cart')
+           },
+           error:function(data){console.log(data)}
+         });
    {%endif %}
 });
-$('.inboxcart').click(function(event){
+
+//code for product remove
+$('body').on('submit',".itemdelete",function(event) {
+    event.preventDefault();
+    datamiveimg = $(this).attr('data-mive')
+    console.log('data-miveimg',datamiveimg)
+    url = $(this).attr('action')
+    //$(rak).submit()
+    piku=$('span[data-miveimg='+datamiveimg+']').html()
+    $('span[data-miveimg='+datamiveimg+']').html("<img src='rstatic/new/images/282.GIF'>")
+    console.log(piku)
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $(this).serialize(), // serializes the form's elements.
+           success: function(data)
+           {console.log('item has been removed from cart');
+             $('#rakeshnavtop').html(data)
+            $('span[data-miveimg='+datamiveimg+']').html(piku)
+            mivenotify('success','Item added','Item has been added to cart')
+           },
+           error:function(data){console.log(data)}
+         });
+});
+//end
+console.log('check2')
+$('body').on('click','.inboxcart',function(event){
   {% if miveuser = 'none' %}
   mivenotify('error','Login required','please login to see cart')
   mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
@@ -536,6 +605,7 @@ $('.inboxcart').click(function(event){
   location = '/cart'
   {%endif %}
 })
+console.log('check3')
 /*
 $("#mivelogin").submit(function(event) {
     event.preventDefault();
@@ -596,36 +666,8 @@ $("#mivelogin").submit(function(event) {
 */
 
 </script>
-<script>
-	
-	$(document).ready(function() {
-    var panels = $('.vote-results');
-    var panelsButton = $('.dropdown-results');
-    panels.hide();
-
-    //Click dropdown
-    panelsButton.click(function() {
-        //get data-for attribute
-        var dataFor = $(this).attr('data-for');
-        var idFor = $(dataFor);
-
-        //current button
-        var currentButton = $(this);
-        idFor.slideToggle(400, function() {
-            //Completed slidetoggle
-            if(idFor.is(':visible'))
-            {
-                currentButton.html('Hide Results');
-            }
-            else
-            {
-                currentButton.html('View Results');
-            }
-        })
-    });
-});
-</script>
 {%block jsblock%}
 {%endblock%}
+
 </body>
 </html>

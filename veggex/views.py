@@ -530,26 +530,43 @@ def logPost(request):
 		request.session['loggedin']=True
 		request.session['mobile']=mobile
 		request.session['miveuser']=u[0].user_id
-		'''
-		cartz = CoreSez.serialize('json',uu)
-		cart = u[0].cart
-		uz = CoreSez.serialize('json',u)
-		#one extra db query remove it when you are free
-		#cart = Cart.objects.filter(cart_id=cart.cart_id)
-		#cartz = CoreSez.serialize('json',list(cart))
-		d = Product.objects.raw('select * from `veggex_cartitem` natural join `veggex_product` where cart_id='+str(cart.cart_id))
-		#cartitems = Cartitem.objects.filter(cart=cart).values('product')
-		#cartsz = CoreSez.serialize('json',cart)
-		#cartitemsz = CoreSez.serialize('json',list(cartitems))
-		p=CoreSez.serialize('json',d)
-		final = {"cartItems":p,"cart":cartz,"user":uz}
-		final = json.dumps([final,])
-		return HttpResponse(final)
-		'''
+		miveuser = u[0]
+		strraw={"mobile":mobile,"password":password}
+		#return HttpResponse(str(strraw))
 		return redirect('/main')
-		
 	else:
 		return HttpResponse('Invalid Login credentials')
+def ajaxlogPost(request):
+	mobile=request.POST['mobile']
+	password = request.POST['password']
+	u = User.objects.filter(mobileNo=mobile)
+	#uu=Cart.objects.raw('select * from `veggex_cart` natural join `veggex_user` where mobileNo='+str(mobile))
+	if(check_password(password,u[0].password)):
+		request.session['loggedin']=True
+		request.session['mobile']=mobile
+		request.session['miveuser']=u[0].user_id
+		miveuser = u[0]
+		cart = miveuser.cart
+		cartItems = Cartitem.objects.filter(cart=cart)
+		totalItems = len(cartItems)
+		customproducts='none'
+		allProducts = Product.objects.all()
+		vegetableProducts = Product.objects.filter(category_id=1)
+		fruitproducts = Product.objects.filter(category_id=2)
+		products = Product.objects.all()
+		categories = Category.objects.all()
+		return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+	else:
+		miveuser='none'
+		cart='none'
+		customproducts='none'
+		cartItems=[]
+		totalItems=0
+		categories = Category.objects.all()
+		products = Product.objects.all()
+		strraw={"mobile":mobile,"password":password}
+		return HttpResponse(str(strraw))
+		#return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def logout(request):
 	 if('loggedin' in request.session):
 		 del request.session['loggedin']
@@ -675,6 +692,40 @@ def addtocart(request):
 		cart.save()
 		cartitem.save()
 	return redirect('/cart')
+def ajaxaddtocart(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	productId = request.POST['productId']
+	productId = (int)(productId)
+	mobile=request.session['mobile']
+	user = User.objects.get(mobileNo=mobile)
+	product  = Product.objects.get(product_id=productId)
+	qty = request.POST['qty']
+	cart = user.cart
+	price = product.pricePerUnit
+	check = Cartitem.objects.filter(cart=cart).filter(product=product)
+	if(len(check)>0):
+		previtem = Cartitem.objects.get(cartitem_id=check[0].cartitem_id)
+		previtem.qtyInUnits = previtem.qtyInUnits+int(qty)
+		cart.cartTotal = cart.cartTotal+int(qty)*int(price)
+		previtem.save()
+		cart.save()
+	else:
+		cartitem=Cartitem()
+		cartitem.cart=cart
+		cartitem.qtyInUnits = qty
+		cartitem.product=product
+		cart.cartTotal = cart.cartTotal+int(qty)*int(price)
+		cart.save()
+		cartitem.save()
+	miveuser = user
+	cartItems = Cartitem.objects.filter(cart=cart)
+	totalItems = len(cartItems)
+	customproducts='none'
+	allProducts = Product.objects.all()
+	products = Product.objects.all()
+	categories = Category.objects.all()
+	return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def removeItemPost(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -686,6 +737,26 @@ def removeItemPost(request):
 	cart.save()
 	item.delete()
 	return redirect('/cart')
+def ajaxremoveItemPost(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	itemId = request.POST['item_id']
+	itemId = int(itemId)
+	item = Cartitem.objects.get(cartitem_id=itemId)
+	cart = item.cart
+	cart.cartTotal = cart.cartTotal-item.product.pricePerUnit*item.qtyInUnits
+	cart.save()
+	item.delete()
+	miveuserId = request.session['miveuser']
+	miveuser = User.objects.get(user_id=int(miveuserId))
+	cart = miveuser.cart
+	cartItems = Cartitem.objects.filter(cart=cart)
+	totalItems = len(cartItems)
+	customproducts='none'
+	allProducts = Product.objects.all()
+	products = Product.objects.all()
+	categories = Category.objects.all()
+	return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def orderStep1(request):
 	if ('loggedin' not in request.session):
 		return TemplateResponse(request, 'login.html',{'csrf_token':get_or_create_csrf_token(request)})

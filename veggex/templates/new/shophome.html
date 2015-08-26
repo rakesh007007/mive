@@ -80,8 +80,8 @@
                     {%for product in products%}
                     <div class="col-sm-3 col-md-3 col-md-offset-0"  style="float:left">
                             <div class="col-item">
-                                <div class="photo">
-                                    <img data-toggle="tooltip" data-placement="bottom" title="{{product.name}}" src="/{{product.coverphoto.url}}" alt="a" class="img img-responsive" style="width:200px;height:200px" />
+                                <div  class="photo">
+                                    <img data-toggle="tooltip" data-placement="bottom" title="{{product.name}}" src="/{{product.coverphoto.url}}"  alt="a" class="img img-responsive" style="width:200px;height:200px" />
                                 </div>
                                 <div class="info">
                                          <center><div class="price col-md-9 col-sm-12">
@@ -123,8 +123,8 @@
                                         </div>
                                     </div>
                                     </div>
-                                   <div class="col-md-5 col-sm-5">
-                                   <p><a href="#" data-original-title="Add to Cart" data-toggle="tooltip" data-mive="#productsubmit-{{product.product_id}}" class="product1submit"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   <div class="col-md-5 col-sm-5" mobile="no" data-miveimg="#productsubmit-{{product.product_id}}">
+                                   <p><a href="#" mobile="no" data-original-title="Add to Cart" data-toggle="tooltip" data-mive="#productsubmit-{{product.product_id}}" class="product1submit"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
                                    </div>
                                    <div class="col-md-1 col-sm-">
                                    </div>
@@ -164,8 +164,8 @@
                   <div><h6 class="price-text-color">{{product.name}}</h6></div>
 
         <div><p style="font-size: 6px;" class="price-text-color">Rate:{{product.pricePerUnit}}/{{product.unit}}</p></div>
-        <a href="#" class="product-a product1submit" data-mive="#productsubmit-{{product.product_id}}" data-original-title="Contact Support" data-toggle="tooltip" title="Add to Cart"><span class="glyphicon glyphicon-shopping-cart" ></span></a>
-        <a onclick="mivenotify('notice','Mive Notification','We are working on this feature')" class="product-a" data-toggle="tooltip" title="Details"><span class="glyphicon glyphicon-th"></span></a>
+        <div data-miveimg="#productsubmit-{{product.product_id}}" mobile="yes"><a href="#" mobile="yes" class="product-a product1submit" data-mive="#productsubmit-{{product.product_id}}" data-original-title="Contact Support" data-toggle="tooltip" title="Add to Cart"><span class="glyphicon glyphicon-shopping-cart" ></span></a>
+        <a onclick="mivenotify('notice','Mive Notification','We are working on this feature')" class="product-a" data-toggle="tooltip" title="Details"><span class="glyphicon glyphicon-th"></span></a></div>
         <div class="input-group number-spinner" >
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
