@@ -212,7 +212,6 @@ class ApiAddToCart(APIView):
 			cartId=int(cartId)
 			items=data['items']
 			user=User.objects.get(user_id=userId)
-			totalprice=0
 			for i in range(0,len(items)):
 				qty=items[str(i+1)]['qty']
 				qty = int(qty)
@@ -222,11 +221,11 @@ class ApiAddToCart(APIView):
 				cartitem=Cartitem()
 				cartitem.cart=cart
 				cartitem.qtyInUnits = qty
-				totalprice=totalprice+qty*product.pricePerUnit
+				totalprice=qty*product.pricePerUnit
 				cartitem.product=product
+				cart.cartTotal = cart.cartTotal+totalprice
 				cartitem.save()
-			cart.cartTotal = cart.cartTotal+totalprice
-			cart.save()
+				cart.save()
 			return Response({"status":"success"})
 		except:
 			return Response({"status":"error"})
@@ -241,7 +240,6 @@ class ApiUpdateCart(APIView):
 			items=data['items']
 			user=User.objects.get(user_id=userId)
 			cart=Cart.objects.get(cart_id=cartId)
-			extraprice = 0
 			for i in range(0,len(items)):
 				qty=items[str(i+1)]['qty']
 				qty = int(qty)
@@ -249,19 +247,21 @@ class ApiUpdateCart(APIView):
 				if(qty==0):
 					acitem=Accartitem()
 					acitem_before=Cartitem.objects.get(cartitem_id=itemId)
-					extraprice = extraprice - acitem_before.qtyInUnits*acitem_before*pricePerUnit
 					acitem.cart=cart
 					acitem.resason="deleted from cart"
 					acitem.qtyInUnits=acitem_before.qtyInUnits
 					acitem.product=acitem_before.product
+					cart.cartTotal = cart.cartTotal-acitem_before.qtyInUnits*acitem_before*pricePerUnit
 					acitem.save()
+					cart.save()
 					Cartitem.objects.get(cartitem_id=itemId).delete()
 				else:
 					item = Cartitem.objects.get(cartitem_id=itemId)
 					oldqty =item.qtyInUnits 
 					item.qtyInUnits = qty
-					extraprice = extraprice+qty*item.product.pricePerUnit - oldqty*item.product.pricePerUnit
+					cart.cartTotal = cart.cartTotal+qty*item.product.pricePerUnit - oldqty*item.product.pricePerUnit
 					item.save()
+					cart.save()
 			return Response([{"status":"success"}])
 		except Exception,e:
 			return Response([{"status":"error"}])
@@ -582,7 +582,7 @@ def account(request):
 	cartItems = Cartitem.objects.filter(cart=cart)
 	totalItems = len(cartItems)
 	categories = Category.objects.all()
-	return TemplateResponse(request, 'new/profile.html',{'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'miveuser':miveuser,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'new/profile.html',{'cartItems':cartItems,'totalItems':totalItems,'categories':categories,'cart':cart,'miveuser':miveuser,'csrf_token':get_or_create_csrf_token(request)})
 def main(request):
 	if(checklogin(request)==False):
 		miveuser='none'

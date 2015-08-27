@@ -51,6 +51,11 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
 
 )
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ry197089@gmail.com'
+EMAIL_HOST_PASSWORD = 'yadav@iitd'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

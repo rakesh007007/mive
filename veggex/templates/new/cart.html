@@ -1,6 +1,9 @@
  {% extends 'new/base.html' %}
  {%block headbl%}
  <style type="text/css">
+ 
+ </style>
+ <style type="text/css">
  body.modal-open #wrap{
     -webkit-filter: blur(7px);
     -moz-filter: blur(15px);
@@ -21,7 +24,7 @@
  <script type="text/javascript" src="/rstatic/new/js/bootstrap-datetimepicker.js"></script>
  {%endblock%}
 {% block content%}
-<div class="container" style="margin-top:50px">
+<div class="container-fluid" style="margin-top:50px">
   <div class="row">
   <br><br>
   <div class="col-md-1"></div>
@@ -41,21 +44,21 @@
         </div>
         <div class="panel-body">
         {%for item in cartItems%}
-          <div class="row">
+          <div class="row" style="padding-left:0">
             <div class="col-xs-2"><img style="height:50px;width:50px"  class="img-responsive hidden-sm hidden-xs" src="{{item.product.coverphoto.url}}">
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-3" style="padding-left:0">
               <h4 class="product-name"><strong>{{item.product.name}}</strong></h4>
             </div>
-            <div class="col-xs-6">
-              <div class="col-xs-6 text-right">
+            <div class="col-xs-7">
+              <div class="col-xs-4 text-right">
                 <h6><strong>{{item.product.pricePerUnit}}$<span class="text-muted">x</span></strong></h6>
               </div>
-              <div class="col-xs-4">
+              <div class="col-xs-5">
                 <input type="integer" class="form-control input-sm" 
                 value="{{item.qtyInUnits}}">
               </div>
-              <div class="col-xs-2">
+              <div class="col-xs-3">
               <form method="post" action="removeItemPost">
                         {%csrf_token%}
                         <input type="hidden" name="item_id" value="{{item.cartitem_id}}">
@@ -113,37 +116,110 @@
   <!-- Button trigger modal -->
   <br>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="container">
+<div class="container">
     <div class="row">
-      <div class="col-sm-6 col-sm-offset-3 text-center">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-        <br><br>
-        <h1>Order Confirmation</h1>
-        <h4>Select time of delivery</h4>
-        <form id="orderdata" method="post" action="/makeOrder">
-        {%csrf_token%}
-        <div class="form-group">
-                <div class='input-group date' id='datetimepicker5'>
-                    <input type='text' class="form-control" autofocus id="datetime" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                    
-                </div>
+        <div class="col-xs-12 show-focus-status">
+            <div class="alert alert-danger">
+                <strong>Out of Focus!</strong> This demo does support the use of your keyboard to change dates! But since it is contained within an iframe you must first click here!
             </div>
-        </form>
-        <hr>
-        <button class="btn btn-primary btn-lg has-spinner" data-loading-text="Loading..." type="button" onclick="click2(this)"  id="orderconfirm">
-          Confirm Order
-        </button>
-      </div>
-  </div>
-</div>
+            <div class="alert alert-success hidden">
+                <strong>In Focus!</strong> You can use your left and right arrow keys to change the date of the first date picker. Try it out now!
+            </div>
+        </div>
+    </div>
+  <div class="row">
+        <div class="col-sm-4">
+            <h2>By Day</h2>
+            <hr/>
+            <div class="date-picker"  data-date="2014/09/02" data-keyboard="true">
+                <div class="date-container pull-left">
+                    <h4 class="weekday">Monday</h4>
+                    <h2 class="date">Februray 4th</h2>
+                    <h4 class="year pull-right">2014</h4>
+                </div>
+                <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left"></span>
+                <span data-toggle="datepicker" data-type="add" class="fa fa-angle-right"></span>
+                <div class="input-group input-datepicker">
+                    <input type="text" class="form-control" data-format="YYYY/MM/DD" placeholder="YYYY/MM/DD">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+                <span data-toggle="calendar" class="fa fa-calendar"></span>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h2>By Week</h2>
+            <hr/>
+            <div class="date-picker">
+                <div class="date-container pull-left">
+                    <h4 class="weekday">Monday</h4>
+                    <h2 class="date">Februray 4th</h2>
+                    <h4 class="year pull-right">2014</h4>
+                </div>
+                <span data-toggle="datepicker" data-type="subtract" data-amt="7" class="fa fa-angle-left pull-left"></span>
+                <span data-toggle="datepicker" data-amt="7" class="fa fa-angle-right pull-right"></span>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h2>Start Date</h2>
+            <hr/>
+            <div class="date-picker" data-date="2014/10/31">
+                <div class="date-container pull-left">
+                    <h4 class="weekday">Monday</h4>
+                    <h2 class="date">Februray 4th</h2>
+                    <h4 class="year pull-right">2014</h4>
+                </div>
+                <span data-toggle="datepicker" data-type="subtract" data-amt="1" class="fa fa-angle-left pull-left"></span>
+                <span data-toggle="datepicker" data-amt="1" class="fa fa-angle-right pull-right"></span>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-4">
+            <h2>By Month</h2>
+            <hr/>
+            <div class="date-picker" data-type="months">
+                <div class="date-container pull-left">
+                    <h4 class="weekday">Monday</h4>
+                    <h2 class="date">Februray 4th</h2>
+                    <h4 class="year pull-right">2014</h4>
+                </div>
+                <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left pull-left"></span>
+                <span data-toggle="datepicker" class="fa fa-angle-right pull-right"></span>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h2>By Year</h2>
+            <hr/>
+            <div class="date-picker" data-type="year" data-date="2014/12/25">
+                <div class="date-container pull-left">
+                    <h4 class="weekday">Monday</h4>
+                    <h2 class="date">Februray 4th</h2>
+                    <h4 class="year pull-right">2014</h4>
+                </div>
+                <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left pull-left"></span>
+                <span data-toggle="datepicker" class="fa fa-angle-right pull-right"></span>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h2>Formatting</h2>
+            <hr/>
+            <div class="date-picker" data-date="2014/10/31">
+                <div class="date-container pull-left">
+                    <h4 class="weekday" data-format="ddd">Monday</h4>
+                    <h2 class="date" data-format="MMM Do">Februray 4th</h2>
+                    <h4 class="year pull-right" data-format="YY">2014</h4>
+                </div>
+                <span data-toggle="datepicker" data-type="subtract" data-amt="1" class="fa fa-angle-left pull-left"></span>
+                <span data-toggle="datepicker" data-amt="1" class="fa fa-angle-right pull-right"></span>
+            </div>
+        </div>
+    </div>
 </div>
 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 
 
 
