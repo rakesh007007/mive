@@ -216,16 +216,24 @@ class ApiAddToCart(APIView):
 				qty=items[str(i+1)]['qty']
 				qty = int(qty)
 				productId=items[str(i+1)]['productId']
-				product = Product.objects.get(product_id=productId)
 				cart = user.cart
-				cartitem=Cartitem()
-				cartitem.cart=cart
-				cartitem.qtyInUnits = qty
-				totalprice=qty*product.pricePerUnit
-				cartitem.product=product
-				cart.cartTotal = cart.cartTotal+totalprice
-				cartitem.save()
-				cart.save()
+				product = Product.objects.get(product_id=productId)
+				check = Cartitem.objects.filter(cart=cart).filter(product=product)
+				if(len(check)>0):
+					previtem = Cartitem.objects.get(cartitem_id=check[0].cartitem_id)
+					previtem.qtyInUnits = previtem.qtyInUnits+int(qty)
+					cart.cartTotal = cart.cartTotal+int(qty)*int(price)
+					previtem.save()
+					cart.save()
+				else:
+					cartitem=Cartitem()
+					cartitem.cart=cart
+					cartitem.qtyInUnits = qty
+					totalprice=qty*product.pricePerUnit
+					cartitem.product=product
+					cart.cartTotal = cart.cartTotal+totalprice
+					cartitem.save()
+					cart.save()
 			return Response({"status":"success"})
 		except:
 			return Response({"status":"error"})
