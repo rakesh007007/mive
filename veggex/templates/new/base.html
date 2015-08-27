@@ -551,15 +551,18 @@ $('body').on('click',".product1submit",function(event) {
    {% else %}
     rak = $(this).attr('data-mive')
     mob = $(this).attr('mobile')
+    form = $('form[mobile='+mob+'][id='+rak.substring(1)+']')
     console.log(rak)
     //$(rak).submit()
+    console.log('targeted form',form)
     piku=$('div[data-miveimg='+rak+'][mobile='+mob+']').html()
     $('div[data-miveimg='+rak+'][mobile='+mob+']').html("<img src='rstatic/new/images/282.GIF'>")
     console.log(piku)
+    console.log('formdata',$(rak).serialize())
     $.ajax({
            type: "POST",
            url: '/ajaxaddtocart',
-           data: $(rak).serialize(), // serializes the form's elements.
+           data: form.serialize(), // serializes the form's elements.
            success: function(data)
            {console.log('item has been added to cart');
              $('#rakeshnavtop').html(data)
