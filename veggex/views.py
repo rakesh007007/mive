@@ -583,7 +583,7 @@ def logout(request):
 	 return redirect('/main')
 def account(request):
 	if(checklogin(request)==False):
-		return redirect('/login')
+		return redirect('/main')
 	mobile =request.session['mobile']
 	miveuser = User.objects.get(mobileNo=mobile)
 	cart = miveuser.cart
@@ -826,11 +826,10 @@ def makeOrder(request):
 			totalItems=len(cartItems)
 			shippingCost=0
 			categories = Category.objects.all()
-			return TemplateResponse(request, 'new/ordercomplete.html',{'order_id':order_id,'totalItems':totalItems,'miveuser':miveuser,'cart':cart,'shippingCost':shippingCost,'cartItems':cartItems,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
-
+			return TemplateResponse(request, 'new/makeorderreload.html',{'order_id':order_id,'totalItems':totalItems,'miveuser':miveuser,'cart':cart,'shippingCost':shippingCost,'cartItems':cartItems,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
 def cart(request):
 	if(checklogin(request)==False):
-		return redirect('/login')
+		return redirect('/main')
 	mobile=request.session['mobile']
 	user = User.objects.get(mobileNo=mobile)
 	miveuser=user

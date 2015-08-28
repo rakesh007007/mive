@@ -1,0 +1,191 @@
+ <script type="text/javascript">
+  mivenotify('success','Order Id:{{order_id}}','Your order has been placed successfully details has been sent on your registered mail and mobile')
+  console.log('yayy')
+</script>
+ <nav class="navbar navbar-default navbar-fixed-top navtoggle" style="opacity:0.98;border:none" id="rakeshnavtop">
+<!-- inbox gmail-->
+<div style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Click on me for cart details" class="inboxcart">
+ {% if miveuser = 'none'%}
+  <button  href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
+  {% else %}
+  <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">{{miveuser.cart.cartTotal}}$<span></button>
+    {% endif %}
+</div>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" style="background:#13c0ba;color:#13c0ba" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><img style="height:52px;width:52px" src="/rstatic/new/images/mivelogo.png" class="img img-responsive"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/main">Home</a></li>
+        {%for categ in categories%}
+        <li><a href="category?categoryId={{categ.category_id}}">{{categ.name}}</a></li>
+        {%endfor%}
+      </ul>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> {{totalItems}} Item<span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-cart"  id="cartcontainer" role="menu">
+          {%for item in cartItems%}
+              <li>
+                  <span class="item">
+                    <span class="item-left">
+                        <img style="width:50px;height:50px" src="/{{item.product.coverphoto.url}}" alt="" />
+                        <span class="item-info">
+                            <span>{{item.product.name}}</span>
+                            <span>{{item.product.pricePerUnit}}$ x {{item.qtyInUnits}}</span>
+                        </span>
+                    </span>
+                    <span class="item-right" data-miveimg="itemdelete-{{item.cartitem_id}}">
+                    <form method="post" data-mive="itemdelete-{{item.cartitem_id}}" action="/ajaxremoveItemPost" class="itemdelete">
+                        {%csrf_token%}
+                        <input type="hidden" name="item_id" value="{{item.cartitem_id}}">
+                        <button type="submit"  id="itemdelete-{{item.cartitem_id}}" class="btn btn-link btn-xs">
+                          <span class="glyphicon glyphicon-trash"> </span>
+                        </button>
+                        </form>
+                    </span>
+                </span>
+              </li>
+             {%endfor%}
+             {%if totalItems = 0 %}
+               <li class="divider"></li>
+              <li><p class="text-center" href="">Empty</p></li>
+             {% else %}
+             <li class="divider"></li>
+              <li><a class="text-center" href="/cart">View Cart</a></li>
+             {% endif %}
+              
+          </ul>
+        </li>
+        {% if miveuser = 'none'%}
+        <li id="loginbutton"> <a href="#" data-toggle="modal"  data-target="#login-modal"> <span class="glyphicon glyphicon-user"></span> Login</a></li>
+        <li id="userbutton" style="display:none" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">{{miveuser.nameOfInstitution}} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="userdetails" href="/account"><i class="icon-user"></i>Details</a></li>
+                            <li><a id="userorders" href="/seeOrder"><i class="icon-envelope"></i>Orders</a></li>
+                            <li  class="divider"></li>
+                            <li><a id="userlogout" href="logout"><i class="icon-off"></i> Logout</a></li>
+                        </ul>
+                    </li>
+        {%else%}
+         <li id="userbutton" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">{{miveuser.nameOfInstitution}} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="userdetails" href="/account"><i class="icon-user"></i> Details</a></li>
+                            <li><a id="userorders" href="/seeOrder"><i class="icon-envelope"></i> Orders</a></li>
+                            <li  class="divider"></li>
+                            <li><a id="userlogout" href="logout"><i class="icon-off"></i> Logout</a></li>
+                        </ul>
+                    </li>
+        {%endif%}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+ <div class="container-fluid" style="margin-top:50px">
+  <div class="row">
+  <br><br>
+  <div class="col-md-1"></div>
+    <div class="col-xs-12 col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <div class="row">
+              <div class="col-xs-12">
+                <h5><span style=""class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+              </div>
+              <div class="col-xs-6">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+        {%for item in cartItems%}
+          <div class="row" style="padding-left">
+            <div class="col-xs-2"><img style="height:50px;width:50px"  class="img-responsive hidden-sm hidden-xs" src="{{item.product.coverphoto.url}}">
+            </div>
+            <div class="col-xs-3" style="padding-left:0">
+              <h4 class="product-name"><strong>{{item.product.name}}</strong></h4>
+            </div>
+            <div class="col-xs-7">
+              <div class="col-xs-4 text-right">
+                <h6><strong>{{item.product.pricePerUnit}}$<span class="text-muted">x</span></strong></h6>
+              </div>
+              <div class="col-xs-5">
+                <input type="integer" class="form-control input-sm" 
+                value="{{item.qtyInUnits}}">
+              </div>
+              <div class="col-xs-3">
+              <form method="post" action="removeItemPost">
+                        {%csrf_token%}
+                        <input type="hidden" name="item_id" value="{{item.cartitem_id}}">
+                        <button type="submit" class="btn btn-link btn-xs">
+                          <span class="glyphicon glyphicon-trash"> </span>
+                        </button>
+                        </form>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+          {%endfor%}
+          {% if totalItems = 0%}
+        {%else%}
+          <div class="row">
+            <div class="text-center">
+              <div class="col-xs-0 col-md-0 col-lg-6">
+              </div>
+              <div class="col-xs-12 col-md-12 col-lg-6 col-md-offset-4">
+                <button disabled type="button" class="btn btn-default btn-sm">
+                 <b>Total  {{cart.cartTotal}} $</b>
+                </button>
+                <button type="button" class="btn btn-warning btn-sm">
+                  Update cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row" z-index="10000">
+            <div class="col-md-4 col-lg-4 col-xs-4 col-md-offset-2 col-lg-offset-2">
+            </div>
+            </div>
+          </div>
+          <div class="row text-center">
+          <h5>Select Delivery time and press checkout</h5>
+          <form id="orderdata" method="post">
+           <div class="col-md-4 col-lg-4 col-xs-6 col-md-offset-2 col-lg-offset-2">
+            <input id="datetime" type='date' class="form-control" id='datetimepicker4' />
+            {%csrf_token%}
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <button  onclick="click2()" id="checkout" class="btn btn-success">
+                Checkout
+              </button>
+            </div>
+            </form>
+          </div>
+        </div>
+        {%endif%}
+      </div>
+    </div>
+      <div class="col-md-1"></div>
+
+  </div>
+</div>
+
+   

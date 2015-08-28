@@ -25,13 +25,19 @@
   </script>
   
   <script type="text/javascript">
+  var stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
   function mivenotify(type,title,text,delay){
+    if (delay === undefined) delay = '1000';
     mivenotification = new PNotify({
       title: title,
       text:text,
-      delay:2500,
+      delay:delay,
       type: type,
       styling: "bootstrap3",
+      buttons: {
+        closer_hover: false
+
+},
       hide:true});
      mivenotification.get().click(function() {
      mivenotification.remove();})
@@ -344,14 +350,6 @@
 <!-- Social Footer, Single Coloured -->
 
 
-    <hr>
-    <div class="container">
-     <div class="col-md-3"></div>
-    <div class="col-md-6">
-    <div class="copyright">Copyright © Mive Technology Pvt. Ltd.</div>
-    </div>
-     <div class="col-md-3"></div>
-    </div>
 
 <!-- login model thing -->
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
@@ -541,9 +539,10 @@ $(document).on('click', '.number-spinner button', function () {
 <script type="text/javascript">
 //code for product add
 $('body').on('click',".product1submit",function(event) {
+
    event.preventDefault();
    {% if miveuser = 'none' %}
-   mivenotify('error','Login required','please login to add products to cart')
+   mivenotify('error','Login required','please login to add products to cart',600)
    console.log('user not loggedin')
    $('#login-modal').modal('toggle')
    mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
@@ -551,8 +550,8 @@ $('body').on('click',".product1submit",function(event) {
    {% else %}
     rak = $(this).attr('data-mive')
     mob = $(this).attr('mobile')
+    var data = $.extend({}, $("#myObject").data());
     form = $('form[mobile='+mob+'][id='+rak.substring(1)+']')
-    console.log(rak)
     //$(rak).submit()
     console.log('targeted form',form)
     piku=$('div[data-miveimg='+rak+'][mobile='+mob+']').html()
@@ -567,7 +566,7 @@ $('body').on('click',".product1submit",function(event) {
            {console.log('item has been added to cart');
              $('#rakeshnavtop').html(data)
             $('div[data-miveimg='+rak+'][mobile='+mob+']').html(piku)
-            mivenotify('success','Item added','Item has been added to cart')
+            mivenotify('success','Item added','Item has been added to cart',600)
            },
            error:function(data){console.log(data)
            mivenotify('error','Item add','Error ocuured while processing your request')
@@ -594,10 +593,10 @@ $('body').on('submit',".itemdelete",function(event) {
            {console.log('item has been removed from cart');
              $('#rakeshnavtop').html(data)
             $('span[data-miveimg='+datamiveimg+']').html(piku)
-            mivenotify('notice','Item Removed','Item has been removed from cart')
+            mivenotify('notice','Item Removed','Item has been removed from cart',600)
            },
            error:function(data){console.log(data)
-           mivenotify('error','Item remove','error while processing your request please contact support@mive.in')
+           mivenotify('error','Item remove','error while processing your request please contact support@mive.in',1200)
            }
          });
 });
@@ -605,7 +604,7 @@ $('body').on('submit',".itemdelete",function(event) {
 console.log('check2')
 $('body').on('click','.inboxcart',function(event){
   {% if miveuser = 'none' %}
-  mivenotify('error','Login required','please login to see cart')
+  mivenotify('error','Login required','please login to see cart',600)
   mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
   $('#login-modal').modal('toggle')
   {% else %}

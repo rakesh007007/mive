@@ -75,15 +75,15 @@
         {%else%}
           <div class="row">
             <div class="text-center">
-              <div class="col-xs-9">
+              <div class="col-xs-0 col-md-0 col-lg-6">
               </div>
-              <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-sm btn-block hidden-xs hidden-sm">
+              <div class="col-xs-12 col-md-12 col-lg-6 col-md-offset-4">
+                <button disabled type="button" class="btn btn-default btn-sm">
+                 <b>Total  {{cart.cartTotal}} $</b>
+                </button>
+                <button type="button" class="btn btn-warning btn-sm">
                   Update cart
                 </button>
-                <a style="font-size:10px" class="hidden-md hidden-lg hidden-sm hidden-xl">
-                  Update
-                </a>
               </div>
             </div>
           </div>
@@ -91,31 +91,22 @@
         <div class="panel-footer">
           <div class="row" z-index="10000">
             <div class="col-md-4 col-lg-4 col-xs-4 col-md-offset-2 col-lg-offset-2">
-            <p style="font-size:20px" class="text-right">Total <strong>{{cart.cartTotal}} $</strong></p>
             </div>
             </div>
           </div>
           <div class="row text-center">
-          <h1>Select felivery time and press checkout</h1>
+          <h5>Select Delivery time and press checkout</h5>
            <div class="col-md-4 col-lg-4 col-xs-6 col-md-offset-2 col-lg-offset-2">
-            <input readonly type='text' class="form-control" id='datetimepicker4' />
-                              <script type="text/javascript">
-                      $(function () {
-                          $('#datetimepicker4').datetimepicker({
-                            autoclose:true,
-                            });
-                      });
-                  </script>
+           <form id="orderdata" method="post">
+            <input autofocus id="datetime" name="delivery" type='date' class="form-control" id='datetimepicker4' />
+            {%csrf_token%}
+            </form>
             </div>
-            <div class="col-xs-6">
-              <button class="btn btn-default">
+            <div class="col-xs-6 col-md-4">
+            <button  onclick="click2()" id="checkout" class="btn btn-success">
+              
                 Checkout
               </button>
-
-               <a data-toggle="modal" data-target="#myModal" style="font-size:10px"class="hidden-md hidden-lg hidden-xl">
-                  checkout
-                </a>
-
             </div>
           </div>
         </div>
@@ -130,10 +121,6 @@
 {% endblock %}
 {% block jsblock %}
 <script type="text/javascript">
-  mivenotify('success','Mive Notification','Your Cart is Empty')
-  console.log('yayy')
-</script>
-<script type="text/javascript">
   function click2() {
      var x = ($('#datetime').val())
      xt = new Date(x)
@@ -142,32 +129,27 @@
          return false;
      }
      currentTime = new Date()
-     console.log(xt < new Date())
-     tright = currentTime.getTime() + 14400
-     tleft = xt.getTime()
-     console.log('tright', tright)
-     console.log('tleft', tleft)
-     console.log('result', tright < tleft)
-
      if (xt.getTime() < (currentTime.getTime() + 14400) == true) {
-         alert(Date() + 14400)
          console.log('min delivery time is 4 hours please select time greayer')
          mivenotify('error', 'Select Proper Time', 'Please select proper order time,delivery time should be greater than 10 hours')
          $('body').removeClass("loading");
          $('#datetime').focus()
      } else {
          var url = "/makeOrder"; // the script where you handle the form input.
-        $('body').addClass("loading"); 
-       $('#myModal').modal('toggle')
+        $('body').addClass("loading");
+        console.log('data',$("#orderdata").serialize()) 
          $.ajax({
              type: "POST",
              url: url,
              data: $("#orderdata").serialize(), // serializes the form's elements.
              success: function(data) {
                  console.log('order confirmed')
-                 $('body').removeClass("loading");
                  $('body').html(data)
-             }
+             },
+             error:function(data){
+              console.log('error occurrred')
+              console.log('errordat',data)
+            }
          });
      }}
 </script>
