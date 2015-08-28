@@ -219,10 +219,14 @@ class ApiAddToCart(APIView):
 				cart = user.cart
 				product = Product.objects.get(product_id=productId)
 				check = Cartitem.objects.filter(cart=cart).filter(product=product)
+				print 'debug'
+				print check
 				if(len(check)>0):
 					previtem = Cartitem.objects.get(cartitem_id=check[0].cartitem_id)
+					print previtem
+					print previtem.qtyInUnits
 					previtem.qtyInUnits = previtem.qtyInUnits+int(qty)
-					cart.cartTotal = cart.cartTotal+int(qty)*int(price)
+					cart.cartTotal = cart.cartTotal+int(qty)*int(product.pricePerUnit)
 					previtem.save()
 					cart.save()
 				else:
@@ -235,8 +239,8 @@ class ApiAddToCart(APIView):
 					cartitem.save()
 					cart.save()
 			return Response({"status":"success"})
-		except:
-			return Response({"status":"error"})
+		except Exception,e:
+			return Response({"status":e})
 class ApiUpdateCart(APIView):
 	def post(self, request, format=None):
 		try:
