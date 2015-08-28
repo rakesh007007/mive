@@ -49,7 +49,7 @@ urlpatterns = [
     url(r'^home', views.shophome),
     url(r'^career', views.career),
     url(r'^contact', views.contact),
-    url(r'^$', views.tryy),
+    url(r'^$', views.shophome),
     url('^api/product/category/(?P<pid>.+)/$', views.ProductsByCategoryList.as_view()),
     url('^api/cart/cartitems/(?P<cartid>.+)/$', views.ItemsOfCartList.as_view()),
     url('^api/user/orders/(?P<userid>.+)/$', views.OrdersOfUserList.as_view()),
