@@ -16,5 +16,9 @@ admin.site.register(Mandi)
 admin.site.register(Subscribe)
 admin.site.register(CustomCategoryProducts)
 admin.site.register(Accartitem)
+admin.site.register(Career)
+admin.site.register(Contact)
+
+
 
 

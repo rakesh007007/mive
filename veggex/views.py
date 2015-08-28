@@ -456,6 +456,40 @@ def getTotal(cartitems):
 	for itemm in cartitems:
 		total = total+itemm.product.pricePerUnit*itemm.qtyInUnits
 	return total
+def contact(request):
+	try:
+		name=request.POST['name']
+		email=request.POST['email']
+		message=request.POST['message']
+		mobile = request.POST['mobile']
+		con = Contact()
+		con.name=name
+		con.email =email
+		con.mobile=mobile
+		con.message=message
+		con.save()
+		return HttpResponse('Thank You Will get back to you')
+	except Exception,e:
+		 return HttpResponse(e+"ting")
+def career(request):
+	try:
+		firstname = request.POST['firstname']
+		lastname = request.POST['lastname']
+		email = request.POST['email']
+		coverletter = request.POST['coverletter']
+		subject = request.POST['subject']
+		resume=request.FILES['resume']
+		ting =Career()
+		ting.firstname =firstname
+		ting.lastname = lastname
+		ting.email = email
+		ting.coverletter = coverletter
+		ting.subject = subject
+		ting.resume=resume
+		ting.save()
+		return HttpResponse('Thank You for applyig to us!! Will get back to you Asap')
+	except Exception,e:
+		return HttpResponse('Error Processing your request looks like you have provided incorrect inputs')
 def shophome(request):
 	return TemplateResponse(request, 'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
 def login(request):

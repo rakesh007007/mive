@@ -13,6 +13,35 @@
   <link rel="stylesheet" href="rstatic/new/css/pnotify.custom.min.css">
   <script src="rstatic/new/js/pnotify.custom.min.js"></script>
   <script src="rstatic/new/js/jquery.cookie.js"></script>
+  <style type="text/javscript">
+  .modalloading {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('/rstatic/new/images/282.GIF') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modalloading {
+    display: block;
+}
+
+
+  </style>
   <script type="text/javascript">
   var stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
   function mivenotify(type,title,text,delay){
@@ -292,15 +321,6 @@
     color: #2580db;
 }
   </style>
-  <script type="text/javascript">
-  $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-    $('#searchtext').typeahead({
-      name: 'accounts',
-      local: ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen']
-    });
-});
-  </script>
 
    <link rel="stylesheet" href="rstatic/new/css/cover.css">
 </head>
@@ -794,8 +814,8 @@
   </div>
 
 </div>
-<div style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Start Miving?" class="inboxcart" z-index="100000">
-  <button  href="/main" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:20px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan"></span></button>
+<div onclick="location='/main'" style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Start Miving?" class="inboxcart" z-index="100000">
+  <button  class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:20px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan"></span></button>
 </div>
 <!-- testimonia -->
 
@@ -810,8 +830,9 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span>Please provide your details so we can contact you.</h4>
                     </div>
-                    <form action="#" method="post" accept-charset="utf-8">
-                    <div class="modal-body" style="padding: 5px;">
+                    <form action="/career" method="post" enctype="multipart/form-data" id="careerform">
+                    {%csrf_token%}
+                    <div id="careerdiv" class="modal-body" style="padding: 5px;">
                           <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
                                     <input class="form-control" name="firstname" placeholder="Firstname" type="text" required autofocus />
@@ -832,22 +853,23 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
-                                    Resume:<input class="form-control" name="subject" placeholder="Subject" type="file" required />
+                                    Resume:<input class="form-control" name="resume" id="resume" value=""placeholder="Subject" type="file" required />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <textarea style="resize:vertical;" class="form-control" placeholder="Cover letter..." rows="6" name="comment" required></textarea>
+                                    <textarea style="resize:vertical;" class="form-control" placeholder="Cover letter..." rows="6" name="coverletter" required></textarea>
                                 </div>
                             </div>
-                        </div>  
+                        </div> 
                         <div class="panel-footer" style="margin-bottom:-14px;">
-                            <input type="submit" class="btn btn-success" value="Send"/>
+                            <input id="careersubmit" type="submit" class="btn btn-success" value="Send"/>
                                 <!--<span class="glyphicon glyphicon-ok"></span>-->
                             <input type="reset" class="btn btn-mive" value="Clear" />
                                 <!--<span class="glyphicon glyphicon-remove"></span>-->
                             <button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
                         </div>
+                        </form> 
                     </div>
                 </div>
             </div>
@@ -977,8 +999,9 @@
 <div class="container" id="contactmive">
 <div class="row">
 <div class="col-md-5">
-    <div class="form-area">  
-        <form role="form">
+    <div class="form-area" id="contactdiv">  
+        <form role="form" id="contactform" method="post" action="/contact">
+        {%csrf_token%}
         <br style="clear:both">
                     <h3 style="margin-bottom: 25px; text-align: center;">Contact Form</h3>
             <div class="form-group">
@@ -991,10 +1014,10 @@
             <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" required>
           </div>
                     <div class="form-group">
-                    <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7"></textarea>
+                    <textarea class="form-control" type="textarea" id="message" name="message" placeholder="Message" maxlength="140" rows="7"></textarea>
                     </div>
             
-        <button type="button" id="submit" name="submit" class="btn btn-mive pull-right" style="color:#ffffff">Submit Form</button>
+        <button type="submit" id="contactsubmit" name="submit" class="btn btn-mive pull-right" style="color:#ffffff">Submit Form</button>
         </form>
     </div>
     </div>
@@ -1114,6 +1137,31 @@ $(document).on('click', '.number-spinner button', function () {
         })
     });
 });
+
+</script>
+<script>
+  $("#contactform").submit(function(event) {
+    event.preventDefault();
+    var url = "/contact";
+    $('#contactsubmit').html("<img src='rstatic/new/images/282.GIF'>") // the script where you handle the form input.
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $("#contactform").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+            console.log('success',data)
+            mivenotify('success','Thank You','We Will get back to you asap',2500)
+            $('#contactdiv').html(data)
+
+           },
+           error:function(data){
+            mivenotify('error','Oops','Error submiting your response looks like you have submitted something incorrect!please check your inputs',2500)
+             console.log('error',data)
+           }
+         })
+  })
 
 </script>
 </body>
