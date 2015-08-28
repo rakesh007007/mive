@@ -159,10 +159,11 @@ ul.dropdown-cart li .item:hover{
     background-color:#f3f3f3;
 }
 body {
-    font-size: 22px ;
+    font-size: 20px ;
+    line-height: 20px !important;
 }
 .price>p{
-   font-size:18	px !important;
+   font-size:13px !important;
 }
 ul.dropdown-cart li .item:after{
     visibility: hidden;
