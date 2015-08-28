@@ -46,7 +46,7 @@ urlpatterns = [
     url(r'^searchForm', views.searchForm),
     url(r'^search', views.search),
     url(r'^product', views.productdetail),
-    url(r'^shop', views.shophome),
+    url(r'^home', views.shophome),
     url(r'^$', views.tryy),
     url('^api/product/category/(?P<pid>.+)/$', views.ProductsByCategoryList.as_view()),
     url('^api/cart/cartitems/(?P<cartid>.+)/$', views.ItemsOfCartList.as_view()),

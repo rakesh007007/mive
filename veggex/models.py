@@ -43,6 +43,24 @@ class Address(models.Model):
 		return str(self.address_id)
 	def addressId(self):
 		return self.address_id
+class Contact(models.Model):
+	contact_id = models.AutoField(primary_key=True)
+	name=models.CharField(max_length=300, blank=False, null=False)
+	email =models.CharField(max_length=300, blank=False, null=False)
+	message = models.TextField(max_length=300, blank=False, null=False)
+	mobile=models.BigIntegerField(blank=False,null=False)
+	def __unicode__(self):
+		return str(self.contact_id)
+class Career(models.Model):
+	career_id = models.AutoField(primary_key=True)
+	firstname=models.CharField(max_length=300, blank=False, null=False)
+	lastname=models.CharField(max_length=300, blank=False, null=False)
+	email =models.CharField(max_length=300, blank=False, null=False)
+	subject=models.CharField(max_length=300, blank=False, null=False)
+	coverletter = models.TextField(max_length=300, blank=False, null=False)
+	resume = models.FileField(blank=False,null=False)
+	def __unicode__(self):
+		return str(self.career_id)
 class Cart(models.Model):
 	cart_id = models.AutoField(primary_key=True)
 	#check this time thing

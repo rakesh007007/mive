@@ -14,13 +14,22 @@
   <script src="rstatic/new/js/pnotify.custom.min.js"></script>
   <script src="rstatic/new/js/jquery.cookie.js"></script>
   <script type="text/javascript">
-  function mivenotify(type,title,text){
-    new PNotify({
+  var stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
+  function mivenotify(type,title,text,delay){
+    if (delay === undefined) delay = '1000';
+    mivenotification = new PNotify({
       title: title,
       text:text,
+      delay:delay,
       type: type,
-      hide:true
-  });
+      styling: "bootstrap3",
+      buttons: {
+        closer_hover: false
+
+},
+      hide:true});
+     mivenotification.get().click(function() {
+     mivenotification.remove();})
 
   }
   </script>
@@ -283,6 +292,15 @@
     color: #2580db;
 }
   </style>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+    $('#searchtext').typeahead({
+      name: 'accounts',
+      local: ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen']
+    });
+});
+  </script>
 
    <link rel="stylesheet" href="rstatic/new/css/cover.css">
 </head>
@@ -304,7 +322,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="#aboutmive">About</a></li>
-        <li><a href="#teammive">Team</a></li>
+        <li class="hidden-sm hidden-xs"><a href="#teammive">Team</a></li>
+        <li class="hidden-lg hidden-md hidden-xl"><a href="#teammive">Team</a></li>
         <li><a href="#contactmive">
           Contact
         </a></li>
@@ -312,17 +331,17 @@
       </ul>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li> <a href="#" class="btn btn-primary btn-outline">Shop</a></li>
-        <li> <a onclick="mivenotify('error','Sorry','Mive will release soon')"><img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/google_play.png" style="width:30px;height:30px"><i>Get App</i></a></li>
+        <li> <a href="/main">Shop</a></li>
+        <li> <a onclick="mivenotify('error','Sorry','Mive will release soon')"><img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/google_play.png" style="width:20px;height:20px"><i>Get App</i></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="container-fluid full hidden-md hidden-lg" >
+<div class="container-fluid full hidden-md hidden-lg" style="height:350px" >
   <div class="row">
     <div class="col-xs-12 col-sm-12">
     <br><br><br><br><br>
-      <img style="" src="https://www.tinyowl.com/img/home/android.png" class="img img-responsive"><br><br>
+      <a onclick="mivenotify('notice','Mive','Will launch soon')"><img style="" src="https://www.tinyowl.com/img/home/android.png" class="img img-responsive"><br><br></a>
         
         <div class="form-group">
                 <div class="input-group input-group-lg">
@@ -332,7 +351,7 @@
                         <label for="Email" class="glyphicon glyphicon-phone" rel="tooltip" title="Mobile"></label>
                     </div>
                     <span class="input-group-btn">
-                        <button class="btn-mive2 btn" type="button">Get App!</button>
+                        <button class="btn-mive2 btn" type="button" onclick="mivenotify('notice','Mive','Will launch soon')">Get App!</button>
                     </span>
                 </div>
             </div>
@@ -348,7 +367,7 @@
         <img src="https://www.tinyowl.com/img/misc/phone.png" style="height:700px">
       </div>
       <div class="col-md-4" style="margin-top:390px;" >
-        <img style="" src="https://www.tinyowl.com/img/home/android.png" class="img img-responsive"><br><br>
+       <a onclick="mivenotify('notice','hola','Will launch soon')"> <img style="" src="https://www.tinyowl.com/img/home/android.png" class="img img-responsive"><br><br></a>
         
         <div class="form-group">
                 <div class="input-group input-group-lg">
@@ -358,7 +377,7 @@
                         <label for="Email" class="glyphicon glyphicon-phone" rel="tooltip" title="Mobile"></label>
                     </div>
                     <span class="input-group-btn">
-                        <button class="btn-mive2 btn" type="button">Get App!</button>
+                        <button onclick="mivenotify('notice','Mive','Will launch soon')" class="btn-mive2 btn" type="button">Get App!</button>
                     </span>
                 </div>
             </div>
@@ -370,8 +389,8 @@
 <!-- About Mive Thing -->
 <center><div class="container" id="aboutmive">
   <div class="row" style="background:none">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
+  <div class="col-md-8 col-md-offset-2">
+  <center>
   <br><br>
     <h3>About Mive</h3> 
     <p >MIVE is a B2B marketplace that aims to reach out to all the unorganized fruits and vegetables foodchains across the nation and make the tedious task of stock procurement hassle free through the extensive use of technology. Anyone can procure stock with least possible efforts by using MIVE Android Application or by simply using MIVE WebApp</p> 
@@ -379,7 +398,9 @@
     <h4><i>No more travelling and facing the hassles of wholesale markets or mandis</i> </h4>
       MIVE assures Best & Fresh Stock at best prices available in mandi & timely delivered as per the requirements of buyers. The advanced logistics enables timely delivery at doorstep with ulmost care of stock. Thus with MIVE one not only save time and money but also reduces the human effort which could be utilized for some other productive work.
     </p>
+    </center>
 </div>
+
 <div class="col-md-2"></div>
   </div>
   </div>
@@ -390,19 +411,22 @@
   </div>
   <div class="col-md-1 hidden-sm -hidden-xs"></div>
   <div class="col-md-5 col-sm-12 col-xs-12">
-  <div class="row">
+  <a href="/category?categoryId=1"><div class="row">
+  <center>
     <br><br>
      <img src="rstatic/new/images/fruits.png">
-    <h3>Buy Fruits</h3> 
+    <h3>Buy Fruits</h3></a> 
     <p >Now get Fruits delivered at your business location. Mive,now brings you the convenience of ordering online or on phone</p> 
+    </center>
   </div>
   </div>
   <div class="col-md-1 hidden-sm hidden-xs"></div>
   <div class="col-md-5 col-sm-12 col-xs-12" style="margin-left:0px">
+  <center>
   <br><br>
-      <img src="rstatic/new/images/vegetables.png">
-    <h3>Buy Vegetables</h3> 
-    <p >Now famillies and businesses can get bulk vegetables delivered at doorstep. Why pay more when you can get things on <u>mandi rates<u></p>
+      <a href="/category?categoryId=2"><img src="rstatic/new/images/vegetables.png">
+    <h3>Buy Vegetables</h3> </a>
+    <p >Now famillies and businesses can get bulk vegetables delivered at doorstep. Why pay more when you can get things on mandi rates</p></center>
 </div>
   </div>
   </div>
@@ -650,28 +674,34 @@
                 <!-- Nav tabs -->
                 <br><br><h2>Team Mive</h2> 
                 <ul class="[ nav nav-justified ]" id="nav-tabs" role="tablist">
+                    <li role="presentation" class="">
+                        <a href="#anna" aria-controls="anna" role="tab" data-toggle="tab">
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/sb.jpg" />
+                            <a target="_blank" href="https://in.linkedin.com/pub/shubham-goel/92/441/206"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
+                        </a>
+                    </li>
                     <li role="presentation">
                         <a href="#dustin" aria-controls="dustin" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="rstatic/new/images/team/rak.jpg"/>
-                            <span class="quote"><i class="fa fa-quote-left"></i></span>
-                        </a>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/rak.jpg"/></a>
+                            <a target="_blank" href="https://in.linkedin.com/in/iitdrakesh"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
+                        
                     </li>
                     <li role="presentation" class="active">
                         <a href="#daksh" aria-controls="daksh" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/annapickard/128.jpg"/>
-                            <span class="quote"><i class="fa fa-quote-left"></i></span>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/pc.jpg"/>
+                            <a target="_blank" target="_blank" href="https://in.linkedin.com/pub/phool-chand-yadav/1a/501/755"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
                         </a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#anna" aria-controls="anna" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/annapickard/128.jpg" />
-                            <span class="quote"><i class="fa fa-quote-left"></i></span>
+                        <a target="_blank" href="#wafer" aria-controls="wafer" role="tab" data-toggle="tab">
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/ab.jpg" />
+                            <a href="https://www.facebook.com/katoch.abhay"><span class="quote"><i class="fa fa-facebook"></i></span></a>
                         </a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#wafer" aria-controls="wafer" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/waferbaby/128.jpg" />
-                            <span class="quote"><i class="fa fa-quote-left"></i></span>
+                        <a target="_blank" href="#ramu" aria-controls="ramu" role="tab" data-toggle="tab">
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/an.jpg" />
+                            <a href="https://www.facebook.com/asood5"><span class="quote"><i class="fa fa-facebook"></i></span></a>
                         </a>
                     </li>
                 </ul>
@@ -680,45 +710,92 @@
                 <!-- Tab panes -->
                 <div class="tab-content" id="tabs-collapse"> 
                          
-                    <div role="tabpanel" class="tab-pane fade in active" id="dustin">
+                    <div role="tabpanel" class="tab-pane fade in" id="dustin">
                         <div class="tab-inner">                    
-                            <p class="lead">Etiam tincidunt enim et pretium efficitur. Donec auctor leo sollicitudin eros iaculis sollicitudin.</p>
                             <hr>
                             <p><strong class="text-uppercase">Rakesh Yadav</strong></p>
                             <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>                 
                         </div>
                     </div>
                     
-                    <div role="tabpanel" class="tab-pane fade" id="daksh">
+                    <div role="tabpanel" class="tab-pane fade in active" id="daksh">
                         <div class="tab-inner">
-                            <p class="lead">Suspendisse dictum gravida est, nec consequat tortor venenatis a. Suspendisse vitae venenatis sapien.</p>
                             <hr>
-                            <p><strong class="text-uppercase">Daksh Bhagya</strong></p>
-                            <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>
+                            <p><strong class="text-uppercase">Phool Chand</strong></p>
+                            <p><em class="text-capitalize"></em> <a href="#">IITD,Angara,Smartprix</a></p>
                         </div>
                     </div>
                     
                     <div role="tabpanel" class="tab-pane fade" id="anna">
                         <div class="tab-inner">
-                            <p class="lead">Nullam suscipit ante ac arcu placerat, nec sagittis quam volutpat. Vestibulum aliquam facilisis velit ut ultrices.</p>
                             <hr>
-                            <p><strong class="text-uppercase">Anna Pickard</strong></p>
-                            <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>
+                            <p><strong class="text-uppercase">Shubham Goel</strong></p>
+                            <p><em class="text-capitalize"></em> <a href="#">DTU,Smartprix</a></p>
                         </div> 
                     </div>
                     
                     <div role="tabpanel" class="tab-pane fade" id="wafer">
                         <div class="tab-inner">
-                            <p class="lead"> Fusce erat libero, fermentum quis sollicitudin id, venenatis nec felis. Morbi sollicitudin gravida finibus.</p>
                             <hr>
-                            <p><strong class="text-uppercase">Wafer Baby</strong></p>
-                           <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>
+                            <p><strong class="text-uppercase">Abhay Katoch</strong></p>
+                           <p><em class="text-capitalize"></em> <a href="#">Hindu College</a></p>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="ramu">
+                        <div class="tab-inner">
+                            <hr>
+                            <p><strong class="text-uppercase">Ankur Sood</strong></p>
+                           <p><em class="text-capitalize"></em> <a href="#">Hindu College</a></p>
                         </div>
                     </div>
                 </div>
             </div>        
         </div>
   </div>
+</div>
+<div class="container-fluid hidden-md hidden-lg hidden-xl" id="teammivemobile">
+  <div class="row">
+  <div class="col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/pc.jpg" />
+                            <center>
+                            <a target="_blank" target="_blank" href="https://in.linkedin.com/pub/phool-chand-yadav/1a/501/755"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
+                            <p style="text-size:2px">Phool Chand</p><br>
+                            </center>
+    </div>
+  <div class="col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-2">
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/rak.jpg" />
+                            <center>
+                            <a target="_blank" href="https://in.linkedin.com/in/iitdrakesh"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
+                            <p style="text-size:2px">Rakesh Yadav</p><br>
+                            </center>
+    </div>
+    <div class="col-sm-4 col-sm-offset-2 col-xs-4 col-xs-offset-1">
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/sb.jpg" />
+                            <center>
+                            <a target="_blank" href="https://in.linkedin.com/pub/shubham-goel/92/441/206"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
+                            <p style="text-size:2px">Shubham Goel</p><br>
+                            </center>
+    </div>
+    <div class="col-sm-4 col-sm-offset-2 col-xs-4 col-xs-offset-2">
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/ab.jpg" />
+                            <center>
+                            <a target="_blank" href="https://www.facebook.com/katoch.abhay"><span class="quote"><i class="fa fa-facebook"></i></span></a>
+                            <p style="text-size:2px">Abhay Katoch</p><br>
+                            </center>
+    </div>
+    <div class="col-sm-4 col-sm-offset-6 col-xs-4 col-xs-offset-6"></div>
+    <div class="col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-4">
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/an.jpg" />
+                            <center>
+                            <a target="_blank" href="https://www.facebook.com/asood5"><span class="quote"><i class="fa fa-facebook"></i></span></a>
+                            <p style="text-size:2px">Ankur Sood</p><br>
+                            </center>
+    </div>
+  </div>
+
+</div>
+<div style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Start Miving?" class="inboxcart" z-index="100000">
+  <button  href="/main" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:20px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan"></span></button>
 </div>
 <!-- testimonia -->
 
@@ -929,13 +1006,10 @@
       <p class="txt-railway"><span class="glyphicon glyphicon-phone"></span>+91-8377950711</p>
       <p class="txt-railway"><span class="glyphicon glyphicon-envelope"></span>info@mive.in</p>
       <address>
-          <strong>Hythe Window Cleaning</strong><br>
-          15 Springfield Way<br>
-          Hythe<br>
-          Kent<br>
-          United Kingdon<br>
-          CT21 5SH<br>
-          <abbr title="Phone">P:</abbr> 01234 567 890
+          <strong>F-143,Sector 41</strong><br>
+          Near Noida City Center<br> Metro Station<br>
+          201304<br>
+          <abbr title="Phone">P:</abbr>08377950711
         </address>
       </form>
     </div>

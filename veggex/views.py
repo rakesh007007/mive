@@ -457,7 +457,7 @@ def getTotal(cartitems):
 		total = total+itemm.product.pricePerUnit*itemm.qtyInUnits
 	return total
 def shophome(request):
-	return TemplateResponse(request, 'new/cart.html',{'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
 def login(request):
 	if ('loggedin' not in request.session):
 		return TemplateResponse(request, 'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
