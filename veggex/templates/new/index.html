@@ -329,11 +329,12 @@ body.loading .modalloading {
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+      <button type="button" style="background:#13c0ba;color:#13c0ba" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span  class="sr-only">Toggle navigation</span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
+        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#"><img style="height:52px;width:52px" src="rstatic/new/images/mivelogo.png" class="img img-responsive"></a>
     </div>
@@ -999,7 +1000,7 @@ body.loading .modalloading {
 
 <div class="container" id="contactmive">
 <div class="row">
-<div class="col-md-5">
+<div class="col-md-5 col-xs-12 col-sm-12">
     <div class="form-area" id="contactdiv">  
         <form role="form" id="contactform" method="post" action="/contact">
         {%csrf_token%}
@@ -1022,11 +1023,10 @@ body.loading .modalloading {
         </form>
     </div>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-2 col-xs-12 col-sm-12"></div>
     <center>
-    <div class="col-md-5">
+    <div class="col-md-5 col-xs-12 col-sm-12">
     <div class="form-area">  
-    <form role="form" style="padding-top:100px;">
         <br style="clear:both">             
       <p class="txt-railway"><span class="glyphicon glyphicon-phone"></span>+91-8377950711</p>
       <p class="txt-railway"><span class="glyphicon glyphicon-envelope"></span>info@mive.in</p>
@@ -1036,7 +1036,6 @@ body.loading .modalloading {
           201304<br>
           <abbr title="Phone">P:</abbr>08377950711
         </address>
-      </form>
     </div>
     </div></center>
     </div>
