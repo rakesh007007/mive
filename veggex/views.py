@@ -276,7 +276,7 @@ class ApiUpdateCart(APIView):
 					cart.save()
 			return Response([{"status":"success"}])
 		except Exception,e:
-			return Response([{"status":"error"}])
+			return Response(e)
 class ApiMakeOrder(APIView):
 	def post(self, request, format=None):
 		try:
