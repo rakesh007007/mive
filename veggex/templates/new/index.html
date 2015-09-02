@@ -1150,7 +1150,7 @@ $(document).on('click', '.number-spinner button', function () {
   $("#contactform").submit(function(event) {
     event.preventDefault();
     var url = "/contact";
-    $('#contactsubmit').html("<img src='rstatic/new/images/282.GIF'>") // the script where you handle the form input.
+    $('#contactsubmit').html("submiting..") // the script where you handle the form input.
 
     $.ajax({
            type: "POST",
@@ -1160,12 +1160,13 @@ $(document).on('click', '.number-spinner button', function () {
            {
             console.log('success',data)
             mivenotify('success','Thank You','We Will get back to you asap',2500)
-            $('#contactdiv').html(data)
+            $('#contactsubmit').html("submitted")
 
            },
            error:function(data){
             mivenotify('error','Oops','Error submiting your response looks like you have submitted something incorrect!please check your inputs',2500)
              console.log('error',data)
+             $('#contactsubmit').html("Submit Form")
            }
          })
   })

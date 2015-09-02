@@ -14,10 +14,12 @@
   <script src="/rstatic/new/js/jquery.cookie.js"></script>
   <script src="/rstatic/new/js/typeahead.bundle.js"></script>
   <link href="rstatic/new/css/font-awesome.css" rel="stylesheet">
+  <link href="rstatic/new/css/awesomplete.css" rel="stylesheet">
+  <script src="/rstatic/new/js/awesomplete.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
-    $('#searchtext').typeahead({
+    $('#searrchbox').typeahead({
       name: 'accounts',
       local: ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen']
     });
