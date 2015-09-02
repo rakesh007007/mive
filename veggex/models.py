@@ -132,9 +132,9 @@ class Product(models.Model):
 	def __unicode__(self):
 		return str(self.name)
 class CustomCategoryProducts(models.Model):
-	Uid=models.AutoField(primary_key=True)
-	user = models.OneToOneField(User,blank=False,null=False)
-	product = models.ManyToManyField(Product, blank=False, null=False)
+	uid=models.AutoField(primary_key=True)
+	user = models.ForeignKey(User,blank=False,null=False)
+	product = models.ForeignKey(Product, blank=False, null=False)
 	def __unicode__(self):
 		return str(self.user.nameOfOwner)
 class Cartitem(models.Model):
