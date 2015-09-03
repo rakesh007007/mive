@@ -1,5 +1,97 @@
 {% extends 'new/base.html' %}
 {% block headbl %}
+<style type="text/css">
+.fab {
+cursor: pointer;
+}
+.fab-backdrop {
+color: rgba(255, 255, 255, 0);
+}
+.fab-primary, .fab-secondary {
+transition: all 0.35s ease-in-out;
+}
+.fab.active .fab-primary {
+opacity: 0;
+transform: rotate(225deg);
+}
+.fab-secondary {
+opacity: 0;
+transform: rotate(-225deg);
+}
+.fab.active .fab-secondary {
+opacity: 1;
+transform: rotate(0);
+margin-top: -2px;
+}
+#inboxstyle .show-on-hover:hover > ul.dropdown-menu {
+display: block;    
+}
+#inboxstyle .show-on-hover {
+position: absolute;
+bottom: 20px;
+right: 20px;
+}
+#inboxstyle .btn-io{
+border-radius: 50%;
+height: 54px;
+width: 54px;
+padding: 0 !important;
+box-shadow: 0px 3px 7px 0px rgba(202, 124, 124, 0.72);
+}
+#inboxstyle .dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu {
+top: auto;
+bottom: 100%;
+margin-bottom: 1px;
+margin-bottom: -5px;
+padding-bottom: 30px;
+}
+#inboxstyle .dropdown-menu-right {
+right: 0 !important;
+left: auto !important;
+}
+#inboxstyle .dropdown-menu {
+position: absolute;
+top: 100%;
+left: 0;
+z-index: 1000;
+display: none;
+float: left;
+min-width: 50px;
+padding: 5px 0;
+margin: 2px 0 0;
+font-size: 14px;
+text-align: center;
+list-style: none;
+background-color: rgba(255, 255, 255, 0) !important;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+border: none;
+border-radius: 0px;
+-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0) !important;
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0) !important;
+}
+#inboxstyle .fa-iox{
+font-size: 12px;
+}
+#inboxstyle .dropdown-menu > li > a {
+display: block;
+padding: 0;
+padding-top: 4px;
+margin-top: 20px;
+clear: both;
+font-weight: normal;
+line-height: 1.42857143;
+color: #fff;
+background: #824076;
+white-space: nowrap;
+width: 40px;
+height: 40px;
+border: solid 1px #ccc;
+border-radius: 50px;
+font-size: 21px;
+box-shadow: 0px 3px 7px 0px rgba(203, 203, 203, 0.72);
+}
+</style>
  <script type="text/javascript">
   var browd =BrowserDetect()
      $( document ).ready(function() {
@@ -29,7 +121,7 @@
       <div class="col-md-3" style="padding-left:40px;margin-top:0px;">
       </div>
       <div class="col-md-6" style="margin-top:240px;">
-      <form method="post" action="/search" data-toggle="tooltip" title="Search Fruits and Vegetables">
+      <form method="get" action="/search" data-toggle="tooltip" title="Search Fruits and Vegetables">
 
             <div class="input-group custom-search-form">
               <input type="text" class="form-control" style="height:60px" placeholder="Search Fruits and Vegetables" spellcheck="false" id="searchbox" name="searchtext">
@@ -50,18 +142,6 @@
   {%endblock%}
 
 <!-- products page -->
-{%block bread%}
-            <div class="container">
-            <div class="row">
-            <div class="col-md-6">
-               <ul class="breadcrumb" style="background:none">
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Products</a></li>
-              </ul>
-              </div>
-              </div></div>
-
-  {%endblock %}
 
 {%block content%}
 <div class="container hidden-xs hidden-sm">
@@ -76,7 +156,7 @@
         </div>
         <div id="carousel-example" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="item active">
+                <div class="item-row item active">
                     <div class="row">
                     {%for product in products%}
                     <div class="col-sm-3 col-md-3 col-md-offset-0"  style="float:left">
@@ -158,7 +238,7 @@
     <!-- product page for mobiles -->
     <div class="container-fluid hidden-md hidden-lg hidden-xl">
     {%for product in products%}
-      <div class="row">
+      <div class="row item-row">
         <div class="col-sm-4 col-xs-6">
           <img src="/{{product.coverphoto.url}}" style="height:150px;width:150px" class="img img-responsive">
         </div>
@@ -187,6 +267,60 @@
       </div>
       {%endfor%}
     </div>
+    <div style="position:fixed;bottom:10px;right:5px" class="container">
+<div class="row">
+<div id="inboxstyle">
+<div class="fab btn-group show-on-hover dropup">
+<div data-toggle="tooltip" data-placement="left" title="Compose" style="margin-left: 42px;">
+<button type="button" class="btn btn-danger btn-io dropdown-toggle" data-toggle="dropdown">
+      <span class="fa-stack fa-2x">
+          <i class="fa fa-circle fa-stack-2x fab-backdrop"></i>
+          <i class="fa fa-plus fa-stack-1x fa-inverse fab-primary class="btn btn-circle-big""></i>
+          <i class="fa fa-pencil fa-stack-1x fa-inverse fab-secondary"></i>
+    </button>
+  </div>
+<ul class="dropdown-menu dropdown-menu-right" role="menu">
+  <li>
+    <a href="#" data-toggle="tooltip" data-placement="top" title="Link 1">
+<i class="fa fa-coffee"></i></a>
+  </li>
+  <li>
+    <a href="#" data-toggle="tooltip" data-placement="top" title="Link 2">
+<i class="fa fa-calendar"></i></a>
+  </li>
+  <li>
+    <a href="#" data-toggle="tooltip" data-placement="top" title="Link 3">
+<i class="fa fa-user"></i></a>
+  </li>
+  <li>
+    <a href="#" data-toggle="tooltip" data-placement="top" title="Link 4">
+<i class="fa fa-eye"></i></a>
+  </li>
+  <li>
+    <a href="#" data-toggle="tooltip" data-placement="top" title="Link 5">
+<i class="fa fa-flag"></i></a>
+  </li>
+  <li>
+    <a href="#" data-toggle="tooltip" data-placement="top" title="Link6">
+<i class="fa fa-spinner fa-spin"></i></a>
+  </li>
+  <li>
+    <a href="#" data-toggle="tooltip" data-placement="top" title="Link 7">
+<i class="fa fa-cog fa-fw"></i></a>
+  </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  $('.fab').hover(function () {
+    $(this).toggleClass('active');
+  });
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }) 
+ </script>
 
 
 {%endblock%}

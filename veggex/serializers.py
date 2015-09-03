@@ -63,7 +63,7 @@ class CustomCategoryProductsSerializer(serializers.HyperlinkedModelSerializer):
 class ItemsOfCartSerializer(serializers.HyperlinkedModelSerializer):
     #Important thing for serializing django foreign key objects
     # **Important**
-    product = ProductSerializer(many=True)
+    product = ProductSerializer()
     class Meta:
         model = Cartitem
         fields=('cartitem_id','cart','qtyInUnits','product')

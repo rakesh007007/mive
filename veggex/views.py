@@ -538,7 +538,7 @@ def checklogin(request):
 	else:
 		return True
 def search(request):
-	tex = request.POST['searchtext']
+	tex = request.GET['searchtext']
 	print tex;
 	resultName = Product.objects.filter(name__icontains = tex)
 	resultNameValues = Product.objects.filter(name__icontains = tex).values('product_id') 
