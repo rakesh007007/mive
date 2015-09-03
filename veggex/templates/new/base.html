@@ -25,6 +25,98 @@
     });
 });
   </script>
+  <style type="text/css">
+.fab {
+cursor: pointer;
+}
+.fab-backdrop {
+color: rgba(255, 255, 255, 0);
+}
+.fab-primary, .fab-secondary {
+transition: all 0.35s ease-in-out;
+}
+.fab.active .fab-primary {
+opacity: 0;
+transform: rotate(225deg);
+}
+.fab-secondary {
+opacity: 0;
+transform: rotate(-225deg);
+}
+.fab.active .fab-secondary {
+opacity: 1;
+transform: rotate(0);
+margin-top: -2px;
+}
+#inboxstyle .show-on-hover:hover > ul.dropdown-menu {
+display: block;    
+}
+#inboxstyle .show-on-hover {
+position: absolute;
+bottom: 20px;
+right: 20px;
+}
+#inboxstyle .btn-io{
+border-radius: 50%;
+height: 54px;
+width: 54px;
+padding: 0 !important;
+box-shadow: 0px 3px 7px 0px rgba(202, 124, 124, 0.72);
+}
+#inboxstyle .dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu {
+top: auto;
+bottom: 100%;
+margin-bottom: 1px;
+margin-bottom: -5px;
+padding-bottom: 30px;
+}
+#inboxstyle .dropdown-menu-right {
+right: 0 !important;
+left: auto !important;
+}
+#inboxstyle .dropdown-menu {
+position: absolute;
+top: 100%;
+left: 0;
+z-index: 1000;
+display: none;
+float: left;
+min-width: 50px;
+padding: 5px 0;
+margin: 2px 0 0;
+font-size: 14px;
+text-align: center;
+list-style: none;
+background-color: rgba(255, 255, 255, 0) !important;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+border: none;
+border-radius: 0px;
+-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0) !important;
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0) !important;
+}
+#inboxstyle .fa-iox{
+font-size: 12px;
+}
+#inboxstyle .dropdown-menu > li > a {
+display: block;
+padding: 0;
+padding-top: 4px;
+margin-top: 20px;
+clear: both;
+font-weight: normal;
+line-height: 1.42857143;
+color: #fff;
+white-space: nowrap;
+width: 50px;
+height: 50px;
+border: solid 1px #ccc;
+border-radius: 60px;
+font-size: 21px;
+box-shadow: 0px 3px 7px 0px rgba(203, 203, 203, 0.72);
+}
+</style>
+
   
   <script type="text/javascript">
   var stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
@@ -382,13 +474,50 @@
       </div>
 <nav class="navbar navbar-default navbar-fixed-top navtoggle" style="opacity:0.98;border:none" id="rakeshnavtop">
 <!-- inbox gmail-->
-<div style="position:fixed;bottom:10px;right:5px;display:none" data-toggle="tooltip" data-placement="left" title="Click on me for cart details" class="inboxcart">
- {% if miveuser = 'none'%}
-  <button  href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
-  {% else %}
-  <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">{{miveuser.cart.cartTotal}}$<span></button>
-    {% endif %}
+ <div style="position:fixed;bottom:10px;right:5px" class="container">
+<div class="row">
+<div id="inboxstyle">
+<div class="fab btn-group show-on-hover dropup">
+<div data-toggle="tooltip" data-placement="left" title="Select Options" style="margin-left: 32px;">
+ <button  href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff">
+    <span class="fa-stack fa-2x" style="font-size:18px">
+          <i class="fa fa-circle fa-stack-2x fab-backdrop"></i>
+          <i class="fa fa-shopping-cart fa-stack-1x fa-inverse fab-primary class="btn btn-circle-big""></i>
+          <i class="fa fa-pencil fa-stack-1x fa-inverse fab-secondary"></i></span>
+ </button>
+  </div>
+<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+  <li data-toggle="tooltip" data-placement="left" title="Buy vegetables" style="background:none">
+    <a href="/category?categoryId=1" style="background: #f0ad4e" href="#" >
+<img style="height:45px;width:45px" src="http://www.hexkart.in/assets/images/img-slider1.png2036" class="img img-circle"></a>
+  </li>
+  <li data-toggle="tooltip" data-placement="left" title="Buy Fruits">
+    <a href="/category?categoryId=2" href="" style="background: #3fad46" href="#">
+<img style="height:45px;width:45px" src="http://img-fotki.yandex.ru/get/6313/131624064.1dd/0_87d8f_b8371f4_L" class="img img-circle"></a>
+  </li>
+  <li  data-toggle="tooltip" data-placement="left" title="Account details">
+    <a href="/account" style="background: #3c80f6" href="#">
+<i class="fa fa-user"></i></a>
+  </li>
+  <li data-toggle="tooltip" data-placement="left" title="Quick checkout">
+    <a href="/cart" style="background: #db4437" href="#" >
+<i class="fa fa-shopping-cart"></i></a>
+  </li>
+</ul>
 </div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  $('.fab').hover(function () {
+    $(this).toggleClass('active');
+  });
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }) 
+ </script>
+
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
