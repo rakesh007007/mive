@@ -80,11 +80,30 @@
                                     <div class="row">
                                         <div class="price col-md-6 col-sm-6">
                                             
-                                            <p class="price-text-color">
+                                            <p data-toggle="modal" data-productid="{{product.product_id}}" class="login-modal2-button price-text-color">
                                                 {{product.name}}</p>
-
                                             <p class="">
                                                 <a>{{product.unit}}</a></p>
+                                                <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
                                         </div>
                                          <div class="price col-md-6 col-sm-6">
                                             <p class="">
@@ -153,7 +172,7 @@
           <img src="/{{product.coverphoto.url}}" style="height:150px;width:150px" class="img img-responsive">
         </div>
         <div class="col-sm-2 col-xs-5">
-                  <div><h6 class="price-text-color">{{product.name}}</h6></div>
+                  <div><h6 data-productid="{{product.product_id}}" class="login-modal2-button price-text-color">{{product.name}}</h6></div>
 
         <div><p style="font-size: 12px;" class="price-text-color">Rate:{{product.pricePerUnit}}/{{product.unit}}</p></div>
         <div data-miveimg="#productsubmit-{{product.product_id}}" mobile="yes"><a href="#" mobile="yes" class="product-a product1submit" data-mive="#productsubmit-{{product.product_id}}" data-original-title="Contact Support" data-toggle="tooltip" title="Add to Cart"><span class="glyphicon glyphicon-shopping-cart" ></span></a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
