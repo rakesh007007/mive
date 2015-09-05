@@ -140,7 +140,7 @@ class CustomCategoryProducts(models.Model):
 class Cartitem(models.Model):
 	cartitem_id = models.AutoField(primary_key=True)
 	cart=models.ForeignKey(Cart,blank=False,null=False)
-	qtyInUnits = models.IntegerField()
+	qtyInUnits = models.PositiveIntegerField()
 	product = models.ForeignKey(Product,blank=False,null=False)
 	def cartItemId(self):
 		return self.cartitem_id
