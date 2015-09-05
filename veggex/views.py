@@ -654,28 +654,8 @@ def main(request):
 		return TemplateResponse(request, 'new/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def productdetail(request):
 	productId = request.GET['productId']
-	if(checklogin(request)==False):
-		miveuser='none'
-		cart='none'
-		customproducts='none'
-		cartItems=[]
-		totalItems=0
-		categories = Category.objects.all()
-		products = Product.objects.filter(product_id=productId)
-		return TemplateResponse(request, 'new/product.html',{'product':product,'cartItems':cartItems,'totalItems':totalItems,'categories':categories,'miveuser':miveuser,'cart':cart,'csrf_token':get_or_create_csrf_token(request)})
-	else:
-		miveuserId = request.session['miveuser']
-		miveuser = User.objects.get(user_id=int(miveuserId))
-		cart = miveuser.cart
-		cartItems = Cartitem.objects.filter(cart=cart)
-		totalItems = len(cartItems)
-		customproducts='none'
-		allProducts = Product.objects.all()
-		vegetableProducts = Product.objects.filter(category_id=1)
-		fruitproducts = Product.objects.filter(category_id=2)
-		products = Product.objects.all()
-		categories = Category.objects.all()
-		return TemplateResponse(request, 'new/product.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+	product = Product.objects.get(product_id=productId)
+	return TemplateResponse(request, 'new/product.html',{'product':product,'csrf_token':get_or_create_csrf_token(request)})
 def get_or_create_cart(user):
 	cart = Cart.objects.filter(user=user)
 	if(len(cart)==1):

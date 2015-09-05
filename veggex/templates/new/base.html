@@ -472,6 +472,15 @@ box-shadow: 0px 3px 7px 0px rgba(203, 203, 203, 0.72);
         </div>
       </div>
       </div>
+
+      <div class="modal fade" id="login-modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+        <div class="modal-dialog">
+        <div class="loginmodal-container2 loginmodal-container" id="detail-container" style="max-width:none;max-height:none;">
+          <center><img src="rstatic/new/images/282.GIF"></center>
+          </div>
+        </div>
+      </div>
+      </div>
 <nav class="navbar navbar-default navbar-fixed-top navtoggle" style="opacity:0.98;border:none" id="rakeshnavtop">
 <!-- inbox gmail-->
  <div style="position:fixed;bottom:10px;right:5px" class="container">
@@ -528,6 +537,7 @@ box-shadow: 0px 3px 7px 0px rgba(203, 203, 203, 0.72);
         <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
         <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
       </button>
+
       <a class="navbar-brand" href="#"><img style="height:52px;width:52px" src="/rstatic/new/images/mivelogo.png" class="img img-responsive"></a>
     </div>
 
@@ -714,6 +724,7 @@ $('body').on('click',".product1submit",function(event) {
          });
    {%endif %}
 });
+//code for product add
 
 //code for product remove
 $('body').on('submit',".itemdelete",function(event) {
@@ -811,6 +822,16 @@ $("#mivelogin").submit(function(event) {
 
 */
 
+</script>
+<script>
+  $('.login-modal2-button').click(function(){
+    idd = $(this).attr('data-productid')
+    $('#login-modal2').modal('toggle')
+    url = "/product?productId=4"
+    data = $.get(url,function(data){
+      $('#detail-container').html(data)
+    })
+  })
 </script>
 {%block jsblock%}
 {%endblock%}
