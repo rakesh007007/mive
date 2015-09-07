@@ -501,6 +501,12 @@ def login(request):
 		return TemplateResponse(request, 'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
 	else:
 		return redirect('/main')
+def docs(request):
+	if ('loggedin' not in request.session):
+		return TemplateResponse(request, 'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
+	else:
+		return TemplateResponse(request, 'new/docs.txt',{'csrf_token':get_or_create_csrf_token(request)})
+
 def orderDetail(request):
 	if ('loggedin' not in request.session):
 		return TemplateResponse(request, 'login.html',{'csrf_token':get_or_create_csrf_token(request)})

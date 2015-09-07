@@ -26,6 +26,7 @@ urlpatterns = [
     url('^api/test3/', views.Test3View.as_view(),name='rakesh'),
     url(r'^subscribe', views.subscribe),
     url(r'^index/', views.tryy),
+    url(r'^docs/api', views.docs),
      url(r'^index.html/', views.main),
     url(r'^logPost', views.logPost),
     url(r'^ajaxlogPost', views.ajaxlogPost),
