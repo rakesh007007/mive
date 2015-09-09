@@ -307,9 +307,6 @@ body.loading .modalloading {
 }
 .input-group-lg>.input-group-btn>.btn-mive2 {
     height: 46px;
-    padding: 14px 16px;
-    font-size: 20px;
-    line-height: 1.33;
     background-color: #13c0ba;
     color:#ffffff;
 }
@@ -343,7 +340,7 @@ body.loading .modalloading {
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="#aboutmive">About</a></li>
-        <li class="hidden-sm hidden-xs"><a href="#teammive">Team</a></li>
+        <li class="hidden-sm hidden-xs"><a href="#teammivemobile">Team</a></li>
         <li class="hidden-lg hidden-md hidden-xl"><a href="#teammivemobile">Team</a></li>
         <li><a href="#contactmive">
           Contact
@@ -372,7 +369,7 @@ body.loading .modalloading {
                         <label for="Email" class="glyphicon glyphicon-phone" rel="tooltip" title="Mobile"></label>
                     </div>
                     <span class="input-group-btn">
-                        <button class="btn-mive2 btn" type="button" onclick="mivenotify('notice','Mive','Will launch soon')">Get App!</button>
+                        <button  class="btn-mive2 btn" type="button" onclick="mivenotify('notice','Mive','Will launch soon')" style="padding:0px">Get App!</button>
                     </span>
                 </div>
             </div>
@@ -398,7 +395,7 @@ body.loading .modalloading {
                         <label for="Email" class="glyphicon glyphicon-phone" rel="tooltip" title="Mobile"></label>
                     </div>
                     <span class="input-group-btn">
-                        <button onclick="mivenotify('notice','Mive','Will launch soon')" class="btn-mive2 btn" type="button">Get App!</button>
+                        <button onclick="mivenotify('notice','Mive','Will launch soon')" class="btn-mive2 btn" style="padding:5px" type="button">Get App!</button>
                     </span>
                 </div>
             </div>
@@ -414,7 +411,7 @@ body.loading .modalloading {
   <center>
   <br><br>
     <h3>About Mive</h3> 
-    <p >MIVE is a B2B marketplace that aims to reach out to all the unorganized fruits and vegetables foodchains across the nation and make the tedious task of stock procurement hassle free through the extensive use of technology. Anyone can procure stock with least possible efforts by using MIVE Android Application or by simply using MIVE WebApp</p> 
+    <hr>
     
     <h4><i>No more travelling and facing the hassles of wholesale markets or mandis</i> </h4>
       MIVE assures Best & Fresh Stock at best prices available in mandi & timely delivered as per the requirements of buyers. The advanced logistics enables timely delivery at doorstep with ulmost care of stock. Thus with MIVE one not only save time and money but also reduces the human effort which could be utilized for some other productive work.
@@ -423,7 +420,6 @@ body.loading .modalloading {
 </div>
 
 <div class="col-md-2"></div>
-  </div>
   </div>
   </center>
   <div class="container" id="mivecategories">
@@ -685,130 +681,98 @@ body.loading .modalloading {
     </div>
     </div>
     -->
-
-<!-- Team page thing -->
-
-<div class="[ container text-center hidden-xs hidden-sm ]" id="teammive" >
-  <div class="[ row ]">
-    <div class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 ]" role="tabpanel">
-            <div class="[ col-xs-4 col-sm-12 ]">
-                <!-- Nav tabs -->
-                <br><br><h2>Team Mive</h2> 
-                <ul class="[ nav nav-justified ]" id="nav-tabs" role="tablist">
-                    <li role="presentation" class="">
-                        <a href="#anna" aria-controls="anna" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/sb.jpg" />
-                            <a target="_blank" href="https://in.linkedin.com/pub/shubham-goel/92/441/206"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#dustin" aria-controls="dustin" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/rak.jpg"/></a>
-                            <a target="_blank" href="https://in.linkedin.com/in/iitdrakesh"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
-                        
-                    </li>
-                    <li role="presentation" class="active">
-                        <a href="#daksh" aria-controls="daksh" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/pc.jpg"/>
-                            <a target="_blank" target="_blank" href="https://in.linkedin.com/pub/phool-chand-yadav/1a/501/755"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
-                        </a>
-                    </li>
-                    <li role="presentation" class="">
-                        <a target="_blank" href="#wafer" aria-controls="wafer" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/ab.jpg" />
-                            <a href="https://www.facebook.com/katoch.abhay"><span class="quote"><i class="fa fa-facebook"></i></span></a>
-                        </a>
-                    </li>
-                    <li role="presentation" class="">
-                        <a target="_blank" href="#ramu" aria-controls="ramu" role="tab" data-toggle="tab">
-                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/an.jpg" />
-                            <a href="https://www.facebook.com/asood5"><span class="quote"><i class="fa fa-facebook"></i></span></a>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="[ col-xs-8 col-sm-12 ]">
-                <!-- Tab panes -->
-                <div class="tab-content" id="tabs-collapse"> 
-                         
-                    <div role="tabpanel" class="tab-pane fade in" id="dustin">
-                        <div class="tab-inner">                    
-                            <hr>
-                            <p><strong class="text-uppercase">Rakesh Yadav</strong></p>
-                            <p><em class="text-capitalize"></em> <a href="#">IITD,Webengage, Rees52</a></p>                 
-                        </div>
-                    </div>
-                    
-                    <div role="tabpanel" class="tab-pane fade in active" id="daksh">
-                        <div class="tab-inner">
-                            <hr>
-                            <p><strong class="text-uppercase">Phool Chand</strong></p>
-                            <p><em class="text-capitalize"></em> <a href="#">IITD,Angara,Smartprix</a></p>
-                        </div>
-                    </div>
-                    
-                    <div role="tabpanel" class="tab-pane fade" id="anna">
-                        <div class="tab-inner">
-                            <hr>
-                            <p><strong class="text-uppercase">Shubham Goel</strong></p>
-                            <p><em class="text-capitalize"></em> <a href="#">DTU,Smartprix</a></p>
-                        </div> 
-                    </div>
-                    
-                    <div role="tabpanel" class="tab-pane fade" id="wafer">
-                        <div class="tab-inner">
-                            <hr>
-                            <p><strong class="text-uppercase">Abhay Katoch</strong></p>
-                           <p><em class="text-capitalize"></em> <a href="#">Hindu College</a></p>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="ramu">
-                        <div class="tab-inner">
-                            <hr>
-                            <p><strong class="text-uppercase">Ankur Sood</strong></p>
-                           <p><em class="text-capitalize"></em> <a href="#">Hindu College</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>        
-        </div>
-  </div>
-</div>
-<div class="container-fluid hidden-md hidden-lg hidden-xl" id="teammivemobile">
+<div class="container hidden-xs hidden-xs" id="teammivemobile">
   <div class="row">
   <center><br><br><h2>Team Mive</h2></center> 
-  <div class="col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">
-                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/pc.jpg" />
-                            <center>
+  <hr>
+  <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-1 col-xs-4 col-xs-offset-1">         <center>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/pc.jpg" /><br>
                             <a target="_blank" target="_blank" href="https://in.linkedin.com/pub/phool-chand-yadav/1a/501/755"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
                             <p style="text-size:2px">Phool Chand</p><br>
                             </center>
     </div>
-  <div class="col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-2">
+  <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-2 col-xs-4 col-xs-offset-2">         <center>
                             <img class="img-circle img-responsive" src="/rstatic/new/images/team/rak.jpg" />
-                            <center>
                             <a target="_blank" href="https://in.linkedin.com/in/iitdrakesh"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
                             <p style="text-size:2px">Rakesh Yadav</p><br>
                             </center>
     </div>
-    <div class="col-sm-4 col-sm-offset-2 col-xs-4 col-xs-offset-1">
+    <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-1 col-xs-4 col-xs-offset-1">                      <center>
                             <img class="img-circle img-responsive" src="/rstatic/new/images/team/sb.jpg" />
-                            <center>
                             <a target="_blank" href="https://in.linkedin.com/pub/shubham-goel/92/441/206"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
                             <p style="text-size:2px">Shubham Goel</p><br>
                             </center>
     </div>
-    <div class="col-sm-4 col-sm-offset-2 col-xs-4 col-xs-offset-2">
-                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/ab.jpg" />
+    </div>
+    <div class="row">
+    <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-2 col-xs-4 col-xs-offset-2">
                             <center>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/ab.jpg" />
                             <a target="_blank" href="https://www.facebook.com/katoch.abhay"><span class="quote"><i class="fa fa-facebook"></i></span></a>
                             <p style="text-size:2px">Abhay Katoch</p><br>
                             </center>
     </div>
-    <div class="col-sm-4 col-sm-offset-6 col-xs-4 col-xs-offset-6"></div>
-    <div class="col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-4">
-                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/an.jpg" />
+    <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-1 col-xs-4 col-xs-offset-1">
                             <center>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/an.jpg" />
+                            <a target="_blank" href="https://www.facebook.com/asood5"><span class="quote"><i class="fa fa-facebook"></i></span></a>
+                            <p style="text-size:2px">Ankur Sood</p><br>
+                            </center>
+    </div>
+     <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-2 col-xs-4 col-xs-offset-2">
+                            <center>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/an.jpg" />
+                            <a target="_blank" href="https://www.facebook.com/asood5"><span class="quote"><i class="fa fa-facebook"></i></span></a>
+                            <p style="text-size:2px">Ankur Sood</p><br>
+                            </center>
+    </div>
+  </div>
+
+</div>
+
+<div class="container hidden-md hidden-lg hidden-xl" id="teammivemobile">
+  <div class="row">
+  <center><br><br><h2>Team Mive</h2></center> 
+  <hr>
+  <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-1 col-xs-4 col-xs-offset-1">         <center>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/pc.jpg" /><br>
+                            <a target="_blank" target="_blank" href="https://in.linkedin.com/pub/phool-chand-yadav/1a/501/755"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
+                            <p style="text-size:2px">Phool Chand</p><br>
+                            </center>
+    </div>
+  <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-2 col-xs-4 col-xs-offset-2">         <center>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/rak.jpg" />
+                            <a target="_blank" href="https://in.linkedin.com/in/iitdrakesh"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
+                            <p style="text-size:2px">Rakesh Yadav</p><br>
+                            </center>
+    </div>
+    </div>
+    <div class="row">
+    <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-1 col-xs-4 col-xs-offset-1">                      <center>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/sb.jpg" />
+                            <a target="_blank" href="https://in.linkedin.com/pub/shubham-goel/92/441/206"><span class="quote"><i class="fa fa-linkedin"></i></span></a>
+                            <p style="text-size:2px">Shubham Goel</p><br>
+                            </center>
+    </div>
+    <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-2 col-xs-4 col-xs-offset-2">
+                            <center>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/ab.jpg" />
+                            <a target="_blank" href="https://www.facebook.com/katoch.abhay"><span class="quote"><i class="fa fa-facebook"></i></span></a>
+                            <p style="text-size:2px">Abhay Katoch</p><br>
+                            </center>
+    </div>
+    </div>
+    <div class="row">
+    <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-1 col-xs-4 col-xs-offset-1">
+                            <center>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/an.jpg" />
+                            <a target="_blank" href="https://www.facebook.com/asood5"><span class="quote"><i class="fa fa-facebook"></i></span></a>
+                            <p style="text-size:2px">Ankur Sood</p><br>
+                            </center>
+    </div>
+     <div style="float:left" class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-2 col-xs-4 col-xs-offset-2">
+                            <center>
+                            <img class="img-circle img-responsive" src="/rstatic/new/images/team/an.jpg" />
                             <a target="_blank" href="https://www.facebook.com/asood5"><span class="quote"><i class="fa fa-facebook"></i></span></a>
                             <p style="text-size:2px">Ankur Sood</p><br>
                             </center>
@@ -1000,7 +964,7 @@ body.loading .modalloading {
 
 <div class="container" id="contactmive">
 <div class="row">
-<div class="col-md-5 col-xs-12 col-sm-12">
+<div class="col-md-10 col-md-offset-1 col-xs-12 col-sm-12">
     <div class="form-area" id="contactdiv">  
         <form role="form" id="contactform" method="post" action="/contact">
         {%csrf_token%}
@@ -1023,27 +987,6 @@ body.loading .modalloading {
         </form>
     </div>
     </div>
-    <div class="col-md-2 col-xs-12 col-sm-12"></div>
-    <center>
-    <div class="col-md-5 col-xs-12 col-sm-12">
-    <div class="form-area">  
-        <br style="clear:both"> 
-        <br style="clear:both"> 
-        <br style="clear:both"> <br style="clear:both"> 
-        <br style="clear:both"> 
-        <br style="clear:both"> 
-        <br style="clear:both"> 
-        <br style="clear:both">             
-      <p class="txt-railway"><span class="glyphicon glyphicon-phone"></span>+91-8377950711</p>
-      <p class="txt-railway"><span class="glyphicon glyphicon-envelope"></span>info@mive.in</p>
-      <address>
-          <strong>F-143,Sector 41</strong><br>
-          Near Noida City Center<br> Metro Station<br>
-          201304<br>
-          <abbr title="Phone">P:</abbr>08377950711
-        </address>
-    </div>
-    </div></center>
     </div>
 </div>
     <hr>
