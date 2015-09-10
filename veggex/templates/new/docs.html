@@ -1,0 +1,125 @@
+Mive API documentation:
+ 
+
+Url : http://www.mive.in/
+
+1. Authtoken
+   end point: */authtoken/
+   POST
+   media type :application/json
+   body:
+        {
+              "user": "admin",
+              "password":"givememyfuckingtoken" 
+              }
+2. Products of a category
+   end point */api/product/category/{categoryId}/
+   GET
+3. Get items of Cart
+    end point */api/cart/cartitems/{cartId}/
+    GET
+4. Add multiple products to cart
+    end point */api/addtocart/
+    POST
+     body :
+         {
+          "cartId":"{cartId}",
+          "userId":"{userId}",
+          "items":
+                  {
+                  "1":{
+                       "qty":"{quantity}",
+                       "productId":"{productId}"
+
+                       }
+                   "2": ......similar
+                   "3"   .....similar
+                   #add as many products as you want
+
+                  }
+
+         }
+5. Update Cart
+   end point */api/updatecart/ 
+   POST
+    body :
+         {
+          "cartId":"{cartId}",
+          "userId":"{userId}",
+          "items":
+                  {
+                  "1":{
+                       "qty":"{quantity}",
+                       "itemId":"{itemId}"
+
+                       }
+                   "2": ......similar
+                   "3"   .....similar
+                   #add as many products as you want
+
+                  }
+
+         }
+6. Make order 
+   end point */api/makeorder/
+   POST
+   body:
+           {
+           "userId":"{userId}",
+           "cartId" :"{cartId}"
+
+           }
+7. Orders of a user
+   GET
+   end point */api/user/orders/{orderId}/
+8. Items of a order
+   GET
+   end point api/order/items/{orderId}
+9. Custom category products
+   GET
+   end point */api/user/customcategory/(?P<userid>.+)/$
+10. Product Search API
+   GET
+   endpoint */api/search/?searchtext={searchtext}
+Full supported(GET,POST,PUT,DELETE) end points
+11. Address
+    GET,POST,PUT,DELETE
+    endpoint: */api/address/
+12. Category
+    GET,POST,PUT,DELETE
+    endpoint: */api/category/
+13. Product
+    GET,POST,PUT,DELETE
+    endpoint: */api/product/
+14. User
+    GET,POST,PUT,DELETE
+    endpoint: */api/user/
+15. Cart
+    GET,POST,PUT,DELETE
+    endpoint: */api/cart/
+16. Cartitems
+    GET,POST,PUT,DELETE
+    endpoint: */api/cartitem/
+17. Order
+    GET,POST,PUT,DELETE
+    endpoint: */api/order/
+18. Orderitem
+    GET,POST,PUT,DELETE
+    endpoint: *api/orderietm
+19. Seller 
+    GET,POST,PUT,DELETE
+    endpoint: */api/seller
+
+
+(*browse endpoint using browser for details)
+   "address": "http://mive.in/api/address/",
+    "category": "http://mive.in/api/category/",
+    "product": "http://mive.in/api/product/",
+    "user": "http://mive.in/api/user/",
+    "cart": "http://mive.in/api/cart/",
+    "cartitem": "http://mive.in/api/cartitem/",
+    "order": "http://mive.in/api/order/",
+    "orderitem": "http://mive.in/api/orderitem/",
+    "seller": "http://mive.in/api/seller/" 
+
+

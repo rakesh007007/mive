@@ -503,9 +503,9 @@ def login(request):
 		return redirect('/main')
 def docs(request):
 	if ('loggedin' not in request.session):
-		return TemplateResponse(request, 'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
+		return redirect('https://github.com/rakesh007007/mive/blob/master/veggex/templates/new/docs.txt')
 	else:
-		return TemplateResponse(request, 'new/docs.txt',{'csrf_token':get_or_create_csrf_token(request)})
+		return redirect('https://github.com/rakesh007007/mive/blob/master/veggex/templates/new/docs.txt')
 
 def orderDetail(request):
 	if ('loggedin' not in request.session):
