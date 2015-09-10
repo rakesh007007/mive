@@ -285,6 +285,7 @@ class ApiMakeOrder(APIView):
 			userId=data['userId']
 			userId=int(userId)
 			cartId=int(cartId)
+			deliveryTime = data['deliveryTime']
 			user =User.objects.get(user_id=userId)
 			payment_mode = 'COD'
 			cart =user.cart
@@ -299,6 +300,7 @@ class ApiMakeOrder(APIView):
 				order.payment_mode = payment_mode
 				order.subtotal=total
 				order.status = 'PLACED'
+				order.deliveryTime=deliveryTime
 				order.save()
 				order_id =order.order_id 
 				for itemn in items:
