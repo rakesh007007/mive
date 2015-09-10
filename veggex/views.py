@@ -313,7 +313,7 @@ class ApiMakeOrder(APIView):
 					rak.order = order
 					rak.save()
 				Cartitem.objects.filter(cart=cart).delete()
-				return Response([{"status":"success","orderId":order_id}])
+				return Response({"status":"success","orderId":order_id})
 		except Exception,e:
 			return Response([{"status":"error"}])
 class UserLoginView(APIView):
