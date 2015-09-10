@@ -483,40 +483,12 @@ box-shadow: 0px 3px 7px 0px rgba(203, 203, 203, 0.72);
       </div>
 <nav class="navbar navbar-default navbar-fixed-top navtoggle" style="opacity:0.98;border:none" id="rakeshnavtop">
 <!-- inbox gmail-->
- <div style="position:fixed;bottom:10px;right:5px" class="container">
-<div class="row">
-<div id="inboxstyle">
-<div class="fab btn-group show-on-hover dropup">
-<div data-toggle="tooltip" data-placement="left" title="Select Options" style="margin-left: 32px;">
- <button  href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff">
-    <span class="fa-stack fa-2x" style="font-size:18px">
-          <i class="fa fa-circle fa-stack-2x fab-backdrop"></i>
-          <i class="fa fa-shopping-cart fa-stack-1x fa-inverse fab-primary class="btn btn-circle-big""></i>
-          <i class="fa fa-pencil fa-stack-1x fa-inverse fab-secondary"></i></span>
- </button>
-  </div>
-<ul class="dropdown-menu dropdown-menu-right" role="menu">
-
-  <li data-toggle="tooltip" data-placement="left" title="Buy vegetables" style="background:none">
-    <a href="/category?categoryId=1" style="background: #f0ad4e" href="#" >
-<img style="height:45px;width:45px" src="http://www.hexkart.in/assets/images/img-slider1.png2036" class="img img-circle"></a>
-  </li>
-  <li data-toggle="tooltip" data-placement="left" title="Buy Fruits">
-    <a href="/category?categoryId=2" href="" style="background: #3fad46" href="#">
-<img style="height:45px;width:45px" src="http://img-fotki.yandex.ru/get/6313/131624064.1dd/0_87d8f_b8371f4_L" class="img img-circle"></a>
-  </li>
-  <li  data-toggle="tooltip" data-placement="left" title="Account details">
-    <a href="/account" style="background: #3c80f6" href="#">
-<i class="fa fa-user"></i></a>
-  </li>
-  <li data-toggle="tooltip" data-placement="left" title="Quick checkout">
-    <a href="/cart" style="background: #db4437" href="#" >
-<i class="fa fa-shopping-cart"></i></a>
-  </li>
-</ul>
-</div>
-</div>
-</div>
+<div style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Click on me for cart details" class="inboxcart">
+ {% if miveuser = 'none'%}
+  <button  href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">0$</span></button>
+  {% else %}
+  <button href="/cart" class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:10px;" class="glyphicon glyphicon-shopping-cart" id="inboxspan">{{miveuser.cart.cartTotal}}$<span></button>
+    {% endif %}
 </div>
 <script type="text/javascript">
   $('.fab').hover(function () {
@@ -532,7 +504,6 @@ box-shadow: 0px 3px 7px 0px rgba(203, 203, 203, 0.72);
     <div class="navbar-header">
       <button type="button" style="background:#13c0ba;color:#13c0ba" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
-        <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
         <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
         <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
         <span style="background-color:#ffffff;text-color:#ffff" class="icon-bar"></span>
