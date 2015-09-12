@@ -123,6 +123,7 @@ class Product(models.Model):
 	origin = models.CharField(max_length=300)
 	maxAvailableUnits=models.IntegerField()
 	qualityRemarks = models.TextField()
+	status = models.CharField(default='enabled')
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
 	def coverphotourl(self):
