@@ -32,6 +32,8 @@ urlpatterns = [
     url(r'^ajaxlogPost', views.ajaxlogPost),
     url(r'^logout', views.logout),
     url(r'^main', views.main),
+    url(r'^desktophomereload', views.desktophomereload),
+    url(r'^mobilehomereload', views.mobilehomereload),
     url(r'^category', views.categoryView),
     url(r'^addtocart', views.addtocart),
     url(r'^ajaxaddtocart', views.ajaxaddtocart),

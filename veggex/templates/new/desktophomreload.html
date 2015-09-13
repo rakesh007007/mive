@@ -1,0 +1,66 @@
+{%for product in products%}
+                    <div class="col-sm-3 col-md-3 col-md-offset-0"  style="float:left">
+                            <div class="col-item">
+                                <div  class="photo">
+                                    <center>
+                                    <img data-toggle="tooltip" data-placement="bottom" title="{{product.name}}" src="/{{product.coverphoto.url}}"  alt="a" class="img img-responsive" style="width:200px;height:200px" />
+                                    </center>
+                                </div>
+                                <div class="info">
+                                         <center><div class="price col-md-9 col-sm-12">
+                                            
+                                        </div></center>
+                                    <div class="row">
+                                        <div class="price col-md-6 col-sm-6">
+                                            
+                                            <p data-toggle="modal" data-productid="{{product.product_id}}" class="login-modal2-button price-text-color">
+                                                {{product.name}}</p>
+                                            <p class="">
+                                                <a>{{product.unit}}</a></p>                                                
+
+                                        </div>
+                                         <div class="price col-md-6 col-sm-6">
+                                            <p class="">
+                                                <a onclick="mivenotify('notice','Mive Notification','We are working on this feature')">Details</a></p>
+                                            <p class="price-text-color">
+                                                {{product.pricePerUnit}}$</p>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                    <div class="col-md-6 cols-sm-6">
+                                    <div class="separator clear-left">
+                                       <div class="input-group number-spinner" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                          </span>
+                                           <form mobile="no" method="post" action="/addtocart" id="productsubmit-{{product.product_id}}">
+                                          <input data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty">
+                                          {%csrf_token%}
+                                          <input type="hidden" name="productId" value="{{product.product_id}}">
+                                          </form>
+                                          <span class="input-group-btn">
+                                            <button data-toggle="tooltip" title="If large qty edit qty directly " class="btn btn-default btn-circle" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                          </span>
+                                         
+                                          
+                                        </div>
+                                    </div>
+                                    </div>
+                                   <div class="col-md-5 col-sm-5" mobile="no" data-miveimg="#productsubmit-{{product.product_id}}">
+                                   <p><a href="#" mobile="no" title="Add to cart" data-toggle="tooltip" data-mive="#productsubmit-{{product.product_id}}" class="product1submit"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   </div>
+                                   <div class="col-md-1 col-sm-">
+                                   </div>
+
+
+                                    </div>
+
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                       
