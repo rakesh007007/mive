@@ -640,13 +640,13 @@ def account(request):
 def desktophomereload(request):
 	limit = request.GET['limit']
 	low = int(limit)
-	high = int(limit)+6
+	high = int(limit)+8
 	products =Product.objects.filter(status=1)[low:high]
 	return TemplateResponse(request, 'new/desktophomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def mobilehomereload(request):
 	limit = request.GET['limit']
 	low = int(limit)
-	high = int(limit)+6
+	high = int(limit)+8
 	products =Product.objects.filter(status=1)[low:high]
 	return TemplateResponse(request, 'new/mobilehomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def main(request):
@@ -657,7 +657,7 @@ def main(request):
 		cartItems=[]
 		totalItems=0
 		categories = Category.objects.all()
-		products = Product.objects.filter(status=1)[:6]
+		products = Product.objects.filter(status=1)[:8]
 		totalProducts = Product.objects.filter(status=1).count()
 		return TemplateResponse(request, 'new/shophome.html',{'totalProducts':totalProducts,'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 	else:
@@ -667,10 +667,10 @@ def main(request):
 		cartItems = Cartitem.objects.filter(cart=cart)
 		totalItems = len(cartItems)
 		customproducts='none'
-		allProducts = Product.objects.filter(status=1)[:6]
+		allProducts = Product.objects.filter(status=1)[:8]
 		vegetableProducts = Product.objects.filter(category_id=1).filter(status=1)
 		fruitproducts = Product.objects.filter(category_id=2).filter(status=1)
-		products = Product.objects.filter(status=1)[:6]
+		products = Product.objects.filter(status=1)[:8]
 		totalProducts = Product.objects.filter(status=1).count()
 		categories = Category.objects.all()
 		return TemplateResponse(request, 'new/shophome.html',{'totalProducts':totalProducts,'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})

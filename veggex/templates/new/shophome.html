@@ -189,22 +189,32 @@
                         </div>
                         <script>
                         window.totalProducts = {{totalProducts}}
-                        window.limit =6
+                        window.limit =8
                          $(window).scroll(function() { 
                            if($(window).scrollTop() + screen.height > $('body').height()) {
-                               if(limit<=totalProducts){
+                               if(limit<totalProducts){
                                   $('.scrollchecker').html("<img src='rstatic/new/images/282.GIF'><br><h4>please wait loading more products</h4>") 
                                   $.get('/mobilehomereload?limit='+limit,function(data){
+                                  })
+                                  .done(function(data){
                                     $('.productrowmobile').append(data)
                                     $('#scrollcheckermobile').html('') 
-
+                                  })
+                                  .fail(function(data){
+                                    $('.scrollchecker').html('<h4>Error occured while loading products</h4>')
+                                    mivenotify('error','Error occured','Error ocuured while loading products please contact administrator')
                                   })
                                    $.get('/desktophomereload?limit='+limit,function(data){
+                                  })
+                                   .done(function(data){
                                     $('.productrowdesktop').append(data)
                                     $('#scrollcheckerdesktop').html('') 
-
-                                  }) 
-                                  window.limit=window.limit+6
+                                  })
+                                  .fail(function(data){
+                                    $('.scrollchecker').html('<h4>Error occured while loading products</h4>')
+                                    mivenotify('error','Error occured','Error ocuured while loading products please contact administrator')
+                                  })
+                                  window.limit=window.limit+8
 
                                 }
                                 else{
