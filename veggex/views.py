@@ -548,9 +548,9 @@ def checklogin(request):
 def search(request):
 	tex = request.GET['searchtext']
 	print tex;
-	resultName = Product.objects.filter(name__icontains = tex)
-	resultNameValues = Product.objects.filter(name__icontains = tex).values('product_id') 
-	resultDescription = Product.objects.filter(description__icontains=tex).exclude(product_id__in=resultNameValues)
+	resultName = Product.objects.filter(name__icontains = tex).filter(status=1)
+	resultNameValues = Product.objects.filter(status=1).filter(name__icontains = tex).values('product_id') 
+	resultDescription = Product.objects.filter(status=1).filter(description__icontains=tex).exclude(product_id__in=resultNameValues)
 	if len(resultName)==0 and len(resultDescription)==0:
 		results=0
 	else:
@@ -605,7 +605,7 @@ def ajaxlogPost(request):
 		totalItems = len(cartItems)
 		customproducts='none'
 		allProducts = Product.objects.filter(status=1)
-		vegetableProducts = Product.objects.filter(category_id=1)
+		vegetableProducts = Product.objects.filter(category_id=1).filter(status=1)
 		fruitproducts = Product.objects.filter(category_id=2).filter(status=1)
 		products = Product.objects.filter(status=1)
 		categories = Category.objects.all()
@@ -695,7 +695,7 @@ def categoryView(request):
 		totalItems = len(cartItems)
 		customproducts='none'
 		allProducts = Product.objects.filter(status=1)
-		vegetableProducts = Product.objects.filter(category_id=1)
+		vegetableProducts = Product.objects.filter(category_id=1).filter(status=1)
 		fruitproducts = Product.objects.filter(category_id=2).filter(status=1)
 		categories = Category.objects.all()
 		return TemplateResponse(request, 'new/category.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
@@ -757,7 +757,7 @@ def ajaxaddtocart(request):
 	totalItems = len(cartItems)
 	customproducts='none'
 	allProducts = Product.objects.filter(status=1)
-	products = Product.objects.all()
+	products = Product.objects.filter(status=1)
 	categories = Category.objects.all()
 	return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def removeItemPost(request):
