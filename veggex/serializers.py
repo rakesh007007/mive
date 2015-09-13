@@ -56,7 +56,7 @@ class SellerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Seller
 class CustomCategoryProductsSerializer(serializers.HyperlinkedModelSerializer):
-    product = ProductSerializer()
+    product = ProductSerializer(many=True)
     class Meta:
         model = CustomCategoryProducts
         fields = ('product',)

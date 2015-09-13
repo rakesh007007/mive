@@ -117,7 +117,7 @@ class Product(models.Model):
 	category = models.ForeignKey(Category)
 	popularityIndex = models.IntegerField(blank=True,null=True)
 	unit = models.CharField(max_length=100,default='kg')
-	priceType = models.CharField(max_length=300,choices=priceType)
+	priceType = models.CharField(max_length=300,choices=priceType, default='custom rates')
 	pricePerUnit = models.IntegerField(blank=False,null=False)
 	coverphoto = models.ImageField()
 	origin = models.CharField(max_length=300)
@@ -135,7 +135,7 @@ class Product(models.Model):
 class CustomCategoryProducts(models.Model):
 	uid=models.AutoField(primary_key=True)
 	user = models.ForeignKey(User,blank=False,null=False)
-	product = models.ForeignKey(Product, blank=False, null=False)
+	product = models.ManyToManyField(Product, blank=False, null=False)
 	def __unicode__(self):
 		return str(self.user.nameOfOwner)
 class Cartitem(models.Model):
