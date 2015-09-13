@@ -48,7 +48,7 @@ class ProductsByCategoryList(generics.ListAPIView):
 			pid= (int)(pid)
 			category = Category.objects.get(category_id=pid)
 			print category
-			return Product.objects.filter(category=category)
+			return Product.objects.filter(category=category).filter(status=1)
 		except:
 			print 'error in ProductsByCategoryList'
 class ItemsOfCartList(generics.ListAPIView):
@@ -110,15 +110,15 @@ class ApiSearchList(APIView):
 			searchtext = request.GET['searchtext']
 			tex = str(searchtext)
 			print tex
-			resultCategory = Product.objects.filter(category__name__icontains = tex)
+			resultCategory = Product.objects.filter(category__name__icontains = tex).filter(status=1)
 			resultCategory = CoreSez.serialize("json",resultCategory)
-			resultName = Product.objects.filter(seller__nameOfSeller__icontains = tex)
+			resultName = Product.objects.filter(seller__nameOfSeller__icontains = tex).filter(status=1)
 			resultname = CoreSez.serialize("json",resultName)
-			resultSeller = Product.objects.filter(name__icontains = tex)
+			resultSeller = Product.objects.filter(name__icontains = tex).filter(status=1)
 			resultSeller = CoreSez.serialize("json",resultSeller)
-			resultOrigin = Product.objects.filter(origin__icontains = tex)
+			resultOrigin = Product.objects.filter(origin__icontains = tex).filter(status=1)
 			resultOrigin = CoreSez.serialize("json",resultOrigin)
-			resultDescription = Product.objects.filter(description__icontains=tex)
+			resultDescription = Product.objects.filter(description__icontains=tex).filter(status=1)
 			resultDescription = CoreSez.serialize("json",resultDescription)
 			struct = json.loads(resultDescription)
 			resultDescription = json.dumps(struct)
@@ -437,7 +437,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 	"""
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
-	queryset = Product.objects.all()
+	queryset = Product.objects.filter(status=1)
 	serializer_class = ProductSerializer
 class SellerViewSet(viewsets.ModelViewSet):
 	"""
@@ -604,10 +604,10 @@ def ajaxlogPost(request):
 		cartItems = Cartitem.objects.filter(cart=cart)
 		totalItems = len(cartItems)
 		customproducts='none'
-		allProducts = Product.objects.all()
+		allProducts = Product.objects.filter(status=1)
 		vegetableProducts = Product.objects.filter(category_id=1)
-		fruitproducts = Product.objects.filter(category_id=2)
-		products = Product.objects.all()
+		fruitproducts = Product.objects.filter(category_id=2).filter(status=1)
+		products = Product.objects.filter(status=1)
 		categories = Category.objects.all()
 		return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 	else:
@@ -617,7 +617,7 @@ def ajaxlogPost(request):
 		cartItems=[]
 		totalItems=0
 		categories = Category.objects.all()
-		products = Product.objects.all()
+		products = Product.objects.filter(status=1)
 		strraw={"mobile":mobile,"password":password}
 		return HttpResponse(str(strraw))
 		#return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
@@ -645,7 +645,7 @@ def main(request):
 		cartItems=[]
 		totalItems=0
 		categories = Category.objects.all()
-		products = Product.objects.all()
+		products = Product.objects.filter(status=1)
 		return TemplateResponse(request, 'new/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 	else:
 		miveuserId = request.session['miveuser']
@@ -654,10 +654,10 @@ def main(request):
 		cartItems = Cartitem.objects.filter(cart=cart)
 		totalItems = len(cartItems)
 		customproducts='none'
-		allProducts = Product.objects.all()
-		vegetableProducts = Product.objects.filter(category_id=1)
-		fruitproducts = Product.objects.filter(category_id=2)
-		products = Product.objects.all()
+		allProducts = Product.objects.filter(status=1)
+		vegetableProducts = Product.objects.filter(category_id=1).filter(status=1)
+		fruitproducts = Product.objects.filter(category_id=2).filter(status=1)
+		products = Product.objects.filter(status=1)
 		categories = Category.objects.all()
 		return TemplateResponse(request, 'new/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def productdetail(request):
@@ -677,7 +677,7 @@ def categoryView(request):
 	categoryId=request.GET['categoryId']
 	categoryId = int(categoryId)
 	category = Category.objects.get(category_id=categoryId)
-	products = Product.objects.filter(category=category)
+	products = Product.objects.filter(category=category).filter(status=1)
 	print('hola apache rakesh')
 	if(checklogin(request)==False):
 		miveuser='none'
@@ -694,9 +694,9 @@ def categoryView(request):
 		cartItems = Cartitem.objects.filter(cart=cart)
 		totalItems = len(cartItems)
 		customproducts='none'
-		allProducts = Product.objects.all()
+		allProducts = Product.objects.filter(status=1)
 		vegetableProducts = Product.objects.filter(category_id=1)
-		fruitproducts = Product.objects.filter(category_id=2)
+		fruitproducts = Product.objects.filter(category_id=2).filter(status=1)
 		categories = Category.objects.all()
 		return TemplateResponse(request, 'new/category.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def addtocart(request):
@@ -756,7 +756,7 @@ def ajaxaddtocart(request):
 	cartItems = Cartitem.objects.filter(cart=cart)
 	totalItems = len(cartItems)
 	customproducts='none'
-	allProducts = Product.objects.all()
+	allProducts = Product.objects.filter(status=1)
 	products = Product.objects.all()
 	categories = Category.objects.all()
 	return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
@@ -787,8 +787,8 @@ def ajaxremoveItemPost(request):
 	cartItems = Cartitem.objects.filter(cart=cart)
 	totalItems = len(cartItems)
 	customproducts='none'
-	allProducts = Product.objects.all()
-	products = Product.objects.all()
+	allProducts = Product.objects.filter(status=1)
+	products = Product.objects.filter(status=1)
 	categories = Category.objects.all()
 	return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def orderStep1(request):
