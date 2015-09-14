@@ -1,14 +1,12 @@
- {%for product in products%}
+{%for product in products%}
       <div class="row item-row">
         <div class="col-sm-4 col-xs-6">
           <img src="/{{product.coverphoto.url}}" style="height:150px;width:150px" class="img img-responsive">
         </div>
         <div class="col-sm-2 col-xs-5">
                   <div><h6 data-productid="{{product.product_id}}" class="login-modal2-button price-text-color">{{product.name}}</h6></div>
-
         <div><p style="font-size: 12px;" class="price-text-color">Rate:{{product.pricePerUnit}}/{{product.unit}}</p></div>
-        <div data-miveimg="#productsubmit-{{product.product_id}}" mobile="yes"><a href="#" mobile="yes" class="product-a product1submit" data-mive="#productsubmit-{{product.product_id}}" data-original-title="Contact Support" data-toggle="tooltip" title="Add to Cart"><span class="glyphicon glyphicon-shopping-cart" ></span></a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-        <a onclick="mivenotify('notice','Mive Notification','We are working on this feature')" class="product-a" data-toggle="tooltip" title="Details"><span class="glyphicon glyphicon-th"></span></a></div>
+
         <div class="input-group number-spinner" >
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
@@ -24,6 +22,10 @@
                                           
                                           
                                         </div>
+        <div data-miveimg="#productsubmit-{{product.product_id}}" mobile="yes">
+        <a href="#" mobile="yes" class="product-a product1submit btn btn-default btn-sm" class="product-a product1submit btn btn-default btn-sm" data-mive="#productsubmit-{{product.product_id}}" data-original-title="Contact Support" data-toggle="tooltip" title="Add to Cart"><span class=" glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Add</a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+        </div>
+
         </div>
       </div>
       {%endfor%}

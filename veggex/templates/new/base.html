@@ -559,6 +559,7 @@ box-shadow: 0px 3px 7px 0px rgba(203, 203, 203, 0.72);
           </ul>
         </li>
         {% if miveuser = 'none'%}
+        <script>window.miveuser='none'</script>
         <li id="loginbutton"> <a href="#" data-toggle="modal"  data-target="#login-modal"> <span class="glyphicon glyphicon-user"></span> Login</a></li>
         <li id="userbutton" style="display:none" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">{{miveuser.nameOfInstitution}} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -569,6 +570,7 @@ box-shadow: 0px 3px 7px 0px rgba(203, 203, 203, 0.72);
                         </ul>
                     </li>
         {%else%}
+        <script>window.miveuser='signed in'</script>
          <li id="userbutton" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="username">{{miveuser.nameOfInstitution}} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a id="userdetails" href="/account"><i class="icon-user"></i> Details</a></li>
@@ -795,10 +797,10 @@ $("#mivelogin").submit(function(event) {
 
 </script>
 <script>
-  $('.login-modal2-button').click(function(){
+  $('body').on('click','.login-modal2-button',function(){
     idd = $(this).attr('data-productid')
     $('#login-modal2').modal('toggle')
-    url = "/product?productId=4"
+    url = "/product?productId="+idd
     data = $.get(url,function(data){
       $('#detail-container').html(data)
     })
