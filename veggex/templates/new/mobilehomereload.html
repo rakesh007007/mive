@@ -1,7 +1,7 @@
 {%for product in products%}
       <div class="row item-row">
         <div class="col-sm-4 col-xs-6">
-          <img src="/{{product.coverphoto.url}}" style="height:150px;width:150px" class="img img-responsive">
+          <a href="#" onclick="return false" class="login-modal2-button" data-productid="{{product.product_id}}" ><img src="/{{product.coverphoto.url}}" style="height:150px;width:150px" class="img img-responsive"></a>
         </div>
         <div class="col-sm-2 col-xs-5">
                   <div><h6 data-productid="{{product.product_id}}" class="login-modal2-button price-text-color">{{product.name}}</h6></div>
