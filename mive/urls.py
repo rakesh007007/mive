@@ -35,6 +35,8 @@ urlpatterns = [
     url(r'^desktophomereload', views.desktophomereload),
     url(r'^mobilehomereload', views.mobilehomereload),
     url(r'^category', views.categoryView),
+    url(r'^desktopcategoryreload', views.desktopcategoryreload),
+    url(r'^mobilecategoryreload', views.mobilecategoryreload),
     url(r'^addtocart', views.addtocart),
     url(r'^ajaxaddtocart', views.ajaxaddtocart),
     url(r'^landing', views.landing),

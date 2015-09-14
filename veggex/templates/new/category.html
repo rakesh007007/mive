@@ -160,6 +160,65 @@
       <hr>
       {%endfor%}
     </div>
+    <div class="container">
+      <div class="row">
+      <div class="col-md-4 col-md-offset-4" >
+      <center>
+      <div id="scrollcheckerdesktop" class="scrollchecker hidden-sm hidden-xs hidden-xl"></div>
+       <div id="scrollcheckermobile" class="scrollchecker hidden-md hidden-lg">
+                        </div>
+                        <script>
+                        window.totalProducts = {{totalProducts}};
+                        $.urlParam = function(name){
+                            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                            if (results==null){
+                               return null;
+                            }
+                            else{
+                               return results[1] || 0;
+                            }
+                        }
+                        window.categoryId = $.urlParam('categoryId')
+                        console.log('categ',categoryId)
+                        window.limit =8
+                         $(window).scroll(function() { 
+                           if($(window).scrollTop() + screen.height > $('body').height()) {
+                               if(limit<totalProducts){
+                                  $('.scrollchecker').html("<img src='rstatic/new/images/282.GIF'><br><h4>please wait loading more products</h4>") 
+                                  $.get('/mobilecategoryreload?limit='+limit+'&categoryId='+categoryId,function(data){
+                                  })
+                                  .done(function(data){
+                                    $('.productrowmobile').append(data)
+                                    $('#scrollcheckermobile').html('') 
+                                  })
+                                  .fail(function(data){
+                                    $('.scrollchecker').html('<h4>Error occured while loading products</h4>')
+                                    mivenotify('error','Error occured','Error ocuured while loading products please contact administrator')
+                                  })
+                                   $.get('/desktophomereload?limit='+limit+'&categoryId='+categoryId,function(data){
+                                  })
+                                   .done(function(data){
+                                    $('.productrowdesktop').append(data)
+                                    $('#scrollcheckerdesktop').html('') 
+                                  })
+                                  .fail(function(data){
+                                    $('.scrollchecker').html('<h4>Error occured while loading products</h4>')
+                                    mivenotify('error','Error occured','Error ocuured while loading products please contact administrator')
+                                  })
+                                  window.limit=window.limit+8
+
+                                }
+                                else{
+
+                                }
+                           }
+                        });
+                        </script>
+                        </center>
+        
+      </div>
+    </div>
+    </div>
 
 
 {%endblock%}
