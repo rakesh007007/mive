@@ -73,6 +73,8 @@
                                 <div  class="photo">
                                     <center>
                                     <img data-toggle="tooltip" data-placement="bottom" title="{{product.name}}" src="/{{product.coverphoto.url}}"  alt="a" class="img img-responsive" style="width:200px;height:200px" />
+                                    <p data-toggle="modal" data-productid="{{product.product_id}}" class="login-modal2-button price-text-color">
+                                                {{product.name}}</p>
                                     </center>
                                 </div>
                                 <div class="info">
@@ -80,25 +82,21 @@
                                             
                                         </div></center>
                                     <div class="row">
-                                        <div class="price col-md-6 col-sm-6">
+                                        <div class="price col-md-5 col-md-offset-2 col-sm-6">
                                             
-                                            <p data-toggle="modal" data-productid="{{product.product_id}}" class="login-modal2-button price-text-color">
-                                                {{product.name}}</p>
                                             <p class="">
                                                 <a>{{product.unit}}</a></p>                                                
 
                                         </div>
-                                         <div class="price col-md-6 col-sm-6">
-                                            <p class="">
-                                                <a onclick="mivenotify('notice','Mive Notification','We are working on this feature')">Details</a></p>
+                                         <div class="price col-md-5 col-sm-6">
                                             <p class="price-text-color">
-                                                {{product.pricePerUnit}}$</p>
+                                                {{product.pricePerUnit}}₹</p>
                                             
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                    <div class="col-md-6 cols-sm-6">
+                                    <div class="col-md-6 col-md-offset-1 cols-sm-6">
                                     <div class="separator clear-left">
                                        <div class="input-group number-spinner" >
                                           <span class="input-group-btn">
@@ -118,7 +116,7 @@
                                     </div>
                                     </div>
                                    <div class="col-md-5 col-sm-5" mobile="no" data-miveimg="#productsubmit-{{product.product_id}}">
-                                   <p><a href="#" mobile="no" title="Add to cart" data-toggle="tooltip" data-mive="#productsubmit-{{product.product_id}}" class="product1submit"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+                                   <p><a href="#" mobile="no" title="Add to cart" data-toggle="tooltip" data-mive="#productsubmit-{{product.product_id}}" type="button" class="product1submit btn btn-default btn-sm"><span class=" glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Add</a></p>
                                    </div>
                                    <div class="col-md-1 col-sm-">
                                    </div>
@@ -157,10 +155,8 @@
         </div>
         <div class="col-sm-2 col-xs-5">
                   <div><h6 data-productid="{{product.product_id}}" class="login-modal2-button price-text-color">{{product.name}}</h6></div>
-
         <div><p style="font-size: 12px;" class="price-text-color">Rate:{{product.pricePerUnit}}/{{product.unit}}</p></div>
-        <div data-miveimg="#productsubmit-{{product.product_id}}" mobile="yes"><a href="#" mobile="yes" class="product-a product1submit" data-mive="#productsubmit-{{product.product_id}}" data-original-title="Contact Support" data-toggle="tooltip" title="Add to Cart"><span class="glyphicon glyphicon-shopping-cart" ></span></a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-        <a onclick="mivenotify('notice','Mive Notification','We are working on this feature')" class="product-a" data-toggle="tooltip" title="Details"><span class="glyphicon glyphicon-th"></span></a></div>
+
         <div class="input-group number-spinner" >
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-circle" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
@@ -176,6 +172,10 @@
                                           
                                           
                                         </div>
+        <div data-miveimg="#productsubmit-{{product.product_id}}" mobile="yes">
+        <a href="#" mobile="yes" class="product-a product1submit btn btn-default btn-sm" class="product-a product1submit btn btn-default btn-sm" data-mive="#productsubmit-{{product.product_id}}" data-original-title="Contact Support" data-toggle="tooltip" title="Add to Cart"><span class=" glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Add</a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+        </div>
+
         </div>
       </div>
       {%endfor%}
