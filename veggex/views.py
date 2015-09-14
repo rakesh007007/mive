@@ -649,6 +649,24 @@ def mobilehomereload(request):
 	high = int(limit)+8
 	products =Product.objects.filter(status=1)[low:high]
 	return TemplateResponse(request, 'new/mobilehomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
+def desktopcategoryreload(request):
+	limit = request.GET['limit']
+	low = int(limit)
+	high = int(limit)+8
+	categoryId=request.GET['categoryId']
+	categoryId = int(categoryId)
+	category = Category.objects.get(category_id=categoryId)
+	products = Product.objects.filter(category=category).filter(status=1)[low:high]
+	return TemplateResponse(request, 'new/desktophomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
+def mobilecategoryreload(request):
+	limit = request.GET['limit']
+	low = int(limit)
+	high = int(limit)+8
+	categoryId=request.GET['categoryId']
+	categoryId = int(categoryId)
+	category = Category.objects.get(category_id=categoryId)
+	products = Product.objects.filter(category=category).filter(status=1)[low:high]
+	return TemplateResponse(request, 'new/mobilehomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def main(request):
 	if(checklogin(request)==False):
 		miveuser='none'
@@ -691,7 +709,8 @@ def categoryView(request):
 	categoryId=request.GET['categoryId']
 	categoryId = int(categoryId)
 	category = Category.objects.get(category_id=categoryId)
-	products = Product.objects.filter(category=category).filter(status=1)
+	products = Product.objects.filter(category=category).filter(status=1)[:8]
+	totalProducts = Product.objects.filter(category=category).filter(status=1).count()
 	print('hola apache rakesh')
 	if(checklogin(request)==False):
 		miveuser='none'
@@ -700,7 +719,7 @@ def categoryView(request):
 		cartItems=[]
 		totalItems=0
 		categories = Category.objects.all()
-		return TemplateResponse(request, 'new/category.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'new/category.html',{'totalProducts':totalProducts,'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 	else:
 		miveuserId = request.session['miveuser']
 		miveuser = User.objects.get(user_id=int(miveuserId))
@@ -712,7 +731,7 @@ def categoryView(request):
 		vegetableProducts = Product.objects.filter(category_id=1).filter(status=1)
 		fruitproducts = Product.objects.filter(category_id=2).filter(status=1)
 		categories = Category.objects.all()
-		return TemplateResponse(request, 'new/category.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'new/category.html',{'totalProducts':totalProducts,'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def addtocart(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
