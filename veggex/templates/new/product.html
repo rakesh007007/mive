@@ -39,7 +39,7 @@
          <h6>Rate: {{product.pricePerUnit}}/{{product.unit}}</h6>
          <form id="productdetailsubmit" method="post" action="addtocart">
             Qty: <input style=" border:0;
-    border-bottom: 1px solid;  text-align: right;" name="qty" style="border:1px" value="1" class="input-circle" type="number" autofocus><br><br>
+    border-bottom: 1px solid;  text-align: right;" name="qty" style="border:1px" value="1" class="input-circle" type="number"><br><br>
             <input name="productId"  value="{{product.product_id}}" style="border:1px" value="2" class="input-circle" type="hidden" autofocus>
             {%csrf_token%}
             <input type="submit" id="productsubmitbutton" onclick="addproduct();return false" value="Add to cart" class="btn btn-success">
