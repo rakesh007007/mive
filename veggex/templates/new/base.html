@@ -800,6 +800,7 @@ $("#mivelogin").submit(function(event) {
   $('body').on('click','.login-modal2-button',function(){
     idd = $(this).attr('data-productid')
     $('#login-modal2').modal('toggle')
+    $('#detail-container').html("<center><img src='rstatic/new/images/282.GIF'></center>")
     url = "/product?productId="+idd
     data = $.get(url,function(data){
       $('#detail-container').html(data)
