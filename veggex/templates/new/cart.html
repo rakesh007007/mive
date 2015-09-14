@@ -1,162 +1,151 @@
- {% extends 'new/base.html' %}
- {%block headbl%}
- <style type="text/css">
- body.modal-open #wrap{
-    -webkit-filter: blur(7px);
-    -moz-filter: blur(15px);
-    -o-filter: blur(15px);
-    -ms-filter: blur(15px);
-    filter: blur(15px);
-}
-  
-.modal-backdrop {background: #f7f7f7;}
-
-.close {
-    font-size: 50px;
-    display:block;
-}
- </style>
- <link rel="stylesheet" href="/rstatic//new/css/bootstrap-datetimepicker.css" />
- <script type="text/javascript" src="/rstatic/new/js/moment.js"></script>
- <script type="text/javascript" src="/rstatic/new/js/transition.js"></script>
- <script type="text/javascript" src="/rstatic/new/js/collapse.js"></script>
- <script type="text/javascript" src="/rstatic/new/js/bootstrap-datetimepicker.js"></script>
- {%endblock%}
+{% extends 'new/base.html' %}
+{%block headbl%}
+<style type="text/css">
+   body.modal-open #wrap{
+   -webkit-filter: blur(7px);
+   -moz-filter: blur(15px);
+   -o-filter: blur(15px);
+   -ms-filter: blur(15px);
+   filter: blur(15px);
+   }
+   .modal-backdrop {background: #f7f7f7;}
+   .close {
+   font-size: 50px;
+   display:block;
+   }
+</style>
+<link rel="stylesheet" href="/rstatic//new/css/bootstrap-datetimepicker.css" />
+<script type="text/javascript" src="/rstatic/new/js/moment.js"></script>
+<script type="text/javascript" src="/rstatic/new/js/transition.js"></script>
+<script type="text/javascript" src="/rstatic/new/js/collapse.js"></script>
+<script type="text/javascript" src="/rstatic/new/js/bootstrap-datetimepicker.js"></script>
+{%endblock%}
 {% block content%}
 <div class="container-fluid" style="margin-top:50px">
-  <div class="row">
-  <br><br>
-  <div class="col-md-1"></div>
-    <div class="col-xs-12 col-md-12">
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <div class="panel-title">
-            <div class="row">
-              <div class="col-xs-12">
-                <h5><span style=""class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
-              </div>
-              <div class="col-xs-6">
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="panel-body">
-        {%for item in cartItems%}
-          <div class="row" style="padding-left">
-            <div class="col-xs-2"><img style="height:50px;width:50px"  class="img-responsive hidden-sm hidden-xs" src="{{item.product.coverphoto.url}}">
-            </div>
-            <div class="col-xs-3" style="padding-left:0">
-              <h4 class="product-name"><strong>{{item.product.name}}</strong></h4>
-            </div>
-            <div class="col-xs-7">
-              <div class="col-xs-4 text-right">
-                <h6><strong>{{item.product.pricePerUnit}}$<span class="text-muted">x</span></strong></h6>
-              </div>
-              <div class="col-xs-5">
-                <input type="integer" class="form-control input-sm" 
-                value="{{item.qtyInUnits}}">
-              </div>
-              <div class="col-xs-3">
-              <form method="post" action="removeItemPost">
-                        {%csrf_token%}
-                        <input type="hidden" name="item_id" value="{{item.cartitem_id}}">
-                        <button type="submit" class="btn btn-link btn-xs">
-                          <span class="glyphicon glyphicon-trash"> </span>
-                        </button>
-                        </form>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-          {%endfor%}
-          {% if totalItems = 0%}
-        {%else%}
-          <div class="row">
-            <div class="text-center">
-              <div class="col-xs-0 col-md-0 col-lg-6">
-              </div>
-              <div class="col-xs-12 col-md-12 col-lg-6 col-md-offset-4">
-                <button disabled type="button" class="btn btn-default btn-sm">
-                 <b>Total  {{cart.cartTotal}} $</b>
-                </button>
-                <button type="button" class="btn btn-warning btn-sm">
-                  Update cart
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="panel-footer">
-          <div class="row" z-index="10000">
-            <div class="col-md-4 col-lg-4 col-xs-4 col-md-offset-2 col-lg-offset-2">
-            </div>
-            </div>
-          </div>
-          <div class="row text-center">
-          <h5>Select Delivery time and press checkout</h5>
-           <div class="col-md-4 col-lg-4 col-xs-6 col-md-offset-2 col-lg-offset-2">
-           <form id="orderdata" method="post">
-            <input autofocus id="datetime" name="delivery" type='date' class="form-control" id='datetimepicker4' />
-            {%csrf_token%}
-            </form>
-            </div>
-            <div class="col-xs-6 col-md-4">
-            <button  onclick="click2()" id="checkout" class="btn btn-success">
-              
-                Checkout
-              </button>
-            </div>
-          </div>
-        </div>
-        {%endif%}
-      </div>
-    </div>
+   <div class="row">
+      <br><br>
       <div class="col-md-1"></div>
-
-  </div>
+      <div class="col-xs-12 col-md-12">
+         <div class="panel panel-info">
+            <div class="panel-heading">
+               <div class="panel-title">
+                  <div class="row">
+                     <div class="col-xs-12">
+                        <h5><span style=""class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+                     </div>
+                     <div class="col-xs-6">
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="panel-body">
+               {%for item in cartItems%}
+               <div class="row" style="padding-left">
+                  <div class="col-xs-2"><img style="height:50px;width:50px"  class="img-responsive hidden-sm hidden-xs" src="{{item.product.coverphoto.url}}">
+                  </div>
+                  <div class="col-xs-3" style="padding-left:0">
+                     <h4 class="product-name"><strong>{{item.product.name}}</strong></h4>
+                  </div>
+                  <div class="col-xs-7">
+                     <div class="col-xs-4 text-right">
+                        <h6><strong>{{item.product.pricePerUnit}}₹<span class="text-muted">x</span></strong></h6>
+                     </div>
+                     <div class="col-xs-5">
+                        <input type="integer" class="form-control input-sm" 
+                           value="{{item.qtyInUnits}}">
+                     </div>
+                     <div class="col-xs-3">
+                        <form method="post" action="removeItemPost">
+                           {%csrf_token%}
+                           <input type="hidden" name="item_id" value="{{item.cartitem_id}}">
+                           <button type="submit" class="btn btn-link btn-xs">
+                           <span class="glyphicon glyphicon-trash"> </span>
+                           </button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <hr>
+               {%endfor%}
+               {% if totalItems = 0%}
+               {%else%}
+               <div class="row">
+                  <div class="text-center">
+                     <div class="col-xs-0 col-md-0 col-lg-6">
+                     </div>
+                     <div class="col-xs-12 col-md-12 col-lg-6 col-md-offset-4">
+                        <button disabled type="button" class="btn btn-default btn-sm">
+                        <b>Total  {{cart.cartTotal}} ₹</b>
+                        </button>
+                        <button type="button" class="btn btn-warning btn-sm">
+                        Update cart
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="panel-footer">
+               <div class="row" z-index="10000">
+                  <div class="col-md-4 col-lg-4 col-xs-4 col-md-offset-2 col-lg-offset-2">
+                  </div>
+               </div>
+            </div>
+            <div class="row text-center">
+               <h5>Select Delivery time and press checkout</h5>
+               <div class="col-md-4 col-lg-4 col-xs-6 col-md-offset-2 col-lg-offset-2">
+                  <form id="orderdata" method="post">
+                     <input autofocus id="datetime" name="delivery" type='date' class="form-control" id='datetimepicker4' />
+                     {%csrf_token%}
+                  </form>
+               </div>
+               <div class="col-xs-6 col-md-4">
+                  <button  onclick="click2()" id="checkout" class="btn btn-success">
+                  Checkout
+                  </button>
+               </div>
+            </div>
+         </div>
+         {%endif%}
+      </div>
+   </div>
+   <div class="col-md-1"></div>
 </div>
-
+</div>
 {% endblock %}
 {% block jsblock %}
 <script type="text/javascript">
-  function click2() {
-     var x = ($('#datetime').val())
-     xt = new Date(x)
-     if (x == '') {
-         mivenotify('notice', 'Provide input', 'Delivery time is empty')
-         return false;
-     }
-     currentTime = new Date()
-     if (xt.getTime() < (currentTime.getTime() + 14400) == true) {
-         console.log('min delivery time is 4 hours please select time greayer')
-         mivenotify('error', 'Select Proper Time', 'Please select proper order time,delivery time should be greater than 10 hours')
-         $('body').removeClass("loading");
-         $('#datetime').focus()
-     } else {
-         var url = "/makeOrder"; // the script where you handle the form input.
-        $('body').addClass("loading");
-        console.log('data',$("#orderdata").serialize()) 
-         $.ajax({
-             type: "POST",
-             url: url,
-             data: $("#orderdata").serialize(), // serializes the form's elements.
-             success: function(data) {
-                 console.log('order confirmed')
-                 $('body').html(data)
-             },
-             error:function(data){
-              console.log('error occurrred')
-              console.log('errordat',data)
-            }
-         });
-     }}
+   function click2() {
+      var x = ($('#datetime').val())
+      xt = new Date(x)
+      if (x == '') {
+          mivenotify('notice', 'Provide input', 'Delivery time is empty')
+          return false;
+      }
+      currentTime = new Date()
+      if (xt.getTime() < (currentTime.getTime() + 14400) == true) {
+          console.log('min delivery time is 4 hours please select time greayer')
+          mivenotify('error', 'Select Proper Time', 'Please select proper order time,delivery time should be greater than 10 hours')
+          $('body').removeClass("loading");
+          $('#datetime').focus()
+      } else {
+          var url = "/makeOrder"; // the script where you handle the form input.
+         $('body').addClass("loading");
+         console.log('data',$("#orderdata").serialize()) 
+          $.ajax({
+              type: "POST",
+              url: url,
+              data: $("#orderdata").serialize(), // serializes the form's elements.
+              success: function(data) {
+                  console.log('order confirmed')
+                  $('body').html(data)
+              },
+              error:function(data){
+               console.log('error occurrred')
+               console.log('errordat',data)
+             }
+          });
+      }}
 </script>
 <!-- Modal -->
 {% endblock %}
-
 <!-- Social Footer, Single Coloured -->
-
-
-   
