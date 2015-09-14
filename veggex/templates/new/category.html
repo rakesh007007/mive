@@ -44,7 +44,7 @@
         <div id="carousel-example" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="item item-row active">
-                    <div class="row">
+                    <div class="row productrowdesktop">
                      {%for product in products%}
                     <div class="col-sm-3 col-md-3 col-md-offset-0"  style="float:left">
                             <div class="col-item">
@@ -126,7 +126,7 @@
     </div>
 
     <!-- product page for mobiles -->
-    <div class="container-fluid hidden-md hidden-lg hidden-xl">
+    <div class="container-fluid hidden-md hidden-lg productrowmobile hidden-xl">
     {%for product in products%}
       <div class="row item-row">
         <div class="col-sm-4 col-xs-6">
@@ -195,7 +195,7 @@
                                     $('.scrollchecker').html('<h4>Error occured while loading products</h4>')
                                     mivenotify('error','Error occured','Error ocuured while loading products please contact administrator')
                                   })
-                                   $.get('/desktophomereload?limit='+limit+'&categoryId='+categoryId,function(data){
+                                   $.get('/desktopcategoryreload?limit='+limit+'&categoryId='+categoryId,function(data){
                                   })
                                    .done(function(data){
                                     $('.productrowdesktop').append(data)
