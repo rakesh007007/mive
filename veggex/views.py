@@ -113,7 +113,7 @@ class ApiSearchList(APIView):
 			resultCategory = Product.objects.filter(category__name__icontains = tex).filter(status=1)
 			resultCategory = CoreSez.serialize("json",resultCategory)
 			resultName = Product.objects.filter(seller__nameOfSeller__icontains = tex).filter(status=1)
-			resultname = CoreSez.serialize("json",resultName)
+			resultName = CoreSez.serialize("json",resultName)
 			resultSeller = Product.objects.filter(name__icontains = tex).filter(status=1)
 			resultSeller = CoreSez.serialize("json",resultSeller)
 			resultOrigin = Product.objects.filter(origin__icontains = tex).filter(status=1)
