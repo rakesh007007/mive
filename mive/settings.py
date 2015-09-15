@@ -75,7 +75,7 @@ ROOT_URLCONF = 'mive.urls'
 
 WSGI_APPLICATION = 'mive.wsgi.application'
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 20
 }
 
 
