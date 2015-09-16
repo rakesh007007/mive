@@ -34,6 +34,32 @@ from rest_framework.permissions import IsAuthenticated
 from veggex.serializers import ProductsByCategorySerializer
 from rest_framework import generics
 
+class ProductSearchDescriptionList(generics.ListAPIView):
+	serializer_class = ProductsByCategorySerializer
+
+	def get_queryset(self):
+		"""
+		This view should return a list of all the purchases for
+		the user as determined by the username portion of the URL.
+		"""
+		try:
+			stext = self.kwargs['pid']
+			return Product.objects.filter(description__icontains = stext).filter(status=1)
+		except:
+			print 'error in ProductsBySearchcategory'
+class ProductSearchTitleList(generics.ListAPIView):
+	serializer_class = ProductsByCategorySerializer
+
+	def get_queryset(self):
+		"""
+		This view should return a list of all the purchases for
+		the user as determined by the username portion of the URL.
+		"""
+		try:
+			stext = self.kwargs['pid']
+			return Product.objects.filter(name__icontains = stext).filter(status=1)
+		except:
+			print 'error in ProductsSearchTitle'
 class ProductsByCategoryList(generics.ListAPIView):
 	serializer_class = ProductsByCategorySerializer
 
@@ -110,15 +136,15 @@ class ApiSearchList(APIView):
 			searchtext = request.GET['searchtext']
 			tex = str(searchtext)
 			print tex
-			resultCategory = Product.objects.filter(category__name__icontains = tex).filter(status=1)
-			resultCategory = CoreSez.serialize("json",resultCategory)
-			resultName = Product.objects.filter(seller__nameOfSeller__icontains = tex).filter(status=1)
+			resultCategory1 = Product.objects.filter(category__name__icontains = tex).filter(status=1).values_list()
+			resultCategory = CoreSez.serialize("json",resultCategory1)
+			resultName = Product.objects.filter(seller__nameOfSeller__icontains = tex).filter(status=1).values_list()
 			resultName = CoreSez.serialize("json",resultName)
-			resultSeller = Product.objects.filter(name__icontains = tex).filter(status=1)
+			resultSeller = Product.objects.filter(name__icontains = tex).filter(status=1).values_list()
 			resultSeller = CoreSez.serialize("json",resultSeller)
-			resultOrigin = Product.objects.filter(origin__icontains = tex).filter(status=1)
+			resultOrigin = Product.objects.filter(origin__icontains = tex).filter(status=1).values_list()
 			resultOrigin = CoreSez.serialize("json",resultOrigin)
-			resultDescription = Product.objects.filter(description__icontains=tex).filter(status=1)
+			resultDescription = Product.objects.filter(description__icontains=tex).filter(status=1).values_list()
 			resultDescription = CoreSez.serialize("json",resultDescription)
 			struct = json.loads(resultDescription)
 			resultDescription = json.dumps(struct)
