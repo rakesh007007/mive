@@ -81,6 +81,10 @@ Url : http://www.mive.in/
 10. Product Search API
    GET
    endpoint */api/search/?searchtext={searchtext}
+11. Product Search for Title API
+   endpoint */api/search/title/{searchtext}
+11. Product Search for Description API
+   endpoint */api/search/description/{searchtext}
 Full supported(GET,POST,PUT,DELETE) end points
 11. Address
     GET,POST,PUT,DELETE
