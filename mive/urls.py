@@ -60,6 +60,8 @@ urlpatterns = [
     url('^api/user/orders/(?P<userid>.+)/$', views.OrdersOfUserList.as_view()),
     url('^api/order/items/(?P<orderid>.+)/$', views.ItemsOfOrderList.as_view()),
     url('^api/user/customcategory/(?P<userid>.+)/$', views.CustomCategoryProductsList.as_view()),
+    url('^api/search/title/(?P<pid>.+)/$', views.ProductSearchTitleList.as_view()),
+    url('^api/search/description/(?P<pid>.+)/$', views.ProductSearchDescriptionList.as_view()),
     url('^api/search/$', views.ApiSearchList.as_view()),
     url('^api/addtocart/$', views.ApiAddToCart.as_view()),
     url('^api/updatecart/$', views.ApiUpdateCart.as_view()),
