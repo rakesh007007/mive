@@ -145,6 +145,8 @@ class Cartitem(models.Model):
 	product = models.ForeignKey(Product,blank=False,null=False)
 	def cartItemId(self):
 		return self.cartitem_id
+	def __unicode__(self):
+		return str(self.product.name)
 class Accartitem(models.Model):
 	accartitem_id = models.AutoField(primary_key=True)
 	cart=models.ForeignKey(Cart,blank=False,null=False)
@@ -162,6 +164,8 @@ class Order(models.Model):
 	deliveryTime = models.TextField(blank=True,null=True)
 	def orderId(self):
 		return self.order_id
+	def __unicode__(self):
+		return str(self.user.nameOfInstitution)
 class Orderitem(models.Model):
 	orderitem_id = models.AutoField(primary_key=True)
 	order=models.ForeignKey(Order,blank=False,null=False)
