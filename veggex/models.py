@@ -67,6 +67,8 @@ class Cart(models.Model):
 	timeOfCreate = AutoDateTimeField(default=timezone.now)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	cartTotal = models.IntegerField(default=0)
+	class Meta:
+		ordering = ['timeOfUpdate']
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
     nameOfInstitution = models.CharField(max_length=300, blank=False, null=False)
@@ -162,6 +164,8 @@ class Order(models.Model):
 	subtotal=models.IntegerField(blank=True,null=True)
 	status = models.CharField(max_length=200,default='PLACED')
 	deliveryTime = models.TextField(blank=True,null=True)
+	class Meta:
+		ordering = ['timeOfUpdate']
 	def orderId(self):
 		return self.order_id
 	def __unicode__(self):
