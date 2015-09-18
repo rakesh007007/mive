@@ -125,12 +125,13 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(null=True, blank=True)),
                 ('popularityIndex', models.IntegerField(null=True, blank=True)),
                 ('unit', models.CharField(default=b'kg', max_length=100)),
-                ('priceType', models.CharField(max_length=300, choices=[(b'as per mandi rates', b'as per mandi rates'), (b'custom rates', b'custom rates')])),
+                ('priceType', models.CharField(default=b'custom rates', max_length=300, choices=[(b'as per mandi rates', b'as per mandi rates'), (b'custom rates', b'custom rates')])),
                 ('pricePerUnit', models.IntegerField()),
                 ('coverphoto', models.ImageField(upload_to=b'')),
                 ('origin', models.CharField(max_length=300)),
                 ('maxAvailableUnits', models.IntegerField()),
                 ('qualityRemarks', models.TextField()),
+                ('status', models.IntegerField(default=1)),
                 ('isPerishable', models.NullBooleanField(default=False)),
                 ('category', models.ForeignKey(to='veggex.Category')),
             ],
@@ -188,7 +189,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='customcategoryproducts',
             name='product',
-            field=models.ForeignKey(to='veggex.Product'),
+            field=models.ManyToManyField(to='veggex.Product'),
         ),
         migrations.AddField(
             model_name='customcategoryproducts',
