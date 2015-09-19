@@ -50,6 +50,9 @@ class Migration(migrations.Migration):
                 ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
                 ('cartTotal', models.IntegerField(default=0)),
             ],
+            options={
+                'ordering': ['timeOfUpdate'],
+            },
         ),
         migrations.CreateModel(
             name='Cartitem',
@@ -105,6 +108,9 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(default=b'PLACED', max_length=200)),
                 ('deliveryTime', models.TextField(null=True, blank=True)),
             ],
+            options={
+                'ordering': ['timeOfUpdate'],
+            },
         ),
         migrations.CreateModel(
             name='Orderitem',

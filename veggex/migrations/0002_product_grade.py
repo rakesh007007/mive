@@ -11,12 +11,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='cart',
-            options={'ordering': ['timeOfUpdate']},
-        ),
-        migrations.AlterModelOptions(
-            name='order',
-            options={'ordering': ['timeOfUpdate']},
+        migrations.AddField(
+            model_name='product',
+            name='grade',
+            field=models.TextField(default=b'e'),
         ),
     ]
