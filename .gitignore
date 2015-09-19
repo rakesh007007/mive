@@ -4,6 +4,7 @@ env
 bin/
 include/
 lib/
+migrations/
 local/
 pip-selfcheck.json
 *.pyc
