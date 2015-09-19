@@ -137,6 +137,7 @@ class Product(models.Model):
 	status = models.IntegerField(default=1)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
+	related_products = models.ManyToManyField("self", blank=True, null=True)
 	def coverphotourl(self):
 		return self.coverphoto.url
 	def productId(self):
