@@ -125,6 +125,7 @@ class Product(models.Model):
 	origin = models.CharField(max_length=300)
 	maxAvailableUnits=models.IntegerField()
 	qualityRemarks = models.TextField()
+	grade = models.TextField()
 	status = models.IntegerField(default=1)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)

@@ -78,7 +78,6 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 20
 }
 
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
@@ -90,6 +89,7 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
+        'STORAGE_ENGINE': 'INNODB'
     }
 }
 # Internationalization
@@ -110,4 +110,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT='static'
+STATIC_ROOT='/home/devrakx/Desktop/bkp/host/mive/mive/static'
+
