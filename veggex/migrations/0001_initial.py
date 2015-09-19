@@ -137,6 +137,7 @@ class Migration(migrations.Migration):
                 ('origin', models.CharField(max_length=300)),
                 ('maxAvailableUnits', models.IntegerField()),
                 ('qualityRemarks', models.TextField()),
+                ('grade', models.TextField(default=b'', choices=[(b'Grade-A', b'Grade-A'), (b'Grade-B', b'Grade-B'), (b'Grade-C', b'Grade-C'), (b'Grade-D', b'Grade-D'), (b'', b'')])),
                 ('status', models.IntegerField(default=1)),
                 ('isPerishable', models.NullBooleanField(default=False)),
                 ('category', models.ForeignKey(to='veggex.Category')),
