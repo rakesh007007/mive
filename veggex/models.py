@@ -133,7 +133,7 @@ class Product(models.Model):
 	origin = models.CharField(max_length=300)
 	maxAvailableUnits=models.IntegerField()
 	qualityRemarks = models.TextField()
-	grade = models.TextField(choices=grades,default='')
+	grade = models.CharField(max_length=200,choices=grades,default='')
 	status = models.IntegerField(default=1)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
