@@ -133,7 +133,6 @@ class Product(models.Model):
 	origin = models.CharField(max_length=300)
 	maxAvailableUnits=models.IntegerField()
 	qualityRemarks = models.TextField()
-	grade = models.TextField(choices=grades,default='')
 	status = models.IntegerField(default=1)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
@@ -143,7 +142,7 @@ class Product(models.Model):
 	def productId(self):
 		return self.product.product_id
 	def __unicode__(self):
-		return str(self.name)+'-'+str(self.grade)+'-'+str(self.origin)
+		return str(self.name)+'-'+str(self.origin)
 class CustomCategoryProducts(models.Model):
 	uid=models.AutoField(primary_key=True)
 	user = models.ForeignKey(User,blank=False,null=False)
