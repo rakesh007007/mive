@@ -7,11 +7,6 @@ class AddressSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Address
         fields = ('address_id','area','city','state','pincode')
-class ProductsByCategorySerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Product
-        fields = ('product_id', 'name', 'description',
-                  'category', 'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','coverphotourl','origin')
 class OrdersOfUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order
@@ -35,11 +30,23 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ('user_id', 'nameOfInstitution', 'nameOfOwner',
                   'institutionType', 'mailId','cartId', 'mobileNo','cart', 'address', 'profilePhoto','gpsLocation','profilephotourl')
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
+class BaseProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
-        fields = ('product_id', 'name', 'description',
+        fields = ('product_id', 'name', 'description','grade','related_products',
                   'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','coverphotourl','origin')
+class ProductSerializer(serializers.HyperlinkedModelSerializer):
+    related_products = BaseProductSerializer(many=True)
+    class Meta:
+        model = Product
+        fields = ('product_id', 'name', 'description','grade','related_products',
+                  'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','coverphotourl','origin')
+class ProductsByCategorySerializer(serializers.HyperlinkedModelSerializer):
+    related_products = ProductSerializer(many=True)
+    class Meta:
+        model = Product
+        fields = ('product_id', 'name','grade','related_products','description',
+                  'category', 'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','coverphotourl','origin')
 class CartitemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Cartitem
