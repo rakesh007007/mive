@@ -19,6 +19,14 @@ categoryType =(
 	('custom','custom'),
 	('normal','normal'),
 	)
+grades = (
+	('Grade-A', 'Grade-A'),
+	('Grade-B', 'Grade-B'),
+	('Grade-C', 'Grade-C'),
+	('Grade-D', 'Grade-D'),
+	('',''),
+
+	)
 class AutoDateTimeField(models.DateTimeField):
     def pre_save(self, model_instance, add):
         return timezone.now()
@@ -125,10 +133,11 @@ class Product(models.Model):
 	origin = models.CharField(max_length=300)
 	maxAvailableUnits=models.IntegerField()
 	qualityRemarks = models.TextField()
-	grade = models.TextField(default='e')
+	grade = models.TextField(choices=grades,default='')
 	status = models.IntegerField(default=1)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
+	related_products = models.ManyToManyField("self", blank=True, null=True)
 	def coverphotourl(self):
 		return self.coverphoto.url
 	def productId(self):
