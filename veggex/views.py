@@ -38,8 +38,8 @@ from veggex.serializers import ProductsByCategorySerializer
 from rest_framework import generics
 
 class ProductSearchDescriptionList(generics.ListAPIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	serializer_class = ProductsByCategorySerializer
 
 	def get_queryset(self):
@@ -53,8 +53,8 @@ class ProductSearchDescriptionList(generics.ListAPIView):
 		except:
 			print 'error in ProductsBySearchcategory'
 class ProductSearchTitleList(generics.ListAPIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	serializer_class = ProductsByCategorySerializer
 
 	def get_queryset(self):
@@ -68,8 +68,8 @@ class ProductSearchTitleList(generics.ListAPIView):
 		except:
 			print 'error in ProductsSearchTitle'
 class ProductsByCategoryList(generics.ListAPIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	serializer_class = ProductsByCategorySerializer
 
 	def get_queryset(self):
@@ -87,8 +87,8 @@ class ProductsByCategoryList(generics.ListAPIView):
 		except:
 			print 'error in ProductsByCategoryList'
 class ItemsOfCartList(generics.ListAPIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	serializer_class = ItemsOfCartSerializer
 
 	def get_queryset(self):
@@ -105,8 +105,8 @@ class ItemsOfCartList(generics.ListAPIView):
 			print 'error in ItemsOfCartList'
 		#return Purchase.objects.filter(purchaser__username=username)
 class OrdersOfUserList(generics.ListAPIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	serializer_class = OrdersOfUserSerializer
 
 	def get_queryset(self):
@@ -123,8 +123,8 @@ class OrdersOfUserList(generics.ListAPIView):
 			print 'Error in OrdersOfUserList'
 		#return Purchase.objects.filter(purchaser__username=username)
 class ItemsOfOrderList(generics.ListAPIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	serializer_class = ItemsOfOrderSerializer
 
 	def get_queryset(self):
@@ -141,8 +141,8 @@ class ItemsOfOrderList(generics.ListAPIView):
 			print 'error in ItemsOfOrderList'
 		#return Purchase.objects.filter(purchaser__username=username)
 class ApiSearchList(APIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	def get(self, request, format=None):
 		"""
 		This view should return a list of all the purchases for
@@ -170,8 +170,8 @@ class ApiSearchList(APIView):
 			return Response(e)
 		#return Purchase.objects.filter(purchaser__username=username)
 class CustomCategoryProductsList(generics.ListAPIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	serializer_class = CustomCategoryProductsSerializer
 
 	def get_queryset(self):
@@ -247,8 +247,8 @@ class Test3View(APIView):
 		
 		#return Response(data)
 class ApiAddToCart(APIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	def post(self, request, format=None):
 		try:
 			data=request.data
@@ -288,8 +288,8 @@ class ApiAddToCart(APIView):
 		except Exception,e:
 			return Response({"status":e})
 class ApiUpdateCart(APIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	def post(self, request, format=None):
 		try:
 			data=request.data
@@ -326,8 +326,8 @@ class ApiUpdateCart(APIView):
 		except Exception,e:
 			return Response(e)
 class ApiMakeOrder(APIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	def post(self, request, format=None):
 		try:
 			data=request.data
@@ -367,8 +367,8 @@ class ApiMakeOrder(APIView):
 		except Exception,e:
 			return Response([{"status":"error"}])
 class UserLoginView(APIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	def get(self,request,format=None):
 		return Response({'detail': "Post request on this url for user authentication check with mobile and password in body"})
 	def post(self, request, format=None):
@@ -394,8 +394,8 @@ class UserLoginView(APIView):
 		if "mobile" not in data or "password" not in data:
 			return Response('Wrong credentials',status=status.HTTP_401_UNAUTHORIZED)
 class Test2View(APIView):
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	def post(self,request,format=None):
 		data =request.data
 		print data
@@ -412,8 +412,8 @@ class Listproducts(APIView):
 	* Requires token authentication.
 	* Only admin users are able to access this view.
 	"""
-	authentication_classes = (authentication.TokenAuthentication,)
-	permission_classes = (permissions.IsAdminUser,)
+	#authentication_classes = (authentication.TokenAuthentication,)
+	#permission_classes = (permissions.IsAdminUser,)
 
 	def get(self, request, format=None):
 		"""
@@ -425,80 +425,80 @@ class AddressViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	queryset = Address.objects.all()
 	serializer_class = AddressSerializer
 class UserViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
 class CategoryViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	queryset = Category.objects.all()
 	serializer_class = CategorySerializer
 class UserViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
 class CartViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	queryset = Cart.objects.all()
 	serializer_class = CartSerializer
 class CartitemViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	queryset = Cartitem.objects.all()
 	serializer_class = CartitemSerializer
 class OrderViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	queryset = Order.objects.all()
 	serializer_class = OrderSerializer
 class OrderitemViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	queryset = Orderitem.objects.all()
 	serializer_class = OrderitemSerializer
 class ProductViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	queryset = Product.objects.filter(status=1)
 	serializer_class = ProductSerializer
 class SellerViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
-	authentication_classes = (TokenAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
 	queryset = Seller.objects.all()
 	serializer_class = SellerSerializer
 def get_or_create_csrf_token(request):
