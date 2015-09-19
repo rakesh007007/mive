@@ -143,7 +143,7 @@ class Product(models.Model):
 	def productId(self):
 		return self.product.product_id
 	def __unicode__(self):
-		return str(self.name)
+		return str(self.name)+'-'+str(self.grade)+'-'+str(self.origin)
 class CustomCategoryProducts(models.Model):
 	uid=models.AutoField(primary_key=True)
 	user = models.ForeignKey(User,blank=False,null=False)
