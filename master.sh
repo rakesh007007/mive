@@ -6,3 +6,4 @@ echo `git add .`
 echo `git commit -m "merge"`
 echo `sudo git merge origin master`
 echo `sudo git stash`
+echo `sudo service apache2 restart`
