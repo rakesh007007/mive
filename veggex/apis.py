@@ -273,7 +273,7 @@ class ApiUpdateCart(APIView):
 					acitem.resason="deleted from cart"
 					acitem.qtyInUnits=acitem_before.qtyInUnits
 					acitem.product=acitem_before.product
-					cart.cartTotal = cart.cartTotal-acitem_before.qtyInUnits*acitem_before*pricePerUnit
+					cart.cartTotal = cart.cartTotal-acitem_before.qtyInUnits*acitem_before.product.pricePerUnit
 					acitem.save()
 					cart.save()
 					Cartitem.objects.get(cartitem_id=itemId).delete()
@@ -298,6 +298,7 @@ class ApiMakeOrder(APIView):
 			userId=int(userId)
 			cartId=int(cartId)
 			deliveryTime = data['deliveryTime']
+			orderMsg = data['orderMsg']
 			user =User.objects.get(user_id=userId)
 			payment_mode = 'COD'
 			cart =user.cart
@@ -313,6 +314,7 @@ class ApiMakeOrder(APIView):
 				order.subtotal=total
 				order.status = 'PLACED'
 				order.deliveryTime=deliveryTime
+				order.orderMsg=orderMsg
 				order.save()
 				order_id =order.order_id 
 				for itemn in items:

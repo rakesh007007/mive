@@ -143,7 +143,7 @@
             <span class="input-group-btn">
             </span>
             <form mobile="yes" id="productsubmit-{{product.product_id}}" method="post" class="productform" action="/addtocart">
-               <input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty">
+               <input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty"><br><br><br>
                {%csrf_token%}
                <input type="hidden" name="productId" value="{{product.product_id}}">
             </form>
