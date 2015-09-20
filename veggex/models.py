@@ -57,6 +57,8 @@ class Contact(models.Model):
 	email =models.CharField(max_length=300, blank=False, null=False)
 	message = models.TextField(max_length=300, blank=False, null=False)
 	mobile=models.BigIntegerField(blank=False,null=False)
+	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	def __unicode__(self):
 		return str(self.contact_id)
 class Career(models.Model):
@@ -67,6 +69,8 @@ class Career(models.Model):
 	subject=models.CharField(max_length=300, blank=False, null=False)
 	coverletter = models.TextField(max_length=300, blank=False, null=False)
 	resume = models.FileField(blank=False,null=False)
+	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	def __unicode__(self):
 		return str(self.career_id)
 class Cart(models.Model):
@@ -77,6 +81,8 @@ class Cart(models.Model):
 	cartTotal = models.IntegerField(default=0)
 	class Meta:
 		ordering = ['timeOfUpdate']
+	def __unicode__(self):
+		return str(self.cart_id)
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
     nameOfInstitution = models.CharField(max_length=300, blank=False, null=False)
@@ -155,6 +161,8 @@ class Cartitem(models.Model):
 	cart=models.ForeignKey(Cart,blank=False,null=False)
 	qtyInUnits = models.PositiveIntegerField()
 	product = models.ForeignKey(Product,blank=False,null=False)
+	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	def cartItemId(self):
 		return self.cartitem_id
 	def __unicode__(self):
@@ -173,7 +181,10 @@ class Order(models.Model):
 	payment_mode = models.CharField(max_length=200,blank=True,null=True)
 	subtotal=models.IntegerField(blank=True,null=True)
 	status = models.CharField(max_length=200,default='PLACED')
-	deliveryTime = models.TextField(blank=True,null=True)
+	orderMsg = models.TextField(blank=True,null=True)
+	deliveryTime = models.DateField(blank=True,null=True)
+	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	class Meta:
 		ordering = ['timeOfUpdate']
 	def orderId(self):

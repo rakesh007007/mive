@@ -26,7 +26,29 @@
            else{
               return results[1] || 0;
            }
+
          }
+         check = $.urlParam('notify')
+                        if(check != null){
+                           title =$.urlParam('title')
+                           if(title != null){
+                              title = title.split('%20').join(' ')
+                           }
+                           console.log('title',title) 
+                           description = $.urlParam('description')
+                           if(description != null){
+                              description = description.split('%20').join(' ')
+                           }
+                           console.log('description',title)
+                           type = $.urlParam('type')
+                           console.log('type',title)
+                           mivenotify(type,title,description,100000)
+                           console.log('yesnotifica')
+
+                        }
+                        else{
+                           console.log('pp')
+                        }
          });
       </script>
       <style type="text/css">
@@ -772,11 +794,32 @@
            })
          })
       </script>
+      <script>
+         $('body').on('click','.login-modal3-button',function(){
+           idd = $(this).attr('data-productid')
+           $('#detail-container').html("<center><img src='rstatic/new/images/282.GIF'></center>")
+           url = "/product?productId="+idd
+           data = $.get(url,function(data){
+             $('#detail-container').html(data)
+           })
+         })
+      </script>
       <script src="/rstatic/new/js/bootstrap.min.js"></script>
       <script src="/rstatic/new/js/typeahead.bundle.js"></script>
       <link href="rstatic/new/css/font-awesome.css" rel="stylesheet">
       <link href="rstatic/new/css/awesomplete.css" rel="stylesheet">
       <script src="/rstatic/new/js/awesomplete.min.js"></script>
+      <script>
+      $.urlParam = function(name){
+                            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                            if (results==null){
+                               return null;
+                            }
+                            else{
+                               return results[1] || 0;
+                            }
+                        }
+      </script>
       {%block jsblock%}
       {%endblock%}
    </body>
