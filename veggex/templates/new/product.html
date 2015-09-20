@@ -26,6 +26,10 @@
             <td>Mandi</td>
             <td>{{product.seller.mandi}}</td>
          </tr>
+          <tr>
+            <td>Grade</td>
+            <td>{{product.grade}}</td>
+         </tr>
          <tr>
             <td>Perishable</td>
             <td>{{product.isPerishable}}</td>
@@ -49,6 +53,23 @@
    </div>
    <div class="col-md-1"></div>
 </div>
+<center><div class="row">
+{% if product.related_products.all|length != 0 %}
+<hr>
+<h5>Related products : </h5>
+{%for pd in product.related_products.all%}
+      <center>
+      <div class="col-md-2">
+      <img src="/{{pd.coverphoto.url}}" style="height:80px;width:80px" class="img img-responsive">
+                              <a href="#" onclick="return false;" data-toggle="modal" data-productid="{{pd.product_id}}" class="login-modal3-button price-text-color" style="font-size: 14px;color: #219FD1;">
+                                 {{pd.name}}
+                              </a>
+      </div>
+      </center>
+      {%endfor%}
+      {%endif%}
+</div>
+</center>
 <div></div>
 <script>
    function addproduct() {

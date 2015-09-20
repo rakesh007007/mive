@@ -2,28 +2,29 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework import routers
 from veggex import views
+from veggex import apis
 from django.contrib.staticfiles.urls import *
 from mive.settings import *
 router = routers.DefaultRouter()
-router.register(r'address', views.AddressViewSet)
-router.register(r'category', views.CategoryViewSet)
-router.register(r'product', views.ProductViewSet)
-router.register(r'user', views.UserViewSet)
-router.register(r'cart', views.CartViewSet)
-router.register(r'cartitem', views.CartitemViewSet)
-router.register(r'order', views.OrderViewSet)
-router.register(r'orderitem', views.OrderitemViewSet)
-router.register(r'seller', views.SellerViewSet)
+router.register(r'address', apis.AddressViewSet)
+router.register(r'category', apis.CategoryViewSet)
+router.register(r'product', apis.ProductViewSet)
+router.register(r'user', apis.UserViewSet)
+router.register(r'cart', apis.CartViewSet)
+router.register(r'cartitem', apis.CartitemViewSet)
+router.register(r'order', apis.OrderViewSet)
+router.register(r'orderitem', apis.OrderitemViewSet)
+router.register(r'seller', apis.SellerViewSet)
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^authtoken/', views.TestView.as_view(), name='auth-view'),
-    url(r'^api/login', views.UserLoginView.as_view(), name='login-view'),
+    url(r'^authtoken/', apis.TestView.as_view(), name='auth-view'),
+    url(r'^api/login', apis.UserLoginView.as_view(), name='login-view'),
     #url(r'^api/custom/product/', views.UserLoginView.as_view(), name='login-view'),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^login', views.login),
-    url('^api/test2/', views.Test2View.as_view()),
-    url('^api/test3/', views.Test3View.as_view(),name='rakesh'),
+    url('^api/test2/', apis.Test2View.as_view()),
+    url('^api/test3/', apis.Test3View.as_view(),name='rakesh'),
     url(r'^subscribe', views.subscribe),
     url(r'^index/', views.tryy),
     url(r'^docs/api', views.docs),
@@ -55,17 +56,17 @@ urlpatterns = [
     url(r'^career', views.career),
     url(r'^contact', views.contact),
     url(r'^$', views.shophome),
-    url('^api/product/category/(?P<pid>.+)/$', views.ProductsByCategoryList.as_view()),
-    url('^api/cart/cartitems/(?P<cartid>.+)/$', views.ItemsOfCartList.as_view()),
-    url('^api/user/orders/(?P<userid>.+)/$', views.OrdersOfUserList.as_view()),
-    url('^api/order/items/(?P<orderid>.+)/$', views.ItemsOfOrderList.as_view()),
-    url('^api/user/customcategory/(?P<userid>.+)/$', views.CustomCategoryProductsList.as_view()),
-    url('^api/search/title/(?P<pid>.+)/$', views.ProductSearchTitleList.as_view()),
-    url('^api/search/description/(?P<pid>.+)/$', views.ProductSearchDescriptionList.as_view()),
-    url('^api/search/$', views.ApiSearchList.as_view()),
-    url('^api/addtocart/$', views.ApiAddToCart.as_view()),
-    url('^api/updatecart/$', views.ApiUpdateCart.as_view()),
-    url('^api/makeorder/$', views.ApiMakeOrder.as_view()),
+    url('^api/product/category/(?P<pid>.+)/$', apis.ProductsByCategoryList.as_view()),
+    url('^api/cart/cartitems/(?P<cartid>.+)/$', apis.ItemsOfCartList.as_view()),
+    url('^api/user/orders/(?P<userid>.+)/$', apis.OrdersOfUserList.as_view()),
+    url('^api/order/items/(?P<orderid>.+)/$', apis.ItemsOfOrderList.as_view()),
+    url('^api/user/customcategory/(?P<userid>.+)/$', apis.CustomCategoryProductsList.as_view()),
+    url('^api/search/title/(?P<pid>.+)/$', apis.ProductSearchTitleList.as_view()),
+    url('^api/search/description/(?P<pid>.+)/$', apis.ProductSearchDescriptionList.as_view()),
+    url('^api/search/$', apis.ApiSearchList.as_view()),
+    url('^api/addtocart/$', apis.ApiAddToCart.as_view()),
+    url('^api/updatecart/$', apis.ApiUpdateCart.as_view()),
+    url('^api/makeorder/$', apis.ApiMakeOrder.as_view()),
 
 
 

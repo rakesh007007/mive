@@ -91,18 +91,21 @@
                </div>
             </div>
             <div class="row text-center">
-               <h5>Select Delivery time and press checkout</h5>
-               <div class="col-md-4 col-lg-4 col-xs-6 col-md-offset-2 col-lg-offset-2">
-                  <form id="orderdata" method="post">
-                     <input autofocus id="datetime" name="delivery" type='date' class="form-control" id='datetimepicker4' />
-                     {%csrf_token%}
-                  </form>
+               <h4>Select Delivery time and press checkout</h4><br>
+               <form id="orderdata" method="post" style="display:inline;">
+               <div class="col-md-3 col-lg-3 col-xs-6 col-md-offset-1 col-lg-offset-1">
+                     <input autofocus id="datetime" name="delivery" type='date' class="form-control" id='datetimepicker4'style="display:inline;" />
                </div>
-               <div class="col-xs-6 col-md-4">
-                  <button  onclick="click2()" id="checkout" class="btn btn-success">
+               <div class="col-md-4 col-lg-4 col-xs-6">
+                     <textarea id="orderMsg" name="orderMsg" type='text' class="form-control" placeholder="Add Comment if any query"  /></textarea> 
+                     {%csrf_token%}
+               </div>
+               <div class="col-md-1 col-lg-1 col-xs-6 ol-md-offset-0 col-lg-offset-0">
+                  <button  onclick="click2();return false;" id="checkout" class="btn btn-success btn-lg">
                   Checkout
                   </button>
                </div>
+               </form>
             </div>
          </div>
          {%endif%}
