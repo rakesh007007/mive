@@ -1,4 +1,9 @@
 from base import *
+def getTotal(cartitems):
+	total=0
+	for itemm in cartitems:
+		total = total+itemm.product.pricePerUnit*itemm.qtyInUnits
+	return total
 class ProductSearchDescriptionList(generics.ListAPIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
