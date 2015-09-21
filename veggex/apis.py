@@ -11,7 +11,8 @@ class ProductSearchDescriptionList(generics.ListAPIView):
 		"""
 		try:
 			stext = self.kwargs['pid']
-			return Product.objects.filter(description__icontains = stext).filter(status=1)
+			resultNameValues = Product.objects.filter(name__icontains = stext).filter(status=1).values('product_id')
+			return Product.objects.filter(description__icontains = stext).filter(status=1).exclude(product_id__in=resultNameValues)
 		except:
 			print 'error in ProductsBySearchcategory'
 class ProductSearchTitleList(generics.ListAPIView):
@@ -329,7 +330,7 @@ class ApiMakeOrder(APIView):
 				Cartitem.objects.filter(cart=cart).delete()
 				return Response({"status":"success","orderId":order_id})
 		except Exception,e:
-			return Response([{"status":"error"}])
+			return Response([{"status":e])
 class UserLoginView(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
