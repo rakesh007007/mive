@@ -1,3 +1,4 @@
+echo `sudo git pull`
 echo `sudo git add .`
 echo `sudo git commit -m "stash"`
 echo `sudo git stash`
