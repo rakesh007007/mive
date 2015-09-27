@@ -54,7 +54,7 @@ class CartitemSerializer(serializers.HyperlinkedModelSerializer):
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order
-        fields=('order_id','user','timeOfCreate','timeOfUpdate','payment_mode','subtotal','status')
+        fields=('order_id','user','deliveryTime','timeOfCreate','timeOfUpdate','payment_mode','subtotal','status')
 class OrderitemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Orderitem
