@@ -30,6 +30,25 @@ grades = (
 class AutoDateTimeField(models.DateTimeField):
     def pre_save(self, model_instance, add):
         return timezone.now()
+class Address(models.Model):
+	address_id = models.AutoField(primary_key=True)
+	area=models.CharField(max_length=300, blank=False, null=False)
+	city =models.CharField(max_length=300, blank=False, null=False)
+	state = models.CharField(max_length=300, blank=False, null=False)
+	pincode=models.IntegerField(blank=False,null=False)
+	def __unicode__(self):
+		return str(self.address_id)
+	def addressId(self):
+		return self.address_id
+class Mandi(models.Model):
+    mandi_id = models.AutoField(primary_key=True)
+    nameOfMandi = models.CharField(max_length=300, blank=False, null=False)
+    description =models.TextField(blank=False, null=False)
+    Photo = models.ImageField(blank=True,null=True)
+    address = models.ForeignKey(Address, blank=True, null=True)
+
+    def __unicode__(self):
+    	return str(self.nameOfMandi)
 class Category(models.Model):
 	category_id = models.AutoField(primary_key=True)
 	name=models.CharField(max_length=300,blank=False,null=False)
@@ -41,16 +60,24 @@ class Category(models.Model):
 		return self.category_id
 	def __unicode__(self):
 		return str(self.name)
-class Address(models.Model):
-	address_id = models.AutoField(primary_key=True)
-	area=models.CharField(max_length=300, blank=False, null=False)
-	city =models.CharField(max_length=300, blank=False, null=False)
-	state = models.CharField(max_length=300, blank=False, null=False)
-	pincode=models.IntegerField(blank=False,null=False)
+class Seller(models.Model):
+    seller_id = models.AutoField(primary_key=True)
+    nameOfSeller = models.CharField(max_length=300, blank=False, null=False)
+    mailId =models.CharField(max_length=300, blank=False, null=False)
+    mobileNo = models.BigIntegerField(blank=False,null=False)
+    profilePhoto = models.ImageField(blank=True,null=True)
+    address = models.ForeignKey(Address, blank=True, null=True)
+    mandi = models.ForeignKey(Mandi,blank=True,null=True)
+    def __unicode__(self):
+    	return str(self.nameOfSeller)
+class CategoryVendor(models.Model):
+	categoryvendor_id = models.AutoField(primary_key=True)
+	category = models.ForeignKey(Category,blank=False,null=False)
+	seller = models.ForeignKey(Seller,blank=False,null=False)
+	def categoryvendorId(self):
+		return self.categoryvendor_id
 	def __unicode__(self):
-		return str(self.address_id)
-	def addressId(self):
-		return self.address_id
+		return str(self.seller.nameOfSeller+"-"+self.category.name)
 class Contact(models.Model):
 	contact_id = models.AutoField(primary_key=True)
 	name=models.CharField(max_length=300, blank=False, null=False)
@@ -83,6 +110,12 @@ class Cart(models.Model):
 		ordering = ['timeOfUpdate']
 	def __unicode__(self):
 		return str(self.cart_id)
+class Owner(models.Model):
+	owner_id = models.AutoField(primary_key=True)
+	nameOfOwner = models.CharField(max_length=300, blank=False, null=False)
+	mailId =models.CharField(max_length=300, blank=False, null=False)
+	mobileNo = models.BigIntegerField(blank=False,null=False,unique=True)
+	profilePhoto = models.ImageField(blank=True,null=True)
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
     nameOfInstitution = models.CharField(max_length=300, blank=False, null=False)
@@ -95,6 +128,8 @@ class User(models.Model):
     profilePhoto = models.ImageField(blank=True,null=True)
     address = models.ForeignKey(Address, blank=True, null=True)
     cart =models.ForeignKey(Cart,blank=False,null=False)
+    owner = models.ForeignKey(Owner,blank=True, null=True)
+    categories = models.ManyToManyField(CategoryVendor,blank=True,null=True)
     def profilephotourl(self):
     	return self.profilePhoto.url
     def cartId(self):
@@ -106,26 +141,6 @@ class User(models.Model):
 
     def __unicode__(self):
     	return str(self.nameOfInstitution)
-class Mandi(models.Model):
-    mandi_id = models.AutoField(primary_key=True)
-    nameOfMandi = models.CharField(max_length=300, blank=False, null=False)
-    description =models.TextField(blank=False, null=False)
-    Photo = models.ImageField(blank=True,null=True)
-    address = models.ForeignKey(Address, blank=True, null=True)
-
-    def __unicode__(self):
-    	return str(self.nameOfMandi)
-class Seller(models.Model):
-    seller_id = models.AutoField(primary_key=True)
-    nameOfSeller = models.CharField(max_length=300, blank=False, null=False)
-    mailId =models.CharField(max_length=300, blank=False, null=False)
-    mobileNo = models.BigIntegerField(blank=False,null=False)
-    profilePhoto = models.ImageField(blank=True,null=True)
-    address = models.ForeignKey(Address, blank=True, null=True)
-    mandi = models.ForeignKey(Mandi,blank=True,null=True)
-
-    def __unicode__(self):
-    	return str(self.nameOfSeller)
 class Product(models.Model):
 	product_id = models.AutoField(primary_key=True)
 	name=models.CharField(max_length=300,blank=False,null=False)
@@ -143,7 +158,7 @@ class Product(models.Model):
 	status = models.IntegerField(default=1)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
-	related_products = models.ManyToManyField("self", blank=True, null=True)
+	related_products = models.ManyToManyField("self", blank=True)
 	def coverphotourl(self):
 		return self.coverphoto.url
 	def productId(self):
@@ -185,7 +200,9 @@ class Order(models.Model):
 	deliveryTime = models.DateField(blank=True,null=True)
 	timeOfCreate = AutoDateTimeField(default=timezone.now)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now)
-	class Meta:
+	seller = models.ForeignKey(Seller,blank=True,null=True)
+	category = models.ForeignKey(Category,blank=True,null=True)
+	class Meta:	
 		ordering = ['timeOfUpdate']
 	def orderId(self):
 		return self.order_id

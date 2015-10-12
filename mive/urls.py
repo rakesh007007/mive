@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^main', views.main),
     url(r'^desktophomereload', views.desktophomereload),
     url(r'^mobilehomereload', views.mobilehomereload),
+    url(r'^categoryvendor', views.categoryVendorView),
     url(r'^category', views.categoryView),
     url(r'^desktopcategoryreload', views.desktopcategoryreload),
     url(r'^mobilecategoryreload', views.mobilecategoryreload),

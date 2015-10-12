@@ -52,7 +52,7 @@ def shophome(request):
 	return TemplateResponse(request, 'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
 def login(request):
 	if ('loggedin' not in request.session):
-		return TemplateResponse(request, 'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'adminr/login.html',{'csrf_token':get_or_create_csrf_token(request)})
 	else:
 		return redirect('/main?notify=yes&title=success&title=Logged In')
 def docs(request):
@@ -224,15 +224,7 @@ def mobilecategoryreload(request):
 	return TemplateResponse(request, 'new/mobilehomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def main(request):
 	if(checklogin(request)==False):
-		miveuser='none'
-		cart='none'
-		customproducts='none'
-		cartItems=[]
-		totalItems=0
-		categories = Category.objects.all()
-		products = Product.objects.filter(status=1)[:8]
-		totalProducts = Product.objects.filter(status=1).count()
-		return TemplateResponse(request, 'new/shophome.html',{'totalProducts':totalProducts,'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+		return redirect('/login')
 	else:
 		miveuserId = request.session['miveuser']
 		miveuser = User.objects.get(user_id=int(miveuserId))
@@ -240,17 +232,14 @@ def main(request):
 		cartItems = Cartitem.objects.filter(cart=cart)
 		totalItems = len(cartItems)
 		customproducts='none'
-		allProducts = Product.objects.filter(status=1)[:8]
-		vegetableProducts = Product.objects.filter(category_id=1).filter(status=1)
-		fruitproducts = Product.objects.filter(category_id=2).filter(status=1)
 		products = Product.objects.filter(status=1)[:8]
 		totalProducts = Product.objects.filter(status=1).count()
-		categories = Category.objects.all()
-		return TemplateResponse(request, 'new/shophome.html',{'totalProducts':totalProducts,'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+		categoryvendor= miveuser.categories
+		return TemplateResponse(request, 'adminr/index.html',{'categoryvendor':categoryvendor,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def productdetail(request):
 	productId = request.GET['productId']
 	product = Product.objects.get(product_id=productId)
-	return TemplateResponse(request, 'new/product.html',{'product':product,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'adminr/product.html',{'product':product,'csrf_token':get_or_create_csrf_token(request)})
 def get_or_create_cart(user):
 	cart = Cart.objects.filter(user=user)
 	if(len(cart)==1):
@@ -260,6 +249,17 @@ def get_or_create_cart(user):
 		cart.user=user
 		cart.save()
 		return cart
+def categoryVendorView(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		categoryVendorId=request.GET['categoryVendorId']
+		categoryVendorId = int(categoryVendorId)
+		categoryVendor = CategoryVendor.objects.get(categoryvendor_id=categoryVendorId)
+		category = categoryVendor.category
+		seller = categoryVendor.seller
+		products = Product.objects.filter(category=category).filter(status=1).filter(seller=seller)[:8]
+		return TemplateResponse(request,'adminr/categoryvendor.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def categoryView(request):
 	categoryId=request.GET['categoryId']
 	categoryId = int(categoryId)
@@ -347,7 +347,7 @@ def ajaxaddtocart(request):
 	allProducts = Product.objects.filter(status=1)
 	products = Product.objects.filter(status=1)
 	categories = Category.objects.all()
-	return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'adminr/productinfo.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def removeItemPost(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
