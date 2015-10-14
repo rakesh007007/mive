@@ -1,4 +1,16 @@
 from base import *
+def basicinfo(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		miveuserId = request.session['miveuser']
+		miveuser = User.objects.get(user_id=int(miveuserId))
+		cart = miveuser.cart
+		cartItems = Cartitem.objects.filter(cart=cart)
+		totalItems = len(cartItems)
+		categoryvendor= miveuser.categories
+		final = {'miveuser':miveuser,'totalItems':totalItems,'categoryvendor':categoryvendor}
+		return final
 def get_or_create_csrf_token(request):
 
 	token = request.META.get('CSRF_COOKIE', None)
@@ -57,7 +69,7 @@ def login(request):
 		return redirect('/main?notify=yes&title=success&title=Logged In')
 def docs(request):
 	if ('loggedin' not in request.session):
-		return redirect('https://github.com/rakesh007007/mive/blob/master/veggex/templates/new/docs.txt')
+		return redirect('/login')
 	else:
 		return redirect('https://github.com/rakesh007007/mive/blob/master/veggex/templates/new/docs.txt')
 
@@ -226,20 +238,17 @@ def main(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
 	else:
-		miveuserId = request.session['miveuser']
-		miveuser = User.objects.get(user_id=int(miveuserId))
-		cart = miveuser.cart
-		cartItems = Cartitem.objects.filter(cart=cart)
-		totalItems = len(cartItems)
-		customproducts='none'
-		products = Product.objects.filter(status=1)[:8]
-		totalProducts = Product.objects.filter(status=1).count()
-		categoryvendor= miveuser.categories
-		return TemplateResponse(request, 'adminr/index.html',{'categoryvendor':categoryvendor,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+		basics = basicinfo(request)
+		return TemplateResponse(request, 'adminr/index.html',{'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 def productdetail(request):
 	productId = request.GET['productId']
 	product = Product.objects.get(product_id=productId)
 	return TemplateResponse(request, 'adminr/product.html',{'product':product,'csrf_token':get_or_create_csrf_token(request)})
+def userproduct(request):
+	productId = request.GET['productId']
+	product = Product.objects.get(product_id=productId)
+	seller = product.seller
+	return TemplateResponse(request, 'adminr/userproduct.html',{'product':product,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
 def get_or_create_cart(user):
 	cart = Cart.objects.filter(user=user)
 	if(len(cart)==1):
@@ -253,13 +262,30 @@ def categoryVendorView(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
 	else:
+		basics = basicinfo(request)
+		miveuser=basics['miveuser']
 		categoryVendorId=request.GET['categoryVendorId']
 		categoryVendorId = int(categoryVendorId)
 		categoryVendor = CategoryVendor.objects.get(categoryvendor_id=categoryVendorId)
-		category = categoryVendor.category
 		seller = categoryVendor.seller
-		products = Product.objects.filter(category=category).filter(status=1).filter(seller=seller)[:8]
-		return TemplateResponse(request,'adminr/categoryvendor.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
+		products = categoryVendor.products
+		return TemplateResponse(request,'adminr/categoryvendor.html',{'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+def addvendors(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		basics = basicinfo(request)
+		sellerId = request.GET['id']
+		seller  = Seller.objects.get(seller_id = sellerId)
+		products = Product.objects.filter(status =1).filter(seller= seller)
+		return TemplateResponse(request,'adminr/addvendors.html',{'basics':basics,'products':products,'seller':seller})
+def vendors(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		basics = basicinfo(request)
+		sellers = Seller.objects.all()
+		return TemplateResponse(request,'adminr/vendors.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def categoryView(request):
 	categoryId=request.GET['categoryId']
 	categoryId = int(categoryId)
@@ -314,6 +340,44 @@ def addtocart(request):
 		cart.save()
 		cartitem.save()
 	return redirect('/cart')
+def delvendoruser(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		id = request.GET['id']
+		basics = basicinfo(request)
+		miveuser = basics['miveuser']
+		CategoryVendor.objects.get(categoryvendor_id=id).delete()
+		return redirect('/vendors')
+
+def ajaxaddtouser(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		productId = request.POST['productId']
+		product = Product.objects.get(product_id=productId)
+		basics = basicinfo(request)
+		miveuser = basics['miveuser']
+		sellerId = request.POST['sellerId']
+		seller = Seller.objects.get(seller_id = sellerId)
+		ccount = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser).count()
+		print 'yoooo'
+		print miveuser
+		print >>sys.stderr, 'log msg'
+		if(ccount>0):
+			existing = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser)[0]
+			existing.products.add(product)
+			existing.save()
+		else:
+			neww = CategoryVendor()
+			neww.seller = seller
+			neww.save()
+			neww.products.add(product)
+			neww.save()
+			miveuser.categories.add(neww)
+			miveuser.save()
+	return HttpResponse('yo success')
+
 def ajaxaddtocart(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -351,13 +415,28 @@ def ajaxaddtocart(request):
 def removeItemPost(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
-	itemId = request.POST['item_id']
+	itemId = request.GET['itemId']
 	itemId = int(itemId)
 	item = Cartitem.objects.get(cartitem_id=itemId)
 	cart = item.cart
 	cart.cartTotal = cart.cartTotal-item.product.pricePerUnit*item.qtyInUnits
 	cart.save()
 	item.delete()
+	return redirect('/cart')
+def editqty(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	itemId = request.POST['itemid']
+	itemId = int(itemId)
+	newqty = request.POST['newqty']
+	newqty = int(newqty)
+	item = Cartitem.objects.get(cartitem_id=itemId)
+	oldqty = item.qtyInUnits
+	cart=item.cart
+	item.qtyInUnits = int(newqty)
+	item.save()
+	cart.cartTotal = cart.cartTotal-(oldqty-newqty)*item.product.pricePerUnit
+	cart.save()
 	return redirect('/cart')
 def ajaxremoveItemPost(request):
 	if(checklogin(request)==False):
@@ -379,6 +458,50 @@ def ajaxremoveItemPost(request):
 	products = Product.objects.filter(status=1)
 	categories = Category.objects.all()
 	return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+def ordercategory(request):	
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	else:
+		miveuserId = request.session['miveuser']
+		user = User.objects.get(user_id=int(miveuserId))
+		cartId = request.GET['cartid']
+		categoryVendorId = request.GET['categoryvendorid']
+		orderMsg = request.GET['orderMsg']
+		deliveryTime = request.GET['deliveryTime']
+		payment_mode = 'COD'
+		cart =Cart.objects.get(cart_id = cartId)
+		categoryvendor = CategoryVendor.objects.get(categoryvendor_id = categoryVendorId)
+		items = Cartitem.objects.filter(cart = cart).filter(product__seller=categoryvendor.seller)
+		totalprice=getTotal(items)
+		if(len(items)<1):
+			print 'no items'
+			return HttpResponse('no items to make order')
+		else:
+			order = Order()
+			order.user = user
+			order.seller = categoryvendor.seller
+			order.payment_mode = payment_mode
+			order.subtotal=totalprice
+			order.status = 'PLACED'
+			order.orderMsg = orderMsg
+			order.deliveryTime = deliveryTime
+			order.save()
+			order_id =order.order_id 
+			for itemn in items:
+				rak = Orderitem()
+				rak.product = itemn.product
+				rak.unit=itemn.product.unit
+				rak.qtyInUnits = itemn.qtyInUnits
+				miveuser=user
+				rak.priceType = itemn.product.priceType
+				rak.priceAtThatTime = itemn.product.pricePerUnit
+				rak.order = order
+				rak.save()
+				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
+			Cartitem.objects.filter(cart = cart).filter(product__seller=categoryvendor.seller).delete()
+			cart.cartTotal=cart.cartTotal - totalprice
+			cart.save()
+	return redirect('/cart')
 def orderStep1(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -448,14 +571,24 @@ def makeOrder(request):
 def cart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
-	mobile=request.session['mobile']
-	user = User.objects.get(mobileNo=mobile)
-	miveuser=user
-	cart=user.cart
+	basics = basicinfo(request)
+	miveuser=basics['miveuser']
+	cart=miveuser.cart
 	cartItems=Cartitem.objects.filter(cart=cart)
 	totalItems=len(cartItems)
 	shippingCost=0
-	categories = Category.objects.all()
-	return TemplateResponse(request, 'new/cart.html',{'totalItems':totalItems,'miveuser':miveuser,'cart':cart,'shippingCost':shippingCost,'cartItems':cartItems,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
-
+	categoryvendor= miveuser.categories
+	allProducts = []
+	for cvend in categoryvendor.all():
+		categoryvendor_id = cvend.categoryvendor_id
+		seller = cvend.seller
+		itemscount = Cartitem.objects.filter(product__seller = seller).filter(cart=cart).count()
+		if itemscount>0:
+			items = Cartitem.objects.filter(product__seller = seller).filter(cart=cart)
+			pd = {'categoryvendor_id':categoryvendor_id,'items':items,'seller':seller}
+			allProducts.append(pd)
+		else:
+			pass
+	print allProducts
+	return TemplateResponse(request, 'adminr/cart.html',{'allProducts':allProducts,'shippingCost':shippingCost,'cartItems':cartItems,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 

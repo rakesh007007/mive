@@ -4,10 +4,10 @@
          "category":1,
          "origin":"delhi",
          "qualityRemarks":"dsd",
-         "name":"Apple",
+         "name":"peppertapApple",
          "pricePerUnit":123,
          "isPerishable":false,
-         "seller":null,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":12,
          "popularityIndex":null,
@@ -17,17 +17,17 @@
          "description":"cfsc"
       },
       "model":"veggex.product",
-      "pk":5
+      "pk":75
    },
    {
       "fields":{
          "category":2,
          "origin":"Delhi",
          "qualityRemarks":"ff",
-         "name":"a",
+         "name":"peppertapa",
          "pricePerUnit":1000,
          "isPerishable":false,
-         "seller":null,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":1212,
          "popularityIndex":null,
@@ -37,17 +37,17 @@
          "description":"ddd"
       },
       "model":"veggex.product",
-      "pk":7
+      "pk":77
    },
    {
       "fields":{
          "category":1,
          "origin":"ggg",
          "qualityRemarks":"dddd",
-         "name":"Green Apple",
+         "name":"peppertapGreen Apple",
          "pricePerUnit":10,
          "isPerishable":false,
-         "seller":null,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":1000,
          "popularityIndex":null,
@@ -57,17 +57,17 @@
          "description":"gdfg"
       },
       "model":"veggex.product",
-      "pk":8
+      "pk":78
    },
    {
       "fields":{
          "category":2,
          "origin":"agra",
          "qualityRemarks":"superb quality , ideal for shakes ",
-         "name":"Cherry ",
+         "name":"peppertapCherry ",
          "pricePerUnit":100,
          "isPerishable":false,
-         "seller":1,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":12,
          "popularityIndex":4,
@@ -77,17 +77,17 @@
          "description":"red cherry "
       },
       "model":"veggex.product",
-      "pk":9
+      "pk":79
    },
    {
       "fields":{
          "category":2,
          "origin":"agra ",
          "qualityRemarks":"amazing quality ",
-         "name":"Oranges",
+         "name":"peppertapOranges",
          "pricePerUnit":45,
          "isPerishable":false,
-         "seller":1,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":100,
          "popularityIndex":9,
@@ -97,17 +97,17 @@
          "description":"Juicy sweet orange "
       },
       "model":"veggex.product",
-      "pk":10
+      "pk":710
    },
    {
       "fields":{
          "category":1,
          "origin":"agra ",
          "qualityRemarks":"superp quality and perishable ",
-         "name":"Lemons ",
+         "name":"peppertapLemons ",
          "pricePerUnit":100,
          "isPerishable":true,
-         "seller":1,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":452,
          "popularityIndex":5,
@@ -117,17 +117,17 @@
          "description":"juicy lemon "
       },
       "model":"veggex.product",
-      "pk":11
+      "pk":711
    },
    {
       "fields":{
          "category":1,
          "origin":"Agra ",
          "qualityRemarks":"superb quality ",
-         "name":"CauliFlower ",
+         "name":"peppertapCauliFlower ",
          "pricePerUnit":60,
          "isPerishable":false,
-         "seller":1,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":20,
          "popularityIndex":5,
@@ -137,17 +137,17 @@
          "description":"White Cauliflower "
       },
       "model":"veggex.product",
-      "pk":12
+      "pk":712
    },
    {
       "fields":{
          "category":2,
          "origin":"china ",
          "qualityRemarks":"juicy litchi ",
-         "name":"Litchi ",
+         "name":"peppertapLitchi ",
          "pricePerUnit":80,
          "isPerishable":false,
-         "seller":1,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":4,
          "popularityIndex":6,
@@ -157,17 +157,17 @@
          "description":"Juicy lichi "
       },
       "model":"veggex.product",
-      "pk":13
+      "pk":713
    },
    {
       "fields":{
          "category":2,
          "origin":"india",
          "qualityRemarks":"amazing sweet grapes ",
-         "name":"Black Grapes ",
+         "name":"peppertapBlack Grapes ",
          "pricePerUnit":80,
          "isPerishable":false,
-         "seller":1,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":120,
          "popularityIndex":9,
@@ -177,17 +177,17 @@
          "description":"Sweet grapes "
       },
       "model":"veggex.product",
-      "pk":14
+      "pk":714
    },
    {
       "fields":{
          "category":2,
          "origin":"nagpur ",
          "qualityRemarks":"sweet guavas with less seeds ",
-         "name":"Guava ",
+         "name":"peppertapGuava ",
          "pricePerUnit":30,
          "isPerishable":false,
-         "seller":1,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":50,
          "popularityIndex":4,
@@ -197,17 +197,17 @@
          "description":"sweet guava "
       },
       "model":"veggex.product",
-      "pk":15
+      "pk":715
    },
    {
       "fields":{
          "category":2,
          "origin":"newzealand",
          "qualityRemarks":"superb quality ",
-         "name":"Kiwi Fruit ",
+         "name":"peppertapKiwi Fruit ",
          "pricePerUnit":200,
          "isPerishable":false,
-         "seller":1,
+         "seller":6,
          "unit":"kg",
          "maxAvailableUnits":10,
          "popularityIndex":7,
@@ -217,6 +217,6 @@
          "description":"Newzealand imported Kiwi fruit "
       },
       "model":"veggex.product",
-      "pk":16
+      "pk":716
    }
 ]

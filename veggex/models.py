@@ -68,16 +68,42 @@ class Seller(models.Model):
     profilePhoto = models.ImageField(blank=True,null=True)
     address = models.ForeignKey(Address, blank=True, null=True)
     mandi = models.ForeignKey(Mandi,blank=True,null=True)
+    categories = models.CharField(max_length=240,blank=True,null=True)
+    rating = models.IntegerField(default=0)
     def __unicode__(self):
     	return str(self.nameOfSeller)
+class Product(models.Model):
+	product_id = models.AutoField(primary_key=True)
+	name=models.CharField(max_length=300,blank=False,null=False)
+	description=models.TextField(blank=True,null=True)
+	category = models.ForeignKey(Category)
+	popularityIndex = models.IntegerField(blank=True,null=True)
+	unit = models.CharField(max_length=100,default='kg')
+	priceType = models.CharField(max_length=300,choices=priceType, default='custom rates')
+	pricePerUnit = models.IntegerField(blank=False,null=False)
+	coverphoto = models.ImageField()
+	origin = models.CharField(max_length=300)
+	maxAvailableUnits=models.IntegerField()
+	qualityRemarks = models.TextField()
+	grade = models.CharField(max_length=200,choices=grades,default='')
+	status = models.IntegerField(default=1)
+	seller = models.ForeignKey(Seller,blank=True,null=True)
+	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
+	related_products = models.ManyToManyField("self", blank=True)
+	def coverphotourl(self):
+		return self.coverphoto.url
+	def productId(self):
+		return self.product.product_id
+	def __unicode__(self):
+		return str(self.name)+'-'+str(self.grade)+'-'+str(self.origin)
 class CategoryVendor(models.Model):
 	categoryvendor_id = models.AutoField(primary_key=True)
-	category = models.ForeignKey(Category,blank=False,null=False)
 	seller = models.ForeignKey(Seller,blank=False,null=False)
+	products = models.ManyToManyField(Product,blank=True,null=True)
 	def categoryvendorId(self):
 		return self.categoryvendor_id
 	def __unicode__(self):
-		return str(self.seller.nameOfSeller+"-"+self.category.name)
+		return str(self.seller.nameOfSeller+"-"+str(self.categoryvendor_id))
 class Contact(models.Model):
 	contact_id = models.AutoField(primary_key=True)
 	name=models.CharField(max_length=300, blank=False, null=False)
@@ -141,30 +167,6 @@ class User(models.Model):
 
     def __unicode__(self):
     	return str(self.nameOfInstitution)
-class Product(models.Model):
-	product_id = models.AutoField(primary_key=True)
-	name=models.CharField(max_length=300,blank=False,null=False)
-	description=models.TextField(blank=True,null=True)
-	category = models.ForeignKey(Category)
-	popularityIndex = models.IntegerField(blank=True,null=True)
-	unit = models.CharField(max_length=100,default='kg')
-	priceType = models.CharField(max_length=300,choices=priceType, default='custom rates')
-	pricePerUnit = models.IntegerField(blank=False,null=False)
-	coverphoto = models.ImageField()
-	origin = models.CharField(max_length=300)
-	maxAvailableUnits=models.IntegerField()
-	qualityRemarks = models.TextField()
-	grade = models.CharField(max_length=200,choices=grades,default='')
-	status = models.IntegerField(default=1)
-	seller = models.ForeignKey(Seller,blank=True,null=True)
-	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
-	related_products = models.ManyToManyField("self", blank=True)
-	def coverphotourl(self):
-		return self.coverphoto.url
-	def productId(self):
-		return self.product.product_id
-	def __unicode__(self):
-		return str(self.name)+'-'+str(self.grade)+'-'+str(self.origin)
 class CustomCategoryProducts(models.Model):
 	uid=models.AutoField(primary_key=True)
 	user = models.ForeignKey(User,blank=False,null=False)
