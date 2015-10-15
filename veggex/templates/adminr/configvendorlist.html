@@ -23,9 +23,9 @@
                 <tr>
                   <th><center>Name</center></th>
                   <th class="hidden-xs hidden-sm"><center>Supplies</center></th>
-                  <th class="hidden-xs hidden-sm"><center>Rating</center></th>
-                  <th ><center>Delete</center></th>
-                  <th ><center>Config</center></th>
+                  <th ><center>Rating</center></th>
+                  <th><center>Delete</center></th>
+                  <th class="hidden-sm hidden-xs"><center>Config</center></th>
                 </tr>
                 {%for sel in basics.categoryvendor.all%}
                 <tr>
@@ -33,14 +33,14 @@
                   <td class="hidden-xs hidden-sm">
                     <center >{{sel.seller.categories}}</center>
                   </td>
-                  <td class="hidden-xs hidden-sm">
+                  <td>
                     <center>{{sel.seller.rating}}</center>
                   </td>
                   <td><center>
                       <a class="btn btn-danger" href="/delvendoruser?id={{sel.categoryvendor_id}}">Delete</a>
                       </center>
                   </td>
-                  <td >
+                  <td class="hidden-sm hidden-xs">
                     <center><a data-productid="{{item.product.product_id}}" href="/configvendor?id={{sel.seller_id}}" ><span class="badge bg-yellow" style="color:blue">Config</span></a></center>
                   </td>
                 </tr>
@@ -50,43 +50,6 @@
             <!-- /.box-body -->
 
             <div class="box-footer clearfix">
-            </div>
-          </div>
-          <!--next table -->
-          <div class="box">
-          <div class="box-header with-border">
-              <h3 class="box-title">Vendors</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered">
-                <tr>
-                  <th><center>Name</center></th>
-                  <th class="hidden-xs hidden-sm"><center>Supplies</center></th>
-                  <th ><center >Rating</center></th>
-                  <th ><center>Browse</center></th>
-                </tr>
-                {%for seller in sellers%}
-                <tr>
-                  <td><center>{{seller.nameOfSeller}}</center></td>
-                  <td class="hidden-xs hidden-sm">
-                    <center>{{seller.categories}}</center>
-                  </td>
-                  <td >
-                    <center>{{seller.rating}}</center>
-                  </td>
-                  <td>
-                    <center><a href="/addvendors?id={{seller.seller_id}}"><span class="badge bg-yellow" style="color:#13c0ba">know more</span></a></center>
-                  </td>
-                </tr>
-                {% endfor%}
-              </table>
-            </div>
-            <!-- /.box-body -->
-            
-            <div class="box-footer clearfix">
-              
-              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Request a Seller</button>
             </div>
           </div>
         </div>

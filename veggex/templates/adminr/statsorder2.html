@@ -1,0 +1,136 @@
+{% extends 'adminr/base.html' %}
+{% block  content %}
+<section class="content-header">
+   <h1>
+      Mive 
+      <small>Restaurs dashboard</small>
+   </h1>
+   <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Cart</li>
+   </ol>
+</section>
+<section class="content">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1" style="position:relative">
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">Charts</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="chartContainer" style="height: 300px; width: 90%;">
+            </div>
+            <div class="box-body" id="chartContainer2" style="height: 300px; width: 90%;">
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              
+              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<div class="modal fade" id="order-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
+               <form id="orderdata" method="get" action="/ordercategory" style="display:inline;">
+              <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
+              <input type="hidden" name="categoryvendorid" id="orderplaceid" value="{{pd.categoryvendor_id}}">
+               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
+                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
+               </div>
+               <div class="col-md-4 col-lg-4 col-xs-12">
+                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+                     <input type="hidden" name="csrfmiddlewaretoken" value="XxYq2vc6MzqqLBPH86mIQeEfObTCXVCc">
+               </div>
+               <div class="col-md-1 col-lg-1 col-xs-6 ol-md-offset-0 col-lg-offset-0">
+                  <button type="submit" id="checkout" class="btn btn-success btn-lg">
+                  Checkout
+                  </button>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
+{%endblock%}
+{% block script%}
+<script>
+  $('body').on('click','.orderplace',function(event){
+    categoryvendorid = $(this).attr('data-categoryvendorid')
+    console.log('clicked')
+    $('#orderplaceid').attr('value',categoryvendorid)
+    $('#order-modal').modal('toggle')
+  })
+</script>
+ <script type="text/javascript">
+  window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer",
+   {
+      title:{
+         text: "Amount spent per vendor"
+      },
+      exportFileName: "Pie Chart",
+      exportEnabled: true,
+                animationEnabled: true,
+      legend:{
+         verticalAlign: "bottom",
+         horizontalAlign: "center"
+      },
+      data: [
+      {       
+         type: "pie",
+         showInLegend: true,
+         toolTipContent: "{legendText}: <strong>₹{y}</strong>",
+         indexLabel: "{label} ₹{y}",
+         dataPoints: [
+         {%for st in statsseller%}
+         {  y: {{st.total}}, legendText: "{{st.seller.nameOfSeller}}", exploded: true, label: "{{st.seller.nameOfSeller}}" },
+         {%endfor%}
+         ]
+   }
+   ]
+   });
+   chart.render();        
+   var chart2 = new CanvasJS.Chart("chartContainer2", {
+
+         title:{
+            text:"Amount spent per product"           
+
+         },
+                        animationEnabled: true,
+         axisX:{
+            interval: 1,
+            gridThickness: 0,
+            labelFontSize: 10,
+            labelFontStyle: "normal",
+            labelFontWeight: "normal",
+            labelFontFamily: "Lucida Sans Unicode"
+
+         },
+         axisY2:{
+            interlacedColor: "rgba(1,77,101,.2)",
+            gridColor: "rgba(1,77,101,.1)"
+
+         },
+
+         data: [
+         {     
+            type: "bar",
+                name: "Products",
+            axisYType: "secondary",
+            color: "#014D65",          
+            dataPoints: [
+            {%for st in statsproduct%}
+            {y: {{st.total}}, label: "{{st.product.name}}"  },
+            {%endfor%}
+            ]
+         }
+         
+         ]
+      });
+
+chart2.render();
+    }
+  </script>
+{% endblock %}

@@ -270,6 +270,27 @@ def categoryVendorView(request):
 		seller = categoryVendor.seller
 		products = categoryVendor.products
 		return TemplateResponse(request,'adminr/categoryvendor.html',{'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+def configvendor(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		basics = basicinfo(request)
+		sellerId = request.GET['id']
+		seller = Seller.objects.get(seller_id=sellerId)
+		miveuser = basics['miveuser']
+		categ = CategoryVendor.objects.filter(user=miveuser).filter(seller=sellerId)
+		if(len(categ)>0):
+			products = categ[0].products
+			currentPds = products.all()
+			t = []
+			for iddd in currentPds:
+				t.append(iddd.product_id)
+		else:
+			products = []
+			t = []
+		allProducts = Product.objects.filter(seller=seller).exclude(product_id__in=t)
+		return TemplateResponse(request,'adminr/configvendor.html',{'categoryvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+
 def addvendors(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -279,12 +300,23 @@ def addvendors(request):
 		seller  = Seller.objects.get(seller_id = sellerId)
 		products = Product.objects.filter(status =1).filter(seller= seller)
 		return TemplateResponse(request,'adminr/addvendors.html',{'basics':basics,'products':products,'seller':seller})
+def configvendorlist(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		basics = basicinfo(request)
+		currentsellers = basics['categoryvendor'].values('seller_id')
+		print currentsellers
+		sellers = Seller.objects.exclude(seller_id__in=currentsellers)
+		return TemplateResponse(request,'adminr/configvendorlist.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def vendors(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
 	else:
 		basics = basicinfo(request)
-		sellers = Seller.objects.all()
+		currentsellers = basics['categoryvendor'].values('seller_id')
+		print currentsellers
+		sellers = Seller.objects.exclude(seller_id__in=currentsellers)
 		return TemplateResponse(request,'adminr/vendors.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def categoryView(request):
 	categoryId=request.GET['categoryId']
@@ -349,6 +381,18 @@ def delvendoruser(request):
 		miveuser = basics['miveuser']
 		CategoryVendor.objects.get(categoryvendor_id=id).delete()
 		return redirect('/vendors')
+
+def ajaxremovefromuser(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		productId = request.POST['productId']
+		categoryvendorId = request.POST['categoryvendorId']
+		product = Product.objects.get(product_id = productId)
+		categ = CategoryVendor.objects.get(categoryvendor_id = categoryvendorId)
+		categ.products.remove(product)
+		categ.save()
+		return HttpResponse('removed successfully')
 
 def ajaxaddtouser(request):
 	if(checklogin(request)==False):
@@ -521,7 +565,66 @@ def seeOrder(request):
 		mobile = request.session['mobile']
 		user =miveuser
 		orders = Order.objects.filter(user=user)
-		return TemplateResponse(request, 'new/order.html',{'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'adminr/seeorders.html',{'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
+def statsorder(request):
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue') 
+	else:
+		basics = basicinfo(request)
+		miveuser = basics['miveuser']
+		allOrders = Order.objects.filter(user=miveuser)
+		sellers = []
+		statsSeller=[]
+		for ord in allOrders:
+			if ord.seller in sellers:
+				index = sellers.index(ord.seller)
+				oldst = statsSeller[index]
+				oldst['total'] = oldst['total']+ord.subtotal
+			else:
+				st = {}
+				sellers.append(ord.seller)
+				st['seller'] = ord.seller
+				st['total']=ord.subtotal
+				statsSeller.append(st)
+		allOrdersitems = Orderitem.objects.filter(order__user=miveuser)
+		products = []
+		statsProduct=[]
+		for ord in allOrdersitems:
+			if ord.product in products:
+				index = products.index(ord.product)
+				oldst = statsProduct[index]
+				oldst['total'] = oldst['total']+ord.product.pricePerUnit*ord.qtyInUnits
+			else:
+				st = {}
+				products.append(ord.product)
+				st['product'] = ord.product
+				st['total']=ord.product.pricePerUnit*ord.qtyInUnits
+				statsProduct.append(st)
+		print statsProduct
+		print statsSeller
+		return TemplateResponse(request, 'adminr/statsorder.html',{'basics':basics,'statsproduct':statsProduct,'statsseller':statsSeller,'csrf_token':get_or_create_csrf_token(request)})
+def statsorderitem(request):
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue') 
+	else:
+		basics = basicinfo(request)
+		miveuser = basics['miveuser']
+		allOrdersitems = Orderitem.objects.filter(order__user=miveuser)
+		products = []
+		stats=[]
+		for ord in allOrdersitems:
+			if ord.product in products:
+				index = products.index(ord.product)
+				oldst = stats[index]
+				oldst['total'] = oldst['total']+ord.product.pricePerUnit*ord.qtyInUnits
+			else:
+				st = {}
+				products.append(ord.product)
+				st['product'] = ord.product
+				st['total']=ord.product.pricePerUnit*ord.qtyInUnits
+				stats.append(st)
+		print stats
+		return TemplateResponse(request, 'adminr/statsorder.html',{'basics':basics,'stats':stats,'csrf_token':get_or_create_csrf_token(request)})
 def makeOrder(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue') 
