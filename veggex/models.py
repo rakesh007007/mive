@@ -205,7 +205,7 @@ class Order(models.Model):
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	category = models.ForeignKey(Category,blank=True,null=True)
 	class Meta:	
-		ordering = ['timeOfUpdate']
+		ordering = ['timeOfCreate']
 	def orderId(self):
 		return self.order_id
 	def __unicode__(self):

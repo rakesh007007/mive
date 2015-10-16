@@ -222,7 +222,7 @@
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
-            <a href="/cart" >
+            <a data-toggle="control-sidebar" >
               <i class="fa fa-shopping-cart"></i>
               <span class="label label-danger"></i></span>
             </a>
@@ -236,7 +236,7 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{basics.miveuser.profilePhoto.url}}" class="img-circle" alt="User Image">
+                <img src="/{{basics.miveuser.profilePhoto.url}}" class="img-circle" alt="User Image">
 
                 <p>
                   {{basics.miveuser.nameOfOwner}} - {{basics.miveuser.nameOfInstitution}}
@@ -256,9 +256,6 @@
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
         </ul>
       </div>
     </nav>
@@ -270,7 +267,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/rstatic/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="/{{basics.miveuser.profilePhoto.url}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{basics.miveuser.nameOfInstitution}}</p>
@@ -292,24 +289,26 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
-          <a href="#">
+          <a href="/index.html">
             <i class="fa fa-dashboard"></i> <span>Orders</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> make order</a></li>
+            <li class="active"><a href="/index.html"><i class="fa fa-circle-o"></i> make order</a></li>
             <li><a href="/seeOrder"><i class="fa fa-circle-o"></i>View Last Orders</a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="/vendors">
             <i class="fa fa-files-o"></i>
             <span>Manage Vendors</span>
             <span class="label label-primary pull-right">4</span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="/vendors"><i class="fa fa-circle-o"></i>add vendors</a></li>
-            <li><a href="/configvendor0"><i class="fa fa-circle-o"></i>config vendors</a></li>
-          </ul>
+        </li>
+         <li>
+          <a>
+            <i class="fa fa-th"></i> <span>Inventory management</span>
+            <small class="label pull-right bg-green">new</small>
+          </a>
         </li>
         <li>
           <a href="pages/widgets.html">
@@ -318,16 +317,25 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="/stats/order">
             <i class="fa fa-pie-chart"></i>
             <span>Statistics</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li><a href="/stats/order"><i class="fa fa-circle-o"></i>Order Statistics </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Payment Statistics</a></li>
+            <li>
+            {%with basics.categoryvendor.all|first as ting%}
+            <a href="/stats/seller?id={{ting.seller_id}}"><i class="fa fa-circle-o"></i> Vendor Statistics</a>
+{%endwith%}
+            </li>
+            <li>
+            {%with basics.categoryvendor.all|first as ting%}
+            <a href="/stats/product?id={{ting.seller_id}}"><i class="fa fa-circle-o"></i> Product Statistics</a>
+{%endwith%}
+            </li>
             <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>Inventory Statistics</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i>Anlytics</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Anlytics</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -365,204 +373,80 @@
     reserved.
   </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript::;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript::;">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript::;">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript::;">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript::;">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript::;">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript::;">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript::;">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
+  <!-- The Right Sidebar -->
+<aside class="control-sidebar control-sidebar-light" id="cartreload">
+  <!-- Content of the sidebar goes here -->
+   <h3 class="box-title">Total:Rs.{{basics.miveuser.cart.cartTotal}}</h3>
+  {%for pd in basics.allProducts%}
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tr>
+                  <th><center>Name</center></th>
+                  <th><center>Qty</center></th>
+                  <th><center>Delete</center></th>
+                </tr>
+                {%for item in pd.items%}
+                <tr>
+                  <td><center>{{item.product.name}}</center></td>
+                  <td>
+                    <center>
+                    <form method="post" action="/editqty" class="ajaxqty">
+                    {%csrf_token%}
+                    <input type="hidden" name="itemid" value="{{item.cartitem_id}}">
+                    <input type="text" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit">update</button></center>
+                    </form>
+                  </td>
+                  <td data-href="/removeItemPost?itemId={{item.cartitem_id}}" onclick="return false" class="minicart-delete"><center><a><span style="color:green" class="itemdelete" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o" ></i></span></a></center></td>
+                </tr>
+                {% endfor%}
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              
+              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
+            </div>
           </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
+          {%endfor%}
+</aside>
+<!-- The sidebar's background -->
+<!-- This div must placed right after the sidebar for it to work-->
+<div class="control-sidebar-bg"></div>
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 </div>
 <div class="modal fade" id="login-modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
          <div class="modal-dialog">
             <div class="loginmodal-container2 loginmodal-container" id="detail-container" style="max-width:none;max-height:none;">
                <center><img src="/rstatic/new/images/282.GIF"></center>
+            </div>
+         </div>
+      </div>
+<div class="modal fade" id="order-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
+               <form id="orderdata" method="get" action="/ordercategory" style="display:inline;">
+              <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
+              <input type="hidden" name="categoryvendorid" id="orderplaceid" value="{{pd.categoryvendor_id}}">
+               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
+                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
+               </div>
+               <div class="col-md-4 col-lg-4 col-xs-12">
+                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+                     <input type="hidden" name="csrfmiddlewaretoken" value="XxYq2vc6MzqqLBPH86mIQeEfObTCXVCc">
+               </div>
+               <div class="col-md-1 col-lg-1 col-xs-6 ol-md-offset-0 col-lg-offset-0">
+                  <button type="submit" id="checkout" class="btn btn-success btn-lg">
+                  Checkout
+                  </button>
+               </div>
+               </form>
             </div>
          </div>
       </div>
@@ -703,6 +587,7 @@
                     data: form.serialize(), // serializes the form's elements.
                     success: function(data)
                     {
+                      $('#cartreload').html(data)
                     },
                     error:function(data){console.log(data)
                     mivenotify('error','Item add','Error ocuured while processing your request')
@@ -735,6 +620,9 @@
                     data: form.serialize(), // serializes the form's elements.
                     success: function(data)
                     {
+                      $('#cartreload').html(data)
+                      $('#login-modal2').modal('toggle')
+
                     },
                     error:function(data){console.log(data)
                     mivenotify('error','Item add','Error ocuured while processing your request')
@@ -743,6 +631,48 @@
             {%endif %}
          });
       </script>
+      <script>
+  $('body').on('click','.orderplace',function(event){
+    categoryvendorid = $(this).attr('data-categoryvendorid')
+    console.log('clicked')
+    $('#orderplaceid').attr('value',categoryvendorid)
+    $('#order-modal').modal('toggle')
+    $.get('/ajaxcart',function(data){$('#cartreload').html(data)})
+  })
+</script>
+<script>
+$('body').on('click','.minicart-delete',function(event){
+  url=$(this).attr('data-href')
+  console.log('url',url)
+  $(this).html("<center><img src='rstatic/new/images/282.GIF'></center>")
+  $.get(url,function(data){
+      console.log('clicked')
+    $('#cartreload').html(data)
+    })
+  })
+</script>
+<script>
+  $('body').on('submit','.ajaxqty',function(event){
+    event.preventDefault()
+    form = $(this)
+    url = $(this).attr('action')
+    data = form.serialize()
+    mivenotify('Success','Qty Updated','quantity has been updated')
+    $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#cartreload').html(data)
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    }
+                  });
+
+  })
+</script>
       {% block script%}
       {% endblock %}
 </body>
