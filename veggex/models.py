@@ -110,7 +110,7 @@ class Contact(models.Model):
 	email =models.CharField(max_length=300, blank=False, null=False)
 	message = models.TextField(max_length=300, blank=False, null=False)
 	mobile=models.BigIntegerField(blank=False,null=False)
-	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	def __unicode__(self):
 		return str(self.contact_id)
@@ -122,14 +122,14 @@ class Career(models.Model):
 	subject=models.CharField(max_length=300, blank=False, null=False)
 	coverletter = models.TextField(max_length=300, blank=False, null=False)
 	resume = models.FileField(blank=False,null=False)
-	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	def __unicode__(self):
 		return str(self.career_id)
 class Cart(models.Model):
 	cart_id = models.AutoField(primary_key=True)
 	#check this time thing
-	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	cartTotal = models.IntegerField(default=0)
 	class Meta:
@@ -178,7 +178,7 @@ class Cartitem(models.Model):
 	cart=models.ForeignKey(Cart,blank=False,null=False)
 	qtyInUnits = models.PositiveIntegerField()
 	product = models.ForeignKey(Product,blank=False,null=False)
-	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	def cartItemId(self):
 		return self.cartitem_id
@@ -193,14 +193,14 @@ class Accartitem(models.Model):
 class Order(models.Model):
 	order_id = models.AutoField(primary_key=True)
 	user=models.ForeignKey(User,blank=False,null=False)
-	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	payment_mode = models.CharField(max_length=200,blank=True,null=True)
 	subtotal=models.IntegerField(blank=True,null=True)
 	status = models.CharField(max_length=200,default='PLACED')
 	orderMsg = models.TextField(blank=True,null=True)
 	deliveryTime = models.DateField(blank=True,null=True)
-	timeOfCreate = AutoDateTimeField(default=timezone.now)
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	category = models.ForeignKey(Category,blank=True,null=True)
