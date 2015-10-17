@@ -374,13 +374,8 @@ class Test2View(APIView):
 		print 'ding'
 		print len(data['items'])
 		print data['items'][str(2)]
-		return Response('[{"user":"name"}]', content_type='application/json')
+		return HttpResponse('[{"user":"name"}]', content_type='application/json')
 		#return Response(data)
-	def get(self,request,format=None):
-		data = request.data
-		id =int(request.GET['id'])
-		catg = CategoryVendor.objects.filter(user__user_id=id)
-		return Response(catg[0].products)
 
 class Listproducts(APIView):
 	"""
@@ -406,14 +401,6 @@ class AddressViewSet(viewsets.ModelViewSet):
 	#permission_classes = (IsAuthenticated,)
 	queryset = Address.objects.all()
 	serializer_class = AddressSerializer
-class CategoryVendorViewSet(viewsets.ModelViewSet):
-	"""
-	API endpoint that allows users to be viewed or edited.
-	"""
-	#authentication_classes = (TokenAuthentication,)
-	#permission_classes = (IsAuthenticated,)
-	queryset = CategoryVendor.objects.all()
-	serializer_class = CategoryVendorSerializer
 class UserViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
@@ -486,17 +473,3 @@ class SellerViewSet(viewsets.ModelViewSet):
 	#permission_classes = (IsAuthenticated,)
 	queryset = Seller.objects.all()
 	serializer_class = SellerSerializer
-class RakeshViewSet(viewsets.ViewSet):
-    """
-    A simple ViewSet for listing or retrieving users.
-    """
-    def list(self, request):
-        queryset = User.objects.all()
-        serializer = UserSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = User.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
