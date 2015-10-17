@@ -1,0 +1,215 @@
+/*random on top*/
+/*model order confirm*/
+/*spinner button classes*/
+.modalloading {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('/rstatic/new/images/282.GIF') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modalloading {
+    display: block;
+}
+
+
+.spinner {
+  display: inline-block;
+  opacity: 0;
+  width: 0;
+
+  -webkit-transition: opacity 0.25s, width 0.25s;
+  -moz-transition: opacity 0.25s, width 0.25s;
+  -o-transition: opacity 0.25s, width 0.25s;
+  transition: opacity 0.25s, width 0.25s;
+}
+
+.has-spinner.active {
+  cursor:progress;
+}
+
+.has-spinner.active .spinner {
+  opacity: 1;
+  width: auto; /* This doesn't work, just fix for unkown width elements */
+}
+
+.has-spinner.btn-mini.active .spinner {
+    width: 10px;
+}
+
+.has-spinner.btn-small.active .spinner {
+    width: 13px;
+}
+
+.has-spinner.btn.active .spinner {
+    width: 16px;
+}
+
+.has-spinner.btn-large.active .spinner {
+    width: 19px;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg); }
+    to { transform: scale(1) rotate(360deg); }
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+.btn-mive {
+  
+  background: #13c0ba;
+}
+#mivecategories>a:hover a:focus {
+    color:#000000 !important;
+    background:#000 !important;
+}
+body>.fontmive {
+    font-size: 20px ;
+    color:#13c0ba !important;
+}
+
+
+.panel-primary>.panel-heading {
+    color: #ffffff;
+    background-color:#13c0ba;
+    border-color: transparent;
+}
+
+
+
+#myCarousel .nav a small {
+    display:block;
+}
+#myCarousel .nav {
+  background:#eee;
+}
+#myCarousel .nav a {
+    border-radius:0px;
+}
+#rakeshfluid {
+     padding-right: 0px !important;
+     padding-left: 0px !important;
+     padding-top: 0px !important;
+     margin-right: 0 !important;
+     margin-left: 0 !important;
+     margin-top: 0 !important;
+}
+/*gmail inbox thing*/
+
+
+/*cart thing*/
+
+
+
+
+/*circle btn input*/
+
+
+  
+  .btn-circle {
+    width: 30px !important;
+    height: 30px !important;
+    text-align: center !important;
+    font-size: 6px !important;
+    line-height: 1.428571429 !important;
+    border-radius: 15px !important;
+  }
+  .btn-circle-big {
+    width: 60px !important;
+    height: 60px !important;
+    text-align: center !important;
+    font-size: 6px !important;
+    line-height: 1.428571429 !important;
+    border-radius: 30px !important;
+  }
+  .input-circle{
+  background: transparent;
+  border: 0 0 0 0 0px;
+  width:44px !important;
+  height:37px;
+  border-style: none;
+  border-color: transparent;
+  outline: none;
+  outline-offset: 0;
+  box-shadow: none;
+  border-radius: 0px;
+  border-bottom: 1px solid;
+  border-color: #dddddd;
+}
+.input-circle:active{
+  background: transparent;
+  outline-offset: 0;
+  box-shadow: none;
+
+
+}
+  .btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+  }
+  .btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 35px;
+  }
+
+
+/*testimonial*/
+
+
+/*contact */
+
+.modal-body:not(.two-col) { padding:0px }
+.glyphicon { margin-right:5px; }
+.glyphicon-new-window { margin-left:5px; }
+.modal-body .radio,.modal-body .checkbox {margin-top: 0px;margin-bottom: 0px;}
+.modal-body .list-group {margin-bottom: 0;}
+.margin-bottom-none { margin-bottom: 0; }
+.modal-body .radio label,.modal-body .checkbox label { display:block; }
+.modal-footer {margin-top: 0px;}
+@media screen and (max-width: 325px){
+    .btn-close {
+        margin-top: 5px;
+        width: 100%;
+    }
+    .btn-results {
+        margin-top: 5px;
+        width: 100%;
+    }
+    .btn-vote{
+        margin-top: 5px;
+        width: 100%;
+    }
+    
+}
+.modal-footer .btn+.btn {
+    margin-left: 0px;
+}
+.progress {
+    margin-right: 10px;
+}
