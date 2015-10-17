@@ -40,16 +40,16 @@ class Migration(migrations.Migration):
                 ('subject', models.CharField(max_length=300)),
                 ('coverletter', models.TextField(max_length=300)),
                 ('resume', models.FileField(upload_to=b'')),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
+                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
             ],
         ),
         migrations.CreateModel(
             name='Cart',
             fields=[
                 ('cart_id', models.AutoField(serialize=False, primary_key=True)),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
+                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('cartTotal', models.IntegerField(default=0)),
             ],
             options={
@@ -61,8 +61,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('cartitem_id', models.AutoField(serialize=False, primary_key=True)),
                 ('qtyInUnits', models.PositiveIntegerField()),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
+                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('cart', models.ForeignKey(to='veggex.Cart')),
             ],
         ),
@@ -76,6 +76,12 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='CategoryVendor',
+            fields=[
+                ('categoryvendor_id', models.AutoField(serialize=False, primary_key=True)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Contact',
             fields=[
                 ('contact_id', models.AutoField(serialize=False, primary_key=True)),
@@ -83,8 +89,15 @@ class Migration(migrations.Migration):
                 ('email', models.CharField(max_length=300)),
                 ('message', models.TextField(max_length=300)),
                 ('mobile', models.BigIntegerField()),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
+                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Currentstock',
+            fields=[
+                ('currentstock_id', models.AutoField(serialize=False, primary_key=True)),
+                ('remainingstock', models.FloatField(default=0)),
             ],
         ),
         migrations.CreateModel(
@@ -112,11 +125,12 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(default=b'PLACED', max_length=200)),
                 ('orderMsg', models.TextField(null=True, blank=True)),
                 ('deliveryTime', models.DateField(null=True, blank=True)),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now)),
+                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('category', models.ForeignKey(blank=True, to='veggex.Category', null=True)),
             ],
             options={
-                'ordering': ['timeOfUpdate'],
+                'ordering': ['timeOfCreate'],
             },
         ),
         migrations.CreateModel(
@@ -128,6 +142,16 @@ class Migration(migrations.Migration):
                 ('priceType', models.CharField(max_length=200, choices=[(b'as per mandi rates', b'as per mandi rates'), (b'custom rates', b'custom rates')])),
                 ('priceAtThatTime', models.IntegerField()),
                 ('order', models.ForeignKey(to='veggex.Order')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Owner',
+            fields=[
+                ('owner_id', models.AutoField(serialize=False, primary_key=True)),
+                ('nameOfOwner', models.CharField(max_length=300)),
+                ('mailId', models.CharField(max_length=300)),
+                ('mobileNo', models.BigIntegerField(unique=True)),
+                ('profilePhoto', models.ImageField(null=True, upload_to=b'', blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -148,7 +172,7 @@ class Migration(migrations.Migration):
                 ('status', models.IntegerField(default=1)),
                 ('isPerishable', models.NullBooleanField(default=False)),
                 ('category', models.ForeignKey(to='veggex.Category')),
-                ('related_products', models.ManyToManyField(related_name='related_products_rel_+', null=True, to='veggex.Product', blank=True)),
+                ('related_products', models.ManyToManyField(related_name='related_products_rel_+', to='veggex.Product', blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -159,8 +183,30 @@ class Migration(migrations.Migration):
                 ('mailId', models.CharField(max_length=300)),
                 ('mobileNo', models.BigIntegerField()),
                 ('profilePhoto', models.ImageField(null=True, upload_to=b'', blank=True)),
+                ('categories', models.CharField(max_length=240, null=True, blank=True)),
+                ('rating', models.IntegerField(default=0)),
                 ('address', models.ForeignKey(blank=True, to='veggex.Address', null=True)),
                 ('mandi', models.ForeignKey(blank=True, to='veggex.Mandi', null=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Stockconsumption',
+            fields=[
+                ('stockwastage_id', models.AutoField(serialize=False, primary_key=True)),
+                ('consumption', models.FloatField(default=0)),
+                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('comment', models.TextField(null=True, blank=True)),
+                ('stock', models.ForeignKey(to='veggex.Currentstock')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Stockwastage',
+            fields=[
+                ('stockwastage_id', models.AutoField(serialize=False, primary_key=True)),
+                ('wastage', models.FloatField(default=0)),
+                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('comment', models.TextField(null=True, blank=True)),
+                ('stock', models.ForeignKey(to='veggex.Currentstock')),
             ],
         ),
         migrations.CreateModel(
@@ -184,6 +230,8 @@ class Migration(migrations.Migration):
                 ('profilePhoto', models.ImageField(null=True, upload_to=b'', blank=True)),
                 ('address', models.ForeignKey(blank=True, to='veggex.Address', null=True)),
                 ('cart', models.ForeignKey(to='veggex.Cart')),
+                ('categories', models.ManyToManyField(to='veggex.CategoryVendor', null=True, blank=True)),
+                ('owner', models.ForeignKey(blank=True, to='veggex.Owner', null=True)),
             ],
         ),
         migrations.AddField(
@@ -195,6 +243,11 @@ class Migration(migrations.Migration):
             model_name='orderitem',
             name='product',
             field=models.ForeignKey(to='veggex.Product'),
+        ),
+        migrations.AddField(
+            model_name='order',
+            name='seller',
+            field=models.ForeignKey(blank=True, to='veggex.Seller', null=True),
         ),
         migrations.AddField(
             model_name='order',
@@ -210,6 +263,21 @@ class Migration(migrations.Migration):
             model_name='customcategoryproducts',
             name='user',
             field=models.ForeignKey(to='veggex.User'),
+        ),
+        migrations.AddField(
+            model_name='currentstock',
+            name='product',
+            field=models.OneToOneField(to='veggex.Product'),
+        ),
+        migrations.AddField(
+            model_name='categoryvendor',
+            name='products',
+            field=models.ManyToManyField(to='veggex.Product', null=True, blank=True),
+        ),
+        migrations.AddField(
+            model_name='categoryvendor',
+            name='seller',
+            field=models.ForeignKey(to='veggex.Seller'),
         ),
         migrations.AddField(
             model_name='cartitem',

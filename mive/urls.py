@@ -15,6 +15,7 @@ router.register(r'cartitem', apis.CartitemViewSet)
 router.register(r'order', apis.OrderViewSet)
 router.register(r'orderitem', apis.OrderitemViewSet)
 router.register(r'seller', apis.SellerViewSet)
+router.register(r'categoryvendor', apis.CategoryVendorViewSet)
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^authtoken/', apis.TestView.as_view(), name='auth-view'),

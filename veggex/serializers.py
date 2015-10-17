@@ -3,6 +3,9 @@ from rest_framework import serializers
 from veggex.models import *
 
 
+class SellerSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Seller
 class AddressSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Address
@@ -24,12 +27,6 @@ class CartSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Cart
         fields = ('cart_id','timeOfCreate','timeOfUpdate','cartTotal')
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    cart = CartSerializer()
-    class Meta:
-        model = User
-        fields = ('user_id', 'nameOfInstitution', 'nameOfOwner',
-                  'institutionType', 'mailId','cartId', 'mobileNo','cart', 'address', 'profilePhoto','gpsLocation','profilephotourl')
 class BaseProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
@@ -41,6 +38,19 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
         model = Product
         fields = ('product_id', 'name', 'description','grade','related_products',
                   'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','coverphotourl','origin')
+class CategoryVendorSerializer(serializers.HyperlinkedModelSerializer):
+    seller = SellerSerializer()
+    products = ProductSerializer(many=True)
+    class Meta:
+        model = CategoryVendor
+        fields = ('categoryvendor_id','seller','products')
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    cart = CartSerializer()
+    categories = CategoryVendorSerializer(many=True)
+    class Meta:
+        model = User
+        fields = ('user_id', 'nameOfInstitution', 'nameOfOwner',
+                  'institutionType', 'mailId','cartId', 'mobileNo','cart', 'address', 'profilePhoto','gpsLocation','profilephotourl','categories','creditlimit')
 class ProductsByCategorySerializer(serializers.HyperlinkedModelSerializer):
     related_products = ProductSerializer(many=True)
     class Meta:
@@ -59,9 +69,6 @@ class OrderitemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Orderitem
         fields = ('orderitem_id','order','unit','qtyInUnits','priceType','priceAtThatTime','product')
-class SellerSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Seller
 class CustomCategoryProductsSerializer(serializers.HyperlinkedModelSerializer):
     product = ProductSerializer(many=True)
     class Meta:

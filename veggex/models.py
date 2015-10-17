@@ -67,7 +67,6 @@ class Seller(models.Model):
     mobileNo = models.BigIntegerField(blank=False,null=False)
     profilePhoto = models.ImageField(blank=True,null=True)
     address = models.ForeignKey(Address, blank=True, null=True)
-    mandi = models.ForeignKey(Mandi,blank=True,null=True)
     categories = models.CharField(max_length=240,blank=True,null=True)
     rating = models.IntegerField(default=0)
     def __unicode__(self):
@@ -156,6 +155,7 @@ class User(models.Model):
     cart =models.ForeignKey(Cart,blank=False,null=False)
     owner = models.ForeignKey(Owner,blank=True, null=True)
     categories = models.ManyToManyField(CategoryVendor,blank=True,null=True)
+    creditlimit = models.IntegerField(default=0,null=True,blank=True)
     def profilephotourl(self):
     	return self.profilePhoto.url
     def cartId(self):
