@@ -1,0 +1,55 @@
+<div class="col-md-10 col-md-offset-1" style="position:relative">
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">Charts</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              
+              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript">
+ window.rakd = function(t){
+      tt = new Date(t)
+      return tt.format(yy,m,dd)
+    }
+        var chart = new CanvasJS.Chart("chartContainer",
+    {
+      theme: "theme2",
+      title:{
+        text: "Per Order spending"
+      },
+      animationEnabled: true,
+      axisX: {
+        valueFormatString: "DD/MMM",
+        interval:1,
+        intervalType: "week"
+        
+      },
+      axisY:{
+        includeZero: false
+        
+      },
+      data: [
+      {        
+        type: "scatter",
+        //lineThickness: 3,        
+        dataPoints: [
+        {%for item in orderItems%}
+        { x:new Date('{{item.order.deliveryTime}}') , y: {{item.product.pricePerUnit}}*{{item.qtyInUnits}} },
+        {%endfor%}
+
+        
+        ]
+      }
+      
+      
+      ]
+    });
+chart.render();
+</script>

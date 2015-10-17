@@ -225,3 +225,25 @@ class Subscribe(models.Model):
 	email = models.TextField(blank=False,null=False)
 	def __unicode__(self):
 		return str(self.email)
+class Currentstock(models.Model):
+	currentstock_id = models.AutoField(primary_key=True)
+	product = models.OneToOneField(Product,blank=False,null=False)
+	remainingstock = models.FloatField(blank=False,null=False,default=0)
+	def __unicode__(self):
+		return str(self.product.name)
+class Stockconsumption(models.Model):
+	stockwastage_id = models.AutoField(primary_key=True)
+	stock  = models.ForeignKey(Currentstock,blank=False,null=False)
+	consumption = models.FloatField(blank=False,null=False,default=0)
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	comment = models.TextField(blank=True,null=True)
+	def __unicode__(self):
+		return str(self.stock)
+class Stockwastage(models.Model):
+	stockwastage_id = models.AutoField(primary_key=True)
+	stock = models.ForeignKey(Currentstock,blank=False,null=False)
+	wastage = models.FloatField(blank=False,null=False,default=0)
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	comment = models.TextField(blank=True,null=True)
+	def __unicode__(self):
+		return str(self.stock)

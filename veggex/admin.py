@@ -19,6 +19,9 @@ admin.site.register(Accartitem)
 admin.site.register(Career)
 admin.site.register(Contact)
 admin.site.register(CategoryVendor)
+admin.site.register(Currentstock)
+admin.site.register(Stockwastage)
+admin.site.register(Stockconsumption)
 
 
 

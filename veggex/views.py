@@ -626,6 +626,16 @@ def ordercategory(request):
 			for itemn in items:
 				rak = Orderitem()
 				rak.product = itemn.product
+				stock = Currentstock.objects.filter(product=itemn.product)
+				if(len(stock)>0):
+					currStock = stock[0]
+					currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
+					currStock.save()
+				else:
+					currStock = Currentstock()
+					currStock.product = itemn.product
+					currStock.remainingstock=itemn.qtyInUnits
+					currStock.save()
 				rak.unit=itemn.product.unit
 				rak.qtyInUnits = itemn.qtyInUnits
 				miveuser=user
@@ -639,11 +649,54 @@ def ordercategory(request):
 			cart.save()
 	strr = '/cart?notify=yes&description=Order has been placed succesfully&title=OrderID:'+str(order_id)
 	return redirect(strr)
+def resetstock(request):
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	else:
+		stockId = int(request.GET['stockId'])
+		stock = Currentstock.objects.get(currentstock_id = stockId)
+		remainingstock = stock.remainingstock
+		stock.remainingstock=0
+		stock.save()
+		stcons = Stockwastage()
+		stcons.stock = stock
+		stcons.wastage = remainingstock
+		stcons.save()
+		stocks = Currentstock.objects.all()
+		basics =basicinfo(request)
+		return TemplateResponse(request, 'adminr/ajaxstocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
+def ajaxstock(request):
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	else:
+		stockId = int(request.POST['stockid'])
+		cons = float(request.POST['newqty'])
+		stock = Currentstock.objects.get(currentstock_id = stockId)
+		stcons = Stockconsumption()
+		stcons.stock = stock
+		if stock.remainingstock>cons and cons>0:
+			stock.remainingstock = stock.remainingstock-cons
+		else:
+			stock.remainingstock = 0
+			cons=0
+		stock.save()
+		stcons.consumption = cons
+		stcons.save()
+		stocks = Currentstock.objects.all()
+		basics =basicinfo(request)
+		return TemplateResponse(request, 'adminr/ajaxstocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
+def stock(request):
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	else:
+		stocks = Currentstock.objects.all()
+		basics =basicinfo(request)
+		return TemplateResponse(request, 'adminr/stocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
+
 def orderStep1(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	else:
-		
 		return TemplateResponse(request, 'orderstep1.html',{'csrf_token':get_or_create_csrf_token(request)})
 def seeOrder(request):
 	if ('loggedin' not in request.session):
@@ -659,12 +712,27 @@ def seeOrder(request):
 		user =miveuser
 		orders = Order.objects.filter(user=user)
 		return TemplateResponse(request, 'adminr/seeorders.html',{'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
-def statsseller(request):
-	sellerId = int(request.GET['id'])
-	seller = Seller.objects.get(seller_id = sellerId)
+def statsproduct(request):
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
-	orders = Order.objects.filter(seller=seller).filter(user=miveuser).order_by('-timeOfCreate')
+	if request.GET['id']==0:
+		productId = int(request.GET['id'])
+		product = Product.objects.get(product_id = productId)
+		orderItems = Orderitem.objects.filter(product=product).filter(order__user=miveuser)
+	else:
+		orderItems = Orderitem.objects.filter(order__user=miveuser)
+	allItems = Orderitem.objects.filter(order__user=miveuser)
+	return TemplateResponse(request,'adminr/statsproduct.html',{'allItems':allItems,'basic':basics,'orderItems':orderItems})
+def statsseller(request):
+	basics = basicinfo(request)
+	miveuser = basics['miveuser']
+	if request.GET['id']==0:
+		sellerId = int(request.GET['id'])
+		seller = Seller.objects.get(seller_id = sellerId)
+		orders = Order.objects.filter(seller=seller).filter(user=miveuser).order_by('-timeOfCreate')
+	else:
+		orders = Order.objects.filter(user=miveuser).order_by('-timeOfCreate')
+		seller=[]
 	ods = orders.values('order_id')
 	ototal = orders.aggregate(Sum('subtotal')) 
 	overalltotal = ototal['subtotal__sum']
@@ -708,7 +776,7 @@ def ajax0datefilter(request):
 		statsSeller=[]
 		apporders = []
 		for ort in allOrders:
-			if(startdate<=ort.timeOfCreate.replace(tzinfo=None)<=enddate and ort not in apporders):
+			if(startdate<=ort.timeOfCreate.replace(tzinfo=None) and ort.timeOfCreate.replace(tzinfo=None)<=enddate and ort not in apporders):
 				apporders.append(ort)
 			else:
 				pass
@@ -741,6 +809,33 @@ def ajax0datefilter(request):
 			else:
 				pass
 		return TemplateResponse(request, 'adminr/ajaxstatsorder.html',{'basics':basics,'statsproduct':statsProduct,'statsseller':statsSeller,'csrf_token':get_or_create_csrf_token(request)})
+def ajaxproductfilter(request):
+	productName = request.POST['product']
+	if request.POST['date']:
+		ping = request.POST['date']
+		pin = ping.split(' - ')
+		st = pin[0]
+		fi = pin[1]
+		st = st.replace('/','-')
+		fi = fi.replace('/','-')
+	else:
+		st ='01-01-2010'
+		fi = '01-01-3010'
+	startdate =datetime.strptime(str(st),"%m-%d-%Y")
+	enddate = datetime.strptime(str(fi),"%m-%d-%Y")
+	basics = basicinfo(request)
+	miveuser = basics['miveuser']
+	product = Product.objects.get(name = productName)
+	orderItems = Orderitem.objects.filter(product=product).filter(order__user=miveuser)
+	t =[]
+	for it in orderItems:
+		if startdate <= it.order.timeOfCreate.replace(tzinfo=None) and it.order.timeOfCreate.replace(tzinfo=None) <= enddate:
+			t.append(it)
+		else:
+			pass
+	allItems = Orderitem.objects.filter(order__user=miveuser)
+	return TemplateResponse(request,'adminr/ajaxstatsproduct.html',{'allItems':allItems,'basic':basics,'orderItems':t})
+
 def ajaxdatefilter(request):
 	sellerName= request.POST['seller']
 	print 'yolo'
@@ -763,7 +858,12 @@ def ajaxdatefilter(request):
 	orders = Order.objects.filter(seller=seller).filter(user=miveuser)
 	apporders = []
 	for ort in orders:
-		if(startdate<=ort.timeOfCreate.replace(tzinfo=None)<=enddate and ort not in apporders):
+		if(startdate<=ort.timeOfCreate.replace(tzinfo=None) and ort.timeOfCreate.replace(tzinfo=None)<=enddate and ort not in apporders):
+			print startdate
+			print enddate
+			print ort.timeOfCreate.replace(tzinfo=None)
+			print startdate<ort.timeOfCreate.replace(tzinfo=None)
+			print enddate >ort.timeOfCreate.replace(tzinfo=None)
 			apporders.append(ort)
 		else:
 			pass
@@ -775,7 +875,7 @@ def ajaxdatefilter(request):
 	statsProduct=[]
 	print 'testin starts from here'
 	for ord in allOrdersitems:
-		if(startdate<ord.order.timeOfCreate.replace(tzinfo=None)<=enddate):
+		if(startdate<=ord.order.timeOfCreate.replace(tzinfo=None) and ord.order.timeOfCreate.replace(tzinfo=None)<=enddate):
 			if ord.product in products:
 				index = products.index(ord.product)
 				oldst = statsProduct[index]

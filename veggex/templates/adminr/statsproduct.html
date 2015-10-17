@@ -15,7 +15,7 @@
         <div class="col-md-10 col-md-offset-1" style="position:relative">
           <form id="bigb">
         <div class="row">
-           <div class="col-md-6 col-md-offset-3">
+           <div class="col-md-6">
              <div class="form-group">
                 <label>Date range:</label>
 
@@ -29,22 +29,34 @@
                 <!-- /.input group -->
               </div>
            </div>
-           <div class="col-md-3">
+           <div class="col-md-6">
+             <div class="form-group">
+                <label>Select a product</label>
+                <select name="product" class="form-control select2" id="productselect" style="width: 100%;">
+                {%with allItems|first as ting%}
+                <option selected="selected">{{ting.product.name}}</option>
+                 {% for item in allItems%}
+                 {% if ting = item%}
+                 {%else%}
+                 <option data-id="{{item.product.product_id}}">{{item.product.name}}</option>
+                 {%endif%}
+                  {%endfor%}
+                  {%endwith%}
+                </select>
+              </div>
            </div>
          </div>
          </form>
         </div>
         </div>
       <div class="row" id="targereload">
-        <div class="col-md-11 col-md-offset-1" style="position:relative">
+        <div class="col-md-10 col-md-offset-1" style="position:relative">
           <div class="box">
           <div class="box-header with-border">
               <h3 class="box-title">Charts</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body" id="chartContainer" style="height: 300px; width: 90%;">
-            </div>
-            <div class="box-body" id="chartContainer2" style="height: 350px; width: 90%;">
+            <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
@@ -79,7 +91,57 @@
       </div>
 {%endblock%}
 {% block script%}
-<script src="/rstatic/admin/plugins/daterangepicker/daterangepicker.js"></script>
+<script>
+  $('body').on('click','.orderplace',function(event){
+    categoryvendorid = $(this).attr('data-categoryvendorid')
+    console.log('clicked')
+    $('#orderplaceid').attr('value',categoryvendorid)
+    $('#order-modal').modal('toggle')
+  })
+</script>
+ <script type="text/javascript">
+ window.rakd = function(t){
+      tt = new Date(t)
+      return tt.format(yy,m,dd)
+    }
+  window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer",
+    {
+      theme: "theme2",
+      title:{
+        text: "Per Order spending"
+      },
+      animationEnabled: true,
+      axisX: {
+        valueFormatString: "DD/MMM",
+        interval:1,
+        intervalType: "week"
+        
+      },
+      axisY:{
+        includeZero: false
+        
+      },
+      data: [
+      {        
+        type: "scatter",
+        //lineThickness: 3,        
+        dataPoints: [
+        {%for item in orderItems%}
+        { x:new Date('{{item.order.deliveryTime}}') , y: {{item.product.pricePerUnit}}*{{item.qtyInUnits}} },
+        {%endfor%}
+
+        
+        ]
+      }
+      
+      
+      ]
+    });
+chart.render();
+    }
+  </script>
+  <script src="/rstatic/admin/plugins/daterangepicker/daterangepicker.js"></script>
   <script>
   $(function () {
     //Date range picker
@@ -95,89 +157,13 @@
   });
 </script>
 <script>
-  $('body').on('click','.orderplace',function(event){
-    categoryvendorid = $(this).attr('data-categoryvendorid')
-    console.log('clicked')
-    $('#orderplaceid').attr('value',categoryvendorid)
-    $('#order-modal').modal('toggle')
-  })
-</script>
- <script type="text/javascript">
-  window.onload = function () {
-        var chart = new CanvasJS.Chart("chartContainer",
-   {
-      title:{
-         text: "Amount spent per vendor"
-      },
-                animationEnabled: true,
-      legend:{
-         verticalAlign: "bottom",
-         horizontalAlign: "center"
-      },
-      data: [
-      {       
-         type: "pie",
-         showInLegend: true,
-         toolTipContent: "{legendText}: <strong>₹{y}</strong>",
-         indexLabel: "{label} ₹{y}",
-         dataPoints: [
-         {%for st in statsseller%}
-         {  y: {{st.total}}, legendText: "{{st.seller.nameOfSeller}}", exploded: true, label: "{{st.seller.nameOfSeller}}" },
-         {%endfor%}
-         ]
-   }
-   ]
-   });
-   chart.render();        
-   var chart2 = new CanvasJS.Chart("chartContainer2", {
-
-         title:{
-            text:"Amount spent per product"           
-
-         },
-                        animationEnabled: true,
-         axisX:{
-            interval: 1,
-            gridThickness: 5,
-            labelFontSize: 8,
-            labelFontStyle: "normal",
-            labelFontWeight: "normal",
-            labelFontFamily: "Lucida Sans Unicode"
-
-         },
-         axisY2:{
-            interlacedColor: "rgba(1,77,101,.2)",
-            gridColor: "rgba(1,77,101,.1)"
-
-         },
-
-         data: [
-         {     
-            type: "bar",
-                name: "Products",
-            axisYType: "secondary",
-            color: "#014D65",          
-            dataPoints: [
-            {%for st in statsproduct%}
-            {y: {{st.total}}, label: "{{st.product.name}}"  },
-            {%endfor%}
-            ]
-         }
-         
-         ]
-      });
-
-chart2.render();
-    }
-  </script>
-  <script>
   $('body').on('click','.applyBtn',function(event){
     console.log('clicked',$('#reservation').datepicker("getDate"))
     data = $('#bigb').serialize()
     $('#targereload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
     $.ajax({
                     type: "POST",
-                    url: '/stats/ajax0filter',
+                    url: '/stats/ajaxproductfilter',
                     data: data, // serializes the form's elements.
                     success: function(data)
                     {
@@ -185,8 +171,27 @@ chart2.render();
                     },
                     error:function(data){
                     mivenotify('error','Item add','Error occured while adding product')
+                    console.log(data)
                     }
                   });
   })
-  </script>
+  $('body').on('click','#productselect',function(event){
+    console.log('clicked2',$('#reservation').datepicker("getDate"))
+    data =$('#bigb').serialize()
+    $('#targereload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+    $.ajax({
+                    type: "POST",
+                    url: '/stats/ajaxproductfilter',
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#targereload').html(data)
+                    },
+                    error:function(data){
+                      console.log(data)
+                    mivenotify('error','Item add','Error occured while adding product')
+                    }
+                  });
+  })
+</script>
 {% endblock %}
