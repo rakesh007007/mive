@@ -90,8 +90,10 @@ urlpatterns = [
     url('^api/search/description/(?P<pid>.+)/$', apis.ProductSearchDescriptionList.as_view()),
     url('^api/search/$', apis.ApiSearchList.as_view()),
     url('^api/addtocart/$', apis.ApiAddToCart.as_view()),
+    url('^api/seecart/$', apis.ApiSeeCart.as_view()),
     url('^api/updatecart/$', apis.ApiUpdateCart.as_view()),
     url('^api/makeorder/$', apis.ApiMakeOrder.as_view()),
+    url('^trycart/$', views.trycart),
 
 
 

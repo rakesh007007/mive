@@ -58,6 +58,7 @@ class ProductsByCategorySerializer(serializers.HyperlinkedModelSerializer):
         fields = ('product_id', 'name','grade','related_products','description',
                   'category', 'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','coverphotourl','origin')
 class CartitemSerializer(serializers.HyperlinkedModelSerializer):
+    product = ProductSerializer()
     class Meta:
         model = Cartitem
         fields=('cartitem_id','cart','qtyInUnits','product')

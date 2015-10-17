@@ -71,6 +71,8 @@ class Seller(models.Model):
     rating = models.IntegerField(default=0)
     def __unicode__(self):
     	return str(self.nameOfSeller)
+    def jsfy(self):
+    	return {'seller_id':self.seller_id,'nameOfSeller':self.nameOfSeller}
 class Product(models.Model):
 	product_id = models.AutoField(primary_key=True)
 	name=models.CharField(max_length=300,blank=False,null=False)
@@ -184,6 +186,8 @@ class Cartitem(models.Model):
 		return self.cartitem_id
 	def __unicode__(self):
 		return str(self.product.name)
+	def jsfy(self):
+		return {'cartitem_id':self.cartitem_id,'qtyInUnits':self.qtyInUnits,'timeOfCreate':self.timeOfCreate}
 class Accartitem(models.Model):
 	accartitem_id = models.AutoField(primary_key=True)
 	cart=models.ForeignKey(Cart,blank=False,null=False)
