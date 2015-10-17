@@ -1,0 +1,51 @@
+[
+   {
+      "fields":{
+         "category":4,
+         "origin":"chomu",
+         "qualityRemarks":"yoo",
+         "name":"rakesh",
+         "grade":"Grade-A",
+         "pricePerUnit":10,
+         "isPerishable":true,
+         "related_products":[
+            2,
+            102
+         ],
+         "seller":14,
+         "status":1,
+         "unit":"kg",
+         "maxAvailableUnits":1000,
+         "popularityIndex":4,
+         "coverphoto":"./Whatsapp.png",
+         "priceType":"as per mandi rates",
+         "description":"fff"
+      },
+      "model":"veggex.product",
+      "pk":221
+   },
+   {
+      "fields":{
+         "category":2,
+         "origin":"newzealand",
+         "qualityRemarks":"superb quality ",
+         "name":"2ptKiwi Fruit ",
+         "grade":"",
+         "pricePerUnit":200,
+         "isPerishable":false,
+         "related_products":[
+
+         ],
+         "seller":14,
+         "status":1,
+         "unit":"kg",
+         "maxAvailableUnits":10,
+         "popularityIndex":7,
+         "coverphoto":"./No_image_available.png",
+         "priceType":"as per mandi rates",
+         "description":"Newzealand imported Kiwi fruit "
+      },
+      "model":"veggex.product",
+      "pk":2210716
+   }
+]

@@ -1,0 +1,25 @@
+<table class="table table-bordered">
+                <tr>
+                  <th class="hidden-xs hidden-sm"><center>Product</center></th>
+                  <th><center>Remaining Qty</center></th>
+                  <th><center>Add Consumption</center></th>
+                  <th><center>Clear stock</center></th>
+                </tr>
+                {%for order in stocks%}
+                <tr>
+                  <td class="hidden-xs hidden-sm"><center>{{order.product.name}}</center></td>
+                  <td>
+                    <center>{{order.remainingstock}} {{order.product.unit}}</center>
+                  </td>
+                  <td>
+                    <center>
+                    <form method="post" action="/ajaxstock" class="ajaxstock">
+                    {%csrf_token%}
+                    <input type="hidden" name="stockid" value="{{order.currentstock_id}}">
+                    <input type="text" class="input-circle" name="newqty" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit">Add</button></center>
+                    </form>
+                  </td>
+                  <td data-href="/resetstock?stockId={{order.currentstock_id}}" onclick="return false" class="stock-reset"><center><a href="#" onclick="return false"><span style="color:green" class="itemdelete" data-itemid="{{item.cartitem_id}}"><i class="fa fa-refresh" ></i></span></a></center></td>
+                </tr>
+                {% endfor%}
+              </table>

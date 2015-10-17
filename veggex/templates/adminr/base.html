@@ -11,9 +11,9 @@
   <link rel="stylesheet" href="/rstatic/admin/dist/css/master.css">
   <link rel="stylesheet" href="/rstatic/admin/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/rstatic/admin/dist/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/rstatic/admin/dist/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/rstatic/admin/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -305,14 +305,8 @@
           </a>
         </li>
          <li>
-          <a>
+          <a href="/stocks">
             <i class="fa fa-th"></i> <span>Inventory management</span>
-            <small class="label pull-right bg-green">new</small>
-          </a>
-        </li>
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Payments</span>
             <small class="label pull-right bg-green">new</small>
           </a>
         </li>
@@ -326,17 +320,21 @@
             <li><a href="/stats/order"><i class="fa fa-circle-o"></i>Order Statistics </a></li>
             <li>
             {%with basics.categoryvendor.all|first as ting%}
-            <a href="/stats/seller?id={{ting.seller_id}}"><i class="fa fa-circle-o"></i> Vendor Statistics</a>
+            <a href="/stats/seller?id=0"><i class="fa fa-circle-o"></i> Vendor Statistics</a>
 {%endwith%}
             </li>
             <li>
-            {%with basics.categoryvendor.all|first as ting%}
-            <a href="/stats/product?id={{ting.seller_id}}"><i class="fa fa-circle-o"></i> Product Statistics</a>
-{%endwith%}
+            <a href="/stats/product?id=0"><i class="fa fa-circle-o"></i> Product Statistics</a>
             </li>
             <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>Inventory Statistics</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>Anlytics</a></li>
           </ul>
+        </li>
+        <li>
+          <a href="pages/widgets.html">
+            <i class="fa fa-th"></i> <span>Payments</span>
+            <small class="label pull-right bg-green">new</small>
+          </a>
         </li>
         <li class="treeview">
           <a href="#">
@@ -455,7 +453,7 @@
 <!-- jQuery 2.1.4 -->
 <script src="/rstatic/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="/rstatic/admin/dist/js/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
@@ -463,7 +461,7 @@
 <!-- Bootstrap 3.3.5 -->
 <script src="/rstatic/admin/bootstrap/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="/rstatic/admin/dist/js/raphael-min.js"></script>
 <!-- Sparkline -->
 <script src="/rstatic/admin/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -472,7 +470,7 @@
 <!-- jQuery Knob Chart -->
 <script src="/rstatic/admin/plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="/rstatic/admin/dist/js/moment.min.js"></script>
 <script src="/rstatic/admin/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="/rstatic/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
@@ -488,7 +486,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/rstatic/admin/dist/js/demo.js"></script>
 <script src="/rstatic/admin/dist/js/pnotify.custom.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
+<script type="text/javascript" src="/rstatic/admin/dist/js/canvasjs.js"></script>
 
 <script type="text/javascript">
          $(document).ready(function(){
