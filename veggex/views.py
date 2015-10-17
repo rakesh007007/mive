@@ -1,4 +1,5 @@
 from base import *
+from veggex.serializers import *
 def giveajaxcart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -1017,6 +1018,33 @@ def cart(request):
 			pass
 	print allProducts
 	return TemplateResponse(request, 'adminr/cart.html',{'allProducts':allProducts,'shippingCost':shippingCost,'cartItems':cartItems,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+def trycart(request):
+	userId = request.GET['userId']
+	miveuser=User.objects.get(user_id = userId)
+	cart=miveuser.cart
+	cartItems=Cartitem.objects.filter(cart=cart)
+	totalItems=len(cartItems)
+	shippingCost=0
+	categoryvendor= miveuser.categories
+	allProducts = []
+	for cvend in categoryvendor.all():
+		categoryvendor_id = cvend.categoryvendor_id
+		seller = cvend.seller
+		jsseller = SellerSerializer(seller,context={'request': request})
+		itemscount = Cartitem.objects.filter(product__seller = seller).filter(cart=cart).count()
+		if itemscount>0:
+			items = Cartitem.objects.filter(product__seller = seller).filter(cart=cart)
+			t =[]
+			for p in items:
+				jsitem = CartitemSerializer(p,context={'request': request}).data
+				t.append(jsitem)
+			jsitems =json.dumps(t)
+			pd = {'categoryvendor_id':categoryvendor_id,'seller':jsseller.data,'items':jsitems}
+			allProducts.append(json.dumps(pd))
+		else:
+			pass
+	allProducts = json.dumps(allProducts)
+	return HttpResponse(allProducts,content_type='application/json')
 def ajaxcart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')

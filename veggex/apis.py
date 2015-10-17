@@ -293,6 +293,39 @@ class ApiUpdateCart(APIView):
 			return Response([{"status":"success"}])
 		except Exception,e:
 			return Response(e)
+class ApiSeeCart(APIView):
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	def get(self,request,format=None):
+		try:
+			userId = request.GET['userId']
+			miveuser=User.objects.get(user_id = userId)
+			cart=miveuser.cart
+			cartItems=Cartitem.objects.filter(cart=cart)
+			totalItems=len(cartItems)
+			shippingCost=0
+			categoryvendor= miveuser.categories
+			allProducts = []
+			for cvend in categoryvendor.all():
+				categoryvendor_id = cvend.categoryvendor_id
+				seller = cvend.seller
+				jsseller = SellerSerializer(seller,context={'request': request})
+				itemscount = Cartitem.objects.filter(product__seller = seller).filter(cart=cart).count()
+				if itemscount>0:
+					items = Cartitem.objects.filter(product__seller = seller).filter(cart=cart)
+					t =[]
+					for p in items:
+						jsitem = CartitemSerializer(p,context={'request': request}).data
+						t.append(jsitem)
+					jsitems =t
+					pd = {'categoryvendor_id':categoryvendor_id,'seller':jsseller.data,'items':jsitems}
+					allProducts.append(pd)
+				else:
+					pass
+			return HttpResponse(JSONRenderer().render(allProducts),content_type='application/json')
+		except Exception,e:
+			return HttpResponse(e)
+
 class ApiMakeOrder(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
