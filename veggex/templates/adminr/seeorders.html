@@ -1,0 +1,89 @@
+{% extends 'adminr/base.html' %}
+{% block  content %}
+<section class="content-header">
+   <h1>
+      Mive 
+      <small>Restaurs dashboard</small>
+   </h1>
+   <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Vendors</li>
+   </ol>
+</section>
+<section class="content">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1" style="position:relative">
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">Your orders</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tr>
+                  <th class="hidden-xs hidden-sm"><center>OrderId</center></th>
+                  <th><center>Date</center></th>
+                  <th><center>Status</center></th>
+                  <th><center>Subtotal</center></th>
+                  <th class="hidden-sm hidden-xs"><center>Details</center></th>
+                </tr>
+                {%for order in orders%}
+                <tr>
+                  <td class="hidden-xs hidden-sm"><center>{{order.order_id}}</center></td>
+                  <td>
+                    <center>{{order.timeOfCreate}}</center>
+                  </td>
+                  <td>
+                    <center>{{order.status}}</center>
+                  </td>
+                  <td><center>
+                  <center>₹{{order.subtotal}}</center>
+                  </td>
+                  <td>
+                    <center><a data-productid="{{item.product.product_id}}" href="/configvendor?id={{sel.seller_id}}" ><span class="badge bg-yellow" style="color:blue">Details</span></a></center>
+                  </td>
+                </tr>
+                {% endfor%}
+              </table>
+            </div>
+            <!-- /.box-body -->
+
+            <div class="box-footer clearfix">
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<div class="modal fade" id="order-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
+               <form id="orderdata" method="get" action="/ordercategory" style="display:inline;">
+              <input type="hidden" name="cartid" value="{{miveuser.cart.cart_id}}">
+              <input type="hidden" name="categoryvendorid" id="orderplaceid" value="{{pd.categoryvendor_id}}">
+               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
+                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
+               </div>
+               <div class="col-md-4 col-lg-4 col-xs-12">
+                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+                     <input type="hidden" name="csrfmiddlewaretoken" value="XxYq2vc6MzqqLBPH86mIQeEfObTCXVCc">
+               </div>
+               <div class="col-md-1 col-lg-1 col-xs-6 ol-md-offset-0 col-lg-offset-0">
+                  <button type="submit" id="checkout" class="btn btn-success btn-lg">
+                  Checkout
+                  </button>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
+{%endblock%}
+{% block script%}
+<script>
+  $('body').on('click','.orderplace',function(event){
+    categoryvendorid = $(this).attr('data-categoryvendorid')
+    console.log('clicked')
+    $('#orderplaceid').attr('value',categoryvendorid)
+    $('#order-modal').modal('toggle')
+  })
+</script>
+{% endblock %}

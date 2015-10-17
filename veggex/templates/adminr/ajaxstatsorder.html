@@ -1,0 +1,83 @@
+        <div class="col-md-10 col-md-offset-1" style="position:relative">
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">Charts</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="chartContainer" style="height: 300px; width: 90%;">
+            </div>
+            <div class="box-body" id="chartContainer2" style="height: 300px; width: 90%;">
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              
+              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
+            </div>
+          </div>
+        </div>
+      <script>
+        var chart = new CanvasJS.Chart("chartContainer",
+   {
+      title:{
+         text: "Amount spent per vendor"
+      },
+                animationEnabled: true,
+      legend:{
+         verticalAlign: "bottom",
+         horizontalAlign: "center"
+      },
+      data: [
+      {       
+         type: "pie",
+         showInLegend: true,
+         toolTipContent: "{legendText}: <strong>₹{y}</strong>",
+         indexLabel: "{label} ₹{y}",
+         dataPoints: [
+         {%for st in statsseller%}
+         {  y: {{st.total}}, legendText: "{{st.seller.nameOfSeller}}", exploded: true, label: "{{st.seller.nameOfSeller}}" },
+         {%endfor%}
+         ]
+   }
+   ]
+   });
+   chart.render();        
+   var chart2 = new CanvasJS.Chart("chartContainer2", {
+
+         title:{
+            text:"Amount spent per product"           
+
+         },
+                        animationEnabled: true,
+         axisX:{
+            interval: 1,
+            gridThickness: 5,
+            labelFontSize: 10,
+            labelFontStyle: "normal",
+            labelFontWeight: "normal",
+            labelFontFamily: "Lucida Sans Unicode"
+
+         },
+         axisY2:{
+            interlacedColor: "rgba(1,77,101,.2)",
+            gridColor: "rgba(1,77,101,.1)"
+
+         },
+
+         data: [
+         {     
+            type: "bar",
+                name: "Products",
+            axisYType: "secondary",
+            color: "#014D65",          
+            dataPoints: [
+            {%for st in statsproduct%}
+            {y: {{st.total}}, label: "{{st.product.name}}"  },
+            {%endfor%}
+            ]
+         }
+         
+         ]
+      });
+
+chart2.render();
+      </script>

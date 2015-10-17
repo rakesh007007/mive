@@ -1,0 +1,37 @@
+<ol class="breadcrumb">
+         <li class="active">Add new products from this vendor >></li>
+      </ol>
+      {% for product in allProducts %}
+      <div class="col-md-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-offset-0 col-lg-offset-0" id="removeid-{{product.product_id}}">
+         <div class="box box-primary">
+            <div class="box-body box-profile">
+               <div >
+                  <center><img   data-productid="{{product.product_id}}" class="img-responsive login-modal2-button-add" src="/{{product.coverphoto.url}}" alt="User profile picture" style="width:100px;height:100px"></center>
+               </div>
+               <center>
+                  <p><a onclick="return false" class="login-modal2-button-add" data-productid="{{product.product_id}}" ><b>{{product.name}} {{product.grade}}</b></a></p>
+               </center>
+               <ul class="list-group list-group-unbordered">
+                  <li class="list-group-item">
+                     <font>Rate </font> <a class="pull-right">{{product.pricePerUnit}}/{{product.unit}}</a>
+                     <form mobile="yes"  id="productsubmit-{{product.product_id}}" method="post" class="productform" action="/addtocart">
+                        {%csrf_token%}
+                        <input type="hidden" name="productId" value="{{product.product_id}}">
+                        <input type="hidden" name="sellerId" value="{{product.seller.seller_id}}">
+                     </form>
+                  </li>
+               </ul>
+               <div class="row">
+                  <div class="col-md-5 col-sm-5 col-xs-5 col-sm-offset-1 col-xs-offset-1 col-md-offset-0 col-lg-offset-0">
+                     <a href="#" class="btn btn-primary product1add" data-miveproduct="{{product.product_id}}" mobile="yes"><b>Add</b></a>
+                  </div>
+                  <div class="col-md-5 col-sm-5 col-xs-5">
+                     <a class="btn btn-primary login-modal2-button-add" data-productid="{{product.product_id}}"><b>Details</b></a>
+                  </div>
+               </div>
+            </div>
+            <!-- /.box-body -->
+         </div>
+         <!-- /.box -->
+      </div>
+      {% endfor %}

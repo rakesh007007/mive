@@ -1,0 +1,66 @@
+{% extends 'adminr/base.html' %}
+{% block  content %}
+<section class="content-header">
+   <h1>
+      Mive 
+      <small>Restaurs dashboard</small>
+   </h1>
+   <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Cart</li>
+   </ol>
+</section>
+<section class="content">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1" style="position:relative">
+        {%for pd in allProducts%}
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tr>
+                  <th><center>Name</center></th>
+                  <th><center>Price/Unit</center></th>
+                  <th><center>Qty</center></th>
+                  <th><center>Delete</center></th>
+                  <th class="hidden-sm hidden-xs"><center>Info</center></th>
+                </tr>
+                {%for item in pd.items%}
+                <tr>
+                  <td><center>{{item.product.name}}</center></td>
+                  <td>
+                    <center><span class="badge bg-red" style="color:#13c0ba">₹{{item.product.pricePerUnit}}/{{item.product.unit}}</span></center>
+                  </td>
+                  <td>
+                    <center>
+                    <form method="post" action="/editqty">
+                    {%csrf_token%}
+                    <input type="hidden" name="itemid" value="{{item.cartitem_id}}">
+                    <input type="text" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit">update</button></center>
+                    </form>
+                  </td>
+                  <td><center><a href="/removeItemPost?itemId={{item.cartitem_id}}"><span style="color:green" class="itemdelete" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o"></i></span></a></center></td>
+                  <td class="hidden-sm hidden-xs">
+                    <center><a data-productid="{{item.product.product_id}}" href="#" onclick="return false" class="login-modal2-button"><span class="badge bg-green" style="color:#13c0ba">know more</span></a></center>
+                  </td>
+                </tr>
+                {% endfor%}
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              
+              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+</section>
+{%endblock%}
+{% block script%}
+
+{% endblock %}
