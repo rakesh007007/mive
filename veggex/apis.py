@@ -16,8 +16,8 @@ class ProductSearchDescriptionList(generics.ListAPIView):
 		"""
 		try:
 			stext = self.kwargs['pid']
-			resultNameValues = Product.objects.filter(name__icontains = stext).filter(status=1).values('product_id')
-			return Product.objects.filter(description__icontains = stext).filter(status=1).exclude(product_id__in=resultNameValues)
+			resultNameValues = Product.rak.filter(name__icontains = stext).filter(status=1).values('product_id')
+			return Product.rak.filter(description__icontains = stext).filter(status=1).exclude(product_id__in=resultNameValues)
 		except:
 			print 'error in ProductsBySearchcategory'
 class ProductSearchTitleList(generics.ListAPIView):
@@ -32,7 +32,7 @@ class ProductSearchTitleList(generics.ListAPIView):
 		"""
 		try:
 			stext = self.kwargs['pid']
-			return Product.objects.filter(name__icontains = stext).filter(status=1)
+			return Product.rak.filter(name__icontains = stext).filter(status=1)
 		except:
 			print 'error in ProductsSearchTitle'
 class ProductsByCategoryList(generics.ListAPIView):
@@ -51,7 +51,7 @@ class ProductsByCategoryList(generics.ListAPIView):
 			pid= (int)(pid)
 			category = Category.objects.get(category_id=pid)
 			print category
-			return Product.objects.filter(category=category).filter(status=1)
+			return Product.rak.filter(category=category).filter(status=1)
 		except:
 			print 'error in ProductsByCategoryList'
 class ItemsOfCartList(generics.ListAPIView):
@@ -120,15 +120,15 @@ class ApiSearchList(APIView):
 			searchtext = request.GET['searchtext']
 			tex = str(searchtext)
 			print tex
-			resultCategory1 = Product.objects.filter(category__name__icontains = tex).filter(status=1).values_list()
+			resultCategory1 = Product.rak.filter(category__name__icontains = tex).filter(status=1).values_list()
 			resultCategory = CoreSez.serialize("json",resultCategory1)
-			resultName = Product.objects.filter(seller__nameOfSeller__icontains = tex).filter(status=1).values_list()
+			resultName = Product.rak.filter(seller__nameOfSeller__icontains = tex).filter(status=1).values_list()
 			resultName = CoreSez.serialize("json",resultName)
-			resultSeller = Product.objects.filter(name__icontains = tex).filter(status=1).values_list()
+			resultSeller = Product.rak.filter(name__icontains = tex).filter(status=1).values_list()
 			resultSeller = CoreSez.serialize("json",resultSeller)
-			resultOrigin = Product.objects.filter(origin__icontains = tex).filter(status=1).values_list()
+			resultOrigin = Product.rak.filter(origin__icontains = tex).filter(status=1).values_list()
 			resultOrigin = CoreSez.serialize("json",resultOrigin)
-			resultDescription = Product.objects.filter(description__icontains=tex).filter(status=1).values_list()
+			resultDescription = Product.rak.filter(description__icontains=tex).filter(status=1).values_list()
 			resultDescription = CoreSez.serialize("json",resultDescription)
 			struct = json.loads(resultDescription)
 			resultDescription = json.dumps(struct)
@@ -231,7 +231,7 @@ class ApiAddToCart(APIView):
 				qty = int(qty)
 				productId=items[str(i+1)]['productId']
 				cart = user.cart
-				product = Product.objects.get(product_id=productId)
+				product = Product.rak.get(product_id=productId)
 				check = Cartitem.objects.filter(cart=cart).filter(product=product)
 				print 'debug'
 				print check
@@ -337,7 +337,7 @@ class ApiMakeOrder(APIView):
 			sellerId = int(data['sellerId'])
 			userId=int(userId)
 			cartId=int(cartId)
-			seller = Seller.objects.get(seller_id)
+			seller = Seller.rak.get(seller_id)
 			deliveryTime = data['deliveryTime']
 			orderMsg = data['orderMsg']
 			user =User.objects.get(user_id=userId)
@@ -522,7 +522,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 	"""
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
-	queryset = Product.objects.filter(status=1)
+	queryset = Product.rak.filter(status=1)
 	serializer_class = ProductSerializer
 class SellerViewSet(viewsets.ModelViewSet):
 	"""
@@ -530,7 +530,7 @@ class SellerViewSet(viewsets.ModelViewSet):
 	"""
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
-	queryset = Seller.objects.all()
+	queryset = Seller.rak.all()
 	serializer_class = SellerSerializer
 class RakeshViewSet(viewsets.ViewSet):
     """

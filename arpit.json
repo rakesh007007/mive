@@ -1,1 +1,4284 @@
-[{"fields": {"city": "delhi", "state": "delhi", "pincode": 110016, "area": "delhi"}, "model": "veggex.address", "pk": 1}, {"fields": {"nameOfMandi": "azadpur", "Photo": "", "description": "dadasdd", "address": 1}, "model": "veggex.mandi", "pk": 1}, {"fields": {"description": "these kind of vegetables are being used for fuck", "name": "Chicken", "coverphoto": ""}, "model": "veggex.category", "pk": 1}, {"fields": {"description": "Django administration Welcome, admin. View site / Change password / Log out Home \u203a Veggex \u203a Products \u203a rakesh Change product History  Name: Description: Category:  Change  Add PopularityIndex: Unit: PriceType: PricePerUnit: Coverphoto: Currently: ./Rees52-Raspberry-Pi-2-Model-SDL605139026-1-07246_r4", "name": "Mutton", "coverphoto": ""}, "model": "veggex.category", "pk": 2}, {"fields": {"description": "Django administration Welcome, admin. View site / Change password / Log out Home \u203a Veggex \u203a Products \u203a rakesh Change product History  Name: Description: Category:  Change  Add PopularityIndex: Unit: PriceType: PricePerUnit: Coverphoto: Currently: ./Rees52-Raspberry-Pi-2-Model-SDL605139026-1-07246_r4", "name": "Mutton", "coverphoto": ""}, "model": "veggex.category", "pk": 3}, {"fields": {"description": "Django administration Welcome, admin. View site / Change password / Log out Home \u203a Veggex \u203a Products \u203a rakesh Change product History  Name: Description: Category:  Change  Add PopularityIndex: Unit: PriceType: PricePerUnit: Coverphoto: Currently: ./Rees52-Raspberry-Pi-2-Model-SDL605139026-1-07246_r4", "name": "Fruits", "coverphoto": ""}, "model": "veggex.category", "pk": 4}, {"fields": {"description": "these kind of vegetables are being used for fuck", "name": "Spices", "coverphoto": ""}, "model": "veggex.category", "pk": 5}, {"fields": {"rating": 0, "mobileNo": 8377950711, "profilePhoto": "./web.png", "nameOfSeller": "Mive", "address": 1, "mailId": "ra@gmail.com", "mandi": 1, "categories": null}, "model": "veggex.seller", "pk": 1}, {"fields": {"rating": 0, "mobileNo": 12, "profilePhoto": "", "nameOfSeller": "aonwhe", "address": 1, "mailId": "rak.dev007@gmail.com", "mandi": 1, "categories": null}, "model": "veggex.seller", "pk": 2}, {"fields": {"rating": 0, "mobileNo": 1234, "profilePhoto": "", "nameOfSeller": "Grofers", "address": 1, "mailId": "grof@gmail.com", "mandi": 1, "categories": null}, "model": "veggex.seller", "pk": 3}, {"fields": {"rating": 0, "mobileNo": 12345, "profilePhoto": "./website17_sI0Nfj3.png", "nameOfSeller": "Bigbasket", "address": 1, "mailId": "rak.dev007@gmail.com", "mandi": 1, "categories": "fyt,ret,tyu"}, "model": "veggex.seller", "pk": 4}, {"fields": {"rating": 0, "mobileNo": 77777778, "profilePhoto": "./Vegetable_2.png", "nameOfSeller": "zopnow", "address": 1, "mailId": "rak.dev007@gmail.com", "mandi": 1, "categories": "fyt,ret,tyu"}, "model": "veggex.seller", "pk": 5}, {"fields": {"rating": 0, "mobileNo": 9289010333, "profilePhoto": "./Vegetable_1.png", "nameOfSeller": "Peppertap", "address": 1, "mailId": "pcy.iitd@gmail.com", "mandi": 1, "categories": "chicken,paranthe"}, "model": "veggex.seller", "pk": 6}, {"fields": {"rating": 0, "mobileNo": 83779507111, "profilePhoto": "./web.png", "nameOfSeller": "X", "address": 1, "mailId": "ra1@gmail.com", "mandi": 1, "categories": null}, "model": "veggex.seller", "pk": 11}, {"fields": {"rating": 0, "mobileNo": 121, "profilePhoto": "", "nameOfSeller": "Supplyt", "address": 1, "mailId": "rak.dev0107@gmail.com", "mandi": 1, "categories": null}, "model": "veggex.seller", "pk": 12}, {"fields": {"rating": 0, "mobileNo": 11234, "profilePhoto": "", "nameOfSeller": "Grs", "address": 1, "mailId": "grof1@gmail.com", "mandi": 1, "categories": null}, "model": "veggex.seller", "pk": 13}, {"fields": {"rating": 0, "mobileNo": 212345, "profilePhoto": "./website17_sI0Nfj3.png", "nameOfSeller": "asket", "address": 1, "mailId": "rak.de1v007@gmail.com", "mandi": 1, "categories": "fyt,ret,tyu"}, "model": "veggex.seller", "pk": 14}, {"fields": {"rating": 0, "mobileNo": 277777778, "profilePhoto": "./Vegetable_2.png", "nameOfSeller": "pnow", "address": 1, "mailId": "rak.dev007@gmail.com", "mandi": 1, "categories": "fyt,ret,tyu"}, "model": "veggex.seller", "pk": 15}, {"fields": {"rating": 0, "mobileNo": 91289010333, "profilePhoto": "./Vegetable_1.png", "nameOfSeller": "petap", "address": 1, "mailId": "pcy.iitd1@gmail.com", "mandi": 1, "categories": "chicken,paranthe"}, "model": "veggex.seller", "pk": 16}, {"fields": {"category": 4, "origin": "chomu", "qualityRemarks": "yoo", "name": "rakesh", "grade": "Grade-A", "pricePerUnit": 10, "isPerishable": true, "related_products": [2, 102], "seller": 2, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": 4, "coverphoto": "./Whatsapp.png", "priceType": "as per mandi rates", "description": "fff"}, "model": "veggex.product", "pk": 1}, {"fields": {"category": 4, "origin": "delhi", "qualityRemarks": "ff", "name": "kellaff", "grade": "Grade-B", "pricePerUnit": 12, "isPerishable": false, "related_products": [1, 101, 201, 211, 221], "seller": 2, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": null, "coverphoto": "./website17.png", "priceType": "custom rates", "description": ""}, "model": "veggex.product", "pk": 2}, {"fields": {"category": 1, "origin": "delhi", "qualityRemarks": "dsd", "name": "1Apple", "grade": "", "pricePerUnit": 123, "isPerishable": false, "related_products": [], "seller": 4, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": null, "coverphoto": "./e.jpg", "priceType": "custom rates", "description": "cfsc"}, "model": "veggex.product", "pk": 5}, {"fields": {"category": 2, "origin": "Delhi", "qualityRemarks": "ff", "name": "1a", "grade": "", "pricePerUnit": 1000, "isPerishable": false, "related_products": [], "seller": 4, "status": 1, "unit": "kg", "maxAvailableUnits": 1212, "popularityIndex": null, "coverphoto": "./image-2-compressed.jpg", "priceType": "custom rates", "description": "ddd"}, "model": "veggex.product", "pk": 7}, {"fields": {"category": 1, "origin": "ggg", "qualityRemarks": "dddd", "name": "1Green Apple", "grade": "", "pricePerUnit": 10, "isPerishable": false, "related_products": [], "seller": 4, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": null, "coverphoto": "./image-4-compressed.jpg", "priceType": "custom rates", "description": "gdfg"}, "model": "veggex.product", "pk": 8}, {"fields": {"category": 2, "origin": "agra", "qualityRemarks": "superb quality , ideal for shakes ", "name": "1Cherry ", "grade": "", "pricePerUnit": 100, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": 4, "coverphoto": "./cherry_PNG611.jpg", "priceType": "custom rates", "description": "red cherry "}, "model": "veggex.product", "pk": 9}, {"fields": {"category": 2, "origin": "agra ", "qualityRemarks": "amazing quality ", "name": "1Oranges", "grade": "", "pricePerUnit": 45, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 100, "popularityIndex": 9, "coverphoto": "./ORANGES.jpg", "priceType": "as per mandi rates", "description": "Juicy sweet orange "}, "model": "veggex.product", "pk": 10}, {"fields": {"category": 1, "origin": "agra ", "qualityRemarks": "superp quality and perishable ", "name": "1Lemons ", "grade": "", "pricePerUnit": 100, "isPerishable": true, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 452, "popularityIndex": 5, "coverphoto": "./lemons.jpg", "priceType": "as per mandi rates", "description": "juicy lemon "}, "model": "veggex.product", "pk": 11}, {"fields": {"category": 1, "origin": "Agra ", "qualityRemarks": "superb quality ", "name": "1CauliFlower ", "grade": "", "pricePerUnit": 60, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 20, "popularityIndex": 5, "coverphoto": "./cauliflower.jpg", "priceType": "as per mandi rates", "description": "White Cauliflower "}, "model": "veggex.product", "pk": 12}, {"fields": {"category": 2, "origin": "china ", "qualityRemarks": "juicy litchi ", "name": "1Litchi ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 4, "popularityIndex": 6, "coverphoto": "./LICHI.jpg", "priceType": "as per mandi rates", "description": "Juicy lichi "}, "model": "veggex.product", "pk": 13}, {"fields": {"category": 2, "origin": "india", "qualityRemarks": "amazing sweet grapes ", "name": "1Black Grapes ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 120, "popularityIndex": 9, "coverphoto": "./black_grapes.jpg", "priceType": "as per mandi rates", "description": "Sweet grapes "}, "model": "veggex.product", "pk": 14}, {"fields": {"category": 2, "origin": "nagpur ", "qualityRemarks": "sweet guavas with less seeds ", "name": "1Guava ", "grade": "", "pricePerUnit": 30, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 50, "popularityIndex": 4, "coverphoto": "./guava1.jpg", "priceType": "as per mandi rates", "description": "sweet guava "}, "model": "veggex.product", "pk": 15}, {"fields": {"category": 2, "origin": "newzealand", "qualityRemarks": "superb quality ", "name": "1Kiwi Fruit ", "grade": "", "pricePerUnit": 200, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 10, "popularityIndex": 7, "coverphoto": "./FreshKiwiFruitPhoto5.jpg", "priceType": "as per mandi rates", "description": "Newzealand imported Kiwi fruit "}, "model": "veggex.product", "pk": 16}, {"fields": {"category": 1, "origin": "delhi", "qualityRemarks": "dsd", "name": "grof1Apple", "grade": "", "pricePerUnit": 123, "isPerishable": false, "related_products": [], "seller": 3, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": null, "coverphoto": "./e.jpg", "priceType": "custom rates", "description": "cfsc"}, "model": "veggex.product", "pk": 35}, {"fields": {"category": 2, "origin": "Delhi", "qualityRemarks": "ff", "name": "grof1a", "grade": "", "pricePerUnit": 1000, "isPerishable": false, "related_products": [], "seller": 3, "status": 1, "unit": "kg", "maxAvailableUnits": 1212, "popularityIndex": null, "coverphoto": "./image-2-compressed.jpg", "priceType": "custom rates", "description": "ddd"}, "model": "veggex.product", "pk": 37}, {"fields": {"category": 1, "origin": "ggg", "qualityRemarks": "dddd", "name": "grof1Green Apple", "grade": "", "pricePerUnit": 10, "isPerishable": false, "related_products": [], "seller": 3, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": null, "coverphoto": "./image-4-compressed.jpg", "priceType": "custom rates", "description": "gdfg"}, "model": "veggex.product", "pk": 38}, {"fields": {"category": 1, "origin": "delhi", "qualityRemarks": "dsd", "name": "zoApple", "grade": "", "pricePerUnit": 123, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": null, "coverphoto": "./e.jpg", "priceType": "custom rates", "description": "cfsc"}, "model": "veggex.product", "pk": 55}, {"fields": {"category": 2, "origin": "Delhi", "qualityRemarks": "ff", "name": "zoa", "grade": "", "pricePerUnit": 1000, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 1212, "popularityIndex": null, "coverphoto": "./image-2-compressed.jpg", "priceType": "custom rates", "description": "ddd"}, "model": "veggex.product", "pk": 57}, {"fields": {"category": 1, "origin": "ggg", "qualityRemarks": "dddd", "name": "zoGreen Apple", "grade": "", "pricePerUnit": 10, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": null, "coverphoto": "./image-4-compressed.jpg", "priceType": "custom rates", "description": "gdfg"}, "model": "veggex.product", "pk": 58}, {"fields": {"category": 2, "origin": "agra", "qualityRemarks": "superb quality , ideal for shakes ", "name": "zoCherry ", "grade": "", "pricePerUnit": 100, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": 4, "coverphoto": "./cherry_PNG611.jpg", "priceType": "custom rates", "description": "red cherry "}, "model": "veggex.product", "pk": 59}, {"fields": {"category": 1, "origin": "delhi", "qualityRemarks": "dsd", "name": "ptApple", "grade": "", "pricePerUnit": 123, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": null, "coverphoto": "./e.jpg", "priceType": "custom rates", "description": "cfsc"}, "model": "veggex.product", "pk": 75}, {"fields": {"category": 2, "origin": "Delhi", "qualityRemarks": "ff", "name": "pta", "grade": "", "pricePerUnit": 1000, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 1212, "popularityIndex": null, "coverphoto": "./image-2-compressed.jpg", "priceType": "custom rates", "description": "ddd"}, "model": "veggex.product", "pk": 77}, {"fields": {"category": 1, "origin": "ggg", "qualityRemarks": "dddd", "name": "ptGreen Apple", "grade": "", "pricePerUnit": 10, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": null, "coverphoto": "./image-4-compressed.jpg", "priceType": "custom rates", "description": "gdfg"}, "model": "veggex.product", "pk": 78}, {"fields": {"category": 2, "origin": "agra", "qualityRemarks": "superb quality , ideal for shakes ", "name": "ptCherry ", "grade": "", "pricePerUnit": 100, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": 4, "coverphoto": "./cherry_PNG611.jpg", "priceType": "custom rates", "description": "red cherry "}, "model": "veggex.product", "pk": 79}, {"fields": {"category": 4, "origin": "chomu", "qualityRemarks": "yoo", "name": "2rakesh", "grade": "Grade-A", "pricePerUnit": 10, "isPerishable": true, "related_products": [2], "seller": 2, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": 4, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "fff"}, "model": "veggex.product", "pk": 101}, {"fields": {"category": 4, "origin": "delhi", "qualityRemarks": "ff", "name": "2kellaff", "grade": "Grade-B", "pricePerUnit": 12, "isPerishable": false, "related_products": [1, 201, 211, 221], "seller": 2, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": ""}, "model": "veggex.product", "pk": 102}, {"fields": {"category": 1, "origin": "delhi", "qualityRemarks": "dsd", "name": "21Apple", "grade": "", "pricePerUnit": 123, "isPerishable": false, "related_products": [], "seller": 4, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": null, "coverphoto": "./e.jpg", "priceType": "custom rates", "description": "cfsc"}, "model": "veggex.product", "pk": 105}, {"fields": {"category": 2, "origin": "Delhi", "qualityRemarks": "ff", "name": "21a", "grade": "", "pricePerUnit": 1000, "isPerishable": false, "related_products": [], "seller": 4, "status": 1, "unit": "kg", "maxAvailableUnits": 1212, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "ddd"}, "model": "veggex.product", "pk": 107}, {"fields": {"category": 1, "origin": "ggg", "qualityRemarks": "dddd", "name": "21Green Apple", "grade": "", "pricePerUnit": 10, "isPerishable": false, "related_products": [], "seller": 4, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "gdfg"}, "model": "veggex.product", "pk": 108}, {"fields": {"category": 2, "origin": "agra", "qualityRemarks": "superb quality , ideal for shakes ", "name": "21Cherry ", "grade": "", "pricePerUnit": 100, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": 4, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "red cherry "}, "model": "veggex.product", "pk": 109}, {"fields": {"category": 4, "origin": "chomu", "qualityRemarks": "yoo", "name": "rakesh", "grade": "Grade-A", "pricePerUnit": 10, "isPerishable": true, "related_products": [2, 102], "seller": 12, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": 4, "coverphoto": "./Whatsapp.png", "priceType": "as per mandi rates", "description": "fff"}, "model": "veggex.product", "pk": 201}, {"fields": {"category": 4, "origin": "chomu", "qualityRemarks": "yoo", "name": "rakesh", "grade": "Grade-A", "pricePerUnit": 10, "isPerishable": true, "related_products": [2, 102], "seller": 13, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": 4, "coverphoto": "./Whatsapp.png", "priceType": "as per mandi rates", "description": "fff"}, "model": "veggex.product", "pk": 211}, {"fields": {"category": 4, "origin": "chomu", "qualityRemarks": "yoo", "name": "rakesh", "grade": "Grade-A", "pricePerUnit": 10, "isPerishable": true, "related_products": [2, 102], "seller": 14, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": 4, "coverphoto": "./Whatsapp.png", "priceType": "as per mandi rates", "description": "fff"}, "model": "veggex.product", "pk": 221}, {"fields": {"category": 2, "origin": "agra ", "qualityRemarks": "amazing quality ", "name": "zoOranges", "grade": "", "pricePerUnit": 45, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 100, "popularityIndex": 9, "coverphoto": "./ORANGES.jpg", "priceType": "as per mandi rates", "description": "Juicy sweet orange "}, "model": "veggex.product", "pk": 510}, {"fields": {"category": 1, "origin": "agra ", "qualityRemarks": "superp quality and perishable ", "name": "zoLemons ", "grade": "", "pricePerUnit": 100, "isPerishable": true, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 452, "popularityIndex": 5, "coverphoto": "./lemons.jpg", "priceType": "as per mandi rates", "description": "juicy lemon "}, "model": "veggex.product", "pk": 511}, {"fields": {"category": 1, "origin": "Agra ", "qualityRemarks": "superb quality ", "name": "zoCauliFlower ", "grade": "", "pricePerUnit": 60, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 20, "popularityIndex": 5, "coverphoto": "./cauliflower.jpg", "priceType": "as per mandi rates", "description": "White Cauliflower "}, "model": "veggex.product", "pk": 512}, {"fields": {"category": 2, "origin": "china ", "qualityRemarks": "juicy litchi ", "name": "zoLitchi ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 4, "popularityIndex": 6, "coverphoto": "./LICHI.jpg", "priceType": "as per mandi rates", "description": "Juicy lichi "}, "model": "veggex.product", "pk": 513}, {"fields": {"category": 2, "origin": "india", "qualityRemarks": "amazing sweet grapes ", "name": "zoBlack Grapes ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 120, "popularityIndex": 9, "coverphoto": "./black_grapes.jpg", "priceType": "as per mandi rates", "description": "Sweet grapes "}, "model": "veggex.product", "pk": 514}, {"fields": {"category": 2, "origin": "nagpur ", "qualityRemarks": "sweet guavas with less seeds ", "name": "zoGuava ", "grade": "", "pricePerUnit": 30, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 50, "popularityIndex": 4, "coverphoto": "./guava1.jpg", "priceType": "as per mandi rates", "description": "sweet guava "}, "model": "veggex.product", "pk": 515}, {"fields": {"category": 2, "origin": "newzealand", "qualityRemarks": "superb quality ", "name": "zoKiwi Fruit ", "grade": "", "pricePerUnit": 200, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 10, "popularityIndex": 7, "coverphoto": "./FreshKiwiFruitPhoto5.jpg", "priceType": "as per mandi rates", "description": "Newzealand imported Kiwi fruit "}, "model": "veggex.product", "pk": 516}, {"fields": {"category": 2, "origin": "agra ", "qualityRemarks": "amazing quality ", "name": "ptOranges", "grade": "", "pricePerUnit": 45, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 100, "popularityIndex": 9, "coverphoto": "./ORANGES.jpg", "priceType": "as per mandi rates", "description": "Juicy sweet orange "}, "model": "veggex.product", "pk": 710}, {"fields": {"category": 1, "origin": "agra ", "qualityRemarks": "superp quality and perishable ", "name": "ptLemons ", "grade": "", "pricePerUnit": 100, "isPerishable": true, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 452, "popularityIndex": 5, "coverphoto": "./lemons.jpg", "priceType": "as per mandi rates", "description": "juicy lemon "}, "model": "veggex.product", "pk": 711}, {"fields": {"category": 1, "origin": "Agra ", "qualityRemarks": "superb quality ", "name": "ptCauliFlower ", "grade": "", "pricePerUnit": 60, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 20, "popularityIndex": 5, "coverphoto": "./cauliflower.jpg", "priceType": "as per mandi rates", "description": "White Cauliflower "}, "model": "veggex.product", "pk": 712}, {"fields": {"category": 2, "origin": "china ", "qualityRemarks": "juicy litchi ", "name": "ptLitchi ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 4, "popularityIndex": 6, "coverphoto": "./LICHI.jpg", "priceType": "as per mandi rates", "description": "Juicy lichi "}, "model": "veggex.product", "pk": 713}, {"fields": {"category": 2, "origin": "india", "qualityRemarks": "amazing sweet grapes ", "name": "ptBlack Grapes ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 120, "popularityIndex": 9, "coverphoto": "./black_grapes.jpg", "priceType": "as per mandi rates", "description": "Sweet grapes "}, "model": "veggex.product", "pk": 714}, {"fields": {"category": 2, "origin": "nagpur ", "qualityRemarks": "sweet guavas with less seeds ", "name": "ptGuava ", "grade": "", "pricePerUnit": 30, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 50, "popularityIndex": 4, "coverphoto": "./guava1.jpg", "priceType": "as per mandi rates", "description": "sweet guava "}, "model": "veggex.product", "pk": 715}, {"fields": {"category": 2, "origin": "newzealand", "qualityRemarks": "superb quality ", "name": "ptKiwi Fruit ", "grade": "", "pricePerUnit": 200, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 10, "popularityIndex": 7, "coverphoto": "./FreshKiwiFruitPhoto5.jpg", "priceType": "as per mandi rates", "description": "Newzealand imported Kiwi fruit "}, "model": "veggex.product", "pk": 716}, {"fields": {"category": 2, "origin": "agra ", "qualityRemarks": "amazing quality ", "name": "21Oranges", "grade": "", "pricePerUnit": 45, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 100, "popularityIndex": 9, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Juicy sweet orange "}, "model": "veggex.product", "pk": 1010}, {"fields": {"category": 1, "origin": "agra ", "qualityRemarks": "superp quality and perishable ", "name": "21Lemons ", "grade": "", "pricePerUnit": 100, "isPerishable": true, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 452, "popularityIndex": 5, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "juicy lemon "}, "model": "veggex.product", "pk": 1011}, {"fields": {"category": 1, "origin": "Agra ", "qualityRemarks": "superb quality ", "name": "21CauliFlower ", "grade": "", "pricePerUnit": 60, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 20, "popularityIndex": 5, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "White Cauliflower "}, "model": "veggex.product", "pk": 1012}, {"fields": {"category": 2, "origin": "china ", "qualityRemarks": "juicy litchi ", "name": "21Litchi ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 4, "popularityIndex": 6, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Juicy lichi "}, "model": "veggex.product", "pk": 1013}, {"fields": {"category": 2, "origin": "india", "qualityRemarks": "amazing sweet grapes ", "name": "21Black Grapes ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 120, "popularityIndex": 9, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Sweet grapes "}, "model": "veggex.product", "pk": 1014}, {"fields": {"category": 2, "origin": "nagpur ", "qualityRemarks": "sweet guavas with less seeds ", "name": "21Guava ", "grade": "", "pricePerUnit": 30, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 50, "popularityIndex": 4, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "sweet guava "}, "model": "veggex.product", "pk": 1015}, {"fields": {"category": 2, "origin": "newzealand", "qualityRemarks": "superb quality ", "name": "21Kiwi Fruit ", "grade": "", "pricePerUnit": 200, "isPerishable": false, "related_products": [], "seller": 1, "status": 1, "unit": "kg", "maxAvailableUnits": 10, "popularityIndex": 7, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Newzealand imported Kiwi fruit "}, "model": "veggex.product", "pk": 1016}, {"fields": {"category": 1, "origin": "delhi", "qualityRemarks": "dsd", "name": "2grof1Apple", "grade": "", "pricePerUnit": 123, "isPerishable": false, "related_products": [], "seller": 3, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "cfsc"}, "model": "veggex.product", "pk": 1035}, {"fields": {"category": 2, "origin": "Delhi", "qualityRemarks": "ff", "name": "2grof1a", "grade": "", "pricePerUnit": 1000, "isPerishable": false, "related_products": [], "seller": 3, "status": 1, "unit": "kg", "maxAvailableUnits": 1212, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "ddd"}, "model": "veggex.product", "pk": 1037}, {"fields": {"category": 1, "origin": "ggg", "qualityRemarks": "dddd", "name": "2grof1Green Apple", "grade": "", "pricePerUnit": 10, "isPerishable": false, "related_products": [], "seller": 3, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "gdfg"}, "model": "veggex.product", "pk": 1038}, {"fields": {"category": 1, "origin": "delhi", "qualityRemarks": "dsd", "name": "2zoApple", "grade": "", "pricePerUnit": 123, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "cfsc"}, "model": "veggex.product", "pk": 1055}, {"fields": {"category": 2, "origin": "Delhi", "qualityRemarks": "ff", "name": "2zoa", "grade": "", "pricePerUnit": 1000, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 1212, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "ddd"}, "model": "veggex.product", "pk": 1057}, {"fields": {"category": 1, "origin": "ggg", "qualityRemarks": "dddd", "name": "2zoGreen Apple", "grade": "", "pricePerUnit": 10, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "gdfg"}, "model": "veggex.product", "pk": 1058}, {"fields": {"category": 2, "origin": "agra", "qualityRemarks": "superb quality , ideal for shakes ", "name": "2zoCherry ", "grade": "", "pricePerUnit": 100, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": 4, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "red cherry "}, "model": "veggex.product", "pk": 1059}, {"fields": {"category": 1, "origin": "delhi", "qualityRemarks": "dsd", "name": "2ptApple", "grade": "", "pricePerUnit": 123, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "cfsc"}, "model": "veggex.product", "pk": 1075}, {"fields": {"category": 2, "origin": "Delhi", "qualityRemarks": "ff", "name": "2pta", "grade": "", "pricePerUnit": 1000, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 1212, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "ddd"}, "model": "veggex.product", "pk": 1077}, {"fields": {"category": 1, "origin": "ggg", "qualityRemarks": "dddd", "name": "2ptGreen Apple", "grade": "", "pricePerUnit": 10, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 1000, "popularityIndex": null, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "gdfg"}, "model": "veggex.product", "pk": 1078}, {"fields": {"category": 2, "origin": "agra", "qualityRemarks": "superb quality , ideal for shakes ", "name": "2ptCherry ", "grade": "", "pricePerUnit": 100, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 12, "popularityIndex": 4, "coverphoto": "./No_image_available.png", "priceType": "custom rates", "description": "red cherry "}, "model": "veggex.product", "pk": 1079}, {"fields": {"category": 2, "origin": "agra ", "qualityRemarks": "amazing quality ", "name": "2zoOranges", "grade": "", "pricePerUnit": 45, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 100, "popularityIndex": 9, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Juicy sweet orange "}, "model": "veggex.product", "pk": 10510}, {"fields": {"category": 1, "origin": "agra ", "qualityRemarks": "superp quality and perishable ", "name": "2zoLemons ", "grade": "", "pricePerUnit": 100, "isPerishable": true, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 452, "popularityIndex": 5, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "juicy lemon "}, "model": "veggex.product", "pk": 10511}, {"fields": {"category": 1, "origin": "Agra ", "qualityRemarks": "superb quality ", "name": "2zoCauliFlower ", "grade": "", "pricePerUnit": 60, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 20, "popularityIndex": 5, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "White Cauliflower "}, "model": "veggex.product", "pk": 10512}, {"fields": {"category": 2, "origin": "china ", "qualityRemarks": "juicy litchi ", "name": "2zoLitchi ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 4, "popularityIndex": 6, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Juicy lichi "}, "model": "veggex.product", "pk": 10513}, {"fields": {"category": 2, "origin": "india", "qualityRemarks": "amazing sweet grapes ", "name": "2zoBlack Grapes ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 120, "popularityIndex": 9, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Sweet grapes "}, "model": "veggex.product", "pk": 10514}, {"fields": {"category": 2, "origin": "nagpur ", "qualityRemarks": "sweet guavas with less seeds ", "name": "2zoGuava ", "grade": "", "pricePerUnit": 30, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 50, "popularityIndex": 4, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "sweet guava "}, "model": "veggex.product", "pk": 10515}, {"fields": {"category": 2, "origin": "newzealand", "qualityRemarks": "superb quality ", "name": "2zoKiwi Fruit ", "grade": "", "pricePerUnit": 200, "isPerishable": false, "related_products": [], "seller": 5, "status": 1, "unit": "kg", "maxAvailableUnits": 10, "popularityIndex": 7, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Newzealand imported Kiwi fruit "}, "model": "veggex.product", "pk": 10516}, {"fields": {"category": 2, "origin": "agra ", "qualityRemarks": "amazing quality ", "name": "2ptOranges", "grade": "", "pricePerUnit": 45, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 100, "popularityIndex": 9, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Juicy sweet orange "}, "model": "veggex.product", "pk": 10710}, {"fields": {"category": 1, "origin": "agra ", "qualityRemarks": "superp quality and perishable ", "name": "2ptLemons ", "grade": "", "pricePerUnit": 100, "isPerishable": true, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 452, "popularityIndex": 5, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "juicy lemon "}, "model": "veggex.product", "pk": 10711}, {"fields": {"category": 1, "origin": "Agra ", "qualityRemarks": "superb quality ", "name": "2ptCauliFlower ", "grade": "", "pricePerUnit": 60, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 20, "popularityIndex": 5, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "White Cauliflower "}, "model": "veggex.product", "pk": 10712}, {"fields": {"category": 2, "origin": "china ", "qualityRemarks": "juicy litchi ", "name": "2ptLitchi ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 4, "popularityIndex": 6, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Juicy lichi "}, "model": "veggex.product", "pk": 10713}, {"fields": {"category": 2, "origin": "india", "qualityRemarks": "amazing sweet grapes ", "name": "2ptBlack Grapes ", "grade": "", "pricePerUnit": 80, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 120, "popularityIndex": 9, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Sweet grapes "}, "model": "veggex.product", "pk": 10714}, {"fields": {"category": 2, "origin": "nagpur ", "qualityRemarks": "sweet guavas with less seeds ", "name": "2ptGuava ", "grade": "", "pricePerUnit": 30, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 50, "popularityIndex": 4, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "sweet guava "}, "model": "veggex.product", "pk": 10715}, {"fields": {"category": 2, "origin": "newzealand", "qualityRemarks": "superb quality ", "name": "2ptKiwi Fruit ", "grade": "", "pricePerUnit": 200, "isPerishable": false, "related_products": [], "seller": 6, "status": 1, "unit": "kg", "maxAvailableUnits": 10, "popularityIndex": 7, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Newzealand imported Kiwi fruit "}, "model": "veggex.product", "pk": 10716}, {"fields": {"category": 2, "origin": "newzealand", "qualityRemarks": "superb quality ", "name": "2ptKiwi Fruit ", "grade": "", "pricePerUnit": 200, "isPerishable": false, "related_products": [], "seller": 12, "status": 1, "unit": "kg", "maxAvailableUnits": 10, "popularityIndex": 7, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Newzealand imported Kiwi fruit "}, "model": "veggex.product", "pk": 2010716}, {"fields": {"category": 2, "origin": "newzealand", "qualityRemarks": "superb quality ", "name": "2ptKiwi Fruit ", "grade": "", "pricePerUnit": 200, "isPerishable": false, "related_products": [], "seller": 13, "status": 1, "unit": "kg", "maxAvailableUnits": 10, "popularityIndex": 7, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Newzealand imported Kiwi fruit "}, "model": "veggex.product", "pk": 2110716}, {"fields": {"category": 2, "origin": "newzealand", "qualityRemarks": "superb quality ", "name": "2ptKiwi Fruit ", "grade": "", "pricePerUnit": 200, "isPerishable": false, "related_products": [], "seller": 14, "status": 1, "unit": "kg", "maxAvailableUnits": 10, "popularityIndex": 7, "coverphoto": "./No_image_available.png", "priceType": "as per mandi rates", "description": "Newzealand imported Kiwi fruit "}, "model": "veggex.product", "pk": 2210716}, {"fields": {"products": [11], "seller": 1}, "model": "veggex.categoryvendor", "pk": 24}, {"fields": {"products": [1, 2], "seller": 2}, "model": "veggex.categoryvendor", "pk": 25}, {"fields": {"products": [9, 10, 11, 12], "seller": 1}, "model": "veggex.categoryvendor", "pk": 27}, {"fields": {"products": [5, 7, 8], "seller": 4}, "model": "veggex.categoryvendor", "pk": 34}, {"fields": {"products": [55, 59, 510, 511, 512, 513, 514, 515], "seller": 5}, "model": "veggex.categoryvendor", "pk": 35}, {"fields": {"products": [1, 2], "seller": 2}, "model": "veggex.categoryvendor", "pk": 36}, {"fields": {"products": [37, 38, 1035], "seller": 3}, "model": "veggex.categoryvendor", "pk": 38}, {"fields": {"products": [10, 11, 12, 13, 15, 1011, 1013, 1014, 1015, 1016], "seller": 1}, "model": "veggex.categoryvendor", "pk": 39}, {"fields": {"products": [221, 2210716], "seller": 14}, "model": "veggex.categoryvendor", "pk": 40}, {"fields": {"products": [201], "seller": 12}, "model": "veggex.categoryvendor", "pk": 41}, {"fields": {"products": [79, 710, 711], "seller": 6}, "model": "veggex.categoryvendor", "pk": 42}, {"fields": {"cartTotal": 1022, "timeOfUpdate": null, "timeOfCreate": null}, "model": "veggex.cart", "pk": 1}, {"fields": {"cartTotal": 1092, "timeOfUpdate": null, "timeOfCreate": null}, "model": "veggex.cart", "pk": 2}, {"fields": {"cartTotal": 1223, "timeOfUpdate": null, "timeOfCreate": null}, "model": "veggex.cart", "pk": 3}, {"fields": {"nameOfOwner": "Rakesh Yadav", "institutionType": "hotels", "mobileNo": 8377950711, "profilePhoto": "./rajat_Cropped.jpg", "cart": 1, "owner": null, "nameOfInstitution": "Mezbaan restaurants", "address": 1, "mailId": "rak.dev007@gmail.com", "gpsLocation": "", "password": "pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=", "categories": [34, 35, 36, 38, 39, 40, 41, 42]}, "model": "veggex.user", "pk": 1}, {"fields": {"nameOfOwner": "Shyam lal", "institutionType": "hotels", "mobileNo": 9928524925, "profilePhoto": "./unnamed.png", "cart": 2, "owner": null, "nameOfInstitution": "Cafe Coffe Day", "address": 1, "mailId": "info@mive.in", "gpsLocation": "", "password": "pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=", "categories": [24, 25]}, "model": "veggex.user", "pk": 2}, {"fields": {"nameOfOwner": "twwe", "institutionType": "hotels", "mobileNo": 9352132140, "profilePhoto": "./pc_205x205.jpg", "cart": 3, "owner": null, "nameOfInstitution": "New hotel", "address": 1, "mailId": "kjfjs@p.com", "gpsLocation": "", "password": "pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=", "categories": [27]}, "model": "veggex.user", "pk": 3}, {"fields": {"qtyInUnits": 1, "product": 7, "timeOfUpdate": null, "timeOfCreate": null, "cart": 2}, "model": "veggex.cartitem", "pk": 42}, {"fields": {"qtyInUnits": 1, "product": 13, "timeOfUpdate": null, "timeOfCreate": null, "cart": 2}, "model": "veggex.cartitem", "pk": 47}, {"fields": {"qtyInUnits": 1, "product": 2, "timeOfUpdate": null, "timeOfCreate": null, "cart": 2}, "model": "veggex.cartitem", "pk": 56}, {"fields": {"qtyInUnits": 1, "product": 35, "timeOfUpdate": null, "timeOfCreate": null, "cart": 3}, "model": "veggex.cartitem", "pk": 62}, {"fields": {"qtyInUnits": 1, "product": 37, "timeOfUpdate": null, "timeOfCreate": null, "cart": 3}, "model": "veggex.cartitem", "pk": 63}, {"fields": {"qtyInUnits": 1, "product": 11, "timeOfUpdate": null, "timeOfCreate": null, "cart": 3}, "model": "veggex.cartitem", "pk": 64}, {"fields": {"qtyInUnits": 1, "product": 2, "timeOfUpdate": null, "timeOfCreate": null, "cart": 1}, "model": "veggex.cartitem", "pk": 145}, {"fields": {"qtyInUnits": 1, "product": 8, "timeOfUpdate": null, "timeOfCreate": null, "cart": 1}, "model": "veggex.cartitem", "pk": 146}, {"fields": {"qtyInUnits": 1, "product": 7, "timeOfUpdate": null, "timeOfCreate": null, "cart": 1}, "model": "veggex.cartitem", "pk": 147}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-15", "seller": null, "user": 1, "payment_mode": "COD", "orderMsg": "fsfsfsf", "subtotal": 360}, "model": "veggex.order", "pk": 1}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": null, "user": 1, "payment_mode": "COD", "orderMsg": "lklkl", "subtotal": 1090}, "model": "veggex.order", "pk": 2}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-29", "seller": null, "user": 1, "payment_mode": "COD", "orderMsg": "check", "subtotal": 22}, "model": "veggex.order", "pk": 3}, {"fields": {"status": "PLACED", "category": 2, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-22", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "asdsff", "subtotal": 260}, "model": "veggex.order", "pk": 4}, {"fields": {"status": "PLACED", "category": 4, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-17", "seller": 2, "user": 1, "payment_mode": "COD", "orderMsg": "Ggg", "subtotal": 10}, "model": "veggex.order", "pk": 5}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-16", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "ijk", "subtotal": 845}, "model": "veggex.order", "pk": 6}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-16", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "ijk", "subtotal": 845}, "model": "veggex.order", "pk": 7}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-16", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "ijk", "subtotal": 845}, "model": "veggex.order", "pk": 8}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-22", "seller": 2, "user": 1, "payment_mode": "COD", "orderMsg": "gjhgj", "subtotal": 12}, "model": "veggex.order", "pk": 9}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-28", "seller": 1, "user": 3, "payment_mode": "COD", "orderMsg": "fs", "subtotal": 300}, "model": "veggex.order", "pk": 10}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-16", "seller": 3, "user": 1, "payment_mode": "COD", "orderMsg": "eesrewrew", "subtotal": 4383}, "model": "veggex.order", "pk": 11}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": 2, "user": 1, "payment_mode": "COD", "orderMsg": "fsfsffs", "subtotal": 22}, "model": "veggex.order", "pk": 12}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-16", "seller": 2, "user": 1, "payment_mode": "COD", "orderMsg": "afdffsf", "subtotal": 220}, "model": "veggex.order", "pk": 13}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-17", "seller": 2, "user": 1, "payment_mode": "COD", "orderMsg": "dfsfsd", "subtotal": 11200}, "model": "veggex.order", "pk": 14}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "hkh", "subtotal": 1590}, "model": "veggex.order", "pk": 15}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-22", "seller": 6, "user": 1, "payment_mode": "COD", "orderMsg": "jhkhkjh", "subtotal": 3153}, "model": "veggex.order", "pk": 16}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-16", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "kjkj", "subtotal": 80}, "model": "veggex.order", "pk": 17}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-11-27", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "ddsd", "subtotal": 1180}, "model": "veggex.order", "pk": 18}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": 4, "user": 1, "payment_mode": "COD", "orderMsg": "uhjhkj", "subtotal": 1010}, "model": "veggex.order", "pk": 19}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": 3, "user": 1, "payment_mode": "COD", "orderMsg": "uhuhkh", "subtotal": 1133}, "model": "veggex.order", "pk": 20}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-16", "seller": 4, "user": 1, "payment_mode": "COD", "orderMsg": "Hgh", "subtotal": 2230}, "model": "veggex.order", "pk": 21}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-22", "seller": 4, "user": 1, "payment_mode": "COD", "orderMsg": "dasdasds", "subtotal": 12133}, "model": "veggex.order", "pk": 22}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-24", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "dsadasd", "subtotal": 125}, "model": "veggex.order", "pk": 23}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": 4, "user": 1, "payment_mode": "COD", "orderMsg": "dsdd", "subtotal": 1123}, "model": "veggex.order", "pk": 24}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": 3, "user": 1, "payment_mode": "COD", "orderMsg": "sdfsdfdsfs", "subtotal": 1123}, "model": "veggex.order", "pk": 25}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": 3, "user": 1, "payment_mode": "COD", "orderMsg": "sdfdsfsdf", "subtotal": 6738}, "model": "veggex.order", "pk": 26}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-29", "seller": 2, "user": 1, "payment_mode": "COD", "orderMsg": "", "subtotal": 108}, "model": "veggex.order", "pk": 27}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-17", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "sdfsf", "subtotal": 3960}, "model": "veggex.order", "pk": 28}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": 4, "user": 1, "payment_mode": "COD", "orderMsg": "yooo", "subtotal": 123}, "model": "veggex.order", "pk": 29}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-17", "seller": 4, "user": 1, "payment_mode": "COD", "orderMsg": "yo", "subtotal": 123}, "model": "veggex.order", "pk": 30}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-29", "seller": 5, "user": 1, "payment_mode": "COD", "orderMsg": "yo", "subtotal": 45}, "model": "veggex.order", "pk": 31}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": 5, "user": 1, "payment_mode": "COD", "orderMsg": "jkjk", "subtotal": 235}, "model": "veggex.order", "pk": 32}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-22", "seller": 2, "user": 1, "payment_mode": "COD", "orderMsg": "yoo", "subtotal": 44}, "model": "veggex.order", "pk": 33}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-23", "seller": 4, "user": 1, "payment_mode": "COD", "orderMsg": "dssf", "subtotal": 1230}, "model": "veggex.order", "pk": 34}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-21", "seller": 4, "user": 1, "payment_mode": "COD", "orderMsg": "dsdsd", "subtotal": 1353}, "model": "veggex.order", "pk": 35}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-05", "seller": 4, "user": 1, "payment_mode": "COD", "orderMsg": "jkxhcksajchkjdac", "subtotal": 30}, "model": "veggex.order", "pk": 36}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-16", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "hjjh", "subtotal": 365}, "model": "veggex.order", "pk": 37}, {"fields": {"status": "PLACED", "category": null, "timeOfUpdate": null, "timeOfCreate": null, "deliveryTime": "2015-10-16", "seller": 1, "user": 1, "payment_mode": "COD", "orderMsg": "", "subtotal": 140}, "model": "veggex.order", "pk": 38}, {"fields": {"product": 12, "qtyInUnits": 6, "priceType": "as per mandi rates", "order": 1, "unit": "kg", "priceAtThatTime": 60}, "model": "veggex.orderitem", "pk": 1}, {"fields": {"product": 10, "qtyInUnits": 4, "priceType": "as per mandi rates", "order": 2, "unit": "kg", "priceAtThatTime": 45}, "model": "veggex.orderitem", "pk": 2}, {"fields": {"product": 13, "qtyInUnits": 2, "priceType": "as per mandi rates", "order": 2, "unit": "kg", "priceAtThatTime": 80}, "model": "veggex.orderitem", "pk": 3}, {"fields": {"product": 15, "qtyInUnits": 5, "priceType": "as per mandi rates", "order": 2, "unit": "kg", "priceAtThatTime": 30}, "model": "veggex.orderitem", "pk": 4}, {"fields": {"product": 16, "qtyInUnits": 3, "priceType": "as per mandi rates", "order": 2, "unit": "kg", "priceAtThatTime": 200}, "model": "veggex.orderitem", "pk": 5}, {"fields": {"product": 1, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 3, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 6}, {"fields": {"product": 2, "qtyInUnits": 1, "priceType": "custom rates", "order": 3, "unit": "kg", "priceAtThatTime": 12}, "model": "veggex.orderitem", "pk": 7}, {"fields": {"product": 9, "qtyInUnits": 1, "priceType": "custom rates", "order": 4, "unit": "kg", "priceAtThatTime": 100}, "model": "veggex.orderitem", "pk": 8}, {"fields": {"product": 13, "qtyInUnits": 2, "priceType": "as per mandi rates", "order": 4, "unit": "kg", "priceAtThatTime": 80}, "model": "veggex.orderitem", "pk": 9}, {"fields": {"product": 1, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 5, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 10}, {"fields": {"product": 10, "qtyInUnits": 5, "priceType": "as per mandi rates", "order": 6, "unit": "kg", "priceAtThatTime": 45}, "model": "veggex.orderitem", "pk": 11}, {"fields": {"product": 12, "qtyInUnits": 7, "priceType": "as per mandi rates", "order": 6, "unit": "kg", "priceAtThatTime": 60}, "model": "veggex.orderitem", "pk": 12}, {"fields": {"product": 16, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 6, "unit": "kg", "priceAtThatTime": 200}, "model": "veggex.orderitem", "pk": 13}, {"fields": {"product": 10, "qtyInUnits": 5, "priceType": "as per mandi rates", "order": 7, "unit": "kg", "priceAtThatTime": 45}, "model": "veggex.orderitem", "pk": 14}, {"fields": {"product": 12, "qtyInUnits": 7, "priceType": "as per mandi rates", "order": 7, "unit": "kg", "priceAtThatTime": 60}, "model": "veggex.orderitem", "pk": 15}, {"fields": {"product": 16, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 7, "unit": "kg", "priceAtThatTime": 200}, "model": "veggex.orderitem", "pk": 16}, {"fields": {"product": 10, "qtyInUnits": 5, "priceType": "as per mandi rates", "order": 8, "unit": "kg", "priceAtThatTime": 45}, "model": "veggex.orderitem", "pk": 17}, {"fields": {"product": 12, "qtyInUnits": 7, "priceType": "as per mandi rates", "order": 8, "unit": "kg", "priceAtThatTime": 60}, "model": "veggex.orderitem", "pk": 18}, {"fields": {"product": 16, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 8, "unit": "kg", "priceAtThatTime": 200}, "model": "veggex.orderitem", "pk": 19}, {"fields": {"product": 2, "qtyInUnits": 1, "priceType": "custom rates", "order": 9, "unit": "kg", "priceAtThatTime": 12}, "model": "veggex.orderitem", "pk": 20}, {"fields": {"product": 11, "qtyInUnits": 3, "priceType": "as per mandi rates", "order": 10, "unit": "kg", "priceAtThatTime": 100}, "model": "veggex.orderitem", "pk": 21}, {"fields": {"product": 35, "qtyInUnits": 11, "priceType": "custom rates", "order": 11, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 22}, {"fields": {"product": 37, "qtyInUnits": 3, "priceType": "custom rates", "order": 11, "unit": "kg", "priceAtThatTime": 1000}, "model": "veggex.orderitem", "pk": 23}, {"fields": {"product": 38, "qtyInUnits": 3, "priceType": "custom rates", "order": 11, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 24}, {"fields": {"product": 1, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 12, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 25}, {"fields": {"product": 2, "qtyInUnits": 1, "priceType": "custom rates", "order": 12, "unit": "kg", "priceAtThatTime": 12}, "model": "veggex.orderitem", "pk": 26}, {"fields": {"product": 1, "qtyInUnits": 10, "priceType": "as per mandi rates", "order": 13, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 27}, {"fields": {"product": 2, "qtyInUnits": 10, "priceType": "custom rates", "order": 13, "unit": "kg", "priceAtThatTime": 12}, "model": "veggex.orderitem", "pk": 28}, {"fields": {"product": 1, "qtyInUnits": 1000, "priceType": "as per mandi rates", "order": 14, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 29}, {"fields": {"product": 2, "qtyInUnits": 100, "priceType": "custom rates", "order": 14, "unit": "kg", "priceAtThatTime": 12}, "model": "veggex.orderitem", "pk": 30}, {"fields": {"product": 9, "qtyInUnits": 2, "priceType": "custom rates", "order": 15, "unit": "kg", "priceAtThatTime": 100}, "model": "veggex.orderitem", "pk": 31}, {"fields": {"product": 11, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 15, "unit": "kg", "priceAtThatTime": 100}, "model": "veggex.orderitem", "pk": 32}, {"fields": {"product": 12, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 15, "unit": "kg", "priceAtThatTime": 60}, "model": "veggex.orderitem", "pk": 33}, {"fields": {"product": 15, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 15, "unit": "kg", "priceAtThatTime": 30}, "model": "veggex.orderitem", "pk": 34}, {"fields": {"product": 16, "qtyInUnits": 6, "priceType": "as per mandi rates", "order": 15, "unit": "kg", "priceAtThatTime": 200}, "model": "veggex.orderitem", "pk": 35}, {"fields": {"product": 78, "qtyInUnits": 3, "priceType": "custom rates", "order": 16, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 36}, {"fields": {"product": 77, "qtyInUnits": 3, "priceType": "custom rates", "order": 16, "unit": "kg", "priceAtThatTime": 1000}, "model": "veggex.orderitem", "pk": 37}, {"fields": {"product": 75, "qtyInUnits": 1, "priceType": "custom rates", "order": 16, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 38}, {"fields": {"product": 14, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 17, "unit": "kg", "priceAtThatTime": 80}, "model": "veggex.orderitem", "pk": 39}, {"fields": {"product": 14, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 18, "unit": "kg", "priceAtThatTime": 80}, "model": "veggex.orderitem", "pk": 40}, {"fields": {"product": 11, "qtyInUnits": 11, "priceType": "as per mandi rates", "order": 18, "unit": "kg", "priceAtThatTime": 100}, "model": "veggex.orderitem", "pk": 41}, {"fields": {"product": 8, "qtyInUnits": 1, "priceType": "custom rates", "order": 19, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 42}, {"fields": {"product": 7, "qtyInUnits": 1, "priceType": "custom rates", "order": 19, "unit": "kg", "priceAtThatTime": 1000}, "model": "veggex.orderitem", "pk": 43}, {"fields": {"product": 35, "qtyInUnits": 1, "priceType": "custom rates", "order": 20, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 44}, {"fields": {"product": 37, "qtyInUnits": 1, "priceType": "custom rates", "order": 20, "unit": "kg", "priceAtThatTime": 1000}, "model": "veggex.orderitem", "pk": 45}, {"fields": {"product": 38, "qtyInUnits": 1, "priceType": "custom rates", "order": 20, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 46}, {"fields": {"product": 5, "qtyInUnits": 10, "priceType": "custom rates", "order": 21, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 47}, {"fields": {"product": 7, "qtyInUnits": 1, "priceType": "custom rates", "order": 21, "unit": "kg", "priceAtThatTime": 1000}, "model": "veggex.orderitem", "pk": 48}, {"fields": {"product": 5, "qtyInUnits": 1, "priceType": "custom rates", "order": 22, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 49}, {"fields": {"product": 7, "qtyInUnits": 12, "priceType": "custom rates", "order": 22, "unit": "kg", "priceAtThatTime": 1000}, "model": "veggex.orderitem", "pk": 50}, {"fields": {"product": 8, "qtyInUnits": 1, "priceType": "custom rates", "order": 22, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 51}, {"fields": {"product": 14, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 23, "unit": "kg", "priceAtThatTime": 80}, "model": "veggex.orderitem", "pk": 52}, {"fields": {"product": 10, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 23, "unit": "kg", "priceAtThatTime": 45}, "model": "veggex.orderitem", "pk": 53}, {"fields": {"product": 5, "qtyInUnits": 1, "priceType": "custom rates", "order": 24, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 54}, {"fields": {"product": 7, "qtyInUnits": 1, "priceType": "custom rates", "order": 24, "unit": "kg", "priceAtThatTime": 1000}, "model": "veggex.orderitem", "pk": 55}, {"fields": {"product": 37, "qtyInUnits": 1, "priceType": "custom rates", "order": 25, "unit": "kg", "priceAtThatTime": 1000}, "model": "veggex.orderitem", "pk": 56}, {"fields": {"product": 35, "qtyInUnits": 1, "priceType": "custom rates", "order": 25, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 57}, {"fields": {"product": 37, "qtyInUnits": 6, "priceType": "custom rates", "order": 26, "unit": "kg", "priceAtThatTime": 1000}, "model": "veggex.orderitem", "pk": 58}, {"fields": {"product": 35, "qtyInUnits": 6, "priceType": "custom rates", "order": 26, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 59}, {"fields": {"product": 2, "qtyInUnits": 9, "priceType": "custom rates", "order": 27, "unit": "kg", "priceAtThatTime": 12}, "model": "veggex.orderitem", "pk": 60}, {"fields": {"product": 12, "qtyInUnits": 66, "priceType": "as per mandi rates", "order": 28, "unit": "kg", "priceAtThatTime": 60}, "model": "veggex.orderitem", "pk": 61}, {"fields": {"product": 5, "qtyInUnits": 1, "priceType": "custom rates", "order": 30, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 62}, {"fields": {"product": 510, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 31, "unit": "kg", "priceAtThatTime": 45}, "model": "veggex.orderitem", "pk": 63}, {"fields": {"product": 510, "qtyInUnits": 3, "priceType": "as per mandi rates", "order": 32, "unit": "kg", "priceAtThatTime": 45}, "model": "veggex.orderitem", "pk": 64}, {"fields": {"product": 511, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 32, "unit": "kg", "priceAtThatTime": 100}, "model": "veggex.orderitem", "pk": 65}, {"fields": {"product": 2, "qtyInUnits": 2, "priceType": "custom rates", "order": 33, "unit": "kg", "priceAtThatTime": 12}, "model": "veggex.orderitem", "pk": 66}, {"fields": {"product": 1, "qtyInUnits": 2, "priceType": "as per mandi rates", "order": 33, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 67}, {"fields": {"product": 5, "qtyInUnits": 10, "priceType": "custom rates", "order": 34, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 68}, {"fields": {"product": 5, "qtyInUnits": 11, "priceType": "custom rates", "order": 35, "unit": "kg", "priceAtThatTime": 123}, "model": "veggex.orderitem", "pk": 69}, {"fields": {"product": 8, "qtyInUnits": 3, "priceType": "custom rates", "order": 36, "unit": "kg", "priceAtThatTime": 10}, "model": "veggex.orderitem", "pk": 70}, {"fields": {"product": 14, "qtyInUnits": 2, "priceType": "as per mandi rates", "order": 37, "unit": "kg", "priceAtThatTime": 80}, "model": "veggex.orderitem", "pk": 71}, {"fields": {"product": 12, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 37, "unit": "kg", "priceAtThatTime": 60}, "model": "veggex.orderitem", "pk": 72}, {"fields": {"product": 11, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 37, "unit": "kg", "priceAtThatTime": 100}, "model": "veggex.orderitem", "pk": 73}, {"fields": {"product": 10, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 37, "unit": "kg", "priceAtThatTime": 45}, "model": "veggex.orderitem", "pk": 74}, {"fields": {"product": 13, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 38, "unit": "kg", "priceAtThatTime": 80}, "model": "veggex.orderitem", "pk": 75}, {"fields": {"product": 12, "qtyInUnits": 1, "priceType": "as per mandi rates", "order": 38, "unit": "kg", "priceAtThatTime": 60}, "model": "veggex.orderitem", "pk": 76}, {"fields": {"remainingstock": 0.0, "product": 510}, "model": "veggex.currentstock", "pk": 1}, {"fields": {"remainingstock": 0.0, "product": 511}, "model": "veggex.currentstock", "pk": 2}, {"fields": {"remainingstock": 0.0, "product": 2}, "model": "veggex.currentstock", "pk": 3}, {"fields": {"remainingstock": 0.0, "product": 1}, "model": "veggex.currentstock", "pk": 4}, {"fields": {"remainingstock": 0.0, "product": 5}, "model": "veggex.currentstock", "pk": 5}, {"fields": {"remainingstock": 0.0, "product": 8}, "model": "veggex.currentstock", "pk": 6}, {"fields": {"remainingstock": 2.0, "product": 14}, "model": "veggex.currentstock", "pk": 7}, {"fields": {"remainingstock": 2.0, "product": 12}, "model": "veggex.currentstock", "pk": 8}, {"fields": {"remainingstock": 1.0, "product": 11}, "model": "veggex.currentstock", "pk": 9}, {"fields": {"remainingstock": 1.0, "product": 10}, "model": "veggex.currentstock", "pk": 10}, {"fields": {"remainingstock": 0.0, "product": 13}, "model": "veggex.currentstock", "pk": 11}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 0.0, "stock": 1}, "model": "veggex.stockconsumption", "pk": 1}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 0.0, "stock": 1}, "model": "veggex.stockconsumption", "pk": 2}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 0.2, "stock": 1}, "model": "veggex.stockconsumption", "pk": 3}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 0.5, "stock": 1}, "model": "veggex.stockconsumption", "pk": 4}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 0.3, "stock": 2}, "model": "veggex.stockconsumption", "pk": 5}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 0.1, "stock": 2}, "model": "veggex.stockconsumption", "pk": 6}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": -1.0, "stock": 2}, "model": "veggex.stockconsumption", "pk": 7}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": -1.0, "stock": 2}, "model": "veggex.stockconsumption", "pk": 8}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": -1.0, "stock": 1}, "model": "veggex.stockconsumption", "pk": 9}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 0.0, "stock": 1}, "model": "veggex.stockconsumption", "pk": 10}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 0.0, "stock": 1}, "model": "veggex.stockconsumption", "pk": 11}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 4.0, "stock": 5}, "model": "veggex.stockconsumption", "pk": 12}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 12.0, "stock": 5}, "model": "veggex.stockconsumption", "pk": 13}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 1.0, "stock": 3}, "model": "veggex.stockconsumption", "pk": 14}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 1.0, "stock": 4}, "model": "veggex.stockconsumption", "pk": 15}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 1.0, "stock": 6}, "model": "veggex.stockconsumption", "pk": 16}, {"fields": {"comment": null, "timeOfCreate": null, "consumption": 0.1, "stock": 11}, "model": "veggex.stockconsumption", "pk": 17}, {"fields": {"comment": null, "wastage": 0.5, "timeOfCreate": null, "stock": 1}, "model": "veggex.stockwastage", "pk": 1}, {"fields": {"comment": null, "wastage": 2.5, "timeOfCreate": null, "stock": 1}, "model": "veggex.stockwastage", "pk": 2}, {"fields": {"comment": null, "wastage": 0.0, "timeOfCreate": null, "stock": 1}, "model": "veggex.stockwastage", "pk": 3}, {"fields": {"comment": null, "wastage": 2.6, "timeOfCreate": null, "stock": 2}, "model": "veggex.stockwastage", "pk": 4}, {"fields": {"comment": null, "wastage": 5.0, "timeOfCreate": null, "stock": 5}, "model": "veggex.stockwastage", "pk": 5}, {"fields": {"comment": null, "wastage": 1.0, "timeOfCreate": null, "stock": 3}, "model": "veggex.stockwastage", "pk": 6}, {"fields": {"comment": null, "wastage": 0.0, "timeOfCreate": null, "stock": 3}, "model": "veggex.stockwastage", "pk": 7}, {"fields": {"comment": null, "wastage": 1.0, "timeOfCreate": null, "stock": 4}, "model": "veggex.stockwastage", "pk": 8}, {"fields": {"comment": null, "wastage": 0.0, "timeOfCreate": null, "stock": 4}, "model": "veggex.stockwastage", "pk": 9}, {"fields": {"comment": null, "wastage": 2.0, "timeOfCreate": null, "stock": 6}, "model": "veggex.stockwastage", "pk": 10}, {"fields": {"comment": null, "wastage": 0.9, "timeOfCreate": null, "stock": 11}, "model": "veggex.stockwastage", "pk": 11}]
+[
+    {
+        "fields": {
+            "city": "delhi",
+            "state": "delhi",
+            "pincode": 110016,
+            "area": "delhi"
+        },
+        "model": "veggex.address",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "nameOfMandi": "azadpur",
+            "Photo": "",
+            "description": "dadasdd",
+            "address": 1
+        },
+        "model": "veggex.mandi",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "description": "these kind of vegetables are being used for fuck",
+            "name": "Chicken",
+            "coverphoto": ""
+        },
+        "model": "veggex.category",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "description": "Django administration Welcome, admin. View site / Change password / Log out Home › Veggex › Products › rakesh Change product History  Name: Description: Category:  Change  Add PopularityIndex: Unit: PriceType: PricePerUnit: Coverphoto: Currently: ./Rees52-Raspberry-Pi-2-Model-SDL605139026-1-07246_r4",
+            "name": "Mutton",
+            "coverphoto": ""
+        },
+        "model": "veggex.category",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "description": "Django administration Welcome, admin. View site / Change password / Log out Home › Veggex › Products › rakesh Change product History  Name: Description: Category:  Change  Add PopularityIndex: Unit: PriceType: PricePerUnit: Coverphoto: Currently: ./Rees52-Raspberry-Pi-2-Model-SDL605139026-1-07246_r4",
+            "name": "Mutton",
+            "coverphoto": ""
+        },
+        "model": "veggex.category",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "description": "Django administration Welcome, admin. View site / Change password / Log out Home › Veggex › Products › rakesh Change product History  Name: Description: Category:  Change  Add PopularityIndex: Unit: PriceType: PricePerUnit: Coverphoto: Currently: ./Rees52-Raspberry-Pi-2-Model-SDL605139026-1-07246_r4",
+            "name": "Fruits",
+            "coverphoto": ""
+        },
+        "model": "veggex.category",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "description": "these kind of vegetables are being used for fuck",
+            "name": "Spices",
+            "coverphoto": ""
+        },
+        "model": "veggex.category",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 8377950711,
+            "profilePhoto": "./web.png",
+            "nameOfSeller": "Mive",
+            "address": 1,
+            "mailId": "ra@gmail.com",
+            
+            "categories": null
+        },
+        "model": "veggex.seller",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 12,
+            "profilePhoto": "",
+            "nameOfSeller": "aonwhe",
+            "address": 1,
+            "mailId": "rak.dev007@gmail.com",
+            
+            "categories": null
+        },
+        "model": "veggex.seller",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 1234,
+            "profilePhoto": "",
+            "nameOfSeller": "Grofers",
+            "address": 1,
+            "mailId": "grof@gmail.com",
+            
+            "categories": null
+        },
+        "model": "veggex.seller",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 12345,
+            "profilePhoto": "./website17_sI0Nfj3.png",
+            "nameOfSeller": "Bigbasket",
+            "address": 1,
+            "mailId": "rak.dev007@gmail.com",
+            
+            "categories": "fyt,ret,tyu"
+        },
+        "model": "veggex.seller",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 77777778,
+            "profilePhoto": "./Vegetable_2.png",
+            "nameOfSeller": "zopnow",
+            "address": 1,
+            "mailId": "rak.dev007@gmail.com",
+            
+            "categories": "fyt,ret,tyu"
+        },
+        "model": "veggex.seller",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 9289010333,
+            "profilePhoto": "./Vegetable_1.png",
+            "nameOfSeller": "Peppertap",
+            "address": 1,
+            "mailId": "pcy.iitd@gmail.com",
+            
+            "categories": "chicken,paranthe"
+        },
+        "model": "veggex.seller",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 83779507111,
+            "profilePhoto": "./web.png",
+            "nameOfSeller": "X",
+            "address": 1,
+            "mailId": "ra1@gmail.com",
+            
+            "categories": null
+        },
+        "model": "veggex.seller",
+        "pk": 11
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 121,
+            "profilePhoto": "",
+            "nameOfSeller": "Supplyt",
+            "address": 1,
+            "mailId": "rak.dev0107@gmail.com",
+            
+            "categories": null
+        },
+        "model": "veggex.seller",
+        "pk": 12
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 11234,
+            "profilePhoto": "",
+            "nameOfSeller": "Grs",
+            "address": 1,
+            "mailId": "grof1@gmail.com",
+            
+            "categories": null
+        },
+        "model": "veggex.seller",
+        "pk": 13
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 212345,
+            "profilePhoto": "./website17_sI0Nfj3.png",
+            "nameOfSeller": "asket",
+            "address": 1,
+            "mailId": "rak.de1v007@gmail.com",
+            
+            "categories": "fyt,ret,tyu"
+        },
+        "model": "veggex.seller",
+        "pk": 14
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 277777778,
+            "profilePhoto": "./Vegetable_2.png",
+            "nameOfSeller": "pnow",
+            "address": 1,
+            "mailId": "rak.dev007@gmail.com",
+            
+            "categories": "fyt,ret,tyu"
+        },
+        "model": "veggex.seller",
+        "pk": 15
+    },
+    {
+        "fields": {
+            "rating": 0,
+            "mobileNo": 91289010333,
+            "profilePhoto": "./Vegetable_1.png",
+            "nameOfSeller": "petap",
+            "address": 1,
+            "mailId": "pcy.iitd1@gmail.com",
+            
+            "categories": "chicken,paranthe"
+        },
+        "model": "veggex.seller",
+        "pk": 16
+    },
+    {
+        "fields": {
+            "category": 4,
+            "origin": "chomu",
+            "qualityRemarks": "yoo",
+            "name": "rakesh",
+            "grade": "Grade-A",
+            "pricePerUnit": 10,
+            "isPerishable": true,
+            "related_products": [
+                2,
+                102
+            ],
+            "seller": 2,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": 4,
+            "coverphoto": "./Whatsapp.png",
+            "priceType": "as per mandi rates",
+            "description": "fff"
+        },
+        "model": "veggex.product",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "category": 4,
+            "origin": "delhi",
+            "qualityRemarks": "ff",
+            "name": "kellaff",
+            "grade": "Grade-B",
+            "pricePerUnit": 12,
+            "isPerishable": false,
+            "related_products": [
+                1,
+                101,
+                201,
+                211,
+                221
+            ],
+            "seller": 2,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": null,
+            "coverphoto": "./website17.png",
+            "priceType": "custom rates",
+            "description": ""
+        },
+        "model": "veggex.product",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "delhi",
+            "qualityRemarks": "dsd",
+            "name": "1Apple",
+            "grade": "",
+            "pricePerUnit": 123,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 4,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": null,
+            "coverphoto": "./e.jpg",
+            "priceType": "custom rates",
+            "description": "cfsc"
+        },
+        "model": "veggex.product",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "Delhi",
+            "qualityRemarks": "ff",
+            "name": "1a",
+            "grade": "",
+            "pricePerUnit": 1000,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 4,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1212,
+            "popularityIndex": null,
+            "coverphoto": "./image-2-compressed.jpg",
+            "priceType": "custom rates",
+            "description": "ddd"
+        },
+        "model": "veggex.product",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "ggg",
+            "qualityRemarks": "dddd",
+            "name": "1Green Apple",
+            "grade": "",
+            "pricePerUnit": 10,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 4,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": null,
+            "coverphoto": "./image-4-compressed.jpg",
+            "priceType": "custom rates",
+            "description": "gdfg"
+        },
+        "model": "veggex.product",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra",
+            "qualityRemarks": "superb quality , ideal for shakes ",
+            "name": "1Cherry ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": 4,
+            "coverphoto": "./cherry_PNG611.jpg",
+            "priceType": "custom rates",
+            "description": "red cherry "
+        },
+        "model": "veggex.product",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra ",
+            "qualityRemarks": "amazing quality ",
+            "name": "1Oranges",
+            "grade": "",
+            "pricePerUnit": 45,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 100,
+            "popularityIndex": 9,
+            "coverphoto": "./ORANGES.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Juicy sweet orange "
+        },
+        "model": "veggex.product",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "agra ",
+            "qualityRemarks": "superp quality and perishable ",
+            "name": "1Lemons ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": true,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 452,
+            "popularityIndex": 5,
+            "coverphoto": "./lemons.jpg",
+            "priceType": "as per mandi rates",
+            "description": "juicy lemon "
+        },
+        "model": "veggex.product",
+        "pk": 11
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "Agra ",
+            "qualityRemarks": "superb quality ",
+            "name": "1CauliFlower ",
+            "grade": "",
+            "pricePerUnit": 60,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 20,
+            "popularityIndex": 5,
+            "coverphoto": "./cauliflower.jpg",
+            "priceType": "as per mandi rates",
+            "description": "White Cauliflower "
+        },
+        "model": "veggex.product",
+        "pk": 12
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "china ",
+            "qualityRemarks": "juicy litchi ",
+            "name": "1Litchi ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 4,
+            "popularityIndex": 6,
+            "coverphoto": "./LICHI.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Juicy lichi "
+        },
+        "model": "veggex.product",
+        "pk": 13
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "india",
+            "qualityRemarks": "amazing sweet grapes ",
+            "name": "1Black Grapes ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 120,
+            "popularityIndex": 9,
+            "coverphoto": "./black_grapes.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Sweet grapes "
+        },
+        "model": "veggex.product",
+        "pk": 14
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "nagpur ",
+            "qualityRemarks": "sweet guavas with less seeds ",
+            "name": "1Guava ",
+            "grade": "",
+            "pricePerUnit": 30,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 50,
+            "popularityIndex": 4,
+            "coverphoto": "./guava1.jpg",
+            "priceType": "as per mandi rates",
+            "description": "sweet guava "
+        },
+        "model": "veggex.product",
+        "pk": 15
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "newzealand",
+            "qualityRemarks": "superb quality ",
+            "name": "1Kiwi Fruit ",
+            "grade": "",
+            "pricePerUnit": 200,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 10,
+            "popularityIndex": 7,
+            "coverphoto": "./FreshKiwiFruitPhoto5.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Newzealand imported Kiwi fruit "
+        },
+        "model": "veggex.product",
+        "pk": 16
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "delhi",
+            "qualityRemarks": "dsd",
+            "name": "grof1Apple",
+            "grade": "",
+            "pricePerUnit": 123,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 3,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": null,
+            "coverphoto": "./e.jpg",
+            "priceType": "custom rates",
+            "description": "cfsc"
+        },
+        "model": "veggex.product",
+        "pk": 35
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "Delhi",
+            "qualityRemarks": "ff",
+            "name": "grof1a",
+            "grade": "",
+            "pricePerUnit": 1000,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 3,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1212,
+            "popularityIndex": null,
+            "coverphoto": "./image-2-compressed.jpg",
+            "priceType": "custom rates",
+            "description": "ddd"
+        },
+        "model": "veggex.product",
+        "pk": 37
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "ggg",
+            "qualityRemarks": "dddd",
+            "name": "grof1Green Apple",
+            "grade": "",
+            "pricePerUnit": 10,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 3,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": null,
+            "coverphoto": "./image-4-compressed.jpg",
+            "priceType": "custom rates",
+            "description": "gdfg"
+        },
+        "model": "veggex.product",
+        "pk": 38
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "delhi",
+            "qualityRemarks": "dsd",
+            "name": "zoApple",
+            "grade": "",
+            "pricePerUnit": 123,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": null,
+            "coverphoto": "./e.jpg",
+            "priceType": "custom rates",
+            "description": "cfsc"
+        },
+        "model": "veggex.product",
+        "pk": 55
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "Delhi",
+            "qualityRemarks": "ff",
+            "name": "zoa",
+            "grade": "",
+            "pricePerUnit": 1000,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1212,
+            "popularityIndex": null,
+            "coverphoto": "./image-2-compressed.jpg",
+            "priceType": "custom rates",
+            "description": "ddd"
+        },
+        "model": "veggex.product",
+        "pk": 57
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "ggg",
+            "qualityRemarks": "dddd",
+            "name": "zoGreen Apple",
+            "grade": "",
+            "pricePerUnit": 10,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": null,
+            "coverphoto": "./image-4-compressed.jpg",
+            "priceType": "custom rates",
+            "description": "gdfg"
+        },
+        "model": "veggex.product",
+        "pk": 58
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra",
+            "qualityRemarks": "superb quality , ideal for shakes ",
+            "name": "zoCherry ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": 4,
+            "coverphoto": "./cherry_PNG611.jpg",
+            "priceType": "custom rates",
+            "description": "red cherry "
+        },
+        "model": "veggex.product",
+        "pk": 59
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "delhi",
+            "qualityRemarks": "dsd",
+            "name": "ptApple",
+            "grade": "",
+            "pricePerUnit": 123,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": null,
+            "coverphoto": "./e.jpg",
+            "priceType": "custom rates",
+            "description": "cfsc"
+        },
+        "model": "veggex.product",
+        "pk": 75
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "Delhi",
+            "qualityRemarks": "ff",
+            "name": "pta",
+            "grade": "",
+            "pricePerUnit": 1000,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1212,
+            "popularityIndex": null,
+            "coverphoto": "./image-2-compressed.jpg",
+            "priceType": "custom rates",
+            "description": "ddd"
+        },
+        "model": "veggex.product",
+        "pk": 77
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "ggg",
+            "qualityRemarks": "dddd",
+            "name": "ptGreen Apple",
+            "grade": "",
+            "pricePerUnit": 10,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": null,
+            "coverphoto": "./image-4-compressed.jpg",
+            "priceType": "custom rates",
+            "description": "gdfg"
+        },
+        "model": "veggex.product",
+        "pk": 78
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra",
+            "qualityRemarks": "superb quality , ideal for shakes ",
+            "name": "ptCherry ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": 4,
+            "coverphoto": "./cherry_PNG611.jpg",
+            "priceType": "custom rates",
+            "description": "red cherry "
+        },
+        "model": "veggex.product",
+        "pk": 79
+    },
+    {
+        "fields": {
+            "category": 4,
+            "origin": "chomu",
+            "qualityRemarks": "yoo",
+            "name": "2rakesh",
+            "grade": "Grade-A",
+            "pricePerUnit": 10,
+            "isPerishable": true,
+            "related_products": [
+                2
+            ],
+            "seller": 2,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": 4,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "fff"
+        },
+        "model": "veggex.product",
+        "pk": 101
+    },
+    {
+        "fields": {
+            "category": 4,
+            "origin": "delhi",
+            "qualityRemarks": "ff",
+            "name": "2kellaff",
+            "grade": "Grade-B",
+            "pricePerUnit": 12,
+            "isPerishable": false,
+            "related_products": [
+                1,
+                201,
+                211,
+                221
+            ],
+            "seller": 2,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": ""
+        },
+        "model": "veggex.product",
+        "pk": 102
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "delhi",
+            "qualityRemarks": "dsd",
+            "name": "21Apple",
+            "grade": "",
+            "pricePerUnit": 123,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 4,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": null,
+            "coverphoto": "./e.jpg",
+            "priceType": "custom rates",
+            "description": "cfsc"
+        },
+        "model": "veggex.product",
+        "pk": 105
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "Delhi",
+            "qualityRemarks": "ff",
+            "name": "21a",
+            "grade": "",
+            "pricePerUnit": 1000,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 4,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1212,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "ddd"
+        },
+        "model": "veggex.product",
+        "pk": 107
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "ggg",
+            "qualityRemarks": "dddd",
+            "name": "21Green Apple",
+            "grade": "",
+            "pricePerUnit": 10,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 4,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "gdfg"
+        },
+        "model": "veggex.product",
+        "pk": 108
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra",
+            "qualityRemarks": "superb quality , ideal for shakes ",
+            "name": "21Cherry ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": 4,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "red cherry "
+        },
+        "model": "veggex.product",
+        "pk": 109
+    },
+    {
+        "fields": {
+            "category": 4,
+            "origin": "chomu",
+            "qualityRemarks": "yoo",
+            "name": "rakesh",
+            "grade": "Grade-A",
+            "pricePerUnit": 10,
+            "isPerishable": true,
+            "related_products": [
+                2,
+                102
+            ],
+            "seller": 12,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": 4,
+            "coverphoto": "./Whatsapp.png",
+            "priceType": "as per mandi rates",
+            "description": "fff"
+        },
+        "model": "veggex.product",
+        "pk": 201
+    },
+    {
+        "fields": {
+            "category": 4,
+            "origin": "chomu",
+            "qualityRemarks": "yoo",
+            "name": "rakesh",
+            "grade": "Grade-A",
+            "pricePerUnit": 10,
+            "isPerishable": true,
+            "related_products": [
+                2,
+                102
+            ],
+            "seller": 13,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": 4,
+            "coverphoto": "./Whatsapp.png",
+            "priceType": "as per mandi rates",
+            "description": "fff"
+        },
+        "model": "veggex.product",
+        "pk": 211
+    },
+    {
+        "fields": {
+            "category": 4,
+            "origin": "chomu",
+            "qualityRemarks": "yoo",
+            "name": "rakesh",
+            "grade": "Grade-A",
+            "pricePerUnit": 10,
+            "isPerishable": true,
+            "related_products": [
+                2,
+                102
+            ],
+            "seller": 14,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": 4,
+            "coverphoto": "./Whatsapp.png",
+            "priceType": "as per mandi rates",
+            "description": "fff"
+        },
+        "model": "veggex.product",
+        "pk": 221
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra ",
+            "qualityRemarks": "amazing quality ",
+            "name": "zoOranges",
+            "grade": "",
+            "pricePerUnit": 45,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 100,
+            "popularityIndex": 9,
+            "coverphoto": "./ORANGES.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Juicy sweet orange "
+        },
+        "model": "veggex.product",
+        "pk": 510
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "agra ",
+            "qualityRemarks": "superp quality and perishable ",
+            "name": "zoLemons ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": true,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 452,
+            "popularityIndex": 5,
+            "coverphoto": "./lemons.jpg",
+            "priceType": "as per mandi rates",
+            "description": "juicy lemon "
+        },
+        "model": "veggex.product",
+        "pk": 511
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "Agra ",
+            "qualityRemarks": "superb quality ",
+            "name": "zoCauliFlower ",
+            "grade": "",
+            "pricePerUnit": 60,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 20,
+            "popularityIndex": 5,
+            "coverphoto": "./cauliflower.jpg",
+            "priceType": "as per mandi rates",
+            "description": "White Cauliflower "
+        },
+        "model": "veggex.product",
+        "pk": 512
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "china ",
+            "qualityRemarks": "juicy litchi ",
+            "name": "zoLitchi ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 4,
+            "popularityIndex": 6,
+            "coverphoto": "./LICHI.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Juicy lichi "
+        },
+        "model": "veggex.product",
+        "pk": 513
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "india",
+            "qualityRemarks": "amazing sweet grapes ",
+            "name": "zoBlack Grapes ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 120,
+            "popularityIndex": 9,
+            "coverphoto": "./black_grapes.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Sweet grapes "
+        },
+        "model": "veggex.product",
+        "pk": 514
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "nagpur ",
+            "qualityRemarks": "sweet guavas with less seeds ",
+            "name": "zoGuava ",
+            "grade": "",
+            "pricePerUnit": 30,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 50,
+            "popularityIndex": 4,
+            "coverphoto": "./guava1.jpg",
+            "priceType": "as per mandi rates",
+            "description": "sweet guava "
+        },
+        "model": "veggex.product",
+        "pk": 515
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "newzealand",
+            "qualityRemarks": "superb quality ",
+            "name": "zoKiwi Fruit ",
+            "grade": "",
+            "pricePerUnit": 200,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 10,
+            "popularityIndex": 7,
+            "coverphoto": "./FreshKiwiFruitPhoto5.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Newzealand imported Kiwi fruit "
+        },
+        "model": "veggex.product",
+        "pk": 516
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra ",
+            "qualityRemarks": "amazing quality ",
+            "name": "ptOranges",
+            "grade": "",
+            "pricePerUnit": 45,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 100,
+            "popularityIndex": 9,
+            "coverphoto": "./ORANGES.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Juicy sweet orange "
+        },
+        "model": "veggex.product",
+        "pk": 710
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "agra ",
+            "qualityRemarks": "superp quality and perishable ",
+            "name": "ptLemons ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": true,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 452,
+            "popularityIndex": 5,
+            "coverphoto": "./lemons.jpg",
+            "priceType": "as per mandi rates",
+            "description": "juicy lemon "
+        },
+        "model": "veggex.product",
+        "pk": 711
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "Agra ",
+            "qualityRemarks": "superb quality ",
+            "name": "ptCauliFlower ",
+            "grade": "",
+            "pricePerUnit": 60,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 20,
+            "popularityIndex": 5,
+            "coverphoto": "./cauliflower.jpg",
+            "priceType": "as per mandi rates",
+            "description": "White Cauliflower "
+        },
+        "model": "veggex.product",
+        "pk": 712
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "china ",
+            "qualityRemarks": "juicy litchi ",
+            "name": "ptLitchi ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 4,
+            "popularityIndex": 6,
+            "coverphoto": "./LICHI.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Juicy lichi "
+        },
+        "model": "veggex.product",
+        "pk": 713
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "india",
+            "qualityRemarks": "amazing sweet grapes ",
+            "name": "ptBlack Grapes ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 120,
+            "popularityIndex": 9,
+            "coverphoto": "./black_grapes.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Sweet grapes "
+        },
+        "model": "veggex.product",
+        "pk": 714
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "nagpur ",
+            "qualityRemarks": "sweet guavas with less seeds ",
+            "name": "ptGuava ",
+            "grade": "",
+            "pricePerUnit": 30,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 50,
+            "popularityIndex": 4,
+            "coverphoto": "./guava1.jpg",
+            "priceType": "as per mandi rates",
+            "description": "sweet guava "
+        },
+        "model": "veggex.product",
+        "pk": 715
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "newzealand",
+            "qualityRemarks": "superb quality ",
+            "name": "ptKiwi Fruit ",
+            "grade": "",
+            "pricePerUnit": 200,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 10,
+            "popularityIndex": 7,
+            "coverphoto": "./FreshKiwiFruitPhoto5.jpg",
+            "priceType": "as per mandi rates",
+            "description": "Newzealand imported Kiwi fruit "
+        },
+        "model": "veggex.product",
+        "pk": 716
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra ",
+            "qualityRemarks": "amazing quality ",
+            "name": "21Oranges",
+            "grade": "",
+            "pricePerUnit": 45,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 100,
+            "popularityIndex": 9,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Juicy sweet orange "
+        },
+        "model": "veggex.product",
+        "pk": 1010
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "agra ",
+            "qualityRemarks": "superp quality and perishable ",
+            "name": "21Lemons ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": true,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 452,
+            "popularityIndex": 5,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "juicy lemon "
+        },
+        "model": "veggex.product",
+        "pk": 1011
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "Agra ",
+            "qualityRemarks": "superb quality ",
+            "name": "21CauliFlower ",
+            "grade": "",
+            "pricePerUnit": 60,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 20,
+            "popularityIndex": 5,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "White Cauliflower "
+        },
+        "model": "veggex.product",
+        "pk": 1012
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "china ",
+            "qualityRemarks": "juicy litchi ",
+            "name": "21Litchi ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 4,
+            "popularityIndex": 6,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Juicy lichi "
+        },
+        "model": "veggex.product",
+        "pk": 1013
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "india",
+            "qualityRemarks": "amazing sweet grapes ",
+            "name": "21Black Grapes ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 120,
+            "popularityIndex": 9,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Sweet grapes "
+        },
+        "model": "veggex.product",
+        "pk": 1014
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "nagpur ",
+            "qualityRemarks": "sweet guavas with less seeds ",
+            "name": "21Guava ",
+            "grade": "",
+            "pricePerUnit": 30,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 50,
+            "popularityIndex": 4,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "sweet guava "
+        },
+        "model": "veggex.product",
+        "pk": 1015
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "newzealand",
+            "qualityRemarks": "superb quality ",
+            "name": "21Kiwi Fruit ",
+            "grade": "",
+            "pricePerUnit": 200,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 1,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 10,
+            "popularityIndex": 7,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Newzealand imported Kiwi fruit "
+        },
+        "model": "veggex.product",
+        "pk": 1016
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "delhi",
+            "qualityRemarks": "dsd",
+            "name": "2grof1Apple",
+            "grade": "",
+            "pricePerUnit": 123,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 3,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "cfsc"
+        },
+        "model": "veggex.product",
+        "pk": 1035
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "Delhi",
+            "qualityRemarks": "ff",
+            "name": "2grof1a",
+            "grade": "",
+            "pricePerUnit": 1000,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 3,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1212,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "ddd"
+        },
+        "model": "veggex.product",
+        "pk": 1037
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "ggg",
+            "qualityRemarks": "dddd",
+            "name": "2grof1Green Apple",
+            "grade": "",
+            "pricePerUnit": 10,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 3,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "gdfg"
+        },
+        "model": "veggex.product",
+        "pk": 1038
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "delhi",
+            "qualityRemarks": "dsd",
+            "name": "2zoApple",
+            "grade": "",
+            "pricePerUnit": 123,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "cfsc"
+        },
+        "model": "veggex.product",
+        "pk": 1055
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "Delhi",
+            "qualityRemarks": "ff",
+            "name": "2zoa",
+            "grade": "",
+            "pricePerUnit": 1000,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1212,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "ddd"
+        },
+        "model": "veggex.product",
+        "pk": 1057
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "ggg",
+            "qualityRemarks": "dddd",
+            "name": "2zoGreen Apple",
+            "grade": "",
+            "pricePerUnit": 10,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "gdfg"
+        },
+        "model": "veggex.product",
+        "pk": 1058
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra",
+            "qualityRemarks": "superb quality , ideal for shakes ",
+            "name": "2zoCherry ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": 4,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "red cherry "
+        },
+        "model": "veggex.product",
+        "pk": 1059
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "delhi",
+            "qualityRemarks": "dsd",
+            "name": "2ptApple",
+            "grade": "",
+            "pricePerUnit": 123,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "cfsc"
+        },
+        "model": "veggex.product",
+        "pk": 1075
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "Delhi",
+            "qualityRemarks": "ff",
+            "name": "2pta",
+            "grade": "",
+            "pricePerUnit": 1000,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1212,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "ddd"
+        },
+        "model": "veggex.product",
+        "pk": 1077
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "ggg",
+            "qualityRemarks": "dddd",
+            "name": "2ptGreen Apple",
+            "grade": "",
+            "pricePerUnit": 10,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 1000,
+            "popularityIndex": null,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "gdfg"
+        },
+        "model": "veggex.product",
+        "pk": 1078
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra",
+            "qualityRemarks": "superb quality , ideal for shakes ",
+            "name": "2ptCherry ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 12,
+            "popularityIndex": 4,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "custom rates",
+            "description": "red cherry "
+        },
+        "model": "veggex.product",
+        "pk": 1079
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra ",
+            "qualityRemarks": "amazing quality ",
+            "name": "2zoOranges",
+            "grade": "",
+            "pricePerUnit": 45,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 100,
+            "popularityIndex": 9,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Juicy sweet orange "
+        },
+        "model": "veggex.product",
+        "pk": 10510
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "agra ",
+            "qualityRemarks": "superp quality and perishable ",
+            "name": "2zoLemons ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": true,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 452,
+            "popularityIndex": 5,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "juicy lemon "
+        },
+        "model": "veggex.product",
+        "pk": 10511
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "Agra ",
+            "qualityRemarks": "superb quality ",
+            "name": "2zoCauliFlower ",
+            "grade": "",
+            "pricePerUnit": 60,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 20,
+            "popularityIndex": 5,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "White Cauliflower "
+        },
+        "model": "veggex.product",
+        "pk": 10512
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "china ",
+            "qualityRemarks": "juicy litchi ",
+            "name": "2zoLitchi ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 4,
+            "popularityIndex": 6,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Juicy lichi "
+        },
+        "model": "veggex.product",
+        "pk": 10513
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "india",
+            "qualityRemarks": "amazing sweet grapes ",
+            "name": "2zoBlack Grapes ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 120,
+            "popularityIndex": 9,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Sweet grapes "
+        },
+        "model": "veggex.product",
+        "pk": 10514
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "nagpur ",
+            "qualityRemarks": "sweet guavas with less seeds ",
+            "name": "2zoGuava ",
+            "grade": "",
+            "pricePerUnit": 30,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 50,
+            "popularityIndex": 4,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "sweet guava "
+        },
+        "model": "veggex.product",
+        "pk": 10515
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "newzealand",
+            "qualityRemarks": "superb quality ",
+            "name": "2zoKiwi Fruit ",
+            "grade": "",
+            "pricePerUnit": 200,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 5,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 10,
+            "popularityIndex": 7,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Newzealand imported Kiwi fruit "
+        },
+        "model": "veggex.product",
+        "pk": 10516
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "agra ",
+            "qualityRemarks": "amazing quality ",
+            "name": "2ptOranges",
+            "grade": "",
+            "pricePerUnit": 45,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 100,
+            "popularityIndex": 9,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Juicy sweet orange "
+        },
+        "model": "veggex.product",
+        "pk": 10710
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "agra ",
+            "qualityRemarks": "superp quality and perishable ",
+            "name": "2ptLemons ",
+            "grade": "",
+            "pricePerUnit": 100,
+            "isPerishable": true,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 452,
+            "popularityIndex": 5,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "juicy lemon "
+        },
+        "model": "veggex.product",
+        "pk": 10711
+    },
+    {
+        "fields": {
+            "category": 1,
+            "origin": "Agra ",
+            "qualityRemarks": "superb quality ",
+            "name": "2ptCauliFlower ",
+            "grade": "",
+            "pricePerUnit": 60,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 20,
+            "popularityIndex": 5,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "White Cauliflower "
+        },
+        "model": "veggex.product",
+        "pk": 10712
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "china ",
+            "qualityRemarks": "juicy litchi ",
+            "name": "2ptLitchi ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 4,
+            "popularityIndex": 6,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Juicy lichi "
+        },
+        "model": "veggex.product",
+        "pk": 10713
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "india",
+            "qualityRemarks": "amazing sweet grapes ",
+            "name": "2ptBlack Grapes ",
+            "grade": "",
+            "pricePerUnit": 80,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 120,
+            "popularityIndex": 9,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Sweet grapes "
+        },
+        "model": "veggex.product",
+        "pk": 10714
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "nagpur ",
+            "qualityRemarks": "sweet guavas with less seeds ",
+            "name": "2ptGuava ",
+            "grade": "",
+            "pricePerUnit": 30,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 50,
+            "popularityIndex": 4,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "sweet guava "
+        },
+        "model": "veggex.product",
+        "pk": 10715
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "newzealand",
+            "qualityRemarks": "superb quality ",
+            "name": "2ptKiwi Fruit ",
+            "grade": "",
+            "pricePerUnit": 200,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 6,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 10,
+            "popularityIndex": 7,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Newzealand imported Kiwi fruit "
+        },
+        "model": "veggex.product",
+        "pk": 10716
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "newzealand",
+            "qualityRemarks": "superb quality ",
+            "name": "2ptKiwi Fruit ",
+            "grade": "",
+            "pricePerUnit": 200,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 12,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 10,
+            "popularityIndex": 7,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Newzealand imported Kiwi fruit "
+        },
+        "model": "veggex.product",
+        "pk": 2010716
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "newzealand",
+            "qualityRemarks": "superb quality ",
+            "name": "2ptKiwi Fruit ",
+            "grade": "",
+            "pricePerUnit": 200,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 13,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 10,
+            "popularityIndex": 7,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Newzealand imported Kiwi fruit "
+        },
+        "model": "veggex.product",
+        "pk": 2110716
+    },
+    {
+        "fields": {
+            "category": 2,
+            "origin": "newzealand",
+            "qualityRemarks": "superb quality ",
+            "name": "2ptKiwi Fruit ",
+            "grade": "",
+            "pricePerUnit": 200,
+            "isPerishable": false,
+            "related_products": [],
+            "seller": 14,
+            "status": 1,
+            "unit": "kg",
+            "maxAvailableUnits": 10,
+            "popularityIndex": 7,
+            "coverphoto": "./No_image_available.png",
+            "priceType": "as per mandi rates",
+            "description": "Newzealand imported Kiwi fruit "
+        },
+        "model": "veggex.product",
+        "pk": 2210716
+    },
+    {
+        "fields": {
+            "products": [
+                11
+            ],
+            "seller": 1
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 24
+    },
+    {
+        "fields": {
+            "products": [
+                1,
+                2
+            ],
+            "seller": 2
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 25
+    },
+    {
+        "fields": {
+            "products": [
+                9,
+                10,
+                11,
+                12
+            ],
+            "seller": 1
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 27
+    },
+    {
+        "fields": {
+            "products": [
+                5,
+                7,
+                8
+            ],
+            "seller": 4
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 34
+    },
+    {
+        "fields": {
+            "products": [
+                55,
+                59,
+                510,
+                511,
+                512,
+                513,
+                514,
+                515
+            ],
+            "seller": 5
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 35
+    },
+    {
+        "fields": {
+            "products": [
+                1,
+                2
+            ],
+            "seller": 2
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 36
+    },
+    {
+        "fields": {
+            "products": [
+                37,
+                38,
+                1035
+            ],
+            "seller": 3
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 38
+    },
+    {
+        "fields": {
+            "products": [
+                10,
+                11,
+                12,
+                13,
+                15,
+                1011,
+                1013,
+                1014,
+                1015,
+                1016
+            ],
+            "seller": 1
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 39
+    },
+    {
+        "fields": {
+            "products": [
+                221,
+                2210716
+            ],
+            "seller": 14
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 40
+    },
+    {
+        "fields": {
+            "products": [
+                201
+            ],
+            "seller": 12
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 41
+    },
+    {
+        "fields": {
+            "products": [
+                79,
+                710,
+                711
+            ],
+            "seller": 6
+        },
+        "model": "veggex.categoryvendor",
+        "pk": 42
+    },
+    {
+        "fields": {
+            "cartTotal": 1022,
+            "timeOfUpdate": null,
+            "timeOfCreate": null
+        },
+        "model": "veggex.cart",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "cartTotal": 1092,
+            "timeOfUpdate": null,
+            "timeOfCreate": null
+        },
+        "model": "veggex.cart",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "cartTotal": 1223,
+            "timeOfUpdate": null,
+            "timeOfCreate": null
+        },
+        "model": "veggex.cart",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "nameOfOwner": "Rakesh Yadav",
+            "institutionType": "hotels",
+            "mobileNo": 8377950711,
+            "profilePhoto": "./rajat_Cropped.jpg",
+            "cart": 1,
+            "owner": null,
+            "nameOfInstitution": "Mezbaan restaurants",
+            "address": 1,
+            "mailId": "rak.dev007@gmail.com",
+            "gpsLocation": "",
+            "password": "pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=",
+            "categories": [
+                34,
+                35,
+                36,
+                38,
+                39,
+                40,
+                41,
+                42
+            ]
+        },
+        "model": "veggex.user",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "nameOfOwner": "Shyam lal",
+            "institutionType": "hotels",
+            "mobileNo": 9928524925,
+            "profilePhoto": "./unnamed.png",
+            "cart": 2,
+            "owner": null,
+            "nameOfInstitution": "Cafe Coffe Day",
+            "address": 1,
+            "mailId": "info@mive.in",
+            "gpsLocation": "",
+            "password": "pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=",
+            "categories": [
+                24,
+                25
+            ]
+        },
+        "model": "veggex.user",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "nameOfOwner": "twwe",
+            "institutionType": "hotels",
+            "mobileNo": 9352132140,
+            "profilePhoto": "./pc_205x205.jpg",
+            "cart": 3,
+            "owner": null,
+            "nameOfInstitution": "New hotel",
+            "address": 1,
+            "mailId": "kjfjs@p.com",
+            "gpsLocation": "",
+            "password": "pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=",
+            "categories": [
+                27
+            ]
+        },
+        "model": "veggex.user",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "qtyInUnits": 1,
+            "product": 7,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "cart": 2
+        },
+        "model": "veggex.cartitem",
+        "pk": 42
+    },
+    {
+        "fields": {
+            "qtyInUnits": 1,
+            "product": 13,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "cart": 2
+        },
+        "model": "veggex.cartitem",
+        "pk": 47
+    },
+    {
+        "fields": {
+            "qtyInUnits": 1,
+            "product": 2,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "cart": 2
+        },
+        "model": "veggex.cartitem",
+        "pk": 56
+    },
+    {
+        "fields": {
+            "qtyInUnits": 1,
+            "product": 35,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "cart": 3
+        },
+        "model": "veggex.cartitem",
+        "pk": 62
+    },
+    {
+        "fields": {
+            "qtyInUnits": 1,
+            "product": 37,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "cart": 3
+        },
+        "model": "veggex.cartitem",
+        "pk": 63
+    },
+    {
+        "fields": {
+            "qtyInUnits": 1,
+            "product": 11,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "cart": 3
+        },
+        "model": "veggex.cartitem",
+        "pk": 64
+    },
+    {
+        "fields": {
+            "qtyInUnits": 1,
+            "product": 2,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "cart": 1
+        },
+        "model": "veggex.cartitem",
+        "pk": 145
+    },
+    {
+        "fields": {
+            "qtyInUnits": 1,
+            "product": 8,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "cart": 1
+        },
+        "model": "veggex.cartitem",
+        "pk": 146
+    },
+    {
+        "fields": {
+            "qtyInUnits": 1,
+            "product": 7,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "cart": 1
+        },
+        "model": "veggex.cartitem",
+        "pk": 147
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-15",
+            "seller": null,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "fsfsfsf",
+            "subtotal": 360
+        },
+        "model": "veggex.order",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": null,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "lklkl",
+            "subtotal": 1090
+        },
+        "model": "veggex.order",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-29",
+            "seller": null,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "check",
+            "subtotal": 22
+        },
+        "model": "veggex.order",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": 2,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-22",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "asdsff",
+            "subtotal": 260
+        },
+        "model": "veggex.order",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": 4,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-17",
+            "seller": 2,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "Ggg",
+            "subtotal": 10
+        },
+        "model": "veggex.order",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-16",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "ijk",
+            "subtotal": 845
+        },
+        "model": "veggex.order",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-16",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "ijk",
+            "subtotal": 845
+        },
+        "model": "veggex.order",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-16",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "ijk",
+            "subtotal": 845
+        },
+        "model": "veggex.order",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-22",
+            "seller": 2,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "gjhgj",
+            "subtotal": 12
+        },
+        "model": "veggex.order",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-28",
+            "seller": 1,
+            "user": 3,
+            "payment_mode": "COD",
+            "orderMsg": "fs",
+            "subtotal": 300
+        },
+        "model": "veggex.order",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-16",
+            "seller": 3,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "eesrewrew",
+            "subtotal": 4383
+        },
+        "model": "veggex.order",
+        "pk": 11
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": 2,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "fsfsffs",
+            "subtotal": 22
+        },
+        "model": "veggex.order",
+        "pk": 12
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-16",
+            "seller": 2,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "afdffsf",
+            "subtotal": 220
+        },
+        "model": "veggex.order",
+        "pk": 13
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-17",
+            "seller": 2,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "dfsfsd",
+            "subtotal": 11200
+        },
+        "model": "veggex.order",
+        "pk": 14
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "hkh",
+            "subtotal": 1590
+        },
+        "model": "veggex.order",
+        "pk": 15
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-22",
+            "seller": 6,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "jhkhkjh",
+            "subtotal": 3153
+        },
+        "model": "veggex.order",
+        "pk": 16
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-16",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "kjkj",
+            "subtotal": 80
+        },
+        "model": "veggex.order",
+        "pk": 17
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-11-27",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "ddsd",
+            "subtotal": 1180
+        },
+        "model": "veggex.order",
+        "pk": 18
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": 4,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "uhjhkj",
+            "subtotal": 1010
+        },
+        "model": "veggex.order",
+        "pk": 19
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": 3,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "uhuhkh",
+            "subtotal": 1133
+        },
+        "model": "veggex.order",
+        "pk": 20
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-16",
+            "seller": 4,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "Hgh",
+            "subtotal": 2230
+        },
+        "model": "veggex.order",
+        "pk": 21
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-22",
+            "seller": 4,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "dasdasds",
+            "subtotal": 12133
+        },
+        "model": "veggex.order",
+        "pk": 22
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-24",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "dsadasd",
+            "subtotal": 125
+        },
+        "model": "veggex.order",
+        "pk": 23
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": 4,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "dsdd",
+            "subtotal": 1123
+        },
+        "model": "veggex.order",
+        "pk": 24
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": 3,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "sdfsdfdsfs",
+            "subtotal": 1123
+        },
+        "model": "veggex.order",
+        "pk": 25
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": 3,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "sdfdsfsdf",
+            "subtotal": 6738
+        },
+        "model": "veggex.order",
+        "pk": 26
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-29",
+            "seller": 2,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "",
+            "subtotal": 108
+        },
+        "model": "veggex.order",
+        "pk": 27
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-17",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "sdfsf",
+            "subtotal": 3960
+        },
+        "model": "veggex.order",
+        "pk": 28
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": 4,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "yooo",
+            "subtotal": 123
+        },
+        "model": "veggex.order",
+        "pk": 29
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-17",
+            "seller": 4,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "yo",
+            "subtotal": 123
+        },
+        "model": "veggex.order",
+        "pk": 30
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-29",
+            "seller": 5,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "yo",
+            "subtotal": 45
+        },
+        "model": "veggex.order",
+        "pk": 31
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": 5,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "jkjk",
+            "subtotal": 235
+        },
+        "model": "veggex.order",
+        "pk": 32
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-22",
+            "seller": 2,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "yoo",
+            "subtotal": 44
+        },
+        "model": "veggex.order",
+        "pk": 33
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-23",
+            "seller": 4,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "dssf",
+            "subtotal": 1230
+        },
+        "model": "veggex.order",
+        "pk": 34
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-21",
+            "seller": 4,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "dsdsd",
+            "subtotal": 1353
+        },
+        "model": "veggex.order",
+        "pk": 35
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-05",
+            "seller": 4,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "jkxhcksajchkjdac",
+            "subtotal": 30
+        },
+        "model": "veggex.order",
+        "pk": 36
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-16",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "hjjh",
+            "subtotal": 365
+        },
+        "model": "veggex.order",
+        "pk": 37
+    },
+    {
+        "fields": {
+            "status": "PLACED",
+            "category": null,
+            "timeOfUpdate": null,
+            "timeOfCreate": null,
+            "deliveryTime": "2015-10-16",
+            "seller": 1,
+            "user": 1,
+            "payment_mode": "COD",
+            "orderMsg": "",
+            "subtotal": 140
+        },
+        "model": "veggex.order",
+        "pk": 38
+    },
+    {
+        "fields": {
+            "product": 12,
+            "qtyInUnits": 6,
+            "priceType": "as per mandi rates",
+            "order": 1,
+            "unit": "kg",
+            "priceAtThatTime": 60
+        },
+        "model": "veggex.orderitem",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "product": 10,
+            "qtyInUnits": 4,
+            "priceType": "as per mandi rates",
+            "order": 2,
+            "unit": "kg",
+            "priceAtThatTime": 45
+        },
+        "model": "veggex.orderitem",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "product": 13,
+            "qtyInUnits": 2,
+            "priceType": "as per mandi rates",
+            "order": 2,
+            "unit": "kg",
+            "priceAtThatTime": 80
+        },
+        "model": "veggex.orderitem",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "product": 15,
+            "qtyInUnits": 5,
+            "priceType": "as per mandi rates",
+            "order": 2,
+            "unit": "kg",
+            "priceAtThatTime": 30
+        },
+        "model": "veggex.orderitem",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "product": 16,
+            "qtyInUnits": 3,
+            "priceType": "as per mandi rates",
+            "order": 2,
+            "unit": "kg",
+            "priceAtThatTime": 200
+        },
+        "model": "veggex.orderitem",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "product": 1,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 3,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "product": 2,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 3,
+            "unit": "kg",
+            "priceAtThatTime": 12
+        },
+        "model": "veggex.orderitem",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "product": 9,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 4,
+            "unit": "kg",
+            "priceAtThatTime": 100
+        },
+        "model": "veggex.orderitem",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "product": 13,
+            "qtyInUnits": 2,
+            "priceType": "as per mandi rates",
+            "order": 4,
+            "unit": "kg",
+            "priceAtThatTime": 80
+        },
+        "model": "veggex.orderitem",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "product": 1,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 5,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "product": 10,
+            "qtyInUnits": 5,
+            "priceType": "as per mandi rates",
+            "order": 6,
+            "unit": "kg",
+            "priceAtThatTime": 45
+        },
+        "model": "veggex.orderitem",
+        "pk": 11
+    },
+    {
+        "fields": {
+            "product": 12,
+            "qtyInUnits": 7,
+            "priceType": "as per mandi rates",
+            "order": 6,
+            "unit": "kg",
+            "priceAtThatTime": 60
+        },
+        "model": "veggex.orderitem",
+        "pk": 12
+    },
+    {
+        "fields": {
+            "product": 16,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 6,
+            "unit": "kg",
+            "priceAtThatTime": 200
+        },
+        "model": "veggex.orderitem",
+        "pk": 13
+    },
+    {
+        "fields": {
+            "product": 10,
+            "qtyInUnits": 5,
+            "priceType": "as per mandi rates",
+            "order": 7,
+            "unit": "kg",
+            "priceAtThatTime": 45
+        },
+        "model": "veggex.orderitem",
+        "pk": 14
+    },
+    {
+        "fields": {
+            "product": 12,
+            "qtyInUnits": 7,
+            "priceType": "as per mandi rates",
+            "order": 7,
+            "unit": "kg",
+            "priceAtThatTime": 60
+        },
+        "model": "veggex.orderitem",
+        "pk": 15
+    },
+    {
+        "fields": {
+            "product": 16,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 7,
+            "unit": "kg",
+            "priceAtThatTime": 200
+        },
+        "model": "veggex.orderitem",
+        "pk": 16
+    },
+    {
+        "fields": {
+            "product": 10,
+            "qtyInUnits": 5,
+            "priceType": "as per mandi rates",
+            "order": 8,
+            "unit": "kg",
+            "priceAtThatTime": 45
+        },
+        "model": "veggex.orderitem",
+        "pk": 17
+    },
+    {
+        "fields": {
+            "product": 12,
+            "qtyInUnits": 7,
+            "priceType": "as per mandi rates",
+            "order": 8,
+            "unit": "kg",
+            "priceAtThatTime": 60
+        },
+        "model": "veggex.orderitem",
+        "pk": 18
+    },
+    {
+        "fields": {
+            "product": 16,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 8,
+            "unit": "kg",
+            "priceAtThatTime": 200
+        },
+        "model": "veggex.orderitem",
+        "pk": 19
+    },
+    {
+        "fields": {
+            "product": 2,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 9,
+            "unit": "kg",
+            "priceAtThatTime": 12
+        },
+        "model": "veggex.orderitem",
+        "pk": 20
+    },
+    {
+        "fields": {
+            "product": 11,
+            "qtyInUnits": 3,
+            "priceType": "as per mandi rates",
+            "order": 10,
+            "unit": "kg",
+            "priceAtThatTime": 100
+        },
+        "model": "veggex.orderitem",
+        "pk": 21
+    },
+    {
+        "fields": {
+            "product": 35,
+            "qtyInUnits": 11,
+            "priceType": "custom rates",
+            "order": 11,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 22
+    },
+    {
+        "fields": {
+            "product": 37,
+            "qtyInUnits": 3,
+            "priceType": "custom rates",
+            "order": 11,
+            "unit": "kg",
+            "priceAtThatTime": 1000
+        },
+        "model": "veggex.orderitem",
+        "pk": 23
+    },
+    {
+        "fields": {
+            "product": 38,
+            "qtyInUnits": 3,
+            "priceType": "custom rates",
+            "order": 11,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 24
+    },
+    {
+        "fields": {
+            "product": 1,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 12,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 25
+    },
+    {
+        "fields": {
+            "product": 2,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 12,
+            "unit": "kg",
+            "priceAtThatTime": 12
+        },
+        "model": "veggex.orderitem",
+        "pk": 26
+    },
+    {
+        "fields": {
+            "product": 1,
+            "qtyInUnits": 10,
+            "priceType": "as per mandi rates",
+            "order": 13,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 27
+    },
+    {
+        "fields": {
+            "product": 2,
+            "qtyInUnits": 10,
+            "priceType": "custom rates",
+            "order": 13,
+            "unit": "kg",
+            "priceAtThatTime": 12
+        },
+        "model": "veggex.orderitem",
+        "pk": 28
+    },
+    {
+        "fields": {
+            "product": 1,
+            "qtyInUnits": 1000,
+            "priceType": "as per mandi rates",
+            "order": 14,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 29
+    },
+    {
+        "fields": {
+            "product": 2,
+            "qtyInUnits": 100,
+            "priceType": "custom rates",
+            "order": 14,
+            "unit": "kg",
+            "priceAtThatTime": 12
+        },
+        "model": "veggex.orderitem",
+        "pk": 30
+    },
+    {
+        "fields": {
+            "product": 9,
+            "qtyInUnits": 2,
+            "priceType": "custom rates",
+            "order": 15,
+            "unit": "kg",
+            "priceAtThatTime": 100
+        },
+        "model": "veggex.orderitem",
+        "pk": 31
+    },
+    {
+        "fields": {
+            "product": 11,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 15,
+            "unit": "kg",
+            "priceAtThatTime": 100
+        },
+        "model": "veggex.orderitem",
+        "pk": 32
+    },
+    {
+        "fields": {
+            "product": 12,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 15,
+            "unit": "kg",
+            "priceAtThatTime": 60
+        },
+        "model": "veggex.orderitem",
+        "pk": 33
+    },
+    {
+        "fields": {
+            "product": 15,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 15,
+            "unit": "kg",
+            "priceAtThatTime": 30
+        },
+        "model": "veggex.orderitem",
+        "pk": 34
+    },
+    {
+        "fields": {
+            "product": 16,
+            "qtyInUnits": 6,
+            "priceType": "as per mandi rates",
+            "order": 15,
+            "unit": "kg",
+            "priceAtThatTime": 200
+        },
+        "model": "veggex.orderitem",
+        "pk": 35
+    },
+    {
+        "fields": {
+            "product": 78,
+            "qtyInUnits": 3,
+            "priceType": "custom rates",
+            "order": 16,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 36
+    },
+    {
+        "fields": {
+            "product": 77,
+            "qtyInUnits": 3,
+            "priceType": "custom rates",
+            "order": 16,
+            "unit": "kg",
+            "priceAtThatTime": 1000
+        },
+        "model": "veggex.orderitem",
+        "pk": 37
+    },
+    {
+        "fields": {
+            "product": 75,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 16,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 38
+    },
+    {
+        "fields": {
+            "product": 14,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 17,
+            "unit": "kg",
+            "priceAtThatTime": 80
+        },
+        "model": "veggex.orderitem",
+        "pk": 39
+    },
+    {
+        "fields": {
+            "product": 14,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 18,
+            "unit": "kg",
+            "priceAtThatTime": 80
+        },
+        "model": "veggex.orderitem",
+        "pk": 40
+    },
+    {
+        "fields": {
+            "product": 11,
+            "qtyInUnits": 11,
+            "priceType": "as per mandi rates",
+            "order": 18,
+            "unit": "kg",
+            "priceAtThatTime": 100
+        },
+        "model": "veggex.orderitem",
+        "pk": 41
+    },
+    {
+        "fields": {
+            "product": 8,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 19,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 42
+    },
+    {
+        "fields": {
+            "product": 7,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 19,
+            "unit": "kg",
+            "priceAtThatTime": 1000
+        },
+        "model": "veggex.orderitem",
+        "pk": 43
+    },
+    {
+        "fields": {
+            "product": 35,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 20,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 44
+    },
+    {
+        "fields": {
+            "product": 37,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 20,
+            "unit": "kg",
+            "priceAtThatTime": 1000
+        },
+        "model": "veggex.orderitem",
+        "pk": 45
+    },
+    {
+        "fields": {
+            "product": 38,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 20,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 46
+    },
+    {
+        "fields": {
+            "product": 5,
+            "qtyInUnits": 10,
+            "priceType": "custom rates",
+            "order": 21,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 47
+    },
+    {
+        "fields": {
+            "product": 7,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 21,
+            "unit": "kg",
+            "priceAtThatTime": 1000
+        },
+        "model": "veggex.orderitem",
+        "pk": 48
+    },
+    {
+        "fields": {
+            "product": 5,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 22,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 49
+    },
+    {
+        "fields": {
+            "product": 7,
+            "qtyInUnits": 12,
+            "priceType": "custom rates",
+            "order": 22,
+            "unit": "kg",
+            "priceAtThatTime": 1000
+        },
+        "model": "veggex.orderitem",
+        "pk": 50
+    },
+    {
+        "fields": {
+            "product": 8,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 22,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 51
+    },
+    {
+        "fields": {
+            "product": 14,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 23,
+            "unit": "kg",
+            "priceAtThatTime": 80
+        },
+        "model": "veggex.orderitem",
+        "pk": 52
+    },
+    {
+        "fields": {
+            "product": 10,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 23,
+            "unit": "kg",
+            "priceAtThatTime": 45
+        },
+        "model": "veggex.orderitem",
+        "pk": 53
+    },
+    {
+        "fields": {
+            "product": 5,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 24,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 54
+    },
+    {
+        "fields": {
+            "product": 7,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 24,
+            "unit": "kg",
+            "priceAtThatTime": 1000
+        },
+        "model": "veggex.orderitem",
+        "pk": 55
+    },
+    {
+        "fields": {
+            "product": 37,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 25,
+            "unit": "kg",
+            "priceAtThatTime": 1000
+        },
+        "model": "veggex.orderitem",
+        "pk": 56
+    },
+    {
+        "fields": {
+            "product": 35,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 25,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 57
+    },
+    {
+        "fields": {
+            "product": 37,
+            "qtyInUnits": 6,
+            "priceType": "custom rates",
+            "order": 26,
+            "unit": "kg",
+            "priceAtThatTime": 1000
+        },
+        "model": "veggex.orderitem",
+        "pk": 58
+    },
+    {
+        "fields": {
+            "product": 35,
+            "qtyInUnits": 6,
+            "priceType": "custom rates",
+            "order": 26,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 59
+    },
+    {
+        "fields": {
+            "product": 2,
+            "qtyInUnits": 9,
+            "priceType": "custom rates",
+            "order": 27,
+            "unit": "kg",
+            "priceAtThatTime": 12
+        },
+        "model": "veggex.orderitem",
+        "pk": 60
+    },
+    {
+        "fields": {
+            "product": 12,
+            "qtyInUnits": 66,
+            "priceType": "as per mandi rates",
+            "order": 28,
+            "unit": "kg",
+            "priceAtThatTime": 60
+        },
+        "model": "veggex.orderitem",
+        "pk": 61
+    },
+    {
+        "fields": {
+            "product": 5,
+            "qtyInUnits": 1,
+            "priceType": "custom rates",
+            "order": 30,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 62
+    },
+    {
+        "fields": {
+            "product": 510,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 31,
+            "unit": "kg",
+            "priceAtThatTime": 45
+        },
+        "model": "veggex.orderitem",
+        "pk": 63
+    },
+    {
+        "fields": {
+            "product": 510,
+            "qtyInUnits": 3,
+            "priceType": "as per mandi rates",
+            "order": 32,
+            "unit": "kg",
+            "priceAtThatTime": 45
+        },
+        "model": "veggex.orderitem",
+        "pk": 64
+    },
+    {
+        "fields": {
+            "product": 511,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 32,
+            "unit": "kg",
+            "priceAtThatTime": 100
+        },
+        "model": "veggex.orderitem",
+        "pk": 65
+    },
+    {
+        "fields": {
+            "product": 2,
+            "qtyInUnits": 2,
+            "priceType": "custom rates",
+            "order": 33,
+            "unit": "kg",
+            "priceAtThatTime": 12
+        },
+        "model": "veggex.orderitem",
+        "pk": 66
+    },
+    {
+        "fields": {
+            "product": 1,
+            "qtyInUnits": 2,
+            "priceType": "as per mandi rates",
+            "order": 33,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 67
+    },
+    {
+        "fields": {
+            "product": 5,
+            "qtyInUnits": 10,
+            "priceType": "custom rates",
+            "order": 34,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 68
+    },
+    {
+        "fields": {
+            "product": 5,
+            "qtyInUnits": 11,
+            "priceType": "custom rates",
+            "order": 35,
+            "unit": "kg",
+            "priceAtThatTime": 123
+        },
+        "model": "veggex.orderitem",
+        "pk": 69
+    },
+    {
+        "fields": {
+            "product": 8,
+            "qtyInUnits": 3,
+            "priceType": "custom rates",
+            "order": 36,
+            "unit": "kg",
+            "priceAtThatTime": 10
+        },
+        "model": "veggex.orderitem",
+        "pk": 70
+    },
+    {
+        "fields": {
+            "product": 14,
+            "qtyInUnits": 2,
+            "priceType": "as per mandi rates",
+            "order": 37,
+            "unit": "kg",
+            "priceAtThatTime": 80
+        },
+        "model": "veggex.orderitem",
+        "pk": 71
+    },
+    {
+        "fields": {
+            "product": 12,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 37,
+            "unit": "kg",
+            "priceAtThatTime": 60
+        },
+        "model": "veggex.orderitem",
+        "pk": 72
+    },
+    {
+        "fields": {
+            "product": 11,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 37,
+            "unit": "kg",
+            "priceAtThatTime": 100
+        },
+        "model": "veggex.orderitem",
+        "pk": 73
+    },
+    {
+        "fields": {
+            "product": 10,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 37,
+            "unit": "kg",
+            "priceAtThatTime": 45
+        },
+        "model": "veggex.orderitem",
+        "pk": 74
+    },
+    {
+        "fields": {
+            "product": 13,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 38,
+            "unit": "kg",
+            "priceAtThatTime": 80
+        },
+        "model": "veggex.orderitem",
+        "pk": 75
+    },
+    {
+        "fields": {
+            "product": 12,
+            "qtyInUnits": 1,
+            "priceType": "as per mandi rates",
+            "order": 38,
+            "unit": "kg",
+            "priceAtThatTime": 60
+        },
+        "model": "veggex.orderitem",
+        "pk": 76
+    },
+    {
+        "fields": {
+            "remainingstock": 0,
+            "product": 510
+        },
+        "model": "veggex.currentstock",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "remainingstock": 0,
+            "product": 511
+        },
+        "model": "veggex.currentstock",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "remainingstock": 0,
+            "product": 2
+        },
+        "model": "veggex.currentstock",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "remainingstock": 0,
+            "product": 1
+        },
+        "model": "veggex.currentstock",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "remainingstock": 0,
+            "product": 5
+        },
+        "model": "veggex.currentstock",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "remainingstock": 0,
+            "product": 8
+        },
+        "model": "veggex.currentstock",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "remainingstock": 2,
+            "product": 14
+        },
+        "model": "veggex.currentstock",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "remainingstock": 2,
+            "product": 12
+        },
+        "model": "veggex.currentstock",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "remainingstock": 1,
+            "product": 11
+        },
+        "model": "veggex.currentstock",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "remainingstock": 1,
+            "product": 10
+        },
+        "model": "veggex.currentstock",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "remainingstock": 0,
+            "product": 13
+        },
+        "model": "veggex.currentstock",
+        "pk": 11
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 0,
+            "stock": 1
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 0,
+            "stock": 1
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 0.2,
+            "stock": 1
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 0.5,
+            "stock": 1
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 0.3,
+            "stock": 2
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 0.1,
+            "stock": 2
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": -1,
+            "stock": 2
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": -1,
+            "stock": 2
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": -1,
+            "stock": 1
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 0,
+            "stock": 1
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 0,
+            "stock": 1
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 11
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 4,
+            "stock": 5
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 12
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 12,
+            "stock": 5
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 13
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 1,
+            "stock": 3
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 14
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 1,
+            "stock": 4
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 15
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 1,
+            "stock": 6
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 16
+    },
+    {
+        "fields": {
+            "comment": null,
+            "timeOfCreate": null,
+            "consumption": 0.1,
+            "stock": 11
+        },
+        "model": "veggex.stockconsumption",
+        "pk": 17
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 0.5,
+            "timeOfCreate": null,
+            "stock": 1
+        },
+        "model": "veggex.stockwastage",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 2.5,
+            "timeOfCreate": null,
+            "stock": 1
+        },
+        "model": "veggex.stockwastage",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 0,
+            "timeOfCreate": null,
+            "stock": 1
+        },
+        "model": "veggex.stockwastage",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 2.6,
+            "timeOfCreate": null,
+            "stock": 2
+        },
+        "model": "veggex.stockwastage",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 5,
+            "timeOfCreate": null,
+            "stock": 5
+        },
+        "model": "veggex.stockwastage",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 1,
+            "timeOfCreate": null,
+            "stock": 3
+        },
+        "model": "veggex.stockwastage",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 0,
+            "timeOfCreate": null,
+            "stock": 3
+        },
+        "model": "veggex.stockwastage",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 1,
+            "timeOfCreate": null,
+            "stock": 4
+        },
+        "model": "veggex.stockwastage",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 0,
+            "timeOfCreate": null,
+            "stock": 4
+        },
+        "model": "veggex.stockwastage",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 2,
+            "timeOfCreate": null,
+            "stock": 6
+        },
+        "model": "veggex.stockwastage",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "comment": null,
+            "wastage": 0.9,
+            "timeOfCreate": null,
+            "stock": 11
+        },
+        "model": "veggex.stockwastage",
+        "pk": 11
+    }
+]

@@ -31,7 +31,7 @@ def basicinfo(request):
 		cart = miveuser.cart
 		cartItems = Cartitem.objects.filter(cart=cart)
 		totalItems = len(cartItems)
-		categoryvendor= miveuser.categories
+		categoryvendor= miveuser.categories.filter(seller__status=1)
 		shippingCost=0
 		allProducts = []
 		for cvend in categoryvendor.all():
@@ -148,9 +148,9 @@ def checklogin(request):
 def search(request):
 	tex = request.GET['searchtext']
 	print tex;
-	resultName = Product.objects.filter(name__icontains = tex).filter(status=1)
-	resultNameValues = Product.objects.filter(status=1).filter(name__icontains = tex).values('product_id') 
-	resultDescription = Product.objects.filter(status=1).filter(description__icontains=tex).exclude(product_id__in=resultNameValues)
+	resultName = Product.rak.filter(name__icontains = tex).filter(status=1)
+	resultNameValues = Product.rak.filter(status=1).filter(name__icontains = tex).values('product_id') 
+	resultDescription = Product.rak.filter(status=1).filter(description__icontains=tex).exclude(product_id__in=resultNameValues)
 	if len(resultName)==0 and len(resultDescription)==0:
 		results=0
 	else:
@@ -207,10 +207,10 @@ def ajaxlogPost(request):
 		cartItems = Cartitem.objects.filter(cart=cart)
 		totalItems = len(cartItems)
 		customproducts='none'
-		allProducts = Product.objects.filter(status=1)
-		vegetableProducts = Product.objects.filter(category_id=1).filter(status=1)
-		fruitproducts = Product.objects.filter(category_id=2).filter(status=1)
-		products = Product.objects.filter(status=1)
+		allProducts = Product.rak.filter(status=1)
+		vegetableProducts = Product.rak.filter(category_id=1).filter(status=1)
+		fruitproducts = Product.rak.filter(category_id=2).filter(status=1)
+		products = Product.rak.filter(status=1)
 		categories = Category.objects.all()
 		return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 	else:
@@ -220,7 +220,7 @@ def ajaxlogPost(request):
 		cartItems=[]
 		totalItems=0
 		categories = Category.objects.all()
-		products = Product.objects.filter(status=1)
+		products = Product.rak.filter(status=1)
 		strraw={"mobile":mobile,"password":password}
 		return HttpResponse(str(strraw))
 		#return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
@@ -244,13 +244,13 @@ def desktophomereload(request):
 	limit = request.GET['limit']
 	low = int(limit)
 	high = int(limit)+8
-	products =Product.objects.filter(status=1)[low:high]
+	products =Product.rak.filter(status=1)[low:high]
 	return TemplateResponse(request, 'new/desktophomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def mobilehomereload(request):
 	limit = request.GET['limit']
 	low = int(limit)
 	high = int(limit)+8
-	products =Product.objects.filter(status=1)[low:high]
+	products =Product.rak.filter(status=1)[low:high]
 	return TemplateResponse(request, 'new/mobilehomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def desktopcategoryreload(request):
 	limit = request.GET['limit']
@@ -259,7 +259,7 @@ def desktopcategoryreload(request):
 	categoryId=request.GET['categoryId']
 	categoryId = int(categoryId)
 	category = Category.objects.get(category_id=categoryId)
-	products = Product.objects.filter(category=category).filter(status=1)[low:high]
+	products = Product.rak.filter(category=category).filter(status=1)[low:high]
 	return TemplateResponse(request, 'new/desktophomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def mobilecategoryreload(request):
 	limit = request.GET['limit']
@@ -268,7 +268,7 @@ def mobilecategoryreload(request):
 	categoryId=request.GET['categoryId']
 	categoryId = int(categoryId)
 	category = Category.objects.get(category_id=categoryId)
-	products = Product.objects.filter(category=category).filter(status=1)[low:high]
+	products = Product.rak.filter(category=category).filter(status=1)[low:high]
 	return TemplateResponse(request, 'new/mobilehomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def main(request):
 	if(checklogin(request)==False):
@@ -278,11 +278,11 @@ def main(request):
 		return TemplateResponse(request, 'adminr/index.html',{'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 def productdetail(request):
 	productId = request.GET['productId']
-	product = Product.objects.get(product_id=productId)
+	product = Product.rak.get(product_id=productId)
 	return TemplateResponse(request, 'adminr/product.html',{'product':product,'csrf_token':get_or_create_csrf_token(request)})
 def userproduct(request):
 	productId = request.GET['productId']
-	product = Product.objects.get(product_id=productId)
+	product = Product.rak.get(product_id=productId)
 	seller = product.seller
 	return TemplateResponse(request, 'adminr/userproduct.html',{'product':product,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
 def get_or_create_cart(user):
@@ -312,7 +312,7 @@ def ajaxrestreload(request):
 	else:
 		basics = basicinfo(request)
 		sellerId = request.GET['id']
-		seller = Seller.objects.get(seller_id=sellerId)
+		seller = Seller.rak.get(seller_id=sellerId)
 		miveuser = basics['miveuser']
 		categ = CategoryVendor.objects.filter(user=miveuser).filter(seller=sellerId)
 		if(len(categ)>0):
@@ -324,7 +324,7 @@ def ajaxrestreload(request):
 		else:
 			products = []
 			t = []
-		allProducts = Product.objects.filter(seller=seller).exclude(product_id__in=t)
+		allProducts = Product.rak.filter(seller=seller).exclude(product_id__in=t)
 		return TemplateResponse(request,'adminr/ajaxrestproductreload.html',{'categoryvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def ajaxaddedreload(request):
 	if(checklogin(request)==False):
@@ -332,7 +332,7 @@ def ajaxaddedreload(request):
 	else:
 		basics = basicinfo(request)
 		sellerId = request.POST['sellerId']
-		seller = Seller.objects.get(seller_id=sellerId)
+		seller = Seller.rak.get(seller_id=sellerId)
 		miveuser = basics['miveuser']
 		categ = CategoryVendor.objects.filter(user=miveuser).filter(seller=sellerId)
 		if(len(categ)>0):
@@ -344,20 +344,20 @@ def ajaxaddedreload(request):
 		else:
 			products = []
 			t = []
-		allProducts = Product.objects.filter(seller=seller).exclude(product_id__in=t)
+		allProducts = Product.rak.filter(seller=seller).exclude(product_id__in=t)
 		return {'allProducts':allProducts,'products':products,'categ':categ}
 def configvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
 		basics = basicinfo(request)
 		sellerId = request.GET['id']
-		seller = Seller.objects.get(seller_id=sellerId)
+		seller = Seller.rak.get(seller_id=sellerId)
 		miveuser = basics['miveuser']
 		categ = CategoryVendor.objects.filter(user=miveuser).filter(seller=sellerId)
 	else:
 		basics = basicinfo(request)
 		sellerId = request.GET['id']
-		seller = Seller.objects.get(seller_id=sellerId)
+		seller = Seller.rak.get(seller_id=sellerId)
 		miveuser = basics['miveuser']
 		categ = CategoryVendor.objects.filter(user=miveuser).filter(seller=sellerId)
 		if(len(categ)>0):
@@ -369,7 +369,7 @@ def configvendor(request):
 		else:
 			products = []
 			t = []
-		allProducts = Product.objects.filter(seller=seller).exclude(product_id__in=t)
+		allProducts = Product.rak.filter(seller=seller).exclude(product_id__in=t)
 		return TemplateResponse(request,'adminr/configvendor.html',{'categoryvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 
 def addvendors(request):
@@ -378,8 +378,8 @@ def addvendors(request):
 	else:
 		basics = basicinfo(request)
 		sellerId = request.GET['id']
-		seller  = Seller.objects.get(seller_id = sellerId)
-		products = Product.objects.filter(status =1).filter(seller= seller)
+		seller  = Seller.rak.get(seller_id = sellerId)
+		products = Product.rak.filter(status =1).filter(seller= seller)
 		return TemplateResponse(request,'adminr/addvendors.html',{'basics':basics,'products':products,'seller':seller})
 def configvendorlist(request):
 	if(checklogin(request)==False):
@@ -388,7 +388,7 @@ def configvendorlist(request):
 		basics = basicinfo(request)
 		currentsellers = basics['categoryvendor'].values('seller_id')
 		print currentsellers
-		sellers = Seller.objects.exclude(seller_id__in=currentsellers)
+		sellers = Seller.rak.exclude(seller_id__in=currentsellers)
 		return TemplateResponse(request,'adminr/configvendorlist.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def vendors(request):
 	if(checklogin(request)==False):
@@ -397,14 +397,14 @@ def vendors(request):
 		basics = basicinfo(request)
 		currentsellers = basics['categoryvendor'].values('seller_id')
 		print currentsellers
-		sellers = Seller.objects.exclude(seller_id__in=currentsellers)
+		sellers = Seller.rak.exclude(seller_id__in=currentsellers)
 		return TemplateResponse(request,'adminr/vendors.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def categoryView(request):
 	categoryId=request.GET['categoryId']
 	categoryId = int(categoryId)
 	category = Category.objects.get(category_id=categoryId)
-	products = Product.objects.filter(category=category).filter(status=1)[:8]
-	totalProducts = Product.objects.filter(category=category).filter(status=1).count()
+	products = Product.rak.filter(category=category).filter(status=1)[:8]
+	totalProducts = Product.rak.filter(category=category).filter(status=1).count()
 	print('hola apache rakesh')
 	if(checklogin(request)==False):
 		miveuser='none'
@@ -421,9 +421,9 @@ def categoryView(request):
 		cartItems = Cartitem.objects.filter(cart=cart)
 		totalItems = len(cartItems)
 		customproducts='none'
-		allProducts = Product.objects.filter(status=1)
-		vegetableProducts = Product.objects.filter(category_id=1).filter(status=1)
-		fruitproducts = Product.objects.filter(category_id=2).filter(status=1)
+		allProducts = Product.rak.filter(status=1)
+		vegetableProducts = Product.rak.filter(category_id=1).filter(status=1)
+		fruitproducts = Product.rak.filter(category_id=2).filter(status=1)
 		categories = Category.objects.all()
 		return TemplateResponse(request, 'new/category.html',{'totalProducts':totalProducts,'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def addtocart(request):
@@ -433,7 +433,7 @@ def addtocart(request):
 	productId = (int)(productId)
 	mobile=request.session['mobile']
 	user = User.objects.get(mobileNo=mobile)
-	product  = Product.objects.get(product_id=productId)
+	product  = Product.rak.get(product_id=productId)
 	qty = request.POST['qty']
 	cart = user.cart
 	price = product.pricePerUnit
@@ -469,7 +469,7 @@ def ajaxremovefromuser(request):
 	else:
 		productId = request.POST['productId']
 		categoryvendorId = request.POST['categoryvendorId']
-		product = Product.objects.get(product_id = productId)
+		product = Product.rak.get(product_id = productId)
 		categ = CategoryVendor.objects.get(categoryvendor_id = categoryvendorId)
 		categ.products.remove(product)
 		categ.save()
@@ -486,11 +486,11 @@ def ajaxaddtouser(request):
 		return redirect('/login')
 	else:
 		productId = request.POST['productId']
-		product = Product.objects.get(product_id=productId)
+		product = Product.rak.get(product_id=productId)
 		basics = basicinfo(request)
 		miveuser = basics['miveuser']
 		sellerId = request.POST['sellerId']
-		seller = Seller.objects.get(seller_id = sellerId)
+		seller = Seller.rak.get(seller_id = sellerId)
 		ccount = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser).count()
 		print 'yoooo'
 		print miveuser
@@ -519,7 +519,7 @@ def ajaxaddtocart(request):
 	productId = (int)(productId)
 	mobile=request.session['mobile']
 	user = User.objects.get(mobileNo=mobile)
-	product  = Product.objects.get(product_id=productId)
+	product  = Product.rak.get(product_id=productId)
 	qty = int(request.POST['qty'])
 	if(qty%1!=0 or qty<0):
 		return HttpResponse('error occured',status=500)
@@ -591,8 +591,8 @@ def ajaxremoveItemPost(request):
 	cartItems = Cartitem.objects.filter(cart=cart)
 	totalItems = len(cartItems)
 	customproducts='none'
-	allProducts = Product.objects.filter(status=1)
-	products = Product.objects.filter(status=1)
+	allProducts = Product.rak.filter(status=1)
+	products = Product.rak.filter(status=1)
 	categories = Category.objects.all()
 	return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def ordercategory(request):	
@@ -648,7 +648,7 @@ def ordercategory(request):
 			Cartitem.objects.filter(cart = cart).filter(product__seller=categoryvendor.seller).delete()
 			cart.cartTotal=cart.cartTotal - totalprice
 			cart.save()
-	strr = '/cart?notify=yes&description=Order has been placed succesfully&title=OrderID:'+str(order_id)
+	strr = '/main?notify=yes&description=Order has been placed succesfully&title=OrderID:'+str(order_id)
 	return redirect(strr)
 def resetstock(request):
 	if ('loggedin' not in request.session):
@@ -718,7 +718,7 @@ def statsproduct(request):
 	miveuser = basics['miveuser']
 	if request.GET['id']==0:
 		productId = int(request.GET['id'])
-		product = Product.objects.get(product_id = productId)
+		product = Product.rak.get(product_id = productId)
 		orderItems = Orderitem.objects.filter(product=product).filter(order__user=miveuser)
 	else:
 		orderItems = Orderitem.objects.filter(order__user=miveuser)
@@ -729,7 +729,7 @@ def statsseller(request):
 	miveuser = basics['miveuser']
 	if request.GET['id']==0:
 		sellerId = int(request.GET['id'])
-		seller = Seller.objects.get(seller_id = sellerId)
+		seller = Seller.rak.get(seller_id = sellerId)
 		orders = Order.objects.filter(seller=seller).filter(user=miveuser).order_by('-timeOfCreate')
 	else:
 		orders = Order.objects.filter(user=miveuser).order_by('-timeOfCreate')
@@ -826,7 +826,7 @@ def ajaxproductfilter(request):
 	enddate = datetime.strptime(str(fi),"%m-%d-%Y")
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
-	product = Product.objects.get(name = productName)
+	product = Product.rak.get(name = productName)
 	orderItems = Orderitem.objects.filter(product=product).filter(order__user=miveuser)
 	t =[]
 	for it in orderItems:
@@ -855,7 +855,7 @@ def ajaxdatefilter(request):
 	enddate = datetime.strptime(str(fi),"%m-%d-%Y")
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
-	seller = Seller.objects.get(nameOfSeller = sellerName)
+	seller = Seller.rak.get(nameOfSeller = sellerName)
 	orders = Order.objects.filter(seller=seller).filter(user=miveuser)
 	apporders = []
 	for ort in orders:
@@ -1051,3 +1051,100 @@ def ajaxcart(request):
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
 	return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+def newvendor(request):
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	basics = basicinfo(request)
+	name =request.POST['name']
+	mobile =request.POST['mobile']
+	email =request.POST['email']
+	area =request.POST['area']
+	city =request.POST['city']
+	state =request.POST['state']
+	pincode = request.POST['pincode']
+	ctext =request.POST['ctext']
+	seller = Seller()
+	seller.nameOfSeller=name
+	seller.mailId = email
+	seller.mobileNo=mobile
+	seller.categories =ctext
+	seller.area=area
+	seller.city =city
+	seller.state = state
+	seller.pincode = pincode
+	seller.save()
+	products = Product.rak.all()
+	return TemplateResponse(request,'adminr/newvendor.html',{'seller':seller,'basics':basics,'products':products})
+def prodnewvendor(request):
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	basics = basicinfo(request)
+	price =request.POST['price']
+	productId =request.POST['productid']
+	sellerId =request.POST['sellerid']
+	baseproduct = Product.rak.get(product_id=productId)
+	seller = Seller.objects.get(seller_id=sellerId)
+	product = Product()
+	product.seller = seller
+	product.pricePerUnit = int(price)
+	product.name = baseproduct.name
+	product.description = baseproduct.description
+	product.unit = baseproduct.unit
+	product.priceType = baseproduct.priceType
+	product.coverphoto = baseproduct.coverphoto
+	product.category = baseproduct.category
+	product.origin = baseproduct.origin
+	product.maxAvailableUnits = baseproduct.maxAvailableUnits
+	product.qualityRemarks = baseproduct.qualityRemarks
+	product.grade = baseproduct.grade
+	product.satus = 1
+	product.save()
+	miveuser = basics['miveuser']
+	ccount = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser).count()
+	if(ccount>0):
+		existing = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser)[0]
+		existing.products.add(product)
+		existing.save()
+	else:
+		neww = CategoryVendor()
+		neww.seller = seller
+		neww.save()
+		neww.products.add(product)
+		neww.save()
+		miveuser.categories.add(neww)
+		miveuser.save()
+	return HttpResponse('yomoso')
+def newprodnewvendor(request):
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	basics = basicinfo(request)
+	price =request.POST['price']
+	sellerId =request.POST['sellerid']
+	seller = Seller.objects.get(seller_id=sellerId)
+	name= request.POST['name']
+	description = request.POST['description']
+	unit = request.POST['unit']
+	product = Product()
+	product.seller = seller
+	product.pricePerUnit = int(price)
+	product.name = name
+	product.description = description
+	product.unit = unit
+	product.priceType = "custom rates"
+	product.satus = 1
+	product.save()
+	miveuser = basics['miveuser']
+	ccount = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser).count()
+	if(ccount>0):
+		existing = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser)[0]
+		existing.products.add(product)
+		existing.save()
+	else:
+		neww = CategoryVendor()
+		neww.seller = seller
+		neww.save()
+		neww.products.add(product)
+		neww.save()
+		miveuser.categories.add(neww)
+		miveuser.save()
+	return HttpResponse('yomoso2')
