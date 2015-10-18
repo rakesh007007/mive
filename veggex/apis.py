@@ -334,8 +334,10 @@ class ApiMakeOrder(APIView):
 			data=request.data
 			cartId=data['cartId']
 			userId=data['userId']
+			sellerId = int(data['sellerId'])
 			userId=int(userId)
 			cartId=int(cartId)
+			seller = Seller.objects.get(seller_id)
 			deliveryTime = data['deliveryTime']
 			orderMsg = data['orderMsg']
 			user =User.objects.get(user_id=userId)
@@ -353,6 +355,7 @@ class ApiMakeOrder(APIView):
 				order.user = user
 				order.payment_mode = payment_mode
 				order.subtotal=total
+				order.seller = seller
 				order.status = 'PLACED'
 				order.deliveryTime=deliveryTime
 				order.orderMsg=orderMsg
@@ -361,6 +364,16 @@ class ApiMakeOrder(APIView):
 				for itemn in items:
 					rak = Orderitem()
 					rak.product = itemn.product
+					stock = Currentstock.objects.filter(product=itemn.product)
+					if(len(stock)>0):
+						currStock = stock[0]
+						currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
+						currStock.save()
+					else:
+						currStock = Currentstock()
+						currStock.product = itemn.product
+						currStock.remainingstock=itemn.qtyInUnits
+						currStock.save()
 					rak.unit=itemn.product.unit
 					rak.qtyInUnits = itemn.qtyInUnits
 					rak.priceType = itemn.product.priceType
