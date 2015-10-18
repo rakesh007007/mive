@@ -30,6 +30,12 @@ grades = (
 class AutoDateTimeField(models.DateTimeField):
     def pre_save(self, model_instance, add):
         return timezone.now()
+class Seller2Manager(models.Manager):
+    def get_queryset(self):
+        return super(Seller2Manager, self).get_queryset().filter(status=1)
+class Product2Manager(models.Manager):
+    def get_queryset(self):
+        return super(Product2Manager, self).get_queryset().filter(status=1)
 class Address(models.Model):
 	address_id = models.AutoField(primary_key=True)
 	area=models.CharField(max_length=300, blank=False, null=False)
@@ -69,28 +75,35 @@ class Seller(models.Model):
     address = models.ForeignKey(Address, blank=True, null=True)
     categories = models.CharField(max_length=240,blank=True,null=True)
     rating = models.IntegerField(default=0)
+    status = models.IntegerField(default=0)
+    objects = models.Manager()
+    rak =Seller2Manager() 
     def __unicode__(self):
     	return str(self.nameOfSeller)
     def jsfy(self):
     	return {'seller_id':self.seller_id,'nameOfSeller':self.nameOfSeller}
+    def get_query_set(self):
+        return super(CustomManager, self).get_query_set().filter(canceled=False)
 class Product(models.Model):
 	product_id = models.AutoField(primary_key=True)
 	name=models.CharField(max_length=300,blank=False,null=False)
 	description=models.TextField(blank=True,null=True)
-	category = models.ForeignKey(Category)
+	category = models.ForeignKey(Category,blank=True,null=True,default=1)
 	popularityIndex = models.IntegerField(blank=True,null=True)
 	unit = models.CharField(max_length=100,default='kg')
 	priceType = models.CharField(max_length=300,choices=priceType, default='custom rates')
 	pricePerUnit = models.IntegerField(blank=False,null=False)
-	coverphoto = models.ImageField()
-	origin = models.CharField(max_length=300)
-	maxAvailableUnits=models.IntegerField()
-	qualityRemarks = models.TextField()
+	coverphoto = models.ImageField(default='./No_image_available.png')
+	origin = models.CharField(max_length=300,null=True,blank=True,default='')
+	maxAvailableUnits=models.IntegerField(null=True,blank=True,default=100000)
+	qualityRemarks = models.TextField(null=True,blank=True,default='Custom Product')
 	grade = models.CharField(max_length=200,choices=grades,default='')
 	status = models.IntegerField(default=1)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
 	related_products = models.ManyToManyField("self", blank=True)
+	objects = models.Manager()
+	rak = Product2Manager()
 	def coverphotourl(self):
 		return self.coverphoto.url
 	def productId(self):
