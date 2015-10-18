@@ -512,8 +512,6 @@ def ajaxaddtouser(request):
 	categ = full['categ']
 	products = full['products']
 	return TemplateResponse(request,'adminr/ajaxaddedproductreload.html',{'categoryvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
-
-
 def ajaxaddtocart(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -522,7 +520,9 @@ def ajaxaddtocart(request):
 	mobile=request.session['mobile']
 	user = User.objects.get(mobileNo=mobile)
 	product  = Product.objects.get(product_id=productId)
-	qty = request.POST['qty']
+	qty = int(request.POST['qty'])
+	if(qty%1!=0 or qty<0):
+		return HttpResponse('error occured',status=500)
 	cart = user.cart
 	price = product.pricePerUnit
 	check = Cartitem.objects.filter(cart=cart).filter(product=product)
@@ -538,8 +538,8 @@ def ajaxaddtocart(request):
 		cartitem.qtyInUnits = qty
 		cartitem.product=product
 		cart.cartTotal = cart.cartTotal+int(qty)*int(price)
-		cart.save()
 		cartitem.save()
+		cart.save()
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
 	return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
@@ -551,8 +551,8 @@ def removeItemPost(request):
 	item = Cartitem.objects.get(cartitem_id=itemId)
 	cart = item.cart
 	cart.cartTotal = cart.cartTotal-item.product.pricePerUnit*item.qtyInUnits
-	cart.save()
 	item.delete()
+	cart.save()
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
 	return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
@@ -568,8 +568,8 @@ def editqty(request):
 	oldqty = item.qtyInUnits
 	cart=item.cart
 	item.qtyInUnits = int(newqty)
-	item.save()
 	cart.cartTotal = cart.cartTotal-(oldqty-newqty)*item.product.pricePerUnit
+	item.save()
 	cart.save()
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
@@ -583,8 +583,8 @@ def ajaxremoveItemPost(request):
 	item = Cartitem.objects.get(cartitem_id=itemId)
 	cart = item.cart
 	cart.cartTotal = cart.cartTotal-item.product.pricePerUnit*item.qtyInUnits
-	cart.save()
 	item.delete()
+	cart.save()
 	miveuserId = request.session['miveuser']
 	miveuser = User.objects.get(user_id=int(miveuserId))
 	cart = miveuser.cart
