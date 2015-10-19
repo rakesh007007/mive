@@ -52,7 +52,7 @@ class Notification(models.Model):
 	objects =models.Manager()
 	unseen = NotificationManager()
 	class Meta:	
-		ordering = ['timeOfCreate']
+		ordering = ['-timeOfCreate']
 	def NotificationId(self):
 		return self.notification_id
 class Message(models.Model):
@@ -65,7 +65,7 @@ class Message(models.Model):
 	objects =models.Manager()
 	unseen = MessageManager()
 	class Meta:	
-		ordering = ['timeOfCreate']
+		ordering = ['-timeOfCreate']
 	def NotificationId(self):
 		return self.notification_id
 class Address(models.Model):
@@ -196,6 +196,7 @@ class User(models.Model):
     institutionType = models.CharField(max_length=300,choices = institutionTypeChoices , blank=False, null=False)
     mailId =models.CharField(max_length=300, blank=False, null=False)
     mobileNo = models.BigIntegerField(blank=False,null=False,unique=True)
+    description = models.TextField(default='Not available')
     password = models.CharField(max_length=300, blank=False, null=False)
     gpsLocation = models.CharField(max_length=300,blank=True,null=True)
     profilePhoto = models.ImageField(blank=True,null=True)
@@ -203,7 +204,7 @@ class User(models.Model):
     cart =models.ForeignKey(Cart,blank=False,null=False)
     owner = models.ForeignKey(Owner,blank=True, null=True)
     categories = models.ManyToManyField(CategoryVendor,blank=True,null=True)
-    creditlimit = models.IntegerField(default=0,null=True,blank=True)
+    creditlimit = models.IntegerField(default=10000,null=True,blank=True)
     notifications = models.ManyToManyField(Notification,blank=True)
     message = models.ManyToManyField(Message,blank=True)
     def profilephotourl(self):
@@ -230,6 +231,8 @@ class Cartitem(models.Model):
 	product = models.ForeignKey(Product,blank=False,null=False)
 	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	class Meta:	
+		ordering = ['-timeOfCreate']
 	def cartItemId(self):
 		return self.cartitem_id
 	def __unicode__(self):
@@ -257,7 +260,7 @@ class Order(models.Model):
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	category = models.ForeignKey(Category,blank=True,null=True)
 	class Meta:	
-		ordering = ['timeOfCreate']
+		ordering = ['-timeOfCreate']
 	def orderId(self):
 		return self.order_id
 	def __unicode__(self):
@@ -279,26 +282,33 @@ class Subscribe(models.Model):
 		return str(self.email)
 class Currentstock(models.Model):
 	currentstock_id = models.AutoField(primary_key=True)
-	product = models.OneToOneField(Product,blank=False,null=False)
-	user = models.ForeignKey(User,null=False,blank=False)
+	product = models.ForeignKey(Product,blank=False,null=False)
+	user = models.ForeignKey(User,null=False,blank=False,default=1)
 	remainingstock = models.FloatField(blank=False,null=False,default=0)
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	def __unicode__(self):
 		return str(self.product.name)
+	class Meta:	
+		ordering = ['-timeOfCreate']
 class Stockconsumption(models.Model):
 	stockwastage_id = models.AutoField(primary_key=True)
 	stock  = models.ForeignKey(Currentstock,blank=False,null=False)
-	user = models.ForeignKey(User,null=False,blank=False)
+	user = models.ForeignKey(User,null=False,blank=False,default=1)
 	consumption = models.FloatField(blank=False,null=False,default=0)
 	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	comment = models.TextField(blank=True,null=True)
 	def __unicode__(self):
 		return str(self.stock)
+	class Meta:	
+		ordering = ['-timeOfCreate']
 class Stockwastage(models.Model):
 	stockwastage_id = models.AutoField(primary_key=True)
 	stock = models.ForeignKey(Currentstock,blank=False,null=False)
-	user = models.ForeignKey(User,null=False,blank=False)
+	user = models.ForeignKey(User,null=False,blank=False,default=1)
 	wastage = models.FloatField(blank=False,null=False,default=0)
 	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	comment = models.TextField(blank=True,null=True)
 	def __unicode__(self):
 		return str(self.stock)
+	class Meta:	
+		ordering = ['-timeOfCreate']

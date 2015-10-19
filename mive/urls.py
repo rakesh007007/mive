@@ -60,6 +60,7 @@ urlpatterns = [
     url(r'^stats/seller', views.statsseller),
     url(r'^stats/product', views.statsproduct),
     url(r'^userproduct', views.userproduct),
+    url(r'^userprofile', views.userprofile),
     url(r'^ajaxaddtouser', views.ajaxaddtouser),
     url(r'^ajaxremovefromuser', views.ajaxremovefromuser),
     url(r'^ajaxaddedreload', views.ajaxaddedreload),

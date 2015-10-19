@@ -271,7 +271,16 @@ def main(request):
 		return redirect('/login')
 	else:
 		basics = basicinfo(request)
-		return TemplateResponse(request, 'adminr/index.html',{'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+		miveuser = basics['miveuser']
+		orders = Order.objects.filter(user=miveuser)
+		norders = orders.count()
+		rorders = orders.aggregate(Sum('subtotal'))
+		rorders =rorders['subtotal__sum']
+		stockwastage = Stockwastage.objects.filter(user=miveuser)
+		d= 0
+		for p in stockwastage:
+			d= d+ p.stock.product.pricePerUnit*p.wastage
+		return TemplateResponse(request, 'adminr/index.html',{'wastage':d,'norders':norders,'rorders':rorders,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 def productdetail(request):
 	productId = request.GET['productId']
 	product = Product.rak.get(product_id=productId)
@@ -623,7 +632,7 @@ def ordercategory(request):
 			for itemn in items:
 				rak = Orderitem()
 				rak.product = itemn.product
-				stock = Currentstock.objects.filter(product=itemn.product)
+				stock = Currentstock.objects.filter(product=itemn.product).filter(user=user)
 				if(len(stock)>0):
 					currStock = stock[0]
 					currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
@@ -631,6 +640,7 @@ def ordercategory(request):
 				else:
 					currStock = Currentstock()
 					currStock.product = itemn.product
+					currStock.user = user
 					currStock.remainingstock=itemn.qtyInUnits
 					currStock.save()
 				rak.unit=itemn.product.unit
@@ -650,27 +660,33 @@ def resetstock(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	else:
+		basics = basicinfo(request)
+		miveuser = basics['miveuser']
 		stockId = int(request.GET['stockId'])
-		stock = Currentstock.objects.get(currentstock_id = stockId)
+		stock = Currentstock.objects.filter(user=miveuser).get(currentstock_id = stockId)
 		remainingstock = stock.remainingstock
 		stock.remainingstock=0
 		stock.save()
 		stcons = Stockwastage()
 		stcons.stock = stock
 		stcons.wastage = remainingstock
+		stcons.user = miveuser
 		stcons.save()
-		stocks = Currentstock.objects.all()
+		stocks = Currentstock.objects.filter(user=miveuser)
 		basics =basicinfo(request)
 		return TemplateResponse(request, 'adminr/ajaxstocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
 def ajaxstock(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	else:
+		basics = basicinfo(request)
+		miveuser = basics['miveuser'] 
 		stockId = int(request.POST['stockid'])
 		cons = float(request.POST['newqty'])
-		stock = Currentstock.objects.get(currentstock_id = stockId)
+		stock = Currentstock.objects.filter(user=miveuser).get(currentstock_id = stockId)
 		stcons = Stockconsumption()
 		stcons.stock = stock
+		stcons.user=miveuser
 		if stock.remainingstock>cons and cons>0:
 			stock.remainingstock = stock.remainingstock-cons
 		else:
@@ -679,14 +695,16 @@ def ajaxstock(request):
 		stock.save()
 		stcons.consumption = cons
 		stcons.save()
-		stocks = Currentstock.objects.all()
+		stocks = Currentstock.objects.filter(user=miveuser)
 		basics =basicinfo(request)
 		return TemplateResponse(request, 'adminr/ajaxstocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
 def stock(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	else:
-		stocks = Currentstock.objects.all()
+		basics = basicinfo(request)
+		miveuser = basics['miveuser']
+		stocks = Currentstock.objects.filter(user=miveuser)
 		basics =basicinfo(request)
 		return TemplateResponse(request, 'adminr/stocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
 
@@ -707,8 +725,9 @@ def seeOrder(request):
 		categories = Category.objects.all()
 		mobile = request.session['mobile']
 		user =miveuser
+		basics = basicinfo(request)
 		orders = Order.objects.filter(user=user)
-		return TemplateResponse(request, 'adminr/seeorders.html',{'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'adminr/seeorders.html',{'basics':basics,'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
 def statsproduct(request):
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
@@ -1144,3 +1163,6 @@ def newprodnewvendor(request):
 		miveuser.categories.add(neww)
 		miveuser.save()
 	return HttpResponse('yomoso2')
+def userprofile(request):
+	basics = basicinfo(request)
+	return TemplateResponse(request,'adminr/profile.html',{'basics':basics})
