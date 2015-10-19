@@ -182,9 +182,11 @@ chart2.render();
                     success: function(data)
                     {
                       $('#targereload').html(data)
+                      console.log(data)
                     },
                     error:function(data){
                     mivenotify('error','Item add','Error occured while adding product')
+                    console.log(data)
                     }
                   });
   })

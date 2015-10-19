@@ -349,8 +349,7 @@
                 </tr>
                 {%for order in basics.orders%}
                 <tr>
-                <h1>yo</h1>
-                  <td><center>{{order.user.nameOfOwner}}</center></td>
+                  <td><center><a href="/seller/orderDetail?orderId={{order.order_id}}">{{order.user.nameOfOwner}}</a></center></td>
                 </tr>
                 {% endfor%}
               </table>

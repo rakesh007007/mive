@@ -49,3 +49,13 @@ def logPost(request):
 			return redirect('/seller/login?notify=yes&type=error&title=LogIn&description=Login has been failed please try with proper credentials')
 	except Exception,e:
 		return redirect('/seller/login?notify=yes&type=notice&title=LogIn&description=Looks like you are not registered please contact info@mive.in')
+def orderDetail(request):
+	if(checklogin(request)==False):
+		return redirect('/seller/login?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	else:
+		basics = basicinfo(request)
+		miveseller = basics['miveseller']
+		order_id = request.GET['orderId']
+		order = Order.objects.filter(seller=miveseller).get(order_id=order_id)
+		orderItems = Orderitem.objects.filter(order=order)
+		return TemplateResponse(request, 'adminr/seller/orderdetail.html',{'basics':basics,'orderItems':orderItems,'order':order})

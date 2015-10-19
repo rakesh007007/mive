@@ -12,6 +12,15 @@
 </section>
 <section class="content">
       <div class="row">
+      {% if stocks|length = 0 %}
+      <div class="col-md-10 col-md-offset-1" style="position:relative">
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">You have no stocks right now</h3>
+            </div>
+            </div>
+        </div>
+        {% else %}
         <div class="col-md-10 col-md-offset-1" style="position:relative">
           <div class="box">
           <div class="box-header with-border">
@@ -52,6 +61,7 @@
           </div>
         </div>
       </div>
+      {% endif %}
 </section>
 {%endblock%}
 {% block script%}
