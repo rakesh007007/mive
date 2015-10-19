@@ -3,6 +3,7 @@ from django.contrib import admin
 from rest_framework import routers
 from veggex import views
 from veggex import apis
+from veggex import seller
 from django.contrib.staticfiles.urls import *
 from mive.settings import *
 router = routers.DefaultRouter()
@@ -84,6 +85,8 @@ urlpatterns = [
     url(r'^newvendor', views.newvendor),
     url(r'^prod-newvendor', views.prodnewvendor),
     url(r'^newproductnewvendor', views.newprodnewvendor),
+    url(r'^seller/login', seller.sel),
+    url(r'^seller/logPost', seller.logPost),
     url('^api/product/category/(?P<pid>.+)/$', apis.ProductsByCategoryList.as_view()),
     url('^api/cart/cartitems/(?P<cartid>.+)/$', apis.ItemsOfCartList.as_view()),
     url('^api/user/orders/(?P<userid>.+)/$', apis.OrdersOfUserList.as_view()),

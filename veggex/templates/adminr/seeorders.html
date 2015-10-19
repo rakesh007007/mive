@@ -40,7 +40,7 @@
                   <center>₹{{order.subtotal}}</center>
                   </td>
                   <td>
-                    <center><a data-productid="{{item.product.product_id}}" href="/configvendor?id={{sel.seller_id}}" ><span class="badge bg-yellow" style="color:blue">Details</span></a></center>
+                    <center><a data-productid="{{item.product.product_id}}" href="/orderDetail?orderId={{order.order_id}}" ><span class="badge bg-yellow" style="color:blue">Details</span></a></center>
                   </td>
                 </tr>
                 {% endfor%}

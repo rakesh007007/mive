@@ -111,19 +111,15 @@ def docs(request):
 
 def orderDetail(request):
 	if ('loggedin' not in request.session):
-		return TemplateResponse(request, 'login.html',{'csrf_token':get_or_create_csrf_token(request)})
+		return redirect('/login')
 	else:
-		miveuserId = request.session['miveuser']
-		miveuser = User.objects.get(user_id=int(miveuserId))
+		basics = basicinfo(request)
+		miveuser = basics['miveuser']
 		cart = miveuser.cart
-		cartItems = Cartitem.objects.filter(cart=cart)
-		totalItems = len(cartItems)
-		categories = Category.objects.all()
-		user =miveuser
 		order_id = request.GET['orderId']
-		order = Order.objects.get(order_id=order_id)
+		order = Order.objects.filter(user=miveuser).get(order_id=order_id)
 		orderItems = Orderitem.objects.filter(order=order)
-		return TemplateResponse(request, 'new/orderDetail.html',{'categories':categories,'orderItems':orderItems,'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'order':order,'miveuser':miveuser,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'adminr/orderdetail.html',{'basics':basics,'orderItems':orderItems,'order':order})
 def ajaxorderDetail(request):
 	if ('loggedin' not in request.session):
 		return TemplateResponse(request, 'login.html',{'csrf_token':get_or_create_csrf_token(request)})
