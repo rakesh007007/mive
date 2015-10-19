@@ -30,12 +30,44 @@ grades = (
 class AutoDateTimeField(models.DateTimeField):
     def pre_save(self, model_instance, add):
         return timezone.now()
+class NotificationManager(models.Manager):	
+	def get_queryset(self):
+		return super(NotificationManager, self).get_queryset().filter(seen=0)
+class MessageManager(models.Manager):	
+	def get_queryset(self):
+		return super(MessageManager, self).get_queryset().filter(seen=0)
 class Seller2Manager(models.Manager):
     def get_queryset(self):
         return super(Seller2Manager, self).get_queryset().filter(status=1)
 class Product2Manager(models.Manager):
     def get_queryset(self):
         return super(Product2Manager, self).get_queryset().filter(status=1)
+class Notification(models.Model):
+	notification_id = models.AutoField(primary_key=True)
+	body = models.TextField(null=False,blank=False,default='body.....')
+	title = models.CharField(max_length=240,null=False,blank=False,default='New Notification')
+	link = models.CharField(max_length=240,null=False,blank=False,default='#')
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	seen = models.IntegerField(null=False,blank=False,default=0)
+	objects =models.Manager()
+	unseen = NotificationManager()
+	class Meta:	
+		ordering = ['timeOfCreate']
+	def NotificationId(self):
+		return self.notification_id
+class Message(models.Model):
+	message_id = models.AutoField(primary_key=True)
+	body = models.TextField(null=False,blank=False,default='body.....')
+	title = models.CharField(max_length=240,null=False,blank=False,default='New Notification')
+	link = models.CharField(max_length=240,null=False,blank=False,default='#')
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	seen = models.IntegerField(null=False,blank=False,default=0)
+	objects =models.Manager()
+	unseen = MessageManager()
+	class Meta:	
+		ordering = ['timeOfCreate']
+	def NotificationId(self):
+		return self.notification_id
 class Address(models.Model):
 	address_id = models.AutoField(primary_key=True)
 	area=models.CharField(max_length=300, blank=False, null=False)
@@ -75,6 +107,7 @@ class Seller(models.Model):
     address = models.ForeignKey(Address, blank=True, null=True)
     categories = models.CharField(max_length=240,blank=True,null=True)
     rating = models.IntegerField(default=0)
+    password = models.CharField(max_length=300, blank=False, null=False,default='pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=')
     status = models.IntegerField(default=0)
     objects = models.Manager()
     rak =Seller2Manager() 
@@ -171,6 +204,8 @@ class User(models.Model):
     owner = models.ForeignKey(Owner,blank=True, null=True)
     categories = models.ManyToManyField(CategoryVendor,blank=True,null=True)
     creditlimit = models.IntegerField(default=0,null=True,blank=True)
+    notifications = models.ManyToManyField(Notification,blank=True)
+    message = models.ManyToManyField(Message,blank=True)
     def profilephotourl(self):
     	return self.profilePhoto.url
     def cartId(self):

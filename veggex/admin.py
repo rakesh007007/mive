@@ -22,6 +22,7 @@ admin.site.register(CategoryVendor)
 admin.site.register(Currentstock)
 admin.site.register(Stockwastage)
 admin.site.register(Stockconsumption)
+admin.site.register(Notification)
 
 
 
