@@ -88,6 +88,7 @@ urlpatterns = [
     url(r'^seller/login', seller.sel),
     url(r'^seller/logPost', seller.logPost),
     url(r'^seller/main', seller.main),
+    url(r'^seller/orderDetail', seller.orderDetail),
     url('^api/product/category/(?P<pid>.+)/$', apis.ProductsByCategoryList.as_view()),
     url('^api/cart/cartitems/(?P<cartid>.+)/$', apis.ItemsOfCartList.as_view()),
     url('^api/user/orders/(?P<userid>.+)/$', apis.OrdersOfUserList.as_view()),
