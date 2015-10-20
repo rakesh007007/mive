@@ -816,7 +816,7 @@ def ajax0datefilter(request):
 		statsSeller=[]
 		apporders = []
 		for ort in allOrders:
-			if(startdate<=ort.deliveryTime and ort.timeOfCreate<=enddate and ort not in apporders):
+			if(startdate<=ort.deliveryTime and ort.deliveryTime<=enddate and ort not in apporders):
 				apporders.append(ort)
 			else:
 				pass
