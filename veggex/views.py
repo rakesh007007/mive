@@ -1170,6 +1170,7 @@ def newvendor(request):
 	ad.city =city
 	ad.state = state
 	ad.pincode = pincode
+	ad.save()
 	seller.address = ad
 	seller.save()
 	products = Product.rak.all()
