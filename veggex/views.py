@@ -1165,10 +1165,12 @@ def newvendor(request):
 	seller.mailId = email
 	seller.mobileNo=mobile
 	seller.categories =ctext
-	seller.area=area
-	seller.city =city
-	seller.state = state
-	seller.pincode = pincode
+	ad =Address()
+	ad.area=area
+	ad.city =city
+	ad.state = state
+	ad.pincode = pincode
+	seller.address = ad
 	seller.save()
 	products = Product.rak.all()
 	return TemplateResponse(request,'adminr/newvendor.html',{'seller':seller,'basics':basics,'products':products})
