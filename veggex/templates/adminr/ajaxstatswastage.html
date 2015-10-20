@@ -22,7 +22,9 @@
     {
       theme: "theme2",
       title:{
-        text: "Per Order spending"
+        {%with wastage|first as ting%}
+        text: "Wastage for  {{ting.stock.product.name}} (in {{ting.stock.product.unit}})"
+        {%endwith%}
       },
       animationEnabled: true,
       axisX: {

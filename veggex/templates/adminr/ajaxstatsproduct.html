@@ -22,7 +22,9 @@
     {
       theme: "theme2",
       title:{
-        text: "Per Order spending"
+        {%with orderItems|first as ting%}
+        text: "Per Order spending for {{ting.product.name}} (in INR)"
+        {%endwith%}
       },
       animationEnabled: true,
       axisX: {
