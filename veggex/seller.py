@@ -27,6 +27,14 @@ def main(request):
 	else:
 		basics = basicinfo(request)
 		return TemplateResponse(request, 'adminr/seller/index.html',{'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+def products(request):
+	if(checklogin(request)==False):
+		return redirect('seller/login')
+	else:
+		basics = basicinfo(request)
+		miveseller = basics['miveseller']
+		products = Product.objects.filter(seller=miveseller)
+		return TemplateResponse(request, 'adminr/seller/products.html',{'products':products,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 def logPost(request):
 	try:
 		mobile=request.POST['mobile']

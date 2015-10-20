@@ -3,20 +3,20 @@
 <section class="content-header">
    <h1>
       Mive 
-      <small>Orders</small>
+      <small>Products</small>
    </h1>
    <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Orders</li>
+      <li class="active">products</li>
    </ol>
 </section>
 <section class="content">
       <div class="row">
-      {% if basics.orders|length = 0 %}
+      {% if products|length = 0 %}
       <div class="col-md-10 col-md-offset-1" style="position:relative">
           <div class="box">
           <div class="box-header with-border">
-              <h3 class="box-title">You have recieved no orders</h3>
+              <h3 class="box-title">You have recieved no products</h3>
             </div>
           </div>
           </div>
@@ -24,29 +24,27 @@
         <div class="col-md-10 col-md-offset-1" style="position:relative">
           <div class="box">
           <div class="box-header with-border">
-              <h3 class="box-title">Orders Recieved</h3>
+              <h3 class="box-title">Your product</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-bordered">
                 <tr>
-                  <th class="hidden-xs hidden-sm"><center>OrderId</center></th>
-                  <th><center>Date</center></th>
-                  <th><center>Status</center></th>
-                  <th><center>Subtotal</center></th>
-                  <th class="hidden-sm hidden-xs"><center>Details</center></th>
+                  <th class="hidden-xs hidden-sm"><center>Product Name</center></th>
+                  <th><center>Unit</center></th>
+                  <th><center>Price/Unit</center></th>
+                  <th><center>Details</center></th>
                 </tr>
-                {%for order in basics.orders%}
+                {%for product in products%}
                 <tr>
-                  <td class="hidden-xs hidden-sm"><center>{{order.order_id}}</center></td>
                   <td>
-                    <center>{{order.timeOfCreate}}</center>
+                    <center>{{product.name}}</center>
                   </td>
                   <td>
-                    <center>{{order.status}}</center>
+                    <center>{{product.unit}}</center>
                   </td>
                   <td><center>
-                  <center>₹{{order.subtotal}}</center>
+                  <center>₹{{product.pricePerUnit}}</center>
                   </td>
                   <td>
                     <center><a data-productid="{{item.product.product_id}}" href="/seller/orderDetail?orderId={{order.order_id}}" ><span class="badge bg-yellow" style="color:blue">Details</span></a></center>
