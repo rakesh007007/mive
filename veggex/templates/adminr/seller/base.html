@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Mive Restaurants| Dashboard</title>
+  <title>Mive Seller| Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
@@ -166,11 +166,11 @@
               <span class="label label-warning">{{basics.miveuser.notifications.all|length}}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have {{basics.miveuser.notifications.all|length}} new notification</li>
+              <li class="header">You have {{basics.miveseller.notifications.all|length}} new notification</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                {%for notif in basics.miveuser.notifications.all%}
+                {%for notif in basics.miveseller.notifications.all%}
                   <li>
                     <a href="{{notif.url}}">
                       <i class="fa fa-users text-aqua"></i>{{notif.body}}
@@ -229,10 +229,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/{{basics.miveuser.profilePhoto.url}}" class="img-circle" alt="User Image">
+          <img src="/{{basics.miveseller.profilePhoto.url}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{basics.miveuser.nameOfInstitution}}</p>
+          <p>{{basics.miveseller.nameOfSeller}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -251,63 +251,14 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
-          <a href="/index.html">
-            <i class="fa fa-dashboard"></i> <span>Orders</span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="/index.html"><i class="fa fa-circle-o"></i> make order</a></li>
-            <li><a href="/seeOrder"><i class="fa fa-circle-o"></i>View Last Orders</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="/vendors">
-            <i class="fa fa-files-o"></i>
-            <span>Manage Vendors</span>
-            <span class="label label-primary pull-right">4</span>
+          <a href="/seller/main">
+            <i class="fa fa-dashboard"></i> <span>Orders</span>
           </a>
         </li>
-         <li>
-          <a href="/stocks">
-            <i class="fa fa-th"></i> <span>Inventory management</span>
-            <small class="label pull-right bg-green">new</small>
+        <li class="active treeview">
+          <a href="/seller/products">
+            <i class="fa fa-dashboard"></i> <span>Manage Products</span> 
           </a>
-        </li>
-        <li class="treeview">
-          <a href="/stats/order">
-            <i class="fa fa-pie-chart"></i>
-            <span>Statistics</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="/stats/order"><i class="fa fa-circle-o"></i>Order Statistics </a></li>
-            <li>
-            {%with basics.categoryvendor.all|first as ting%}
-            <a href="/stats/seller?id=0"><i class="fa fa-circle-o"></i> Vendor Statistics</a>
-{%endwith%}
-            </li>
-            <li>
-            <a href="/stats/product?id=0"><i class="fa fa-circle-o"></i> Product Statistics</a>
-            </li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>Inventory Statistics</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Anlytics</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Payments</span>
-            <small class="label pull-right bg-green">new</small>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Integrations</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Zendesk</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Zomato base</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Open apis</a></li>
-=          </ul>
         </li>
         <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Help</span></a></li>
         <li class="header">Connet with mive</li>
@@ -336,29 +287,22 @@
   <!-- The Right Sidebar -->
 <aside class="control-sidebar control-sidebar-light" id="cartreload">
   <!-- Content of the sidebar goes here -->
-   <h3 class="box-title">Total:Rs.{{basics.miveuser.cart.cartTotal}}</h3>
+   <h3 class="box-title">Recent Orders</h3>
           <div class="box">
           <div class="box-header with-border">
-              <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-bordered">
-                <tr>
-                  <th><center>Name</center></th>
-                </tr>
                 {%for order in basics.orders%}
                 <tr>
-                  <td><center><a href="/seller/orderDetail?orderId={{order.order_id}}">{{order.user.nameOfOwner}}</a></center></td>
+                  <td><center><p href="/seller/orderDetail?orderId={{order.order_id}}">{{order.user.nameOfOwner}}</p></center></td>
+                  <td><center><a href="/seller/orderDetail?orderId={{order.order_id}}">Details</a></center></td>
                 </tr>
                 {% endfor%}
               </table>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              
-              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
-            </div>
           </div>
 </aside>
 <!-- The sidebar's background -->

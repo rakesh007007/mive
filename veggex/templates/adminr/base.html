@@ -549,6 +549,7 @@
                     success: function(data)
                     {
                       $('#cartreload').html(data)
+                      console.log(data)
                     },
                     error:function(data){console.log(data)
                     mivenotify('error','Item add','Error ocuured while processing your request')
@@ -583,6 +584,7 @@
                     {
                       $('#cartreload').html(data)
                       $('#login-modal2').modal('toggle')
+                      console.log(data)
 
                     },
                     error:function(data){console.log(data)
