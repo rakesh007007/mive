@@ -294,7 +294,7 @@
           </ul>
         </li>
         <li>
-          <a href="pages/widgets.html">
+          <a href="pages/widgets.html" onclick="return false" class="notif">
             <i class="fa fa-th"></i> <span>Payments</span>
             <small class="label pull-right bg-green">new</small>
           </a>
@@ -305,9 +305,9 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Quickbooks</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Zomato base</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Open apis</a></li>
+            <li><a href="#" onclick="return false" class="notif"><i class="fa fa-circle-o"></i>Quickbooks</a></li>
+            <li><a href="#" onclick="return false" class="notif"><i class="fa fa-circle-o"></i>Zomato base</a></li>
+            <li><a href="#" onclick="return false" class="notif"><i class="fa fa-circle-o"></i>Open apis</a></li>
 =          </ul>
         </li>
         <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Help</span></a></li>
@@ -633,6 +633,11 @@ $('body').on('click','.minicart-delete',function(event){
                   });
 
   })
+</script>
+<script>
+$('body').on('click','.notif',function(event){
+  mivenotify('notice','Access denied need access?','Please contact rakesh@mive.in')
+})
 </script>
       {% block script%}
       {% endblock %}
