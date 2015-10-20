@@ -55,8 +55,10 @@
                <h3 class="box-title">Charts</h3>
             </div>
             <!-- /.box-header -->
+{%if consumption|length = 0 %}
+            {%else%}
             <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
-            </div>
+            </div>{% endif %}
             <!-- /.box-body -->
             <div class="box-footer clearfix">
                <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
