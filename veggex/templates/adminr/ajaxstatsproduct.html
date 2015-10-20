@@ -29,8 +29,8 @@
       animationEnabled: true,
       axisX: {
         valueFormatString: "DD/MMM",
-        interval:1,
-        intervalType: "week"
+        interval:3,
+        intervalType: "day"
         
       },
       axisY:{
@@ -40,8 +40,10 @@
       data: [
       {        
         type: "scatter",
+         markerSize: 20,
         //lineThickness: 3,        
         dataPoints: [
+
         {%for item in orderItems%}
         { x:new Date('{{item.order.deliveryTime}}') , y: {{item.product.pricePerUnit}}*{{item.qtyInUnits}} },
         {%endfor%}

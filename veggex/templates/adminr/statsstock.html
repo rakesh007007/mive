@@ -113,11 +113,11 @@
       },
         animationEnabled: true,
         axisX: {
-          valueFormatString: "DD/MMM",
-          interval:1,
-          intervalType: "week"
-          
-        },
+        valueFormatString: "DD/MMM",
+        interval:3,
+        intervalType: "day"
+        
+      },
         axisY:{
           includeZero: false
           
@@ -125,6 +125,7 @@
         data: [
         {        
           type: "line",
+          markerSize: 20,
           //lineThickness: 3,        
           dataPoints: [
           {%for cts in consumption%}
