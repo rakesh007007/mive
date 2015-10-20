@@ -606,6 +606,7 @@ def ordercategory(request):
 	else:
 		miveuserId = request.session['miveuser']
 		user = User.objects.get(user_id=int(miveuserId))
+		miveuser=user
 		cartId = request.GET['cartid']
 		categoryVendorId = request.GET['categoryvendorid']
 		orderMsg = request.GET['orderMsg']
@@ -653,6 +654,8 @@ def ordercategory(request):
 				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
 			Cartitem.objects.filter(cart = cart).filter(product__seller=categoryvendor.seller).delete()
 			cart.cartTotal=cart.cartTotal - totalprice
+			miveuser.creditlimit = miveuser.creditlimit - totalprice
+			miveuser.save()
 			cart.save()
 	strr = '/main?notify=yes&description=Order has been placed succesfully&title=OrderID:'+str(order_id)
 	return redirect(strr)
