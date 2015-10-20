@@ -739,6 +739,30 @@ def statsproduct(request):
 		orderItems = Orderitem.objects.filter(order__user=miveuser)
 	allItems = Orderitem.objects.filter(order__user=miveuser)
 	return TemplateResponse(request,'adminr/statsproduct.html',{'allItems':allItems,'basic':basics,'orderItems':orderItems})
+def statswastage(request):
+	basics= basicinfo(request)
+	miveuser = basics['miveuser']
+	stockId = int(request.GET['id'])
+	if int(stockId)==0:
+		stocks = Currentstock.objects.filter(user=miveuser)
+		stcss = Stockwastage.objects.filter(stock__in=stocks)
+	else:
+		stock = Currentstock.objects.get(currentstock_id = stockId)
+		stcss = Stockwastage.objects.filter(stock=stock)
+	stocks = Currentstock.objects.filter(user=miveuser)
+	return TemplateResponse(request,'adminr/statswastage.html',{'basics':basics,'wastage':stcss,'stocks':stocks})
+def statsconsumption(request):
+	basics= basicinfo(request)
+	miveuser = basics['miveuser']
+	stockId = int(request.GET['id'])
+	if int(stockId)==0:
+		stocks = Currentstock.objects.filter(user=miveuser)
+		stcss = Stockconsumption.objects.filter(stock__in=stocks)
+	else:
+		stock = Currentstock.objects.get(currentstock_id = stockId)
+		stcss = Stockconsumption.objects.filter(stock=stock)
+	stocks = Currentstock.objects.filter(user=miveuser)
+	return TemplateResponse(request,'adminr/statsstock.html',{'basics':basics,'consumption':stcss,'stocks':stocks})
 def statsseller(request):
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
@@ -783,8 +807,8 @@ def ajax0datefilter(request):
 		else:
 			st ='01-01-2010'
 			fi = '01-01-3010'
-		startdate =datetime.strptime(str(st),"%m-%d-%Y")
-		enddate = datetime.strptime(str(fi),"%m-%d-%Y")
+		startdate =datetime.strptime(str(st),"%m-%d-%Y").date()
+		enddate = datetime.strptime(str(fi),"%m-%d-%Y").date()
 		basics = basicinfo(request)
 		miveuser = basics['miveuser']
 		allOrders = Order.objects.filter(user=miveuser)
@@ -792,7 +816,7 @@ def ajax0datefilter(request):
 		statsSeller=[]
 		apporders = []
 		for ort in allOrders:
-			if(startdate<=ort.timeOfCreate.replace(tzinfo=None) and ort.timeOfCreate.replace(tzinfo=None)<=enddate and ort not in apporders):
+			if(startdate<=ort.deliveryTime and ort.timeOfCreate<=enddate and ort not in apporders):
 				apporders.append(ort)
 			else:
 				pass
@@ -825,6 +849,67 @@ def ajax0datefilter(request):
 			else:
 				pass
 		return TemplateResponse(request, 'adminr/ajaxstatsorder.html',{'basics':basics,'statsproduct':statsProduct,'statsseller':statsSeller,'csrf_token':get_or_create_csrf_token(request)})
+def ajaxconsumptionfilter(request):
+	stock = request.POST['stockId']
+	if request.POST['date']:
+		ping = request.POST['date']
+		pin = ping.split(' - ')
+		st = pin[0]
+		fi = pin[1]
+		st = st.replace('/','-')
+		fi = fi.replace('/','-')
+	else:
+		st ='01-01-2010'
+		fi = '01-01-3010'
+	startdate =datetime.strptime(str(st),"%m-%d-%Y").date()
+	enddate = datetime.strptime(str(fi),"%m-%d-%Y").date()
+	basics = basicinfo(request)
+	miveuser = basics['miveuser']
+	if stock==0:
+		stock = Currentstock.objects.filter(user=miveuser)[0]
+	else:
+		stock = Currentstock.objects.get(currentstock_id = stock)
+	consumptions = Stockconsumption.objects.filter(stock=stock)
+	t =[]
+	for it in consumptions:
+		if startdate <= it.timeOfCreate and it.timeOfCreate <= enddate:
+			t.append(it)
+			print 'yoooot'
+			print t
+		else:
+			pass
+	return TemplateResponse(request,'adminr/ajaxstatsconsumption.html',{'basic':basics,'consumption':t})
+
+def ajaxwastagefilter(request):
+	stock = request.POST['stockId']
+	if request.POST['date']:
+		ping = request.POST['date']
+		pin = ping.split(' - ')
+		st = pin[0]
+		fi = pin[1]
+		st = st.replace('/','-')
+		fi = fi.replace('/','-')
+	else:
+		st ='01-01-2010'
+		fi = '01-01-3010'
+	startdate =datetime.strptime(str(st),"%m-%d-%Y").date()
+	enddate = datetime.strptime(str(fi),"%m-%d-%Y").date()
+	basics = basicinfo(request)
+	miveuser = basics['miveuser']
+	if stock==0:
+		stock = Currentstock.objects.filter(user=miveuser)[0]
+	else:
+		stock = Currentstock.objects.get(currentstock_id = stock)
+	consumptions = Stockwastage.objects.filter(stock=stock)
+	t =[]
+	for it in consumptions:
+		if startdate <= it.timeOfCreate and it.timeOfCreate <= enddate:
+			t.append(it)
+			print 'yoooot'
+			print t
+		else:
+			pass
+	return TemplateResponse(request,'adminr/ajaxstatswastage.html',{'basic':basics,'wastage':t})
 def ajaxproductfilter(request):
 	productName = request.POST['product']
 	if request.POST['date']:
@@ -837,21 +922,20 @@ def ajaxproductfilter(request):
 	else:
 		st ='01-01-2010'
 		fi = '01-01-3010'
-	startdate =datetime.strptime(str(st),"%m-%d-%Y")
-	enddate = datetime.strptime(str(fi),"%m-%d-%Y")
+	startdate =datetime.strptime(str(st),"%m-%d-%Y").date()
+	enddate = datetime.strptime(str(fi),"%m-%d-%Y").date()
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
 	product = Product.rak.get(name = productName)
 	orderItems = Orderitem.objects.filter(product=product).filter(order__user=miveuser)
 	t =[]
 	for it in orderItems:
-		if startdate <= it.order.timeOfCreate.replace(tzinfo=None) and it.order.timeOfCreate.replace(tzinfo=None) <= enddate:
+		if startdate <= it.order.deliveryTime and it.order.deliveryTime <= enddate:
 			t.append(it)
 		else:
 			pass
 	allItems = Orderitem.objects.filter(order__user=miveuser)
 	return TemplateResponse(request,'adminr/ajaxstatsproduct.html',{'allItems':allItems,'basic':basics,'orderItems':t})
-
 def ajaxdatefilter(request):
 	sellerName= request.POST['seller']
 	print 'yolo'
@@ -866,20 +950,18 @@ def ajaxdatefilter(request):
 	else:
 		st ='01-01-2010'
 		fi = '01-01-3010'
-	startdate =datetime.strptime(str(st),"%m-%d-%Y")
-	enddate = datetime.strptime(str(fi),"%m-%d-%Y")
+	startdate =datetime.strptime(str(st),"%m-%d-%Y").date()
+	enddate = datetime.strptime(str(fi),"%m-%d-%Y").date()
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
 	seller = Seller.rak.get(nameOfSeller = sellerName)
 	orders = Order.objects.filter(seller=seller).filter(user=miveuser)
 	apporders = []
 	for ort in orders:
-		if(startdate<=ort.timeOfCreate.replace(tzinfo=None) and ort.timeOfCreate.replace(tzinfo=None)<=enddate and ort not in apporders):
+		if(startdate<=ort.deliveryTime and ort.deliveryTime<=enddate and ort not in apporders):
 			print startdate
 			print enddate
 			print ort.timeOfCreate.replace(tzinfo=None)
-			print startdate<ort.timeOfCreate.replace(tzinfo=None)
-			print enddate >ort.timeOfCreate.replace(tzinfo=None)
 			apporders.append(ort)
 		else:
 			pass
@@ -891,7 +973,7 @@ def ajaxdatefilter(request):
 	statsProduct=[]
 	print 'testin starts from here'
 	for ord in allOrdersitems:
-		if(startdate<=ord.order.timeOfCreate.replace(tzinfo=None) and ord.order.timeOfCreate.replace(tzinfo=None)<=enddate):
+		if(startdate<=ord.order.deliveryTime and ord.order.deliveryTime<=enddate):
 			if ord.product in products:
 				index = products.index(ord.product)
 				oldst = statsProduct[index]

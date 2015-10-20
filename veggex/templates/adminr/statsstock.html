@@ -1,0 +1,199 @@
+{% extends 'adminr/base.html' %}
+{% block  content %}
+<section class="content-header">
+   <h1>
+      Mive 
+      <small>Consumption statistics</small>
+   </h1>
+   <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Cart</li>
+   </ol>
+</section>
+<section class="content">
+   <div class="row">
+      <div class="col-md-10 col-md-offset-1" style="position:relative">
+         <form id="bigb">
+            <div class="row">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>Date range:</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <i class="fa fa-calendar"></i>
+                        </div>
+                        <input placeholder="select date range for analysis" name="date" value="" type="text" class="form-control pull-right" id="reservation">
+                        {%csrf_token%}
+                     </div>
+                     <!-- /.input group -->
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>Select a product</label>
+                     <select name="stockId" class="form-control select2" id="productselect" style="width: 100%;">
+                        {%with stocks|first as ting%}
+                        <option value="{{ting.currentstock_id}}" selected="selected">{{ting.product.name}}</option>
+                        {% for stock in stocks%}
+                        {% if ting = stock%}
+                        {%else%}
+                        <option data-id="{{stock.currentstock_id}}" value="{{stock.currentstock_id}}">{{stock.product.name}}</option>
+                        {%endif%}
+                        {%endfor%}
+                        {%endwith%}
+                     </select>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   <div class="row" id="targereload">
+      <div class="col-md-10 col-md-offset-1" style="position:relative">
+         <div class="box">
+            <div class="box-header with-border">
+               <h3 class="box-title">Charts</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+               <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<div class="modal fade" id="order-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+   <div class="modal-dialog">
+      <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
+         <form id="orderdata" method="get" action="/ordercategory" style="display:inline;">
+            <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
+            <input type="hidden" name="categoryvendorid" id="orderplaceid" value="{{pd.categoryvendor_id}}">
+            <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
+               <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+               <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+               <input type="hidden" name="csrfmiddlewaretoken" value="XxYq2vc6MzqqLBPH86mIQeEfObTCXVCc">
+            </div>
+            <div class="col-md-1 col-lg-1 col-xs-6 ol-md-offset-0 col-lg-offset-0">
+               <button type="submit" id="checkout" class="btn btn-success btn-lg">
+               Checkout
+               </button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+{%endblock%}
+{% block script%}
+<script>
+   $('body').on('click','.orderplace',function(event){
+     categoryvendorid = $(this).attr('data-categoryvendorid')
+     console.log('clicked')
+     $('#orderplaceid').attr('value',categoryvendorid)
+     $('#order-modal').modal('toggle')
+   })
+</script>
+<script type="text/javascript">
+   window.rakd = function(t){
+        tt = new Date(t)
+        return tt.format(yy,m,dd)
+      }
+    window.onload = function () {
+          var chart = new CanvasJS.Chart("chartContainer",
+      {
+        theme: "theme2",
+        title:{
+          text: "Per Order spending"
+        },
+        animationEnabled: true,
+        axisX: {
+          valueFormatString: "DD/MMM",
+          interval:1,
+          intervalType: "week"
+          
+        },
+        axisY:{
+          includeZero: false
+          
+        },
+        data: [
+        {        
+          type: "line",
+          //lineThickness: 3,        
+          dataPoints: [
+          {%for cts in consumption%}
+          { x:new Date('{{cts.timeOfCreate}}') , y: {{cts.consumption}} },
+          {%endfor%}
+   
+          
+          ]
+        }
+        
+        
+        ]
+      });
+   chart.render();
+      }
+    
+</script>
+<script src="/rstatic/admin/plugins/daterangepicker/daterangepicker.js"></script>
+<script>
+   $(function () {
+     //Date range picker
+     $('#reservation').daterangepicker(
+       {
+     locale: {
+       format: 'MM-DD-YYYY'
+     }
+   } 
+       );
+     //Date range picker with time picker
+   
+   });
+</script>
+<script>
+   $('body').on('click','.applyBtn',function(event){
+     console.log('clicked',$('#reservation').datepicker("getDate"))
+     data = $('#bigb').serialize()
+     $('#targereload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+     $.ajax({
+                     type: "POST",
+                     url: '/stats/ajaxconsumptionfilter',
+                     data: data, // serializes the form's elements.
+                     success: function(data)
+                     {
+                       $('#targereload').html(data)
+                       window.tink = data 
+                     },
+                     error:function(data){
+                     mivenotify('error','Item add','Error occured while adding product')
+                     console.log(data)
+                     }
+                   });
+   })
+   $('body').on('click','#productselect',function(event){
+     console.log('clicked2',$('#reservation').datepicker("getDate"))
+     data =$('#bigb').serialize()
+     $('#targereload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+     $.ajax({
+                     type: "POST",
+                     url: '/stats/ajaxconsumptionfilter',
+                     data: data, // serializes the form's elements.
+                     success: function(data)
+                     {
+                       $('#targereload').html(data)
+                       console.log(data)
+                       window.tink = data 
+                     },
+                     error:function(data){
+                       console.log(data)
+                     mivenotify('error','Item add','Error occured while adding product')
+                     }
+                   });
+   })
+</script>
+{% endblock %}

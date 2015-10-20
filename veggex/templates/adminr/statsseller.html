@@ -3,7 +3,7 @@
 <section class="content-header">
    <h1>
       Mive 
-      <small>Restaurs dashboard</small>
+      <small>Vendor statistics</small>
    </h1>
    <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -212,6 +212,7 @@ chart2.render();
                     },
                     error:function(data){
                     mivenotify('error','Item add','Error occured while adding product')
+                    console.log(data)
                     }
                   });
   })

@@ -44,7 +44,7 @@ class Product2Manager(models.Manager):
         return super(Product2Manager, self).get_queryset().filter(status=1)
 class Notification(models.Model):
 	notification_id = models.AutoField(primary_key=True)
-	body = models.TextField(null=False,blank=False,default='body.....')
+	body = models.TextField(null=False,blank=False,default='Test Notification from mive')
 	title = models.CharField(max_length=240,null=False,blank=False,default='New Notification')
 	link = models.CharField(max_length=240,null=False,blank=False,default='#')
 	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
@@ -285,7 +285,7 @@ class Currentstock(models.Model):
 	product = models.ForeignKey(Product,blank=False,null=False)
 	user = models.ForeignKey(User,null=False,blank=False,default=1)
 	remainingstock = models.FloatField(blank=False,null=False,default=0)
-	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	timeOfCreate = models.DateField(default=timezone.now,null=True,blank=True)
 	def __unicode__(self):
 		return str(self.product.name)
 	class Meta:	
@@ -295,7 +295,7 @@ class Stockconsumption(models.Model):
 	stock  = models.ForeignKey(Currentstock,blank=False,null=False)
 	user = models.ForeignKey(User,null=False,blank=False,default=1)
 	consumption = models.FloatField(blank=False,null=False,default=0)
-	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	timeOfCreate = models.DateField(default=timezone.now,null=True,blank=True)
 	comment = models.TextField(blank=True,null=True)
 	def __unicode__(self):
 		return str(self.stock)
@@ -306,7 +306,7 @@ class Stockwastage(models.Model):
 	stock = models.ForeignKey(Currentstock,blank=False,null=False)
 	user = models.ForeignKey(User,null=False,blank=False,default=1)
 	wastage = models.FloatField(blank=False,null=False,default=0)
-	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	timeOfCreate = models.DateField(default=timezone.now,null=True,blank=True)
 	comment = models.TextField(blank=True,null=True)
 	def __unicode__(self):
 		return str(self.stock)
