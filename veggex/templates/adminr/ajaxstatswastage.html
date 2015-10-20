@@ -4,8 +4,12 @@
               <h3 class="box-title">Charts</h3>
             </div>
             <!-- /.box-header -->
+            {%if wastage|length = 0 %}
+            <h1>No data for this selection</h1>
+{%else%}
             <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
             </div>
+            {%endif%}
             <!-- /.box-body -->
             <div class="box-footer clearfix">
               
@@ -14,6 +18,10 @@
           </div>
         </div>
      <script type="text/javascript">
+
+{%if wastage|length = 0 %}
+
+     {%else%}
  window.rakd = function(t){
       tt = new Date(t)
       return tt.format(yy,m,dd)
@@ -41,6 +49,9 @@
       {        
         type: "line",
          markerSize: 20,
+         {%if orderItems|length = 0 %}
+{%else%}
+{%endif%}
         //lineThickness: 3,        
         dataPoints: [
         {%for cts in wastage%}
@@ -55,4 +66,5 @@
       ]
     });
 chart.render();
+{%endif%}
   </script>

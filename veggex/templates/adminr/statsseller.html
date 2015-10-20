@@ -56,14 +56,18 @@
               <h3 class="box-title">Charts</h3>
             </div>
             <!-- /.box-header -->
+{%if orders|length = 0 %}
+            {%else%}
             <div class="box-body" id="chartContainer" style="height: 300px; width: 90%;">
-            </div>
+            </div>{% endif %}
+{%if statsproduct|length = 0 %}
+            {%else%}
             <div class="box-body" id="chartContainer2" style="height: 300px; width: 90%;">
             </div>
+            {% endif %}
             <!-- /.box-body -->
             <div class="box-footer clearfix">
               
-              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
             </div>
           </div>
         </div>
@@ -102,6 +106,8 @@
   })
 </script>
  <script type="text/javascript">
+{%if orders|length = 0 %}
+ {%else%}
  window.rakd = function(t){
       tt = new Date(t)
       return tt.format(yy,m,dd)
@@ -141,7 +147,9 @@
       
       ]
     });
-chart.render();
+chart.render();{% endif %}
+{%if statsproduct|length = 0 %}
+{%else%}
    var chart2 = new CanvasJS.Chart("chartContainer2", {
 
          title:{
@@ -181,7 +189,7 @@ chart.render();
       });
 
 chart2.render();
-    }
+    }{% endif %}
   </script>
   <script src="/rstatic/admin/plugins/daterangepicker/daterangepicker.js"></script>
   <script>

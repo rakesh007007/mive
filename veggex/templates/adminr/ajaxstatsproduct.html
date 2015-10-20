@@ -4,16 +4,23 @@
               <h3 class="box-title">Charts</h3>
             </div>
             <!-- /.box-header -->
+            {%if orderItems|length = 0 %}
+            <div class="box-header with-border">
+              <h3 class="box-title">No data for this selection</h3>
+            </div>
+            {%else%}
             <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
             </div>
+            {%endif%}
             <!-- /.box-body -->
             <div class="box-footer clearfix">
               
-              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
             </div>
           </div>
         </div>
         <script type="text/javascript">
+{%if orderItems|length = 0 %}
+        {%else%}
  window.rakd = function(t){
       tt = new Date(t)
       return tt.format(yy,m,dd)
@@ -56,4 +63,5 @@
       ]
     });
 chart.render();
+{%endif%}
 </script>
