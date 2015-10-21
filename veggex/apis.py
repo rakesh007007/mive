@@ -342,7 +342,7 @@ class ApiMakeOrder(APIView):
 		user =User.objects.get(user_id=userId)
 		payment_mode = 'COD'
 		cart =user.cart
-		items = Cartitem.objects.filter(cart = cart)
+		items = Cartitem.objects.filter(cart = cart).filter(product__seller = seller)
 		total=cart.cartTotal
 		if(len(items)<1):
 			print 'no items'
