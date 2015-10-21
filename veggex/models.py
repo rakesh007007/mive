@@ -117,6 +117,8 @@ class Seller(models.Model):
     	return {'seller_id':self.seller_id,'nameOfSeller':self.nameOfSeller}
     def get_query_set(self):
         return super(CustomManager, self).get_query_set().filter(canceled=False)
+     def sellerId(self):
+     	return self.seller_id
 class Product(models.Model):
 	product_id = models.AutoField(primary_key=True)
 	name=models.CharField(max_length=300,blank=False,null=False)
