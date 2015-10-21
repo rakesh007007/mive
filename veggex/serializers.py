@@ -6,7 +6,7 @@ from veggex.models import *
 class SellerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Seller
-        fields = ('seller_id','nameOfSeller','mailId','mobileNo')
+        fields = ('seller_id','nameOfSeller','mailId','mobileNo','sellerId')
 class AddressSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Address
