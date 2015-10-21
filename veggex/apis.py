@@ -337,7 +337,7 @@ class ApiMakeOrder(APIView):
 			sellerId = int(data['sellerId'])
 			userId=int(userId)
 			cartId=int(cartId)
-			seller = Seller.rak.get(seller_id)
+			seller = Seller.rak.get(sellerId)
 			deliveryTime = data['deliveryTime']
 			orderMsg = data['orderMsg']
 			user =User.objects.get(user_id=userId)
