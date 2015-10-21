@@ -330,60 +330,57 @@ class ApiMakeOrder(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
 	def post(self, request, format=None):
-		try:
-			data=request.data
-			cartId=data['cartId']
-			userId=data['userId']
-			sellerId = int(data['sellerId'])
-			userId=int(userId)
-			cartId=int(cartId)
-			seller = Seller.rak.get(sellerId)
-			deliveryTime = data['deliveryTime']
-			orderMsg = data['orderMsg']
-			user =User.objects.get(user_id=userId)
-			payment_mode = 'COD'
-			cart =user.cart
-			items = Cartitem.objects.filter(cart = cart)
-			total=cart.cartTotal
-			cart.cartTotal = 0
-			cart.save()
-			if(len(items)<1):
-				print 'no items'
-				return Response(['no items to make order'])
-			else:
-				order = Order()
-				order.user = user
-				order.payment_mode = payment_mode
-				order.subtotal=total
-				order.seller = seller
-				order.status = 'PLACED'
-				order.deliveryTime=deliveryTime
-				order.orderMsg=orderMsg
-				order.save()
-				order_id =order.order_id 
-				for itemn in items:
-					rak = Orderitem()
-					rak.product = itemn.product
-					stock = Currentstock.objects.filter(product=itemn.product)
-					if(len(stock)>0):
-						currStock = stock[0]
-						currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
-						currStock.save()
-					else:
-						currStock = Currentstock()
-						currStock.product = itemn.product
-						currStock.remainingstock=itemn.qtyInUnits
-						currStock.save()
-					rak.unit=itemn.product.unit
-					rak.qtyInUnits = itemn.qtyInUnits
-					rak.priceType = itemn.product.priceType
-					rak.priceAtThatTime = itemn.product.pricePerUnit
-					rak.order = order
-					rak.save()
-				Cartitem.objects.filter(cart=cart).delete()
-				return Response({"status":"success","orderId":order_id})
-		except Exception,e:
-			return HttpResponse(e)
+		data=request.data
+		cartId=data['cartId']
+		userId=data['userId']
+		sellerId = int(data['sellerId'])
+		userId=int(userId)
+		cartId=int(cartId)
+		seller = Seller.rak.get(sellerId)
+		deliveryTime = data['deliveryTime']
+		orderMsg = data['orderMsg']
+		user =User.objects.get(user_id=userId)
+		payment_mode = 'COD'
+		cart =user.cart
+		items = Cartitem.objects.filter(cart = cart)
+		total=cart.cartTotal
+		cart.cartTotal = 0
+		cart.save()
+		if(len(items)<1):
+			print 'no items'
+			return Response(['no items to make order'])
+		else:
+			order = Order()
+			order.user = user
+			order.payment_mode = payment_mode
+			order.subtotal=total
+			order.seller = seller
+			order.status = 'PLACED'
+			order.deliveryTime=deliveryTime
+			order.orderMsg=orderMsg
+			order.save()
+			order_id =order.order_id 
+			for itemn in items:
+				rak = Orderitem()
+				rak.product = itemn.product
+				stock = Currentstock.objects.filter(product=itemn.product)
+				if(len(stock)>0):
+					currStock = stock[0]
+					currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
+					currStock.save()
+				else:
+					currStock = Currentstock()
+					currStock.product = itemn.product
+					currStock.remainingstock=itemn.qtyInUnits
+					currStock.save()
+				rak.unit=itemn.product.unit
+				rak.qtyInUnits = itemn.qtyInUnits
+				rak.priceType = itemn.product.priceType
+				rak.priceAtThatTime = itemn.product.pricePerUnit
+				rak.order = order
+				rak.save()
+			Cartitem.objects.filter(cart=cart).delete()
+			return Response({"status":"success","orderId":order_id})
 class UserLoginView(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
