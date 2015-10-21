@@ -344,8 +344,6 @@ class ApiMakeOrder(APIView):
 		cart =user.cart
 		items = Cartitem.objects.filter(cart = cart)
 		total=cart.cartTotal
-		cart.cartTotal = 0
-		cart.save()
 		if(len(items)<1):
 			print 'no items'
 			return Response(['no items to make order'])
@@ -360,9 +358,11 @@ class ApiMakeOrder(APIView):
 			order.orderMsg=orderMsg
 			order.save()
 			order_id =order.order_id 
+			su = 0
 			for itemn in items:
 				rak = Orderitem()
 				rak.product = itemn.product
+				su = su + itemn.product.pricePerUnit*itemn.qtyInUnits
 				stock = Currentstock.objects.filter(product=itemn.product)
 				if(len(stock)>0):
 					currStock = stock[0]
@@ -378,8 +378,10 @@ class ApiMakeOrder(APIView):
 				rak.priceType = itemn.product.priceType
 				rak.priceAtThatTime = itemn.product.pricePerUnit
 				rak.order = order
+				itemn.delete()
 				rak.save()
-			Cartitem.objects.filter(cart=cart).delete()
+			cart.cartTotal = cart.cartTotal - su
+			cart.save()
 			return Response({"status":"success","orderId":order_id})
 class UserLoginView(APIView):
 	#authentication_classes = (TokenAuthentication,)
