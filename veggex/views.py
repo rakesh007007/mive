@@ -55,8 +55,8 @@ def get_or_create_csrf_token(request):
 		request.META['CSRF_COOKIE'] = token
 	request.META['CSRF_COOKIE_USED'] = True
 	return token
-def landing(request):
-			return TemplateResponse(request, 'html/index.html',{'csrf_token':get_or_create_csrf_token(request)})
+def home(request):
+	return TemplateResponse(request,'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
 def getTotal(cartitems):
 	total=0
 	for itemm in cartitems:
@@ -96,8 +96,6 @@ def career(request):
 		return HttpResponse('Thank You for applyig to us!! Will get back to you Asap')
 	except Exception,e:
 		return HttpResponse('Error Processing your request looks like you have provided incorrect inputs')
-def shophome(request):
-	return TemplateResponse(request, 'new/index.html',{'csrf_token':get_or_create_csrf_token(request)})
 def login(request):
 	if ('loggedin' not in request.session):
 		return TemplateResponse(request, 'adminr/login.html',{'csrf_token':get_or_create_csrf_token(request)})
@@ -107,7 +105,12 @@ def docs(request):
 	if ('loggedin' not in request.session):
 		return redirect('/login')
 	else:
-		return redirect('https://github.com/rakesh007007/mive/blob/master/veggex/templates/new/docs.txt')
+		return redirect('https://github.com/rakesh007007/mive/blob/master/veggex/templates/adminr/docs/v1.txt')
+def docsv2(request):
+	if ('loggedin' not in request.session):
+		return redirect('/login')
+	else:
+		return redirect('https://github.com/rakesh007007/mive/blob/master/veggex/templates/adminr/docs/v2.txt')
 
 def orderDetail(request):
 	if ('loggedin' not in request.session):
@@ -120,16 +123,6 @@ def orderDetail(request):
 		order = Order.objects.filter(user=miveuser).get(order_id=order_id)
 		orderItems = Orderitem.objects.filter(order=order)
 		return TemplateResponse(request, 'adminr/orderdetail.html',{'basics':basics,'orderItems':orderItems,'order':order})
-def ajaxorderDetail(request):
-	if ('loggedin' not in request.session):
-		return TemplateResponse(request, 'login.html',{'csrf_token':get_or_create_csrf_token(request)})
-	else:
-		order_id = request.POST['order_id']
-		order = Order.objects.get(order_id=order_id)
-		orderitems = Orderitem.objects.filter(order=order)
-		return TemplateResponse(request, 'orderDetail.html',{'orderitems':orderitems,'order':order,'csrf_token':get_or_create_csrf_token(request)})
-def tryy(request):
-	return TemplateResponse(request, 'webuild/index.html',{'csrf_token':get_or_create_csrf_token(request)})
 def subscribe(request):
 	email =request.POST['email']
 	subscribe=Subscribe()
@@ -141,36 +134,6 @@ def checklogin(request):
 		return False
 	else:
 		return True
-def search(request):
-	tex = request.GET['searchtext']
-	print tex;
-	resultName = Product.rak.filter(name__icontains = tex).filter(status=1)
-	resultNameValues = Product.rak.filter(status=1).filter(name__icontains = tex).values('product_id') 
-	resultDescription = Product.rak.filter(status=1).filter(description__icontains=tex).exclude(product_id__in=resultNameValues)
-	if len(resultName)==0 and len(resultDescription)==0:
-		results=0
-	else:
-		results=1
-	if(checklogin(request)==False):
-		miveuser='none'
-		cart='none'
-		customproducts='none'
-		cartItems=[]
-		totalItems=0
-		categories = Category.objects.all()
-		return TemplateResponse(request, 'new/search.html',{'resultName':resultName,'resultDescription':resultDescription,'results':results,'cartItems':cartItems,'totalItems':totalItems,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
-	else:
-		miveuserId = request.session['miveuser']
-		miveuser = User.objects.get(user_id=int(miveuserId))
-		cart = miveuser.cart
-		cartItems = Cartitem.objects.filter(cart=cart)
-		totalItems = len(cartItems)
-		customproducts='none'
-		categories = Category.objects.all()
-		return TemplateResponse(request, 'new/search.html',{'resultName':resultName,'resultDescription':resultDescription,'results':results,'cartItems':cartItems,'totalItems':totalItems,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
-	return TemplateResponse(request, 'searchResults.html',{'resultCategory':resultCategory,'resultSeller':resultSeller,'resultOrigin':resultOrigin,'resultName':resultName,'resultDescription':resultDescription,'csrf_token':get_or_create_csrf_token(request)})
-def searchForm(request):
-	return TemplateResponse(request, 'search.html',{'csrf_token':get_or_create_csrf_token(request)})
 def logPost(request):
 	try:
 		mobile=request.POST['mobile']
@@ -189,83 +152,12 @@ def logPost(request):
 			return redirect('/main?notify=yes&type=error&title=LogIn&description=Login has been failed please try with proper credentials')
 	except:
 		return redirect('/main?notify=yes&type=notice&title=LogIn&description=Looks like you are not registered please contact info@mive.in')
-def ajaxlogPost(request):
-	mobile=request.POST['mobile']
-	password = request.POST['password']
-	u = User.objects.filter(mobileNo=mobile)
-	#uu=Cart.objects.raw('select * from `veggex_cart` natural join `veggex_user` where mobileNo='+str(mobile))
-	if(check_password(password,u[0].password)):
-		request.session['loggedin']=True
-		request.session['mobile']=mobile
-		request.session['miveuser']=u[0].user_id
-		miveuser = u[0]
-		cart = miveuser.cart
-		cartItems = Cartitem.objects.filter(cart=cart)
-		totalItems = len(cartItems)
-		customproducts='none'
-		allProducts = Product.rak.filter(status=1)
-		vegetableProducts = Product.rak.filter(category_id=1).filter(status=1)
-		fruitproducts = Product.rak.filter(category_id=2).filter(status=1)
-		products = Product.rak.filter(status=1)
-		categories = Category.objects.all()
-		return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
-	else:
-		miveuser='none'
-		cart='none'
-		customproducts='none'
-		cartItems=[]
-		totalItems=0
-		categories = Category.objects.all()
-		products = Product.rak.filter(status=1)
-		strraw={"mobile":mobile,"password":password}
-		return HttpResponse(str(strraw))
-		#return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def logout(request):
 	 if('loggedin' in request.session):
 		 del request.session['loggedin']
 	 if('mobile' in request.session):
 		del request.session['mobile'] 
 	 return redirect('/main?notify=yes&type=notice&title=Logged Out&description=You have been logged out')
-def account(request):
-	if(checklogin(request)==False):
-		return redirect('/main')
-	mobile =request.session['mobile']
-	miveuser = User.objects.get(mobileNo=mobile)
-	cart = miveuser.cart
-	cartItems = Cartitem.objects.filter(cart=cart)
-	totalItems = len(cartItems)
-	categories = Category.objects.all()
-	return TemplateResponse(request, 'new/profile.html',{'cartItems':cartItems,'totalItems':totalItems,'categories':categories,'cart':cart,'miveuser':miveuser,'csrf_token':get_or_create_csrf_token(request)})
-def desktophomereload(request):
-	limit = request.GET['limit']
-	low = int(limit)
-	high = int(limit)+8
-	products =Product.rak.filter(status=1)[low:high]
-	return TemplateResponse(request, 'new/desktophomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
-def mobilehomereload(request):
-	limit = request.GET['limit']
-	low = int(limit)
-	high = int(limit)+8
-	products =Product.rak.filter(status=1)[low:high]
-	return TemplateResponse(request, 'new/mobilehomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
-def desktopcategoryreload(request):
-	limit = request.GET['limit']
-	low = int(limit)
-	high = int(limit)+8
-	categoryId=request.GET['categoryId']
-	categoryId = int(categoryId)
-	category = Category.objects.get(category_id=categoryId)
-	products = Product.rak.filter(category=category).filter(status=1)[low:high]
-	return TemplateResponse(request, 'new/desktophomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
-def mobilecategoryreload(request):
-	limit = request.GET['limit']
-	low = int(limit)
-	high = int(limit)+8
-	categoryId=request.GET['categoryId']
-	categoryId = int(categoryId)
-	category = Category.objects.get(category_id=categoryId)
-	products = Product.rak.filter(category=category).filter(status=1)[low:high]
-	return TemplateResponse(request, 'new/mobilehomereload.html',{'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def main(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -404,33 +296,6 @@ def vendors(request):
 		print currentsellers
 		sellers = Seller.rak.exclude(seller_id__in=currentsellers)
 		return TemplateResponse(request,'adminr/vendors.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
-def categoryView(request):
-	categoryId=request.GET['categoryId']
-	categoryId = int(categoryId)
-	category = Category.objects.get(category_id=categoryId)
-	products = Product.rak.filter(category=category).filter(status=1)[:8]
-	totalProducts = Product.rak.filter(category=category).filter(status=1).count()
-	print('hola apache rakesh')
-	if(checklogin(request)==False):
-		miveuser='none'
-		cart='none'
-		customproducts='none'
-		cartItems=[]
-		totalItems=0
-		categories = Category.objects.all()
-		return TemplateResponse(request, 'new/category.html',{'totalProducts':totalProducts,'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
-	else:
-		miveuserId = request.session['miveuser']
-		miveuser = User.objects.get(user_id=int(miveuserId))
-		cart = miveuser.cart
-		cartItems = Cartitem.objects.filter(cart=cart)
-		totalItems = len(cartItems)
-		customproducts='none'
-		allProducts = Product.rak.filter(status=1)
-		vegetableProducts = Product.rak.filter(category_id=1).filter(status=1)
-		fruitproducts = Product.rak.filter(category_id=2).filter(status=1)
-		categories = Category.objects.all()
-		return TemplateResponse(request, 'new/category.html',{'totalProducts':totalProducts,'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
 def addtocart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=You are not logged in please logIn')
@@ -711,11 +576,6 @@ def stock(request):
 		basics =basicinfo(request)
 		return TemplateResponse(request, 'adminr/stocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
 
-def orderStep1(request):
-	if ('loggedin' not in request.session):
-		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
-	else:
-		return TemplateResponse(request, 'orderstep1.html',{'csrf_token':get_or_create_csrf_token(request)})
 def seeOrder(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -1049,52 +909,6 @@ def statsorderitem(request):
 				stats.append(st)
 		print stats
 		return TemplateResponse(request, 'adminr/statsorder.html',{'basics':basics,'stats':stats,'csrf_token':get_or_create_csrf_token(request)})
-def makeOrder(request):
-	if ('loggedin' not in request.session):
-		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue') 
-	else:
-		print 'yoo'
-		orderMsg = request.POST['orderMsg']
-		deliveryTime = request.POST['delivery']
-		mobile = request.session['mobile']
-		user =User.objects.filter(mobileNo=mobile)[0]
-		payment_mode = 'COD'
-		cart =user.cart
-		items = Cartitem.objects.filter(cart = cart)
-		total=cart.cartTotal
-		if(len(items)<1):
-			print 'no items'
-			return HttpResponse('no items to make order')
-		else:
-			order = Order()
-			order.user = user
-			order.payment_mode = payment_mode
-			order.subtotal=total
-			order.status = 'PLACED'
-			order.orderMsg = orderMsg
-			order.deliveryTime = deliveryTime
-			order.save()
-			order_id =order.order_id 
-			for itemn in items:
-				rak = Orderitem()
-				rak.product = itemn.product
-				rak.unit=itemn.product.unit
-				rak.qtyInUnits = itemn.qtyInUnits
-				miveuser=user
-				rak.priceType = itemn.product.priceType
-				rak.priceAtThatTime = itemn.product.pricePerUnit
-				rak.order = order
-				rak.save()
-				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
-			Cartitem.objects.filter(cart = cart).delete()
-			cart.cartTotal=0
-			cart.save()
-			items = Orderitem.objects.filter(order=order)
-			cartItems=Cartitem.objects.filter(cart=cart)
-			totalItems=len(cartItems)
-			shippingCost=0
-			categories = Category.objects.all()
-			return TemplateResponse(request, 'new/makeorderreload.html',{'order_id':order_id,'totalItems':totalItems,'miveuser':miveuser,'cart':cart,'shippingCost':shippingCost,'cartItems':cartItems,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
 def cart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -1118,33 +932,6 @@ def cart(request):
 			pass
 	print allProducts
 	return TemplateResponse(request, 'adminr/cart.html',{'allProducts':allProducts,'shippingCost':shippingCost,'cartItems':cartItems,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
-def trycart(request):
-	userId = request.GET['userId']
-	miveuser=User.objects.get(user_id = userId)
-	cart=miveuser.cart
-	cartItems=Cartitem.objects.filter(cart=cart)
-	totalItems=len(cartItems)
-	shippingCost=0
-	categoryvendor= miveuser.categories
-	allProducts = []
-	for cvend in categoryvendor.all():
-		categoryvendor_id = cvend.categoryvendor_id
-		seller = cvend.seller
-		jsseller = SellerSerializer(seller,context={'request': request})
-		itemscount = Cartitem.objects.filter(product__seller = seller).filter(cart=cart).count()
-		if itemscount>0:
-			items = Cartitem.objects.filter(product__seller = seller).filter(cart=cart)
-			t =[]
-			for p in items:
-				jsitem = CartitemSerializer(p,context={'request': request}).data
-				t.append(jsitem)
-			jsitems =json.dumps(t)
-			pd = {'categoryvendor_id':categoryvendor_id,'seller':jsseller.data,'items':jsitems}
-			allProducts.append(json.dumps(pd))
-		else:
-			pass
-	allProducts = json.dumps(allProducts)
-	return HttpResponse(allProducts,content_type='application/json')
 def ajaxcart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')

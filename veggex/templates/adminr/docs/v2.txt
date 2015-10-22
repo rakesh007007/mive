@@ -1,0 +1,152 @@
+Mive API documentation:
+ 
+
+Url : http://www.mive.in/
+
+1. Authtoken
+   end point: */authtoken/
+   POST
+   media type :application/json
+   body:
+        {
+              "user": "admin",
+              "password":"givememyfuckingtoken" 
+              }
+2. login
+    end point: */api/login
+    POST
+    media type :application/json
+    body {
+        "mobile":"{mobile}",
+        "password":"password"
+    }
+    result - all vendors and their products
+3. stock 
+   end point */api/stock/{userId}
+   result: available stock and quantity
+4. add cosnumption 
+    end point api/addtoconsumption
+    POST
+    body :
+        {
+         "userId":"{userId}",
+         "stockId":"{stockId}".
+         "qty":"{consumption qty}"
+
+
+        }
+5. add wastage 
+    end point api/addtowastage
+    POST
+    body :
+        {
+         "userId":"{userId}",
+         "stockId":"{stockId}".
+
+        }
+6. Add multiple products to cart
+    end point */api/addtocart/
+    POST
+     body :
+         {
+          "cartId":"{cartId}",
+          "userId":"{userId}",
+          "items":
+                  {
+                  "1":{
+                       "qty":"{quantity}",
+                       "productId":"{productId}"
+
+                       }
+                   "2": ......similar
+                   "3"   .....similar
+                   #add as many products as you want
+
+                  }
+
+         }
+7. Update Cart
+   end point */api/updatecart/ 
+   POST
+    body :
+         {
+          "cartId":"{cartId}",
+          "userId":"{userId}",
+          "items":
+                  {
+                  "1":{
+                       "qty":"{quantity}",
+                       "itemId":"{itemId}"
+
+                       }
+                   "2": ......similar
+                   "3"   .....similar
+                   #add as many products as you want
+
+                  }
+
+         }
+8. Make order 
+   end point */api/makeorder/
+   POST
+   body:
+           {
+           "userId":"{userId}",
+           "cartId" :"{cartId}",
+           "deliveryTime" :"{cartId}",
+           "orderMsg" :"{cartId}"
+           "sellerId":"{sellerId}"
+
+           }
+9. Orders of a user
+   GET
+   end point */api/user/orders/{orderId}/
+10. Items of a order
+   GET
+   end point api/order/items/{orderId}
+11. Product Search for Title API
+   endpoint */api/search/title/{searchtext}
+12. Product Search for Description API
+   endpoint */api/search/description/{searchtext}
+Full supported(GET,POST,PUT,DELETE) end points
+13. Address
+    GET,POST,PUT,DELETE
+    endpoint: */api/address/
+14. Category
+    GET,POST,PUT,DELETE
+    endpoint: */api/category/
+15. Product
+    GET,POST,PUT,DELETE
+    endpoint: */api/product/
+16. User
+    GET,POST,PUT,DELETE
+    endpoint: */api/user/
+17. Cart
+    GET,POST,PUT,DELETE
+    endpoint: */api/cart/
+18. Cartitems
+    GET,POST,PUT,DELETE
+    endpoint: */api/cartitem/
+19. Order
+    GET,POST,PUT,DELETE
+    endpoint: */api/order/
+20. Orderitem
+    GET,POST,PUT,DELETE
+    endpoint: *api/orderietm
+21. Seller 
+    GET,POST,PUT,DELETE
+    endpoint: */api/seller
+
+
+(*browse endpoint using browser for details)
+   "address": "http://mive.in/api/address/",
+    "category": "http://mive.in/api/category/",
+    "product": "http://mive.in/api/product/",
+    "user": "http://mive.in/api/user/",
+    "cart": "http://mive.in/api/cart/",
+    "cartitem": "http://mive.in/api/cartitem/",
+    "order": "http://mive.in/api/order/",
+    "orderitem": "http://mive.in/api/orderitem/",
+    "seller": "http://mive.in/api/seller/" 
+
+
