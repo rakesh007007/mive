@@ -28,16 +28,16 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body" id="stockreload">
-              <table class="table table-bordered">
+              <table class="table table-condensed table-hover table-responsive">
                 <tr>
-                  <th class="hidden-xs hidden-sm"><center>Product</center></th>
+                  <th ><center>Product</center></th>
                   <th><center>Remaining Qty</center></th>
                   <th><center>Add Consumption</center></th>
                   <th><center>Clear stock</center></th>
                 </tr>
                 {%for order in stocks%}
                 <tr>
-                  <td class="hidden-xs hidden-sm"><center>{{order.product.name}}</center></td>
+                  <td><center>{{order.product.name}}</center></td>
                   <td>
                     <center>{{order.remainingstock}} {{order.product.unit}}</center>
                   </td>
