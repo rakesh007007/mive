@@ -4,6 +4,22 @@ def getTotal(cartitems):
 	for itemm in cartitems:
 		total = total+itemm.product.pricePerUnit*itemm.qtyInUnits
 	return total
+class StockList(generics.ListAPIView):
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	serializer_class = StockSerializer
+
+	def get_queryset(self):
+		"""
+		This view should return a list of all the purchases for
+		the user as determined by the username portion of the URL.
+		"""
+		try:
+			userId = self.kwargs['pid']
+			resultStocks = Currentstock.objects.filter(user__user_id =int(userId) )
+			return resultStocks
+		except:
+			print 'error in StockList'
 class ProductSearchDescriptionList(generics.ListAPIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
@@ -35,43 +51,6 @@ class ProductSearchTitleList(generics.ListAPIView):
 			return Product.rak.filter(name__icontains = stext).filter(status=1)
 		except:
 			print 'error in ProductsSearchTitle'
-class ProductsByCategoryList(generics.ListAPIView):
-	#authentication_classes = (TokenAuthentication,)
-	#permission_classes = (IsAuthenticated,)
-	serializer_class = ProductsByCategorySerializer
-
-	def get_queryset(self):
-		"""
-		This view should return a list of all the purchases for
-		the user as determined by the username portion of the URL.
-		"""
-		try:
-			pid = self.kwargs['pid']
-			print 'yo'+pid
-			pid= (int)(pid)
-			category = Category.objects.get(category_id=pid)
-			print category
-			return Product.rak.filter(category=category).filter(status=1)
-		except:
-			print 'error in ProductsByCategoryList'
-class ItemsOfCartList(generics.ListAPIView):
-	#authentication_classes = (TokenAuthentication,)
-	#permission_classes = (IsAuthenticated,)
-	serializer_class = ItemsOfCartSerializer
-
-	def get_queryset(self):
-		"""
-		This view should return a list of all the purchases for
-		the user as determined by the username portion of the URL.
-		"""
-		try:
-			cartId = self.kwargs['cartid']
-			cartId= (int)(cartId)
-			cart = Cart.objects.get(cart_id=cartId)
-			return Cartitem.objects.filter(cart=cart)
-		except:
-			print 'error in ItemsOfCartList'
-		#return Purchase.objects.filter(purchaser__username=username)
 class OrdersOfUserList(generics.ListAPIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
@@ -108,35 +87,6 @@ class ItemsOfOrderList(generics.ListAPIView):
 		except:
 			print 'error in ItemsOfOrderList'
 		#return Purchase.objects.filter(purchaser__username=username)
-class ApiSearchList(APIView):
-	#authentication_classes = (TokenAuthentication,)
-	#permission_classes = (IsAuthenticated,)
-	def get(self, request, format=None):
-		"""
-		This view should return a list of all the purchases for
-		the user as determined by the username portion of the URL.
-		"""
-		try:
-			searchtext = request.GET['searchtext']
-			tex = str(searchtext)
-			print tex
-			resultCategory1 = Product.rak.filter(category__name__icontains = tex).filter(status=1).values_list()
-			resultCategory = CoreSez.serialize("json",resultCategory1)
-			resultName = Product.rak.filter(seller__nameOfSeller__icontains = tex).filter(status=1).values_list()
-			resultName = CoreSez.serialize("json",resultName)
-			resultSeller = Product.rak.filter(name__icontains = tex).filter(status=1).values_list()
-			resultSeller = CoreSez.serialize("json",resultSeller)
-			resultOrigin = Product.rak.filter(origin__icontains = tex).filter(status=1).values_list()
-			resultOrigin = CoreSez.serialize("json",resultOrigin)
-			resultDescription = Product.rak.filter(description__icontains=tex).filter(status=1).values_list()
-			resultDescription = CoreSez.serialize("json",resultDescription)
-			struct = json.loads(resultDescription)
-			resultDescription = json.dumps(struct)
-			return Response({"resultCategory":resultCategory,"resultName":resultName,"resultSeller":resultSeller,"resultOrigin":resultOrigin,"resultDescription":resultDescription})
-		except Exception, e:
-			print 'error in ItemsOfOrderList'
-			return Response(e)
-		#return Purchase.objects.filter(purchaser__username=username)
 class CustomCategoryProductsList(generics.ListAPIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
@@ -156,64 +106,48 @@ class CustomCategoryProductsList(generics.ListAPIView):
 			print 'error in CustomCategoryProductsList'
 		#.raw('select * from veggex_customcategoryproducts natural join veggex_customcategoryproducts_product natural join veggex_product')
 		#return Purchase.objects.filter(purchaser__username=username)
-class TestView(APIView):
-	"""
-	"""
- 
-	def get(self, request, format=None):
-		return Response({'detail': "GET Response"})
- 
+class ApiAddToWastage(APIView):
 	def post(self, request, format=None):
 		try:
 			data = request.data
-		except ParseError as error:
-			return Response(
-				'Invalid JSON - {0}'.format(error.detail),
-				status=status.HTTP_400_BAD_REQUEST
-			)
-		if "user" not in data or "password" not in data:
-			return Response(
-				'Wrong credentials',
-				status=status.HTTP_401_UNAUTHORIZED
-			)
-		user = request.data['user']
-		user = str(user)
-		password=request.data['password']
-		password = str(password)
-		print(user=='admin')
-		print(password=='givememyfuckingtoken')
-		if user=="admin" and password=="givememyfuckingtoken":
-			user = authUser.objects.first()
-			token = Token.objects.get_or_create(user=user)
-			return Response({'detail': 'enjoy!!', 'token': token[0].key})
-		else:
-			return Response('fuck off you cant get token')
-
- 
-		if not user:
-			return Response(
-				'No default user, please create one',
-				status=status.HTTP_404_NOT_FOUND
-			)
- 
-# Create your views here.
-#test 3 is for custom category thing
-class Test3View(APIView):
+			userId = int(data['userId'])
+			stockId= int(data['stockId'])
+			miveuser = User.objects.get(user_id = userId)
+			stock = Currentstock.objects.get(currentstock_id = stockId)
+			remainingstock = stock.remainingstock
+			stock.remainingstock=0
+			stock.save()
+			stcons = Stockwastage()
+			stcons.stock = stock
+			stcons.wastage = remainingstock
+			stcons.user = miveuser
+			stcons.save()
+			return Response({"result":"success"})
+		except Exception,e:
+			Response({"result":"error"})
+class ApiAddToConsumption(APIView):
 	def post(self, request, format=None):
 		try:
-			pid = request.POST['uid']
-			user=User.objects.get(user_id=pid);
-			import json
-			a=CustomCategoryProducts.objects.get(user=user)
-			t= a.product.all()
-			print t
-			data = CoreSez.serialize("json", [a,])
-			print data
-			return Response(data)
-		except:
-			return Response({"status":"error"})
-		
-		#return Response(data)
+			data = request.data
+			stockId = data['stockId']
+			cons = int(data['qty'])
+			userId = data['userId']
+			miveuser = User.objects.get(user_id = int(userId))
+			stock = Currentstock.objects.get(currentstock_id=stockId)
+			stcons = Stockconsumption()
+			stcons.stock = stock
+			stcons.user=miveuser
+			if stock.remainingstock>cons and cons>0:
+				stock.remainingstock = stock.remainingstock-cons
+			else:
+				stock.remainingstock = 0
+				cons=0
+			stock.save()
+			stcons.consumption = cons
+			stcons.save()
+			Return Response({"result":"success"})
+		except Exception,e:
+			return Response({"result":"error"})
 class ApiAddToCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
@@ -410,23 +344,6 @@ class UserLoginView(APIView):
 
 		if "mobile" not in data or "password" not in data:
 			return Response('Wrong credentials',status=status.HTTP_401_UNAUTHORIZED)
-class Test2View(APIView):
-	#authentication_classes = (TokenAuthentication,)
-	#permission_classes = (IsAuthenticated,)
-	def post(self,request,format=None):
-		data =request.data
-		print data
-		print 'ding'
-		print len(data['items'])
-		print data['items'][str(2)]
-		return Response('[{"user":"name"}]', content_type='application/json')
-		#return Response(data)
-	def get(self,request,format=None):
-		data = request.data
-		id =int(request.GET['id'])
-		catg = CategoryVendor.objects.filter(user__user_id=id)
-		return Response(catg[0].products)
-
 class Listproducts(APIView):
 	"""
 	View to list all users in the system.
@@ -532,9 +449,6 @@ class SellerViewSet(viewsets.ModelViewSet):
 	queryset = Seller.rak.all()
 	serializer_class = SellerSerializer
 class RakeshViewSet(viewsets.ViewSet):
-    """
-    A simple ViewSet for listing or retrieving users.
-    """
     def list(self, request):
         queryset = User.objects.all()
         serializer = UserSerializer(queryset, many=True)

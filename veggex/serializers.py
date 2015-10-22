@@ -88,3 +88,8 @@ class ItemsOfOrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Orderitem
         fields = ('orderitem_id','order','unit','qtyInUnits','priceType','priceAtThatTime','product')
+class StockSerializer(serializers.HyperlinkedModelSerializer):
+    product = ProductSerializer()
+    class Meta:
+        model = Currentstock
+        fields = ('currentstock_id','remainingstock','product')
