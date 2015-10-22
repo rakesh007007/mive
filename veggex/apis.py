@@ -145,7 +145,7 @@ class ApiAddToConsumption(APIView):
 			stock.save()
 			stcons.consumption = cons
 			stcons.save()
-			Return Response({"result":"success"})
+			return Response({"result":"success"})
 		except Exception,e:
 			return Response({"result":"error"})
 class ApiAddToCart(APIView):
