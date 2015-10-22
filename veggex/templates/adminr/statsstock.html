@@ -131,7 +131,7 @@
           //lineThickness: 3,        
           dataPoints: [
           {%for cts in consumption%}
-          { x:new Date('{{cts.timeOfCreate}}') , y: {{cts.consumption}} },
+          { x:new Date('{{cts.timeOfCreate.isoformat}}') , y: {{cts.consumption}} },
           {%endfor%}
    
           

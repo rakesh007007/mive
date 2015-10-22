@@ -131,7 +131,7 @@
         //lineThickness: 3,        
         dataPoints: [
         {%for item in orderItems%}
-        { x:new Date('{{item.order.deliveryTime}}') , y: {{item.product.pricePerUnit}}*{{item.qtyInUnits}} },
+        { x:new Date('{{item.order.deliveryTime.isoformat}}') , y: {{item.product.pricePerUnit}}*{{item.qtyInUnits}} },
         {%endfor%}
 
         
