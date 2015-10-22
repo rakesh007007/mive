@@ -125,6 +125,24 @@ class ApiAddToWastage(APIView):
 			return Response({"result":"success"})
 		except Exception,e:
 			Response({"result":"error"})
+class ItemsOfCartList(generics.ListAPIView):
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	serializer_class = ItemsOfCartSerializer
+
+	def get_queryset(self):
+		"""
+		This view should return a list of all the purchases for
+		the user as determined by the username portion of the URL.
+		"""
+		try:
+			cartId = self.kwargs['cartid']
+			cartId= (int)(cartId)
+			cart = Cart.objects.get(cart_id=cartId)
+			return Cartitem.objects.filter(cart=cart)
+		except:
+			print 'error in ItemsOfCartList'
+		#return Purchase.objects.filter(purchaser__username=username)
 class ApiAddToConsumption(APIView):
 	def post(self, request, format=None):
 		try:
