@@ -23,13 +23,13 @@ def sel(request):
 	return TemplateResponse(request,'adminr/seller/login.html')
 def main(request):
 	if(checklogin(request)==False):
-		return redirect('seller/login')
+		return redirect('/seller/login')
 	else:
 		basics = basicinfo(request)
 		return TemplateResponse(request, 'adminr/seller/index.html',{'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 def products(request):
 	if(checklogin(request)==False):
-		return redirect('seller/login')
+		return redirect('/seller/login')
 	else:
 		basics = basicinfo(request)
 		miveseller = basics['miveseller']
