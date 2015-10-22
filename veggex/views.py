@@ -600,8 +600,14 @@ def statsproduct(request):
 		orderItems = Orderitem.objects.filter(product=product).filter(order__user=miveuser)
 	else:
 		orderItems = Orderitem.objects.filter(order__user=miveuser)
+	items, products = [], []
 	allItems = Orderitem.objects.filter(order__user=miveuser)
-	return TemplateResponse(request,'adminr/statsproduct.html',{'allItems':allItems,'basic':basics,'orderItems':orderItems})
+	for item in allItems:
+		if item.product not in products:
+			products.append(item.product)
+			items.append(item)
+	allItems = items
+	return TemplateResponse(request,'adminr/statsproduct.html',{'basics':basics,'allItems':allItems,'basic':basics,'orderItems':orderItems})
 def statswastage(request):
 	basics= basicinfo(request)
 	miveuser = basics['miveuser']
@@ -612,7 +618,11 @@ def statswastage(request):
 	else:
 		stock = Currentstock.objects.get(currentstock_id = stockId)
 		stcss = Stockwastage.objects.filter(stock=stock)
-	stocks = Currentstock.objects.filter(user=miveuser)
+	t = Stockwastage.objects.all()
+	l =[]
+	for pp in t:
+		l.append(pp.stock)
+	stocks = l
 	return TemplateResponse(request,'adminr/statswastage.html',{'basics':basics,'wastage':stcss,'stocks':stocks})
 def statsconsumption(request):
 	basics= basicinfo(request)
@@ -624,7 +634,11 @@ def statsconsumption(request):
 	else:
 		stock = Currentstock.objects.get(currentstock_id = stockId)
 		stcss = Stockconsumption.objects.filter(stock=stock)
-	stocks = Currentstock.objects.filter(user=miveuser)
+	t = Stockconsumption.objects.all()
+	l =[]
+	for pp in t:
+		l.append(pp.stock)
+	stocks = l
 	return TemplateResponse(request,'adminr/statsstock.html',{'basics':basics,'consumption':stcss,'stocks':stocks})
 def statsseller(request):
 	basics = basicinfo(request)

@@ -1,6 +1,9 @@
 /*random on top*/
 /*model order confirm*/
 /*spinner button classes*/
+.borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+    border: 0 !important;
+}
 .modalloading {
     display:    none;
     position:   fixed;
