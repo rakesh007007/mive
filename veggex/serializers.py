@@ -12,9 +12,10 @@ class AddressSerializer(serializers.HyperlinkedModelSerializer):
         model = Address
         fields = ('address_id','area','city','state','pincode')
 class OrdersOfUserSerializer(serializers.HyperlinkedModelSerializer):
+    seller = SellerSerializer()
     class Meta:
         model = Order
-        fields=('order_id','user','deliveryTime','timeOfCreate','timeOfUpdate','payment_mode','subtotal','status')
+        fields=('order_id','seller','user','deliveryTime','timeOfCreate','timeOfUpdate','payment_mode','subtotal','status')
 class ItemsOfOrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Orderitem

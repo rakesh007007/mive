@@ -134,7 +134,7 @@
           //lineThickness: 3,        
           dataPoints: [
           {%for cts in wastage%}
-          { x:new Date('{{cts.timeOfCreate}}') , y: {{cts.wastage}} },
+          { x:new Date('{{cts.timeOfCreate.isoformat}}') , y: {{cts.wastage}} },
           {%endfor%}
    
           

@@ -137,7 +137,7 @@
         //lineThickness: 3,        
         dataPoints: [
         {%for order in orders%}
-        { x:new Date('{{order.deliveryTime}}') , y: {{order.subtotal}} },
+        { x:new Date('{{order.deliveryTime.isoformat}}') , y: {{order.subtotal}} },
         {%endfor%}
 
         
