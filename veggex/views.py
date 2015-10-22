@@ -105,7 +105,12 @@ def docs(request):
 	if ('loggedin' not in request.session):
 		return redirect('/login')
 	else:
-		return redirect('https://github.com/rakesh007007/mive/blob/master/veggex/templates/new/docs.txt')
+		return redirect('https://github.com/rakesh007007/mive/blob/master/veggex/templates/adminr/docs/v1.txt')
+def docsv2(request):
+	if ('loggedin' not in request.session):
+		return redirect('/login')
+	else:
+		return redirect('https://github.com/rakesh007007/mive/blob/master/veggex/templates/adminr/docs/v2.txt')
 
 def orderDetail(request):
 	if ('loggedin' not in request.session):
