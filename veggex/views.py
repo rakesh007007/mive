@@ -522,6 +522,13 @@ def ordercategory(request):
 			miveuser.creditlimit = miveuser.creditlimit - totalprice
 			miveuser.save()
 			cart.save()
+	n = Notification()
+	n.title='Order Placed'
+	n.body='Your order has been placed succesfully with orderId:'+str(order_id)
+	n.link = '#'
+	n.save()
+	miveuser.notifications.add(n)
+	miveuser.save()
 	strr = '/main?notify=yes&description=Order has been placed succesfully&title=OrderID:'+str(order_id)
 	return redirect(strr)
 def resetstock(request):

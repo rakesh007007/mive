@@ -102,7 +102,7 @@ class Seller(models.Model):
     seller_id = models.AutoField(primary_key=True)
     nameOfSeller = models.CharField(max_length=300, blank=False, null=False)
     mailId =models.CharField(max_length=300, blank=False, null=False)
-    mobileNo = models.BigIntegerField(blank=False,null=False)
+    mobileNo = models.BigIntegerField(blank=False,null=False,unique=True)
     profilePhoto = models.ImageField(blank=True,null=True)
     address = models.ForeignKey(Address, blank=True, null=True)
     categories = models.CharField(max_length=240,blank=True,null=True)
