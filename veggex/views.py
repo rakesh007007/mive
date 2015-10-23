@@ -620,8 +620,11 @@ def statswastage(request):
 		stcss = Stockwastage.objects.filter(stock=stock)
 	t = Stockwastage.objects.all()
 	l =[]
+	pd = []
 	for pp in t:
-		l.append(pp.stock)
+		if pp.stock.product not in pd:
+			pd.append(pp.stock.product)
+			l.append(pp.stock)
 	stocks = l
 	return TemplateResponse(request,'adminr/statswastage.html',{'basics':basics,'wastage':stcss,'stocks':stocks})
 def statsconsumption(request):
@@ -636,8 +639,11 @@ def statsconsumption(request):
 		stcss = Stockconsumption.objects.filter(stock=stock)
 	t = Stockconsumption.objects.all()
 	l =[]
+	pd =[]
 	for pp in t:
-		l.append(pp.stock)
+		if pp.stock.product not in pd:
+			pd.append(pp.stock.product)
+			l.append(pp.stock)
 	stocks = l
 	return TemplateResponse(request,'adminr/statsstock.html',{'basics':basics,'consumption':stcss,'stocks':stocks})
 def statsseller(request):
