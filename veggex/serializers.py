@@ -36,10 +36,11 @@ class BaseProductSerializer(serializers.HyperlinkedModelSerializer):
                   'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','coverphotourl','origin')
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     related_products = BaseProductSerializer(many=True)
+    seller = SellerSerializer()
     class Meta:
         model = Product
         fields = ('product_id', 'name', 'description','grade','related_products',
-                  'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','coverphotourl','origin')
+                  'popularityIndex', 'unit', 'priceType', 'pricePerUnit','origin','maxAvailableUnits','qualityRemarks','isPerishable','coverphotourl','origin','seller')
 class CategoryVendorSerializer(serializers.HyperlinkedModelSerializer):
     seller = SellerSerializer()
     products = ProductSerializer(many=True)

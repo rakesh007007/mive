@@ -23,7 +23,7 @@ class StockList(generics.ListAPIView):
 class ProductSearchDescriptionList(generics.ListAPIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
-	serializer_class = ProductsByCategorySerializer
+	serializer_class = ProductSerializer
 
 	def get_queryset(self):
 		"""
@@ -32,14 +32,22 @@ class ProductSearchDescriptionList(generics.ListAPIView):
 		"""
 		try:
 			stext = self.kwargs['pid']
+			userId = self.kwargs['userId']
+			user = User.objects.get(user_id=userId)
+			allvendors = user.categories.all()
+			pds= []
+			for i in allvendors:
+				allpds = i.products.all()
+				for pd in allpds:
+					pds.append(pd.product_id)
 			resultNameValues = Product.rak.filter(name__icontains = stext).filter(status=1).values('product_id')
-			return Product.rak.filter(description__icontains = stext).filter(status=1).exclude(product_id__in=resultNameValues)
+			return Product.rak.filter(description__icontains = stext).filter(product_id__in=pds).exclude(product_id__in=resultNameValues)
 		except:
 			print 'error in ProductsBySearchcategory'
 class ProductSearchTitleList(generics.ListAPIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
-	serializer_class = ProductsByCategorySerializer
+	serializer_class = ProductSerializer
 
 	def get_queryset(self):
 		"""
@@ -48,7 +56,15 @@ class ProductSearchTitleList(generics.ListAPIView):
 		"""
 		try:
 			stext = self.kwargs['pid']
-			return Product.rak.filter(name__icontains = stext).filter(status=1)
+			userId = self.kwargs['userId']
+			user = User.objects.get(user_id=userId)
+			allvendors = user.categories.all()
+			pds= []
+			for i in allvendors:
+				allpds = i.products.all()
+				for pd in allpds:
+					pds.append(pd.product_id)
+			return Product.rak.filter(name__icontains = stext).filter(product_id__in=pds)
 		except:
 			print 'error in ProductsSearchTitle'
 class OrdersOfUserList(generics.ListAPIView):
