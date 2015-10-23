@@ -136,6 +136,10 @@ Full supported(GET,POST,PUT,DELETE) end points
 21. Seller 
     GET,POST,PUT,DELETE
     endpoint: */api/seller
+22. Product Search for Title API
+    endpoint */api/search/title/{searchtext}/{userId}/
+23. Product Search for Description API
+   endpoint */api/search/description/{searchtext}/{userId}/
 
 
 (*browse endpoint using browser for details)
