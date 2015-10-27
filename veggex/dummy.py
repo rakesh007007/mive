@@ -36,6 +36,8 @@ def dummyajaxaddtocart(request):
 		return redirect('/login')
 	productId = request.POST['productId']
 	productId = (int)(productId)
+	pricePerUnit = request.POST['pricePerUnit']
+	pricePerUnit = int(pricePerUnit)
 	mobile=request.session['mobile']
 	user = User.objects.get(mobileNo=mobile)
 	product  = Product.rak.get(product_id=productId)
@@ -44,24 +46,25 @@ def dummyajaxaddtocart(request):
 		return HttpResponse('error occured',status=500)
 	dummycart = user.dummycart
 	price = product.pricePerUnit
-	check = Dummycartitem.objects.filter(dummycart=dummycart).filter(product=product)
+	check = Dummycartitem.objects.filter(dummycart=dummycart).filter(product=product).filter(pricePerUnit=pricePerUnit)
 	if(len(check)>0):
 		previtem = Dummycartitem.objects.get(dummycartitem_id=check[0].dummycartitem_id)
 		previtem.qtyInUnits = previtem.qtyInUnits+int(qty)
-		dummycart.dummycartTotal = dummycart.dummycartTotal+int(qty)*int(price)
+		dummycart.dummycartTotal = dummycart.dummycartTotal+int(qty)*int(pricePerUnit)
 		previtem.save()
 		dummycart.save()
 	else:
 		dummycartitem=Dummycartitem()
 		dummycartitem.dummycart=dummycart
 		dummycartitem.qtyInUnits = qty
+		dummycartitem.pricePerUnit = pricePerUnit
 		dummycartitem.product=product
-		dummycart.dummycartTotal = dummycart.dummycartTotal+int(qty)*int(price)
+		dummycart.dummycartTotal = dummycart.dummycartTotal+int(qty)*int(pricePerUnit)
 		dummycartitem.save()
 		dummycart.save()
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
-	return TemplateResponse(request, 'adminr/dummy/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'adminr/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 def dummycart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -95,7 +98,7 @@ def dummyremoveItemPost(request):
 	itemId = int(itemId)
 	item = Dummycartitem.objects.get(dummycartitem_id=itemId)
 	dummycart = item.dummycart
-	dummycart.dummycartTotal = dummycart.dummycartTotal-item.product.pricePerUnit*item.qtyInUnits
+	dummycart.dummycartTotal = dummycart.dummycartTotal-item.pricePerUnit*item.qtyInUnits
 	item.delete()
 	dummycart.save()
 	basics = basicinfo(request)
@@ -110,9 +113,10 @@ def dummyeditqty(request):
 	newqty = int(newqty)
 	item = Dummycartitem.objects.get(dummycartitem_id=itemId)
 	oldqty = item.qtyInUnits
+	pricePerUnit = item.pricePerUnit
 	dummycart=item.dummycart
 	item.qtyInUnits = int(newqty)
-	dummycart.dummycartTotal = dummycart.dummycartTotal-(oldqty-newqty)*item.product.pricePerUnit
+	dummycart.dummycartTotal = dummycart.dummycartTotal-(oldqty-newqty)*item.pricePerUnit
 	item.save()
 	dummycart.save()
 	basics = basicinfo(request)
@@ -165,9 +169,9 @@ def dummyordercategory(request):
 					currStock.save()
 				rak.unit=itemn.product.unit
 				rak.qtyInUnits = itemn.qtyInUnits
+				rak.pricePerUnit = itemn.pricePerUnit
 				miveuser=user
 				rak.priceType = itemn.product.priceType
-				rak.priceAtThatTime = itemn.product.pricePerUnit
 				rak.order = order
 				rak.save()
 				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
@@ -416,25 +420,3 @@ def dummyprodnewvendor(request):
 		miveuser.dummyvendors.add(neww)
 		miveuser.save()
 	return HttpResponse('yomoso')
-def giveajaxdummycart(request):
-	if(checklogin(request)==False):
-		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
-	basics = basicinfo(request)
-	miveuser=basics['miveuser']
-	dummycart=miveuser.dummycart
-	dummycartItems=Dummycartitem.objects.filter(dummycart=dummycart)
-	totalItems=len(cartItems)
-	shippingCost=0
-	categoryvendor= miveuser.categories
-	allProducts = []
-	for cvend in categoryvendor.all():
-		categoryvendor_id = cvend.categoryvendor_id
-		seller = cvend.seller
-		itemscount = Cartitem.objects.filter(product__seller = seller).filter(cart=cart).count()
-		if itemscount>0:
-			items = Cartitem.objects.filter(product__seller = seller).filter(cart=cart)
-			pd = {'categoryvendor_id':categoryvendor_id,'items':items,'seller':seller}
-			allProducts.append(pd)
-		else:
-			pass
-	return allProducts

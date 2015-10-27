@@ -85,7 +85,7 @@ def home(request):
 def getTotal(cartitems):
 	total=0
 	for itemm in cartitems:
-		total = total+itemm.product.pricePerUnit*itemm.qtyInUnits
+		total = total+itemm.pricePerUnit*itemm.qtyInUnits
 	return total
 def contact(request):
 	try:
@@ -444,6 +444,7 @@ def ajaxaddtocart(request):
 		cartitem.cart=cart
 		cartitem.qtyInUnits = qty
 		cartitem.product=product
+		cartitem.pricePerUnit = price
 		cart.cartTotal = cart.cartTotal+int(qty)*int(price)
 		cartitem.save()
 		cart.save()
@@ -550,7 +551,7 @@ def ordercategory(request):
 				rak.qtyInUnits = itemn.qtyInUnits
 				miveuser=user
 				rak.priceType = itemn.product.priceType
-				rak.priceAtThatTime = itemn.product.pricePerUnit
+				rak.pricePerUnit = itemn.product.pricePerUnit
 				rak.order = order
 				rak.save()
 				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
