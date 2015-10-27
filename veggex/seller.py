@@ -18,7 +18,8 @@ def basicinfo(request):
 		mivesellerId = request.session['mivesellerId']
 		miveseller = Seller.rak.get(seller_id=int(mivesellerId))
 		orders =  Order.objects.filter(seller=miveseller)
-		return {'orders':orders,'miveseller':miveseller}
+		notifications = Sellernotification.unseen.filter(seller__seller_id=int(mivesellerId))
+		return {'orders':orders,'miveseller':miveseller,'notifications':notifications}
 def sel(request):
 	return TemplateResponse(request,'adminr/seller/login.html')
 def main(request):
@@ -27,6 +28,18 @@ def main(request):
 	else:
 		basics = basicinfo(request)
 		return TemplateResponse(request, 'adminr/seller/index.html',{'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+def nRouter(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		basics = basicinfo(request)
+		miveseller = basics['miveseller']
+		nid = request.GET['nId']
+		url = request.GET['url']
+		notif = Sellernotification.unseen.get(sellernotification_id=int(nid))
+		notif.seen=1
+		notif.save()
+		return redirect(url)
 def products(request):
 	if(checklogin(request)==False):
 		return redirect('/seller/login')

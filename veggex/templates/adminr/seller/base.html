@@ -163,16 +163,16 @@
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">{{basics.miveuser.notifications.all|length}}</span>
+              <span class="label label-warning">{{basics.notifications|length}}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have {{basics.miveseller.notifications.all|length}} new notification</li>
+              <li class="header">You have {{basics.notifications|length}} new notification</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                {%for notif in basics.miveseller.notifications.all%}
+                {%for notif in basics.notifications%}
                   <li>
-                    <a href="{{notif.url}}">
+                    <a href="/seller/notification/router?nId={{notif.sellernotification_id}}&url=/{{notif.link}}">
                       <i class="fa fa-users text-aqua"></i>{{notif.body}}
                     </a>
                   </li>
@@ -563,6 +563,23 @@ $('body').on('click','.minicart-delete',function(event){
                   });
 
   })
+</script>
+<script src="https://cdn.pubnub.com/pubnub-dev.js"></script>
+
+<!-- Instantiate PubNub -->
+<script type="text/javascript">
+
+    var PUBNUB_demo = PUBNUB.init({
+        publish_key: 'pub-c-e1bca6d4-b702-467b-83dc-3afe5f939776',
+        subscribe_key: 'sub-c-0b0ced82-79b3-11e5-8d3c-0619f8945a4f'
+    });
+    PUBNUB_demo.subscribe({
+    channel: 'demo_tutorial',
+    message: function(m){console.log(m)
+      alert(m)
+    }
+});
+
 </script>
       {% block script%}
       {% endblock %}

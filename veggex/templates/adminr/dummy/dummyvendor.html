@@ -1,0 +1,172 @@
+{% extends 'adminr/base.html' %}
+{% block  content %}
+<section class="content-header">
+   <h1>
+      Mive 
+      <small>Restaurant dashboard</small>
+   </h1>
+   <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Widgets</li>
+   </ol>
+</section>
+
+<section class="content">
+      <div class="row">
+      {% for product in products.all %}
+        <div class="col-md-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-offset-0 col-lg-offset-0">
+        <div class="box box-primary">
+            <div class="box-body box-profile">
+              <div >
+              	<center><img   data-productid="{{product.product_id}}" class="img-responsive login-modal2-button" src="/{{product.coverphoto.url}}" alt="User profile picture" style="width:100px;height:100px"></center>
+              </div>
+              <center><p><a onclick="return false" class="login-modal2-button" data-productid="{{product.product_id}}" >{{product.name}}</a></p></center>
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <font>Rate </font> <a class="pull-right">{{product.pricePerUnit}}/{{product.unit}}</a>
+                </li>
+                <li class="list-group-item">
+                <form mobile="yes"  id="productsubmit-{{product.product_id}}" method="post" class="productform" action="/addtocart">
+                  <div class="row">
+                  	<center><div class="col-md-6 col-sm-6 col-xs-6">
+                  		<font>Quantity </font>
+                  	</div></center>
+                  	<div class="col-md-6 col-sm-6 col-xs-6">
+				        <input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty" style="border:none;  border-bottom:solid grey 1px; height:20px">
+				        {%csrf_token%}
+				        <input type="hidden" name="productId" value="{{product.product_id}}">
+                  	</div>
+                  </div></br>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <font>Rate/{{product.unit}}</font>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                <input data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle priceperunit" value="{{product.pricePerUnit}}" name="pricePerUnit" style="border:none;  border-bottom:solid grey 1px;height:20px">
+                    </div>
+                  </div>
+                  </br>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <font>Total</font>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                <input data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle totalprice" value="1" name="total" style="border:none;  border-bottom:solid grey 1px;height:20px">
+                    </div>
+                  </div>
+                  </form>
+                </li>
+                <li class="list-group-item">
+                </li>
+                <li></li>
+              </ul>
+              <div class="row">
+                  	<div class="col-md-5 col-sm-5 col-xs-5 col-sm-offset-1 col-xs-offset-1 col-md-offset-0 col-lg-offset-0">
+              <a href="#" class="btn btn-primary product1submit" data-miveproduct="{{product.product_id}}" mobile="yes"><b>Add</b></a>
+                  	</div>
+                  	<div class="col-md-5 col-sm-5 col-xs-5">
+              <a class="btn btn-primary login-modal2-button" data-productid="{{product.product_id}}"><b>Details</b></a>
+                  	</div>
+                  </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        {% endfor %}
+      </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+   $('body').on('click','.login-modal2-button',function(){
+     idd = $(this).attr('data-productid')
+     $('#login-modal2').modal('toggle')
+     $('#detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+     url = "/data/product?productId="+idd
+     data = $.get(url,function(data){
+       $('#detail-container').html(data)
+     })
+   })
+</script>
+<script>
+       $('body').on('click',".product1submit",function(event) {
+         
+            event.preventDefault();
+            {% if basics.miveuser = 'none' %}
+            mivenotify('error','Login required','please login to add products to cart',600)
+            console.log('user not loggedin')
+            $('#login-modal').modal('toggle')
+            mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+            return
+            {% else %}
+             rak = $(this).attr('data-miveproduct')
+             formid= "#"+"productsubmit-"+rak
+             form = $(formid)
+             //$(rak).submit()
+             mivenotify('success','Item added','Item has been added to cart',600)
+             $.ajax({
+                    type: "POST",
+                    url: '/data/ajaxaddtocart',
+                    data: form.serialize(), // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#cartreload').html(data)
+                      console.log(data)
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    }
+                  });
+            {%endif %}
+         });
+      </script>
+       <script>
+       $('body').on('click',"#productsubmitbutton",function(event) {
+         
+            event.preventDefault();
+            {% if basics.miveuser = 'none' %}
+            mivenotify('error','Login required','please login to add products to cart',600)
+            console.log('user not loggedin')
+            $('#login-modal').modal('toggle')
+            mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+            return
+            {% else %}
+            idd = $(this).attr('data-miveproduct')
+            console.log('idd',idd)
+            formid = '#productdetailsubmit-'+idd
+             form = $(formid)
+             console.log('formdata',form.serialize())
+             //$(rak).submit()
+             mivenotify('success','Item added','Item has been added to cart',600)
+             $.ajax({
+                    type: "POST",
+                    url: '/data/ajaxaddtocart',
+                    data: form.serialize(), // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#cartreload').html(data)
+                      $('#login-modal2').modal('toggle')
+                      console.log(data)
+
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    }
+                  });
+            {%endif %}
+         });
+      </script>
+      <script>
+         $('body').on('click','.login-modal3-button',function(){
+           idd = $(this).attr('data-productid')
+           $('#detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+           url = "/data/product?productId="+idd
+           data = $.get(url,function(data){
+             $('#detail-container').html(data)
+           })
+         })
+      </script>
+
+{% endblock %}

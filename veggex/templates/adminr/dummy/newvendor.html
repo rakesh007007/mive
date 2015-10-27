@@ -1,0 +1,152 @@
+{% extends 'adminr/base.html' %}
+{% block  content %}
+<section class="content-header">
+   <h1>
+      Mive 
+      <small>Restaurant dashboard</small>
+   </h1>
+   <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">{{seller.nameOfSeller}}</li>
+   </ol>
+</section>
+<section class="content">
+      <div class="row">
+         <div class="col-md-10 col-md-offset-1" style="position:relative">
+          <div class="box"> 
+            <div class="box-header with-border">
+            <h3>Your Vendor has been added successfully</h3>
+            <p>Mive will review your vendor and it will start displaying in your account ASAP<br>Meanwhile please add products for this vendor,you can create a new product or select from our directory and add it according to your pricing</p>
+            <button class="btn btn-warning new-product-button">Add new Product</button>
+            </div>
+          </div>
+         </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1" style="position:relative">
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">Select from our directory</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="stockreload">
+              <table class="table table-bordered">
+                <tr>
+                  <th class="hidden-xs hidden-sm"><center>Product</center></th>
+                  <th><center>Unit</center></th>
+                  <th><center>Add price/unit</center></th>
+                  <th><center>Add this</center></th>
+                </tr>
+                {%for product in products%}
+                <tr data-action="/data/prod-newvendor?productId={{product.product_id}}">
+                  <td class="hidden-xs hidden-sm"><center>{{product.name}}</center></td>
+                  <td class="hidden-xs hidden-sm"><center>{{product.unit}}</center></td>
+                  <td>
+                    <center>
+                    <form method="post" action="/data/prod-newvendor?productId={{product.product_id}}" class="add-pd">
+                    {%csrf_token%}
+                    <input type="hidden" name="sellerid" value="{{seller.seller_id}}">
+                    <input type="hidden" name="productid" value="{{product.product_id}}">
+                    <input type="text" class="input-circle" name="price" style="text-align:center"></center>
+                   
+                  </td>
+                  <td data-href="/data/prod-newvendor?productId={{order.currentstock_id}}"><center><button class="btn-primary btn" style="border-radius:none" type="submit">Add</button></center></td>
+                   </form>
+                </tr>
+                {% endfor%}
+              </table>
+            </div>
+            <!-- /.box-body -->
+
+            <div class="box-footer clearfix">
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<div class="modal fade" id="new-product-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
+               <form method="post" action="/newproductnewvendor" id="newpd">
+              <input type="hidden" name="userid" value="{{basics.miveuser.user_id}}">
+              <input type="hidden" name="sellerid" value="{{seller.seller_id}}">
+              <div class="col-md-6">
+              {%csrf_token%}
+              Name:<input  placeholder="enter name" id="name" name="name" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+              Unit :<input  placeholder="Enter unit ex:kg"  name="unit" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+              Price per unit<input  placeholder="Category names" name="price" type="integer" class="form-control">
+              </div>
+              <div class="col-md-6">
+              Description:<textarea  placeholder="enter email Id" name="description" type="text" class="form-control"></textarea>
+              </div>
+              <div class="col-md-6 col-md-offset-4">
+                  <button type="submit" id="add" class="btn btn-success btn-lg">
+                  Add product
+                  </button>
+              </div>
+               </form>
+            </div>
+         </div>
+      </div>
+{%endblock%}
+{% block script%}
+<script>
+  $('body').on('click','.new-product-button',function(event){
+    $('#new-product-modal').modal('toggle')
+  })
+</script>
+<script>
+  $('body').on('submit','#newpd',function(event){
+    event.preventDefault()
+    console.log('try','fuck you')
+    form = $(this)
+    url = $(this).attr('action')
+    data = form.serialize()
+    $('#new-product-modal').modal('toggle')
+    mivenotify('Success','Product added','successs')
+    $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      console.log('yay')
+                      console.log(data)
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    console.log(data)
+                    }
+                  });
+
+  })
+</script>
+<script>
+  $('body').on('submit','.add-pd',function(event){
+    event.preventDefault()
+    form = $(this)
+    url = $(this).attr('action')
+    data = form.serialize()
+    mivenotify('Success','Product added','successs')
+    $("tr[data-action='"+url+"']").css('display','none')
+    $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      console.log(data)
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    console.log(data)
+                    }
+                  });
+
+  })
+</script>
+{% endblock %}

@@ -1,0 +1,38 @@
+<!-- Content of the sidebar goes here -->
+   <h3 class="box-title">Total:Rs.{{basics.miveuser.dummycart.dummycartTotal}}</h3>
+  {%for pd in basics.allProducts%}
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tr>
+                  <th><center>Name</center></th>
+                  <th><center>Qty</center></th>
+                  <th><center>Delete</center></th>
+                </tr>
+                {%for item in pd.items%}
+                <tr>
+                  <td><center>{{item.product.name}}</center></td>
+                  <td>
+                    <center>
+                    <form method="post" action="/editqty" class="ajaxqty">
+                    {%csrf_token%}
+                    <input type="hidden" name="itemid" value="{{item.cartitem_id}}">
+                    <input type="text" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit">update</button></center>
+                    </form>
+                  </td>
+                  <td data-href="/removeItemPost?itemId={{item.cartitem_id}}" onclick="return false" class="minicart-delete"><center><a><span style="color:green" class="itemdelete" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o" ></i></span></a></center></td>
+                </tr>
+                {% endfor%}
+              </table>
+          </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              
+              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
+            </div>
+          </div>
+          {%endfor%}

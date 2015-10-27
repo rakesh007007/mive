@@ -27,6 +27,10 @@ grades = (
 	('',''),
 
 	)
+orderTypes = (
+	('real','real'),
+	('dummy','dummy'),
+	)
 class AutoDateTimeField(models.DateTimeField):
     def pre_save(self, model_instance, add):
         return timezone.now()
@@ -42,6 +46,21 @@ class Seller2Manager(models.Manager):
 class Product2Manager(models.Manager):
     def get_queryset(self):
         return super(Product2Manager, self).get_queryset().filter(status=1)
+class Sellernotification(models.Model):
+	sellernotification_id = models.AutoField(primary_key=True)
+	body = models.TextField(null=False,blank=False,default='Test Notification from mive')
+	title = models.CharField(max_length=240,null=False,blank=False,default='New Notification')
+	link = models.CharField(max_length=240,null=False,blank=False,default='#')
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	seen = models.IntegerField(null=False,blank=False,default=0)
+	objects =models.Manager()
+	unseen = NotificationManager()
+	class Meta:	
+		ordering = ['-timeOfCreate']
+	def SellernotificationId(self):
+		return self.sellernotification_id
+	def __unicode__(self):
+		return str(self.sellernotification_id)
 class Notification(models.Model):
 	notification_id = models.AutoField(primary_key=True)
 	body = models.TextField(null=False,blank=False,default='Test Notification from mive')
@@ -55,6 +74,8 @@ class Notification(models.Model):
 		ordering = ['-timeOfCreate']
 	def NotificationId(self):
 		return self.notification_id
+	def __unicode__(self):
+		return str(self.notification_id)
 class Message(models.Model):
 	message_id = models.AutoField(primary_key=True)
 	body = models.TextField(null=False,blank=False,default='body.....')
@@ -109,6 +130,7 @@ class Seller(models.Model):
     rating = models.IntegerField(default=0)
     password = models.CharField(max_length=300, blank=False, null=False,default='pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=')
     status = models.IntegerField(default=0)
+    notifications = models.ManyToManyField(Sellernotification,blank=True,default=1)
     objects = models.Manager()
     rak =Seller2Manager() 
     def __unicode__(self):
@@ -148,11 +170,19 @@ class Product(models.Model):
 class CategoryVendor(models.Model):
 	categoryvendor_id = models.AutoField(primary_key=True)
 	seller = models.ForeignKey(Seller,blank=False,null=False)
-	products = models.ManyToManyField(Product,blank=True,null=True)
+	products = models.ManyToManyField(Product,blank=True)
 	def categoryvendorId(self):
 		return self.categoryvendor_id
 	def __unicode__(self):
 		return str(self.seller.nameOfSeller+"-"+str(self.categoryvendor_id))
+class DummyVendor(models.Model):
+	dummyvendor_id = models.AutoField(primary_key=True)
+	seller = models.ForeignKey(Seller,blank=False,null=False)
+	products = models.ManyToManyField(Product,blank=True)
+	def dummyvendorId(self):
+		return self.dummyvendor_id
+	def __unicode__(self):
+		return str(self.seller.nameOfSeller+"-"+str(self.dummyvendor_id))
 class Contact(models.Model):
 	contact_id = models.AutoField(primary_key=True)
 	name=models.CharField(max_length=300, blank=False, null=False)
@@ -185,6 +215,16 @@ class Cart(models.Model):
 		ordering = ['timeOfUpdate']
 	def __unicode__(self):
 		return str(self.cart_id)
+class Dummycart(models.Model):
+	dummycart_id = models.AutoField(primary_key=True)
+	#check this time thing
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	timeOfUpdate =AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	dummycartTotal = models.IntegerField(default=0)
+	class Meta:
+		ordering = ['timeOfUpdate']
+	def __unicode__(self):
+		return str(self.dummycart_id)
 class Owner(models.Model):
 	owner_id = models.AutoField(primary_key=True)
 	nameOfOwner = models.CharField(max_length=300, blank=False, null=False)
@@ -204,8 +244,10 @@ class User(models.Model):
     profilePhoto = models.ImageField(blank=True,null=True)
     address = models.ForeignKey(Address, blank=True, null=True)
     cart =models.ForeignKey(Cart,blank=False,null=False)
+    dummycart =models.ForeignKey(Dummycart,blank=False)
     owner = models.ForeignKey(Owner,blank=True, null=True)
-    categories = models.ManyToManyField(CategoryVendor,blank=True,null=True)
+    categories = models.ManyToManyField(CategoryVendor,blank=True)
+    dummyvendors = models.ManyToManyField(DummyVendor,blank=True)
     creditlimit = models.IntegerField(default=10000,null=True,blank=True)
     notifications = models.ManyToManyField(Notification,blank=True)
     message = models.ManyToManyField(Message,blank=True)
@@ -241,6 +283,20 @@ class Cartitem(models.Model):
 		return str(self.product.name)
 	def jsfy(self):
 		return {'cartitem_id':self.cartitem_id,'qtyInUnits':self.qtyInUnits,'timeOfCreate':self.timeOfCreate}
+class Dummycartitem(models.Model):
+	dummycartitem_id = models.AutoField(primary_key=True)
+	dummycart=models.ForeignKey(Dummycart,blank=False,null=False)
+	qtyInUnits = models.PositiveIntegerField()
+	product = models.ForeignKey(Product,blank=False,null=False)
+	pricePerUnit = models.PositiveIntegerField(blank=False,null=False)
+	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	timeOfUpdate =AutoDateTimeField(default=timezone.now,null=True,blank=True)
+	class Meta:	
+		ordering = ['-timeOfCreate']
+	def cartItemId(self):
+		return self.dummycartitem_id
+	def __unicode__(self):
+		return str(self.product.name)
 class Accartitem(models.Model):
 	accartitem_id = models.AutoField(primary_key=True)
 	cart=models.ForeignKey(Cart,blank=False,null=False)
@@ -261,6 +317,7 @@ class Order(models.Model):
 	timeOfUpdate =AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	category = models.ForeignKey(Category,blank=True,null=True)
+	orderType = models.CharField(max_length=240,blank=False,null=False,choices=orderTypes,default='real')
 	class Meta:	
 		ordering = ['-timeOfCreate']
 	def orderId(self):
@@ -273,7 +330,7 @@ class Orderitem(models.Model):
 	unit = models.CharField(max_length=100,default='kg')
 	qtyInUnits = models.IntegerField()
 	priceType = models.CharField(max_length=200,choices=priceType)
-	priceAtThatTime = models.IntegerField()
+	pricePerUnit = models.IntegerField(blank=False,null=False)
 	product = models.ForeignKey(Product,blank=False,null=False)
 	def orderItemId(self):
 		return self.orderitem_id
