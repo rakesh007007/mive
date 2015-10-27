@@ -163,16 +163,16 @@
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">{{basics.miveuser.notifications.all|length}}</span>
+              <span class="label label-warning">{{basics.notifications|length}}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have {{basics.miveuser.notifications.all|length}} new notification</li>
+              <li class="header">You have {{basics.notifications|length}} new notification</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                {%for notif in basics.miveuser.notifications.all%}
+                {%for notif in basics.notifications%}
                   <li>
-                    <a href="{{notif.url}}">
+                    <a href="/notification/router?nId={{notif.notification_id}}&url=/{{notif.link}}">
                       <i class="fa fa-users text-aqua"></i>{{notif.body}}
                     </a>
                   </li>
@@ -186,6 +186,12 @@
           <li class="dropdown tasks-menu">
             <a data-toggle="control-sidebar" >
               <i class="fa fa-shopping-cart"></i>
+              <span class="label label-danger"></i></span>
+            </a>
+          </li>
+          <li class="dropdown tasks-menu">
+            <a data-toggle="modal" data-target="#data-cart-modal" >
+              <i class="fa fa-bookmark"></i>
               <span class="label label-danger"></i></span>
             </a>
           </li>
@@ -249,10 +255,16 @@
           </ul>
         </li>
         <li class="treeview">
-          <a href="/vendors">
+          <a href="/data/vendors">
             <i class="fa fa-files-o"></i>
             <span>Manage Vendors</span>
             <span class="label label-primary pull-right">4</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/data/main">
+            <i class="fa fa-files-o"></i>
+            <span>Add data</span>
           </a>
         </li>
          <li>
@@ -370,6 +382,56 @@
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
 </div>
+<div class="modal fade" id="data-cart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+            <div class="loginmodal-container2 loginmodal-container" id="data-detail-container" style="max-width:none;max-height:none;">
+              {%for pd in basics.dummycart%}
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tr>
+                  <th><center>Name</center></th>
+                  <th><center>Price/Unit</center></th>
+                  <th><center>Qty</center></th>
+                  <th><center>Delete</center></th>
+                  <th class="hidden-sm hidden-xs"><center>Info</center></th>
+                </tr>
+                {%for item in pd.items%}
+                <tr>
+                  <td><center>{{item.product.name}}</center></td>
+                  <td>
+                    <center><span class="badge bg-red" style="color:#13c0ba">₹{{item.pricePerUnit}}/{{item.product.unit}}</span></center>
+                  </td>
+                  <td>
+                    <center>
+                    <form method="post" action="/data/editqty">
+                    {%csrf_token%}
+                    <input type="hidden" name="itemid" value="{{item.dummycartitem_id}}">
+                    <input type="text" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit">update</button></center>
+                    </form>
+                  </td>
+                  <td><center><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span style="color:green" class="itemdelete" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o"></i></span></a></center></td>
+                  <td class="hidden-sm hidden-xs">
+                    <center><a data-productid="{{item.product.product_id}}" href="#" onclick="return false" class="login-modal2-button"><span class="badge bg-green" style="color:#13c0ba">know more</span></a></center>
+                  </td>
+                </tr>
+                {% endfor%}
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              
+              <button class="btn btn-primary pull-right orderdata" data-dummyvendorid="{{pd.dummyvendor_id}}" >Place Order</button>
+            </div>
+          </div>
+          {%endfor%} 
+            </div>
+         </div>
+      </div>
 <div class="modal fade" id="login-modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
          <div class="modal-dialog">
             <div class="loginmodal-container2 loginmodal-container" id="detail-container" style="max-width:none;max-height:none;">
@@ -400,6 +462,28 @@
          </div>
       </div>
 <!-- ./wrapper -->
+<div class="modal fade" id="data-order-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
+               <form id="orderdata" method="get" action="/data/ordercategory" style="display:inline;">
+              <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
+              <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
+               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
+                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
+               </div>
+               <div class="col-md-4 col-lg-4 col-xs-12">
+                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+                     <input type="hidden" name="csrfmiddlewaretoken" value="XxYq2vc6MzqqLBPH86mIQeEfObTCXVCc">
+               </div>
+               <div class="col-md-1 col-lg-1 col-xs-6 ol-md-offset-0 col-lg-offset-0">
+                  <button type="submit" id="checkout" class="btn btn-success btn-lg">
+                  Checkout
+                  </button>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
 
 <!-- jQuery 2.1.4 -->
 <script src="/rstatic/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -495,95 +579,6 @@
          });
       </script>
       <script>
-         $('body').on('click','.login-modal2-button',function(){
-           idd = $(this).attr('data-productid')
-           $('#login-modal2').modal('toggle')
-           $('#detail-container').html("<center><img src='rstatic/new/images/282.GIF'></center>")
-           url = "/product?productId="+idd
-           data = $.get(url,function(data){
-             $('#detail-container').html(data)
-           })
-         })
-      </script>
-      <script>
-         $('body').on('click','.login-modal3-button',function(){
-           idd = $(this).attr('data-productid')
-           $('#detail-container').html("<center><img src='rstatic/new/images/282.GIF'></center>")
-           url = "/product?productId="+idd
-           data = $.get(url,function(data){
-             $('#detail-container').html(data)
-           })
-         })
-      </script>
-      <script>
-       $('body').on('click',".product1submit",function(event) {
-         
-            event.preventDefault();
-            {% if basics.miveuser = 'none' %}
-            mivenotify('error','Login required','please login to add products to cart',600)
-            console.log('user not loggedin')
-            $('#login-modal').modal('toggle')
-            mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
-            return
-            {% else %}
-             rak = $(this).attr('data-miveproduct')
-             formid= "#"+"productsubmit-"+rak
-             form = $(formid)
-             //$(rak).submit()
-             mivenotify('success','Item added','Item has been added to cart',600)
-             $.ajax({
-                    type: "POST",
-                    url: '/ajaxaddtocart',
-                    data: form.serialize(), // serializes the form's elements.
-                    success: function(data)
-                    {
-                      $('#cartreload').html(data)
-                      console.log(data)
-                    },
-                    error:function(data){console.log(data)
-                    mivenotify('error','Item add','Error ocuured while processing your request')
-                    }
-                  });
-            {%endif %}
-         });
-      </script>
-       <script>
-       $('body').on('click',"#productsubmitbutton",function(event) {
-         
-            event.preventDefault();
-            {% if basics.miveuser = 'none' %}
-            mivenotify('error','Login required','please login to add products to cart',600)
-            console.log('user not loggedin')
-            $('#login-modal').modal('toggle')
-            mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
-            return
-            {% else %}
-            idd = $(this).attr('data-miveproduct')
-            console.log('idd',idd)
-            formid = '#productdetailsubmit-'+idd
-             form = $(formid)
-             console.log('formdata',form.serialize())
-             //$(rak).submit()
-             mivenotify('success','Item added','Item has been added to cart',600)
-             $.ajax({
-                    type: "POST",
-                    url: '/ajaxaddtocart',
-                    data: form.serialize(), // serializes the form's elements.
-                    success: function(data)
-                    {
-                      $('#cartreload').html(data)
-                      $('#login-modal2').modal('toggle')
-                      console.log(data)
-
-                    },
-                    error:function(data){console.log(data)
-                    mivenotify('error','Item add','Error ocuured while processing your request')
-                    }
-                  });
-            {%endif %}
-         });
-      </script>
-      <script>
   $('body').on('click','.orderplace',function(event){
     categoryvendorid = $(this).attr('data-categoryvendorid')
     console.log('clicked')
@@ -596,7 +591,7 @@
 $('body').on('click','.minicart-delete',function(event){
   url=$(this).attr('data-href')
   console.log('url',url)
-  $(this).html("<center><img src='rstatic/new/images/282.GIF'></center>")
+  $(this).html("<center><img src='/rstatic/new/images/282.GIF'></center>")
   $.get(url,function(data){
       console.log('clicked')
     $('#cartreload').html(data)
@@ -629,6 +624,14 @@ $('body').on('click','.minicart-delete',function(event){
 $('body').on('click','.notif',function(event){
   mivenotify('notice','Access denied need access?','Please contact rakesh@mive.in')
 })
+</script>
+<script>
+  $('body').on('click','.orderdata',function(event){
+    dummyvendorid = $(this).attr('data-dummyvendorid')
+    console.log('clicked')
+    $('#dataorderplaceid').attr('value',dummyvendorid)
+    $('#data-order-modal').modal('toggle')
+  })
 </script>
       {% block script%}
       {% endblock %}

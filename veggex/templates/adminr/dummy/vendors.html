@@ -1,0 +1,152 @@
+{% extends 'adminr/base.html' %}
+{% block  content %}
+<section class="content-header">
+   <h1>
+      Mive 
+      <small>Vendors</small>
+   </h1>
+   <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Vendors</li>
+   </ol>
+</section>
+<section class="content">
+      <div class="row">
+        <div class="col-md-9 col-md-offset-1" style="position:relative">
+          <div class="box">
+          {% if  basics.dummyvendor.all|length = 0 %}
+          <center><div class="box-header with-border">
+          <h3 class="box-title">Looks like you have no vendors right now Please add vendors</h3>
+          <p>You can browse and add from our existing vendors our you can create your own</p>
+          <button class="btn btn-primary addvendor" data-dummyvendorid="{{pd.dummyvendor_id}}" >Add a new vendor</button>
+            </div></center>
+          {%else %}
+            <div class="box-header with-border">
+              <h3 class="box-title">Current Vendors</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tr>
+                  <th><center>Name</center></th>
+                  <th class="hidden-xs hidden-sm"><center>Supplies</center></th>
+                  <th class="hidden-xs hidden-sm"><center>Rating</center></th>
+                  <th ><center>Delete</center></th>
+                  <th ><center>Config</center></th>
+                </tr>
+                {%for sel in basics.dummyvendor.all%}
+                <tr>
+                  <td><center>{{sel.seller.nameOfSeller}}</center></td>
+                  <td class="hidden-xs hidden-sm">
+                    <center >{{sel.seller.categories}}</center>
+                  </td>
+                  <td class="hidden-xs hidden-sm">
+                    <center>{{sel.seller.rating}}</center>
+                  </td>
+                  <td><center>
+                      <a class="btn btn-danger" href="/data/delvendoruser?id={{sel.dummyvendor_id}}">Delete</a>
+                      </center>
+                  </td>
+                  <td >
+                    <center><a data-productid="{{item.product.product_id}}" href="/data/configvendor?id={{sel.seller_id}}" ><span class="btn btn-warning" >Config</span></a></center>
+                  </td>
+                </tr>
+                {% endfor%}
+              </table>
+            </div>
+            {% endif %}
+            <!-- /.box-body -->
+
+            <div class="box-footer clearfix">
+            </div>
+          </div>
+          <!--next table -->
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">Add new vendors</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tr>
+                  <th><center>Name</center></th>
+                  <th class="hidden-xs hidden-sm"><center>Supplies</center></th>
+                  <th ><center >Rating</center></th>
+                  <th ><center>Browse</center></th>
+                </tr>
+                {%for seller in sellers%}
+                <tr>
+                  <td><center>{{seller.nameOfSeller}}</center></td>
+                  <td class="hidden-xs hidden-sm">
+                    <center>{{seller.categories}}</center>
+                  </td>
+                  <td >
+                    <center>{{seller.rating}}</center>
+                  </td>
+                  <td>
+                    <center><a  href="/data/addvendors?id={{seller.seller_id}}"><span class="btn btn-success">Add</span></a></center>
+                  </td>
+                </tr>
+                {% endfor%}
+              </table>
+            </div>
+            <!-- /.box-body -->
+            
+            <div class="box-footer clearfix">
+              
+              <button class="btn btn-primary pull-right addvendor" data-dummyvendorid="{{pd.dummyvendor_id}}" >Add a new vendor</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<div class="modal fade" id="vendor-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
+               <form method="post" action="/newvendor">
+              <input type="hidden" name="userid" value="{{basics.miveuser.user_id}}">
+              <div class="col-md-6">
+              {%csrf_token%}
+              Name:<input  placeholder="enter name" id="name" name="name" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+              Email Id:<input  placeholder="enter email Id" name="email" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+              Mobile :<input  placeholder="enter mobile number" id="datetime" name="mobile" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+              Add dummy Names<input  placeholder="dummy names" name="ctext" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+              Area<input  placeholder="area" name="area" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+              City<input  placeholder="city" name="city" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+              State<input  placeholder="state" name="state" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+                     Pincode: <input  placeholder="pincode" id="datetime" name="pincode" type="text" class="form-control">
+              </div>
+              <div class="col-md-6 col-md-offset-4">
+                  <button type="submit" id="add" class="btn btn-success btn-lg">
+                  Add Vendor
+                  </button>
+              </div>
+               </form>
+            </div>
+         </div>
+      </div>
+{%endblock%}
+{% block script%}
+<script>
+  $('body').on('click','.addvendor',function(event){
+    dummyvendorid = $(this).attr('data-dummyvendorid')
+    console.log('clicked')
+    $('#addvendorid').attr('value',dummyvendorid)
+    $('#vendor-modal').modal('toggle')
+  })
+</script>
+{% endblock %}

@@ -3,7 +3,7 @@
 <section class="content-header">
    <h1>
       Mive 
-      <small>Restaurs dashboard</small>
+      <small>Restaurant dashboard</small>
    </h1>
    <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -57,5 +57,97 @@
         </div>
         {% endfor %}
       </div>
-{% endblock %}
 </section>
+{% endblock %}
+{% block script %}
+<script>
+   $('body').on('click','.login-modal2-button',function(){
+     idd = $(this).attr('data-productid')
+     $('#login-modal2').modal('toggle')
+     $('#detail-container').html("<center><img src='rstatic/new/images/282.GIF'></center>")
+     url = "/product?productId="+idd
+     data = $.get(url,function(data){
+       $('#detail-container').html(data)
+     })
+   })
+</script>
+<script>
+       $('body').on('click',".product1submit",function(event) {
+         
+            event.preventDefault();
+            {% if basics.miveuser = 'none' %}
+            mivenotify('error','Login required','please login to add products to cart',600)
+            console.log('user not loggedin')
+            $('#login-modal').modal('toggle')
+            mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+            return
+            {% else %}
+             rak = $(this).attr('data-miveproduct')
+             formid= "#"+"productsubmit-"+rak
+             form = $(formid)
+             //$(rak).submit()
+             mivenotify('success','Item added','Item has been added to cart',600)
+             $.ajax({
+                    type: "POST",
+                    url: '/ajaxaddtocart',
+                    data: form.serialize(), // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#cartreload').html(data)
+                      console.log(data)
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    }
+                  });
+            {%endif %}
+         });
+      </script>
+       <script>
+       $('body').on('click',"#productsubmitbutton",function(event) {
+         
+            event.preventDefault();
+            {% if basics.miveuser = 'none' %}
+            mivenotify('error','Login required','please login to add products to cart',600)
+            console.log('user not loggedin')
+            $('#login-modal').modal('toggle')
+            mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+            return
+            {% else %}
+            idd = $(this).attr('data-miveproduct')
+            console.log('idd',idd)
+            formid = '#productdetailsubmit-'+idd
+             form = $(formid)
+             console.log('formdata',form.serialize())
+             //$(rak).submit()
+             mivenotify('success','Item added','Item has been added to cart',600)
+             $.ajax({
+                    type: "POST",
+                    url: '/ajaxaddtocart',
+                    data: form.serialize(), // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#cartreload').html(data)
+                      $('#login-modal2').modal('toggle')
+                      console.log(data)
+
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    }
+                  });
+            {%endif %}
+         });
+      </script>
+      <script>
+         $('body').on('click','.login-modal3-button',function(){
+           idd = $(this).attr('data-productid')
+           $('#detail-container').html("<center><img src='rstatic/new/images/282.GIF'></center>")
+           url = "/product?productId="+idd
+           data = $.get(url,function(data){
+             $('#detail-container').html(data)
+           })
+         })
+      </script>
+
+{% endblock %}

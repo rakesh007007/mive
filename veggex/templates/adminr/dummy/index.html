@@ -1,0 +1,103 @@
+  {% extends 'adminr/base.html' %}
+  {% block content %}
+  <section class="content-header">
+      <h1>
+        Mive 
+        <small>Home</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Main</li>
+      </ol>
+    </section>
+    <section class="content">
+    <!-- Info boxes -->
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-cart-plus"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Total Purchase</span>
+                            <p>(last 30 days)</p>
+
+              <span class="info-box-number">₹{{rorders}}<small></small></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-bar-chart"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Orders</span>
+              <p>(last 30 days)</p>
+
+              <span class="info-box-number">{{norders}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-inr"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Credit</span>
+              <span class="info-box-number">{{basics.miveuser.creditlimit}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-thumbs-o-down"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Wastage</span>
+              <span class="info-box-number">₹{{wastage}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    <div class="row">
+       
+       <div class="col-lg-10 col-xs-6">
+          <!-- small box -->
+
+         {% if basics.dummyvendor.all|length = 0 %}
+          <h3>No vendors added</h3>
+          <p>Please configure your vendors <a href="/vendors">Add now</a></p>
+         {%endif%}
+         </div>
+        {%for categ in basics.dummyvendor.all%}
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <center><h3>{{categ.seller}}</h3></center>
+            </div>
+            <a href="/data/categoryvendor?dummyVendorId={{categ.dummyvendor_id}}" class="small-box-footer">
+              Order Now <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+      </section>
+      {% endblock %}
