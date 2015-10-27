@@ -289,7 +289,7 @@ class Dummycartitem(models.Model):
 	dummycart=models.ForeignKey(Dummycart,blank=False,null=False)
 	qtyInUnits = models.PositiveIntegerField()
 	product = models.ForeignKey(Product,blank=False,null=False)
-	pricePerUnit = models.PositiveIntegerField(blank=False,null=False)
+	pricePerUnit = models.PositiveIntegerField(blank=False,null=False,default=0)
 	timeOfCreate = AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	class Meta:	

@@ -75,12 +75,12 @@ def statsseller(request):
 		if ord.product in products:
 			index = products.index(ord.product)
 			oldst = statsProduct[index]
-			oldst['total'] = oldst['total']+ord.product.pricePerUnit*ord.qtyInUnits
+			oldst['total'] = oldst['total']+ord.pricePerUnit*ord.qtyInUnits
 		else:
 			st = {}
 			products.append(ord.product)
 			st['product'] = ord.product
-			st['total']=ord.product.pricePerUnit*ord.qtyInUnits
+			st['total']=ord.pricePerUnit*ord.qtyInUnits
 			statsProduct.append(st)
 	print products
 	print orders
@@ -131,12 +131,12 @@ def ajax0datefilter(request):
 				if ord.product in products :
 					index = products.index(ord.product)
 					oldst = statsProduct[index]
-					oldst['total'] = oldst['total']+ord.product.pricePerUnit*ord.qtyInUnits
+					oldst['total'] = oldst['total']+ord.pricePerUnit*ord.qtyInUnits
 				else:
 					st = {}
 					products.append(ord.product)
 					st['product'] = ord.product
-					st['total']=ord.product.pricePerUnit*ord.qtyInUnits
+					st['total']=ord.pricePerUnit*ord.qtyInUnits
 					statsProduct.append(st)
 			else:
 				pass
@@ -269,12 +269,12 @@ def ajaxdatefilter(request):
 			if ord.product in products:
 				index = products.index(ord.product)
 				oldst = statsProduct[index]
-				oldst['total'] = oldst['total']+ord.product.pricePerUnit*ord.qtyInUnits
+				oldst['total'] = oldst['total']+ord.pricePerUnit*ord.qtyInUnits
 			else:
 				st = {}
 				products.append(ord.product)
 				st['product'] = ord.product
-				st['total']=ord.product.pricePerUnit*ord.qtyInUnits
+				st['total']=ord.pricePerUnit*ord.qtyInUnits
 				statsProduct.append(st)
 		else:
 			pass
@@ -308,12 +308,12 @@ def statsorder(request):
 			if ord.product in products:
 				index = products.index(ord.product)
 				oldst = statsProduct[index]
-				oldst['total'] = oldst['total']+ord.product.pricePerUnit*ord.qtyInUnits
+				oldst['total'] = oldst['total']+ord.pricePerUnit*ord.qtyInUnits
 			else:
 				st = {}
 				products.append(ord.product)
 				st['product'] = ord.product
-				st['total']=ord.product.pricePerUnit*ord.qtyInUnits
+				st['total']=ord.pricePerUnit*ord.qtyInUnits
 				statsProduct.append(st)
 		return TemplateResponse(request, 'adminr/statsorder.html',{'basics':basics,'statsproduct':statsProduct,'statsseller':statsSeller,'csrf_token':get_or_create_csrf_token(request)})
 def statsorderitem(request):
@@ -329,12 +329,12 @@ def statsorderitem(request):
 			if ord.product in products:
 				index = products.index(ord.product)
 				oldst = stats[index]
-				oldst['total'] = oldst['total']+ord.product.pricePerUnit*ord.qtyInUnits
+				oldst['total'] = oldst['total']+ord.pricePerUnit*ord.qtyInUnits
 			else:
 				st = {}
 				products.append(ord.product)
 				st['product'] = ord.product
-				st['total']=ord.product.pricePerUnit*ord.qtyInUnits
+				st['total']=ord.pricePerUnit*ord.qtyInUnits
 				stats.append(st)
 		print stats
 		return TemplateResponse(request, 'adminr/statsorder.html',{'basics':basics,'stats':stats,'csrf_token':get_or_create_csrf_token(request)})
