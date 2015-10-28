@@ -30,6 +30,8 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^login', views.login),
     url(r'^subscribe', views.subscribe),
+    url(r'^tryy', views.tryy),
+    url(r'^csrfreq', dummy.csrfreq),
     url(r'^docs/v1', views.docs),
     url(r'^docs/v2', views.docsv2),
      url(r'^index.html/', views.main),
@@ -120,6 +122,8 @@ urlpatterns = [
     url('^api/seedummycart/$', apis.ApiSeeDummyCart.as_view()),
     url('^api/updatecart/$', apis.ApiUpdateCart.as_view()),
     url('^api/makeorder/$', apis.ApiMakeOrder.as_view()),
+    url('^api/makeorderdummy/$', apis.ApiMakeOrderDummy.as_view()),
+    url('^api/temp/makeorderdummy$', dummy.csrfreq),
 
 
 

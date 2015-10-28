@@ -1,4 +1,5 @@
 from base import *
+from rest_framework.parsers import *
 def getTotal(cartitems):
 	total=0
 	for itemm in cartitems:
@@ -261,7 +262,7 @@ class ApiAddToDummyCart(APIView):
 					dummycart.save()
 			return Response({"status":"success"})
 		except Exception,e:
-			return Response({"status":e})
+			return Response({"status":e,"type":"error"})
 class ApiUpdateCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
@@ -452,6 +453,72 @@ class ApiMakeOrder(APIView):
 				rak.save()
 			cart.cartTotal = cart.cartTotal - su
 			cart.save()
+			return Response({"status":"success","orderId":order_id})
+class ApiMakeOrderDummy(APIView):
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	parser_classes = (MultiPartParser,FormParser,)
+	def post(self, request, format=None):
+		data=request.data
+		dummycartId=data['dummycartId']
+		userId=data['userId']
+		sellerId = int(data['sellerId'])
+		userId=int(userId)
+		dummycartId=int(dummycartId)
+		seller = Seller.rak.get(seller_id = sellerId)
+		deliveryTime = data['deliveryTime']
+		orderMsg = data['orderMsg']
+		user =User.objects.get(user_id=userId)
+		payment_mode = 'COD'
+		dummycart =user.dummycart
+		items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller = seller)
+		total=dummycart.dummycartTotal
+		if(len(items)<1):
+			print 'no items'
+			return Response(['no items to make order'])
+		else:
+			order = Order()
+			order.user = user
+			order.payment_mode = payment_mode
+			order.subtotal=total
+			order.seller = seller
+			order.status = 'PLACED'
+			order.deliveryTime=deliveryTime
+			order.orderMsg=orderMsg
+			order.save()
+			for afile in request.data['image']:
+				print '>>>>>>>check'
+				print afile
+			 	d = Invoiceimage()
+			 	d.image = afile
+			 	d.save()
+			 	order.invoices.add(d)
+			 	order.save()
+			order_id =order.order_id 
+			su = 0
+			for itemn in items:
+				rak = Orderitem()
+				rak.product = itemn.product
+				su = su + itemn.pricePerUnit*itemn.qtyInUnits
+				stock = Currentstock.objects.filter(product=itemn.product)
+				if(len(stock)>0):
+					currStock = stock[0]
+					currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
+					currStock.save()
+				else:
+					currStock = Currentstock()
+					currStock.product = itemn.product
+					currStock.remainingstock=itemn.qtyInUnits
+					currStock.save()
+				rak.unit=itemn.product.unit
+				rak.qtyInUnits = itemn.qtyInUnits
+				rak.priceType = itemn.product.priceType
+				rak.pricePerUnit = itemn.pricePerUnit
+				rak.order = order
+				itemn.delete()
+				rak.save()
+			dummycart.dummycartTotal = dummycart.dummycartTotal - su
+			dummycart.save()
 			return Response({"status":"success","orderId":order_id})
 class UserLoginView(APIView):
 	#authentication_classes = (TokenAuthentication,)

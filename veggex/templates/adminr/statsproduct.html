@@ -34,11 +34,11 @@
                 <label>Select a product</label>
                 <select name="product" class="form-control select2" id="productselect" style="width: 100%;">
                 {%with allItems|first as ting%}
-                <option selected="selected">{{ting.product.name}}</option>
+                <option selected="selected" value="{{ting.product.product_id}}">{{ting.product.name}}</option>
                  {% for item in allItems%}
                  {% if ting = item%}
                  {%else%}
-                 <option data-id="{{item.product.product_id}}">{{item.product.name}}</option>
+                 <option data-id="{{item.product.product_id}}" value="{{item.product.product_id}}">{{item.product.name}}</option>
                  {%endif%}
                   {%endfor%}
                   {%endwith%}

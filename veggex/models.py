@@ -304,6 +304,9 @@ class Accartitem(models.Model):
 	qtyInUnits = models.IntegerField()
 	product = models.ForeignKey(Product,blank=False,null=False)
 	resason = models.TextField(blank=True,null=True)
+class Invoiceimage(models.Model):
+    invoiceimage_id = models.AutoField(primary_key=True)
+    image = models.ImageField(upload_to='./invoices')
 class Order(models.Model):
 	order_id = models.AutoField(primary_key=True)
 	user=models.ForeignKey(User,blank=False,null=False)
@@ -318,6 +321,7 @@ class Order(models.Model):
 	timeOfUpdate =AutoDateTimeField(default=timezone.now,null=True,blank=True)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	category = models.ForeignKey(Category,blank=True,null=True)
+	invoices = models.ManyToManyField(Invoiceimage,blank=True)
 	orderType = models.CharField(max_length=240,blank=False,null=False,choices=orderTypes,default='real')
 	class Meta:	
 		ordering = ['-timeOfCreate']

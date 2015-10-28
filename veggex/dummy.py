@@ -1,5 +1,6 @@
 from base import *
 from views import *
+from django.views.decorators.csrf import csrf_exempt
 def dummymain(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -130,9 +131,10 @@ def dummyordercategory(request):
 		basics = basicinfo(request)
 		user = basics['miveuser']
 		miveuser=user
-		dummyVendorId = request.GET['dummyvendorid']
-		orderMsg = request.GET['orderMsg']
-		deliveryTime = request.GET['deliveryTime']
+		dummyVendorId = request.POST['dummyvendorid']
+		images=request.FILES.getlist('image')
+		orderMsg = request.POST['orderMsg']
+		deliveryTime = request.POST['deliveryTime']
 		payment_mode = 'COD'
 		dummycart = miveuser.dummycart
 		dummyvendor = DummyVendor.objects.get(dummyvendor_id = dummyVendorId)
@@ -152,6 +154,14 @@ def dummyordercategory(request):
 			order.orderMsg = orderMsg
 			order.deliveryTime = deliveryTime
 			order.save()
+			for afile in request.FILES.getlist('image'):
+				print '>>>>>>>check'
+				print afile
+			 	d = Invoiceimage()
+			 	d.image = afile
+			 	d.save()
+			 	order.invoices.add(d)
+			 	order.save()
 			order_id =order.order_id 
 			for itemn in items:
 				rak = Orderitem()
@@ -179,15 +189,91 @@ def dummyordercategory(request):
 			dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
 			miveuser.save()
 			dummycart.save()
-	n = Notification()
-	n.title='Order Recieved'
-	n.body='Your order has been recieved succesfully with orderId:'+str(order_id)
-	n.link = 'orderDetail?orderId='+str(order_id)
-	n.save()
-	miveuser.notifications.add(n)
-	miveuser.save()
-	strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID:'+str(order_id)
-	return redirect(strr)
+			n = Notification()
+			n.title='Order Recieved'
+			n.body='Your order has been recieved succesfully with orderId:'+str(order_id)
+			n.link = 'orderDetail?orderId='+str(order_id)
+			n.save()
+			miveuser.notifications.add(n)
+			miveuser.save()
+			strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID:'+str(order_id)
+			return redirect(strr)
+@csrf_exempt
+def csrfreq(request):	
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	else:
+		miveuserId = request.POST['userId']
+		user = User.objects.get(user_id=int(miveuserId))
+		miveuser=user
+		sellerId = request.POST['sellerId']
+		images=request.FILES.getlist('image')
+		dummycartId = request.POST['dummycartId']
+		orderMsg = request.POST['orderMsg']
+		deliveryTime = request.POST['deliveryTime']
+		payment_mode = 'COD'
+		dummycart = miveuser.dummycart
+		dummyvendor = DummyVendor.objects.filter(user=miveuser).get(seller__seller_id=int(sellerId))
+		items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller)
+		totalprice=getTotal(items)
+		if(len(items)<1):
+			print 'no items'
+			return HttpResponse('no items to make order')
+		else:
+			order = Order()
+			order.user = user
+			order.seller = dummyvendor.seller
+			order.payment_mode = payment_mode
+			order.subtotal=totalprice
+			order.status = 'PLACED'
+			order.orderType='dummy'
+			order.orderMsg = orderMsg
+			order.deliveryTime = deliveryTime
+			order.save()
+			for afile in request.FILES.getlist('image'):
+				print '>>>>>>>check'
+				print afile
+			 	d = Invoiceimage()
+			 	d.image = afile
+			 	d.save()
+			 	order.invoices.add(d)
+			 	order.save()
+			order_id =order.order_id 
+			for itemn in items:
+				rak = Orderitem()
+				rak.product = itemn.product
+				stock = Currentstock.objects.filter(product=itemn.product).filter(user=user)
+				if(len(stock)>0):
+					currStock = stock[0]
+					currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
+					currStock.save()
+				else:
+					currStock = Currentstock()
+					currStock.product = itemn.product
+					currStock.user = user
+					currStock.remainingstock=itemn.qtyInUnits
+					currStock.save()
+				rak.unit=itemn.product.unit
+				rak.qtyInUnits = itemn.qtyInUnits
+				rak.pricePerUnit = itemn.pricePerUnit
+				miveuser=user
+				rak.priceType = itemn.product.priceType
+				rak.order = order
+				rak.save()
+				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
+			Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller).delete()
+			dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
+			miveuser.save()
+			dummycart.save()
+			n = Notification()
+			n.title='Order Recieved'
+			n.body='Your order has been recieved succesfully with orderId:'+str(order_id)
+			n.link = 'orderDetail?orderId='+str(order_id)
+			n.save()
+			miveuser.notifications.add(n)
+			miveuser.save()
+			strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID:'+str(order_id)
+			return HttpResponse(str({"status":"success","orderId":str(order_id)}),content_type='application/json')
 def dummyvendors(request):
 	if(checklogin(request)==False):
 		return redirect('/login')

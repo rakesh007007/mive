@@ -27,6 +27,7 @@ admin.site.register(Stockwastage)
 admin.site.register(Stockconsumption)
 admin.site.register(Notification)
 admin.site.register(Sellernotification)
+admin.site.register(Invoiceimage)
 
 
 
