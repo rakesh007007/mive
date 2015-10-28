@@ -197,29 +197,69 @@ class ApiAddToCart(APIView):
 			for i in range(0,len(items)):
 				qty=items[str(i+1)]['qty']
 				qty = int(qty)
+				priceperunit=items[str(i+1)]['priceperunit']
+				priceperunit = int(priceperunit)
 				productId=items[str(i+1)]['productId']
 				cart = user.cart
-				product = Product.rak.get(product_id=productId)
-				check = Cartitem.objects.filter(cart=cart).filter(product=product)
-				print 'debug'
-				print check
+				product = Product.objects.get(product_id=productId)
+				check = Cartitem.objects.filter(cart=cart).filter(product=product).filter(pricePerUnit=priceperunit)
 				if(len(check)>0):
 					previtem = Cartitem.objects.get(cartitem_id=check[0].cartitem_id)
 					print previtem
 					print previtem.qtyInUnits
 					previtem.qtyInUnits = previtem.qtyInUnits+int(qty)
-					cart.cartTotal = cart.cartTotal+int(qty)*int(product.pricePerUnit)
+					cart.cartTotal = cart.cartTotal+int(qty)*int(priceperunit)
 					previtem.save()
 					cart.save()
 				else:
 					cartitem=Cartitem()
 					cartitem.cart=cart
 					cartitem.qtyInUnits = qty
-					totalprice=qty*product.pricePerUnit
+					totalprice=qty*priceperunit
 					cartitem.product=product
 					cart.cartTotal = cart.cartTotal+totalprice
 					cartitem.save()
 					cart.save()
+			return Response({"status":"success"})
+		except Exception,e:
+			return Response({"status":e})
+class ApiAddToDummyCart(APIView):
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	def post(self, request, format=None):
+		try:
+			data=request.data
+			dummycartId=data['dummycartId']
+			userId=data['userId']
+			userId=int(userId)
+			dummycartId=int(dummycartId)
+			items=data['items']
+			user=User.objects.get(user_id=userId)
+			for i in range(0,len(items)):
+				qty=items[str(i+1)]['qty']
+				priceperunit=items[str(i+1)]['priceperunit']
+				qty = int(qty)
+				priceperunit = int(priceperunit)
+				productId=items[str(i+1)]['productId']
+				dummycart = user.dummycart
+				product = Product.rak.get(product_id=productId)
+				check = Dummycartitem.objects.filter(dummycart=dummycart).filter(product=product).filter(pricePerUnit=priceperunit)
+				if(len(check)>0):
+					previtem = Dummycartitem.objects.get(dummycartitem_id=check[0].dummycartitem_id)
+					previtem.qtyInUnits = previtem.qtyInUnits+int(qty)
+					dummycart.dummycartTotal = dummycart.dummycartTotal+int(qty)*int(priceperunit)
+					previtem.save()
+					dummycart.save()
+				else:
+					dummycartitem=Dummycartitem()
+					dummycartitem.dummycart=dummycart
+					dummycartitem.qtyInUnits = qty
+					dummycartitem.pricePerUnit = priceperunit
+					totalprice=qty*priceperunit
+					dummycartitem.product=product
+					dummycart.dummycartTotal = dummycart.dummycartTotal+totalprice
+					dummycartitem.save()
+					dummycart.save()
 			return Response({"status":"success"})
 		except Exception,e:
 			return Response({"status":e})
@@ -261,6 +301,38 @@ class ApiUpdateCart(APIView):
 			return Response([{"status":"success"}])
 		except Exception,e:
 			return Response(e)
+class ApiUpdateDummyCart(APIView):
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	def post(self, request, format=None):
+		try:
+			data=request.data
+			dummycartId=data['dummycartId']
+			userId=data['userId']
+			userId=int(userId)
+			dummycartId=int(dummycartId)
+			items=data['items']
+			user=User.objects.get(user_id=userId)
+			dummycart=Dummycart.objects.get(dummycart_id=dummycartId)
+			for i in range(0,len(items)):
+				qty=items[str(i+1)]['qty']
+				qty = int(qty)
+				itemId=items[str(i+1)]['itemId']
+				if(qty==0):
+					acitem_before=Dummycartitem.objects.get(dummycartitem_id=itemId)
+					dummycart.dummycartTotal = dummycart.dummycartTotal-acitem_before.qtyInUnits*acitem_before.pricePerUnit
+					cart.save()
+					Dummycartitem.objects.get(dummycartitem_id=itemId).delete()
+				else:
+					item = Dummycartitem.objects.get(dummycartitem_id=itemId)
+					oldqty =item.qtyInUnits 
+					item.qtyInUnits = qty
+					dummycart.dummycartTotal = dummycart.dummycartTotal+qty*item.pricePerUnit - oldqty*item.pricePerUnit
+					item.save()
+					dummycart.save()
+			return Response([{"status":"success"}])
+		except Exception,e:
+			return Response(e)
 class ApiSeeCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
@@ -293,7 +365,38 @@ class ApiSeeCart(APIView):
 			return HttpResponse(JSONRenderer().render(allProducts),content_type='application/json')
 		except Exception,e:
 			return HttpResponse(e)
-
+class ApiSeeDummyCart(APIView):
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	def get(self,request,format=None):
+		try:
+			userId = request.GET['userId']
+			miveuser=User.objects.get(user_id = userId)
+			dummycart=miveuser.dummycart
+			dummycartItems=Dummycartitem.objects.filter(dummycart=dummycart)
+			totalItems=len(dummycartItems)
+			shippingCost=0
+			dummyvendor= miveuser.dummyvendors
+			allProducts = []
+			for cvend in dummyvendor.all():
+				dummyvendor_id = cvend.dummyvendor_id
+				seller = cvend.seller
+				jsseller = SellerSerializer(seller,context={'request': request})
+				itemscount = Dummycartitem.objects.filter(product__seller = seller).filter(dummycart=dummycart).count()
+				if itemscount>0:
+					items = Dummycartitem.objects.filter(product__seller = seller).filter(dummycart=dummycart)
+					t =[]
+					for p in items:
+						jsitem = DummycartitemSerializer(p,context={'request': request}).data
+						t.append(jsitem)
+					jsitems =t
+					pd = {'dummyvendor_id':dummyvendor_id,'seller':jsseller.data,'items':jsitems}
+					allProducts.append(pd)
+				else:
+					pass
+			return HttpResponse(JSONRenderer().render(allProducts),content_type='application/json')
+		except Exception,e:
+			return HttpResponse(e)
 class ApiMakeOrder(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
@@ -330,7 +433,7 @@ class ApiMakeOrder(APIView):
 			for itemn in items:
 				rak = Orderitem()
 				rak.product = itemn.product
-				su = su + itemn.product.pricePerUnit*itemn.qtyInUnits
+				su = su + itemn.pricePerUnit*itemn.qtyInUnits
 				stock = Currentstock.objects.filter(product=itemn.product)
 				if(len(stock)>0):
 					currStock = stock[0]
@@ -344,7 +447,7 @@ class ApiMakeOrder(APIView):
 				rak.unit=itemn.product.unit
 				rak.qtyInUnits = itemn.qtyInUnits
 				rak.priceType = itemn.product.priceType
-				rak.priceAtThatTime = itemn.product.pricePerUnit
+				rak.pricePerUnit = itemn.pricePerUnit
 				rak.order = order
 				itemn.delete()
 				rak.save()
@@ -410,6 +513,14 @@ class CategoryVendorViewSet(viewsets.ModelViewSet):
 	#permission_classes = (IsAuthenticated,)
 	queryset = CategoryVendor.objects.all()
 	serializer_class = CategoryVendorSerializer
+class DummyVendorViewSet(viewsets.ModelViewSet):
+	"""
+	API endpoint that allows users to be viewed or edited.
+	"""
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	queryset = DummyVendor.objects.all()
+	serializer_class = DummyVendorSerializer
 class UserViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
@@ -442,6 +553,14 @@ class CartViewSet(viewsets.ModelViewSet):
 	#permission_classes = (IsAuthenticated,)
 	queryset = Cart.objects.all()
 	serializer_class = CartSerializer
+class DummycartViewSet(viewsets.ModelViewSet):
+	"""
+	API endpoint that allows users to be viewed or edited.
+	"""
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	queryset = Dummycart.objects.all()
+	serializer_class = DummycartSerializer
 class CartitemViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
@@ -450,6 +569,14 @@ class CartitemViewSet(viewsets.ModelViewSet):
 	#permission_classes = (IsAuthenticated,)
 	queryset = Cartitem.objects.all()
 	serializer_class = CartitemSerializer
+class DummycartitemViewSet(viewsets.ModelViewSet):
+	"""
+	API endpoint that allows users to be viewed or edited.
+	"""
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	queryset = Dummycartitem.objects.all()
+	serializer_class = DummycartitemSerializer
 class OrderViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
