@@ -197,12 +197,11 @@ class ApiAddToCart(APIView):
 			for i in range(0,len(items)):
 				qty=items[str(i+1)]['qty']
 				qty = int(qty)
-				priceperunit=items[str(i+1)]['priceperunit']
-				priceperunit = int(priceperunit)
 				productId=items[str(i+1)]['productId']
 				cart = user.cart
 				product = Product.objects.get(product_id=productId)
-				check = Cartitem.objects.filter(cart=cart).filter(product=product).filter(pricePerUnit=priceperunit)
+				priceperunit = product.pricePerUnit
+				check = Cartitem.objects.filter(cart=cart).filter(product=product)
 				if(len(check)>0):
 					previtem = Cartitem.objects.get(cartitem_id=check[0].cartitem_id)
 					print previtem
@@ -287,7 +286,7 @@ class ApiUpdateCart(APIView):
 					acitem.resason="deleted from cart"
 					acitem.qtyInUnits=acitem_before.qtyInUnits
 					acitem.product=acitem_before.product
-					cart.cartTotal = cart.cartTotal-acitem_before.qtyInUnits*acitem_before.product.pricePerUnit
+					cart.cartTotal = cart.cartTotal-acitem_before.qtyInUnits*acitem_before.pricePerUnit
 					acitem.save()
 					cart.save()
 					Cartitem.objects.get(cartitem_id=itemId).delete()
@@ -295,7 +294,7 @@ class ApiUpdateCart(APIView):
 					item = Cartitem.objects.get(cartitem_id=itemId)
 					oldqty =item.qtyInUnits 
 					item.qtyInUnits = qty
-					cart.cartTotal = cart.cartTotal+qty*item.product.pricePerUnit - oldqty*item.product.pricePerUnit
+					cart.cartTotal = cart.cartTotal+qty*item.pricePerUnit - oldqty*item.pricePerUnit
 					item.save()
 					cart.save()
 			return Response([{"status":"success"}])

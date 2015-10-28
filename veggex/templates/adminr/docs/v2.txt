@@ -3,7 +3,7 @@ Mive API documentation:
 
 Url : http://www.mive.in/
 
-1. Authtoken
+Authtoken
    end point: */authtoken/
    POST
    media type :application/json
@@ -12,7 +12,7 @@ Url : http://www.mive.in/
               "user": "admin",
               "password":"givememyfuckingtoken" 
               }
-2. login
+login
     end point: */api/login
     POST
     media type :application/json
@@ -21,10 +21,10 @@ Url : http://www.mive.in/
         "password":"password"
     }
     result - all vendors and their products
-3. stock 
+stock 
    end point */api/stock/{userId}
    result: available stock and quantity
-4. add cosnumption 
+add cosnumption 
     end point api/addtoconsumption
     POST
     body :
@@ -35,7 +35,7 @@ Url : http://www.mive.in/
 
 
         }
-5. add wastage 
+add wastage 
     end point api/addtowastage
     POST
     body :
@@ -43,8 +43,14 @@ Url : http://www.mive.in/
          "userId":"{userId}",
          "stockId":"{stockId}".
 
-        }
-6. Add multiple products to cart
+See cart of user
+    end point */api/seecart/?cartId={cartId}
+    GET
+See dummycart of user
+    end point */api/seedummycart/?dummycartId={dummycartId}
+    GET
+           }
+Add multiple products to cart
     end point */api/addtocart/
     POST
      body :
@@ -65,7 +71,29 @@ Url : http://www.mive.in/
                   }
 
          }
-7. Update Cart
+Add multiple products to dummycart
+    end point */api/addtodummycart/
+    POST
+     body :
+         {
+          "dummycartId":"{dummycartId}",
+          "userId":"{userId}",
+          "items":
+                  {
+                  "1":{
+                       "qty":"{quantity}",
+                       "productId":"{productId}",
+                       "pricePerUnit":"{priceperunit}"
+
+                       }
+                   "2": ......similar
+                   "3"   .....similar
+                   #add as many products as you want
+
+                  }
+
+         }
+Update Cart
    end point */api/updatecart/ 
    POST
     body :
@@ -86,7 +114,28 @@ Url : http://www.mive.in/
                   }
 
          }
-8. Make order 
+Update dummycart
+   end point */api/updatedummycart/ 
+   POST
+    body :
+         {
+          "dummycartId":"{dummycartId}",
+          "userId":"{userId}",
+          "items":
+                  {
+                  "1":{
+                       "qty":"{quantity}",
+                       "itemId":"{itemId}"
+
+                       }
+                   "2": ......similar
+                   "3"   .....similar
+                   #add as many products as you want
+
+                  }
+
+         }
+Make order 
    end point */api/makeorder/
    POST
    body:
@@ -98,15 +147,15 @@ Url : http://www.mive.in/
            "sellerId":"{sellerId}"
 
            }
-9. Orders of a user
+Orders of a user
    GET
    end point */api/user/orders/{orderId}/
-10. Items of a order
+Items of a order
    GET
    end point api/order/items/{orderId}
-11. Product Search for Title API
+Product Search for Title API
    endpoint */api/search/title/{searchtext}
-12. Product Search for Description API
+Product Search for Description API
    endpoint */api/search/description/{searchtext}
 Full supported(GET,POST,PUT,DELETE) end points
 13. Address
