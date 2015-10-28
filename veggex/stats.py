@@ -218,7 +218,7 @@ def ajaxproductfilter(request):
 	enddate = datetime.strptime(str(fi),"%m-%d-%Y").date()
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
-	product = Product.rak.get(name = productName)
+	product = Product.rak.get(product_id = productName)
 	orderItems = Orderitem.objects.filter(product=product).filter(order__user=miveuser)
 	t =[]
 	for it in orderItems:

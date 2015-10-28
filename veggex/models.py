@@ -306,7 +306,7 @@ class Accartitem(models.Model):
 	resason = models.TextField(blank=True,null=True)
 class Invoiceimage(models.Model):
     invoiceimage_id = models.AutoField(primary_key=True)
-    image = models.ImageField(upload_to='/invoices')
+    image = models.ImageField(upload_to='./invoices')
 class Order(models.Model):
 	order_id = models.AutoField(primary_key=True)
 	user=models.ForeignKey(User,blank=False,null=False)

@@ -87,6 +87,8 @@ def getTotal(cartitems):
 	for itemm in cartitems:
 		total = total+itemm.pricePerUnit*itemm.qtyInUnits
 	return total
+def tryy(request):
+	return TemplateResponse(request,'tryform.html')
 def contact(request):
 	try:
 		name=request.POST['name']

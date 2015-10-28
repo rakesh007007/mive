@@ -147,6 +147,17 @@ Make order
            "sellerId":"{sellerId}"
 
            }
+Make order dummy
+   end point */api/temp/makeorder/
+   POST
+   content type : 'multipart/form-data'
+   body:
+           "userId":"{userId}",
+           "dummycartId" :"{cartId}",
+           "deliveryTime" :"{cartId}",
+           "orderMsg" :"{cartId}"
+           "sellerId":"{sellerId}"
+           "image": {images of invoic might be multiple}
 Orders of a user
    GET
    end point */api/user/orders/{orderId}/
