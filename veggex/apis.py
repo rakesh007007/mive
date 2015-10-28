@@ -261,7 +261,7 @@ class ApiAddToDummyCart(APIView):
 					dummycart.save()
 			return Response({"status":"success"})
 		except Exception,e:
-			return Response({"status":e})
+			return Response({"status":e,"type":"error"})
 class ApiUpdateCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
