@@ -29,6 +29,10 @@ class CartSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Cart
         fields = ('cart_id','timeOfCreate','timeOfUpdate','cartTotal')
+class DummycartSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Dummycart
+        fields = ('dummycart_id','timeOfCreate','timeOfUpdate','dummycartTotal')
 class BaseProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
@@ -47,13 +51,21 @@ class CategoryVendorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CategoryVendor
         fields = ('categoryvendor_id','seller','products')
+class DummyVendorSerializer(serializers.HyperlinkedModelSerializer):
+    seller = SellerSerializer()
+    products = ProductSerializer(many=True)
+    class Meta:
+        model = DummyVendor
+        fields = ('dummyvendor_id','seller','products')
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     cart = CartSerializer()
+    dummycart = DummycartSerializer()
     categories = CategoryVendorSerializer(many=True)
+    dummyvendors = DummyVendorSerializer(many=True)
     class Meta:
         model = User
         fields = ('user_id', 'nameOfInstitution', 'nameOfOwner',
-                  'institutionType', 'mailId','cartId', 'mobileNo','cart', 'address', 'profilePhoto','gpsLocation','profilephotourl','categories','creditlimit')
+                  'institutionType', 'mailId','cartId', 'mobileNo','cart','dummycart','address', 'profilePhoto','gpsLocation','profilephotourl','categories','dummyvendors','creditlimit')
 class ProductsByCategorySerializer(serializers.HyperlinkedModelSerializer):
     related_products = ProductSerializer(many=True)
     class Meta:
@@ -64,7 +76,12 @@ class CartitemSerializer(serializers.HyperlinkedModelSerializer):
     product = ProductSerializer()
     class Meta:
         model = Cartitem
-        fields=('cartitem_id','cart','qtyInUnits','product')
+        fields=('cartitem_id','cart','qtyInUnits','product','pricePerUnit')
+class DummycartitemSerializer(serializers.HyperlinkedModelSerializer):
+    product = ProductSerializer()
+    class Meta:
+        model = Dummycartitem
+        fields=('dummycartitem_id','dummycart','qtyInUnits','product','pricePerUnit')
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order

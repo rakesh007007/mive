@@ -14,11 +14,14 @@ router.register(r'category', apis.CategoryViewSet)
 router.register(r'product', apis.ProductViewSet)
 router.register(r'user', apis.UserViewSet)
 router.register(r'cart', apis.CartViewSet)
+router.register(r'dummycart', apis.DummycartViewSet)
 router.register(r'cartitem', apis.CartitemViewSet)
+router.register(r'dummycartitem', apis.DummycartitemViewSet)
 router.register(r'order', apis.OrderViewSet)
 router.register(r'orderitem', apis.OrderitemViewSet)
 router.register(r'seller', apis.SellerViewSet)
 router.register(r'categoryvendor', apis.CategoryVendorViewSet)
+router.register(r'dummyvendor', apis.DummyVendorViewSet)
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/login', apis.UserLoginView.as_view(), name='login-view'),
@@ -112,7 +115,9 @@ urlpatterns = [
     url('^api/addtoconsumption/$', apis.ApiAddToConsumption.as_view()),
     url('^api/addtowastage/$', apis.ApiAddToWastage.as_view()),
     url('^api/addtocart/$', apis.ApiAddToCart.as_view()),
+    url('^api/addtodummycart/$', apis.ApiAddToDummyCart.as_view()),
     url('^api/seecart/$', apis.ApiSeeCart.as_view()),
+    url('^api/seedummycart/$', apis.ApiSeeDummyCart.as_view()),
     url('^api/updatecart/$', apis.ApiUpdateCart.as_view()),
     url('^api/makeorder/$', apis.ApiMakeOrder.as_view()),
 
