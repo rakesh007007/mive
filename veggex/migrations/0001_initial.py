@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django.utils.timezone
-import veggex.models
 
 
 class Migration(migrations.Migration):
@@ -40,16 +39,16 @@ class Migration(migrations.Migration):
                 ('subject', models.CharField(max_length=300)),
                 ('coverletter', models.TextField(max_length=300)),
                 ('resume', models.FileField(upload_to=b'')),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfCreate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
             ],
         ),
         migrations.CreateModel(
             name='Cart',
             fields=[
                 ('cart_id', models.AutoField(serialize=False, primary_key=True)),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfCreate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('cartTotal', models.IntegerField(default=0)),
             ],
             options={
@@ -62,8 +61,8 @@ class Migration(migrations.Migration):
                 ('cartitem_id', models.AutoField(serialize=False, primary_key=True)),
                 ('qtyInUnits', models.PositiveIntegerField()),
                 ('pricePerUnit', models.PositiveIntegerField(default=0)),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfCreate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('cart', models.ForeignKey(to='veggex.Cart')),
             ],
             options={
@@ -93,8 +92,8 @@ class Migration(migrations.Migration):
                 ('email', models.CharField(max_length=300)),
                 ('message', models.TextField(max_length=300)),
                 ('mobile', models.BigIntegerField()),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfCreate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -118,8 +117,8 @@ class Migration(migrations.Migration):
             name='Dummycart',
             fields=[
                 ('dummycart_id', models.AutoField(serialize=False, primary_key=True)),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfCreate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('dummycartTotal', models.IntegerField(default=0)),
             ],
             options={
@@ -132,8 +131,8 @@ class Migration(migrations.Migration):
                 ('dummycartitem_id', models.AutoField(serialize=False, primary_key=True)),
                 ('qtyInUnits', models.PositiveIntegerField()),
                 ('pricePerUnit', models.PositiveIntegerField(default=0)),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfCreate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('dummycart', models.ForeignKey(to='veggex.Dummycart')),
             ],
             options={
@@ -144,6 +143,13 @@ class Migration(migrations.Migration):
             name='DummyVendor',
             fields=[
                 ('dummyvendor_id', models.AutoField(serialize=False, primary_key=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Invoiceimage',
+            fields=[
+                ('invoiceimage_id', models.AutoField(serialize=False, primary_key=True)),
+                ('image', models.ImageField(upload_to=b'./invoices')),
             ],
         ),
         migrations.CreateModel(
@@ -163,7 +169,7 @@ class Migration(migrations.Migration):
                 ('body', models.TextField(default=b'body.....')),
                 ('title', models.CharField(default=b'New Notification', max_length=240)),
                 ('link', models.CharField(default=b'#', max_length=240)),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfCreate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('seen', models.IntegerField(default=0)),
             ],
             options={
@@ -177,7 +183,7 @@ class Migration(migrations.Migration):
                 ('body', models.TextField(default=b'Test Notification from mive')),
                 ('title', models.CharField(default=b'New Notification', max_length=240)),
                 ('link', models.CharField(default=b'#', max_length=240)),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfCreate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('seen', models.IntegerField(default=0)),
             ],
             options={
@@ -188,15 +194,16 @@ class Migration(migrations.Migration):
             name='Order',
             fields=[
                 ('order_id', models.AutoField(serialize=False, primary_key=True)),
+                ('timeOfCreate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfUpdate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('payment_mode', models.CharField(max_length=200, null=True, blank=True)),
                 ('subtotal', models.IntegerField(null=True, blank=True)),
                 ('status', models.CharField(default=b'PLACED', max_length=200)),
                 ('orderMsg', models.TextField(null=True, blank=True)),
                 ('deliveryTime', models.DateField(null=True, blank=True)),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
-                ('timeOfUpdate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('orderType', models.CharField(default=b'real', max_length=240, choices=[(b'real', b'real'), (b'dummy', b'dummy')])),
                 ('category', models.ForeignKey(blank=True, to='veggex.Category', null=True)),
+                ('invoices', models.ManyToManyField(to='veggex.Invoiceimage', blank=True)),
             ],
             options={
                 'ordering': ['-timeOfCreate'],
@@ -266,7 +273,7 @@ class Migration(migrations.Migration):
                 ('body', models.TextField(default=b'Test Notification from mive')),
                 ('title', models.CharField(default=b'New Notification', max_length=240)),
                 ('link', models.CharField(default=b'#', max_length=240)),
-                ('timeOfCreate', veggex.models.AutoDateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
+                ('timeOfCreate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('seen', models.IntegerField(default=0)),
             ],
             options={
