@@ -1,0 +1,201 @@
+{% extends 'adminr/base.html' %}
+{% block  content %}
+<section class="content-header">
+   <h1>
+      Mive 
+      <small>Stocks</small>
+   </h1>
+   <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Stocks</li>
+   </ol>
+</section>
+<section class="content">
+<div class="row">
+        <div class="col-md-10 col-md-offset-1" style="position:relative">
+          <form id="bigb">
+        <div class="row">
+           <div class="col-md-6 col-md-offset-1">
+             <div class="form-group">
+             <div class="col-sm-12" id="fatu">
+                 Select time range
+                  <input id="range_4" type="text" name="date" value="7;200">
+                  {%csrf_token%}
+                </div>
+
+                <!-- /.input group -->
+              </div>
+           </div>
+           <div class="col-md-2">
+           Sort by
+           <select name="sortby" class="form-control select2" style="width: 100%;" id="sortby">
+			<option selected="selected" value="impact">Impact</option>
+			<option  value="change">Change</option>
+			<option  value="avg">Average</option>
+			<option  value="current">Currentprice</option>
+			</select>
+           </div>
+         </div>
+         </form>
+        </div>
+        </div><br>
+      <div class="row">
+      {% if uniqueitems|length = 0 %}
+      <div class="col-md-10 col-md-offset-1" style="position:relative">
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">You have not purchased any items</h3>
+            </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-10 col-md-offset-1" style="position:relative">
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">Your stock</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="targetreload">
+              <table class="table table-condensed table-hover table-responsive">
+                <tr>
+                  <th ><center>Product</center></th>
+                  <th><center>Current</center></th>
+                  <th><center>avg</center></th>
+                  <th><center>change(%)</center></th>
+                  <th><center>Impact</center></th>
+                </tr>
+                {%for itemn in uniqueitems%}
+                <tr>
+                  <td><center>{{itemn.pd.product.name}}</center></td>
+                  <td>
+                    <center>₹{{itemn.currentprice}}</center>
+                  </td>
+                  <td>
+                    <center>
+                    ₹{{itemn.averageprice}}
+                  </td>
+                  <td data-href="/resetstock?stockId={{order.currentstock_id}}" onclick="return false" class="stock-reset"><center>{{itemn.sign}} %</center></td>
+                  <td data-href="/resetstock?stockId={{order.currentstock_id}}" onclick="return false" class="stock-reset"><center>₹{{itemn.impact}}</center></td>
+                </tr>
+                {% endfor%}
+              </table>
+            </div>
+            <!-- /.box-body -->
+
+            <div class="box-footer clearfix">
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+</section>
+{%endblock%}
+{% block script%}
+<script>
+$('body').on('click','.stock-reset',function(event){
+  url=$(this).attr('data-href')
+  console.log('url',url)
+  $(this).html("<center><img src='rstatic/new/images/282.GIF'></center>")
+  $.get(url,function(data){
+      console.log('clicked')
+    $('#stockreload').html(data)
+    })
+  })
+</script>
+<script>
+  $('body').on('submit','.ajaxstock',function(event){
+    event.preventDefault()
+    form = $(this)
+    url = $(this).attr('action')
+    data = form.serialize()
+    mivenotify('Success','Stock Updated','stock has been updated')
+    $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#stockreload').html(data)
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    }
+                  });
+
+  })
+</script>
+<script>
+  $(function () {
+    //Date range picker
+    $('#reservation').daterangepicker(
+      {
+    locale: {
+      format: 'MM-DD-YYYY'
+    }
+} 
+      );
+    //Date range picker with time picker
+
+  });
+</script>
+<script>
+  $('body').on('click','#fatu',function(event){
+    data = $('#bigb').serialize()
+    $('#targetreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+    $.ajax({
+                    type: "POST",
+                    url: '/stats/filter/prices',
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#targetreload').html(data)
+                      console.log(data)
+                    },
+                    error:function(data){
+                    mivenotify('error','Item add','Error occured while adding product')
+                    console.log(data)
+                    }
+                  });
+  })
+  </script>
+  <script>
+  $('body').on('click','#sortby',function(event){
+    data = $('#bigb').serialize()
+    $('#targetreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+    $.ajax({
+                    type: "POST",
+                    url: '/stats/filter/prices',
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#targetreload').html(data)
+                      console.log(data)
+                    },
+                    error:function(data){
+                    mivenotify('error','Item add','Error occured while adding product')
+                    console.log(data)
+                    }
+                  });
+  })
+  </script>
+  <script src="/rstatic/admin/plugins/ionslider/ion.rangeSlider.min.js"></script>
+  <script>
+  $(function () {
+    /* BOOTSTRAP SLIDER */
+    $('.slider').slider();
+
+    /* ION SLIDER */
+    $("#range_4").ionRangeSlider({
+      min: 7,
+      max: 200,
+      from: 7,
+      to: 200,
+      type: "single",
+      step: 1,
+      postfix: "days",
+      hideMinMax: true,
+      hideFromTo: false
+    });
+  });
+</script>
+{% endblock %}

@@ -85,6 +85,71 @@ def statsseller(request):
 	print products
 	print orders
 	return TemplateResponse(request, 'adminr/statsseller.html',{'basics':basics,'orders':orders,'statsproduct':statsProduct,'overalltotal':overalltotal,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
+def filterforprices(request):
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue') 
+	else:
+		localtz = pytz.timezone('Asia/Kolkata')
+		aaj = date.today()
+		days =request.POST['date']
+		sortby = request.POST['sortby']
+		basics= basicinfo(request)
+		beforedays = date.today() - timedelta(days=int(days))
+		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
+		timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
+		orders = Order.objects.filter(timeOfCreate__lte=timeaaj ).filter(timeOfCreate__gt=timebeforedays).order_by('-timeOfCreate')
+		orderids = orders.values('order_id')
+		print orderids
+		uniqueitems = []
+		times =[]
+		products = []
+		orderItems= Orderitem.objects.filter(order_id__in=orderids).order_by('order__timeOfCreate')
+		i=0
+		j=0
+		for ite in orderItems:
+			i=i+1
+			if ite.product in products:
+				print 'in if loop'
+				j=j+1
+				print j
+				print 'it was j'
+				index = products.index(ite.product)
+				if ite.order.timeOfCreate>times[index]:
+					times[index]=ite.order.timeOfCreate
+					currentprice = ite.pricePerUnit
+					old = uniqueitems[index]
+					ototal = Orderitem.objects.filter(order_id__in=orderids).filter(product=ite.product).exclude(orderitem_id=ite.orderitem_id).aggregate(Avg('pricePerUnit'))
+					averageprice = ototal['pricePerUnit__avg']
+					if averageprice==None:
+						averageprice=currentprice
+					increase = currentprice-averageprice
+					sign = increase*100/averageprice
+					impact = increase*ite.qtyInUnits
+					newbucket = {'pd':ite,'currentprice':currentprice,'averageprice':averageprice,'sign':sign,'impact':impact}
+					uniqueitems[index]=newbucket
+			else:
+				products.append(ite.product)
+				times.append(ite.order.timeOfCreate)
+				currentprice = ite.pricePerUnit
+				ototal = Orderitem.objects.filter(order_id__in=orderids).filter(product=ite.product).exclude(orderitem_id=ite.orderitem_id).aggregate(Avg('pricePerUnit'))
+				averageprice = ototal['pricePerUnit__avg']
+				if averageprice==None:
+					averageprice=currentprice
+				increase = currentprice-averageprice
+				impact = increase*ite.qtyInUnits
+				sign=increase*100/averageprice
+				bucket= {'pd':ite,'currentprice':currentprice,'averageprice':averageprice,'sign':sign,'impact':impact}
+				uniqueitems.append(bucket)
+		if (sortby=='impact'):
+			uniqueitems = sorted(uniqueitems, key=lambda k: k['impact'])
+		elif (sortby=='avg'):
+			uniqueitems = sorted(uniqueitems, key=lambda k: k['averageprice'])
+		elif (sortby=='current'):
+			uniqueitems = sorted(uniqueitems, key=lambda k: k['currentprice'],reverse=True)
+		else:
+			uniqueitems = sorted(uniqueitems, key=lambda k: k['sign'])
+		return TemplateResponse(request,'adminr/pricesreload.html',{'basics':basics,'uniqueitems':uniqueitems,'products':products})
+		
 def ajax0datefilter(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue') 
@@ -338,3 +403,63 @@ def statsorderitem(request):
 				stats.append(st)
 		print stats
 		return TemplateResponse(request, 'adminr/statsorder.html',{'basics':basics,'stats':stats,'csrf_token':get_or_create_csrf_token(request)})
+def pricefluct(request):
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue') 
+	else:
+		localtz = pytz.timezone('Asia/Kolkata')
+		aaj = date.today()
+		basics= basicinfo(request)
+		before7 = date.today() - timedelta(days=7)
+		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
+		timebefore7 = datetime.combine(before7, datetime.max.time()).replace(tzinfo=localtz)
+		orders = Order.objects.filter(timeOfCreate__lte=timeaaj ).filter(timeOfCreate__gt=timebefore7).order_by('-timeOfCreate')
+		orderids = orders.values('order_id')
+		print orderids
+		uniqueitems = []
+		times =[]
+		products = []
+		orderItems= Orderitem.objects.filter(order_id__in=orderids).order_by('order__timeOfCreate')
+		i=0
+		j=0
+		for ite in orderItems:
+			i=i+1
+			print i
+			print 'hola yadavji>>>'
+			print products
+			print len(products)
+			print len(uniqueitems)
+			if ite.product in products:
+				print 'in if loop'
+				j=j+1
+				print j
+				print 'it was j'
+				index = products.index(ite.product)
+				if ite.order.timeOfCreate>times[index]:
+					times[index]=ite.order.timeOfCreate
+					currentprice = ite.pricePerUnit
+					old = uniqueitems[index]
+					ototal = Orderitem.objects.filter(order_id__in=orderids).filter(product=ite.product).exclude(orderitem_id=ite.orderitem_id).aggregate(Avg('pricePerUnit'))
+					averageprice = ototal['pricePerUnit__avg']
+					if averageprice==None:
+						averageprice=currentprice
+					increase = currentprice-averageprice
+					impact = increase*ite.qtyInUnits
+					sign = increase*100/averageprice
+					newbucket = {'pd':ite,'currentprice':currentprice,'averageprice':averageprice,'sign':sign,'impact':impact}
+					uniqueitems[index]=newbucket
+			else:
+				products.append(ite.product)
+				times.append(ite.order.timeOfCreate)
+				currentprice = ite.pricePerUnit
+				ototal = Orderitem.objects.filter(order_id__in=orderids).filter(product=ite.product).exclude(orderitem_id=ite.orderitem_id).aggregate(Avg('pricePerUnit'))
+				averageprice = ototal['pricePerUnit__avg']
+				if averageprice==None:
+					averageprice=currentprice
+				increase = currentprice-averageprice
+				sign=increase*100/averageprice
+				impact = increase*ite.qtyInUnits
+				bucket= {'pd':ite,'currentprice':currentprice,'averageprice':averageprice,'sign':sign,'impact':impact}
+				uniqueitems.append(bucket)
+		uniqueitems = sorted(uniqueitems, key=lambda k: k['impact']) 
+		return TemplateResponse(request,'adminr/prices.html',{'basics':basics,'uniqueitems':uniqueitems,'products':products})
