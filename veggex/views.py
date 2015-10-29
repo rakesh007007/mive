@@ -631,6 +631,7 @@ def stock(request):
 		basics = basicinfo(request)
 		miveuser = basics['miveuser']
 		stocks = Currentstock.objects.filter(user=miveuser)
+		stocks=sorted(stocks, key=operator.attrgetter('remainingstock'),reverse=True)
 		basics =basicinfo(request)
 		return TemplateResponse(request, 'adminr/stocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
 
