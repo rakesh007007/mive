@@ -225,8 +225,11 @@ def categoryVendorView(request):
 		basics = basicinfo(request)
 		miveuser=basics['miveuser']
 		categoryVendorId=request.GET['categoryVendorId']
-		categoryVendorId = int(categoryVendorId)
-		categoryVendor = CategoryVendor.objects.get(categoryvendor_id=categoryVendorId)
+		if int(categoryVendorId)==0:
+			categoryVendor = CategoryVendor.objects.filter(user=miveuser).get(seller__nameOfSeller='Mive')
+		else:
+			categoryVendorId = int(categoryVendorId)
+			categoryVendor = CategoryVendor.objects.get(categoryvendor_id=categoryVendorId)
 		seller = categoryVendor.seller
 		products = categoryVendor.products
 		return TemplateResponse(request,'adminr/categoryvendor.html',{'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})

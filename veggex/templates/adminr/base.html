@@ -27,6 +27,9 @@
   <link rel="stylesheet" href="/rstatic/admin/plugins/datepicker/datepicker3.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/rstatic/admin/plugins/daterangepicker/daterangepicker-bs3.css">
+  <link rel="stylesheet" href="/rstatic/admin/plugins/ionslider/ion.rangeSlider.css">
+  <!-- ion slider Nice -->
+  <link rel="stylesheet" href="/rstatic/admin/plugins/ionslider/ion.rangeSlider.skinNice.css">
 
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="/rstatic/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
@@ -250,21 +253,26 @@
             <i class="fa fa-dashboard"></i> <span>Orders</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="/index.html"><i class="fa fa-circle-o"></i> place order</a></li>
+            <li class="active"><a href="/categoryvendor?categoryVendorId=0"><i class="fa fa-circle-o"></i> place order</a></li>
             <li><a href="/seeOrder"><i class="fa fa-circle-o"></i>View Last Orders</a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href="/data/vendors">
+          <a href="/data/main">
             <i class="fa fa-files-o"></i>
-            <span>Manage Vendors</span>
-            <span class="label label-primary pull-right">4</span>
+            <span>Add Invoices</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="/data/main">
-            <i class="fa fa-files-o"></i>
-            <span>Add data</span>
+          <a href="/stats/prices">
+            <i class="fa fa-search-minus"></i>
+            <span>Price Intelligence</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/data/vendors">
+            <i class="fa fa-user-plus"></i>
+            <span>Manage Vendors</span>
           </a>
         </li>
          <li>
@@ -295,7 +303,7 @@
         </li>
         <li>
           <a href="pages/widgets.html" onclick="return false" class="notif">
-            <i class="fa fa-th"></i> <span>Payments</span>
+            <i class="fa fa-inr"></i> <span>Payments</span>
             <small class="label pull-right bg-green">new</small>
           </a>
         </li>
