@@ -599,6 +599,7 @@ def resetstock(request):
 		stcons.user = miveuser
 		stcons.save()
 		stocks = Currentstock.objects.filter(user=miveuser)
+		stocks=sorted(stocks, key=operator.attrgetter('remainingstock'),reverse=True)
 		basics =basicinfo(request)
 		return TemplateResponse(request, 'adminr/ajaxstocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
 def ajaxstock(request):
@@ -622,6 +623,7 @@ def ajaxstock(request):
 		stcons.consumption = cons
 		stcons.save()
 		stocks = Currentstock.objects.filter(user=miveuser)
+		stocks=sorted(stocks, key=operator.attrgetter('remainingstock'),reverse=True)
 		basics =basicinfo(request)
 		return TemplateResponse(request, 'adminr/ajaxstocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
 def stock(request):
@@ -631,6 +633,7 @@ def stock(request):
 		basics = basicinfo(request)
 		miveuser = basics['miveuser']
 		stocks = Currentstock.objects.filter(user=miveuser)
+		stocks=sorted(stocks, key=operator.attrgetter('remainingstock'),reverse=True)
 		basics =basicinfo(request)
 		return TemplateResponse(request, 'adminr/stocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
 

@@ -61,28 +61,6 @@
         </div>
       </div>
 </section>
-<div class="modal fade" id="data-order-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
-         <div class="modal-dialog">
-            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
-               <form id="orderdata" method="get" action="/data/ordercategory" style="display:inline;">
-              <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
-              <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
-               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
-                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
-               </div>
-               <div class="col-md-4 col-lg-4 col-xs-12">
-                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
-                     <input type="hidden" name="csrfmiddlewaretoken" value="XxYq2vc6MzqqLBPH86mIQeEfObTCXVCc">
-               </div>
-               <div class="col-md-1 col-lg-1 col-xs-6 ol-md-offset-0 col-lg-offset-0">
-                  <button type="submit" id="checkout" class="btn btn-success btn-lg">
-                  Checkout
-                  </button>
-               </div>
-               </form>
-            </div>
-         </div>
-      </div>
 {%endblock%}
 {% block script%}
 
