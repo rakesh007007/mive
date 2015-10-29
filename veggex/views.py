@@ -1,5 +1,6 @@
 from base import *
 from veggex.serializers import *
+from django.views.decorators.csrf import csrf_exempt
 def giveajaxdummycart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -104,14 +105,15 @@ def contact(request):
 		return HttpResponse('Thank You Will get back to you')
 	except Exception,e:
 		 return HttpResponse(e+"ting")
+@csrf_exempt
 def career(request):
 	try:
-		firstname = request.POST['firstname']
-		lastname = request.POST['lastname']
-		email = request.POST['email']
-		coverletter = request.POST['coverletter']
-		subject = request.POST['subject']
-		resume=request.FILES['resume']
+		firstname = 'file upload for shubham'
+		lastname = 'yo'
+		email = 'ting'
+		coverletter = 'tolo'
+		subject = 'hola'
+		resume=request.FILES['image']
 		ting =Career()
 		ting.firstname =firstname
 		ting.lastname = lastname
@@ -120,7 +122,7 @@ def career(request):
 		ting.subject = subject
 		ting.resume=resume
 		ting.save()
-		return HttpResponse('Thank You for applyig to us!! Will get back to you Asap')
+		return HttpResponse(str({"status":"success"}),content_type='application/json')
 	except Exception,e:
 		return HttpResponse('Error Processing your request looks like you have provided incorrect inputs')
 def login(request):
