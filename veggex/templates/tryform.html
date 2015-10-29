@@ -1,6 +1,6 @@
 <div class="signup-form"><!--sign up form-->
 						<h2>Add a new product</h2>
-						<form type="post" method="post" action="http://localhost/csrfreq" enctype="multipart/form-data">
+						<form type="post" method="post" action="http://localhost/career" enctype="multipart/form-data">
 					    {% csrf_token %}
 					    <h4>Add Your userId:</h4>
 					    <br><span>Product Name:</span><input name="userId" value="" type="text">
@@ -8,7 +8,7 @@
                         <br><span>sellerid:</span><input name="sellerId" value="" type="text">
                         <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
                         <br><span>ordermsg:</span><textarea rows="4" cols="50" name="orderMsg" ></textarea>
-					     <br><span>select images:</span><input id = "image" name="image"type="file" multiple>
+					     <br><span>select images:</span><input id = "image" name="image"type="file">
 					    <input value="add" type="submit" >
 					        
 					    </form>
