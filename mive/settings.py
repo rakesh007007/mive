@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'veggex',
     'rest_framework',
     'rest_framework.authtoken',
+    'debug_toolbar',
 
 )
 EMAIL_HOST = 'smtp.gmail.com'
