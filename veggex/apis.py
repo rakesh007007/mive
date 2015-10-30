@@ -237,7 +237,7 @@ class ApiAddToDummyCart(APIView):
 			user=User.objects.get(user_id=userId)
 			for i in range(0,len(items)):
 				qty=items[str(i+1)]['qty']
-				priceperunit=items[str(i+1)]['priceperunit']
+				priceperunit=items[str(i+1)]['pricePerUnit']
 				qty = int(qty)
 				priceperunit = int(priceperunit)
 				productId=items[str(i+1)]['productId']

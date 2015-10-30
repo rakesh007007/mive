@@ -1,0 +1,55 @@
+def pricefluct(request):
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue') 
+	else:
+		localtz = pytz.timezone('Asia/Kolkata')
+		aaj = date.today()
+		basics= basicinfo(request)
+		before7 = date.today() - timedelta(days=7)
+		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
+		timebefore7 = datetime.combine(before7, datetime.max.time()).replace(tzinfo=localtz)
+		orders = Order.objects.filter(timeOfCreate__lte=timeaaj ).filter(timeOfCreate__gt=timebefore7).order_by('-timeOfCreate')
+		orderids = orders.values('order_id')
+		print orderids
+		uniqueitems = []
+		times =[]
+		products = []
+		orderItems= Orderitem.objects.filter(order_id__in=orderids).order_by('order__timeOfCreate')
+		i=0
+		j=0
+		for ite in orderItems:
+			if ite.product in products:
+				index = products.index(ite.product)
+				if ite.order.timeOfCreate>times[index]:
+					times[index]=ite.order.timeOfCreate
+					currentprice = ite.pricePerUnit
+					nextitem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__gte=timebefore7).order_by('order__timeOfCreate')
+					previtem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__lte=timebefore7).order_by('-order__timeOfCreate')
+					if nextitem.order.timeOfCreate-timebefore7<timebefore7-previtem.order.timeOfCreate:
+						closestorderitem = nextitem
+					else:
+						closestorderitem = previtem
+					lastprice = closestorderitem.pricePerUnit 
+					increase = currentprice-lastprice
+					sign=increase*100/lastprice
+					impact = sign*ite.qtyInUnits
+					bucket= {'pd':ite,'currentprice':currentprice,'lastprice':lastprice,'sign':sign,'impact':impact}
+					uniqueitems[index]=bucket
+			else:
+				products.append(ite.product)
+				times.append(ite.order.timeOfCreate)
+				currentprice = ite.pricePerUnit
+				nextitem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__gte=timebefore7).order_by('order__timeOfCreate')
+				previtem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__lte=timebefore7).order_by('-order__timeOfCreate')
+				if nextitem.order.timeOfCreate-timebefore7<timebefore7-previtem.order.timeOfCreate:
+					closestorderitem = nextitem
+				else:
+					closestorderitem = previtem
+				lastprice = closestorderitem.pricePerUnit 
+				increase = currentprice-lastprice
+				sign=increase*100/lastprice
+				impact = sign*ite.qtyInUnits
+				bucket= {'pd':ite,'currentprice':currentprice,'lastprice':lastprice,'sign':sign,'impact':impact}
+				uniqueitems.append(bucket)
+		uniqueitems = sorted(uniqueitems, key=lambda k: k['impact']) 
+		return TemplateResponse(request,'adminr/prices.html',{'basics':basics,'uniqueitems':uniqueitems,'products':products})
