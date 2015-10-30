@@ -1,0 +1,26 @@
+<table class="table table-responsive borderless">
+                <tr class="success">
+                  <th class="hidden-xs hidden-sm"><center>Seller</center></th>
+                  <th><center>Date</center></th>
+                  <th><center>Status</center></th>
+                  <th><center>Subtotal</center></th>
+                  <th class="hidden-sm hidden-xs"><center>Details</center></th>
+                </tr>
+                {%for order in orders%}
+                <tr>
+                  <td class="hidden-xs hidden-sm"><center>{{order.seller.nameOfSeller}}</center></td>
+                  <td>
+                    <center>{{order.timeOfCreate}}</center>
+                  </td>
+                  <td>
+                    <center>{{order.status}}</center>
+                  </td>
+                  <td><center>
+                  <center>₹{{order.subtotal}}</center>
+                  </td>
+                  <td>
+                    <center><a data-productid="{{item.product.product_id}}" href="/orderDetail?orderId={{order.order_id}}" ><span class="badge bg-yellow" style="color:blue">Details</span></a></center>
+                  </td>
+                </tr>
+                {% endfor%}
+              </table>
