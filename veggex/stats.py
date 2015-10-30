@@ -463,3 +463,4 @@ def pricefluct(request):
 				uniqueitems.append(bucket)
 		uniqueitems = sorted(uniqueitems, key=lambda k: k['impact']) 
 		return TemplateResponse(request,'adminr/prices.html',{'basics':basics,'uniqueitems':uniqueitems,'products':products})
+
