@@ -148,7 +148,7 @@ Make order
 
            }
 Make order dummy
-   end point */api/temp/makeorder/
+   end point */api/temp/makeorderdummy/
    POST
    content type : 'multipart/form-data'
    body:
@@ -158,6 +158,19 @@ Make order dummy
            "orderMsg" :"{cartId}"
            "sellerId":"{sellerId}"
            "image": {images of invoic might be multiple}
+Sees orde with filters
+   end point */api/seeorders/
+   POST
+   body:
+          {
+              "userId":"{{userId}}",
+              "days":"{{number of days}}",
+              "payment":"{{paid,unpaid or all}}",
+              "sellers":[{"sellerId":1},{"sellerId":4},{"sellerId":5},{"sellerId":3},{"sellerId":6}],
+              "sortby":"{{subtotal,seller,status,date}}"
+              
+          }
+
 Orders of a user
    GET
    end point */api/user/orders/{orderId}/

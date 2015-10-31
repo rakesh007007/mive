@@ -333,6 +333,45 @@ class ApiUpdateDummyCart(APIView):
 			return Response([{"status":"success"}])
 		except Exception,e:
 			return Response(e)
+class ApiSeeOrder(APIView):
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	def post(self,request,format=None):
+		userId = request.data['userId']
+		miveuser=User.objects.get(user_id = int(userId))
+		localtz = pytz.timezone('Asia/Kolkata')
+		aaj = date.today()
+		days =request.data['days']
+		sellers = request.data['sellers']
+		d=[]
+		for js in sellers:
+			d.append(int(js['sellerId']))
+		sellers=d
+		print sellers
+		print 'hiiiiiiii'
+		payment=request.data['payment']
+		sortby = request.data['sortby']
+		beforedays = date.today() - timedelta(days=int(days))
+		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
+		timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
+		if payment=='all':
+			orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
+		else:
+			orders = Order.objects.filter(user=miveuser).filter(seller__seller_id__in=sellers).filter(payment=payment).filter(timeOfCreate__gt=timebeforedays)
+		if (sortby=='date'):
+			orders=orders.order_by('-timeOfCreate')
+		elif (sortby=='subtotal'):
+			orders=orders.order_by('-subtotal')
+		elif (sortby=='status'):
+			orders=orders.order_by('-status')
+		else:
+			orders=orders.order_by('-seller__nameOfSeller')
+		print orders
+		l=[]
+		for p in orders:
+			l.append(OrderSerializer(p,context={'request': request}).data)
+		orders = l
+		return HttpResponse(JSONRenderer().render(orders),content_type='application/json')
 class ApiSeeCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
@@ -611,6 +650,14 @@ class UserViewSet(viewsets.ModelViewSet):
 	#permission_classes = (IsAuthenticated,)
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
+class InvocieimageViewSet(viewsets.ModelViewSet):
+	"""
+	API endpoint that allows users to be viewed or edited.
+	"""
+	#authentication_classes = (TokenAuthentication,)
+	#permission_classes = (IsAuthenticated,)
+	queryset = Invoiceimage.objects.all()
+	serializer_class = InvoiceimageSerializer
 class CartViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.

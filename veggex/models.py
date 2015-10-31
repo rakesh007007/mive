@@ -307,6 +307,8 @@ class Accartitem(models.Model):
 class Invoiceimage(models.Model):
     invoiceimage_id = models.AutoField(primary_key=True)
     image = models.ImageField(upload_to='./invoices')
+    def geturl(self):
+    	return self.image.url
 class Order(models.Model):
 	order_id = models.AutoField(primary_key=True)
 	user=models.ForeignKey(User,blank=False,null=False)
