@@ -93,7 +93,7 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
 class OrderitemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Orderitem
-        fields = ('orderitem_id','order','unit','qtyInUnits','priceType','priceAtThatTime','product')
+        fields = ('orderitem_id','order','unit','qtyInUnits','priceType','pricePerUnit','product')
 class CustomCategoryProductsSerializer(serializers.HyperlinkedModelSerializer):
     product = ProductSerializer(many=True)
     class Meta:
