@@ -34,12 +34,12 @@
     {
       theme: "theme",
       title:{
-        text: "Per Order spending"
+        text: "Per Order spending({{this.nameOfSeller}})"
       },
       animationEnabled: true,
       axisX: {
         valueFormatString: "DD/MMM",
-        interval:2,
+        interval:{{intervel}},
         labelFontSize: 15,
         intervalType: "day"
         
@@ -51,7 +51,7 @@
       },
       data: [
       {        
-        type: "scatter",
+        type: "line",
          markerSize: 20,
         //lineThickness: 3,        
         dataPoints: [
@@ -70,7 +70,7 @@ chart.render();{%endif%}
    var chart2 = new CanvasJS.Chart("chartContainer2", {
 
          title:{
-            text:"Amount spent per product for this seller"           
+            text:"Amount spent per product for {{this.nameOfSeller}}"           
 
          },
          theme:"theme",
