@@ -56,8 +56,12 @@
               <h3 class="box-title">Charts</h3>
             </div>
             <!-- /.box-header -->
+            {%if orderItems|length = 0 %}
+            <h1>No orders right now</h1>
+            {%else%}
             <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
             </div>
+            {%endif%}
             <!-- /.box-body -->
             <div class="box-footer clearfix">
               

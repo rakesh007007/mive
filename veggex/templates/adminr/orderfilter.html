@@ -1,4 +1,7 @@
 <table class="table table-responsive borderless">
+{% if orders|length = 0 %}
+                <h3>No data for this selection</h3>
+                {% else %}
                 <tr class="success">
                   <th class="hidden-xs hidden-sm"><center>Seller</center></th>
                   <th><center>Date</center></th>
@@ -6,6 +9,7 @@
                   <th><center>Subtotal</center></th>
                   <th class="hidden-sm hidden-xs"><center>Details</center></th>
                 </tr>
+                {% endif %}
                 {%for order in orders%}
                 <tr>
                   <td class="hidden-xs hidden-sm"><center>{{order.seller.nameOfSeller}}</center></td>

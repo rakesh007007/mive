@@ -246,7 +246,7 @@ class User(models.Model):
     cart =models.ForeignKey(Cart,blank=False,null=False)
     dummycart =models.ForeignKey(Dummycart,blank=False)
     owner = models.ForeignKey(Owner,blank=True, null=True)
-    categories = models.ManyToManyField(CategoryVendor,blank=True)
+    categories = models.ManyToManyField(CategoryVendor,blank=True,default=[39,])
     dummyvendors = models.ManyToManyField(DummyVendor,blank=True)
     creditlimit = models.IntegerField(default=10000,null=True,blank=True)
     notifications = models.ManyToManyField(Notification,blank=True)
