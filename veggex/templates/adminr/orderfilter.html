@@ -3,18 +3,18 @@
                 <h3>No data for this selection</h3>
                 {% else %}
                 <tr class="success">
-                  <th class="hidden-xs hidden-sm"><center>Seller</center></th>
-                  <th><center>Date</center></th>
+                  <th ><center>Seller</center></th>
+                  <th class="hidden-xs hidden-sm"><center>Date</center></th>
                   <th><center>Status</center></th>
                   <th><center>Subtotal</center></th>
                   <th><center>Invoice</center></th>
-                  <th class="hidden-sm hidden-xs"><center>Details</center></th>
+                  <th ><center>Details</center></th>
                 </tr>
                 {% endif %}
                 {%for order in orders%}
                 <tr>
-                  <td class="hidden-xs hidden-sm"><center>{{order.seller.nameOfSeller}}</center></td>
-                  <td>
+                  <td ><center>{{order.seller.nameOfSeller}}</center></td>
+                  <td class="hidden-xs hidden-sm">
                     <center>{{order.timeOfCreate}}</center>
                   </td>
                   <td>
