@@ -4,13 +4,12 @@
               <h3 class="box-title">Charts</h3>
             </div>
             <!-- /.box-header -->
-            {%if statseller.count = 0 %}
-            <div class="box-header with-border">
-              <h3 class="box-title">No data for this selection</h3>
-            </div>
+           {%if statsseller|length = 0%}
+            <h1>No orders right now</h1>
             {%else%}
             <div class="box-body" id="chartContainer" style="height: 300px; width: 90%;">
-            </div>{% endif %}
+            </div>
+            {%endif%}
 
             {%if statsproduct.count = 0 %}
             <div class="box-header with-border">

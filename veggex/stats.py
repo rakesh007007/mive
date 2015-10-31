@@ -27,7 +27,7 @@ def statswastage(request):
 	else:
 		stock = Currentstock.objects.get(currentstock_id = stockId)
 		stcss = Stockwastage.objects.filter(stock=stock)
-	t = Stockwastage.objects.all()
+	t = Stockwastage.objects.filter(user=miveuser)
 	l =[]
 	pd = []
 	for pp in t:
@@ -45,18 +45,24 @@ def statsconsumption(request):
 		stcss = Stockconsumption.objects.filter(stock__in=stocks)
 		od1 = stcss.order_by('-timeOfCreate')
 		od2 = stcss.order_by('timeOfCreate')
-		delta=od1[0].timeOfCreate-od2[0].timeOfCreate
-		intervel = int(delta.days/10)+1
+		if od1.count()!=0 and od2.count()!=0:
+			delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+			intervel = int(delta.days/10)+1
+		else:
+			intervel=1
 	else:
 		stock = Currentstock.objects.get(currentstock_id = stockId)
 		stcss = Stockconsumption.objects.filter(stock=stock)
 		od1 = stcss.order_by('-timeOfCreate')
 		od2 = stcss.order_by('timeOfCreate')
-		delta=od1[0].timeOfCreate-od2[0].timeOfCreate
-		intervel = int(delta.days/10)+1
+		if od1.count()!=0 and od2.count()!=0:
+			delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+			intervel = int(delta.days/10)+1
+		else:
+			intervel=1
 	print 'intervel'
 	print intervel
-	t = Stockconsumption.objects.all()	
+	t = Stockconsumption.objects.filter(user=miveuser)	
 	l =[]
 	pd =[]
 	for pp in t:

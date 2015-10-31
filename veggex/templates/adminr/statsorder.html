@@ -42,16 +42,20 @@
               <h3 class="box-title">Charts</h3>
             </div>
             <!-- /.box-header -->
+            {%if statsseller|length = 0%}
+            <h1>No orders right now</h1>
+            {%else%}
             <div class="box-body" id="chartContainer" style="height: 300px; width: 90%;">
             </div>
+            {%endif%}
+            {%if statsproduct|length = 0%}
+            {%else%}
             <div class="box-body" id="chartContainer2" style="height: 350px; width: 90%;">
             </div>
-            <center><div class="box-body" id="chart_div" style="height: 350px; width: 90%;">
-            </div></center>
+            {%endif%}
             <!-- /.box-body -->
             <div class="box-footer clearfix">
               
-              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
             </div>
           </div></center>
         </div>

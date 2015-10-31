@@ -590,22 +590,28 @@ def resetstock(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	else:
-		basics = basicinfo(request)
-		miveuser = basics['miveuser']
-		stockId = int(request.GET['stockId'])
-		stock = Currentstock.objects.filter(user=miveuser).get(currentstock_id = stockId)
-		remainingstock = stock.remainingstock
-		stock.remainingstock=0
-		stock.save()
-		stcons = Stockwastage()
-		stcons.stock = stock
-		stcons.wastage = remainingstock
-		stcons.user = miveuser
-		stcons.save()
-		stocks = Currentstock.objects.filter(user=miveuser)
-		stocks=sorted(stocks, key=operator.attrgetter('remainingstock'),reverse=True)
-		basics =basicinfo(request)
-		return TemplateResponse(request, 'adminr/ajaxstocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
+		try:
+			basics = basicinfo(request)
+			miveuser = basics['miveuser']
+			stockId = int(request.GET['stockId'])
+			stock = Currentstock.objects.filter(user=miveuser).get(currentstock_id = stockId)
+			remainingstock = stock.remainingstock
+			if remainingstock!=0:
+				stock.remainingstock=0
+				stock.save()
+				stcons = Stockwastage()
+				stcons.stock = stock
+				stcons.wastage = remainingstock
+				stcons.user = miveuser
+				stcons.save()
+				stocks = Currentstock.objects.filter(user=miveuser)
+				stocks=sorted(stocks, key=operator.attrgetter('remainingstock'),reverse=True)
+				basics =basicinfo(request)
+				return TemplateResponse(request, 'adminr/ajaxstocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
+			else:
+				raise ValueError('A very specific bad thing happened')
+		except Exception,e:
+			return HttpResponse(e,status=500)
 def ajaxstock(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
