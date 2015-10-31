@@ -1,7 +1,9 @@
 <button class="btn btn-success pull-left" data-orderid="{{order.order_id}}" id="previnvoice">prev</button>
 <button class="btn btn-success pull-right" data-orderid="{{order.order_id}}" id="nextinvoice">next</button>
 <br>
-<div class="hidden-sm hidden-xs">
+<div>
+<center>Order Id: {{order.order_id}}</center>
+
 {%for inv in invoices.all %}
 <center><img src="/{{inv.image.url}}"  class="img img-responsive" width="500px"></center><br>
 {% endfor %}
