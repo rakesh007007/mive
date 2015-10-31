@@ -99,6 +99,7 @@
                   <th><center>Date</center></th>
                   <th><center>Status</center></th>
                   <th><center>Subtotal</center></th>
+                  <th><center>Invoices</center></th>
                   <th class="hidden-sm hidden-xs"><center>Details</center></th>
                 </tr>
                 {%for order in orders%}
@@ -112,6 +113,9 @@
                   </td>
                   <td><center>
                   <center>₹{{order.subtotal}}</center>
+                  </td>
+                   <td>
+                    <center><a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" style="color:blue"><span class="badge bg-green" style="color:blue">Invoice</span></span></a></center>
                   </td>
                   <td>
                     <center><a data-productid="{{item.product.product_id}}" href="/orderDetail?orderId={{order.order_id}}" ><span class="badge bg-yellow" style="color:blue">Details</span></a></center>
@@ -129,38 +133,14 @@
       </div>
       {% endif %}
 </section>
-<div class="modal fade" id="order-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+<div class="modal fade" id="invoice-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
          <div class="modal-dialog">
-            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
-               <form id="orderdata" method="get" action="/ordercategory" style="display:inline;">
-              <input type="hidden" name="cartid" value="{{miveuser.cart.cart_id}}">
-              <input type="hidden" name="categoryvendorid" id="orderplaceid" value="{{pd.categoryvendor_id}}">
-               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
-                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
-               </div>
-               <div class="col-md-4 col-lg-4 col-xs-12">
-                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
-                     <input type="hidden" name="csrfmiddlewaretoken" value="XxYq2vc6MzqqLBPH86mIQeEfObTCXVCc">
-               </div>
-               <div class="col-md-1 col-lg-1 col-xs-6 ol-md-offset-0 col-lg-offset-0">
-                  <button type="submit" id="checkout" class="btn btn-success btn-lg">
-                  Checkout
-                  </button>
-               </div>
-               </form>
+            <div class="loginmodal-container2 loginmodal-container" id="invoice-detail-container" style="max-width:none;max-height:none;">
             </div>
          </div>
       </div>
 {%endblock%}
 {% block script%}
-<script>
-  $('body').on('click','.orderplace',function(event){
-    categoryvendorid = $(this).attr('data-categoryvendorid')
-    console.log('clicked')
-    $('#orderplaceid').attr('value',categoryvendorid)
-    $('#order-modal').modal('toggle')
-  })
-</script>
 <script>
   $('body').on('click','#fatu',function(event){
     data = $('#bigb').serialize()
@@ -268,6 +248,75 @@
 <script src="rstatic/admin/plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript">
   $(".select2").select2();
-</script>>
+</script>
+<script type="text/javascript">
+  orderids=[
+  {% for od in orders %}
+  {{od.order_id}},
+  {% endfor %}
+  ]
+</script>
+<script>
+  $('body').on('click','.invoice-detail',function(request){
+    $('#invoice-detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+    orderid = $(this).attr('data-orderid')
+    console.log('orderid',orderid)
+    $('#invoice-modal').modal('toggle')
+    index= orderids.indexOf(orderid)
+    previd = orderids[index-1]
+    nextid = orderids[index+1]
+    $.get('/invoices?orderId='+orderid,function(data){
+     $('#invoice-detail-container').html(data)
+     console.log(data)
+    })
+  })
+</script>
+<script>
+  $('body').on('click','#nextinvoice',function(request){
+    orderid = $(this).attr('data-orderid')
+    console.log('orderid',orderid)
+    finished = orderids.length
+    index= orderids.indexOf(parseInt(orderid))
+    console.log('index',index)
+    index=index+1
+    console.log('index',index)
+    if (index>finished-1){
+      mivenotify('notice','No more orders','')
+    }
+    else{
+    $('#invoice-detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+
+      nextid = orderids[index]
+    console.log('nextid',nextid)
+    $.get('/invoices?orderId='+nextid,function(data){
+     $('#invoice-detail-container').html(data)
+     console.log(data)
+    })
+
+    }
+  })
+</script>
+<script>
+  $('body').on('click','#previnvoice',function(request){
+    orderid = $(this).attr('data-orderid')
+    console.log('orderid',orderid)
+    index= orderids.indexOf(parseInt(orderid))
+    index= index-1
+    if (index<0){
+      mivenotify('notice','No more orders','')
+    }
+    else{
+    $('#invoice-detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+
+      nextid = orderids[index]
+    console.log('nextid',nextid)
+    $.get('/invoices?orderId='+nextid,function(data){
+     $('#invoice-detail-container').html(data)
+     console.log(data)
+    })
+
+    }
+  })
+</script>
 
 {% endblock %}

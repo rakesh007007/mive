@@ -7,6 +7,7 @@
                   <th><center>Date</center></th>
                   <th><center>Status</center></th>
                   <th><center>Subtotal</center></th>
+                  <th><center>Invoice</center></th>
                   <th class="hidden-sm hidden-xs"><center>Details</center></th>
                 </tr>
                 {% endif %}
@@ -23,8 +24,18 @@
                   <center>₹{{order.subtotal}}</center>
                   </td>
                   <td>
+                    <center><a data-orderid="{{order.order_id}}" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" style="color:blue"><span class="badge bg-green" style="color:blue">Invoice</span></span></a></center>
+                  </td>
+                  <td>
                     <center><a data-productid="{{item.product.product_id}}" href="/orderDetail?orderId={{order.order_id}}" ><span class="badge bg-yellow" style="color:blue">Details</span></a></center>
                   </td>
                 </tr>
                 {% endfor%}
               </table>
+              <script type="text/javascript">
+                orderids=[
+                {% for od in orders %}
+                {{od.order_id}},
+                {% endfor %}
+                ]
+              </script>
