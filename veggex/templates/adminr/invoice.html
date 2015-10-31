@@ -1,7 +1,15 @@
 <button class="btn btn-success pull-left" data-orderid="{{order.order_id}}" id="previnvoice">prev</button>
 <button class="btn btn-success pull-right" data-orderid="{{order.order_id}}" id="nextinvoice">next</button>
 <br>
-<div>
+<div class="hidden-sm hidden-xs">
+{%for inv in invoices.all %}
+<center><img src="/{{inv.image.url}}" width="500px"></center><br>
+{% endfor %}
+{% if invoices.all|length = 0 %}
+<center><h3>No invoice image for this order</h3></center>
+{%endif%}
+</div>
+<div class="hidden-md hidden-lg hidden-xl">
 {%for inv in invoices.all %}
 <center><img src="/{{inv.image.url}}" width="500px"></center><br>
 {% endfor %}
