@@ -1,4 +1,7 @@
 {% extends 'adminr/base.html' %}
+{% block css%}
+<link rel="stylesheet" href="rstatic/admin/plugins/select2/select2.min.css">
+{% endblock %}
 {% block  content %}
 <section class="content-header">
    <h1>
@@ -11,11 +14,22 @@
    </ol>
 </section>
 <section class="content">
+<form id="bigb">
 <div class="row">
-      <div class="col-md-10 col-md-offset-1" style="position:relative">
-        <form id="bigb">
+<div class="col-md-3 col-md-offset-1 " style="position:relative">
+       <div class="form-group">
+                <label>Multiple</label>
+                <select class="form-control select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;" name="sellers" id="sellerselect">
+                 {%for sel in sellers%}
+                  <option selected value="{{sel.seller_id}}">{{sel.nameOfSeller}}</option>
+                  {%endfor%}
+                 }
+                </select>
+              </div>
+              </div>
+      <div class="col-md-6">
       <div class="row">
-         <div class="col-md-6 col-md-offset-1">
+         <div class="col-md-7">
            <div class="form-group">
            <div class="col-sm-12" id="fatu">
                Select time range
@@ -26,7 +40,7 @@
               <!-- /.input group -->
             </div>
          </div>
-         <div class="col-md-2">
+         <div class="col-md-3">
          Sort by
          <select name="sortby" class="form-control select2" style="width: 100%;" id="sortby">
     <option selected="selected" value="date">Date</option>
@@ -35,11 +49,33 @@
     <option  value="seller">seller</option>
     </select>
          </div>
+         <div class="col-md-2 ">
+       <div class="form-group" id="checkbox">
+                  <div class="checkbox" >
+                    <label>
+                      <input type="radio" name="rak" value="paid">
+                      paid
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="radio" name="rak" value="all" checked>
+                      all
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="radio" name="rak" value="unpaid">
+                      unpaid
+                    </label>
+                  </div>
+
+                </div>
+              </div>
        </div>
-       </form>
       </div>
 </div><br>
-      <div class="row">
+</form>
       <div class="row">
       {% if orders|length = 0 %}
       <div class="col-md-10 col-md-offset-1" style="position:relative">
@@ -146,8 +182,51 @@
   })
   </script>
   <script>
-  $('body').on('click','#sortby',function(event){
+  $('body').on('change','#sortby',function(event){
     data = $('#bigb').serialize()
+    console.log('yolo')
+    $('#targetreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+    $.ajax({
+                    type: "POST",
+                    url: '/filter/seeorder',
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#targetreload').html(data)
+                      console.log(data)
+                    },
+                    error:function(data){
+                    mivenotify('error','Item add','Error occured while adding product')
+                    console.log(data)
+                    }
+                  });
+  })
+  </script>
+  <script>
+  $('body').on('change','#sellerselect',function(event){
+    data = $('#bigb').serialize()
+    console.log('yolo')
+    $('#targetreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+    $.ajax({
+                    type: "POST",
+                    url: '/filter/seeorder',
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#targetreload').html(data)
+                      console.log(data)
+                    },
+                    error:function(data){
+                    mivenotify('error','Item add','Error occured while adding product')
+                    console.log(data)
+                    }
+                  });
+  })
+  </script>
+  <script>
+  $('body').on('click','#checkbox',function(event){
+    data = $('#bigb').serialize()
+    console.log('yolo')
     $('#targetreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
     $.ajax({
                     type: "POST",
@@ -184,5 +263,11 @@
       hideFromTo: false
     });
   });
+
 </script>
+<script src="rstatic/admin/plugins/select2/select2.full.min.js"></script>
+<script type="text/javascript">
+  $(".select2").select2();
+</script>>
+
 {% endblock %}

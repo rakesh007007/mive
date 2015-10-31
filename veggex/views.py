@@ -655,30 +655,39 @@ def seeOrder(request):
 		user =miveuser
 		basics = basicinfo(request)
 		orders = Order.objects.filter(user=user)
-		return TemplateResponse(request, 'adminr/seeorders.html',{'basics':basics,'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'csrf_token':get_or_create_csrf_token(request)})
+		sellers=Seller.objects.filter(seller_id__in=orders.values('seller'))
+		return TemplateResponse(request, 'adminr/seeorders.html',{'basics':basics,'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def orderfilter(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	else:
+		print 'yoooooooooooooo'
+		print request.POST
+		print (request.POST['sellers'])
 		basics = basicinfo(request)
 		miveuser = basics['miveuser']
 		localtz = pytz.timezone('Asia/Kolkata')
 		aaj = date.today()
 		days =request.POST['date']
+		sellers = request.POST.getlist('sellers')
+		payment=request.POST['rak']
 		sortby = request.POST['sortby']
 		basics= basicinfo(request)
 		beforedays = date.today() - timedelta(days=int(days))
 		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
 		timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
-		orders = Order.objects.filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
-		if (sortby=='date'):
-			orders=sorted(orders, key=operator.attrgetter('timeOfCreate'),reverse=True)
-		elif (sortby=='subtotal'):
-			orders=sorted(orders, key=operator.attrgetter('subtotal'),reverse=True)
-		elif (sortby=='status'):
-			orders=sorted(orders, key=operator.attrgetter('status'),reverse=True)
+		if payment=='all':
+			orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
 		else:
-			orders=sorted(orders, key=operator.attrgetter('seller.nameOfSeller'))
+			orders = Order.objects.filter(seller__seller_id__in=sellers).filter(payment=payment).filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
+		if (sortby=='date'):
+			orders=orders.order_by('-timeOfCreate')
+		elif (sortby=='subtotal'):
+			orders=orders.order_by('-subtotal')
+		elif (sortby=='status'):
+			orders=orders.order_by('-status')
+		else:
+			orders=orders.order_by('-seller__nameOfSeller')
 		return TemplateResponse(request,'adminr/orderfilter.html',{'basics':basics,'orders':orders})
 def cart(request):
 	if(checklogin(request)==False):

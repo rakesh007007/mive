@@ -43,10 +43,20 @@ def statsconsumption(request):
 	if int(stockId)==0:
 		stocks = Currentstock.objects.filter(user=miveuser)
 		stcss = Stockconsumption.objects.filter(stock__in=stocks)
+		od1 = stcss.order_by('-timeOfCreate')
+		od2 = stcss.order_by('timeOfCreate')
+		delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+		intervel = int(delta.days/10)+1
 	else:
 		stock = Currentstock.objects.get(currentstock_id = stockId)
 		stcss = Stockconsumption.objects.filter(stock=stock)
-	t = Stockconsumption.objects.all()
+		od1 = stcss.order_by('-timeOfCreate')
+		od2 = stcss.order_by('timeOfCreate')
+		delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+		intervel = int(delta.days/10)+1
+	print 'intervel'
+	print intervel
+	t = Stockconsumption.objects.all()	
 	l =[]
 	pd =[]
 	for pp in t:
@@ -54,7 +64,7 @@ def statsconsumption(request):
 			pd.append(pp.stock.product)
 			l.append(pp.stock)
 	stocks = l
-	return TemplateResponse(request,'adminr/statsstock.html',{'basics':basics,'consumption':stcss,'stocks':stocks})
+	return TemplateResponse(request,'adminr/statsstock.html',{'basics':basics,'consumption':stcss,'stocks':stocks,'intervel':intervel})
 def statsseller(request):
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
@@ -107,43 +117,43 @@ def filterforprices(request):
 		i=0
 		j=0
 		for ite in orderItems:
-			i=i+1
 			if ite.product in products:
-				print 'in if loop'
-				j=j+1
-				print j
-				print 'it was j'
 				index = products.index(ite.product)
 				if ite.order.timeOfCreate>times[index]:
 					times[index]=ite.order.timeOfCreate
 					currentprice = ite.pricePerUnit
-					old = uniqueitems[index]
-					ototal = Orderitem.objects.filter(order_id__in=orderids).filter(product=ite.product).exclude(orderitem_id=ite.orderitem_id).aggregate(Avg('pricePerUnit'))
-					averageprice = ototal['pricePerUnit__avg']
-					if averageprice==None:
-						averageprice=currentprice
-					increase = currentprice-averageprice
-					sign = increase*100/averageprice
+					nextitem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__gte=timebeforedays).order_by('order__timeOfCreate')[:1]
+					previtem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__lte=timebeforedays).order_by('-order__timeOfCreate')[:1]
+					if len(nextitem)!=0 and len(previtem)!=0 and nextitem[0].order.timeOfCreate-timebeforedays>timebeforedays-previtem[0].order.timeOfCreate:
+						closestorderitem = previtem[0]
+					else:
+						closestorderitem = nextitem[0]
+					lastprice = closestorderitem.pricePerUnit 
+					increase = currentprice-lastprice
+					sign=increase*100/lastprice
 					impact = increase*ite.qtyInUnits
-					newbucket = {'pd':ite,'currentprice':currentprice,'averageprice':averageprice,'sign':sign,'impact':impact}
-					uniqueitems[index]=newbucket
+					bucket= {'pd':ite,'currentprice':currentprice,'lastprice':lastprice,'sign':sign,'impact':impact}
+					uniqueitems[index]=bucket
 			else:
 				products.append(ite.product)
 				times.append(ite.order.timeOfCreate)
 				currentprice = ite.pricePerUnit
-				ototal = Orderitem.objects.filter(order_id__in=orderids).filter(product=ite.product).exclude(orderitem_id=ite.orderitem_id).aggregate(Avg('pricePerUnit'))
-				averageprice = ototal['pricePerUnit__avg']
-				if averageprice==None:
-					averageprice=currentprice
-				increase = currentprice-averageprice
+				nextitem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__gte=timebeforedays).order_by('order__timeOfCreate')[:1]
+				previtem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__lte=timebeforedays).order_by('-order__timeOfCreate')[:1]
+				if len(nextitem)!=0 and len(previtem)!=0 and nextitem[0].order.timeOfCreate-timebeforedays>timebeforedays-previtem[0].order.timeOfCreate:
+					closestorderitem = previtem[0]
+				else:
+					closestorderitem = nextitem[0]
+				lastprice = closestorderitem.pricePerUnit 
+				increase = currentprice-lastprice
+				sign=increase*100/lastprice
 				impact = increase*ite.qtyInUnits
-				sign=increase*100/averageprice
-				bucket= {'pd':ite,'currentprice':currentprice,'averageprice':averageprice,'sign':sign,'impact':impact}
+				bucket= {'pd':ite,'currentprice':currentprice,'lastprice':lastprice,'sign':sign,'impact':impact}
 				uniqueitems.append(bucket)
 		if (sortby=='impact'):
 			uniqueitems = sorted(uniqueitems, key=lambda k: k['impact'])
-		elif (sortby=='avg'):
-			uniqueitems = sorted(uniqueitems, key=lambda k: k['averageprice'])
+		elif (sortby=='old'):
+			uniqueitems = sorted(uniqueitems, key=lambda k: k['lastprice'])
 		elif (sortby=='current'):
 			uniqueitems = sorted(uniqueitems, key=lambda k: k['currentprice'],reverse=True)
 		else:
@@ -226,16 +236,12 @@ def ajaxconsumptionfilter(request):
 		stock = Currentstock.objects.filter(user=miveuser)[0]
 	else:
 		stock = Currentstock.objects.get(currentstock_id = stock)
-	consumptions = Stockconsumption.objects.filter(stock=stock)
-	t =[]
-	for it in consumptions:
-		if startdate <= it.timeOfCreate and it.timeOfCreate <= enddate:
-			t.append(it)
-			print 'yoooot'
-			print t
-		else:
-			pass
-	return TemplateResponse(request,'adminr/ajaxstatsconsumption.html',{'basic':basics,'consumption':t})
+	consumptions = Stockconsumption.objects.filter(stock=stock).filter(timeOfCreate__lte=enddate).filter(timeOfCreate__gte=startdate)
+	od1 = consumptions.order_by('-timeOfCreate')
+	od2 = consumptions.order_by('timeOfCreate')
+	delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+	intervel = int(delta.days/10)+1
+	return TemplateResponse(request,'adminr/ajaxstatsconsumption.html',{'basic':basics,'consumption':consumptions,'intervel':intervel})
 
 def ajaxwastagefilter(request):
 	stock = request.POST['stockId']
@@ -460,6 +466,61 @@ def pricefluct(request):
 				sign=increase*100/averageprice
 				impact = increase*ite.qtyInUnits
 				bucket= {'pd':ite,'currentprice':currentprice,'averageprice':averageprice,'sign':sign,'impact':impact}
+				uniqueitems.append(bucket)
+		uniqueitems = sorted(uniqueitems, key=lambda k: k['impact']) 
+		return TemplateResponse(request,'adminr/prices.html',{'basics':basics,'uniqueitems':uniqueitems,'products':products})
+def pricefluct(request):
+	if ('loggedin' not in request.session):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue') 
+	else:
+		localtz = pytz.timezone('Asia/Kolkata')
+		aaj = date.today()
+		basics= basicinfo(request)
+		before7 = date.today() - timedelta(days=7)
+		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
+		timebefore7 = datetime.combine(before7, datetime.max.time()).replace(tzinfo=localtz)
+		orders = Order.objects.filter(timeOfCreate__lte=timeaaj ).filter(timeOfCreate__gt=timebefore7).order_by('-timeOfCreate')
+		orderids = orders.values('order_id')
+		print orderids
+		uniqueitems = []
+		times =[]
+		products = []
+		orderItems= Orderitem.objects.filter(order_id__in=orderids).order_by('order__timeOfCreate')
+		i=0
+		j=0
+		for ite in orderItems:
+			if ite.product in products:
+				index = products.index(ite.product)
+				if ite.order.timeOfCreate>times[index]:
+					times[index]=ite.order.timeOfCreate
+					currentprice = ite.pricePerUnit
+					nextitem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__gte=timebefore7).order_by('order__timeOfCreate')[:1]
+					previtem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__lte=timebefore7).order_by('-order__timeOfCreate')[:1]
+					if len(nextitem)!=0 and len(previtem)!=0 and nextitem[0].order.timeOfCreate-timebefore7>timebefore7-previtem[0].order.timeOfCreate:
+						closestorderitem = previtem[0]
+					else:
+						closestorderitem = nextitem[0]
+					lastprice = closestorderitem.pricePerUnit 
+					increase = currentprice-lastprice
+					sign=increase*100/lastprice
+					impact = increase*ite.qtyInUnits
+					bucket= {'pd':ite,'currentprice':currentprice,'lastprice':lastprice,'sign':sign,'impact':impact}
+					uniqueitems[index]=bucket
+			else:
+				products.append(ite.product)
+				times.append(ite.order.timeOfCreate)
+				currentprice = ite.pricePerUnit
+				nextitem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__gte=timebefore7).order_by('order__timeOfCreate')[:1]
+				previtem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__lte=timebefore7).order_by('-order__timeOfCreate')[:1]
+				if len(nextitem)!=0 and len(previtem)!=0 and nextitem[0].order.timeOfCreate-timebefore7>timebefore7-previtem[0].order.timeOfCreate:
+					closestorderitem = previtem[0]
+				else:
+					closestorderitem = nextitem[0]
+				lastprice = closestorderitem.pricePerUnit 
+				increase = currentprice-lastprice
+				sign=increase*100/lastprice
+				impact = increase*ite.qtyInUnits
+				bucket= {'pd':ite,'currentprice':currentprice,'lastprice':lastprice,'sign':sign,'impact':impact}
 				uniqueitems.append(bucket)
 		uniqueitems = sorted(uniqueitems, key=lambda k: k['impact']) 
 		return TemplateResponse(request,'adminr/prices.html',{'basics':basics,'uniqueitems':uniqueitems,'products':products})
