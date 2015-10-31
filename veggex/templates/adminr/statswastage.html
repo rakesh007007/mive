@@ -58,7 +58,7 @@
 {%if wastage|length = 0 %}
 <h1>No wastage right now</h1>
             {%else%}
-            <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
+            <div class="box-body" id="chartContainer" style="height: 400px; width: 90%;">
             </div>{% endif %}
             <!-- /.box-body -->
             <div class="box-footer clearfix">
@@ -111,7 +111,7 @@
     window.onload = function () {
           var chart = new CanvasJS.Chart("chartContainer",
       {
-        theme: "theme2",
+        theme: "theme",
         title:{
         {%with wastage|first as ting%}
         text: "Wastage for  {{ting.stock.product.name}} (in {{ting.stock.product.unit}})"
@@ -121,10 +121,12 @@
         axisX: {
         valueFormatString: "DD/MMM",
         interval:2,
+        labelFontSize:15,
         intervalType: "day"
         
       },
         axisY:{
+          labelFontSize:15,
           includeZero: false
           
         },

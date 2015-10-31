@@ -9,7 +9,7 @@
               <h3 class="box-title">No data for this selection</h3>
             </div>
             {%else%}
-            <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
+            <div class="box-body" id="chartContainer" style="height: 400px; width: 90%;">
             </div>
             {%endif%}
             <!-- /.box-body -->
@@ -37,10 +37,13 @@
       axisX: {
         valueFormatString: "DD/MMM",
         interval:2,
+        labelFontSize: 15,
         intervalType: "day"
         
       },
+      theme:"theme",
       axisY:{
+        labelFontSize: 15,
         includeZero: false
         
       },
