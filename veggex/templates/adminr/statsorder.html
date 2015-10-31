@@ -45,12 +45,12 @@
             {%if statsseller|length = 0%}
             <h1>No orders right now</h1>
             {%else%}
-            <div class="box-body" id="chartContainer" style="height: 300px; width: 90%;">
+            <div class="box-body" id="chartContainer" style="height: 400px; width: 90%;">
             </div>
             {%endif%}
             {%if statsproduct|length = 0%}
             {%else%}
-            <div class="box-body" id="chartContainer2" style="height: 350px; width: 90%;">
+            <div class="box-body" id="chartContainer2" style="height: 400px; width: 90%;">
             </div>
             {%endif%}
             <!-- /.box-body -->
@@ -144,25 +144,24 @@
                         animationEnabled: true,
          axisX:{
             interval: 1,
-            gridThickness: 5,
-            labelFontSize: 8,
+            gridThickness: 0,
+            labelFontSize: 12,
             labelFontStyle: "normal",
             labelFontWeight: "normal",
             labelFontFamily: "Lucida Sans Unicode"
 
          },
          axisY2:{
-            interlacedColor: "rgba(1,77,101,.2)",
-            gridColor: "rgba(1,77,101,.1)"
+            gridColor: "rgba(1,77,101,.1)",
 
          },
+         theme:"theme",
 
          data: [
          {     
             type: "bar",
                 name: "Products",
             axisYType: "secondary",
-            color: "#014D65",          
             dataPoints: [
             {%for st in statsproduct%}
             {y: {{st.total}}, label: "{{st.product.name}}"  },

@@ -9,7 +9,7 @@
               <h3 class="box-title">No data for this selection</h3>
             </div>
             {%else%}
-            <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
+            <div class="box-body" id="chartContainer" style="height: 400px; width: 90%;">
             </div>
             {% endif %}
             <!-- /.box-body -->
@@ -28,7 +28,7 @@
     }
         var chart = new CanvasJS.Chart("chartContainer",
     {
-      theme: "theme2",
+      theme: "theme",
       title:{
         {%with consumption|first as ting%}
         text: "Consumption for  {{ting.stock.product.name}} (in {{ting.stock.product.unit}})"
@@ -36,12 +36,14 @@
       },
       animationEnabled: true,
       axisX: {
+        labelFontSize: 15,
         valueFormatString: "DD/MMM",
         interval:{{intervel}},
         intervalType: "day"
         
       },
       axisY:{
+        labelFontSize: 15,
         includeZero: false
         
       },

@@ -59,7 +59,7 @@
             {%if orderItems|length = 0 %}
             <h1>No orders right now</h1>
             {%else%}
-            <div class="box-body" id="chartContainer" style="height: 200px; width: 90%;">
+            <div class="box-body" id="chartContainer" style="height: 400px; width: 90%;">
             </div>
             {%endif%}
             <!-- /.box-body -->
@@ -111,7 +111,7 @@
   window.onload = function () {
         var chart = new CanvasJS.Chart("chartContainer",
     {
-      theme: "theme2",
+      theme: "theme",
       title:{
         {%with orderItems|first as ting%}
         text: "Per Order spending for {{ting.product.name}} (in INR)"
@@ -121,10 +121,12 @@
       axisX: {
         valueFormatString: "DD/MMM",
         interval:3,
+        labelFontSize: 15,
         intervalType: "day"
         
       },
       axisY:{
+        labelFontSize: 15,
         includeZero: false
         
       },
