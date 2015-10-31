@@ -148,7 +148,7 @@ Make order
 
            }
 Make order dummy
-   end point */api/temp/makeorder/
+   end point */api/temp/makeorderdummy/
    POST
    content type : 'multipart/form-data'
    body:
