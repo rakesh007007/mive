@@ -11,7 +11,7 @@
 </div>
 <div class="hidden-md hidden-lg hidden-xl">
 {%for inv in invoices.all %}
-<center><img src="/{{inv.image.url}}" width="500px"></center><br>
+<center><img src="/{{inv.image.url}}" class="img img-responsive" width="100%"></center><br>
 {% endfor %}
 {% if invoices.all|length = 0 %}
 <center><h3>No invoice image for this order</h3></center>
