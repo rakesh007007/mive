@@ -33,15 +33,13 @@
              <div class="form-group">
                 <label>Select a vendor</label>
                 <select name="seller" class="form-control select2" id="vendorselect" style="width: 100%;">
-                {%with basics.categoryvendor.all|first as ting%}
-                <option selected="selected">{{ting.seller.nameOfSeller}}</option>
-                 {% for seller in basics.categoryvendor.all%}
-                 {% if ting = seller%}
+                <option selected="selected" data-id="{{this.seller_id}}">{{this.nameOfSeller}}</option>
+                 {% for seller in basics.dummyvendor.all%}
+                 {% if this = seller.seller %}
                  {%else%}
                  <option data-id="{{seller.seller.seller_id}}">{{seller.seller.nameOfSeller}}</option>
                  {%endif%}
                   {%endfor%}
-                  {%endwith%}
                 </select>
               </div>
            </div>
