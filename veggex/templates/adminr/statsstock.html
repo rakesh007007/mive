@@ -110,7 +110,7 @@
         theme: "theme",
         title:{
         {%with consumption|first as ting%}
-        text: "Consumption for  {{ting.stock.product.name}} (in {{ting.stock.product.unit}})"
+        text: "Consumption for  {{this.stock.product.name}} (in {{this.stock.product.unit}})"
         {%endwith%}
       },
         animationEnabled: true,

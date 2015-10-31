@@ -3,12 +3,25 @@ from views import *
 def statsproduct(request):
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
-	if request.GET['id']==0:
-		productId = int(request.GET['id'])
-		product = Product.rak.get(product_id = productId)
-		orderItems = Orderitem.objects.filter(product=product).filter(order__user=miveuser)
+	if int(request.GET['id'])==0:
+		orderItems = Orderitem.objects.filter(order__user=miveuser)
+		if orderItems.count()!=0:
+			pd = orderItems[0].product
+			this=pd
+			orderItems=orderItems.filter(product=pd)
+		else:
+			this=[]
+			pd=[]
+			orderItems=orderItems.filter(order__user=miveuser)
 	else:
 		orderItems = Orderitem.objects.filter(order__user=miveuser)
+	od1 = orderItems.order_by('-order__deliveryTime')
+	od2 = orderItems.order_by('order__deliveryTime')
+	if od1.count()!=0 and od2.count()!=0:
+		delta=od1[0].order.timeOfCreate-od2[0].order.timeOfCreate
+		intervel = int(delta.days/10)+1
+	else:
+		intervel=1
 	items, products = [], []
 	allItems = Orderitem.objects.filter(order__user=miveuser)
 	for item in allItems:
@@ -16,18 +29,31 @@ def statsproduct(request):
 			products.append(item.product)
 			items.append(item)
 	allItems = items
-	return TemplateResponse(request,'adminr/statsproduct.html',{'basics':basics,'allItems':allItems,'basic':basics,'orderItems':orderItems})
+	return TemplateResponse(request,'adminr/statsproduct.html',{'this':pd,'basics':basics,'intervel':intervel,'allItems':allItems,'basic':basics,'orderItems':od2})
 def statswastage(request):
 	basics= basicinfo(request)
 	miveuser = basics['miveuser']
 	stockId = int(request.GET['id'])
 	if int(stockId)==0:
 		stocks = Currentstock.objects.filter(user=miveuser)
-		stcss = Stockwastage.objects.filter(stock__in=stocks)
+		sts = Stockwastage.objects.filter(user=miveuser)
+		if sts.count()!=0:
+			stk=sts[0]
+			stcss = Stockwastage.objects.filter(stock=stk.stock)
+		else:
+			stk=[]
+			stcss=sts.filter(stock=0)
 	else:
 		stock = Currentstock.objects.get(currentstock_id = stockId)
 		stcss = Stockwastage.objects.filter(stock=stock)
 	t = Stockwastage.objects.filter(user=miveuser)
+	od1 = stcss.order_by('-timeOfCreate')
+	od2 = stcss.order_by('timeOfCreate')
+	if od1.count()!=0 and od2.count()!=0:
+		delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+		intervel = int(delta.days/10)+1
+	else:
+		intervel=1
 	l =[]
 	pd = []
 	for pp in t:
@@ -35,20 +61,28 @@ def statswastage(request):
 			pd.append(pp.stock.product)
 			l.append(pp.stock)
 	stocks = l
-	return TemplateResponse(request,'adminr/statswastage.html',{'basics':basics,'wastage':stcss,'stocks':stocks})
+	return TemplateResponse(request,'adminr/statswastage.html',{'this':stk,'intervel':intervel,'basics':basics,'wastage':od2,'stocks':stocks})
 def statsconsumption(request):
 	basics= basicinfo(request)
 	miveuser = basics['miveuser']
 	stockId = int(request.GET['id'])
 	if int(stockId)==0:
 		stocks = Currentstock.objects.filter(user=miveuser)
-		stcss = Stockconsumption.objects.filter(stock__in=stocks)
-		od1 = stcss.order_by('-timeOfCreate')
-		od2 = stcss.order_by('timeOfCreate')
-		if od1.count()!=0 and od2.count()!=0:
-			delta=od1[0].timeOfCreate-od2[0].timeOfCreate
-			intervel = int(delta.days/10)+1
+		sts= Stockconsumption.objects.filter(user=miveuser)
+		if sts.count()!=0:
+			stk =sts[0]
+			stcss = sts.filter(stock=stk.stock)
+			od1 = stcss.order_by('-timeOfCreate')
+			od2 = stcss.order_by('timeOfCreate')
+			if od1.count()!=0 and od2.count()!=0:
+				delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+				intervel = int(delta.days/10)+1
+			else:
+				intervel=1
 		else:
+			stk=[]
+			od2=[]
+			stcss=[]
 			intervel=1
 	else:
 		stock = Currentstock.objects.get(currentstock_id = stockId)
@@ -70,17 +104,31 @@ def statsconsumption(request):
 			pd.append(pp.stock.product)
 			l.append(pp.stock)
 	stocks = l
-	return TemplateResponse(request,'adminr/statsstock.html',{'basics':basics,'consumption':stcss,'stocks':stocks,'intervel':intervel})
+	return TemplateResponse(request,'adminr/statsstock.html',{'this':stk,'basics':basics,'consumption':stcss,'stocks':stocks,'intervel':intervel})
 def statsseller(request):
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
-	if request.GET['id']==0:
+	if int(request.GET['id'])==0:
 		sellerId = int(request.GET['id'])
-		seller = Seller.rak.get(seller_id = sellerId)
-		orders = Order.objects.filter(seller=seller).filter(user=miveuser).order_by('-timeOfCreate')
+		sell = Order.objects.filter(user=miveuser)
+		if sell.count()!=0:
+			seller=sell[0]
+			this = seller.seller
+			orders = Order.objects.filter(seller=this).filter(user=miveuser).order_by('-timeOfCreate')
+		else:
+			this=[]
+			seller=[]
+			orders = Order.objects.filter(user=miveuser)
 	else:
 		orders = Order.objects.filter(user=miveuser).order_by('-timeOfCreate')
 		seller=[]
+	od1 = orders.order_by('-deliveryTime')
+	od2 = orders.order_by('deliveryTime')
+	if od1.count()!=0 and od2.count()!=0:
+		delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+		intervel = int(delta.days/10)+1
+	else:
+		intervel=1
 	ods = orders.values('order_id')
 	ototal = orders.aggregate(Sum('subtotal')) 
 	overalltotal = ototal['subtotal__sum']
@@ -100,7 +148,7 @@ def statsseller(request):
 			statsProduct.append(st)
 	print products
 	print orders
-	return TemplateResponse(request, 'adminr/statsseller.html',{'basics':basics,'orders':orders,'statsproduct':statsProduct,'overalltotal':overalltotal,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'adminr/statsseller.html',{'this':this,'basics':basics,'intervel':intervel,'orders':od2,'statsproduct':statsProduct,'overalltotal':overalltotal,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
 def filterforprices(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue') 
@@ -246,8 +294,11 @@ def ajaxconsumptionfilter(request):
 	consumptions = Stockconsumption.objects.filter(stock=stock).filter(timeOfCreate__lte=enddate).filter(timeOfCreate__gte=startdate)
 	od1 = consumptions.order_by('-timeOfCreate')
 	od2 = consumptions.order_by('timeOfCreate')
-	delta=od1[0].timeOfCreate-od2[0].timeOfCreate
-	intervel = int(delta.days/10)+1
+	if od1.count()!=0 and od2.count()!=0:
+		delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+		intervel = int(delta.days/10)+1
+	else:
+		intervel=1
 	return TemplateResponse(request,'adminr/ajaxstatsconsumption.html',{'basic':basics,'consumption':consumptions,'intervel':intervel})
 
 def ajaxwastagefilter(request):
@@ -270,16 +321,15 @@ def ajaxwastagefilter(request):
 		stock = Currentstock.objects.filter(user=miveuser)[0]
 	else:
 		stock = Currentstock.objects.get(currentstock_id = stock)
-	consumptions = Stockwastage.objects.filter(stock=stock)
-	t =[]
-	for it in consumptions:
-		if startdate <= it.timeOfCreate and it.timeOfCreate <= enddate:
-			t.append(it)
-			print 'yoooot'
-			print t
-		else:
-			pass
-	return TemplateResponse(request,'adminr/ajaxstatswastage.html',{'basic':basics,'wastage':t})
+	consumptions = Stockwastage.objects.filter(stock=stock).filter(timeOfCreate__lte=enddate).filter(timeOfCreate__gte=startdate)
+	od1 = consumptions.order_by('-timeOfCreate')
+	od2 = consumptions.order_by('timeOfCreate')
+	if od1.count()!=0 and od2.count()!=0:
+		delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+		intervel = int(delta.days/10)+1
+	else:
+		intervel=1
+	return TemplateResponse(request,'adminr/ajaxstatswastage.html',{'basic':basics,'wastage':od2,'intervel':intervel})
 def ajaxproductfilter(request):
 	productName = request.POST['product']
 	if request.POST['date']:
@@ -298,14 +348,16 @@ def ajaxproductfilter(request):
 	miveuser = basics['miveuser']
 	product = Product.rak.get(product_id = productName)
 	orderItems = Orderitem.objects.filter(product=product).filter(order__user=miveuser)
-	t =[]
-	for it in orderItems:
-		if startdate <= it.order.deliveryTime and it.order.deliveryTime <= enddate:
-			t.append(it)
-		else:
-			pass
+	t =orderItems.filter(order__deliveryTime__lte=enddate).filter(order__deliveryTime__gte=startdate)
+	od1 = t.order_by('-order__deliveryTime')
+	od2 = t.order_by('order__deliveryTime')
+	if od1.count()!=0 and od2.count()!=0:
+		delta=od1[0].order.timeOfCreate-od2[0].order.timeOfCreate
+		intervel = int(delta.days/10)+1
+	else:
+		intervel=1
 	allItems = Orderitem.objects.filter(order__user=miveuser)
-	return TemplateResponse(request,'adminr/ajaxstatsproduct.html',{'allItems':allItems,'basic':basics,'orderItems':t})
+	return TemplateResponse(request,'adminr/ajaxstatsproduct.html',{'intervel':intervel,'allItems':allItems,'basic':basics,'orderItems':od2})
 def ajaxdatefilter(request):
 	sellerName= request.POST['seller']
 	print 'yolo'
@@ -326,15 +378,14 @@ def ajaxdatefilter(request):
 	miveuser = basics['miveuser']
 	seller = Seller.rak.get(nameOfSeller = sellerName)
 	orders = Order.objects.filter(seller=seller).filter(user=miveuser)
-	apporders = []
-	for ort in orders:
-		if(startdate<=ort.deliveryTime and ort.deliveryTime<=enddate and ort not in apporders):
-			print startdate
-			print enddate
-			print ort.timeOfCreate.replace(tzinfo=None)
-			apporders.append(ort)
-		else:
-			pass
+	apporders = orders.filter(deliveryTime__lte=enddate).filter(deliveryTime__gte=startdate)
+	od1 = apporders.order_by('-deliveryTime')
+	od2 = apporders.order_by('deliveryTime')
+	if od1.count()!=0 and od2.count()!=0:
+		delta=od1[0].timeOfCreate-od2[0].timeOfCreate
+		intervel = int(delta.days/10)+1
+	else:
+		intervel=1
 	ods = orders.values('order_id')
 	ototal = orders.aggregate(Sum('subtotal')) 
 	overalltotal = ototal['subtotal__sum']
@@ -357,7 +408,7 @@ def ajaxdatefilter(request):
 		else:
 			pass
 	print statsProduct
-	return TemplateResponse(request, 'adminr/ajaxstatsseller.html',{'basics':basics,'orders':apporders,'statsproduct':statsProduct,'overalltotal':overalltotal,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'adminr/ajaxstatsseller.html',{'basics':basics,'orders':od2,'statsproduct':statsProduct,'overalltotal':overalltotal,'this':seller,'csrf_token':get_or_create_csrf_token(request),'intervel':intervel})
 
 def statsorder(request):
 	if ('loggedin' not in request.session):
