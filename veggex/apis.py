@@ -372,6 +372,71 @@ class ApiSeeOrder(APIView):
 			l.append(OrderSerializer(p,context={'request': request}).data)
 		orders = l
 		return HttpResponse(JSONRenderer().render(orders),content_type='application/json')
+class ApiSeePrices(APIView):
+	def post(self,request,format=None):
+		localtz = pytz.timezone('Asia/Kolkata')
+		userId = request.data['userId']
+		miveuser = User.objects.get(user_id=userId)
+		aaj = date.today()
+		days =request.data['days']
+		sortby = request.data['sortby']
+		beforedays = date.today() - timedelta(days=int(days))
+		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
+		timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
+		orders = Order.objects.filter(user=miveuser).filter(timeOfCreate__lte=timeaaj ).filter(timeOfCreate__gt=timebeforedays).order_by('-timeOfCreate')
+		orderids = orders.values('order_id')
+		print orderids
+		uniqueitems = []
+		times =[]
+		products = []
+		orderItems= Orderitem.objects.filter(order_id__in=orderids).order_by('order__timeOfCreate')
+		i=0
+		j=0
+		for ite in orderItems:
+			if ite.product in products:
+				index = products.index(ite.product)
+				if ite.order.timeOfCreate>times[index]:
+					times[index]=ite.order.timeOfCreate
+					currentprice = ite.pricePerUnit
+					nextitem = Orderitem.objects.filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__gte=timebeforedays).order_by('order__timeOfCreate')[:1]
+					previtem = Orderitem.objects.filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__lte=timebeforedays).order_by('-order__timeOfCreate')[:1]
+					if len(nextitem)!=0 and len(previtem)!=0 and nextitem[0].order.timeOfCreate-timebeforedays>timebeforedays-previtem[0].order.timeOfCreate:
+						closestorderitem = previtem[0]
+					else:
+						closestorderitem = nextitem[0]
+					lastprice = closestorderitem.pricePerUnit 
+					increase = currentprice-lastprice
+					sign=increase*100/lastprice
+					impact = increase*ite.qtyInUnits
+					ite = OrderitemSerializer(ite,context={'request': request})
+					bucket= {'pd':ite.data,'currentprice':currentprice,'lastprice':lastprice,'sign':sign,'impact':impact}
+					uniqueitems[index]=bucket
+			else:
+				products.append(ite.product)
+				times.append(ite.order.timeOfCreate)
+				currentprice = ite.pricePerUnit
+				nextitem = Orderitem.objects.filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__gte=timebeforedays).order_by('order__timeOfCreate')[:1]
+				previtem = Orderitem.objects.filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__lte=timebeforedays).order_by('-order__timeOfCreate')[:1]
+				if len(nextitem)!=0 and len(previtem)!=0 and nextitem[0].order.timeOfCreate-timebeforedays>timebeforedays-previtem[0].order.timeOfCreate:
+					closestorderitem = previtem[0]
+				else:
+					closestorderitem = nextitem[0]
+				lastprice = closestorderitem.pricePerUnit 
+				increase = currentprice-lastprice
+				sign=increase*100/lastprice
+				impact = increase*ite.qtyInUnits
+				ite = OrderitemSerializer(ite,context={'request': request})
+				bucket= {'pd':ite.data,'currentprice':currentprice,'lastprice':lastprice,'sign':sign,'impact':impact}
+				uniqueitems.append(bucket)
+		if (sortby=='impact'):
+			uniqueitems = sorted(uniqueitems, key=lambda k: k['impact'])
+		elif (sortby=='old'):
+			uniqueitems = sorted(uniqueitems, key=lambda k: k['lastprice'])
+		elif (sortby=='current'):
+			uniqueitems = sorted(uniqueitems, key=lambda k: k['currentprice'],reverse=True)
+		else:
+			uniqueitems = sorted(uniqueitems, key=lambda k: k['sign'])
+		return HttpResponse(JSONRenderer().render(uniqueitems),content_type='application/json')
 class ApiSeeCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)

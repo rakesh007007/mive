@@ -123,6 +123,7 @@ urlpatterns = [
     url('^api/addtocart/$', apis.ApiAddToCart.as_view()),
     url('^api/addtodummycart/$', apis.ApiAddToDummyCart.as_view()),
     url('^api/seecart/$', apis.ApiSeeCart.as_view()),
+    url('^api/prices/$', apis.ApiSeePrices.as_view()),
     url('^api/seeorders/$', apis.ApiSeeOrder.as_view()),
     url('^api/seedummycart/$', apis.ApiSeeDummyCart.as_view()),
     url('^api/updatecart/$', apis.ApiUpdateCart.as_view()),

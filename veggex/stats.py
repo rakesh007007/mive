@@ -104,6 +104,7 @@ def filterforprices(request):
 		days =request.POST['date']
 		sortby = request.POST['sortby']
 		basics= basicinfo(request)
+		miveuser=basics['miveuser']
 		beforedays = date.today() - timedelta(days=int(days))
 		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
 		timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
@@ -113,7 +114,7 @@ def filterforprices(request):
 		uniqueitems = []
 		times =[]
 		products = []
-		orderItems= Orderitem.objects.filter(order_id__in=orderids).order_by('order__timeOfCreate')
+		orderItems= Orderitem.objects.filter(order__user=miveuser).filter(order_id__in=orderids).order_by('order__timeOfCreate')
 		i=0
 		j=0
 		for ite in orderItems:
@@ -122,8 +123,8 @@ def filterforprices(request):
 				if ite.order.timeOfCreate>times[index]:
 					times[index]=ite.order.timeOfCreate
 					currentprice = ite.pricePerUnit
-					nextitem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__gte=timebeforedays).order_by('order__timeOfCreate')[:1]
-					previtem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__lte=timebeforedays).order_by('-order__timeOfCreate')[:1]
+					nextitem = Orderitem.objects.filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__gte=timebeforedays).order_by('order__timeOfCreate')[:1]
+					previtem = Orderitem.objects.filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__lte=timebeforedays).order_by('-order__timeOfCreate')[:1]
 					if len(nextitem)!=0 and len(previtem)!=0 and nextitem[0].order.timeOfCreate-timebeforedays>timebeforedays-previtem[0].order.timeOfCreate:
 						closestorderitem = previtem[0]
 					else:
@@ -138,8 +139,8 @@ def filterforprices(request):
 				products.append(ite.product)
 				times.append(ite.order.timeOfCreate)
 				currentprice = ite.pricePerUnit
-				nextitem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__gte=timebeforedays).order_by('order__timeOfCreate')[:1]
-				previtem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__lte=timebeforedays).order_by('-order__timeOfCreate')[:1]
+				nextitem = Orderitem.objects.filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__gte=timebeforedays).order_by('order__timeOfCreate')[:1]
+				previtem = Orderitem.objects.filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__lte=timebeforedays).order_by('-order__timeOfCreate')[:1]
 				if len(nextitem)!=0 and len(previtem)!=0 and nextitem[0].order.timeOfCreate-timebeforedays>timebeforedays-previtem[0].order.timeOfCreate:
 					closestorderitem = previtem[0]
 				else:
@@ -479,13 +480,14 @@ def pricefluct(request):
 		before7 = date.today() - timedelta(days=7)
 		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
 		timebefore7 = datetime.combine(before7, datetime.max.time()).replace(tzinfo=localtz)
+		miveuser=basics['miveuser']
 		orders = Order.objects.filter(timeOfCreate__lte=timeaaj ).filter(timeOfCreate__gt=timebefore7).order_by('-timeOfCreate')
 		orderids = orders.values('order_id')
 		print orderids
 		uniqueitems = []
 		times =[]
 		products = []
-		orderItems= Orderitem.objects.filter(order_id__in=orderids).order_by('order__timeOfCreate')
+		orderItems= Orderitem.objects.filter(order__user=miveuser).filter(order_id__in=orderids).order_by('order__timeOfCreate')
 		i=0
 		j=0
 		for ite in orderItems:
@@ -494,8 +496,8 @@ def pricefluct(request):
 				if ite.order.timeOfCreate>times[index]:
 					times[index]=ite.order.timeOfCreate
 					currentprice = ite.pricePerUnit
-					nextitem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__gte=timebefore7).order_by('order__timeOfCreate')[:1]
-					previtem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__lte=timebefore7).order_by('-order__timeOfCreate')[:1]
+					nextitem = Orderitem.objects.filter(order__user=miveuser).filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__gte=timebefore7).order_by('order__timeOfCreate')[:1]
+					previtem = Orderitem.objects.filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__lte=timebefore7).order_by('-order__timeOfCreate')[:1]
 					if len(nextitem)!=0 and len(previtem)!=0 and nextitem[0].order.timeOfCreate-timebefore7>timebefore7-previtem[0].order.timeOfCreate:
 						closestorderitem = previtem[0]
 					else:
@@ -510,8 +512,8 @@ def pricefluct(request):
 				products.append(ite.product)
 				times.append(ite.order.timeOfCreate)
 				currentprice = ite.pricePerUnit
-				nextitem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__gte=timebefore7).order_by('order__timeOfCreate')[:1]
-				previtem = Orderitem.objects.filter(product=ite.product).filter(order__timeOfCreate__lte=timebefore7).order_by('-order__timeOfCreate')[:1]
+				nextitem = Orderitem.objects.filter(order__user=miveuser).filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__gte=timebefore7).order_by('order__timeOfCreate')[:1]
+				previtem = Orderitem.objects.filter(order__user=miveuser).filter(product=ite.product).filter(order__timeOfCreate__lte=timebefore7).order_by('-order__timeOfCreate')[:1]
 				if len(nextitem)!=0 and len(previtem)!=0 and nextitem[0].order.timeOfCreate-timebefore7>timebefore7-previtem[0].order.timeOfCreate:
 					closestorderitem = previtem[0]
 				else:
