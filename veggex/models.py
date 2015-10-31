@@ -314,7 +314,8 @@ class Order(models.Model):
 	timeOfUpdate =models.DateTimeField(default=timezone.now,null=True,blank=True)
 	payment_mode = models.CharField(max_length=200,blank=True,null=True)
 	subtotal=models.IntegerField(blank=True,null=True)
-	status = models.CharField(max_length=200,default='PLACED')
+	payment=models.CharField(max_length=100,blank=True,null=True,default='unpaid')
+	status = models.CharField(max_length=200,default='placed')
 	orderMsg = models.TextField(blank=True,null=True)
 	deliveryTime = models.DateField(blank=True,null=True)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
@@ -337,6 +338,8 @@ class Orderitem(models.Model):
 	product = models.ForeignKey(Product,blank=False,null=False)
 	def orderItemId(self):
 		return self.orderitem_id
+	def __unicode__(self):
+		return str(self.orderitem_id)
 class Subscribe(models.Model):
 	id = models.AutoField(primary_key=True)
 	email = models.TextField(blank=False,null=False)

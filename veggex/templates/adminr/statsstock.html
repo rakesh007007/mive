@@ -116,7 +116,7 @@
         animationEnabled: true,
         axisX: {
         valueFormatString: "DD/MMM",
-        interval:2,
+        interval:{{intervel}},
         intervalType: "day"
         
       },
@@ -147,6 +147,7 @@
 </script>
 <script src="/rstatic/admin/plugins/daterangepicker/daterangepicker.js"></script>
 <script>
+console.log('intervel','{{intervel}}')
    $(function () {
      //Date range picker
      $('#reservation').daterangepicker(
