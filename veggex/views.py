@@ -827,3 +827,11 @@ def newprodnewvendor(request):
 def userprofile(request):
 	basics = basicinfo(request)
 	return TemplateResponse(request,'adminr/profile.html',{'basics':basics})
+def invoice(request):
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	basics = basicinfo(request)
+	orderId = int(request.GET['orderId'])
+	order= Order.objects.get(order_id=orderId)
+	invoices = order.invoices
+	return TemplateResponse(request,'adminr/invoice.html',{'basics':basics,'invoices':invoices,'order':order})
