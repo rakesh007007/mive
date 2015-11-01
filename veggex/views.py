@@ -447,6 +447,8 @@ def newajaxaddtocart(request):
 		for it in productdetails:
 			pdid = (it['productId'])
 			qty = int(it['qty'])
+			if qty<=0:
+				continue
 			pd = Product.objects.get(product_id=pdid)
 			ct = Cartitem.objects.filter(cart=cart).filter(product=pd).filter(pricePerUnit=pd.pricePerUnit).count()
 			if ct>0:

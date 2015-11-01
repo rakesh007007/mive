@@ -1,6 +1,31 @@
 from base import *
 from views import *
 from django.views.decorators.csrf import csrf_exempt
+def giveajaxdummycart(request):
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	basics = basicinfo(request)
+	miveuser=basics['miveuser']
+	dummycart=miveuser.dummycart
+	cartItems=Dummycartitem.objects.filter(dummycart=dummycart)
+	totalItems=len(cartItems)
+	shippingCost=0
+	dummyvendor= miveuser.dummyvendors
+	allProducts = []
+	for cvend in dummyvendor.all():
+		dummyvendor_id = cvend.dummyvendor_id
+		seller = cvend.seller
+		print 'yochecker'
+		print seller
+		itemscount = Dummycartitem.objects.filter(product__seller = seller).filter(dummycart=dummycart).count()
+		print itemscount
+		if itemscount>0:
+			items = Dummycartitem.objects.filter(product__seller = seller).filter(dummycart=dummycart)
+			pd = {'dummyvendor_id':dummyvendor_id,'items':items,'seller':seller}
+			allProducts.append(pd)
+		else:
+			pass
+	return allProducts
 def dummymain(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -32,6 +57,43 @@ def dummyproductdetail(request):
 	productId = request.GET['productId']
 	product = Product.rak.get(product_id=productId)
 	return TemplateResponse(request, 'adminr/dummy/product.html',{'product':product,'csrf_token':get_or_create_csrf_token(request)})
+@csrf_exempt
+@transaction.atomic
+def newajaxaddtodummycart(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		dt = request.POST
+		basics = basicinfo(request)
+		productdetails = json.loads(dt['dt'])
+		miveuser = basics['miveuser']
+		dummycart = miveuser.dummycart
+		total=0
+		for it in productdetails:
+			pdid = (it['productId'])
+			qty = int(it['qty'])
+			pricePerUnit = int(it['priceperunit'])
+			if qty<=0 or pricePerUnit<0:
+				continue
+			pd = Product.objects.get(product_id=pdid)
+			ct = Dummycartitem.objects.filter(dummycart=dummycart).filter(product=pd).filter(pricePerUnit=pricePerUnit).count()
+			if ct>0:
+				oldit = Dummycartitem.objects.filter(dummycart=dummycart).filter(product=pd).filter(pricePerUnit=pricePerUnit)[0]
+				total = total+pricePerUnit*qty
+				oldit.qtyInUnits = oldit.qtyInUnits+qty
+				oldit.save()
+			else:
+				total = total+pricePerUnit*qty
+				item = Dummycartitem()
+				item.product = pd
+				item.pricePerUnit = pricePerUnit
+				item.qtyInUnits = qty
+				item.dummycart = dummycart
+				item.save()
+		dummycart.dummycartTotal = dummycart.dummycartTotal+total
+		dummycart.save()
+		allProducts = giveajaxdummycart(request)
+		return TemplateResponse(request, 'adminr/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyajaxaddtocart(request):
 	if(checklogin(request)==False):

@@ -7,67 +7,56 @@
    </h1>
    <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Widgets</li>
+      <li class="active">Add Invoices</li>
    </ol>
 </section>
-
 <section class="content">
-      <div class="row">
+   <!-- Info boxes -->
+   <div class="row">
       {% for product in products.all %}
-        <div class="col-md-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-offset-0 col-lg-offset-0">
-        <div class="box box-primary">
-            <div class="box-body box-profile">
-              <div >
-              	<center><img   data-productid="{{product.product_id}}" class="img-responsive" src="/{{product.coverphoto.url}}" alt="User profile picture" style="width:100px;height:100px"></center>
-              </div>
-              <center><p><a onclick="return false" class="" data-productid="{{product.product_id}}" >{{product.name}}</a></p></center>
-
-              <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
-                <form mobile="yes"  id="productsubmit-{{product.product_id}}" method="post" class="productform" action="/addtocart">
+      <div class="col-md-4 col-sm-12 col-xs-12">
+         <div class="info-box">
+            <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}" class="login-modal2-button" src="/{{product.coverphoto.url}}"></i></span>
+            <div class="info-box-content">
+               <div class="col-xs-12 col-md-12 col-lg-12">
                   <div class="row">
-                  	<center><div class="col-md-6 col-sm-6 col-xs-6">
-                  		<font>Quantity </font>
-                  	</div></center>
-                  	<div class="col-md-6 col-sm-6 col-xs-6">
-				        <input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty" style="border:none;  border-bottom:solid grey 1px; height:20px" data-productid="{{product.product_id}}" id="qty-{{product.product_id}}">
-				        {%csrf_token%}
-				        <input type="hidden" name="productId" value="{{product.product_id}}">
-                <input type="hidden" name="defaultpriceperunit" value="{{product.pricePerUnit}}" data-productid="{{product.product_id}}" class="defaultprice" id="default-{{product.product_id}}">
-                  	</div>
-                  </div></br>
+                     <center>
+                        <div  class="col-md-12 col-sm-12 col-xs-12 col-md-offset-0 col-xs-offset-0 col-sm-offset-0">
+                           <span >{{product.name}}</span><br>
+                        </div>
+                     </center>
+                  </div>
                   <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                      <font>Rate/{{product.unit}}</font>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                <input data-toggle="tooltip" data-productid="{{product.product_id}}" title="Input Qty" type="text" class="form-control text-center input-circle priceperunit" value="{{product.pricePerUnit}}" name="pricePerUnit" id="price-{{product.product_id}}" style="border:none;  border-bottom:solid grey 1px;height:20px">
-                    </div>
+                     <div class="col-md-4 col-sm-4 col-xs-4">
+                        <center>
+                           Qty:<input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="0" name="qty" style="border:none;  border-bottom:solid grey 1px;width:20px" data-productid="{{product.product_id}}" id="qty-{{product.product_id}}">
+                           {%csrf_token%}
+                           <input type="hidden" name="productId" value="{{product.product_id}}">
+                        </center>
+                     </div>
+                     <div class="col-md-4 col-sm-4 col-xs-4">
+                        <center>
+                           Rate:<input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle priceperunit" value="{{product.pricePerUnit}}" name="qty" style="border:none;  border-bottom:solid grey 1px;width:20px" data-productid="{{product.product_id}}" id="price-{{product.product_id}}">
+                           {%csrf_token%}
+                           <input type="hidden" name="productId" value="{{product.product_id}}">
+                        </center>
+                     </div>
+                     <div class="col-md-4 col-sm-4 col-xs-4">
+                        <center>
+                           Total:<input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle totalprice" value="0" name="qty" style="border:none;  border-bottom:solid grey 1px;width:20px" data-productid="{{product.product_id}}" id="total-{{product.product_id}}">
+                           {%csrf_token%}
+                           <input type="hidden" name="productId" value="{{product.product_id}}">
+                        </center>
+                     </div>
                   </div>
-                  </br>
-                  <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                      <font>Total</font>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                <input data-toggle="tooltip" title="Input Qty" data-productid="{{product.product_id}}" type="text" class="form-control text-center input-circle totalprice" value="{% widthratio product.pricePerUnit 1 1 %}" name="total" id="total-{{product.product_id}}" style="border:none;  border-bottom:solid grey 1px;height:20px">
-                    </div>
-                  </div>
-                  </form>
-                </li>
-              </ul>
-              <div class="row">
-                  	<center><div class="col-md-5 col-sm-5 col-xs-5 col-sm-offset-1 col-xs-offset-1 col-md-offset-2 col-lg-offset-2">
-              <a href="#" class="btn btn-primary product1submit" data-miveproduct="{{product.product_id}}" mobile="yes"><b>Add this</b></a>
-                  	</div></center>
-                  </div>
+               </div>
             </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        {% endfor %}
+            <!-- /.info-box-content -->
+         </div>
+         <!-- /.info-box -->
       </div>
+      {% endfor %}
+   </div>
 </section>
 {% endblock %}
 {% block script %}
@@ -83,119 +72,185 @@
    })
 </script>
 <script>
-       $('body').on('click',".product1submit",function(event) {
-         
-            event.preventDefault();
-            {% if basics.miveuser = 'none' %}
-            mivenotify('error','Login required','please login to add products to cart',600)
-            console.log('user not loggedin')
-            $('#login-modal').modal('toggle')
-            mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
-            return
-            {% else %}
-             rak = $(this).attr('data-miveproduct')
-             formid= "#"+"productsubmit-"+rak
-             form = $(formid)
-             //$(rak).submit()
-             mivenotify('success','Item added','Item has been added to cart',600)
-             $.ajax({
-                    type: "POST",
-                    url: '/data/ajaxaddtocart',
-                    data: form.serialize(), // serializes the form's elements.
-                    success: function(data)
-                    {
-                      $('#data-detail-container').html(data)
-                      console.log(data)
-                    },
-                    error:function(data){console.log(data)
-                    mivenotify('error','Item add','Error ocuured while processing your request')
-                    }
-                  });
-            {%endif %}
-         });
-      </script>
-       <script>
-       $('body').on('click',"#productsubmitbutton",function(event) {
-         
-            event.preventDefault();
-            {% if basics.miveuser = 'none' %}
-            mivenotify('error','Login required','please login to add products to cart',600)
-            console.log('user not loggedin')
-            $('#login-modal').modal('toggle')
-            mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
-            return
-            {% else %}
-            idd = $(this).attr('data-miveproduct')
-            console.log('idd',idd)
-            formid = '#productdetailsubmit-'+idd
-             form = $(formid)
-             console.log('formdata',form.serialize())
-             //$(rak).submit()
-             mivenotify('success','Item added','Item has been added to cart',600)
-             $.ajax({
-                    type: "POST",
-                    url: '/data/ajaxaddtocart',
-                    data: form.serialize(), // serializes the form's elements.
-                    success: function(data)
-                    {
-                      $('#data-detail-container').html(data)
-                      $('#login-modal2').modal('toggle')
-                      console.log(data)
+   $('body').on('click',".product1submit",function(event) {
+     
+        event.preventDefault();
+        {% if basics.miveuser = 'none' %}
+        mivenotify('error','Login required','please login to add products to cart',600)
+        console.log('user not loggedin')
+        $('#login-modal').modal('toggle')
+        mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+        return
+        {% else %}
+         rak = $(this).attr('data-miveproduct')
+         formid= "#"+"productsubmit-"+rak
+         form = $(formid)
+         //$(rak).submit()
+         mivenotify('success','Item added','Item has been added to cart',600)
+         $.ajax({
+                type: "POST",
+                url: '/data/ajaxaddtocart',
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                  $('#data-detail-container').html(data)
+                  console.log(data)
+                },
+                error:function(data){console.log(data)
+                mivenotify('error','Item add','Error ocuured while processing your request')
+                }
+              });
+        {%endif %}
+     });
+</script>
+<script>
+   $('body').on('click',"#productsubmitbutton",function(event) {
+     
+        event.preventDefault();
+        {% if basics.miveuser = 'none' %}
+        mivenotify('error','Login required','please login to add products to cart',600)
+        console.log('user not loggedin')
+        $('#login-modal').modal('toggle')
+        mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+        return
+        {% else %}
+        idd = $(this).attr('data-miveproduct')
+        console.log('idd',idd)
+        formid = '#productdetailsubmit-'+idd
+         form = $(formid)
+         console.log('formdata',form.serialize())
+         //$(rak).submit()
+         mivenotify('success','Item added','Item has been added to cart',600)
+         $.ajax({
+                type: "POST",
+                url: '/data/ajaxaddtocart',
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                  $('#data-detail-container').html(data)
+                  $('#login-modal2').modal('toggle')
+                  console.log(data)
+   
+                },
+                error:function(data){console.log(data)
+                mivenotify('error','Item add','Error ocuured while processing your request')
+                }
+              });
+        {%endif %}
+     });
+</script>
+<script>
+   $('body').on('click','.login-modal3-button',function(){
+     idd = $(this).attr('data-productid')
+     $('#detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+     url = "/data/product?productId="+idd
+     data = $.get(url,function(data){
+       $('#detail-container').html(data)
+     })
+   })
+</script>
+<script>
+totalbox=[]
+selected=[]
+</script>
+<script>
+   $('body').on('change','.inputproductqty',function(){
+     console.log('tintu')
+     idd = $(this).attr('data-productid')
+     qty = $(this).val()
+     console.log('qty',qty)
+     idprice = '#price-'+idd
+     idtotal = '#total-'+idd
+     iddefault = '#default-'+idd
+     price = $(idprice).val()
+   
+     $(idtotal).val(price*qty)
+     pdid = idd
+     qty=qty
+      if (selected.indexOf(parseInt(pdid))>-1){
+          index = selected.indexOf(parseInt(pdid))
+          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
+          totalbox[index]=obj
 
-                    },
-                    error:function(data){console.log(data)
-                    mivenotify('error','Item add','Error ocuured while processing your request')
-                    }
-                  });
-            {%endif %}
-         });
-      </script>
-      <script>
-         $('body').on('click','.login-modal3-button',function(){
-           idd = $(this).attr('data-productid')
-           $('#detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
-           url = "/data/product?productId="+idd
-           data = $.get(url,function(data){
-             $('#detail-container').html(data)
-           })
-         })
-      </script>
-      <script>
-      $('body').on('change','.inputproductqty',function(){
-        console.log('tintu')
-        idd = $(this).attr('data-productid')
-        qty = $(this).val()
-        console.log('qty',qty)
-        idprice = '#price-'+idd
-        idtotal = '#total-'+idd
-        iddefault = '#default-'+idd
-        price = $(idprice).val()
+        }
+        else{
+          obj = {"productId":pdid,"qty":qty,"priceperunit":price}
+          totalbox.push(obj)
+          selected.push(parseInt(pdid))
 
-        $(idtotal).val(price*qty)
+        }
+        console.log(totalbox)
+   })
+   $('body').on('change','.priceperunit',function(){
+     idd = $(this).attr('data-productid')
+     price = $(this).val()
+     idprice = '#price-'+idd
+     idtotal = '#total-'+idd
+     idqty = '#qty-'+idd
+     iddefault = '#default-'+idd
+     qty = $(idqty).val()
+   
+     $(idtotal).val(price*qty)
+     pdid = idd
+     qty=qty
+      if (selected.indexOf(parseInt(pdid))>-1){
+          index = selected.indexOf(parseInt(pdid))
+          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
+          totalbox[index]=obj
+
+        }
+        else{
+          obj = {"productId":pdid,"qty":qty,"priceperunit":price}
+          totalbox.push(obj)
+          selected.push(parseInt(pdid))
+
+        }
+        console.log(totalbox)
+   })
+   $('body').on('change','.totalprice',function(){
+     idd = $(this).attr('data-productid')
+     totalprice = $(this).val()
+     idprice = '#price-'+idd
+     idtotal = '#total-'+idd
+     idqty = '#qty-'+idd
+     iddefault = '#default-'+idd
+     qty = $(idqty).val()
+   
+     $(idprice).val(totalprice/qty)
+     pdid = idd
+     qty=qty
+      if (selected.indexOf(parseInt(pdid))>-1){
+          index = selected.indexOf(parseInt(pdid))
+          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
+          totalbox[index]=obj
+
+        }
+        else{
+          obj = {"productId":pdid,"qty":qty,"priceperunit":totalprice/qty}
+          totalbox.push(obj)
+          selected.push(parseInt(pdid))
+
+        }
+        console.log(totalbox)
+   })
+   
+</script>
+<script type="text/javascript">
+  $('body').on('click','#basedatacart',function(request){
+        console.log('len',totalbox.length)
+        if (totalbox.length!=0){
+           p=JSON.stringify(totalbox)
+        t= $.post( "/new/ajaxaddtodummycartd", { "dt": p},function(data){
+          $('#data-detail-container').html(data)
+          mivenotify('success','Items aadded','Items has been succesfully added to cart')
+          totalbox=[]
+                      } );
+        t.fail(function(data) {
+    alert( "error" );
+    console.log(data)
+  })
+
+        }
       })
-      $('body').on('change','.priceperunit',function(){
-        idd = $(this).attr('data-productid')
-        price = $(this).val()
-        idprice = '#price-'+idd
-        idtotal = '#total-'+idd
-        idqty = '#qty-'+idd
-        iddefault = '#default-'+idd
-        qty = $(idqty).val()
-
-        $(idtotal).val(price*qty)
-      })
-      $('body').on('change','.totalprice',function(){
-        idd = $(this).attr('data-productid')
-        totalprice = $(this).val()
-        idprice = '#price-'+idd
-        idtotal = '#total-'+idd
-        idqty = '#qty-'+idd
-        iddefault = '#default-'+idd
-        qty = $(idqty).val()
-
-        $(idprice).val(totalprice/qty)
-      })
-
-      </script>
-
+</script>>
 {% endblock %}
