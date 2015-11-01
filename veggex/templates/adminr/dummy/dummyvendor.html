@@ -240,6 +240,7 @@ selected=[]
         console.log('len',totalbox.length)
         if (totalbox.length!=0){
            p=JSON.stringify(totalbox)
+           $('#data-detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
         t= $.post( "/new/ajaxaddtodummycartd", { "dt": p},function(data){
           $('#data-detail-container').html(data)
           mivenotify('success','Items aadded','Items has been succesfully added to cart')
