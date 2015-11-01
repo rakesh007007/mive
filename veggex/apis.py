@@ -584,6 +584,8 @@ class ApiMakeOrderDummy(APIView):
 		data=request.data
 		dummycartId=data['dummycartId']
 		userId=data['userId']
+		payment=data['payment']
+		tt = data['total']
 		sellerId = int(data['sellerId'])
 		userId=int(userId)
 		dummycartId=int(dummycartId)
@@ -594,7 +596,10 @@ class ApiMakeOrderDummy(APIView):
 		payment_mode = 'COD'
 		dummycart =user.dummycart
 		items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller = seller)
-		total=dummycart.dummycartTotal
+		if int(tt)!=0:
+			total = int(tt)
+		else:
+			total=dummycart.dummycartTotal
 		if(len(items)<1):
 			print 'no items'
 			return Response(['no items to make order'])
@@ -603,6 +608,7 @@ class ApiMakeOrderDummy(APIView):
 			order.user = user
 			order.payment_mode = payment_mode
 			order.subtotal=total
+			order.payment = payment
 			order.seller = seller
 			order.status = 'PLACED'
 			order.deliveryTime=deliveryTime
