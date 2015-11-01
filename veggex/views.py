@@ -277,6 +277,7 @@ def ajaxaddedreload(request):
 			t = []
 		allProducts = Product.rak.filter(seller=seller).exclude(product_id__in=t)
 		return {'allProducts':allProducts,'products':products,'categ':categ}
+@transaction.atomic
 def configvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -330,6 +331,7 @@ def vendors(request):
 		print currentsellers
 		sellers = Seller.rak.exclude(seller_id__in=currentsellers)
 		return TemplateResponse(request,'adminr/vendors.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def addtocart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=You are not logged in please logIn')
@@ -379,6 +381,7 @@ def delvendoruser(request):
 		CategoryVendor.objects.get(categoryvendor_id=id).delete()
 		return redirect('/vendors')
 
+@transaction.atomic
 def ajaxremovefromuser(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -397,6 +400,7 @@ def ajaxremovefromuser(request):
 	return TemplateResponse(request,'adminr/ajaxrestproductreload.html',{'categoryvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 
 
+@transaction.atomic
 def ajaxaddtouser(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -428,6 +432,7 @@ def ajaxaddtouser(request):
 	categ = full['categ']
 	products = full['products']
 	return TemplateResponse(request,'adminr/ajaxaddedproductreload.html',{'categoryvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def ajaxaddtocart(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -460,6 +465,7 @@ def ajaxaddtocart(request):
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
 	return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def removeItemPost(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -474,6 +480,7 @@ def removeItemPost(request):
 	allProducts = giveajaxcart(request)
 	return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 
+@transaction.atomic
 def editqty(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -492,6 +499,7 @@ def editqty(request):
 	allProducts = giveajaxcart(request)
 	return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 
+@transaction.atomic
 def ajaxremoveItemPost(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -512,6 +520,7 @@ def ajaxremoveItemPost(request):
 	products = Product.rak.filter(status=1)
 	categories = Category.objects.all()
 	return TemplateResponse(request, 'new/ajax/shophome.html',{'cartItems':cartItems,'totalItems':totalItems,'products':products,'categories':categories,'miveuser':miveuser,'cart':cart,'customproducts':customproducts,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def ordercategory(request):	
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -589,6 +598,7 @@ def ordercategory(request):
 				return redirect(strr)
 		except Exception,e:
 			return HttpResponse('error ocurre',status=500)
+@transaction.atomic
 def resetstock(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -615,6 +625,7 @@ def resetstock(request):
 				raise ValueError('A very specific bad thing happened')
 		except Exception,e:
 			return HttpResponse(e,status=500)
+@transaction.atomic
 def ajaxstock(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -732,6 +743,7 @@ def ajaxcart(request):
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
 	return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def newvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -762,6 +774,7 @@ def newvendor(request):
 		return TemplateResponse(request,'adminr/newvendor.html',{'seller':seller,'basics':basics,'products':products})
 	except Exception,e:
 		return HttpResponse(e,status=500)
+@transaction.atomic
 def prodnewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -804,6 +817,7 @@ def prodnewvendor(request):
 		return HttpResponse('yomoso')
 	except Exception,e:
 		return HttpResponse('Error occure',status=500)
+@transaction.atomic
 def newprodnewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
