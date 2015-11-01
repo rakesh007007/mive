@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^data/categoryvendor', dummy.dummyVendorView),
     url(r'^addtocart', views.addtocart),
     url(r'^ajaxaddtocart', views.ajaxaddtocart),
+    url(r'^new/ajaxaddtocart', views.newajaxaddtocart),
     url(r'^data/ajaxaddtocart', dummy.dummyajaxaddtocart),
     url(r'^addvendors', views.addvendors),
     url(r'^data/addvendors', dummy.dummyaddvendors),
