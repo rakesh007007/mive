@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
                        <form mobile="yes"  id="productsubmit-{{product.product_id}}" method="post" class="productform">
-                Quantity <input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty" style="border:none;  border-bottom:solid grey 1px;width:20px" data-productid="{{product.product_id}}">
+                Quantity <input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="0" name="qty" style="border:none;  border-bottom:solid grey 1px;width:20px" data-productid="{{product.product_id}}">
                 {%csrf_token%}
                 <input type="hidden" name="productId" value="{{product.product_id}}">
              </form>
@@ -174,7 +174,8 @@
         console.log('len',totalbox.length)
         if (totalbox.length!=0){
            p=JSON.stringify(totalbox)
-        $.post( "/new/ajaxaddtocart", { "dt": p},function(data){$('#cartreload').html(data)
+        $.post( "/new/ajaxaddtocart", { "dt": p},function(data){
+          $('#cartreload').html(data)
           mivenotify('success','Items aadded','Items has been succesfully added to cart')
           totalbox=[]
                       } );
