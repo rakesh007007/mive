@@ -107,28 +107,28 @@
               <input type="hidden" name="userid" value="{{basics.miveuser.user_id}}">
               <div class="col-md-6">
               {%csrf_token%}
-              Name:<input  placeholder="enter name" id="name" name="name" type="text" class="form-control">
+              Name:<input  placeholder="enter name" id="name" name="name" type="text" class="form-control" required>
               </div>
               <div class="col-md-6">
-              Email Id:<input  placeholder="enter email Id" name="email" type="text" class="form-control">
+              Email Id:<input  placeholder="enter email Id" name="email" type="text" class="form-control" required>
               </div>
               <div class="col-md-6">
-              Mobile :<input  placeholder="enter mobile number" id="datetime" name="mobile" type="text" class="form-control">
+              Mobile :<input  placeholder="enter mobile number" id="datetime" name="mobile" type="text" class="form-control" required>
               </div>
               <div class="col-md-6">
-              Add dummy Names<input  placeholder="dummy names" name="ctext" type="text" class="form-control">
+              Add dummy Names<input  placeholder="dummy names" name="ctext" type="text" class="form-control" required>
               </div>
               <div class="col-md-6">
-              Area<input  placeholder="area" name="area" type="text" class="form-control">
+              Area<input  placeholder="area" name="area" type="text" class="form-control" required>
               </div>
               <div class="col-md-6">
-              City<input  placeholder="city" name="city" type="text" class="form-control">
+              City<input  placeholder="city" name="city" type="text" class="form-control" required>
               </div>
               <div class="col-md-6">
-              State<input  placeholder="state" name="state" type="text" class="form-control">
+              State<input  placeholder="state" name="state" type="text" class="form-control" required>
               </div>
               <div class="col-md-6">
-                     Pincode: <input  placeholder="pincode" id="datetime" name="pincode" type="text" class="form-control">
+                     Pincode: <input  placeholder="pincode" id="datetime" name="pincode" type="text" class="form-control" required>
               </div>
               <div class="col-md-6 col-md-offset-4">
                   <button type="submit" id="add" class="btn btn-success btn-lg">

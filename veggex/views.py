@@ -438,7 +438,7 @@ def ajaxaddtocart(request):
 	product  = Product.rak.get(product_id=productId)
 	qty = int(request.POST['qty'])
 	if(qty%1!=0 or qty<0):
-		return HttpResponse('error occured',status=500)
+		return HttpResponse('error occured invalid quantity',status=500)
 	cart = user.cart
 	price = product.pricePerUnit
 	check = Cartitem.objects.filter(cart=cart).filter(product=product)
@@ -516,76 +516,79 @@ def ordercategory(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	else:
-		miveuserId = request.session['miveuser']
-		user = User.objects.get(user_id=int(miveuserId))
-		miveuser=user
-		cartId = request.GET['cartid']
-		categoryVendorId = request.GET['categoryvendorid']
-		orderMsg = request.GET['orderMsg']
-		deliveryTime = request.GET['deliveryTime']
-		payment_mode = 'COD'
-		cart =Cart.objects.get(cart_id = cartId)
-		categoryvendor = CategoryVendor.objects.get(categoryvendor_id = categoryVendorId)
-		items = Cartitem.objects.filter(cart = cart).filter(product__seller=categoryvendor.seller)
-		totalprice=getTotal(items)
-		if(len(items)<1):
-			print 'no items'
-			return HttpResponse('no items to make order')
-		else:
-			order = Order()
-			order.user = user
-			order.seller = categoryvendor.seller
-			order.payment_mode = payment_mode
-			order.subtotal=totalprice
-			order.status = 'PLACED'
-			order.orderMsg = orderMsg
-			order.deliveryTime = deliveryTime
-			order.save()
-			order_id =order.order_id 
-			for itemn in items:
-				rak = Orderitem()
-				rak.product = itemn.product
-				stock = Currentstock.objects.filter(product=itemn.product).filter(user=user)
-				if(len(stock)>0):
-					currStock = stock[0]
-					currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
-					currStock.save()
-				else:
-					currStock = Currentstock()
-					currStock.product = itemn.product
-					currStock.user = user
-					currStock.remainingstock=itemn.qtyInUnits
-					currStock.save()
-				rak.unit=itemn.product.unit
-				rak.qtyInUnits = itemn.qtyInUnits
-				miveuser=user
-				rak.priceType = itemn.product.priceType
-				rak.pricePerUnit = itemn.product.pricePerUnit
-				rak.order = order
-				rak.save()
-				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
-			Cartitem.objects.filter(cart = cart).filter(product__seller=categoryvendor.seller).delete()
-			cart.cartTotal=cart.cartTotal - totalprice
-			miveuser.creditlimit = miveuser.creditlimit - totalprice
-			miveuser.save()
-			cart.save()
-	n = Notification()
-	n.title='Order Placed'
-	n.body='Your order has been placed succesfully with orderId:'+str(order_id)
-	n.link = 'orderDetail?orderId='+str(order_id)
-	n.save()
-	miveuser.notifications.add(n)
-	miveuser.save()
-	n2 = Sellernotification()
-	n2.title ='Order recieved'
-	n2.body = 'Congratulations you have recieved a new order orderId'+str(order_id)
-	n2.link = 'seller/orderDetail?orderId='+str(order_id)
-	n2.save()
-	miveseller= categoryvendor.seller
-	miveseller.notifications.add(n2)
-	miveseller.save()
-	strr = '/main?notify=yes&description=Order has been placed succesfully&title=OrderID:'+str(order_id)
-	return redirect(strr)
+		try:
+			miveuserId = request.session['miveuser']
+			user = User.objects.get(user_id=int(miveuserId))
+			miveuser=user
+			cartId = request.GET['cartid']
+			categoryVendorId = request.GET['categoryvendorid']
+			orderMsg = request.GET['orderMsg']
+			deliveryTime = request.GET['deliveryTime']
+			payment_mode = 'COD'
+			cart =Cart.objects.get(cart_id = cartId)
+			categoryvendor = CategoryVendor.objects.get(categoryvendor_id = categoryVendorId)
+			items = Cartitem.objects.filter(cart = cart).filter(product__seller=categoryvendor.seller)
+			totalprice=getTotal(items)
+			if(len(items)<1):
+				print 'no items'
+				return HttpResponse('no items to make order',status=500)
+			else:
+				order = Order()
+				order.user = user
+				order.seller = categoryvendor.seller
+				order.payment_mode = payment_mode
+				order.subtotal=totalprice
+				order.status = 'PLACED'
+				order.orderMsg = orderMsg
+				order.deliveryTime = deliveryTime
+				order.save()
+				order_id =order.order_id 
+				for itemn in items:
+					rak = Orderitem()
+					rak.product = itemn.product
+					stock = Currentstock.objects.filter(product=itemn.product).filter(user=user)
+					if(len(stock)>0):
+						currStock = stock[0]
+						currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
+						currStock.save()
+					else:
+						currStock = Currentstock()
+						currStock.product = itemn.product
+						currStock.user = user
+						currStock.remainingstock=itemn.qtyInUnits
+						currStock.save()
+					rak.unit=itemn.product.unit
+					rak.qtyInUnits = itemn.qtyInUnits
+					miveuser=user
+					rak.priceType = itemn.product.priceType
+					rak.pricePerUnit = itemn.product.pricePerUnit
+					rak.order = order
+					rak.save()
+					#fullMsgSender(userId,'Purchase','you have just orderds this shit')
+				Cartitem.objects.filter(cart = cart).filter(product__seller=categoryvendor.seller).delete()
+				cart.cartTotal=cart.cartTotal - totalprice
+				miveuser.creditlimit = miveuser.creditlimit - totalprice
+				miveuser.save()
+				cart.save()
+				n = Notification()
+				n.title='Order Placed'
+				n.body='Your order has been placed succesfully with orderId:'+str(order_id)
+				n.link = 'orderDetail?orderId='+str(order_id)
+				n.save()
+				miveuser.notifications.add(n)
+				miveuser.save()
+				n2 = Sellernotification()
+				n2.title ='Order recieved'
+				n2.body = 'Congratulations you have recieved a new order orderId'+str(order_id)
+				n2.link = 'seller/orderDetail?orderId='+str(order_id)
+				n2.save()
+				miveseller= categoryvendor.seller
+				miveseller.notifications.add(n2)
+				miveseller.save()
+				strr = '/main?notify=yes&description=Order has been placed succesfully&title=OrderID:'+str(order_id)
+				return redirect(strr)
+		except Exception,e:
+			return HttpResponse('error ocurre',status=500)
 def resetstock(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -616,26 +619,28 @@ def ajaxstock(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	else:
-		basics = basicinfo(request)
-		miveuser = basics['miveuser'] 
-		stockId = int(request.POST['stockid'])
-		cons = float(request.POST['newqty'])
-		stock = Currentstock.objects.filter(user=miveuser).get(currentstock_id = stockId)
-		stcons = Stockconsumption()
-		stcons.stock = stock
-		stcons.user=miveuser
-		if stock.remainingstock>cons and cons>0:
-			stock.remainingstock = stock.remainingstock-cons
-		else:
-			stock.remainingstock = 0
-			cons=0
-		stock.save()
-		stcons.consumption = cons
-		stcons.save()
-		stocks = Currentstock.objects.filter(user=miveuser)
-		stocks=sorted(stocks, key=operator.attrgetter('remainingstock'),reverse=True)
-		basics =basicinfo(request)
-		return TemplateResponse(request, 'adminr/ajaxstocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
+		try:
+			basics = basicinfo(request)
+			miveuser = basics['miveuser'] 
+			stockId = int(request.POST['stockid'])
+			cons = float(request.POST['newqty'])
+			stock = Currentstock.objects.filter(user=miveuser).get(currentstock_id = stockId)
+			stcons = Stockconsumption()
+			stcons.stock = stock
+			stcons.user=miveuser
+			if stock.remainingstock>cons and cons>0:
+				stock.remainingstock = stock.remainingstock-cons
+			else:
+				raise ValueError('Invalid entry')
+			stock.save()
+			stcons.consumption = cons
+			stcons.save()
+			stocks = Currentstock.objects.filter(user=miveuser)
+			stocks=sorted(stocks, key=operator.attrgetter('remainingstock'),reverse=True)
+			basics =basicinfo(request)
+			return TemplateResponse(request, 'adminr/ajaxstocks.html',{'basics':basics,'stocks':stocks,'csrf_token':get_or_create_csrf_token(request)})
+		except Exception,e:
+			return HttpResponse(e,status=500)
 def stock(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -667,34 +672,37 @@ def orderfilter(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	else:
-		print 'yoooooooooooooo'
-		print request.POST
-		print (request.POST['sellers'])
-		basics = basicinfo(request)
-		miveuser = basics['miveuser']
-		localtz = pytz.timezone('Asia/Kolkata')
-		aaj = date.today()
-		days =request.POST['date']
-		sellers = request.POST.getlist('sellers')
-		payment=request.POST['rak']
-		sortby = request.POST['sortby']
-		basics= basicinfo(request)
-		beforedays = date.today() - timedelta(days=int(days))
-		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
-		timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
-		if payment=='all':
-			orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
-		else:
-			orders = Order.objects.filter(seller__seller_id__in=sellers).filter(payment=payment).filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
-		if (sortby=='date'):
-			orders=orders.order_by('-timeOfCreate')
-		elif (sortby=='subtotal'):
-			orders=orders.order_by('-subtotal')
-		elif (sortby=='status'):
-			orders=orders.order_by('-status')
-		else:
-			orders=orders.order_by('-seller__nameOfSeller')
-		return TemplateResponse(request,'adminr/orderfilter.html',{'basics':basics,'orders':orders})
+		try:
+			print 'yoooooooooooooo'
+			print request.POST
+			print (request.POST['sellers'])
+			basics = basicinfo(request)
+			miveuser = basics['miveuser']
+			localtz = pytz.timezone('Asia/Kolkata')
+			aaj = date.today()
+			days =request.POST['date']
+			sellers = request.POST.getlist('sellers')
+			payment=request.POST['rak']
+			sortby = request.POST['sortby']
+			basics= basicinfo(request)
+			beforedays = date.today() - timedelta(days=int(days))
+			timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
+			timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
+			if payment=='all':
+				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
+			else:
+				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(payment=payment).filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
+			if (sortby=='date'):
+				orders=orders.order_by('-timeOfCreate')
+			elif (sortby=='subtotal'):
+				orders=orders.order_by('-subtotal')
+			elif (sortby=='status'):
+				orders=orders.order_by('-status')
+			else:
+				orders=orders.order_by('-seller__nameOfSeller')
+			return TemplateResponse(request,'adminr/orderfilter.html',{'basics':basics,'orders':orders})
+		except Exception,e:
+			return HttpResponse(e,status=500)
 def cart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -727,111 +735,123 @@ def ajaxcart(request):
 def newvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
-	basics = basicinfo(request)
-	name =request.POST['name']
-	mobile =request.POST['mobile']
-	email =request.POST['email']
-	area =request.POST['area']
-	city =request.POST['city']
-	state =request.POST['state']
-	pincode = request.POST['pincode']
-	ctext =request.POST['ctext']
-	seller = Seller()
-	seller.nameOfSeller=name
-	seller.mailId = email
-	seller.mobileNo=mobile
-	seller.categories =ctext
-	ad =Address()
-	ad.area=area
-	ad.city =city
-	ad.state = state
-	ad.pincode = pincode
-	ad.save()
-	seller.address = ad
-	seller.save()
-	products = Product.rak.all()
-	return TemplateResponse(request,'adminr/newvendor.html',{'seller':seller,'basics':basics,'products':products})
+	try:
+		basics = basicinfo(request)
+		name =request.POST['name']
+		mobile =request.POST['mobile']
+		email =request.POST['email']
+		area =request.POST['area']
+		city =request.POST['city']
+		state =request.POST['state']
+		pincode = request.POST['pincode']
+		ctext =request.POST['ctext']
+		seller = Seller()
+		seller.nameOfSeller=name
+		seller.mailId = email
+		seller.mobileNo=mobile
+		seller.categories =ctext
+		ad =Address()
+		ad.area=area
+		ad.city =city
+		ad.state = state
+		ad.pincode = pincode
+		ad.save()
+		seller.address = ad
+		seller.save()
+		products = Product.rak.all()
+		return TemplateResponse(request,'adminr/newvendor.html',{'seller':seller,'basics':basics,'products':products})
+	except Exception,e:
+		return HttpResponse(e,status=500)
 def prodnewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
-	basics = basicinfo(request)
-	price =request.POST['price']
-	productId =request.POST['productid']
-	sellerId =request.POST['sellerid']
-	baseproduct = Product.rak.get(product_id=productId)
-	seller = Seller.objects.get(seller_id=sellerId)
-	product = Product()
-	product.seller = seller
-	product.pricePerUnit = int(price)
-	product.name = baseproduct.name
-	product.description = baseproduct.description
-	product.unit = baseproduct.unit
-	product.priceType = baseproduct.priceType
-	product.coverphoto = baseproduct.coverphoto
-	product.category = baseproduct.category
-	product.origin = baseproduct.origin
-	product.maxAvailableUnits = baseproduct.maxAvailableUnits
-	product.qualityRemarks = baseproduct.qualityRemarks
-	product.grade = baseproduct.grade
-	product.satus = 1
-	product.save()
-	miveuser = basics['miveuser']
-	ccount = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser).count()
-	if(ccount>0):
-		existing = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser)[0]
-		existing.products.add(product)
-		existing.save()
-	else:
-		neww = CategoryVendor()
-		neww.seller = seller
-		neww.save()
-		neww.products.add(product)
-		neww.save()
-		miveuser.categories.add(neww)
-		miveuser.save()
-	return HttpResponse('yomoso')
+	try:
+		basics = basicinfo(request)
+		price =request.POST['price']
+		productId =request.POST['productid']
+		sellerId =request.POST['sellerid']
+		baseproduct = Product.rak.get(product_id=productId)
+		seller = Seller.objects.get(seller_id=sellerId)
+		product = Product()
+		product.seller = seller
+		product.pricePerUnit = int(price)
+		product.name = baseproduct.name
+		product.description = baseproduct.description
+		product.unit = baseproduct.unit
+		product.priceType = baseproduct.priceType
+		product.coverphoto = baseproduct.coverphoto
+		product.category = baseproduct.category
+		product.origin = baseproduct.origin
+		product.maxAvailableUnits = baseproduct.maxAvailableUnits
+		product.qualityRemarks = baseproduct.qualityRemarks
+		product.grade = baseproduct.grade
+		product.satus = 1
+		product.save()
+		miveuser = basics['miveuser']
+		ccount = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser).count()
+		if(ccount>0):
+			existing = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser)[0]
+			existing.products.add(product)
+			existing.save()
+		else:
+			neww = CategoryVendor()
+			neww.seller = seller
+			neww.save()
+			neww.products.add(product)
+			neww.save()
+			miveuser.categories.add(neww)
+			miveuser.save()
+		return HttpResponse('yomoso')
+	except Exception,e:
+		return HttpResponse('Error occure',status=500)
 def newprodnewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
-	basics = basicinfo(request)
-	price =request.POST['price']
-	sellerId =request.POST['sellerid']
-	seller = Seller.objects.get(seller_id=sellerId)
-	name= request.POST['name']
-	description = request.POST['description']
-	unit = request.POST['unit']
-	product = Product()
-	product.seller = seller
-	product.pricePerUnit = int(price)
-	product.name = name
-	product.description = description
-	product.unit = unit
-	product.priceType = "custom rates"
-	product.satus = 1
-	product.save()
-	miveuser = basics['miveuser']
-	ccount = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser).count()
-	if(ccount>0):
-		existing = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser)[0]
-		existing.products.add(product)
-		existing.save()
-	else:
-		neww = CategoryVendor()
-		neww.seller = seller
-		neww.save()
-		neww.products.add(product)
-		neww.save()
-		miveuser.categories.add(neww)
-		miveuser.save()
-	return HttpResponse('yomoso2')
+	try:
+		basics = basicinfo(request)
+		price =request.POST['price']
+		sellerId =request.POST['sellerid']
+		seller = Seller.objects.get(seller_id=sellerId)
+		name= request.POST['name']
+		description = request.POST['description']
+		unit = request.POST['unit']
+		product = Product()
+		product.seller = seller
+		product.pricePerUnit = int(price)
+		product.name = name
+		product.description = description
+		product.unit = unit
+		product.priceType = "custom rates"
+		product.satus = 1
+		product.save()
+		miveuser = basics['miveuser']
+		ccount = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser).count()
+		if(ccount>0):
+			existing = CategoryVendor.objects.filter(seller=seller).filter(user=miveuser)[0]
+			existing.products.add(product)
+			existing.save()
+		else:
+			neww = CategoryVendor()
+			neww.seller = seller
+			neww.save()
+			neww.products.add(product)
+			neww.save()
+			miveuser.categories.add(neww)
+			miveuser.save()
+		return HttpResponse('yomoso2')
+	except Exception,e:
+		return HttpResponse(e,status=500)
 def userprofile(request):
 	basics = basicinfo(request)
 	return TemplateResponse(request,'adminr/profile.html',{'basics':basics})
 def invoice(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
-	basics = basicinfo(request)
-	orderId = int(request.GET['orderId'])
-	order= Order.objects.get(order_id=orderId)
-	invoices = order.invoices
-	return TemplateResponse(request,'adminr/invoice.html',{'basics':basics,'invoices':invoices,'order':order})
+	try:
+		basics = basicinfo(request)
+		orderId = int(request.GET['orderId'])
+		order= Order.objects.get(order_id=orderId)
+		invoices = order.invoices
+		return TemplateResponse(request,'adminr/invoice.html',{'basics':basics,'invoices':invoices,'order':order})
+	except Exception,e:
+		return HttpResponse(e,status=500)

@@ -461,7 +461,7 @@
               <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
               <input type="hidden" name="categoryvendorid" id="orderplaceid" value="{{pd.categoryvendor_id}}">
                <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
-                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
+                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control" required>
                </div>
                <div class="col-md-4 col-lg-4 col-xs-12">
                      <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
@@ -486,7 +486,7 @@
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
               <div class="row">
                <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
-                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
+                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control" required>
                </div>
                <div class="col-md-4 col-lg-4 col-xs-12">
                      <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
@@ -638,7 +638,7 @@ $('body').on('click','.minicart-delete',function(event){
                       $('#cartreload').html(data)
                     },
                     error:function(data){console.log(data)
-                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    mivenotify('error','Item add error',data)
                     }
                   });
 

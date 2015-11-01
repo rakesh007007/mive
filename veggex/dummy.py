@@ -43,8 +43,8 @@ def dummyajaxaddtocart(request):
 	user = User.objects.get(mobileNo=mobile)
 	product  = Product.rak.get(product_id=productId)
 	qty = int(request.POST['qty'])
-	if(qty%1!=0 or qty<=0):
-		return HttpResponse('error occured',status=500)
+	if(qty%1!=0 or qty<=0 or pricePerUnit<=0):
+		return HttpResponse('error occured invalid qty or price',status=500)
 	dummycart = user.dummycart
 	price = product.pricePerUnit
 	check = Dummycartitem.objects.filter(dummycart=dummycart).filter(product=product).filter(pricePerUnit=pricePerUnit)
