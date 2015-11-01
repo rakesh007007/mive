@@ -465,6 +465,38 @@ def ajaxaddtocart(request):
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
 	return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+def ajaxaddtocart2(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	productId = request.POST['productId']
+	productId = (int)(productId)
+	mobile=request.session['mobile']
+	user = User.objects.get(mobileNo=mobile)
+	product  = Product.rak.get(product_id=productId)
+	qty = int(request.POST['qty'])
+	if(qty%1!=0 or qty<0):
+		return HttpResponse('error occured invalid quantity',status=500)
+	cart = user.cart
+	price = product.pricePerUnit
+	check = Cartitem.objects.filter(cart=cart).filter(product=product)
+	if(len(check)>0):
+		previtem = Cartitem.objects.get(cartitem_id=check[0].cartitem_id)
+		previtem.qtyInUnits = previtem.qtyInUnits+int(qty)
+		cart.cartTotal = cart.cartTotal+int(qty)*int(price)
+		previtem.save()
+		cart.save()
+	else:
+		cartitem=Cartitem()
+		cartitem.cart=cart
+		cartitem.qtyInUnits = qty
+		cartitem.product=product
+		cartitem.pricePerUnit = price
+		cart.cartTotal = cart.cartTotal+int(qty)*int(price)
+		cartitem.save()
+		cart.save()
+	basics = basicinfo(request)
+	allProducts = giveajaxcart(request)
+	return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def removeItemPost(request):
 	if(checklogin(request)==False):
