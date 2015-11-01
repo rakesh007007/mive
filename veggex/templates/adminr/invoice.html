@@ -5,7 +5,7 @@
 <center>Order Id: {{order.order_id}}</center>
 
 {%for inv in invoices.all %}
-<center><img src="/{{inv.image.url}}"  class="img img-responsive" width="500px"></center><br>
+<center><img src="/{{inv.image.url}}"  class="img img-responsive" width="1000px"></center><br>
 {% endfor %}
 {% if invoices.all|length = 0 %}
 <center><h3>No invoice image for this order</h3></center>

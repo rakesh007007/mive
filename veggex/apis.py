@@ -532,6 +532,14 @@ class ApiMakeOrder(APIView):
 			order.deliveryTime=deliveryTime
 			order.orderMsg=orderMsg
 			order.save()
+			miveuser.creditlimit=miveuser.creditlimit-total
+			n = Notification()
+			n.title='Order Placed'
+			n.body='Your order has been placed succesfully with orderId:'+str(order_id)
+			n.link = 'orderDetail?orderId='+str(order.order_id)
+			n.save()
+			miveuser.notifications.add(n)
+			miveuser.save()
 			order_id =order.order_id 
 			su = 0
 			for itemn in items:
@@ -590,6 +598,11 @@ class ApiMakeOrderDummy(APIView):
 			order.deliveryTime=deliveryTime
 			order.orderMsg=orderMsg
 			order.save()
+			n = Notification()
+			n.title='Order Placed'
+			n.body='Your order has been placed succesfully with orderId:'+str(order_id)
+			n.link = 'orderDetail?orderId='+str(order.order_id)
+			n.save()
 			for afile in request.data['image']:
 				print '>>>>>>>check'
 				print afile
@@ -619,6 +632,8 @@ class ApiMakeOrderDummy(APIView):
 				rak.priceType = itemn.product.priceType
 				rak.pricePerUnit = itemn.pricePerUnit
 				rak.order = order
+				rak.product.pricePerUnit=itemn.pricePerUnit
+				rak.product.save()
 				itemn.delete()
 				rak.save()
 			dummycart.dummycartTotal = dummycart.dummycartTotal - su
