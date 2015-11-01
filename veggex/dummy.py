@@ -386,7 +386,7 @@ def dummyconfigvendor(request):
 			products = []
 			t = []
 		allProducts = Product.rak.filter(seller=seller).exclude(product_id__in=t)
-		return TemplateResponse(request,'adminr/dummy/configvendor.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/dummy/configvendor.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyajaxremovefromuser(request):
 	if(checklogin(request)==False):

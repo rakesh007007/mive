@@ -3,7 +3,7 @@
 <section class="content-header">
    <h1>
       Mive 
-      <small>Add products to vendor list</small>
+      <small>Add products to vendor {{seller.nameOfSeller}}</small>
    </h1>
    <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -25,6 +25,10 @@
         </div>
         </div>
       <div class="row">
+      <center>{% if products|length = 0 %}
+      <h3>this vendor doesnt not have any product</h3>
+      <h3>Kindly click on add new product and add new products</h3>
+      {% endif %}</center>
       {% for product in products %}
         <div class="col-md-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-offset-0 col-lg-offset-0" id="removeid-{{product.product_id}}">
         <div class="box box-primary">
@@ -46,11 +50,8 @@
                 
               </ul>
               <div class="row">
-                  	<div class="col-md-5 col-sm-5 col-xs-5 col-sm-offset-1 col-xs-offset-1 col-md-offset-0 col-lg-offset-0">
+                  	<div class="col-md-5 col-sm-5 col-xs-5 col-sm-offset-1 col-xs-offset-1 col-md-offset-3 col-lg-offset-3">
               <a href="#" class="btn btn-primary product1add" data-miveproduct="{{product.product_id}}" mobile="yes"><b>Add</b></a>
-                  	</div>
-                  	<div class="col-md-5 col-sm-5 col-xs-5">
-              <a class="btn btn-primary login-modal2-button-add" data-productid="{{product.product_id}}"><b>Details</b></a>
                   	</div>
                   </div>
             </div>
@@ -60,9 +61,73 @@
         </div>
         {% endfor %}
       </div>
+      <div class="row">
+        <center>
+          <button class="btn btn-success btn-bg new-product-button">Add new Product</button>
+        </center>
+      </div>
+<div class="modal fade" id="new-product-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
+               <form method="post" action="/data/newproductnewvendor" id="newpd">
+              <input type="hidden" name="userid" value="{{basics.miveuser.user_id}}">
+              <input type="hidden" name="sellerid" value="{{seller.seller_id}}">
+              <div class="col-md-6">
+              {%csrf_token%}
+              Name:<input  placeholder="enter name" id="name" name="name" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+              Unit :<input  placeholder="Enter unit ex:kg"  name="unit" type="text" class="form-control">
+              </div>
+              <div class="col-md-6">
+              Price per unit<input  placeholder="Category names" name="price" type="integer" class="form-control">
+              </div>
+              <div class="col-md-6">
+              Description:<textarea  placeholder="enter email Id" name="description" type="text" class="form-control"></textarea>
+              </div>
+              <div class="col-md-6 col-md-offset-4">
+                  <button type="submit" id="add" class="btn btn-success btn-lg">
+                  Add product
+                  </button>
+              </div>
+               </form>
+            </div>
+         </div>
+      </div>
 {% endblock %}
 </section>
 {%block script%}
+<script>
+  $('body').on('click','.new-product-button',function(event){
+    $('#new-product-modal').modal('toggle')
+  })
+</script>
+<script>
+  $('body').on('submit','#newpd',function(event){
+    event.preventDefault()
+    console.log('try','fuck you')
+    form = $(this)
+    url = $(this).attr('action')
+    data = form.serialize()
+    $('#new-product-modal').modal('toggle')
+    mivenotify('Success','Product added','successs')
+    $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      console.log('yay')
+                      console.log(data)
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    console.log(data)
+                    }
+                  });
+
+  })
+</script>
 <script>
          $('body').on('click','.login-modal2-button-add',function(){
            idd = $(this).attr('data-productid')
