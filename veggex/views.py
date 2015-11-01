@@ -432,6 +432,40 @@ def ajaxaddtouser(request):
 	categ = full['categ']
 	products = full['products']
 	return TemplateResponse(request,'adminr/ajaxaddedproductreload.html',{'categoryvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+@csrf_exempt
+@transaction.atomic
+def newajaxaddtocart(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		dt = request.POST
+		basics = basicinfo(request)
+		productdetails = json.loads(dt['dt'])
+		miveuser = basics['miveuser']
+		cart = miveuser.cart
+		total=0
+		for it in productdetails:
+			pdid = (it['productId'])
+			qty = int(it['qty'])
+			pd = Product.objects.get(product_id=pdid)
+			ct = Cartitem.objects.filter(cart=cart).filter(product=pd).filter(pricePerUnit=pd.pricePerUnit).count()
+			if ct>0:
+				oldit = Cartitem.objects.filter(cart=cart).filter(product=pd).filter(pricePerUnit=pd.pricePerUnit)[0]
+				total = total+pd.pricePerUnit*qty
+				oldit.qtyInUnits = oldit.qtyInUnits+qty
+				oldit.save()
+			else:
+				total = total+pd.pricePerUnit*qty
+				item = Cartitem()
+				item.product = pd
+				item.pricePerUnit = pd.pricePerUnit
+				item.qtyInUnits = qty
+				item.cart = cart
+				item.save()
+		cart.cartTotal = cart.cartTotal+total
+		cart.save()
+		allProducts = giveajaxcart(request)
+		return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def ajaxaddtocart(request):
 	if(checklogin(request)==False):
@@ -443,7 +477,7 @@ def ajaxaddtocart(request):
 	product  = Product.rak.get(product_id=productId)
 	qty = int(request.POST['qty'])
 	if(qty%1!=0 or qty<0):
-		return HttpResponse('error occured invalid quantity',status=500)
+		return HttpResponse('error occured invalid quantity',status=500,content_type='application/json')
 	cart = user.cart
 	price = product.pricePerUnit
 	check = Cartitem.objects.filter(cart=cart).filter(product=product)

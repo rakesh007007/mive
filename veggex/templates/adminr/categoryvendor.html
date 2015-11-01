@@ -40,7 +40,7 @@
                       </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                       <form mobile="yes"  id="productsubmit-{{product.product_id}}" method="post" class="productform" action="/addtocart">
+                       <form mobile="yes"  id="productsubmit-{{product.product_id}}" method="post" class="productform">
                 Quantity <input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle inputproductqty" value="1" name="qty" style="border:none;  border-bottom:solid grey 1px;width:20px" data-productid="{{product.product_id}}">
                 {%csrf_token%}
                 <input type="hidden" name="productId" value="{{product.product_id}}">
@@ -150,11 +150,36 @@
          })
       </script>
       <script>
+      totalbox=[]
+      selected=[]
       $('body').on('change','.inputproductqty',function(request){
         pdid = $(this).attr('data-productid')
         qty=$(this).val()
-        obj = 
+        if (selected.indexOf(parseInt(pdid))>-1){
+          index = selected.indexOf(parseInt(pdid))
+          obj = {"productId":parseInt(pdid),"qty":qty}
+          totalbox[index]=obj
 
+        }
+        else{
+          obj = {"productId":pdid,"qty":qty}
+          totalbox.push(obj)
+          selected.push(parseInt(pdid))
+
+        }
+        console.log(totalbox)
+
+      })
+      $('body').on('click','#basecartbutton',function(request){
+        console.log('len',totalbox.length)
+        if (totalbox.length!=0){
+           p=JSON.stringify(totalbox)
+        $.post( "/new/ajaxaddtocart", { "dt": p},function(data){$('#cartreload').html(data)
+          mivenotify('success','Items aadded','Items has been succesfully added to cart')
+          totalbox=[]
+                      } );
+
+        }
       })
       </script>
 {% endblock %}
