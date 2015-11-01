@@ -404,14 +404,13 @@
               <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
             </div>
             <!-- /.box-header -->
-            <div class="">
+            <div class="borderless">
               <table class="table table-responsive borderless">
                 <tr class="success">
                   <th><center>Name</center></th>
                   <th class="hidden-sm hidden-xs"><center>Price/Unit</center></th>
                   <th><center>Qty</center></th>
                   <th><center>Delete</center></th>
-                  <th class="hidden-sm hidden-xs"><center>Info</center></th>
                 </tr>
                 {%for item in pd.items%}
                 <tr>
@@ -428,16 +427,13 @@
                     </form>
                   </td>
                   <td><center><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span style="color:green" class="itemdelete" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o"></i></span></a></center></td>
-                  <td class="hidden-sm hidden-xs">
-                    <center><a data-productid="{{item.product.product_id}}" href="#" onclick="return false" class="login-modal2-button"><span class="badge bg-green" style="color:#13c0ba">know more</span></a></center>
-                  </td>
                 </tr>
                 {% endfor%}
               </table>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-              
+              <button class="btn btn-warning" >Update</button>&nbsp;
               <button class="btn btn-primary pull-right orderdata" data-dummyvendorid="{{pd.dummyvendor_id}}" >Place Order</button>
             </div>
           </div>

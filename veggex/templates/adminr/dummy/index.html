@@ -45,7 +45,6 @@
         <!-- /.col -->
 
         <!-- fix for small devices only -->
-        <div class="clearfix visible-sm-block"></div>
 
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
@@ -75,9 +74,9 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-    <div class="row">
+    <div class="row" style="float:left;margin-left:0px;align:left">
        
-       <div class="col-lg-10 col-xs-6">
+       <div class="col-lg-10 col-xs-6 " style="align:left">
           <!-- small box -->
 
          {% if basics.dummyvendor.all|length = 0 %}
@@ -86,7 +85,7 @@
          {%endif%}
          </div>
         {%for categ in basics.dummyvendor.all%}
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-xs-6 col-sm-offset-0 col-xs-offset-0" style="float:left align:left">
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
