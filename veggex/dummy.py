@@ -32,6 +32,7 @@ def dummyproductdetail(request):
 	productId = request.GET['productId']
 	product = Product.rak.get(product_id=productId)
 	return TemplateResponse(request, 'adminr/dummy/product.html',{'product':product,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def dummyajaxaddtocart(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -92,6 +93,7 @@ def dummycart(request):
 			pass
 	print allProducts
 	return TemplateResponse(request, 'adminr/dummy/cart.html',{'allProducts':allProducts,'shippingCost':shippingCost,'cartItems':cartItems,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def dummyremoveItemPost(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -105,6 +107,7 @@ def dummyremoveItemPost(request):
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
 	return redirect('/data/cart')
+@transaction.atomic
 def dummyeditqty(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -123,6 +126,7 @@ def dummyeditqty(request):
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
 	return redirect('/data/cart')
+@transaction.atomic
 def dummyordercategory(request):	
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -203,6 +207,7 @@ def dummyordercategory(request):
 			strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID:'+str(order_id)
 			return redirect(strr)
 @csrf_exempt
+@transaction.atomic
 def csrfreq(request):	
 
 	miveuserId = request.POST['userId']
@@ -314,6 +319,7 @@ def dummyajaxaddedreload(request):
 			t = []
 		allProducts = Product.rak.filter(seller=seller).exclude(product_id__in=t)
 		return {'allProducts':allProducts,'products':products,'categ':categ}
+@transaction.atomic
 def dummyajaxaddtouser(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -345,6 +351,7 @@ def dummyajaxaddtouser(request):
 	categ = full['categ']
 	products = full['products']
 	return TemplateResponse(request,'adminr/dummy/ajaxaddedproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def dummyconfigvendorlist(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -354,6 +361,7 @@ def dummyconfigvendorlist(request):
 		print currentsellers
 		sellers = Seller.rak.exclude(seller_id__in=currentsellers)
 		return TemplateResponse(request,'adminr/data/configvendorlist.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def dummyconfigvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -379,6 +387,7 @@ def dummyconfigvendor(request):
 			t = []
 		allProducts = Product.rak.filter(seller=seller).exclude(product_id__in=t)
 		return TemplateResponse(request,'adminr/dummy/configvendor.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def dummyajaxremovefromuser(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -395,6 +404,7 @@ def dummyajaxremovefromuser(request):
 	categ = full['categ']
 	basics= basicinfo(request)
 	return TemplateResponse(request,'adminr/dummy/ajaxrestproductreload.html',{'categoryvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def dummydelvendoruser(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -404,6 +414,7 @@ def dummydelvendoruser(request):
 		miveuser = basics['miveuser']
 		DummyVendor.objects.get(dummyvendor_id=id).delete()
 		return redirect('/data/vendors')
+@transaction.atomic
 def dummynewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -431,6 +442,7 @@ def dummynewvendor(request):
 	seller.save()
 	products = Product.rak.all()
 	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'seller':seller,'basics':basics,'products':products})
+@transaction.atomic
 def dummynewprodnewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -465,6 +477,7 @@ def dummynewprodnewvendor(request):
 		miveuser.dummyvendors.add(neww)
 		miveuser.save()
 	return HttpResponse('yomoso2')
+@transaction.atomic
 def dummyprodnewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')

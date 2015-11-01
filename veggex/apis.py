@@ -124,6 +124,7 @@ class CustomCategoryProductsList(generics.ListAPIView):
 		#.raw('select * from veggex_customcategoryproducts natural join veggex_customcategoryproducts_product natural join veggex_product')
 		#return Purchase.objects.filter(purchaser__username=username)
 class ApiAddToWastage(APIView):
+	@transaction.atomic
 	def post(self, request, format=None):
 		try:
 			data = request.data
@@ -161,6 +162,7 @@ class ItemsOfCartList(generics.ListAPIView):
 			print 'error in ItemsOfCartList'
 		#return Purchase.objects.filter(purchaser__username=username)
 class ApiAddToConsumption(APIView):
+	@transaction.atomic
 	def post(self, request, format=None):
 		try:
 			data = request.data
@@ -186,6 +188,7 @@ class ApiAddToConsumption(APIView):
 class ApiAddToCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
+	@transaction.atomic
 	def post(self, request, format=None):
 		try:
 			data=request.data
@@ -226,6 +229,7 @@ class ApiAddToCart(APIView):
 class ApiAddToDummyCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
+	@transaction.atomic
 	def post(self, request, format=None):
 		try:
 			data=request.data
@@ -266,6 +270,7 @@ class ApiAddToDummyCart(APIView):
 class ApiUpdateCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
+	@transaction.atomic
 	def post(self, request, format=None):
 		try:
 			data=request.data
@@ -304,6 +309,7 @@ class ApiUpdateCart(APIView):
 class ApiUpdateDummyCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
+	@transaction.atomic
 	def post(self, request, format=None):
 		try:
 			data=request.data
@@ -336,6 +342,7 @@ class ApiUpdateDummyCart(APIView):
 class ApiSeeOrder(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
+	@transaction.atomic
 	def post(self,request,format=None):
 		userId = request.data['userId']
 		miveuser=User.objects.get(user_id = int(userId))
@@ -373,6 +380,7 @@ class ApiSeeOrder(APIView):
 		orders = l
 		return HttpResponse(JSONRenderer().render(orders),content_type='application/json')
 class ApiSeePrices(APIView):
+	@transaction.atomic
 	def post(self,request,format=None):
 		localtz = pytz.timezone('Asia/Kolkata')
 		userId = request.data['userId']
@@ -504,6 +512,7 @@ class ApiSeeDummyCart(APIView):
 class ApiMakeOrder(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
+	@transaction.atomic
 	def post(self, request, format=None):
 		data=request.data
 		cartId=data['cartId']
@@ -570,6 +579,7 @@ class ApiMakeOrderDummy(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
 	parser_classes = (MultiPartParser,FormParser,)
+	@transaction.atomic
 	def post(self, request, format=None):
 		data=request.data
 		dummycartId=data['dummycartId']
