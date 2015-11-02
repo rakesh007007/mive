@@ -423,17 +423,17 @@
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.dummycartitem_id}}">
-                    <input type="text" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit">update</button></center>
+                    <input type="text" class="input-circle dummyqtyupdate" name="newqty" value="{{item.qtyInUnits}}" data-dummyitemid="{{item.dummycartitem_id}}" style="text-align:center"></center>
                     </form>
                   </td>
-                  <td><center><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span style="color:green" class="itemdelete" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o"></i></span></a></center></td>
+                  <td><center><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span href="/data/removeItemPost?itemId={{item.dummycartitem_id}}" style="color:green" class="itemdelete" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o"></i></span></a></center></td>
                 </tr>
                 {% endfor%}
               </table>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-              <button class="btn btn-warning" >Update</button>&nbsp;
+              <button class="btn btn-warning dummycartupdate" >Update</button>&nbsp;
               <button class="btn btn-primary pull-right orderdata" data-dummyvendorid="{{pd.dummyvendor_id}}" >Place Order</button>
             </div>
           </div>
@@ -646,6 +646,55 @@ $('body').on('click','.notif',function(event){
     $('#data-order-modal').modal('toggle')
   })
 </script>
+<script>
+$('body').on('click','.itemdelete',function(event){
+  event.preventDefault()
+  url = $(this).attr('href')
+  $.get(url,function(data){
+    console.log(data)
+     $('#data-detail-container').html(data)
+  })
+
+})
+</script>
+<script>
+      itemtotalbox=[]
+      itemselected=[]
+      $('body').on('change','.dummyqtyupdate',function(request){
+        pdid = $(this).attr('data-dummyitemid')
+        qty=$(this).val()
+        if (itemselected.indexOf(parseInt(pdid))>-1){
+          index = itemselected.indexOf(parseInt(pdid))
+          obj = {"dummyitemid":parseInt(pdid),"qty":qty}
+          itemtotalbox[index]=obj
+
+        }
+        else{
+          obj = {"dummyitemid":pdid,"qty":qty}
+          itemtotalbox.push(obj)
+          itemselected.push(parseInt(pdid))
+
+        }
+        console.log(itemtotalbox)
+
+      })
+      $('body').on('click','.dummycartupdate',function(request){
+        console.log('len',itemtotalbox.length)
+        if (itemtotalbox.length!=0){
+           p=JSON.stringify(itemtotalbox)
+        t= $.post( "/ajaxdummycartupdate", { "dt": p},function(data){
+          $('#data-detail-container').html(data)
+          console.log(data)
+          mivenotify('success','Cart Updated','Items has been succesfully added to cart')
+          itemtotalbox=[]
+                      } );
+        t.fail(function(data){
+          console.log(data)
+        })
+
+        }
+      })
+      </script>
       {% block script%}
       {% endblock %}
 </body>

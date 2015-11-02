@@ -59,6 +59,35 @@ def dummyproductdetail(request):
 	return TemplateResponse(request, 'adminr/dummy/product.html',{'product':product,'csrf_token':get_or_create_csrf_token(request)})
 @csrf_exempt
 @transaction.atomic
+def ajaxdummycartupdate(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		dt = request.POST
+		basics = basicinfo(request)
+		itemdetails = json.loads(dt['dt'])
+		miveuser = basics['miveuser']
+		dummycart = miveuser.dummycart
+		total=0
+		for it in itemdetails:
+			pdid = (it['dummyitemid'])
+			qty = int(it['qty'])
+			if qty<=0:
+				continue
+			ct = Dummycartitem.objects.filter(dummycart=dummycart).filter(dummycartitem_id=pdid).count()
+			if ct>0:
+				oldit = Dummycartitem.objects.filter(dummycart=dummycart).filter(dummycartitem_id=pdid)[0]
+				total = total+(qty-oldit.qtyInUnits)*oldit.pricePerUnit
+				oldit.qtyInUnits = qty
+				oldit.save()
+			else:
+				continue
+		dummycart.dummycartTotal = dummycart.dummycartTotal+total
+		dummycart.save()
+		allProducts = giveajaxdummycart(request)
+		return TemplateResponse(request, 'adminr/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+@csrf_exempt
+@transaction.atomic
 def newajaxaddtodummycart(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -168,7 +197,8 @@ def dummyremoveItemPost(request):
 	dummycart.save()
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
-	return redirect('/data/cart')
+	allProducts = giveajaxdummycart(request)
+	return TemplateResponse(request, 'adminr/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyeditqty(request):
 	if(checklogin(request)==False):
