@@ -370,7 +370,7 @@
                     <input type="text" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit">update</button></center>
                     </form>
                   </td>
-                  <td data-href="/removeItemPost?itemId={{item.cartitem_id}}" onclick="return false" class="minicart-delete"><center><a><span style="color:green" class="itemdelete" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o" ></i></span></a></center></td>
+                  <td data-href="/removeItemPost?itemId={{item.cartitem_id}}" onclick="return false" class="minicart-delete"><center><a><span style="color:green" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o" ></i></span></a></center></td>
                 </tr>
                 {% endfor%}
               </table>
