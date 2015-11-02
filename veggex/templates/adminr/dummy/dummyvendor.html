@@ -2,8 +2,8 @@
 {% block  content %}
 <section class="content-header">
    <h1>
-      Mive 
-      <small>Restaurant {{seller.nameOfSeller}}</small>
+      {{seller.nameOfSeller}} 
+      <small>Add products to invoice</small>
    </h1>
    <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -11,6 +11,13 @@
    </ol>
 </section>
 <section class="content">
+<div class="row">
+<center>
+<div class="col-md-10 col-md-offset-1">
+<button class="btn btn-primary btn-lg orderdata" data-dummyvendorid="{{dmv.dummyvendor_id}}" >Add Invoice only</button><br><br>
+</div>
+</div>
+</center>
    <!-- Info boxes -->
    <div class="row">
       {% for product in products.all %}

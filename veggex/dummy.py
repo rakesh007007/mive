@@ -52,7 +52,7 @@ def dummyVendorView(request):
 		dummyVendor = DummyVendor.objects.get(dummyvendor_id=dummyVendorId)
 		seller = dummyVendor.seller
 		products = dummyVendor.products
-		return TemplateResponse(request,'adminr/dummy/dummyvendor.html',{'basics':basics,'products':products,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/dummy/dummyvendor.html',{'dmv':dummyVendor,'basics':basics,'products':products,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
 def dummyproductdetail(request):
 	productId = request.GET['productId']
 	product = Product.rak.get(product_id=productId)
