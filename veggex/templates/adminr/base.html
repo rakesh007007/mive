@@ -165,7 +165,7 @@
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
             <a  id="basedatacart" >
-              <i data-toggle="modal" data-target="#data-cart-modal" class="fa fa-bookmark"></i>
+              <i data-toggle="modal" class="fa fa-bookmark"></i>
               <span class="label label-danger"></i></span>
             </a>
           </li>
@@ -694,6 +694,11 @@ $('body').on('click','.itemdelete',function(event){
         })
 
         }
+      })
+      </script>
+      <script>
+      $('body').on('click',"#basedatacart",function(request){
+        $("#data-cart-modal").modal('toggle')
       })
       </script>
       {% block script%}
