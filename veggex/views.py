@@ -501,6 +501,7 @@ def ajaxaddtocart(request):
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
 	return TemplateResponse(request, 'adminr/ajaxcart.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+@transaction.atomic
 def ajaxaddtocart2(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
