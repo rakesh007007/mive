@@ -933,7 +933,8 @@ def invoice(request):
 		basics = basicinfo(request)
 		orderId = int(request.GET['orderId'])
 		order= Order.objects.get(order_id=orderId)
+		orderItems = Orderitem.objects.filter(order=order)
 		invoices = order.invoices
-		return TemplateResponse(request,'adminr/invoice.html',{'basics':basics,'invoices':invoices,'order':order})
+		return TemplateResponse(request,'adminr/invoice.html',{'orderItems':orderItems,'basics':basics,'invoices':invoices,'order':order})
 	except Exception,e:
 		return HttpResponse(e,status=500)

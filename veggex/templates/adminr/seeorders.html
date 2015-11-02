@@ -99,8 +99,7 @@
                   <th class="hidden-xs hidden-sm"><center>Date</center></th>
                   <th><center>Payment</center></th>
                   <th><center>Subtotal</center></th>
-                  <th><center>Invoices</center></th>
-                  <th><center>Details</center></th>
+                  <th><center>Invoice</center></th>
                 </tr>
                 {%for order in orders%}
                 <tr>
@@ -116,9 +115,6 @@
                   </td>
                    <td>
                     <center><a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" style="color:blue"><span class="badge bg-green" style="color:blue">Invoice</span></span></a></center>
-                  </td>
-                  <td>
-                    <center><a data-productid="{{item.product.product_id}}" href="/orderDetail?orderId={{order.order_id}}" ><span class="badge bg-yellow" style="color:blue">Details</span></a></center>
                   </td>
                 </tr>
                 {% endfor%}
