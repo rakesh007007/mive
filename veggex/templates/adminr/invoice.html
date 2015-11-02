@@ -13,8 +13,8 @@
 }
 </style>
 <div class="row">
-<button class="btn btn-success pull-left" data-orderid="{{order.order_id}}" id="previnvoice">prev</button>
-<button class="btn btn-success pull-right" data-orderid="{{order.order_id}}" id="nextinvoice">next</button>
+<button class="btn btn-success pull-left btn-bg btn-app" data-orderid="{{order.order_id}}" id="previnvoice"><i class="fa fa-angle-double-left"> prev </i></button>
+<button class="btn btn-success pull-right btn-bg btn-app" data-orderid="{{order.order_id}}" id="nextinvoice"><i class="fa fa-angle-double-right">next</i></button>
 </div>
 <div class="row">
 {%if  invoices.all|length = 0 %}
