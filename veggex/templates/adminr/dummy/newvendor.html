@@ -10,7 +10,7 @@
       <li class="active">{{seller.nameOfSeller}}</li>
    </ol>
 </section>
-<section class="content">
+<section class="content" id="wholereload">
       <div class="row">
          <div class="col-md-10 col-md-offset-1" style="position:relative">
           <div class="box"> 
@@ -190,6 +190,7 @@
         if (nvtotalbox.length!=0){
            p=JSON.stringify(nvtotalbox)
         t= $.post( "/new/data/prod-newvendor", { "dt": p,"sellerId":sellerId},function(data){
+          $('#wholereload').html(data)
          
           mivenotify('success','Items aadded','Items has been succesfully added to list')
           nvtotalbox=[]
