@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import migrations, models
+from django.db import models, migrations
 import django.utils.timezone
 
 
@@ -236,8 +236,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('product_id', models.AutoField(serialize=False, primary_key=True)),
                 ('name', models.CharField(max_length=300)),
-                ('description', models.TextField(null=True, blank=True)),
-                ('popularityIndex', models.IntegerField(null=True, blank=True)),
+                ('description', models.TextField(default=b'not available', null=True, blank=True)),
+                ('popularityIndex', models.IntegerField(default=1, null=True, blank=True)),
                 ('unit', models.CharField(default=b'unit', max_length=100)),
                 ('priceType', models.CharField(default=b'custom rates', max_length=300, choices=[(b'as per mandi rates', b'as per mandi rates'), (b'custom rates', b'custom rates')])),
                 ('pricePerUnit', models.IntegerField(default=0)),
@@ -249,7 +249,7 @@ class Migration(migrations.Migration):
                 ('status', models.IntegerField(default=1, null=True, blank=True)),
                 ('isPerishable', models.NullBooleanField(default=False)),
                 ('category', models.ForeignKey(default=1, blank=True, to='veggex.Category', null=True)),
-                ('related_products', models.ManyToManyField(related_name='_related_products_+', null=True, to='veggex.Product', blank=True)),
+                ('related_products', models.ManyToManyField(related_name='related_products_rel_+', null=True, to='veggex.Product', blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -257,10 +257,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('seller_id', models.AutoField(serialize=False, primary_key=True)),
                 ('nameOfSeller', models.CharField(max_length=300)),
-                ('mailId', models.CharField(max_length=300)),
-                ('mobileNo', models.BigIntegerField(unique=True)),
-                ('profilePhoto', models.ImageField(null=True, upload_to=b'', blank=True)),
-                ('categories', models.CharField(max_length=240, null=True, blank=True)),
+                ('mailId', models.CharField(default=b'no mail id', max_length=300)),
+                ('mobileNo', models.BigIntegerField()),
+                ('profilePhoto', models.ImageField(default=b'./No_image_available.png', null=True, upload_to=b'', blank=True)),
+                ('categories', models.CharField(default=b'all', max_length=240, null=True, blank=True)),
                 ('rating', models.IntegerField(default=0)),
                 ('password', models.CharField(default=b'pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=', max_length=300)),
                 ('status', models.IntegerField(default=0)),
