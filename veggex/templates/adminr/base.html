@@ -143,6 +143,7 @@
   <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
   <header class="main-header">
@@ -668,6 +669,10 @@ $('body').on('click','.itemdelete',function(event){
       $('body').on('change','.dummyqtyupdate',function(request){
         pdid = $(this).attr('data-dummyitemid')
         qty=$(this).val()
+        if (qty<=0 || isNaN(parseInt(qty))){
+          mivenotify('error','Invalid quantity','quantity is incorrect kindly correct it')
+          return 1
+        }
         if (itemselected.indexOf(parseInt(pdid))>-1){
           index = itemselected.indexOf(parseInt(pdid))
           obj = {"dummyitemid":parseInt(pdid),"qty":qty}

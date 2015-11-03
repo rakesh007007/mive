@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations, models
 import django.utils.timezone
 
 
@@ -198,7 +198,8 @@ class Migration(migrations.Migration):
                 ('timeOfUpdate', models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True)),
                 ('payment_mode', models.CharField(max_length=200, null=True, blank=True)),
                 ('subtotal', models.IntegerField(null=True, blank=True)),
-                ('status', models.CharField(default=b'PLACED', max_length=200)),
+                ('payment', models.CharField(default=b'unpaid', max_length=100, null=True, blank=True)),
+                ('status', models.CharField(default=b'placed', max_length=200)),
                 ('orderMsg', models.TextField(null=True, blank=True)),
                 ('deliveryTime', models.DateField(null=True, blank=True)),
                 ('orderType', models.CharField(default=b'real', max_length=240, choices=[(b'real', b'real'), (b'dummy', b'dummy')])),
@@ -237,18 +238,18 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=300)),
                 ('description', models.TextField(null=True, blank=True)),
                 ('popularityIndex', models.IntegerField(null=True, blank=True)),
-                ('unit', models.CharField(default=b'kg', max_length=100)),
+                ('unit', models.CharField(default=b'unit', max_length=100)),
                 ('priceType', models.CharField(default=b'custom rates', max_length=300, choices=[(b'as per mandi rates', b'as per mandi rates'), (b'custom rates', b'custom rates')])),
-                ('pricePerUnit', models.IntegerField()),
-                ('coverphoto', models.ImageField(default=b'./No_image_available.png', upload_to=b'')),
+                ('pricePerUnit', models.IntegerField(default=0)),
+                ('coverphoto', models.ImageField(default=b'./No_image_available.png', null=True, upload_to=b'', blank=True)),
                 ('origin', models.CharField(default=b'', max_length=300, null=True, blank=True)),
                 ('maxAvailableUnits', models.IntegerField(default=100000, null=True, blank=True)),
                 ('qualityRemarks', models.TextField(default=b'Custom Product', null=True, blank=True)),
-                ('grade', models.CharField(default=b'', max_length=200, choices=[(b'Grade-A', b'Grade-A'), (b'Grade-B', b'Grade-B'), (b'Grade-C', b'Grade-C'), (b'Grade-D', b'Grade-D'), (b'', b'')])),
-                ('status', models.IntegerField(default=1)),
+                ('grade', models.CharField(default=b'', max_length=200, null=True, blank=True, choices=[(b'Grade-A', b'Grade-A'), (b'Grade-B', b'Grade-B'), (b'Grade-C', b'Grade-C'), (b'Grade-D', b'Grade-D'), (b'', b'')])),
+                ('status', models.IntegerField(default=1, null=True, blank=True)),
                 ('isPerishable', models.NullBooleanField(default=False)),
                 ('category', models.ForeignKey(default=1, blank=True, to='veggex.Category', null=True)),
-                ('related_products', models.ManyToManyField(related_name='related_products_rel_+', to='veggex.Product', blank=True)),
+                ('related_products', models.ManyToManyField(related_name='_related_products_+', null=True, to='veggex.Product', blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -329,7 +330,7 @@ class Migration(migrations.Migration):
                 ('creditlimit', models.IntegerField(default=10000, null=True, blank=True)),
                 ('address', models.ForeignKey(blank=True, to='veggex.Address', null=True)),
                 ('cart', models.ForeignKey(to='veggex.Cart')),
-                ('categories', models.ManyToManyField(to='veggex.CategoryVendor', blank=True)),
+                ('categories', models.ManyToManyField(default=[39], to='veggex.CategoryVendor', blank=True)),
                 ('dummycart', models.ForeignKey(to='veggex.Dummycart')),
                 ('dummyvendors', models.ManyToManyField(to='veggex.DummyVendor', blank=True)),
                 ('message', models.ManyToManyField(to='veggex.Message', blank=True)),

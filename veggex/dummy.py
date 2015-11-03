@@ -412,6 +412,49 @@ def dummyajaxaddedreload(request):
 		allProducts = Product.rak.filter(seller=seller).exclude(product_id__in=t)
 		return {'allProducts':allProducts,'products':products,'categ':categ}
 @transaction.atomic
+@csrf_exempt
+def newdummyajaxaddtouser(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		basics = basicinfo(request)
+		dt = request.POST
+		basics = basicinfo(request)
+		productdetails = json.loads(dt['dt'])
+		sellerId =int(dt['sellerId']) 
+		miveuser = basics['miveuser']
+		seller = Seller.objects.get(seller_id=sellerId)
+		for pdd in productdetails:
+			productId = pdd['productId']
+			pricePerUnit = pdd['price']
+			product = Product.rak.get(product_id=productId)
+			xsellerids=miveuser.categories.values_list('seller__seller_id',flat=True)
+			if product.seller_id not in xsellerids:
+				product.pricePerUnit = pricePerUnit
+				product.save()
+			ccount = DummyVendor.objects.filter(seller=seller).filter(user=miveuser).count()
+			print 'yoooo'
+			print miveuser
+			print >>sys.stderr, 'log msg'
+			if(ccount>0):
+				existing = DummyVendor.objects.filter(seller=seller).filter(user=miveuser)[0]
+				existing.products.add(product)
+				existing.save()
+			else:
+				neww = DummyVendor()
+				neww.seller = seller
+				neww.save()
+				neww.products.add(product)
+				neww.save()
+				miveuser.dummyvendors.add(neww)
+				miveuser.save()
+		full=dummyajaxaddedreload(request)
+		allProducts =full['allProducts']
+		categ = full['categ']
+		products = full['products']
+		return TemplateResponse(request,'adminr/dummy/ajaxaddedproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+
+@transaction.atomic
 def dummyajaxaddtouser(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -495,7 +538,7 @@ def dummyajaxremovefromuser(request):
 	products = full['products']
 	categ = full['categ']
 	basics= basicinfo(request)
-	return TemplateResponse(request,'adminr/dummy/ajaxrestproductreload.html',{'categoryvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request,'adminr/dummy/ajaxrestproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummydelvendoruser(request):
 	if(checklogin(request)==False):
@@ -560,6 +603,7 @@ def dummynewprodnewvendor(request):
 		existing = DummyVendor.objects.filter(seller=seller).filter(user=miveuser)[0]
 		existing.products.add(product)
 		existing.save()
+		miveuser.save()
 	else:
 		neww = DummyVendor()
 		neww.seller = seller
@@ -569,6 +613,52 @@ def dummynewprodnewvendor(request):
 		miveuser.dummyvendors.add(neww)
 		miveuser.save()
 	return HttpResponse('yomoso2')
+@transaction.atomic
+@csrf_exempt
+def  newdummyprodnewvendor(request):
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	basics = basicinfo(request)
+	dt = request.POST
+	basics = basicinfo(request)
+	productdetails = json.loads(dt['dt'])
+	sellerId =int(dt['sellerId']) 
+	miveuser = basics['miveuser']
+	seller = Seller.objects.get(seller_id=sellerId)
+	for pdd in productdetails:
+		pdid = int(pdd['productId'])
+		pricePerUnit = (pdd['price'])
+		baseproduct = Product.rak.get(product_id=pdid)
+		product = Product()
+		product.seller = seller
+		product.pricePerUnit = int(pricePerUnit)
+		product.name = baseproduct.name
+		product.description = baseproduct.description
+		product.unit = baseproduct.unit
+		product.priceType = baseproduct.priceType
+		product.coverphoto = baseproduct.coverphoto
+		product.category = baseproduct.category
+		product.origin = baseproduct.origin
+		product.maxAvailableUnits = baseproduct.maxAvailableUnits
+		product.qualityRemarks = baseproduct.qualityRemarks
+		product.grade = baseproduct.grade
+		product.satus = 1
+		product.save()
+		miveuser = basics['miveuser']
+		ccount = DummyVendor.objects.filter(seller=seller).filter(user=miveuser).count()
+		if(ccount>0):
+			existing = DummyVendor.objects.filter(seller=seller).filter(user=miveuser)[0]
+			existing.products.add(product)
+			existing.save()
+		else:
+			neww = DummyVendor()
+			neww.seller = seller
+			neww.save()
+			neww.products.add(product)
+			neww.save()
+			miveuser.dummyvendors.add(neww)
+			miveuser.save()
+	return HttpResponse('succesfully added')
 @transaction.atomic
 def dummyprodnewvendor(request):
 	if(checklogin(request)==False):

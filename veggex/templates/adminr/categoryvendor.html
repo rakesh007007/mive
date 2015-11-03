@@ -57,6 +57,9 @@
         {% endfor %}
        
       </div>
+      <div  style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Add selected products to list for this user?" class="inboxadd" z-index="100000000000000">
+         <button  class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:20px;" class="glyphicon glyphicon-plus" id="inboxspan"></span></button>
+      </div>
       </section>
 {% endblock %}
 {% block script %}
@@ -155,6 +158,10 @@
       $('body').on('change','.inputproductqty',function(request){
         pdid = $(this).attr('data-productid')
         qty=$(this).val()
+        if (parseInt(qty)<=0 || isNaN(parseInt(qty))){
+          mivenotify('error','Invalid quantity','quantity is incorrect kindly correct it')
+          return 1
+        }
         if (selected.indexOf(parseInt(pdid))>-1){
           index = selected.indexOf(parseInt(pdid))
           obj = {"productId":parseInt(pdid),"qty":qty}
@@ -170,17 +177,22 @@
         console.log(totalbox)
 
       })
-      $('body').on('click','#basecartbutton',function(request){
+      $('body').on('click','.inboxadd',function(request){
         console.log('len',totalbox.length)
         if (totalbox.length!=0){
            p=JSON.stringify(totalbox)
-        $.post( "/new/ajaxaddtocart", { "dt": p},function(data){
+        t = $.post( "/new/ajaxaddtocart", { "dt": p},function(data){
           $('#cartreload').html(data)
           mivenotify('success','Items aadded','Items has been succesfully added to cart')
           totalbox=[]
                       } );
 
         }
+      t.fail(function(data){
+          mivenotify('error','request failed','error ocured while processing your request')
+          
       })
-      </script>class="login-modal2-button" 
+
+      })
+      </script>
 {% endblock %}

@@ -23,45 +23,48 @@
          </div>
       </div>
       <div class="row">
-        <div class="col-md-10 col-md-offset-1" style="position:relative">
-          <div class="box">
-          <div class="box-header with-border">
-              <h3 class="box-title">Select from our directory</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body" id="stockreload">
-              <table class="table table-bordered">
-                <tr>
-                  <th class="hidden-xs hidden-sm"><center>Product</center></th>
-                  <th><center>Unit</center></th>
-                  <th><center>Add price/unit</center></th>
-                  <th><center>Add this</center></th>
-                </tr>
-                {%for product in products%}
-                <tr data-action="/data/prod-newvendor?productId={{product.product_id}}">
-                  <td class="hidden-xs hidden-sm"><center>{{product.name}}</center></td>
-                  <td class="hidden-xs hidden-sm"><center>{{product.unit}}</center></td>
-                  <td>
-                    <center>
-                    <form method="post" action="/data/prod-newvendor?productId={{product.product_id}}" class="add-pd">
-                    {%csrf_token%}
-                    <input type="hidden" name="sellerid" value="{{seller.seller_id}}">
-                    <input type="hidden" name="productid" value="{{product.product_id}}">
-                    <input type="text" class="input-circle" name="price" style="text-align:center"></center>
-                   
-                  </td>
-                  <td data-href="/data/prod-newvendor?productId={{order.currentstock_id}}"><center><button class="btn-primary btn" style="border-radius:none" type="submit">Add</button></center></td>
-                   </form>
-                </tr>
-                {% endfor%}
-              </table>
-            </div>
-            <!-- /.box-body -->
+       {% for product in products %}
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}" class="login-modal2-button" src="/{{product.coverphoto.url}}"></i></span>
 
-            <div class="box-footer clearfix">
+            <div class="info-box-content">
+              <div class="col-xs-12 col-md-12 col-lg-12">
+              <div class="row">
+                    <div class="col-md-6 col-sm-5 col-xs-5 col-md-offset-0 col-xs-offset-1 col-sm-offset-1">
+                       <div class="row">
+                     <div class="col-md-12 col-xs-12">
+                      <span >{{product.name}}</span>
+                      </div>
+                      </div>
+                      <div class="row">
+                     <div class="col-md-12 col-xs-12">
+                      <br>
+                      </div>
+                      </div>
+                      <div class="row">
+                     <div class="col-md-12 col-xs-12">
+                     <label> <input type="checkbox" data-productid="{{product.product_id}}" class="minimal tick"></label>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                       <form mobile="yes"  id="productsubmit-{{product.product_id}}" method="post" class="productform">
+                Price <input data-mobile="yes" data-toggle="tooltip" title="Input Qty" type="text" class="form-control text-center input-circle" value="0" name="qty" style="border:none;  border-bottom:solid grey 1px;width:20px" data-productid="{{product.product_id}}" id="price-{{product.product_id}}">
+                {%csrf_token%}
+                <input type="hidden" name="productId" value="{{product.product_id}}">
+             </form>
+                    </div>
+                  </div>
+                  </div>
+
             </div>
+            <!-- /.info-box-content -->
           </div>
+          <!-- /.info-box -->
         </div>
+        {% endfor %}
+       
       </div>
 </section>
 <div class="modal fade" id="new-product-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
@@ -91,6 +94,9 @@
                </form>
             </div>
          </div>
+      </div>
+      <div  style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Add selected products to list for this user?" class="inboxadd" z-index="100000000000000">
+         <button  class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff"><span style="font-size:20px;" class="glyphicon glyphicon-plus" id="inboxspan"></span></button>
       </div>
 {%endblock%}
 {% block script%}
@@ -148,5 +154,85 @@
                   });
 
   })
+</script>
+<script>
+      window.sellerId="{{seller.seller_id}}"
+      nvtotalbox=[]
+      nvselected=[]
+      $('body').on('change','.tick',function(request){
+        pdid = $(this).attr('data-productid')
+        price = $('#price-'+pdid).val()
+        if (price<0 || isNaN(parseInt(price))){
+          mivenotify('error','Invalid price','price is incorrect kindly correct it')
+          return 1
+        }
+        if (price<0){
+          alert('price cannot be negative')
+          return 1
+        }
+        if (nvselected.indexOf(parseInt(pdid))>-1){
+          index = nvselected.indexOf(parseInt(pdid))
+          obj = {"productId":parseInt(pdid),"price":price}
+          nvtotalbox[index]=obj
+
+        }
+        else{
+          obj = {"productId":pdid,"price":price}
+          nvtotalbox.push(obj)
+          nvselected.push(parseInt(pdid))
+
+        }
+        console.log(nvtotalbox)
+
+      })
+      $('body').on('click','.inboxadd',function(request){
+        console.log('len',nvtotalbox.length)
+        if (nvtotalbox.length!=0){
+           p=JSON.stringify(nvtotalbox)
+        t= $.post( "/new/data/prod-newvendor", { "dt": p,"sellerId":sellerId},function(data){
+         
+          mivenotify('success','Items aadded','Items has been succesfully added to list')
+          nvtotalbox=[]
+                      } );
+        t.fail(function(data){
+          console.log(data)
+        })
+
+        }
+      })
+      </script>
+      <script>
+   $('body').on('click',".product1remove",function(event) {
+     
+        event.preventDefault();
+        {% if basics.miveuser = 'none' %}
+        mivenotify('error','Login required','please login to add products to cart',600)
+        console.log('user not loggedin')
+        $('#login-modal').modal('toggle')
+        mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
+        return
+        {% else %}
+         rak = $(this).attr('data-productid')
+         formid= "#"+"productsubmit-"+rak
+         removeid = "#"+'removeid-'+rak
+         form = $(formid)
+         $(removeid).remove()
+         //$(rak).submit()
+         mivenotify('success','Item removed','Item has been removed from list',600)
+         $.ajax({
+                type: "POST",
+                url: '/data/ajaxremovefromuser',
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                   $('#wholereload').html(data)
+                },
+                error:function(data){
+                  console.log(data)
+                mivenotify('error','Item remove error','Error occured while removing product')
+                }
+              });
+        {%endif %}
+     });
 </script>
 {% endblock %}
