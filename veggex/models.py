@@ -91,10 +91,10 @@ class Message(models.Model):
 		return self.notification_id
 class Address(models.Model):
 	address_id = models.AutoField(primary_key=True)
-	area=models.CharField(max_length=300, blank=False, null=False)
-	city =models.CharField(max_length=300, blank=False, null=False)
-	state = models.CharField(max_length=300, blank=False, null=False)
-	pincode=models.IntegerField(blank=False,null=False)
+	area=models.CharField(max_length=300, null=False)
+	city =models.CharField(max_length=300, null=False)
+	state = models.CharField(max_length=300, null=False)
+	pincode=models.IntegerField(null=False)
 	def __unicode__(self):
 		return str(self.address_id)
 	def addressId(self):
@@ -129,8 +129,9 @@ class Seller(models.Model):
     categories = models.CharField(max_length=240,blank=True,null=True,default='all')
     rating = models.IntegerField(default=0)
     password = models.CharField(max_length=300, blank=False, null=False,default='pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=')
-    status = models.IntegerField(default=0)
+    status = models.IntegerField(default=1)
     notifications = models.ManyToManyField(Sellernotification,blank=True,default=1)
+    typeOfSeller = models.CharField(max_length=200,blank=True,null=True,default='offline')
     objects = models.Manager()
     rak =Seller2Manager() 
     def __unicode__(self):
@@ -237,7 +238,7 @@ class User(models.Model):
     nameOfOwner = models.CharField(max_length=300, blank=False, null=False)
     institutionType = models.CharField(max_length=300,choices = institutionTypeChoices , blank=False, null=False)
     mailId =models.CharField(max_length=300, blank=False, null=False)
-    mobileNo = models.BigIntegerField(blank=False,null=False,unique=True)
+    mobileNo = models.BigIntegerField(blank=False,null=False,unique=False)
     description = models.TextField(default='Not available')
     password = models.CharField(max_length=300, blank=False, null=False)
     gpsLocation = models.CharField(max_length=300,blank=True,null=True)

@@ -87,9 +87,11 @@ class DummycartitemSerializer(serializers.HyperlinkedModelSerializer):
         model = Dummycartitem
         fields=('dummycartitem_id','dummycart','qtyInUnits','product','pricePerUnit')
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
+    seller = SellerSerializer()
     invoices = InvoiceimageSerializer(many=True)
     class Meta:
         model = Order
+        fields = ('order_id','invoices','seller','subtotal','payment','deliveryTime')
 class OrderitemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Orderitem

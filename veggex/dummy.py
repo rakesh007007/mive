@@ -547,12 +547,31 @@ def dummynewvendor(request):
 	basics = basicinfo(request)
 	name =request.POST['name']
 	mobile =request.POST['mobile']
-	email =request.POST['email']
-	area =request.POST['area']
-	city =request.POST['city']
-	state =request.POST['state']
-	pincode = request.POST['pincode']
-	ctext =request.POST['ctext']
+	print request.POST
+	if request.POST['email']=='':
+		email=''
+	else:
+		email =request.POST['email']
+	if request.POST['area']=='':
+		area=''
+	else:
+		area =request.POST['area']
+	if request.POST['city']=='':
+		city=''
+	else:
+		city =request.POST['city']
+	if request.POST['state']=='':
+		state=''
+	else:
+		state =request.POST['state']
+	if request.POST['pincode']=='':
+		pincode=1
+	else:
+		pincode =int(request.POST['pincode'])
+	if request.POST['ctext']=='':
+		ctext='all'
+	else:
+		ctext =request.POST['ctext']
 	seller = Seller()
 	seller.nameOfSeller=name
 	seller.mailId = email
@@ -649,7 +668,11 @@ def  newdummyprodnewvendor(request):
 			neww.save()
 			miveuser.dummyvendors.add(neww)
 			miveuser.save()
-	return HttpResponse('succesfully added')
+	full=dummyajaxaddedreload(request)
+	allProducts =full['allProducts']
+	categ = full['categ']
+	products = full['products']
+	return TemplateResponse(request,'adminr/dummy/ajaxaddedproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyprodnewvendor(request):
 	if(checklogin(request)==False):
