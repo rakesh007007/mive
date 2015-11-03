@@ -1,13 +1,13 @@
 <table class="table table-bordered">
                 <tr>
-                  <th class="hidden-xs hidden-sm"><center>Product</center></th>
+                  <th><center>Product</center></th>
                   <th><center>Remaining Qty</center></th>
                   <th><center>Add Consumption</center></th>
                   <th><center>Clear stock</center></th>
                 </tr>
                 {%for order in stocks%}
                 <tr>
-                  <td class="hidden-xs hidden-sm"><center>{{order.product.name}}</center></td>
+                  <td ><center>{{order.product.name}}</center></td>
                   <td>
                     <center>{{order.remainingstock}} {{order.product.unit}}</center>
                   </td>
