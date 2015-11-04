@@ -13,48 +13,57 @@
 <section class="content">
       <div class="row">
         <div class="col-md-9 col-md-offset-1" style="position:relative">
-{% if  basics.dummyvendor.all|length = 0 %}
           <div class="box">
+          {% if  basics.dummyvendor.all|length = 0 %}
           <center><div class="box-header with-border">
           <h3 class="box-title">Looks like you have no vendors right now Please add vendors</h3>
-          <button class="btn btn-primary addvendor" data-dummyvendorid="{{pd.dummyvendor_id}}" >Add a new vendor</button>
+          <p>You can browse and add from our existing vendors our you can create your own</p>
+          <button class="btn btn-primary addvendor" data-categoryvendorid="{{pd.categoryvendor_id}}" >Add a new vendor</button>
             </div></center>
-          </div>
-          {% endif %} 
-          <!--next table -->
-          <div class="box">
-          <div class="box-header with-border">
-              <h3 class="box-title">Add new vendors</h3>
-              <button class="btn btn-primary pull-right addvendor" data-dummyvendorid="{{pd.dummyvendor_id}}" >Add a new vendor</button>
+          {%else %}
+            <div class="box-header with-border">
+              <h3 class="box-title">Current Vendors</h3>
+               <button class="btn btn-primary pull-right addvendor" data-categoryvendorid="{{pd.categoryvendor_id}}" >Add a new vendor</button>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table class="table table-responsive borderless table-striped">
-                <tr class="success">
+              <table class="table table-bordered">
+                <tr>
                   <th><center>Name</center></th>
                   <th class="hidden-xs hidden-sm"><center>Supplies</center></th>
-                  <th ><center >Rating</center></th>
-                  <th ><center>Browse</center></th>
+                  <th class="hidden-xs hidden-sm"><center>Rating</center></th>
+                  <th ><center>Delete</center></th>
+                  <th ><center>Config</center></th>
                 </tr>
-                {%for seller in sellers%}
+                {%for sel in basics.dummyvendor.all%}
                 <tr>
-                  <td><center>{{seller.nameOfSeller}}</center></td>
+                  <td><center>{{sel.seller.nameOfSeller}}</center></td>
                   <td class="hidden-xs hidden-sm">
-                    <center>{{seller.categories}}</center>
+                    <center >{{sel.seller.categories}}</center>
+                  </td>
+                  <td class="hidden-xs hidden-sm">
+                    <center>{{sel.seller.rating}}</center>
+                  </td>
+                  <td><center>
+                      <a class="btn btn-danger" href="/data/delvendoruser?id={{sel.dummyvendor_id}}">Delete</a>
+                      </center>
                   </td>
                   <td >
-                    <center>{{seller.rating}}</center>
-                  </td>
-                  <td>
-                    <center><a  href="/data/addvendors?id={{seller.seller_id}}"><span class="btn btn-success">Add</span></a></center>
+                    <center><a data-productid="{{item.product.product_id}}" href="/data/configvendor?id={{sel.seller_id}}" ><span class="btn btn-warning" >Config</span></a></center>
                   </td>
                 </tr>
                 {% endfor%}
               </table>
             </div>
+            {% endif %}
             <!-- /.box-body -->
-            
+
+
+            <div class="box-footer clearfix">
+            </div>
           </div>
+          <!--next table -->
+          
         </div>
       </div>
 </section>
