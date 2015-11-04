@@ -253,7 +253,12 @@ selected=[]
      idqty = '#qty-'+idd
      iddefault = '#default-'+idd
      qty = $(idqty).val()
-   
+     if (qty==0){
+      pp=0
+      $(idprice).val(pp)
+      return 1
+     }
+
      $(idprice).val(totalprice/qty)
      pdid = idd
      qty=qty
