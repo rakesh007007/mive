@@ -264,16 +264,22 @@ def dummyordercategory(request):
 		images=request.FILES.getlist('image')
 		orderMsg = request.POST['orderMsg']
 		deliveryTime = request.POST['deliveryTime']
+		total = request.POST['total']
 		payment_mode = 'COD'
 		dummycart = miveuser.dummycart
 		dummyvendor = DummyVendor.objects.get(dummyvendor_id = dummyVendorId)
 		items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller)
+		if len(items)<1 and str(total)=='' and len(images)==0 :
+			return HttpResponse('provide subtotal or invoice atleast')
 		totalprice=getTotal(items)
 		order = Order()
 		order.user = user
 		order.seller = dummyvendor.seller
 		order.payment_mode = payment_mode
-		order.subtotal=totalprice
+		if len(items)<1 and str(total)!='':
+			order.subtotal=int(total)
+		else:
+			order.subtotal=totalprice
 		order.status = 'PLACED'
 		order.orderType='dummy'
 		order.orderMsg = orderMsg

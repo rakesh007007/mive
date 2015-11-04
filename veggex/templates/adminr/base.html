@@ -501,6 +501,7 @@
             <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;" enctype="multipart/form-data">
                <form id="orderdata" action="/data/ordercategory" style="display:inline;" method="post" enctype="multipart/form-data">
               <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
+              <input type="hidden" name="total">
               {% csrf_token %}
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
               <div class="row">
@@ -527,7 +528,46 @@
             </div>
          </div>
       </div>
-
+<div class="modal fade" id="data-order-modal-invoice-only" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+         <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" ><i class="fa fa-reply-all"></i></button>
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container-invoice-only" style="max-width:none;max-height:none;" enctype="multipart/form-data">
+               <form id="orderdata2" action="/data/ordercategory" style="display:inline;" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
+              {% csrf_token %}
+              <input type="hidden" name="dummyvendorid" id="dataorderplaceid2" value="{{pd.dummyvendor_id}}">
+              <div class="row">
+               <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
+                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
+               </div>
+               <div class="col-md-6 col-lg-6 col-xs-12 ol-md-offset-0 col-lg-offset-0">
+               <br>
+               <input id = "total" name="total" class="form-control" value="" placeholder="order total" type="text">
+               </div>
+               </div>
+               <br>
+               <div class="row">
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+               </div>
+               <div class="col-md-6 col-lg-6 col-xs-12 ol-md-offset-0 col-lg-offset-0">
+               <br>
+               <input id = "image" name="image" value="" type="file" multiple>
+               </div>
+               </div>
+               <br>
+               <br>
+               <div class="row">
+               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
+               <button type="submit" id="checkout" class="btn btn-success btn-lg">
+                  Checkout
+                  </button>
+                </div>
+                </div>
+               </form>
+            </div>
+         </div>
+      </div>
 <!-- jQuery 2.1.4 -->
 <script src="/rstatic/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -670,6 +710,14 @@ $('body').on('click','.notif',function(event){
     console.log('clicked')
     $('#dataorderplaceid').attr('value',dummyvendorid)
     $('#data-order-modal').modal('toggle')
+  })
+</script>
+<script>
+  $('body').on('click','.orderdata2',function(event){
+    dummyvendorid = $(this).attr('data-dummyvendorid')
+    console.log('clicked')
+    $('#dataorderplaceid2').attr('value',dummyvendorid)
+    $('#data-order-modal-invoice-only').modal('toggle')
   })
 </script>
 <script>
