@@ -222,6 +222,22 @@ def get_or_create_cart(user):
 		cart.user=user
 		cart.save()
 		return cart
+def productfilter(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		basics = basicinfo(request)
+		miveuser=basics['miveuser']
+		categoryfilter = request.POST['categoryfilter']
+		categoryvendorid=request.POST['categoryvendorid']
+		categoryVendor = CategoryVendor.objects.get(categoryvendor_id=categoryvendorid)
+		if int(categoryfilter)==0:
+			products = categoryVendor.products.all()
+			return TemplateResponse(request,'adminr/productfilter.html',{'products':products})
+		else:
+			category = Category.objects.get(category_id=int(categoryfilter))
+			products = categoryVendor.products.filter(category=category)
+			return TemplateResponse(request,'adminr/productfilter.html',{'products':products})
 def categoryVendorView(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -236,7 +252,8 @@ def categoryVendorView(request):
 			categoryVendor = CategoryVendor.objects.get(categoryvendor_id=categoryVendorId)
 		seller = categoryVendor.seller
 		products = categoryVendor.products
-		return TemplateResponse(request,'adminr/categoryvendor.html',{'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+		categories = Category.objects.all()
+		return TemplateResponse(request,'adminr/categoryvendor.html',{'categoryvendor':categoryVendor,'categories':categories,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 def ajaxrestreload(request):
 	if(checklogin(request)==False):
 		return redirect('/login')

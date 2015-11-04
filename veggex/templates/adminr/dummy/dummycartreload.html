@@ -1,37 +1,55 @@
-<div class="box-header with-border"> 
-            {% if allProducts|length = 0 %}
+<div class="box-header with-border" style="padding-left:0px; margin-left:0px"> 
+            {% if basics.dummycart|length = 0 %}
              <h3 class="box-title">No products right now</h3>
             {%endif%}
             </div>
-              {%for pd in allProducts%}
+              {%for pd in basics.dummycart%}
           <div>
-          <div class="box-header with-border">          
+          <div class="box-header with-border" >          
               <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
             </div>
             <!-- /.box-header -->
             <div class="borderless">
-              <table class="table table-responsive borderless">
+              <table class="table table-condensed borderless">
                 <tr class="success">
                   <th><center>Name</center></th>
-                  <th class="hidden-sm hidden-xs"><center>Price/Unit</center></th>
                   <th><center>Qty</center></th>
-                  <th><center>Delete</center></th>
+                  <th><center>Rate</center></th>
+                  <th><center>Total</center></th>
+                  <th><center></center></th>
                 </tr>
                 {%for item in pd.items%}
                 <tr>
                   <td><center>{{item.product.name}}</center></td>
-                  <td class="hidden-sm hidden-xs">
-                    <center><span class="badge bg-red" style="color:#13c0ba">₹{{item.pricePerUnit}}/{{item.product.unit}}</span></center>
+                  <td>
+                    <center>
+                    <form method="post" action="/data/editqty">
+                    {%csrf_token%}
+                    <input type="text" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:12px" id="itemqty-{{item.dummycartitem_id}}">
+
+                    </center>
+                    </form>
+                  </td>
+                  <td>
+                    <center>
+                    <form method="post" action="/data/editqty">
+                    {%csrf_token%}
+                    <input type="text" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemprice-{{item.dummycartitem_id}}">
+                    
+                    </center>
+                    </form>
                   </td>
                   <td>
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.dummycartitem_id}}">
-                    <input type="text" class="input-circle dummyqtyupdate" name="newqty" value="{{item.qtyInUnits}}" data-dummyitemid="{{item.dummycartitem_id}}" style="text-align:center"></center>
+                    <input type="text" class="input-circle dummytotalprice" name="newqty" value="{% widthratio item.qtyInUnits 1 item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemtotal-{{item.dummycartitem_id}}">
+                    
+                    </center>
                     </form>
                   </td>
-                  <td><center><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span href="/data/removeItemPost?itemId={{item.dummycartitem_id}}" style="color:green" class="itemdelete" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o"></i></span></a></center></td>
+                  <td><center><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span href="/data/removeItemPost?itemId={{item.dummycartitem_id}}" style="color:green" class="itemdelete" data-itemid="{{item.dummycartitem_id}}"><i class="fa fa-trash-o"></i></span></a></center></td>
                 </tr>
                 {% endfor%}
               </table>

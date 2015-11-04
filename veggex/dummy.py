@@ -72,13 +72,15 @@ def ajaxdummycartupdate(request):
 		for it in itemdetails:
 			pdid = (it['dummyitemid'])
 			qty = int(it['qty'])
-			if qty<=0:
+			pricePerUnit = int(it['priceperunit'])
+			if qty<=0 or pricePerUnit<=0:
 				continue
 			ct = Dummycartitem.objects.filter(dummycart=dummycart).filter(dummycartitem_id=pdid).count()
 			if ct>0:
 				oldit = Dummycartitem.objects.filter(dummycart=dummycart).filter(dummycartitem_id=pdid)[0]
 				total = total+(qty-oldit.qtyInUnits)*oldit.pricePerUnit
 				oldit.qtyInUnits = qty
+				oldit.pricePerUnit=pricePerUnit
 				oldit.save()
 			else:
 				continue
@@ -586,8 +588,17 @@ def dummynewvendor(request):
 	seller.address = ad
 	seller.save()
 	products = Product.rak.all()
-	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'seller':seller,'basics':basics,'products':products})
+	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'seller':seller,'basics':basics,'products':products,'new':1})
 @transaction.atomic
+def sellerpdreference(request):
+	sellerId = request.GET['sellerId']
+	basics = basicinfo(request)
+	seller = Seller.objects.get(seller_id=sellerId)
+	miveuser = basics['miveuser']
+	dummyvendor = DummyVendor.objects.filter(seller=seller).filter(user=miveuser)
+	alpds = dummyvendor[0].products.values_list('product_id',flat=True)
+	products = Product.rak.exclude(seller=seller)
+	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'seller':seller,'basics':basics,'products':products,'new':0})
 def dummynewprodnewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')

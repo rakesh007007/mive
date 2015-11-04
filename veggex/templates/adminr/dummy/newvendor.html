@@ -2,23 +2,26 @@
 {% block  content %}
 <section class="content-header">
    <h1>
-      Mive 
-      <small>Restaurant {{seller.nameOfSeller}}</small>
+      {{seller.nameOfSeller}} 
+      <small>Add new products</small>
    </h1>
    <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">{{seller.nameOfSeller}}</li>
+      <li class="active">New Products-{{seller.nameOfSeller}}</li>
    </ol>
 </section>
 <section class="content" id="wholereload">
       <div class="row">
-         <div class="col-md-10 col-md-offset-1" style="position:relative">
+         <div class="col-md-12 col-md-offset-0" style="position:relative">
           <div class="box"> 
+           <center>
             <div class="box-header with-border">
+            {% if new = 1%}
             <h3>Your Vendor has been added successfully</h3>
-            <p>Mive will review your vendor and it will start displaying in your account ASAP<br>Meanwhile please add products for this vendor,you can create a new product or select from our directory and add it according to your pricing</p>
+            <p>Please add products for this vendor,you can create a new product or select from our directory and add it according to your pricing</p>
+            {% endif %}
             <button class="btn btn-warning new-product-button">Add new Product</button>
-            </div>
+            </div></center>
           </div>
          </div>
       </div>
