@@ -258,7 +258,7 @@
       $('body').on('change','#categoryfilter',function(event){
         event.preventDefault();
         form = $('#categoryselect')
-        $('#productreload').html("<center><img src='rstatic/new/images/282.GIF'></center>")
+        $('#productreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
         $.ajax({
                     type: "POST",
                     url: '/data/normalproduct/filter',
