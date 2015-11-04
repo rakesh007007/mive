@@ -41,6 +41,36 @@ def dummymain(request):
 		for p in stockwastage:
 			d= d+ p.stock.product.pricePerUnit*p.wastage
 		return TemplateResponse(request, 'adminr/dummy/index.html',{'wastage':d,'norders':norders,'rorders':rorders,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+def dummyproductfilter(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		basics = basicinfo(request)
+		miveuser=basics['miveuser']
+		categoryfilter = request.POST['categoryfilter']
+		dummyvendorid=request.POST['dummyvendorid']
+		dummyVendor = DummyVendor.objects.get(dummyvendor_id=dummyvendorid)
+		if int(categoryfilter)==0:
+			products = dummyVendor.products.all()
+			return TemplateResponse(request,'adminr/dummy/productfilter.html',{'products':products})
+		else:
+			category = Category.objects.get(category_id=int(categoryfilter))
+			products = dummyVendor.products.filter(category=category)
+			return TemplateResponse(request,'adminr/dummy/productfilter.html',{'products':products})
+def dummynormalproductfilter(request):
+	if(checklogin(request)==False):
+		return redirect('/login')
+	else:
+		basics = basicinfo(request)
+		miveuser=basics['miveuser']
+		categoryfilter = request.POST['categoryfilter']
+		if int(categoryfilter)==0:
+			products = Product.objects.all()
+			return TemplateResponse(request,'adminr/dummy/normalproductfilter.html',{'products':products})
+		else:
+			category = Category.objects.get(category_id=int(categoryfilter))
+			products = Product.objects.filter(category=category)
+			return TemplateResponse(request,'adminr/dummy/normalproductfilter.html',{'products':products})
 def dummyVendorView(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -51,8 +81,9 @@ def dummyVendorView(request):
 		dummyVendorId = int(dummyVendorId)
 		dummyVendor = DummyVendor.objects.get(dummyvendor_id=dummyVendorId)
 		seller = dummyVendor.seller
+		categories = Category.objects.all()
 		products = dummyVendor.products
-		return TemplateResponse(request,'adminr/dummy/dummyvendor.html',{'dmv':dummyVendor,'basics':basics,'products':products,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/dummy/dummyvendor.html',{'categories':categories,'dmv':dummyVendor,'basics':basics,'products':products,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
 def dummyproductdetail(request):
 	productId = request.GET['productId']
 	product = Product.rak.get(product_id=productId)
@@ -588,7 +619,8 @@ def dummynewvendor(request):
 	seller.address = ad
 	seller.save()
 	products = Product.rak.all()
-	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'seller':seller,'basics':basics,'products':products,'new':1})
+	categories = Category.objects.all()
+	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'categories':categories,'seller':seller,'basics':basics,'products':products,'new':1})
 @transaction.atomic
 def sellerpdreference(request):
 	sellerId = request.GET['sellerId']
@@ -598,7 +630,8 @@ def sellerpdreference(request):
 	dummyvendor = DummyVendor.objects.filter(seller=seller).filter(user=miveuser)
 	alpds = dummyvendor[0].products.values_list('product_id',flat=True)
 	products = Product.rak.exclude(seller=seller)
-	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'seller':seller,'basics':basics,'products':products,'new':0})
+	categories = Category.objects.all()
+	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'categories':categories,'seller':seller,'basics':basics,'products':products,'new':0})
 def dummynewprodnewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')

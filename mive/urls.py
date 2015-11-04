@@ -41,6 +41,8 @@ urlpatterns = [
     url(r'^logPost', views.logPost),
     url(r'^editqty', views.editqty),
     url(r'^product/filter', views.productfilter),
+    url(r'^data/product/filter', dummy.dummyproductfilter),
+    url(r'^data/normalproduct/filter', dummy.dummynormalproductfilter),
     url(r'^data/editqty', dummy.dummyeditqty),
     url(r'^logout', views.logout),
     url(r'^main', dummy.dummymain),
