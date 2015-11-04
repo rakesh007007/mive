@@ -130,8 +130,9 @@ class Seller(models.Model):
     rating = models.IntegerField(default=0)
     password = models.CharField(max_length=300, blank=False, null=False,default='pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=')
     status = models.IntegerField(default=1)
-    notifications = models.ManyToManyField(Sellernotification,blank=True,default=1)
+    notifications = models.ManyToManyField(Sellernotification,blank=True,default=[1,])
     typeOfSeller = models.CharField(max_length=200,blank=True,null=True,default='offline')
+    directory = models.BooleanField(null=False,blank=False,default=False)
     objects = models.Manager()
     rak =Seller2Manager() 
     def __unicode__(self):
