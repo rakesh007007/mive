@@ -642,7 +642,8 @@ def sellerpdreference(request):
 	dummyvendor = DummyVendor.objects.filter(seller=seller).filter(user=miveuser)
 	alpds = dummyvendor[0].products.values_list('product_id',flat=True)
 	sellerids= Seller.objects.filter(directory=True).values('seller_id')
-	products = Product.rak.filter(seller__seller_id__in=sellerids).exclude(seller=seller)
+	slpds = Product.objects.filter(seller=seller).values_list('name')
+	products = Product.rak.filter(seller__seller_id__in=sellerids)..exclude(name__in=slpds).exclude(seller=seller)
 	categories = Category.objects.all()
 	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'categories':categories,'seller':seller,'basics':basics,'products':products,'new':0})
 def dummynewprodnewvendor(request):
