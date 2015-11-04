@@ -1,9 +1,9 @@
 <div class="box-header with-border" style="padding-left:0px; margin-left:0px"> 
-            {% if basics.dummycart|length = 0 %}
+            {% if allProducts|length = 0 %}
              <h3 class="box-title">No products right now</h3>
             {%endif%}
             </div>
-              {%for pd in basics.dummycart%}
+              {%for pd in allProducts%}
           <div>
           <div class="box-header with-border" >          
               <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
