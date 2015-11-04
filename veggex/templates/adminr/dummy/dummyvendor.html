@@ -20,6 +20,22 @@
 </center>
    <!-- Info boxes -->
    <div class="row">
+       <div class="col-md-4 col-xs-10 col-sm-10 col-md-offset-4 col-xs-offset-1 col-sm-offset-1">
+        Filter:
+        <form id="categoryselect" >
+         <select name="categoryfilter" class="form-control select2" style="width: 100%;" id="categoryfilter">
+        }
+    <option selected="selected" value="0">All</option>
+    {% for categ in categories%}
+    <option value="{{categ.category_id}}">{{categ.name}}</option>
+    {% endfor %}
+    </select>
+    <input type="hidden" name="dummyvendorid" value="{{dmv.dummyvendor_id}}">
+    {% csrf_token %}
+    </form>
+       </div>
+      </div><br>
+   <div class="row" id="productreload">
       {% for product in products.all %}
       <div class="col-md-4 col-sm-12 col-xs-12">
          <div class="info-box">
@@ -277,4 +293,24 @@ selected=[]
         }
       })
 </script>
+<script>
+      $('body').on('change','#categoryfilter',function(event){
+        event.preventDefault();
+        form = $('#categoryselect')
+        $.ajax({
+                    type: "POST",
+                    url: '/data/product/filter',
+                    data: form.serialize(), // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#productreload').html(data)
+                      console.log(data)
+
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Error occured','Error ocuured while processing your request')
+                    }
+                  });
+      })
+      </script>
 {% endblock %}
