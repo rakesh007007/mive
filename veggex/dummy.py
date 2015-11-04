@@ -339,12 +339,17 @@ def csrfreq(request):
 	images=request.FILES.getlist('image')
 	dummycartId = request.POST['dummycartId']
 	orderMsg = request.POST['orderMsg']
+	total = request.POST['total']
+	payment = request.POST['payment']
 	deliveryTime = request.POST['deliveryTime']
 	payment_mode = 'COD'
 	dummycart = miveuser.dummycart
 	dummyvendor = DummyVendor.objects.filter(user=miveuser).get(seller__seller_id=int(sellerId))
 	items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller)
-	totalprice=getTotal(items)
+	if (len(items)==0 and int(total)!=0 ):
+		totalprice = int(total)
+	else:
+		totalprice=getTotal(items)
 	order = Order()
 	order.user = user
 	order.seller = dummyvendor.seller
