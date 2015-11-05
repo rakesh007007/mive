@@ -7,6 +7,7 @@
           <div>
           <div class="box-header with-border" >          
               <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
+              <h3 class="box-title pull-right">Total:{{pd.total}}</h3>
             </div>
             <!-- /.box-header -->
             <div class="borderless">
@@ -25,7 +26,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="text" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:12px" id="itemqty-{{item.dummycartitem_id}}">
+                    <input type="number" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:12px" id="itemqty-{{item.dummycartitem_id}}" min="1">
 
                     </center>
                     </form>
@@ -34,7 +35,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="text" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemprice-{{item.dummycartitem_id}}">
+                    <input type="number" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemprice-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
@@ -44,7 +45,7 @@
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.dummycartitem_id}}">
-                    <input type="text" class="input-circle dummytotalprice" name="newqty" value="{% widthratio item.qtyInUnits 1 item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemtotal-{{item.dummycartitem_id}}">
+                    <input type="number" class="input-circle dummytotalprice" name="newqty" value="{% widthratio item.qtyInUnits 1 item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemtotal-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
