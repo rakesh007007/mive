@@ -36,6 +36,7 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <!-- stylesheet for modal -->
   <style>
+  .datepicker {z-index: 1151 !important;}
   @import url(http://fonts.googleapis.com/css?family=Roboto);
 
 /****** LOGIN MODAL ******/
@@ -369,7 +370,7 @@
                     <form method="post" action="/editqty" class="ajaxqty">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.cartitem_id}}">
-                    <input type="text" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit">update</button></center>
+                    <input type="number" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit" required min="1">update</button></center>
                     </form>
                   </td>
                   <td data-href="/removeItemPost?itemId={{item.cartitem_id}}" onclick="return false" class="minicart-delete"><center><a><span style="color:green" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o" ></i></span></a></center></td>
@@ -405,6 +406,7 @@
           <div>
           <div class="box-header with-border" >          
               <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
+              <h3 class="box-title pull-right">Total:{{pd.total}}</h3>
             </div>
             <!-- /.box-header -->
             <div class="borderless">
@@ -423,7 +425,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="text" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:12px" id="itemqty-{{item.dummycartitem_id}}">
+                    <input type="number" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:12px" id="itemqty-{{item.dummycartitem_id}}" min="1">
 
                     </center>
                     </form>
@@ -432,7 +434,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="text" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemprice-{{item.dummycartitem_id}}">
+                    <input type="number" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemprice-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
@@ -442,7 +444,7 @@
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.dummycartitem_id}}">
-                    <input type="text" class="input-circle dummytotalprice" name="newqty" value="{% widthratio item.qtyInUnits 1 item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemtotal-{{item.dummycartitem_id}}">
+                    <input type="number" class="input-circle dummytotalprice" name="newqty" value="{% widthratio item.qtyInUnits 1 item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemtotal-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
@@ -477,7 +479,7 @@
               <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
               <input type="hidden" name="categoryvendorid" id="orderplaceid" value="{{pd.categoryvendor_id}}">
                <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
-                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
+                     <input autofocus placeholder="Deliver date" id="date1" name="deliveryTime" type="date" class="form-control date" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
 
                </div>
                <div class="col-md-4 col-lg-4 col-xs-12">
@@ -506,13 +508,13 @@
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
               <div class="row">
                <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
-                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
+                     <input autofocus placeholder="Deliver date"  name="deliveryTime"  class="form-control date"  id="date2" type="date" required style="z-index:10000">
                </div>
                <div class="col-md-4 col-lg-4 col-xs-12">
                      <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
                </div>
                <div class="col-md-2 col-lg-2 col-xs-6 ol-md-offset-0 col-lg-offset-0">
-               <input id = "image" name="image" value="" type="file" multiple>
+               <input id = "image" name="image" value="" type="file" multiple required>
                </div>
                </div>
                <br>
@@ -538,7 +540,7 @@
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid2" value="{{pd.dummyvendor_id}}">
               <div class="row">
                <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
-                     <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
+                     <input autofocus placeholder="Deliver date" id="date3" name="deliveryTime" type="date" class="form-control date" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
                </div>
                <div class="col-md-6 col-lg-6 col-xs-12 ol-md-offset-0 col-lg-offset-0">
                <br>
@@ -552,7 +554,7 @@
                </div>
                <div class="col-md-6 col-lg-6 col-xs-12 ol-md-offset-0 col-lg-offset-0">
                <br>
-               <input id = "image" name="image" value="" type="file" multiple>
+               <input id = "image" name="image" value="" type="file" multiple required>
                </div>
                </div>
                <br>
@@ -868,6 +870,26 @@ en: {
         console.log(itemtotalbox)
    })
    
+</script>
+<script type="text/javascript">
+  $('.datepicker').datepicker(
+    )
+</script>
+<script>
+   var date = new Date();
+
+var day = date.getDate();
+var month = date.getMonth() + 1;
+var year = date.getFullYear();
+
+if (month < 10) month = "0" + month;
+if (day < 10) day = "0" + day;
+
+var today = year + "-" + month + "-" + day;
+
+$('#date1').val(today)
+$('#date2').val(today)
+$('#date3').val(today)
 </script>
       {% block script%}
       {% endblock %}

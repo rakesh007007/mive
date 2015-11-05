@@ -18,7 +18,9 @@ def giveajaxdummycart(request):
 		itemscount = Dummycartitem.objects.filter(product__seller = seller).filter(dummycart=dummycart).count()
 		if itemscount>0:
 			items = Dummycartitem.objects.filter(product__seller = seller).filter(dummycart=dummycart)
-			pd = {'dummyvendor_id':dummyvendor_id,'items':items,'seller':seller}
+			totalP = items.aggregate(total=Sum(F('pricePerUnit')*F('qtyInUnits')))
+			total = totalP['total']
+			pd = {'dummyvendor_id':dummyvendor_id,'items':items,'seller':seller,'total':total}
 			allProducts.append(pd)
 		else:
 			pass
@@ -574,6 +576,8 @@ def editqty(request):
 	itemId = int(itemId)
 	newqty = request.POST['newqty']
 	newqty = int(newqty)
+	if (newqty<=0):
+		raise ValueError('invalid quantity')
 	item = Cartitem.objects.get(cartitem_id=itemId)
 	oldqty = item.qtyInUnits
 	cart=item.cart
