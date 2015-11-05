@@ -15,6 +15,7 @@
 <div class="row">
 <button class="btn btn-success pull-left btn-bg btn-app" data-orderid="{{order.order_id}}" id="previnvoice"><i class="fa fa-angle-double-left"> prev </i></button>
 <button class="btn btn-success pull-right btn-bg btn-app" data-orderid="{{order.order_id}}" id="nextinvoice"><i class="fa fa-angle-double-right">next</i></button>
+<center><span>Order Id: {{order.order_id}}</span></center>
 </div>
 <div class="row">
 {%if  invoices.all|length = 0 %}
@@ -63,7 +64,12 @@
         <div class="col-sm-4 invoice-col">
           <b>Invoice #{{order.order_id}}</b><br>
           <b>Date {{order.deliveryTime}}<br>
+          {% if order.payment = 'unpaid' %}
           <b>Payment status:</b> {{order.payment}}<br>
+          Make Paid? <input type="checkbox" id="makepaid" data-order="{{order.order_id}}">
+          {% else %}
+          <b>Payment status:</b> {{order.payment}}<br>
+          {% endif %}
         </div>
         <!-- /.col -->
       </div>

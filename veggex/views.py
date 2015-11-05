@@ -960,3 +960,19 @@ def invoice(request):
 		return TemplateResponse(request,'adminr/invoice.html',{'orderItems':orderItems,'basics':basics,'invoices':invoices,'order':order})
 	except Exception,e:
 		return HttpResponse(e,status=500)
+def makepaid(request):
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	try:
+		basics = basicinfo(request)
+		orderId = int(request.GET['orderId'])
+		miveuser = basics['miveuser']
+		order= Order.objects.filter(user=miveuser).get(order_id=orderId)
+		order.payment='paid'
+		order.save()
+		orderItems = Orderitem.objects.filter(order=order)
+		invoices = order.invoices
+		return TemplateResponse(request,'adminr/invoice.html',{'orderItems':orderItems,'basics':basics,'invoices':invoices,'order':order})
+	except Exception,e:
+		return HttpResponse(e,status=500)
+
