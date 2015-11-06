@@ -414,7 +414,7 @@ def dummyvendors(request):
 		currentsellers = basics['dummyvendor'].values('seller_id')
 		sellers = Seller.rak.exclude(seller_id__in=currentsellers)
 		categories = Category.objects.all()
-		return TemplateResponse(request,'adminr/dummy/vendors.html',{'basics':basics,'category':category,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/dummy/vendors.html',{'basics':basics,'categories':categories,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def dummyaddvendors(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
