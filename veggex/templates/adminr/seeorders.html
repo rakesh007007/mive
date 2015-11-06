@@ -315,5 +315,26 @@
     }
   })
 </script>
+<script>
+$('body').on('change','#makepaid',function(event){
+  console.log('paid')
+  id = $(this).attr('data-order')
+  id = parseInt(id)
+  var t = confirm('Mark this order as paid. Are you sure?')
+  if (t==true){
+    t = $.get('/makepaid?orderId='+id,function(data){
+    $('#invoice-detail-container').html(data)
+  })
+  t.fail(function(data){
+    console.log(data)
+  })
+
+  }
+  else{
+    console.log('canceled')
+
+  }
+})
+</script>
 
 {% endblock %}

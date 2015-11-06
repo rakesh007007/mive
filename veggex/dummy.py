@@ -21,7 +21,9 @@ def giveajaxdummycart(request):
 		print itemscount
 		if itemscount>0:
 			items = Dummycartitem.objects.filter(product__seller = seller).filter(dummycart=dummycart)
-			pd = {'dummyvendor_id':dummyvendor_id,'items':items,'seller':seller}
+			totalP = items.aggregate(total=Sum(F('pricePerUnit')*F('qtyInUnits')))
+			total = totalP['total']
+			pd = {'dummyvendor_id':dummyvendor_id,'items':items,'seller':seller,'total':total}
 			allProducts.append(pd)
 		else:
 			pass
@@ -411,7 +413,8 @@ def dummyvendors(request):
 		basics = basicinfo(request)
 		currentsellers = basics['dummyvendor'].values('seller_id')
 		sellers = Seller.rak.exclude(seller_id__in=currentsellers)
-		return TemplateResponse(request,'adminr/dummy/vendors.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
+		categories = Category.objects.all()
+		return TemplateResponse(request,'adminr/dummy/vendors.html',{'basics':basics,'category':category,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def dummyaddvendors(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -589,6 +592,7 @@ def dummynewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	basics = basicinfo(request)
+	miveuser = basics['miveuser']
 	name =request.POST['name']
 	mobile =request.POST['mobile']
 	print request.POST
@@ -629,6 +633,11 @@ def dummynewvendor(request):
 	ad.save()
 	seller.address = ad
 	seller.save()
+	dmv= DummyVendor()
+	dmv.seller = seller
+	dmv.save()
+	miveuser.dummyvendors.add(dmv)
+	miveuser.save()
 	sellerids= Seller.objects.filter(directory=True).values('seller_id')
 	products = Product.rak.filter(seller__seller_id__in=sellerids)
 	categories = Category.objects.all()
@@ -650,7 +659,12 @@ def dummynewprodnewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	basics = basicinfo(request)
-	price =request.POST['price']
+	if request.POST['price']=='':
+		price = 0
+	else:
+		price =request.POST['price']
+	categ = request.POST['category']
+	category = Category.objects.get(category_id=int(categ))
 	sellerId =request.POST['sellerid']
 	seller = Seller.objects.get(seller_id=sellerId)
 	name= request.POST['name']
@@ -662,6 +676,7 @@ def dummynewprodnewvendor(request):
 	product.name = name
 	product.description = description
 	product.unit = unit
+	product.category = category
 	product.priceType = "custom rates"
 	product.satus = 1
 	product.save()
