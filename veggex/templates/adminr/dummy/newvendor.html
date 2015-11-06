@@ -10,21 +10,22 @@
       <li class="active">New Products-{{seller.nameOfSeller}}</li>
    </ol>
 </section>
+
 <section class="content" id="wholereload">
+{% if new = 1%}
       <div class="row">
          <div class="col-md-12 col-md-offset-0" style="position:relative">
           <div class="box"> 
            <center>
             <div class="box-header with-border">
-            {% if new = 1%}
             <h3>Your Vendor has been added successfully</h3>
             <p>Please add products for this vendor,you can create a new product or select from our directory and add it according to your pricing</p>
-            {% endif %}
-            <button class="btn btn-warning new-product-button">Add new Product</button>
             </div></center>
           </div>
          </div>
       </div>
+      {% endif %}
+         <center><button class="btn btn-warning new-product-button">Add new Product</button></center>
        <div class="row">
        <div class="col-md-4 col-xs-10 col-sm-10 col-md-offset-4 col-xs-offset-1 col-sm-offset-1">
         Filter:
@@ -92,18 +93,32 @@
                <form method="post" action="/data/newproductnewvendor" id="newpd">
               <input type="hidden" name="userid" value="{{basics.miveuser.user_id}}">
               <input type="hidden" name="sellerid" value="{{seller.seller_id}}">
+              <div class="row">
               <div class="col-md-6">
               {%csrf_token%}
-              Name:<input  placeholder="enter name" id="name" name="name" type="text" class="form-control">
+              Name*<input  placeholder="enter name" id="name" name="name" type="text" class="form-control" required>
               </div>
               <div class="col-md-6">
-              Unit :<input  placeholder="Enter unit ex:kg"  name="unit" type="text" class="form-control">
+              Category*<select name="category" class="form-control" required>
+              {% for categ in categories%}
+              <option value="{{categ.category_id}}">{{categ.name}}</option>
+              {% endfor %}
+                
+              </select>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-6">
+              Unit<input  placeholder="Enter unit ex:kg"  name="unit" type="text" class="form-control">
               </div>
               <div class="col-md-6">
-              Price per unit<input  placeholder="Category names" name="price" type="integer" class="form-control">
+              Price per unit<input  placeholder="Price per Unit" name="price" type="integer" class="form-control">
               </div>
+              </div>
+              <div class="row">
               <div class="col-md-6">
-              Description:<textarea  placeholder="enter email Id" name="description" type="text" class="form-control"></textarea>
+              Description<textarea  placeholder="enter email Id" name="description" type="text" class="form-control"></textarea>
+              </div>
               </div>
               <div class="col-md-6 col-md-offset-4">
                   <button type="submit" id="add" class="btn btn-success btn-lg">
