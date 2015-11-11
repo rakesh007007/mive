@@ -13,10 +13,11 @@
 }
 </style>
 <div class="row">
-<button class="btn btn-success pull-left btn-bg btn-app" data-orderid="{{order.order_id}}" id="previnvoice"><i class="fa fa-angle-double-left"> prev </i></button>
-<button class="btn btn-success pull-right btn-bg btn-app" data-orderid="{{order.order_id}}" id="nextinvoice"><i class="fa fa-angle-double-right">next</i></button>
+<button class="btn btn-success pull-left" data-orderid="{{order.order_id}}" id="previnvoice"><i class="fa fa-angle-double-left"> prev </i></button>
+<button class="btn btn-success pull-right" data-orderid="{{order.order_id}}" id="nextinvoice"><i class="fa fa-angle-double-right">next</i></button>
 <center><span>Order Id: {{order.order_id}}</span></center>
 </div>
+{% load humanize %}
 <div class="row">
 {%if  invoices.all|length = 0 %}
 {%else%}
@@ -24,6 +25,7 @@
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
             {%for inv in invoices.all%}
+            <br >
                 <div class="item active">
                     <a href="{{inv.image.url}}"><img src="{{inv.image.url}}"></a>
                 </div><br>
@@ -44,9 +46,8 @@
           <address>
             <strong>{{basics.miveuser.nameOfOwner}}</strong><br>
             {{basics.miveuser.address.area}}, {{basics.miveuser.addresscity}}<br>
-            {{basics.miveuser.address.state}}, {{basics.miveuser.address.pincode}}<br>
+            {{basics.miveuser.address.pincode}}<br>
             {{basics.miveuser.mobileNo}}<br>
-            Email: {{basics.miveuser.mailId}}
           </address>
         </div>
         <!-- /.col -->
@@ -55,20 +56,19 @@
           <address>
             <strong>{{order.seller.nameOfSeller}}</strong><br>
             {{order.seller.address.area}}, {{order.seller.address.city}}<br>
-            {{order.seller.address.state}}, {{order.seller.address.pincode}}<br>
+             {{order.seller.address.pincode}}<br>
             Phone: {{order.seller.mobileNo}}<br>
-            Email: {{order.seller.mailId}}
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-          <b>Invoice #{{order.order_id}}</b><br>
-          <b>Date {{order.deliveryTime}}<br>
+          Invoice #{{order.order_id}}<br>
+          Date {{order.deliveryTime}}<br>
           {% if order.payment = 'unpaid' %}
-          <b>Payment status:</b> {{order.payment}}<br>
+          Payment status:{{order.payment}}<br>
           Make Paid? <input type="checkbox" id="makepaid" data-order="{{order.order_id}}">
           {% else %}
-          <b>Payment status:</b> {{order.payment}}<br>
+          Payment status:{{order.payment}}<br>
           {% endif %}
         </div>
         <!-- /.col -->
@@ -108,10 +108,12 @@
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-xs-6">
-
+         {% if order.orderMsg = ''%}
+         {%else%}
           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
             {{order.orderMsg}}
           </p>
+          {%endif%}
         </div>
         <!-- /.col -->
         <div class="col-xs-6">
@@ -133,9 +135,10 @@
       <div class="row no-print">
         <div class="col-xs-12">
           <a onclick="window.print()" target="_blank" class="btn btn-default"><i class="fa fa-print" onclick="window.print()"></i> Print</a>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Generate PDF
+          <button type="button" class="btn btn-primary pull-right view-order" data-orderid="{{order.order_id}}" style="margin-right: 5px;">
+          View Order
           </button>
+
         </div>
       </div>
 

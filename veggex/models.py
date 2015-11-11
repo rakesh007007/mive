@@ -323,6 +323,7 @@ class Order(models.Model):
 	orderMsg = models.TextField(blank=True,null=True)
 	deliveryTime = models.DateField(blank=True,null=True)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
+	flag= models.BooleanField(default=False)
 	category = models.ForeignKey(Category,blank=True,null=True)
 	invoices = models.ManyToManyField(Invoiceimage,blank=True)
 	orderType = models.CharField(max_length=240,blank=False,null=False,choices=orderTypes,default='real')

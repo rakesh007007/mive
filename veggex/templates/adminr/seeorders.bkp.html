@@ -1,12 +1,20 @@
 {% extends 'adminr/base.html' %}
 {% block css%}
 <link rel="stylesheet" href="rstatic/admin/plugins/select2/select2.min.css">
- <link rel="stylesheet" href="rstatic/admin/plugins/datatables/dataTables.bootstrap.css">
 {% endblock %}
 {% block  content %}
-{% load humanize %}
- <section class="content">
- <form id="bigb">
+<section class="content-header">
+   <h1>
+      Mive 
+      <small>Orders</small>
+   </h1>
+   <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Orders</li>
+   </ol>
+</section>
+<section class="content">
+<form id="bigb">
 <div class="row">
 <div class="col-md-3 col-md-offset-1 " style="position:relative">
        <div class="form-group" style="text-transform: capitalize;">
@@ -69,16 +77,23 @@
 </div><br>
 </form>
       <div class="row">
-        <div class="col-xs-12" style="position:relative;margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px">
-          <div class="box" id="targetreload" style="position:relative;margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px">
-            <div class="box-header">
-              <h3 class="box-title pull-left">Previous orders</h3>
-              <h3 class="box-title pull-right">Total :{{total|intcomma}}</h3>
+      {% if orders|length = 0 %}
+      <div class="col-md-10 col-md-offset-1" style="position:relative">
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">You have placed no orders</h3>
+            </div>
+          </div>
+          </div>
+        {% else %}
+        <div class="col-md-12 col-md-offset-0" style="position:relative;margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px">
+          <div class="box" style="position:relative;margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px">
+          <div class="box-header with-border" >
+              <h3 class="box-title">Your orders</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body"  style="position:relative;margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px">
-              <table id="example2" class="table table-bordered table-hover table-condensed">
-                <thead>
+            <div class="box-body" id="targetreload" style="position:relative;margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px">
+              <table class="table table-responsive table-condensed borderless">
                 <tr class="success">
                   <th ><center>Seller</center></th>
                   <th><center>Date</center></th>
@@ -86,10 +101,6 @@
                   <th><center>Total</center></th>
                   <th><center>Invoice</center></th>
                 </tr>
-                </thead>
-                <tbody>
-                
-                
                 {%for order in orders%}
                 <tr>
                   <td  style="text-transform: capitalize;"><center>{{order.seller.nameOfSeller}}</center></td>
@@ -100,10 +111,11 @@
 
                     <center>
                     {%if order.payment = 'paid' %}
-                    <span class="label label-success">{{order.payment}}</span>
+                    <i class="fa fa-circle" style="color:green"></i>
                     {% else %}
-                    <span class="label label-danger">{{order.payment}}</span>
+                    <i class="fa fa-circle" style="color:red"></i>
                     {% endif %}
+                    {{order.payment}}
                     </center>
                   </td>
                   <td><center>
@@ -111,59 +123,26 @@
                   <center>{{order.subtotal|intcomma}}</center>
                   </td>
                    <td>
-                    <center><a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="success" style=""><i class="fa fa-book"></i></span></span></a></center>
+                    <center><a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="" style=""><i class="fa fa-book"></i></span></span></a></center>
                   </td>
                 </tr>
                 {% endfor%}
-                </tbody>
-                <tfoot>
-                </tfoot>
               </table>
             </div>
             <!-- /.box-body -->
+
+            <div class="box-footer clearfix">
+            </div>
           </div>
-          <!-- /.box -->
-          </div>
-          </div>
-    </section>
+        </div>
+      </div>
+      {% endif %}
+</section>
 <div class="modal fade" id="invoice-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96;">
          <div class="modal-dialog" style="width:100%">
          <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" ><i class="fa fa-reply-all"></i></button>
             <div class="loginmodal-container2 loginmodal-container" id="invoice-detail-container" style="max-width:1000px;max-height:none;">
             </div>
-         </div>
-      </div>
-<div class="modal fade" id="order-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:1;">
-         <div class="modal-dialog">
-           <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" ><i class="fa fa-reply-all"></i></button>
-            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;" enctype="multipart/form-data">
-               <form id="orderdata" action="/data/ordercategory" style="display:inline;" method="post" enctype="multipart/form-data">
-              <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
-              <input type="hidden" name="total">
-              {% csrf_token %}
-              <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
-              <div class="row">
-               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
-                     <input autofocus placeholder="Deliver date"  name="deliveryTime"  class="form-control date"  id="date2" type="date" required style="z-index:10000">
-               </div>
-               <div class="col-md-4 col-lg-4 col-xs-12">
-                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
-               </div>
-               <div class="col-md-2 col-lg-2 col-xs-6 ol-md-offset-0 col-lg-offset-0">
-               <input id = "image" name="image" value="" type="file" multiple required>
-               </div>
-               </div>
-               <br>
-               <br>
-               <div class="row">
-               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
-               <button type="submit" id="checkout" class="btn btn-success btn-lg">
-                  Checkout
-                  </button>
-                </div>
-                </div>
-               </form>
-               </div>
          </div>
       </div>
 {%endblock%}
@@ -299,13 +278,6 @@
   })
 </script>
 <script>
-  $('body').on('click','.view-order',function(request){
-   orderid = $(this).attr('data-orderid')
-    console.log('orderid',orderid)
-    $('#order-view-modal').modal('toggle')
-})
-</script>
-<script>
   $('body').on('click','#nextinvoice',function(request){
     orderid = $(this).attr('data-orderid')
     console.log('orderid',orderid)
@@ -352,8 +324,6 @@
     }
   })
 </script>
-<script src="rstatic/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="rstatic/admin/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script>
 $('body').on('change','#makepaid',function(event){
   console.log('paid')
@@ -375,16 +345,5 @@ $('body').on('change','#makepaid',function(event){
   }
 })
 </script>
-<script>
-  $(function () {
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
-</script>
+
 {% endblock %}

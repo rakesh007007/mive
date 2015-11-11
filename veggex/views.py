@@ -767,8 +767,10 @@ def seeOrder(request):
 		user =miveuser
 		basics = basicinfo(request)
 		orders = Order.objects.filter(user=user)
+		total = orders.aggregate(total=Sum('subtotal'))
+		total = total['total']
 		sellers=Seller.objects.filter(seller_id__in=orders.values('seller'))
-		return TemplateResponse(request, 'adminr/seeorders.html',{'basics':basics,'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'adminr/seeorders.html',{'basics':basics,'total':total,'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def orderfilter(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -801,7 +803,9 @@ def orderfilter(request):
 				orders=orders.order_by('-status')
 			else:
 				orders=orders.order_by('-seller__nameOfSeller')
-			return TemplateResponse(request,'adminr/orderfilter.html',{'basics':basics,'orders':orders})
+			total = orders.aggregate(total=Sum('subtotal'))
+			total = total['total']
+			return TemplateResponse(request,'adminr/orderfilter.html',{'basics':basics,'total':total,'orders':orders})
 		except Exception,e:
 			return HttpResponse(e,status=500)
 def cart(request):

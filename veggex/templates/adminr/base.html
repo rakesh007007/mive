@@ -604,8 +604,6 @@
 <script src="/rstatic/admin/dist/js/demo.js"></script>
 <script src="/rstatic/admin/dist/js/pnotify.custom.min.js"></script>
 <script type="text/javascript" src="/rstatic/admin/dist/js/canvasjs.js"></script>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
 <script type="text/javascript">
          $(document).ready(function(){
           var stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
@@ -759,20 +757,6 @@ $('body').on('click','.itemdelete',function(event){
         $("#data-cart-modal").modal('toggle')
       })
       </script>
-      <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
-<script>
-webshims.setOptions('forms-ext', {types: 'date'});
-webshims.polyfill('forms forms-ext');
-$.webshims.formcfg = {
-en: {
-    dFormat: '-',
-    dateSigns: '-',
-    patterns: {
-        d: "yy-mm-dd"
-    }
-}
-};
-</script>
 <script>
    $('body').on('change','.dummyinputproductqty',function(){
      console.log('tintu')
