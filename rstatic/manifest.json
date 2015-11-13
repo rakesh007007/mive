@@ -38,7 +38,6 @@
       "density": 4.0
     }
   ],
-  "start_url": "new",
+  "start_url": "/new",
   "display": "standalone",
-  "orientation": "landscape"
 }
