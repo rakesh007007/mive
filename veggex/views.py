@@ -1,6 +1,8 @@
 from base import *
 from veggex.serializers import *
 from django.views.decorators.csrf import csrf_exempt
+import django_excel as excel
+import pyexcel.ext.xls
 def giveajaxdummycart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -1033,3 +1035,7 @@ def new(request):
 		return TemplateResponse(request, 'adminr/launch/index.html',{'wastage':d,'norders':norders,'rorders':rorders,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 	except Exception,e:
 		print 'hi'
+def export(request):
+	pds = User.objects.all()
+	cls =['nameOfInstitution','password']
+	return excel.make_response_from_query_sets(pds, cls, 'xls')
