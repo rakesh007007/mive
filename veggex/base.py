@@ -5,7 +5,7 @@ from datetime import date, timedelta
 import pytz
 from django.db import transaction
 from rest_framework.renderers import JSONRenderer
-from django.db.models import Count, Min, Sum, Avg,F
+from django.db.models import Count, Min, Sum, Avg,F,Q
 
 from django.shortcuts import render
 from django.shortcuts import render

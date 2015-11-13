@@ -48,7 +48,7 @@ INSTALLED_APPS = (
     'veggex',
     'rest_framework',
     'rest_framework.authtoken',
-    'debug_toolbar',
+    'django.contrib.humanize',
 
 )
 EMAIL_HOST = 'smtp.gmail.com'

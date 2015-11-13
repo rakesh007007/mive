@@ -15,7 +15,6 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/rstatic/admin/dist/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="/rstatic/admin/dist/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/rstatic/admin/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -152,9 +151,10 @@
     <!-- Logo -->
     <a href="/main" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><img style="height:40px;width:40px" src="/rstatic/admin/dist/img/mivelogo.png"></span>
+      <span class="logo-lg pull-left"><b>MIVE</b></span>
+      <span class="logo-lg pull-right"> <img style="height:30px;width:30px" src="/rstatic/admin/dist/img/mivelogo.png"></span>
+      <span class="logo-mini">  <img style="height:40px;width:40px" src="/rstatic/admin/dist/img/mivelogo.png"></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Mive</b><img style="height:40px;width:40px" src="/rstatic/admin/dist/img/mivelogo.png"></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -169,13 +169,7 @@
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
             <a  id="basedatacart" >
-              <i data-toggle="modal" class="fa fa-bookmark"></i>
-              <span class="label label-danger"></i></span>
-            </a>
-          </li>
-          <li class="dropdown tasks-menu">
-            <a data-toggle="control-sidebar" id="basecartbutton" >
-              <i class="fa fa-shopping-cart" ></i>
+              <i data-toggle="modal" class="fa fa-shopping-cart"></i>
               <span class="label label-danger"></i></span>
             </a>
           </li>
@@ -203,33 +197,6 @@
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
           <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="/userprofile" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/{{basics.miveuser.profilePhoto.url}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{basics.miveuser.nameOfInstitution}}</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="/{{basics.miveuser.profilePhoto.url}}" class="img-circle" alt="User Image">
-
-                <p>
-                  {{basics.miveuser.nameOfOwner}} - {{basics.miveuser.nameOfInstitution}}
-                  <small>{{miveuser.address.city}}</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="/userprofile" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
           <!-- Control Sidebar Toggle Button -->
         </ul>
       </div>
@@ -245,88 +212,43 @@
           <img src="/{{basics.miveuser.profilePhoto.url}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{basics.miveuser.nameOfInstitution}}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p><a href="/userprofile">{{basics.miveuser.nameOfInstitution}}</a></p>
+          <a href="/logout"><i></i>Logout</a>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
-          <a href="/index.html">
-            <i class="fa fa-dashboard"></i> <span>Orders</span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="/categoryvendor?categoryVendorId=0"><i class="fa fa-circle-o"></i> place order</a></li>
-            <li><a href="/seeOrder"><i class="fa fa-circle-o"></i>View Last Orders</a></li>
-          </ul>
-        </li>
         <li class="treeview">
-          <a href="/data/main">
-            <i class="fa fa-files-o"></i>
-            <span>Add Invoices</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="/stats/prices">
-            <i class="fa fa-search-minus"></i>
-            <span>Price Intelligence</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="/data/vendors">
-            <i class="fa fa-user-plus"></i>
-            <span>Manage Vendors</span>
-          </a>
-        </li>
-         <li>
-          <a href="/stocks">
-            <i class="fa fa-th"></i> <span>Inventory management</span>
-            <small class="label pull-right bg-green">new</small>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="/stats/order">
-            <i class="fa fa-pie-chart"></i>
-            <span>Statistics</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="/stats/order"><i class="fa fa-circle-o"></i>Order Statistics </a></li>
-            <li>
-            {%with basics.categoryvendor.all|first as ting%}
-            <a href="/stats/seller?id=0"><i class="fa fa-circle-o"></i> Vendor Statistics</a>
-{%endwith%}
-            </li>
-            <li>
-            <a href="/stats/product?id=0"><i class="fa fa-circle-o"></i> Product Statistics</a>
-            </li>
-            <li><a href="/stats/consumption?id=0"><i class="fa fa-circle-o"></i>Consumption Statistics</a></li>
-            <li><a href="/stats/wastage?id=0"><i class="fa fa-circle-o"></i>Wastage Statistics</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="pages/widgets.html" onclick="return false" class="notif">
-            <i class="fa fa-inr"></i> <span>Payments</span>
-            <small class="label pull-right bg-green">new</small>
+          <a href="/new">
+            <i class="fa fa-home"></i>
+            <span>Home</span>
           </a>
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Integrations</span>
+            <i class="fa fa-files-o"></i>
+            <span>Add Invoices</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#" onclick="return false" class="notif"><i class="fa fa-circle-o"></i>Quickbooks</a></li>
-            <li><a href="#" onclick="return false" class="notif"><i class="fa fa-circle-o"></i>Zomato base</a></li>
-            <li><a href="#" onclick="return false" class="notif"><i class="fa fa-circle-o"></i>Open apis</a></li>
-=          </ul>
+          {% for ai in basics.dummyvendor.all%}
+            <li><a href="/data/categoryvendor?dummyVendorId={{ai.dummyvendor_id}}"><i class="fa fa-circle-o"></i>{{ai.seller}}</a></li>
+          {%endfor%}
+         </ul>
         </li>
-        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Help</span></a></li>
-        <li class="header">Connet with mive</li>
-        <li><a href="#"><i class="fa fa-facebook text-red"></i> <span>facebook</span></a></li>
-        <li><a href="#"><i class="fa fa-linkedin text-yellow"></i> <span>linkedin</span></a></li>
-        <li><a href="#"><i class="fa fa-twitter text-aqua"></i> <span>twitter</span></a></li>
+        <li class="treeview">
+          <a href="/seeOrder">
+            <i class="fa fa-pie-chart"></i>
+            <span>Previous orders</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/data/vendors">
+            <i class="fa fa-user"></i>
+            <span>Manage Vendors</span>
+          </a>
+        </li>
+        
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -581,19 +503,12 @@
 </script>
 <!-- Bootstrap 3.3.5 -->
 <script src="/rstatic/admin/bootstrap/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="/rstatic/admin/dist/js/raphael-min.js"></script>
-
-<!-- Sparkline -->
-<!-- jvectormap -->
-<!-- jQuery Knob Chart -->
 <!-- daterangepicker -->
 <script src="/rstatic/admin/dist/js/moment.min.js"></script>
 <script src="/rstatic/admin/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="/rstatic/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="/rstatic/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
 <!-- FastClick -->
 <script src="/rstatic/admin/plugins/fastclick/fastclick.js"></script>
@@ -601,9 +516,7 @@
 <script src="/rstatic/admin/dist/js/app.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- AdminLTE for demo purposes -->
-<script src="/rstatic/admin/dist/js/demo.js"></script>
 <script src="/rstatic/admin/dist/js/pnotify.custom.min.js"></script>
-<script type="text/javascript" src="/rstatic/admin/dist/js/canvasjs.js"></script>
 <script type="text/javascript">
          $(document).ready(function(){
           var stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};

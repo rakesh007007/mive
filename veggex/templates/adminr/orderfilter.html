@@ -1,33 +1,61 @@
+{% load humanize %}
 {% if orders|length = 0 %}
                 <h3>No data for this selection</h3>
                 {% else %}
-<table class="table table-responsive table-condensed borderless">
+<div class="box-header">
+              <h3 class="box-title pull-left">Previous orders</h3>
+              <h3 class="box-title pull-right">Total :{{total|intcomma}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body"  style="position:relative;margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px">
+              <table id="example2" class="table table-bordered table-hover table-condensed">
+                <thead>
                 <tr class="success">
                   <th ><center>Seller</center></th>
                   <th><center>Date</center></th>
                   <th><center>Payment</center></th>
-                  <th><center>total</center></th>
+                  <th><center>Total</center></th>
                   <th><center>Invoice</center></th>
                 </tr>
-                {%endif%}
+                </thead>
+                <tbody>
+                
+                
                 {%for order in orders%}
                 <tr>
-                  <td ><center>{{order.seller.nameOfSeller}}</center></td>
+                  <td  style="text-transform: capitalize;"><center>{{order.seller.nameOfSeller}}</center></td>
                   <td >
-                    <center>{{order.deliveryTime}}</center>
+                    <center>{{order.deliveryTime|date:"d/m"}}</center>
                   </td>
-                  <td>
-                    <center>{{order.payment}}</center>
+                  <td style="text-transform: capitalize;" >
+
+                    <center>
+                    {%if order.payment = 'paid' %}
+                    <span class="label label-success">{{order.payment}}</span>
+                    {% else %}
+                    <span class="label label-warning">{{order.payment}}</span>
+                    {% endif %}
+                    </center>
                   </td>
                   <td><center>
-                  <center>{{order.subtotal}}</center>
+                  {% load humanize %}
+                  <center>{{order.subtotal|intcomma}}</center>
                   </td>
                    <td>
-                    <center><a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="" style=""><i class="fa fa-book"></i></span></span></a></center>
+                    <center>
+                    {% if order.flag = True %}
+                    <span class="label label-danger">flag</span>
+                    {% endif %}
+                    <a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="success" style=""><i class="fa fa-book"></i></span></span></a></center>
                   </td>
                 </tr>
                 {% endfor%}
+                </tbody>
+                <tfoot>
+                </tfoot>
               </table>
+            </div>
+            <!-- /.box-body -->
               <script type="text/javascript">
                 orderids=[
                 {% for od in orders %}
@@ -35,3 +63,16 @@
                 {% endfor %}
                 ]
               </script>
+              <script>
+  $(function () {
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+{%endif%}

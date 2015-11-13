@@ -13,10 +13,11 @@
 }
 </style>
 <div class="row">
-<button class="btn btn-success pull-left btn-bg btn-app" data-orderid="{{order.order_id}}" id="previnvoice"><i class="fa fa-angle-double-left"> prev </i></button>
-<button class="btn btn-success pull-right btn-bg btn-app" data-orderid="{{order.order_id}}" id="nextinvoice"><i class="fa fa-angle-double-right">next</i></button>
+<button class="btn btn-success pull-left" data-orderid="{{order.order_id}}" id="previnvoice"><i class="fa fa-angle-double-left"> prev </i></button>
+<button class="btn btn-success pull-right" data-orderid="{{order.order_id}}" id="nextinvoice"><i class="fa fa-angle-double-right">next</i></button>
 <center><span>Order Id: {{order.order_id}}</span></center>
 </div>
+{% load humanize %}
 <div class="row">
 {%if  invoices.all|length = 0 %}
 {%else%}
@@ -24,6 +25,7 @@
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
             {%for inv in invoices.all%}
+            <br >
                 <div class="item active">
                     <a href="{{inv.image.url}}"><img src="{{inv.image.url}}"></a>
                 </div><br>
@@ -39,36 +41,34 @@
     {%endif%}
       <!-- info row -->
       <div class="row invoice-info">
-        <div class="col-sm-4 invoice-col">
+        <div class="col-sm-4 col-xs-6 invoice-col">
           From
           <address>
             <strong>{{basics.miveuser.nameOfOwner}}</strong><br>
             {{basics.miveuser.address.area}}, {{basics.miveuser.addresscity}}<br>
-            {{basics.miveuser.address.state}}, {{basics.miveuser.address.pincode}}<br>
+            {{basics.miveuser.address.pincode}}<br>
             {{basics.miveuser.mobileNo}}<br>
-            Email: {{basics.miveuser.mailId}}
           </address>
         </div>
         <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
+        <div class="col-sm-4 col-xs-6 invoice-col">
           To
           <address>
             <strong>{{order.seller.nameOfSeller}}</strong><br>
             {{order.seller.address.area}}, {{order.seller.address.city}}<br>
-            {{order.seller.address.state}}, {{order.seller.address.pincode}}<br>
+             {{order.seller.address.pincode}}<br>
             Phone: {{order.seller.mobileNo}}<br>
-            Email: {{order.seller.mailId}}
           </address>
         </div>
         <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-          <b>Invoice #{{order.order_id}}</b><br>
-          <b>Date {{order.deliveryTime}}<br>
+        <div class="col-sm-4 col-xs-6 invoice-col">
+          Invoice #{{order.order_id}}<br>
+          Date {{order.deliveryTime}}<br>
           {% if order.payment = 'unpaid' %}
-          <b>Payment status:</b> {{order.payment}}<br>
+          Payment status:{{order.payment}}<br>
           Make Paid? <input type="checkbox" id="makepaid" data-order="{{order.order_id}}">
           {% else %}
-          <b>Payment status:</b> {{order.payment}}<br>
+          Payment status:{{order.payment}}<br>
           {% endif %}
         </div>
         <!-- /.col -->
@@ -108,10 +108,12 @@
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-xs-6">
-
+         {% if order.orderMsg = ''%}
+         {%else%}
           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
             {{order.orderMsg}}
           </p>
+          {%endif%}
         </div>
         <!-- /.col -->
         <div class="col-xs-6">
@@ -133,11 +135,54 @@
       <div class="row no-print">
         <div class="col-xs-12">
           <a onclick="window.print()" target="_blank" class="btn btn-default"><i class="fa fa-print" onclick="window.print()"></i> Print</a>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Generate PDF
+          <button type="button" class="btn btn-primary pull-right view-order" data-orderid="{{order.order_id}}" style="margin-right: 5px;">
+          View Order
           </button>
+
         </div>
       </div>
 
     </div> <!-- /col-sm-6 -->
   </div> <!-- /row -->
+
+
+  <div class="modal fade" id="order-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:1;">
+         <div class="modal-dialog">
+           <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" ><i class="fa fa-reply-all"></i></button>
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;" enctype="multipart/form-data">
+               <form id="editorder" action="/editorder" style="display:inline;" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="orderid" id="view-orderid" value="{{basics.miveuser.cart.cart_id}}">
+              <input type="hidden" name="total">
+              {% csrf_token %}
+              <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
+              <div class="row">
+               <div class="col-md-6 col-lg-6 col-xs-6 ol-md-offset-0 col-lg-offset-0">
+               <center>Add more invoices <input id = "image" name="image" value="" type="file" multiple></center>
+               </div>
+               <div class="col-md-6 col-lg-6 col-xs-12">
+                     <center><textarea id="orderMsg" name="orderMsg" value="{{order.orderMsg}}" type="text" class="form-control" placeholder="Add Comment if any">{{order.orderMsg}}</textarea> </center>
+               </div>
+               {% if order.flag = False %}
+               <div class="col-md-6 col-lg-6 col-xs-12">
+               <center><br>Flag this order <input type="checkbox"  name="flag" data-order="{{order.order_id}}"></center>
+                </div>
+                {%endif%}
+                {% if order.payment != "paid" %}
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                <center><br>Mark as paid <input type="checkbox"  name="paid" data-order="{{order.order_id}}"></center>
+                </div>
+                {%endif%}
+               </div>
+               <br>
+               <br>
+               <div class="row">
+               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
+               <button type="submit" id="checkout" class="btn btn-success btn-lg">
+                  Update
+                  </button>
+                </div>
+                </div>
+               </form>
+               </div>
+         </div>
+      </div>

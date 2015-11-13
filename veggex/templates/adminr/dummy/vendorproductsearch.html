@@ -1,7 +1,7 @@
 {% if products|length = 0 %}
 <center><h3>No products for this selection</h3></center>
 {% endif%}
-{% for product in products.all %}
+{% for product in products %}
       <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:0px; margin-left:0px;padding-right:0px; margin-right:0px">
          <div class="info-box">
             <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}"  src="/{{product.coverphoto.url}}"></i></span>
