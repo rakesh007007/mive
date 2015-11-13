@@ -38,6 +38,6 @@
       "density": 4.0
     }
   ],
-  "start_url": "/new",
+  "start_url": "http://mive.in/new",
   "display": "standalone",
 }
