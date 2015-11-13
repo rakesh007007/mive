@@ -12,7 +12,7 @@
   left: 0;
 
   width: 100%;
-  height: 2px;
+  height: 3px;
 }
 
 /* Fancy blur effect */
@@ -34,7 +34,7 @@
 #nprogress .spinner {
   display: block;
   position: fixed;
-  z-index: 1031;
+  z-index: 10031;
   top: 15px;
   right: 15px;
 }
@@ -42,6 +42,7 @@
 #nprogress .spinner-icon {
   width: 18px;
   height: 18px;
+  z-index: 10031;
   box-sizing: border-box;
 
   border: solid 2px transparent;
