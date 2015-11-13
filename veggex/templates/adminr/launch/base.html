@@ -522,8 +522,16 @@
 <script type="text/javascript">
 $('body').on('click','.loader',function(event){
  NProgress.start();
+ NProgress.configure({ showSpinner: true });
 })
-</script>>
+$( document ).ajaxStart(function() {
+ NProgress.start();
+ NProgress.configure({ showSpinner: true });
+});
+$( document ).ajaxStop(function() {
+ NProgress.done();
+});
+</script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- AdminLTE for demo purposes -->
 <script src="/rstatic/admin/dist/js/pnotify.custom.min.js"></script>
