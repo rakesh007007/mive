@@ -522,9 +522,11 @@
 <script type="text/javascript">
 $('body').on('click','.loader',function(event){
  NProgress.start();
+ NProgress.configure({ showSpinner: true });
 })
 $( document ).ajaxStart(function() {
  NProgress.start();
+ NProgress.configure({ showSpinner: true });
 });
 $( document ).ajaxStop(function() {
  NProgress.done();
