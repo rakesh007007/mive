@@ -523,7 +523,13 @@
 $('body').on('click','.loader',function(event){
  NProgress.start();
 })
-</script>>
+$( document ).ajaxStart(function() {
+ NProgress.start();
+});
+$( document ).ajaxStop(function() {
+ NProgress.done();
+});
+</script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- AdminLTE for demo purposes -->
 <script src="/rstatic/admin/dist/js/pnotify.custom.min.js"></script>
