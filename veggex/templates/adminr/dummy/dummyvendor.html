@@ -1,4 +1,4 @@
-{% extends 'adminr/base.html' %}
+{% extends 'adminr/launch/base.html' %}
 {% block  content %}
 <section class="content-header">
    <h1>
@@ -20,8 +20,19 @@
 </center>
    <!-- Info boxes -->
    <div class="row">
-       <div class="col-md-4 col-xs-10 col-sm-10 col-md-offset-4 col-xs-offset-1 col-sm-offset-1">
-        Filter:
+      <div class="col-md-4 col-xs-8 col-sm-8 col-md-offset-1 col-xs-offset-2 col-sm-offset-2">
+      <form action="/search/dummyvendor" class="productsearchform" type="post">
+        <div class="input-group margin">
+                <input type="hidden" value="{{seller.seller_id}}" name="sellerId">
+                {%csrf_token%}
+                <input  name="stext" type="text" class="form-control" placeholder="Search Products" required>
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-info productsearch">Go!</button>
+                    </span>
+              </div>
+      </form>
+      </div>
+       <div class="col-md-3 col-xs-6 col-sm-6 col-md-offset-3 col-xs-offset-3 col-sm-offset-2">
         <form id="categoryselect" >
          <select name="categoryfilter" class="form-control select2" style="width: 100%;" id="categoryfilter">
         }
@@ -35,12 +46,12 @@
     </form>
        </div>
       </div><br>
-   <div class="row" id="productreload">
+   <div class="row" id="productreload" style="width:100%;padding-left:0px; margin-left:0px;padding-right:0px; margin-right:0px">
       {% for product in products.all %}
-      <div class="col-md-4 col-sm-12 col-xs-12">
-         <div class="info-box">
+      <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:4px; margin-left:2ppx;padding-right:0px; margin-right:0px">
+         <div class="info-box" style="width:100%;padding-left:0px; margin-left:0px;padding-right:0px; margin-right:0px">
             <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}"  src="/{{product.coverphoto.url}}"></i></span>
-            <div class="info-box-content">
+            <div class="info-box-content" >
                <div class="col-xs-12 col-md-12 col-lg-12">
                   <div class="row">
                      <center>
@@ -120,9 +131,9 @@
                 success: function(data)
                 {
                   $('#data-detail-container').html(data)
-                  console.log(data)
+                  
                 },
-                error:function(data){console.log(data)
+                error:function(data){
                 mivenotify('error','Item add','Error ocuured while processing your request')
                 }
               });
@@ -155,10 +166,10 @@
                 {
                   $('#data-detail-container').html(data)
                   $('#login-modal2').modal('toggle')
-                  console.log(data)
+                  
    
                 },
-                error:function(data){console.log(data)
+                error:function(data){
                 mivenotify('error','Item add','Error ocuured while processing your request')
                 }
               });
@@ -292,10 +303,13 @@ selected=[]
                       } );
         t.fail(function(data) {
     alert( "error" );
-    console.log(data)
+    
   })
 
         }
+      else{
+        mivenotify('warning','Select items first','No items selected! Select few items first')
+      }
       })
 </script>
 <script>
@@ -310,10 +324,31 @@ selected=[]
                     success: function(data)
                     {
                       $('#productreload').html(data)
-                      console.log(data)
+                      
 
                     },
-                    error:function(data){console.log(data)
+                    error:function(data){
+                    mivenotify('error','Error occured','Error ocuured while processing your request')
+                    }
+                  });
+      })
+      </script>
+      <script>
+      $('body').on('submit','.productsearchform',function(event){
+        event.preventDefault();
+        form = $(this)
+        $('#productreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+        $.ajax({
+                    type: "POST",
+                    url: '/search/dummyvendor',
+                    data: form.serialize(), // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#productreload').html(data)
+                      
+
+                    },
+                    error:function(data){
                     mivenotify('error','Error occured','Error ocuured while processing your request')
                     }
                   });

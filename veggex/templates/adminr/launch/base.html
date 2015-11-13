@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Mive Restaurants| Dashboard</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  {% block css%}
+  {% endblock %}
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="/rstatic/admin/dist/css/pnotify.custom.min.css">
+  <link rel="stylesheet" href="/rstatic/admin/dist/css/master.css">
+  <link rel="stylesheet" href="/rstatic/admin/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/rstatic/admin/dist/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/rstatic/admin/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/rstatic/admin/dist/css/skins/_all-skins.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="/rstatic/admin/plugins/iCheck/flat/blue.css">
+  <!-- jvectormap -->
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="/rstatic/admin/plugins/datepicker/datepicker3.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="/rstatic/admin/plugins/daterangepicker/daterangepicker-bs3.css">
+  <link rel="stylesheet" href="/rstatic/admin/plugins/ionslider/ion.rangeSlider.css">
+  <!-- ion slider Nice -->
+  <link rel="stylesheet" href="/rstatic/admin/plugins/ionslider/ion.rangeSlider.skinNice.css">
+  <meta name="theme-color" content="#3c8dbc">
+
+
+  <!-- bootstrap wysihtml5 - text editor -->
+  <!-- stylesheet for modal -->
+  <style>
+  .datepicker {z-index: 1151 !important;}
+  @import url(http://fonts.googleapis.com/css?family=Roboto);
+
+/****** LOGIN MODAL ******/
+.loginmodal-container {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  background-color: #ffffff;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  font-family: roboto;
+}
+
+.loginmodal-container h1 {
+  text-align: center;
+  font-size: 1.8em;
+  font-family: roboto;
+}
+
+.loginmodal-container input[type=submit] {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.loginmodal-container input[type=text], input[type=password] {
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.loginmodal-container input[type=text]:hover, input[type=password]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.loginmodal {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+/* border-radius: 3px; */
+/* -webkit-user-select: none;
+  user-select: none; */
+}
+
+.loginmodal-submit {
+  /* border: 1px solid #3079ed; */
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #4d90fe;
+  padding: 17px 0px;
+  font-family: roboto;
+  font-size: 14px;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+}
+
+.loginmodal-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #357ae8;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
+.loginmodal-container a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.6;
+  transition: opacity ease 0.5s;
+} 
+
+.login-help{
+  font-size: 12px;
+}
+  </style>
+
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="/main" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-lg pull-left"><b>MIVE</b></span>
+      <span class="logo-lg pull-right"> <img style="height:30px;width:30px" src="/rstatic/admin/dist/img/mivelogo.png"></span>
+      <span class="logo-mini">  <img style="height:40px;width:40px" src="/rstatic/admin/dist/img/mivelogo.png"></span>
+      <!-- logo for regular state and mobile devices -->
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown tasks-menu">
+            <a  id="basedatacart" >
+              <i data-toggle="modal" class="fa fa-shopping-cart"></i>
+              <span class="label label-danger"></i></span>
+            </a>
+          </li>
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">{{basics.notifications|length}}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have {{basics.notifications|length}} new notification</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                {%for notif in basics.notifications%}
+                  <li>
+                    <a href="/notification/router?nId={{notif.notification_id}}&url=/{{notif.link}}">
+                      <i class="fa fa-users text-aqua"></i>{{notif.body}}
+                    </a>
+                  </li>
+                {%endfor%}
+                </ul>
+              </li>
+              <li class="footer"><a href="#">View all</a></li>
+            </ul>
+          </li>
+          <!-- Tasks: style can be found in dropdown.less -->
+          <!-- User Account: style can be found in dropdown.less -->
+          <!-- Control Sidebar Toggle Button -->
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="/{{basics.miveuser.profilePhoto.url}}" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p><a href="/userprofile">{{basics.miveuser.nameOfInstitution}}</a></p>
+          <a href="/logout"><i></i>Logout</a>
+        </div>
+      </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="treeview">
+          <a href="/new">
+            <i class="fa fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Add Invoices</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+          {% for ai in basics.dummyvendor.all%}
+            <li><a href="/data/categoryvendor?dummyVendorId={{ai.dummyvendor_id}}"><i class="fa fa-circle-o"></i>{{ai.seller}}</a></li>
+          {%endfor%}
+         </ul>
+        </li>
+        <li class="treeview">
+          <a href="/seeOrder">
+            <i class="fa fa-pie-chart"></i>
+            <span>Previous orders</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/data/vendors">
+            <i class="fa fa-user"></i>
+            <span>Manage Vendors</span>
+          </a>
+        </li>
+        
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+  {% block content%}
+  {% endblock %}
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 0.1
+    </div>
+    <strong>Copyright &copy; 2015 <a href="http://almsaeedstudio.com">Mive Technologies Pvt Ltd.</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- The Right Sidebar -->
+<aside class="control-sidebar control-sidebar-light" id="cartreload">
+  <!-- Content of the sidebar goes here -->
+   <h3 class="box-title">Total:Rs.{{basics.miveuser.cart.cartTotal}}</h3>
+  {%for pd in basics.allProducts%}
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-responsive borderless">
+                <tr class="success">
+                  <th><center>Name</center></th>
+                  <th><center>Qty</center></th>
+                  <th><center>Delete</center></th>
+                </tr>
+                {%for item in pd.items%}
+                <tr>
+                  <td><center>{{item.product.name}}</center></td>
+                  <td>
+                    <center>
+                    <form method="post" action="/editqty" class="ajaxqty">
+                    {%csrf_token%}
+                    <input type="hidden" name="itemid" value="{{item.cartitem_id}}">
+                    <input type="number" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit" required min="1">update</button></center>
+                    </form>
+                  </td>
+                  <td data-href="/removeItemPost?itemId={{item.cartitem_id}}" onclick="return false" class="minicart-delete"><center><a><span style="color:green" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o" ></i></span></a></center></td>
+                </tr>
+                {% endfor%}
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              
+              <button class="btn btn-primary pull-right orderplace" data-categoryvendorid="{{pd.categoryvendor_id}}" >Place Order</button>
+            </div>
+          </div>
+          {%endfor%}
+</aside>
+<!-- The sidebar's background -->
+<!-- This div must placed right after the sidebar for it to work-->
+<div class="control-sidebar-bg"></div>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+</div>
+<div class="modal fade" id="data-cart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog" style="width:100%;padding-left:0px; margin-left:0px;padding-right:0px; margin-right:0px">
+         <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" ><i class="fa fa-reply-all"></i></button>
+            <div class="loginmodal-container2 loginmodal-container" id="data-detail-container" style="max-width:none;max-height:none;padding-left:0px; margin-left:0px;padding-right:0px; margin-right:0px">
+            <div class="box-header with-border" style="padding-left:0px; margin-left:0px"> 
+            {% if basics.dummycart|length = 0 %}
+             <h3 class="box-title">No products right now</h3>
+            {%endif%}
+            </div>
+              {%for pd in basics.dummycart%}
+          <div>
+          <div class="box-header with-border" >          
+              <h3 class="box-title">{{pd.seller.nameOfSeller}}</h3>
+              <h3 class="box-title pull-right">Total:{{pd.total}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="borderless">
+              <table class="table table-condensed borderless">
+                <tr class="success">
+                  <th><center>Name</center></th>
+                  <th><center>Qty</center></th>
+                  <th><center>Rate</center></th>
+                  <th><center>Total</center></th>
+                  <th><center></center></th>
+                </tr>
+                {%for item in pd.items%}
+                <tr>
+                  <td><center>{{item.product.name}}</center></td>
+                  <td>
+                    <center>
+                    <form method="post" action="/data/editqty">
+                    {%csrf_token%}
+                    <input type="number" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:12px" id="itemqty-{{item.dummycartitem_id}}" min="1">
+
+                    </center>
+                    </form>
+                  </td>
+                  <td>
+                    <center>
+                    <form method="post" action="/data/editqty">
+                    {%csrf_token%}
+                    <input type="number" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemprice-{{item.dummycartitem_id}}">
+                    
+                    </center>
+                    </form>
+                  </td>
+                  <td>
+                    <center>
+                    <form method="post" action="/data/editqty">
+                    {%csrf_token%}
+                    <input type="hidden" name="itemid" value="{{item.dummycartitem_id}}">
+                    <input type="number" class="input-circle dummytotalprice" name="newqty" value="{% widthratio item.qtyInUnits 1 item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemtotal-{{item.dummycartitem_id}}">
+                    
+                    </center>
+                    </form>
+                  </td>
+                  <td><center><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span href="/data/removeItemPost?itemId={{item.dummycartitem_id}}" style="color:green" class="itemdelete" data-itemid="{{item.dummycartitem_id}}"><i class="fa fa-trash-o"></i></span></a></center></td>
+                </tr>
+                {% endfor%}
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <button class="btn btn-warning dummycartupdate" >Update</button>&nbsp;
+              <button class="btn btn-primary pull-right orderdata" data-dummyvendorid="{{pd.dummyvendor_id}}" >Place Order</button>
+            </div>
+          </div>
+          {%endfor%} 
+            </div>
+         </div>
+      </div>
+<div class="modal fade" id="login-modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+            <div class="loginmodal-container2 loginmodal-container" id="detail-container" style="max-width:none;max-height:none;">
+               <center><img src="/rstatic/new/images/282.GIF"></center>
+            </div>
+         </div>
+      </div>
+<div class="modal fade" id="order-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+         <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" ><i class="fa fa-reply-all"></i></button>
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
+               <form id="orderdata"  action="/ordercategory" style="display:inline;"  >
+              <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
+              <input type="hidden" name="categoryvendorid" id="orderplaceid" value="{{pd.categoryvendor_id}}">
+               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
+                     <input autofocus placeholder="Deliver date" id="date1" name="deliveryTime" type="date" class="form-control date" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
+
+               </div>
+               <div class="col-md-4 col-lg-4 col-xs-12">
+               <br>
+                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+                     <input type="hidden" name="csrfmiddlewaretoken" value="XxYq2vc6MzqqLBPH86mIQeEfObTCXVCc">
+               </div>
+               <div class="col-md-1 col-lg-1 col-xs-6 ol-md-offset-0 col-lg-offset-0">
+                  <button type="submit" id="checkout" class="btn btn-success btn-lg">
+                  Checkout
+                  </button>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
+<!-- ./wrapper -->
+<div class="modal fade" id="data-order-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+         <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" ><i class="fa fa-reply-all"></i></button>
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;" enctype="multipart/form-data">
+               <form id="orderdata" action="/data/ordercategory" style="display:inline;" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
+              <input type="hidden" name="total">
+              {% csrf_token %}
+              <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
+              <div class="row">
+               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
+                     <input autofocus placeholder="Deliver date"  name="deliveryTime"  class="form-control date"  id="date2" type="date" required style="z-index:10000">
+               </div>
+               <div class="col-md-4 col-lg-4 col-xs-12">
+                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+               </div>
+               <div class="col-md-2 col-lg-2 col-xs-6 ol-md-offset-0 col-lg-offset-0">
+               <input id = "image" name="image" value="" type="file" multiple required>
+               </div>
+               </div>
+               <br>
+               <br>
+               <div class="row">
+               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
+               <button type="submit" id="checkout" class="btn btn-success btn-lg">
+                  Checkout
+                  </button>
+                </div>
+                </div>
+               </form>
+            </div>
+         </div>
+      </div>
+<div class="modal fade" id="data-order-modal-invoice-only" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96">
+         <div class="modal-dialog">
+         <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" ><i class="fa fa-reply-all"></i></button>
+            <div class="loginmodal-container2 loginmodal-container" id="order-detail-container-invoice-only" style="max-width:none;max-height:none;" enctype="multipart/form-data">
+               <form id="orderdata2" action="/data/ordercategory" style="display:inline;" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
+              {% csrf_token %}
+              <input type="hidden" name="dummyvendorid" id="dataorderplaceid2" value="{{pd.dummyvendor_id}}">
+              <div class="row">
+               <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
+                     <input autofocus placeholder="Deliver date" id="date3" name="deliveryTime" type="date" class="form-control date" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
+               </div>
+               <div class="col-md-6 col-lg-6 col-xs-12 ol-md-offset-0 col-lg-offset-0">
+               <br>
+               <input id = "total" name="total" class="form-control" value="" placeholder="order total" type="text">
+               </div>
+               </div>
+               <br>
+               <div class="row">
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+               </div>
+               <div class="col-md-6 col-lg-6 col-xs-12 ol-md-offset-0 col-lg-offset-0">
+               <br>
+               <input id = "image" name="image" value="" type="file" multiple required>
+               </div>
+               </div>
+               <br>
+               <br>
+               <div class="row">
+               <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
+               <button type="submit" id="checkout" class="btn btn-success btn-lg">
+                  Checkout
+                  </button>
+                </div>
+                </div>
+               </form>
+            </div>
+         </div>
+      </div>
+<!-- jQuery 2.1.4 -->
+<script src="/rstatic/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="/rstatic/admin/dist/js/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.5 -->
+<script src="/rstatic/admin/bootstrap/js/bootstrap.min.js"></script>
+<!-- daterangepicker -->
+<script src="/rstatic/admin/dist/js/moment.min.js"></script>
+<script src="/rstatic/admin/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- datepicker -->
+<script src="/rstatic/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<!-- Slimscroll -->
+<!-- FastClick -->
+<script src="/rstatic/admin/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="/rstatic/admin/dist/js/app.min.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- AdminLTE for demo purposes -->
+<script src="/rstatic/admin/dist/js/pnotify.custom.min.js"></script>
+<script type="text/javascript">
+         $(document).ready(function(){
+          var stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
+         window.mivenotify = function(type,title,text,delay){
+           if (delay === undefined) delay = '1000';
+           mivenotification = new PNotify({
+             title: title,
+             text:text,
+             delay:delay,
+             type: type,
+             styling: "bootstrap3",
+             buttons: {
+               closer_hover: false
+         
+         },
+             hide:true});
+            mivenotification.get().click(function() {
+            mivenotification.remove();})
+         
+         }
+           $('[data-toggle="tooltip"]').tooltip();
+           $.urlParam = function(name){
+           var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+           if (results==null){
+              return null;
+           }
+           else{
+              return results[1] || 0;
+           }
+
+         }
+         check = $.urlParam('notify')
+                        if(check != null){
+                           title =$.urlParam('title')
+                           if(title != null){
+                              title = title.split('%20').join(' ')
+                           }
+                           console.log('title',title) 
+                           description = $.urlParam('description')
+                           if(description != null){
+                              description = description.split('%20').join(' ')
+                           }
+                           console.log('description',title)
+                           type = $.urlParam('type')
+                           console.log('type',title)
+                           mivenotify(type,title,description,2000)
+                           console.log('yesnotifica')
+
+                        }
+                        else{
+                           console.log('pp')
+                        }
+         });
+      </script>
+      <script>
+  $('body').on('click','.orderplace',function(event){
+    categoryvendorid = $(this).attr('data-categoryvendorid')
+    console.log('clicked')
+    $('#orderplaceid').attr('value',categoryvendorid)
+    $('#order-modal').modal('toggle')
+    $.get('/ajaxcart',function(data){$('#cartreload').html(data)})
+  })
+</script>
+<script>
+$('body').on('click','.minicart-delete',function(event){
+  url=$(this).attr('data-href')
+  console.log('url',url)
+  $(this).html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+  $.get(url,function(data){
+      console.log('clicked')
+    $('#cartreload').html(data)
+    })
+  })
+</script>
+<script>
+  $('body').on('submit','.ajaxqty',function(event){
+    event.preventDefault()
+    form = $(this)
+    url = $(this).attr('action')
+    data = form.serialize()
+    mivenotify('Success','Qty Updated','quantity has been updated')
+    $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#cartreload').html(data)
+                    },
+                    error:function(data){console.log(data)
+                    mivenotify('error','Item add error',data)
+                    }
+                  });
+
+  })
+</script>
+<script>
+$('body').on('click','.notif',function(event){
+  mivenotify('notice','Access denied need access?','Please contact rakesh@mive.in')
+})
+</script>
+<script>
+  $('body').on('click','.orderdata',function(event){
+    dummyvendorid = $(this).attr('data-dummyvendorid')
+    console.log('clicked')
+    $('#dataorderplaceid').attr('value',dummyvendorid)
+    $('#data-order-modal').modal('toggle')
+  })
+</script>
+<script>
+  $('body').on('click','.orderdata2',function(event){
+    dummyvendorid = $(this).attr('data-dummyvendorid')
+    console.log('clicked')
+    $('#dataorderplaceid2').attr('value',dummyvendorid)
+    $('#data-order-modal-invoice-only').modal('toggle')
+  })
+</script>
+<script>
+$('body').on('click','.itemdelete',function(event){
+  event.preventDefault()
+  url = $(this).attr('href')
+  $.get(url,function(data){
+    console.log(data)
+     $('#data-detail-container').html(data)
+  })
+
+})
+</script>
+<script>
+      itemtotalbox=[]
+      itemselected=[]
+      $('body').on('click','.dummycartupdate',function(request){
+        console.log('len',itemtotalbox.length)
+        if (itemtotalbox.length!=0){
+           p=JSON.stringify(itemtotalbox)
+        t= $.post( "/ajaxdummycartupdate", { "dt": p},function(data){
+          $('#data-detail-container').html(data)
+          console.log(data)
+          mivenotify('success','Cart Updated','Items has been succesfully added to cart')
+          itemtotalbox=[]
+                      } );
+        t.fail(function(data){
+          console.log(data)
+        })
+
+        }
+      })
+      </script>
+      <script>
+      $('body').on('click',"#basedatacart",function(request){
+        $("#data-cart-modal").modal('toggle')
+      })
+      </script>
+<script>
+   $('body').on('change','.dummyinputproductqty',function(){
+     console.log('tintu')
+     idd = $(this).attr('data-itemid')
+     qty = $(this).val()
+     if (qty<=0 || isNaN(parseInt(qty))){
+          mivenotify('error','Invalid quantity','quantity is incorrect kindly correct it')
+          return 1
+        }
+     console.log('qty',qty)
+     idprice = '#itemprice-'+idd
+     idtotal = '#itemtotal-'+idd
+     iddefault = '#itemdefault-'+idd
+     price = $(idprice).val()
+   
+     $(idtotal).val(price*qty)
+     pdid = idd
+     qty=qty
+      if (itemselected.indexOf(parseInt(pdid))>-1){
+          index = itemselected.indexOf(parseInt(pdid))
+          obj = {"dummyitemid":parseInt(pdid),"qty":qty,"priceperunit":price}
+          itemtotalbox[index]=obj
+
+        }
+        else{
+          obj = {"dummyitemid":pdid,"qty":qty,"priceperunit":price}
+          itemtotalbox.push(obj)
+          itemselected.push(parseInt(pdid))
+
+        }
+        console.log(itemtotalbox)
+   })
+   $('body').on('change','.dummypriceperunit',function(){
+     idd = $(this).attr('data-itemid')
+     price = $(this).val()
+     if (price<0 || isNaN(parseInt(price))){
+          mivenotify('error','Invalid price','price is incorrect kindly correct it')
+          return 1
+        }
+     idprice = '#itemprice-'+idd
+     idtotal = '#itemtotal-'+idd
+     idqty = '#itemqty-'+idd
+     iddefault = '#itemdefault-'+idd
+     qty = $(idqty).val()
+   
+     $(idtotal).val(price*qty)
+     pdid = idd
+     qty=qty
+      if (itemselected.indexOf(parseInt(pdid))>-1){
+          index = itemselected.indexOf(parseInt(pdid))
+          obj = {"dummyitemid":parseInt(pdid),"qty":qty,"priceperunit":price}
+          itemtotalbox[index]=obj
+
+        }
+        else{
+          obj = {"dummyitemid":pdid,"qty":qty,"priceperunit":price}
+          itemtotalbox.push(obj)
+          itemselected.push(parseInt(pdid))
+
+        }
+        console.log(itemtotalbox)
+   })
+   $('body').on('change','.dummytotalprice',function(){
+     idd = $(this).attr('data-itemid')
+     totalprice = $(this).val()
+     if (totalprice<0 || isNaN(parseInt(totalprice))){
+          mivenotify('error','Invalid total','total is incorrect kindly correct it')
+          return 1
+        }
+     idprice = '#itemprice-'+idd
+     idtotal = '#itemtotal-'+idd
+     idqty = '#itemqty-'+idd
+     iddefault = '#itemdefault-'+idd
+     qty = $(idqty).val()
+     if (qty==0){
+      pp=0
+      $(idprice).val(pp)
+      return 1
+     }
+   
+     $(idprice).val(totalprice/qty)
+     pdid = idd
+     qty=qty
+      if (itemselected.indexOf(parseInt(pdid))>-1){
+          index = itemselected.indexOf(parseInt(pdid))
+          obj = {"dummyitemid":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
+          itemtotalbox[index]=obj
+
+        }
+        else{
+          obj = {"dummyitemid":pdid,"qty":qty,"priceperunit":totalprice/qty}
+          itemtotalbox.push(obj)
+          itemselected.push(parseInt(pdid))
+
+        }
+        console.log(itemtotalbox)
+   })
+   
+</script>
+<script type="text/javascript">
+  $('.datepicker').datepicker(
+    )
+</script>
+<script>
+   var date = new Date();
+
+var day = date.getDate();
+var month = date.getMonth() + 1;
+var year = date.getFullYear();
+
+if (month < 10) month = "0" + month;
+if (day < 10) day = "0" + day;
+
+var today = year + "-" + month + "-" + day;
+
+$('#date1').val(today)
+$('#date2').val(today)
+$('#date3').val(today)
+</script>
+      {% block script%}
+      {% endblock %}
+</body>
+</html>

@@ -1,4 +1,4 @@
-{% extends 'adminr/base.html' %}
+{% extends 'adminr/launch/base.html' %}
 {% block  content %}
 <section class="content-header">
    <h1>
@@ -223,7 +223,7 @@
         console.log('len',nvtotalbox.length)
         if (nvtotalbox.length!=0){
            p=JSON.stringify(nvtotalbox)
-        t= $.post( "/new/data/prod-newvendor", { "dt": p,"sellerId":sellerId},function(data){
+        t= $.post( "/new/data/ajaxaddtouser", { "dt": p,"sellerId":sellerId},function(data){
           $('#wholereload').html(data)
          
           mivenotify('success','Items aadded','Items has been succesfully added to list')

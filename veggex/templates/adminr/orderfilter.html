@@ -19,7 +19,7 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                
                 
                 {%for order in orders%}
                 <tr>
@@ -33,7 +33,7 @@
                     {%if order.payment = 'paid' %}
                     <span class="label label-success">{{order.payment}}</span>
                     {% else %}
-                    <span class="label label-danger">{{order.payment}}</span>
+                    <span class="label label-warning">{{order.payment}}</span>
                     {% endif %}
                     </center>
                   </td>
@@ -42,7 +42,11 @@
                   <center>{{order.subtotal|intcomma}}</center>
                   </td>
                    <td>
-                    <center><a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="" style=""><i class="fa fa-book"></i></span></span></a></center>
+                    <center>
+                    {% if order.flag = True %}
+                    <span class="label label-danger">flag</span>
+                    {% endif %}
+                    <a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="success" style=""><i class="fa fa-book"></i></span></span></a></center>
                   </td>
                 </tr>
                 {% endfor%}
@@ -51,6 +55,7 @@
                 </tfoot>
               </table>
             </div>
+            <!-- /.box-body -->
               <script type="text/javascript">
                 orderids=[
                 {% for od in orders %}

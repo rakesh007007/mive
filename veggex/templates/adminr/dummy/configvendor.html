@@ -1,4 +1,4 @@
-{% extends 'adminr/base.html' %}
+{% extends 'adminr/launch/base.html' %}
 {% block  content %}
 <section class="content-header">
    <h1>
@@ -21,7 +21,7 @@
       </ol>
       <center>{% if products.all|length = 0 %}
       <span>No already added product</span>
-      <h3>Kindly click on add new product and add new products</h3>
+      <span>Kindly click on add new product and add new products</span>
       {% endif %}</center>
        {% for product in products.all %}
       <div class="col-md-4 col-sm-12 col-xs-12">
@@ -73,8 +73,8 @@
          <li class="active">Add new products from this vendor ></li>
       </ol>
       <center>{% if allProducts|length = 0 %}
-      <h3>this vendor doesnt not have any new products</h3>
-      <h3>Kindly click on add new product and add new products</h3>
+      <span class="warning">this vendor doesnt not have any new products</span><br>
+      <span>Kindly click on add new product and add new products</span>
       {% endif %}</center>
       {% for product in allProducts %}
       <div class="col-md-4 col-sm-12 col-xs-12">

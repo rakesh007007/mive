@@ -133,7 +133,7 @@ def login(request):
 	if ('loggedin' not in request.session):
 		return TemplateResponse(request, 'adminr/login.html',{'csrf_token':get_or_create_csrf_token(request)})
 	else:
-		return redirect('/main?notify=yes&title=success&title=Logged In')
+		return redirect('/new?notify=yes&title=success&title=Logged In')
 def docs(request):
 	if ('loggedin' not in request.session):
 		return redirect('/login')
@@ -180,17 +180,17 @@ def logPost(request):
 			miveuser = u[0]
 			strraw={"mobile":mobile,"password":password}
 			#return HttpResponse(str(strraw))
-			return redirect('/main?notify=yes&type=success&title=Logged In&description=You have been logged in')
+			return redirect('/new?notify=yes&type=success&title=Logged In&description=You have been logged in')
 		else:
-			return redirect('/main?notify=yes&type=error&title=LogIn&description=Login has been failed please try with proper credentials')
+			return redirect('/login?notify=yes&type=error&title=LogIn&description=Login has been failed please try with proper credentials')
 	except:
-		return redirect('/main?notify=yes&type=notice&title=LogIn&description=Looks like you are not registered please contact info@mive.in')
+		return redirect('/login?notify=yes&type=notice&title=LogIn&description=Looks like you are not registered please contact info@mive.in')
 def logout(request):
 	 if('loggedin' in request.session):
 		 del request.session['loggedin']
 	 if('mobile' in request.session):
 		del request.session['mobile'] 
-	 return redirect('/main?notify=yes&type=notice&title=Logged Out&description=You have been logged out')
+	 return redirect('/new?notify=yes&type=notice&title=Logged Out&description=You have been logged out')
 def main(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -205,7 +205,7 @@ def main(request):
 		d= 0
 		for p in stockwastage:
 			d= d+ p.stock.product.pricePerUnit*p.wastage
-		return TemplateResponse(request, 'adminr/index.html',{'wastage':d,'norders':norders,'rorders':rorders,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'adminr/launch/index.html',{'wastage':d,'norders':norders,'rorders':rorders,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 def productdetail(request):
 	productId = request.GET['productId']
 	product = Product.rak.get(product_id=productId)
@@ -979,4 +979,57 @@ def makepaid(request):
 		return TemplateResponse(request,'adminr/invoice.html',{'orderItems':orderItems,'basics':basics,'invoices':invoices,'order':order})
 	except Exception,e:
 		return HttpResponse(e,status=500)
-
+def editorder(request):
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	try:
+		basics= basicinfo(request)
+		miveuser = basics['miveuser']
+		msg = request.POST['orderMsg']
+		files = request.FILES.getlist('image')
+		if 'flag' in request.POST:
+			flag = request.POST['flag']
+		else:
+			flag=''
+		if 'paid' in request.POST:
+			paid = request.POST['paid']
+		else:
+			paid=''
+		orderId = request.POST['orderid']
+		orderId = int(orderId)
+		order = Order.objects.get(order_id=orderId)
+		if msg!='':
+			order.orderMsg = msg
+		if flag=='on':
+			order.flag=True
+		if paid =='on':
+		    order.payment = 'paid'
+		if len(files)!=0:
+			for afile in files:
+			 	d = Invoiceimage()
+			 	d.image = afile
+			 	d.save()
+			 	order.invoices.add(d)
+			 	order.save()
+		order.save()	
+		strr = '/main?notify=yes&description=Order has been updated succesfully&title=OrderID:'+str(orderId)
+		return redirect(strr)
+	except Exception,e:
+		return HttpResponse(e)
+def new(request):
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	try:
+		basics = basicinfo(request)
+		miveuser = basics['miveuser']
+		orders = Order.objects.filter(user=miveuser)
+		norders = orders.count()
+		rorders = orders.aggregate(Sum('subtotal'))
+		rorders =rorders['subtotal__sum']
+		stockwastage = Stockwastage.objects.filter(user=miveuser)
+		d= 0
+		for p in stockwastage:
+			d= d+ p.stock.product.pricePerUnit*p.wastage
+		return TemplateResponse(request, 'adminr/launch/index.html',{'wastage':d,'norders':norders,'rorders':rorders,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+	except Exception,e:
+		print 'hi'

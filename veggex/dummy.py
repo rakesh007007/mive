@@ -490,7 +490,7 @@ def newdummyajaxaddtouser(request):
 		allProducts =full['allProducts']
 		categ = full['categ']
 		products = full['products']
-		return TemplateResponse(request,'adminr/dummy/ajaxaddedproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/dummy/ajaxaddedproductreload.html',{'seller':seller,'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 
 @transaction.atomic
 def dummyajaxaddtouser(request):

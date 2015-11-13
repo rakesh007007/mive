@@ -6,6 +6,7 @@ from veggex import apis
 from veggex import stats
 from veggex import seller
 from veggex import dummy
+from veggex import search
 from django.contrib.staticfiles.urls import *
 from mive.settings import *
 router = routers.DefaultRouter()
@@ -97,6 +98,7 @@ urlpatterns = [
     url(r'^cart', views.cart),
     url(r'^data/cart', dummy.dummycart),
     url(r'^orderDetail', views.orderDetail),
+    url(r'^editorder', views.editorder),
     url(r'^removeItemPost', views.removeItemPost),
     url(r'^data/removeItemPost', dummy.dummyremoveItemPost),
     url(r'^ajaxremoveItemPost', views.ajaxremoveItemPost),
@@ -106,6 +108,7 @@ urlpatterns = [
     url(r'^product', views.productdetail),
     url(r'^data/product', dummy.dummyproductdetail),
     url(r'^career', views.career),
+    url(r'^new', views.new),
     url(r'^contact', views.contact),
     url(r'^$', views.home),
     url(r'^newvendor', views.newvendor),
@@ -117,6 +120,7 @@ urlpatterns = [
     url(r'^data/newproductnewvendor', dummy.dummynewprodnewvendor),
     url(r'^invoice', views.invoice),
     url(r'^makepaid', views.makepaid),
+    url(r'^search/dummyvendor', search.vendor),
     url(r'^seller/login', seller.sel),
     url(r'^seller/logPost', seller.logPost),
     url(r'^seller/main', seller.main),
