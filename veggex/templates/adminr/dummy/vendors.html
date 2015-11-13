@@ -45,11 +45,11 @@
                     <center>{{sel.seller.rating}}</center>
                   </td>
                   <td><center>
-                      <a class="btn btn-danger" href="/data/delvendoruser?id={{sel.dummyvendor_id}}">Delete</a>
+                      <a class="btn btn-danger loader" href="/data/delvendoruser?id={{sel.dummyvendor_id}}">Delete</a>
                       </center>
                   </td>
                   <td >
-                    <center><a data-productid="{{item.product.product_id}}" href="/data/configvendor?id={{sel.seller_id}}" ><span class="btn btn-warning" >Config</span></a></center>
+                    <center><a data-productid="{{item.product.product_id}}" href="/data/configvendor?id={{sel.seller_id}}" ><span class="btn btn-warning loader" >Config</span></a></center>
                   </td>
                 </tr>
                 {% endfor%}
