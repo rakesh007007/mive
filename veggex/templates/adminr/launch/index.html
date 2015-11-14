@@ -22,14 +22,14 @@
         {%for categ in basics.dummyvendor.all%}
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-aqua">
+          <a href="/data/categoryvendor?dummyVendorId={{categ.dummyvendor_id}}" class="loader"><div class="small-box bg-aqua">
             <div class="inner">
-              <center><h3>{{categ.seller}}</h3></center>
+              <center><h3 style="color:#fff">{{categ.seller}}</h3></center>
             </div>
             <a href="/data/categoryvendor?dummyVendorId={{categ.dummyvendor_id}}" class="small-box-footer loader">
               Add invoice <i class="fa fa-arrow-circle-right"></i>
             </a>
-          </div>
+          </div></a>
         </div>
         {%endfor%}
       </div>
