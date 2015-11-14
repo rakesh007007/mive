@@ -122,7 +122,6 @@ urlpatterns = [
     url(r'^makepaid', views.makepaid),
     url(r'^search/dummyvendor', search.vendor),
     url(r'^seller/login', seller.sel),
-    url(r'^export/try', views.export),
     url(r'^seller/logPost', seller.logPost),
     url(r'^seller/main', seller.main),
     url(r'^seller/products', seller.products),
