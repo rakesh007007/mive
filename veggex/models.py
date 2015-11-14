@@ -52,7 +52,7 @@ class Sellernotification(models.Model):
 	title = models.CharField(max_length=240,null=False,blank=False,default='New Notification')
 	link = models.CharField(max_length=240,null=False,blank=False,default='#')
 	timeOfCreate = models.DateTimeField(default=timezone.now,null=True,blank=True)
-	seen = models.IntegerField(null=False,blank=False,default=0)
+	seen = models.FloatField(null=False,blank=False,default=0)
 	objects =models.Manager()
 	unseen = NotificationManager()
 	class Meta:	
@@ -67,7 +67,7 @@ class Notification(models.Model):
 	title = models.CharField(max_length=240,null=False,blank=False,default='New Notification')
 	link = models.CharField(max_length=240,null=False,blank=False,default='#')
 	timeOfCreate = models.DateTimeField(default=timezone.now,null=True,blank=True)
-	seen = models.IntegerField(null=False,blank=False,default=0)
+	seen = models.FloatField(null=False,blank=False,default=0)
 	objects =models.Manager()
 	unseen = NotificationManager()
 	class Meta:	
@@ -82,7 +82,7 @@ class Message(models.Model):
 	title = models.CharField(max_length=240,null=False,blank=False,default='New Notification')
 	link = models.CharField(max_length=240,null=False,blank=False,default='#')
 	timeOfCreate = models.DateTimeField(default=timezone.now,null=True,blank=True)
-	seen = models.IntegerField(null=False,blank=False,default=0)
+	seen = models.FloatField(null=False,blank=False,default=0)
 	objects =models.Manager()
 	unseen = MessageManager()
 	class Meta:	
@@ -94,7 +94,7 @@ class Address(models.Model):
 	area=models.CharField(max_length=300, null=False)
 	city =models.CharField(max_length=300, null=False)
 	state = models.CharField(max_length=300, null=False)
-	pincode=models.IntegerField(null=False)
+	pincode=models.FloatField(null=False)
 	def __unicode__(self):
 		return str(self.address_id)
 	def addressId(self):
@@ -127,9 +127,9 @@ class Seller(models.Model):
     profilePhoto = models.ImageField(blank=True,null=True,default='./No_image_available.png')
     address = models.ForeignKey(Address, blank=True, null=True)
     categories = models.CharField(max_length=240,blank=True,null=True,default='all')
-    rating = models.IntegerField(default=0)
+    rating = models.FloatField(default=0)
     password = models.CharField(max_length=300, blank=False, null=False,default='pbkdf2_sha256$20000$xcPbF0CMVCyw$eZECZo2qDkuIVr8+UxTiIosfDPdHx6mMQNhUbp3AAjM=')
-    status = models.IntegerField(default=1)
+    status = models.FloatField(default=1)
     notifications = models.ManyToManyField(Sellernotification,blank=True,default=[1,])
     typeOfSeller = models.CharField(max_length=200,blank=True,null=True,default='offline')
     directory = models.BooleanField(null=False,blank=False,default=False)
@@ -148,16 +148,16 @@ class Product(models.Model):
 	name=models.CharField(max_length=300,blank=False,null=False)
 	description=models.TextField(blank=True,null=True,default='not available')
 	category = models.ForeignKey(Category,blank=True,null=True,default=1)
-	popularityIndex = models.IntegerField(blank=True,null=True,default=1)
+	popularityIndex = models.FloatField(blank=True,null=True,default=1)
 	unit = models.CharField(max_length=100,default='unit')
 	priceType = models.CharField(max_length=300,choices=priceType, default='custom rates')
-	pricePerUnit = models.IntegerField(blank=False,null=False,default=0)
+	pricePerUnit = models.FloatField(blank=False,null=False,default=0)
 	coverphoto = models.ImageField(blank=True,null=True,default='./No_image_available.png')
 	origin = models.CharField(max_length=300,null=True,blank=True,default='')
-	maxAvailableUnits=models.IntegerField(null=True,blank=True,default=100000)
+	maxAvailableUnits=models.FloatField(null=True,blank=True,default=100000)
 	qualityRemarks = models.TextField(null=True,blank=True,default='Custom Product')
 	grade = models.CharField(max_length=200,choices=grades,default='',blank=True,null=True)
-	status = models.IntegerField(blank=True,null=True,default=1)
+	status = models.FloatField(blank=True,null=True,default=1)
 	seller = models.ForeignKey(Seller,blank=True,null=True)
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
 	related_products = models.ManyToManyField("self", blank=True,null=True)
@@ -212,7 +212,7 @@ class Cart(models.Model):
 	#check this time thing
 	timeOfCreate = models.DateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =models.DateTimeField(default=timezone.now,null=True,blank=True)
-	cartTotal = models.IntegerField(default=0)
+	cartTotal = models.FloatField(default=0)
 	class Meta:
 		ordering = ['timeOfUpdate']
 	def __unicode__(self):
@@ -222,7 +222,7 @@ class Dummycart(models.Model):
 	#check this time thing
 	timeOfCreate = models.DateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =models.DateTimeField(default=timezone.now,null=True,blank=True)
-	dummycartTotal = models.IntegerField(default=0)
+	dummycartTotal = models.FloatField(default=0)
 	class Meta:
 		ordering = ['timeOfUpdate']
 	def __unicode__(self):
@@ -250,7 +250,7 @@ class User(models.Model):
     owner = models.ForeignKey(Owner,blank=True, null=True)
     categories = models.ManyToManyField(CategoryVendor,blank=True,default=[39,])
     dummyvendors = models.ManyToManyField(DummyVendor,blank=True)
-    creditlimit = models.IntegerField(default=10000,null=True,blank=True)
+    creditlimit = models.FloatField(default=10000,null=True,blank=True)
     notifications = models.ManyToManyField(Notification,blank=True)
     message = models.ManyToManyField(Message,blank=True)
     def profilephotourl(self):
@@ -273,9 +273,9 @@ class CustomCategoryProducts(models.Model):
 class Cartitem(models.Model):
 	cartitem_id = models.AutoField(primary_key=True)
 	cart=models.ForeignKey(Cart,blank=False,null=False)
-	qtyInUnits = models.PositiveIntegerField()
+	qtyInUnits = models.FloatField()
 	product = models.ForeignKey(Product,blank=False,null=False)
-	pricePerUnit = models.PositiveIntegerField(blank=False,null=False, default=0)
+	pricePerUnit = models.FloatField(blank=False,null=False, default=0)
 	timeOfCreate = models.DateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =models.DateTimeField(default=timezone.now,null=True,blank=True)
 	class Meta:	
@@ -289,9 +289,9 @@ class Cartitem(models.Model):
 class Dummycartitem(models.Model):
 	dummycartitem_id = models.AutoField(primary_key=True)
 	dummycart=models.ForeignKey(Dummycart,blank=False,null=False)
-	qtyInUnits = models.PositiveIntegerField()
+	qtyInUnits = models.FloatField()
 	product = models.ForeignKey(Product,blank=False,null=False)
-	pricePerUnit = models.PositiveIntegerField(blank=False,null=False,default=0)
+	pricePerUnit = models.FloatField(blank=False,null=False,default=0)
 	timeOfCreate = models.DateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =models.DateTimeField(default=timezone.now,null=True,blank=True)
 	class Meta:	
@@ -303,7 +303,7 @@ class Dummycartitem(models.Model):
 class Accartitem(models.Model):
 	accartitem_id = models.AutoField(primary_key=True)
 	cart=models.ForeignKey(Cart,blank=False,null=False)
-	qtyInUnits = models.IntegerField()
+	qtyInUnits = models.FloatField()
 	product = models.ForeignKey(Product,blank=False,null=False)
 	resason = models.TextField(blank=True,null=True)
 class Invoiceimage(models.Model):
@@ -317,7 +317,7 @@ class Order(models.Model):
 	timeOfCreate = models.DateTimeField(default=timezone.now,null=True,blank=True)
 	timeOfUpdate =models.DateTimeField(default=timezone.now,null=True,blank=True)
 	payment_mode = models.CharField(max_length=200,blank=True,null=True)
-	subtotal=models.IntegerField(blank=True,null=True)
+	subtotal=models.FloatField(blank=True,null=True)
 	payment=models.CharField(max_length=100,blank=True,null=True,default='unpaid')
 	status = models.CharField(max_length=200,default='placed')
 	orderMsg = models.TextField(blank=True,null=True)
@@ -337,9 +337,9 @@ class Orderitem(models.Model):
 	orderitem_id = models.AutoField(primary_key=True)
 	order=models.ForeignKey(Order,blank=False,null=False)
 	unit = models.CharField(max_length=100,default='kg')
-	qtyInUnits = models.IntegerField()
+	qtyInUnits = models.FloatField()
 	priceType = models.CharField(max_length=200,choices=priceType)
-	pricePerUnit = models.IntegerField(blank=False,null=False)
+	pricePerUnit = models.FloatField(blank=False,null=False)
 	product = models.ForeignKey(Product,blank=False,null=False)
 	def orderItemId(self):
 		return self.orderitem_id
