@@ -104,8 +104,8 @@ def ajaxdummycartupdate(request):
 		total=0
 		for it in itemdetails:
 			pdid = (it['dummyitemid'])
-			qty = int(it['qty'])
-			pricePerUnit = int(it['priceperunit'])
+			qty = float(it['qty'])
+			pricePerUnit = float(it['priceperunit'])
 			if qty<=0 or pricePerUnit<=0:
 				continue
 			ct = Dummycartitem.objects.filter(dummycart=dummycart).filter(dummycartitem_id=pdid).count()
@@ -135,8 +135,8 @@ def newajaxaddtodummycart(request):
 		total=0
 		for it in productdetails:
 			pdid = (it['productId'])
-			qty = int(it['qty'])
-			pricePerUnit = int(it['priceperunit'])
+			qty = float(it['qty'])
+			pricePerUnit = float(it['priceperunit'])
 			if qty<=0 or pricePerUnit<0:
 				continue
 			pd = Product.objects.get(product_id=pdid)
@@ -165,11 +165,11 @@ def dummyajaxaddtocart(request):
 	productId = request.POST['productId']
 	productId = (int)(productId)
 	pricePerUnit = request.POST['pricePerUnit']
-	pricePerUnit = int(pricePerUnit)
+	pricePerUnit = float(pricePerUnit)
 	mobile=request.session['mobile']
 	user = User.objects.get(mobileNo=mobile)
 	product  = Product.rak.get(product_id=productId)
-	qty = int(request.POST['qty'])
+	qty = float(request.POST['qty'])
 	if(qty%1!=0 or qty<=0 or pricePerUnit<=0):
 		return HttpResponse('error occured invalid qty or price',status=500)
 	dummycart = user.dummycart
@@ -239,14 +239,14 @@ def dummyeditqty(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
 	itemId = request.POST['itemid']
-	itemId = int(itemId)
+	itemId = float(itemId)
 	newqty = request.POST['newqty']
-	newqty = int(newqty)
+	newqty = float(newqty)
 	item = Dummycartitem.objects.get(dummycartitem_id=itemId)
 	oldqty = item.qtyInUnits
 	pricePerUnit = item.pricePerUnit
 	dummycart=item.dummycart
-	item.qtyInUnits = int(newqty)
+	item.qtyInUnits = float(newqty)
 	dummycart.dummycartTotal = dummycart.dummycartTotal-(oldqty-newqty)*item.pricePerUnit
 	item.save()
 	dummycart.save()
