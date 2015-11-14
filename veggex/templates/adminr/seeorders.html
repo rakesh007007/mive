@@ -141,22 +141,6 @@
 {% block script%}
 <script>
   $('body').on('click touchstart','#fatu',function(event){
-    data = $('#bigb').serialize()
-    $('#targetreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
-    $.ajax({
-                    type: "POST",
-                    url: '/filter/seeorder',
-                    data: data, // serializes the form's elements.
-                    success: function(data)
-                    {
-                      $('#targetreload').html(data)
-                      console.log(data)
-                    },
-                    error:function(data){
-                    mivenotify('error','Item add','Error occured while adding product')
-                    console.log(data)
-                    }
-                  });
   })
   </script>
   <script>
@@ -238,7 +222,25 @@
       step: 1,
       postfix: "days",
       hideMinMax: true,
-      hideFromTo: false
+      hideFromTo: false,
+      onFinish: function (data) {
+        data = $('#bigb').serialize()
+    $('#targetreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+    $.ajax({
+                    type: "POST",
+                    url: '/filter/seeorder',
+                    data: data, // serializes the form's elements.
+                    success: function(data)
+                    {
+                      $('#targetreload').html(data)
+                      console.log(data)
+                    },
+                    error:function(data){
+                    mivenotify('error','Error Occured','Error occured while processing')
+                    console.log(data)
+                    }
+                  });
+    },
     });
   });
 
