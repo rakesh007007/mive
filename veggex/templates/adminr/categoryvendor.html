@@ -174,20 +174,20 @@
       $('body').on('change','.inputproductqty',function(request){
         pdid = $(this).attr('data-productid')
         qty=$(this).val()
-        if (parseInt(qty)<=0 || isNaN(parseInt(qty))){
+        if (parseFloat(qty)<=0 || isNaN(parseFloat(qty))){
           mivenotify('error','Invalid quantity','quantity is incorrect kindly correct it')
           return 1
         }
-        if (selected.indexOf(parseInt(pdid))>-1){
-          index = selected.indexOf(parseInt(pdid))
-          obj = {"productId":parseInt(pdid),"qty":qty}
+        if (selected.indexOf(parseFloat(pdid))>-1){
+          index = selected.indexOf(parseFloat(pdid))
+          obj = {"productId":parseFloat(pdid),"qty":qty}
           totalbox[index]=obj
 
         }
         else{
           obj = {"productId":pdid,"qty":qty}
           totalbox.push(obj)
-          selected.push(parseInt(pdid))
+          selected.push(parseFloat(pdid))
 
         }
         console.log(totalbox)

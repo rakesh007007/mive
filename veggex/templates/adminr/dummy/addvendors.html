@@ -228,21 +228,21 @@
       $('body').on('change','.tick',function(request){
         pdid = $(this).attr('data-productid')
         price = $('#price-'+pdid).val()
-        if (price<0 || isNaN(parseInt(price))){
+        if (price<0 || isNaN(parseFloat(price))){
           mivenotify('error','Invalid price','price is incorrect kindly correct it')
           return 1
         }
         
-        if (nvselected.indexOf(parseInt(pdid))>-1){
-          index = nvselected.indexOf(parseInt(pdid))
-          obj = {"productId":parseInt(pdid),"price":price}
+        if (nvselected.indexOf(parseFloat(pdid))>-1){
+          index = nvselected.indexOf(parseFloat(pdid))
+          obj = {"productId":parseFloat(pdid),"price":price}
           nvtotalbox[index]=obj
 
         }
         else{
           obj = {"productId":pdid,"price":price}
           nvtotalbox.push(obj)
-          nvselected.push(parseInt(pdid))
+          nvselected.push(parseFloat(pdid))
 
         }
         console.log(nvtotalbox)

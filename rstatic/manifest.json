@@ -40,5 +40,5 @@
   ],
   "start_url": "/new",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "fullscreen"
 }

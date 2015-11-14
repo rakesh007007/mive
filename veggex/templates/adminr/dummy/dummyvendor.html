@@ -191,7 +191,7 @@ selected=[]
      console.log('tintu')
      idd = $(this).attr('data-productid')
      qty = $(this).val()
-     if (qty<=0 || isNaN(parseInt(qty))){
+     if (qty<=0 || isNaN(parseFloat(qty))){
           mivenotify('error','Invalid quantity','quantity is incorrect kindly correct it')
           return 1
         }
@@ -204,16 +204,16 @@ selected=[]
      $(idtotal).val(price*qty)
      pdid = idd
      qty=qty
-      if (selected.indexOf(parseInt(pdid))>-1){
-          index = selected.indexOf(parseInt(pdid))
-          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
+      if (selected.indexOf(parseFloat(pdid))>-1){
+          index = selected.indexOf(parseFloat(pdid))
+          obj = {"productId":parseFloat(pdid),"qty":qty,"priceperunit":price}
           totalbox[index]=obj
 
         }
         else{
           obj = {"productId":pdid,"qty":qty,"priceperunit":price}
           totalbox.push(obj)
-          selected.push(parseInt(pdid))
+          selected.push(parseFloat(pdid))
 
         }
         console.log(totalbox)
@@ -221,7 +221,7 @@ selected=[]
    $('body').on('change','.priceperunit',function(){
      idd = $(this).attr('data-productid')
      price = $(this).val()
-     if (price<0 || isNaN(parseInt(price))){
+     if (price<0 || isNaN(parseFloat(price))){
           mivenotify('error','Invalid price','price is incorrect kindly correct it')
           return 1
         }
@@ -234,16 +234,16 @@ selected=[]
      $(idtotal).val(price*qty)
      pdid = idd
      qty=qty
-      if (selected.indexOf(parseInt(pdid))>-1){
-          index = selected.indexOf(parseInt(pdid))
-          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
+      if (selected.indexOf(parseFloat(pdid))>-1){
+          index = selected.indexOf(parseFloat(pdid))
+          obj = {"productId":parseFloat(pdid),"qty":qty,"priceperunit":price}
           totalbox[index]=obj
 
         }
         else{
           obj = {"productId":pdid,"qty":qty,"priceperunit":price}
           totalbox.push(obj)
-          selected.push(parseInt(pdid))
+          selected.push(parseFloat(pdid))
 
         }
         console.log(totalbox)
@@ -251,7 +251,7 @@ selected=[]
    $('body').on('change','.totalprice',function(){
      idd = $(this).attr('data-productid')
      totalprice = $(this).val()
-     if (totalprice<0 || isNaN(parseInt(totalprice))){
+     if (totalprice<0 || isNaN(parseFloat(totalprice))){
           mivenotify('error','Invalid total','total is incorrect kindly correct it')
           return 1
         }
@@ -269,16 +269,16 @@ selected=[]
      $(idprice).val(totalprice/qty)
      pdid = idd
      qty=qty
-      if (selected.indexOf(parseInt(pdid))>-1){
-          index = selected.indexOf(parseInt(pdid))
-          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
+      if (selected.indexOf(parseFloat(pdid))>-1){
+          index = selected.indexOf(parseFloat(pdid))
+          obj = {"productId":parseFloat(pdid),"qty":qty,"priceperunit":totalprice/qty}
           totalbox[index]=obj
 
         }
         else{
           obj = {"productId":pdid,"qty":qty,"priceperunit":totalprice/qty}
           totalbox.push(obj)
-          selected.push(parseInt(pdid))
+          selected.push(parseFloat(pdid))
 
         }
         console.log(totalbox)
