@@ -616,15 +616,10 @@ def dummynewvendor(request):
 		pincode=1
 	else:
 		pincode =int(request.POST['pincode'])
-	if request.POST['ctext']=='':
-		ctext='all'
-	else:
-		ctext =request.POST['ctext']
 	seller = Seller()
 	seller.nameOfSeller=name
 	seller.mailId = email
 	seller.mobileNo=mobile
-	seller.categories =ctext
 	ad =Address()
 	ad.area=area
 	ad.city =city
