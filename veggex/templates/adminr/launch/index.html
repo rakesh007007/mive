@@ -16,7 +16,7 @@
           <!-- small box -->
           <a href="/data/categoryvendor?dummyVendorId={{categ.dummyvendor_id}}" class="loader"><div class="small-box bg-aqua">
             <div class="inner">
-              <center><h3 style="color:#fff">{{categ.seller}}</h3></center>
+              <center><font style="color:#fff;" size="5"><b>{{categ.seller}}</b></font></center>
             </div>
             <a href="/data/categoryvendor?dummyVendorId={{categ.dummyvendor_id}}" class="small-box-footer loader">
               Add invoice <i class="fa fa-arrow-circle-right"></i>
@@ -66,7 +66,7 @@
               Name*:<input  placeholder="enter name" id="name" name="name" type="text" class="form-control">
               </div>
               <div class="col-md-6">
-              Mobile* :<input  placeholder="enter mobile number" id="datetime" name="mobile" type="number" class="form-control" required>
+              Mobile* :<input  placeholder="enter mobile number" id="datetime" name="mobile" type="number" min="0" class="form-control" required>
               </div>
               <div class="col-md-6">
               Email Id:<input  placeholder="enter email Id" name="email" type="email" class="form-control">
@@ -81,7 +81,7 @@
               State<input  placeholder="state" name="state" type="text" class="form-control">
               </div>
               <div class="col-md-6">
-                     Pincode: <input  placeholder="pincode" id="datetime" name="pincode" type="number" class="form-control">
+                     Pincode: <input  placeholder="pincode" id="datetime" name="pincode" type="number" min="0" class="form-control">
               </div>
               <div class="col-md-6 col-md-offset-4">
                   <button type="submit" id="add" class="btn btn-success btn-lg">

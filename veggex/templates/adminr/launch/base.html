@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  {% load rak %}
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Mive Restaurants| Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -41,6 +42,13 @@
 
   <!-- bootstrap wysihtml5 - text editor -->
   <!-- stylesheet for modal -->
+  <style type="text/css">
+   input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+  </style>
   <style>
   .datepicker {z-index: 1151 !important;}
   @import url(http://fonts.googleapis.com/css?family=Roboto);
@@ -292,7 +300,7 @@
                     <form method="post" action="/editqty" class="ajaxqty">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.cartitem_id}}">
-                    <input type="number" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit" required min="1">update</button></center>
+                    <input type="number" min="0" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit" required min="1">update</button></center>
                     </form>
                   </td>
                   <td data-href="/removeItemPost?itemId={{item.cartitem_id}}" onclick="return false" class="minicart-delete"><center><a><span style="color:green" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o" ></i></span></a></center></td>
@@ -336,8 +344,8 @@
                 <tr class="success">
                   <th><center>Name</center></th>
                   <th><center>Qty</center></th>
-                  <th><center>Rate</center></th>
-                  <th><center>Total</center></th>
+                  <th><center>Rate </center></th>
+                  <th><center>Total </center></th>
                   <th><center></center></th>
                 </tr>
                 {%for item in pd.items%}
@@ -347,7 +355,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="number" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:12px" id="itemqty-{{item.dummycartitem_id}}" min="1">
+                    <input type="number" min="0" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:14px" id="itemqty-{{item.dummycartitem_id}}" min="1">
 
                     </center>
                     </form>
@@ -356,7 +364,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="number" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemprice-{{item.dummycartitem_id}}">
+                    <input type="number" min="0" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px" id="itemprice-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
@@ -366,7 +374,7 @@
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.dummycartitem_id}}">
-                    <input type="number" class="input-circle dummytotalprice" name="newqty" value="{% widthratio item.qtyInUnits 1 item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemtotal-{{item.dummycartitem_id}}">
+                    <input type="number" min="0" class="input-circle dummytotalprice" name="newqty" value="{% multiply item.qtyInUnits item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px" id="itemtotal-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
@@ -457,6 +465,7 @@
          <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" >&#10006;</button>
             <div class="loginmodal-container2 loginmodal-container" id="order-detail-container-invoice-only" style="max-width:none;max-height:none;" enctype="multipart/form-data">
                <form id="orderdata2" action="/data/ordercategory" style="display:inline;" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="invoiceonly" value="0">
               <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
               {% csrf_token %}
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid2" value="{{pd.dummyvendor_id}}">
@@ -466,7 +475,7 @@
                </div>
                <div class="col-md-6 col-lg-6 col-xs-12 ol-md-offset-0 col-lg-offset-0">
                <br>
-               <input id = "total" name="total" class="form-control" value="" placeholder="order total" type="text">
+               <input id = "total" name="total" class="form-control" value="" placeholder="order total" type="number" required min="0">
                </div>
                </div>
                <br>
