@@ -273,7 +273,7 @@ def dummyordercategory(request):
 		items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller)
 		if len(items)<1 and str(total)=='' and len(images)==0 :
 			return HttpResponse('provide subtotal or invoice atleast')
-		totalprice=getTotal(items)
+		totalprice=float(getTotal(items))
 		order = Order()
 		order.user = user
 		order.seller = dummyvendor.seller
