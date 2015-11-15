@@ -462,6 +462,7 @@ def dummyuserproduct(request):
 	product = Product.rak.get(product_id=productId)
 	seller = product.seller
 	return TemplateResponse(request, 'adminr/dummy/userproduct.html',{'product':product,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
+@csrf_exempt
 def dummyajaxaddedreload(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -724,11 +725,8 @@ def dummynewprodnewvendor(request):
 		miveuser.dummyvendors.add(neww)
 		miveuser.save()
 	return HttpResponse('yomoso2')
-@transaction.atomic
 @csrf_exempt
-def  newdummyprodnewvendor(request):
-	if(checklogin(request)==False):
-		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+def newdummyprodnewvendor(request):
 	basics = basicinfo(request)
 	dt = request.POST
 	basics = basicinfo(request)
