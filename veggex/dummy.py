@@ -278,49 +278,63 @@ def dummyordercategory(request):
 		order.user = user
 		order.seller = dummyvendor.seller
 		order.payment_mode = payment_mode
-		if len(items)<1 and str(total)!='':
+		if str(total)!='' and 'invoiceonly' in request.POST:
 			order.subtotal=float(total)
+			order.status = 'PLACED'
+			order.orderType='dummy'
+			order.orderMsg = orderMsg
+			order.deliveryTime = deliveryTime
+			order.save()
+			order_id = order.order_id
+			for afile in request.FILES.getlist('image'):
+				print '>>>>>>>check'
+				print afile
+			 	d = Invoiceimage()
+			 	d.image = afile
+			 	d.save()
+			 	order.invoices.add(d)
+			 	order.save()
 		else:
 			order.subtotal=totalprice
-		order.status = 'PLACED'
-		order.orderType='dummy'
-		order.orderMsg = orderMsg
-		order.deliveryTime = deliveryTime
-		order.save()
-		for afile in request.FILES.getlist('image'):
-			print '>>>>>>>check'
-			print afile
-		 	d = Invoiceimage()
-		 	d.image = afile
-		 	d.save()
-		 	order.invoices.add(d)
-		 	order.save()
-		order_id =order.order_id 
-		for itemn in items:
-			rak = Orderitem()
-			rak.product = itemn.product
-			stock = Currentstock.objects.filter(product=itemn.product).filter(user=user)
-			currStock = Currentstock()
-			currStock.product = itemn.product
-			currStock.user = user
-			currStock.remainingstock=itemn.qtyInUnits
-			currStock.save()
-			rak.unit=itemn.product.unit
-			rak.qtyInUnits = itemn.qtyInUnits
-			rak.pricePerUnit = itemn.pricePerUnit
-			categories = miveuser.categories.values('seller__seller_id')
-			rak.priceType = itemn.product.priceType
-			rak.order = order
-			rak.save()
-			xsellerids=miveuser.categories.values_list('seller__seller_id',flat=True)
-			if itemn.product.seller.seller_id not in xsellerids:
-				itemn.product.pricePerUnit = itemn.pricePerUnit
-				itemn.product.save()
-			#fullMsgSender(userId,'Purchase','you have just orderds this shit')
-			Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller).delete()
-			dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
-			miveuser.save()
-			dummycart.save()
+			order.status = 'PLACED'
+			order.orderType='dummy'
+			order.orderMsg = orderMsg
+			order.deliveryTime = deliveryTime
+			order.save()
+			for afile in request.FILES.getlist('image'):
+				print '>>>>>>>check'
+				print afile
+			 	d = Invoiceimage()
+			 	d.image = afile
+			 	d.save()
+			 	order.invoices.add(d)
+			 	order.save()
+			order_id =order.order_id 
+			for itemn in items:
+				rak = Orderitem()
+				rak.product = itemn.product
+				stock = Currentstock.objects.filter(product=itemn.product).filter(user=user)
+				currStock = Currentstock()
+				currStock.product = itemn.product
+				currStock.user = user
+				currStock.remainingstock=itemn.qtyInUnits
+				currStock.save()
+				rak.unit=itemn.product.unit
+				rak.qtyInUnits = itemn.qtyInUnits
+				rak.pricePerUnit = itemn.pricePerUnit
+				categories = miveuser.categories.values('seller__seller_id')
+				rak.priceType = itemn.product.priceType
+				rak.order = order
+				rak.save()
+				xsellerids=miveuser.categories.values_list('seller__seller_id',flat=True)
+				if itemn.product.seller.seller_id not in xsellerids:
+					itemn.product.pricePerUnit = itemn.pricePerUnit
+					itemn.product.save()
+				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
+				Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller).delete()
+				dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
+				miveuser.save()
+				dummycart.save()
 			n = Notification()
 			n.title='Order Recieved'
 			n.body='Your order has been recieved succesfully with orderId:'+str(order_id)
@@ -348,55 +362,74 @@ def csrfreq(request):
 	dummycart = miveuser.dummycart
 	dummyvendor = DummyVendor.objects.filter(user=miveuser).get(seller__seller_id=int(sellerId))
 	items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller)
-	if (len(items)==0 and int(total)!=0 ):
+	if (invoiceonly in request.POST):
 		totalprice = int(total)
+		order = Order()
+		order.user = user
+		order.seller = dummyvendor.seller
+		order.payment_mode = payment_mode
+		order.subtotal=totalprice
+		order.status = 'PLACED'
+		order.orderType='dummy'
+		order.orderMsg = orderMsg
+		order.deliveryTime = deliveryTime
+		order.save()
+		for afile in request.FILES.getlist('image'):
+			print '>>>>>>>check'
+			print afile
+		 	d = Invoiceimage()
+		 	d.image = afile
+		 	d.save()
+		 	order.invoices.add(d)
+		 	order.save()
+		order_id = order.order_id
 	else:
 		totalprice=getTotal(items)
-	order = Order()
-	order.user = user
-	order.seller = dummyvendor.seller
-	order.payment_mode = payment_mode
-	order.subtotal=totalprice
-	order.status = 'PLACED'
-	order.orderType='dummy'
-	order.orderMsg = orderMsg
-	order.deliveryTime = deliveryTime
-	order.save()
-	for afile in request.FILES.getlist('image'):
-		print '>>>>>>>check'
-		print afile
-	 	d = Invoiceimage()
-	 	d.image = afile
-	 	d.save()
-	 	order.invoices.add(d)
-	 	order.save()
-	order_id =order.order_id 
-	for itemn in items:
-		rak = Orderitem()
-		rak.product = itemn.product
-		stock = Currentstock.objects.filter(product=itemn.product).filter(user=user)
-		if(len(stock)>0):
-			currStock = stock[0]
-			currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
-			currStock.save()
-		else:
-			currStock = Currentstock()
-			currStock.product = itemn.product
-			currStock.user = user
-			currStock.remainingstock=itemn.qtyInUnits
-			currStock.save()
-		rak.unit=itemn.product.unit
-		rak.qtyInUnits = itemn.qtyInUnits
-		rak.pricePerUnit = itemn.pricePerUnit
-		miveuser=user
-		rak.priceType = itemn.product.priceType
-		rak.order = order
-		rak.save()
-		#fullMsgSender(userId,'Purchase','you have just orderds this shit')
-	Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller).delete()
-	dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
-	miveuser.save()
-	dummycart.save()
+		order = Order()
+		order.user = user
+		order.seller = dummyvendor.seller
+		order.payment_mode = payment_mode
+		order.subtotal=totalprice
+		order.status = 'PLACED'
+		order.orderType='dummy'
+		order.orderMsg = orderMsg
+		order.deliveryTime = deliveryTime
+		order.save()
+		for afile in request.FILES.getlist('image'):
+			print '>>>>>>>check'
+			print afile
+		 	d = Invoiceimage()
+		 	d.image = afile
+		 	d.save()
+		 	order.invoices.add(d)
+		 	order.save()
+		order_id =order.order_id 
+		for itemn in items:
+			rak = Orderitem()
+			rak.product = itemn.product
+			stock = Currentstock.objects.filter(product=itemn.product).filter(user=user)
+			if(len(stock)>0):
+				currStock = stock[0]
+				currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
+				currStock.save()
+			else:
+				currStock = Currentstock()
+				currStock.product = itemn.product
+				currStock.user = user
+				currStock.remainingstock=itemn.qtyInUnits
+				currStock.save()
+			rak.unit=itemn.product.unit
+			rak.qtyInUnits = itemn.qtyInUnits
+			rak.pricePerUnit = itemn.pricePerUnit
+			miveuser=user
+			rak.priceType = itemn.product.priceType
+			rak.order = order
+			rak.save()
+			#fullMsgSender(userId,'Purchase','you have just orderds this shit')
+		Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller).delete()
+		dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
+		miveuser.save()
+		dummycart.save()
 	n = Notification()
 	n.title='Order Recieved'
 	n.body='Your order has been recieved succesfully with orderId:'+str(order_id)

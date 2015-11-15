@@ -371,7 +371,7 @@
                     <form method="post" action="/editqty" class="ajaxqty">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.cartitem_id}}">
-                    <input type="number" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit" required min="1">update</button></center>
+                    <input type="number" min="0" class="input-circle" name="newqty" value="{{item.qtyInUnits}}" style="text-align:center"><button class="btn-primary btn" style="border-radius:none" type="submit" required min="1">update</button></center>
                     </form>
                   </td>
                   <td data-href="/removeItemPost?itemId={{item.cartitem_id}}" onclick="return false" class="minicart-delete"><center><a><span style="color:green" data-itemid="{{item.cartitem_id}}"><i class="fa fa-trash-o" ></i></span></a></center></td>
@@ -426,7 +426,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="number" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:12px" id="itemqty-{{item.dummycartitem_id}}" min="1">
+                    <input type="number" min="0" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:12px" id="itemqty-{{item.dummycartitem_id}}" min="1">
 
                     </center>
                     </form>
@@ -435,7 +435,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="number" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemprice-{{item.dummycartitem_id}}">
+                    <input type="number" min="0" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemprice-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
@@ -445,7 +445,7 @@
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.dummycartitem_id}}">
-                    <input type="number" class="input-circle dummytotalprice" name="newqty" value="{% widthratio item.qtyInUnits 1 item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemtotal-{{item.dummycartitem_id}}">
+                    <input type="number" min="0" class="input-circle dummytotalprice" name="newqty" value="{% widthratio item.qtyInUnits 1 item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="text-align:center;border:none;  border-bottom:solid grey 1px;width:25px" id="itemtotal-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
@@ -538,6 +538,7 @@
                <form id="orderdata2" action="/data/ordercategory" style="display:inline;" method="post" enctype="multipart/form-data">
               <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
               {% csrf_token %}
+              <input type="hidden" name="invoiceonly" value="0">
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid2" value="{{pd.dummyvendor_id}}">
               <div class="row">
                <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
@@ -545,7 +546,7 @@
                </div>
                <div class="col-md-6 col-lg-6 col-xs-12 ol-md-offset-0 col-lg-offset-0">
                <br>
-               <input id = "total" name="total" class="form-control" value="" placeholder="order total" type="text">
+               <input id = "total" name="total" class="form-control" value="" placeholder="order total" type="number" required>
                </div>
                </div>
                <br>
