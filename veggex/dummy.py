@@ -101,7 +101,7 @@ def ajaxdummycartupdate(request):
 		itemdetails = json.loads(dt['dt'])
 		miveuser = basics['miveuser']
 		dummycart = miveuser.dummycart
-		total=0
+		total=0.0
 		for it in itemdetails:
 			pdid = (it['dummyitemid'])
 			qty = float(it['qty'])
@@ -279,7 +279,7 @@ def dummyordercategory(request):
 		order.seller = dummyvendor.seller
 		order.payment_mode = payment_mode
 		if len(items)<1 and str(total)!='':
-			order.subtotal=int(total)
+			order.subtotal=float(total)
 		else:
 			order.subtotal=totalprice
 		order.status = 'PLACED'
