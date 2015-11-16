@@ -826,6 +826,8 @@ def payment(request):
 		subt = orders.aggregate(subtotal = Sum('subtotal'))
 		due = dummyvendors.filter(seller=seller)[0].due
 		total = subt['subtotal']
+		if orders.count()==0:
+			total=0
 		r ={}
 		r['seller']=seller
 		r['total']=total
