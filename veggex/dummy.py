@@ -827,7 +827,7 @@ def payment(request):
 		due = dummyvendors.filter(seller=seller)[0].due
 		total = subt['subtotal']
 		if orders.count()==0:
-			total=0
+			total=0.0
 		r ={}
 		r['seller']=seller
 		r['total']=total
