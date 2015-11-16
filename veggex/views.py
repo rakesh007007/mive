@@ -1,6 +1,7 @@
 from base import *
 from veggex.serializers import *
 from django.views.decorators.csrf import csrf_exempt
+import csv
 def giveajaxdummycart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -1033,3 +1034,12 @@ def new(request):
 		return TemplateResponse(request, 'adminr/launch/index.html',{'wastage':d,'norders':norders,'rorders':rorders,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 	except Exception,e:
 		print 'hi'
+def export(request):
+	books = Order.objects.all()
+	response = HttpResponse(books , content_type='application/vnd.ms-excel;charset=utf-8')
+	response['Content-Disposition'] = 'attachment; filename="books.xls"'
+	writer = csv.writer(response)
+	writer.writerow(['Book', 'Author'])
+	for book in books:
+		writer.writerow([book.seller.nameOfSeller, book.subtotal])
+	return response
