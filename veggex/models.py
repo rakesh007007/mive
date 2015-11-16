@@ -149,7 +149,7 @@ class Product(models.Model):
 	description=models.TextField(blank=True,null=True,default='not available')
 	category = models.ForeignKey(Category,blank=True,null=True,default=1)
 	popularityIndex = models.FloatField(blank=True,null=True,default=1)
-	unit = models.CharField(max_length=100,default='kg')
+	unit = models.CharField(max_length=100,default='Kg')
 	priceType = models.CharField(max_length=300,choices=priceType, default='custom rates')
 	pricePerUnit = models.FloatField(blank=False,null=False,default=0)
 	coverphoto = models.ImageField(blank=True,null=True,default='./No_image_available.png')
