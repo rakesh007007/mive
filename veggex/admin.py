@@ -2,11 +2,12 @@ from django.contrib import admin
 from veggex.models import *
 
 # Register your models here.
-
+class ProductAdmin(admin.ModelAdmin):
+    list_filter = ['seller',]
 admin.site.register(User)
 admin.site.register(Address)
 admin.site.register(Category)
-admin.site.register(Product)
+admin.site.register(Product,ProductAdmin)
 admin.site.register(Cart)
 admin.site.register(Dummycart)
 admin.site.register(Cartitem)
