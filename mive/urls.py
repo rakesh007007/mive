@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^data/index.html/', dummy.dummymain),
     url(r'^data/main/', dummy.dummymain),
      url(r'^payment/', dummy.payment),
+     url(r'^data/change/payment/', dummy.makepayment),
     url(r'^logPost', views.logPost),
     url(r'^new/data/prod-newvendor', dummy.newdummyprodnewvendor),
     url(r'^editqty', views.editqty),

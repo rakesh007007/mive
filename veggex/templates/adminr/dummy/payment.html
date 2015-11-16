@@ -4,14 +4,15 @@
     </section>
     <section class="content">
     <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
+    {%for sl in list %}
+            <div class="col-md-3 col-sm-12 col-xs-12">
           <div class="info-box" >
           <div class="row">
             <div class="col-xs-12 col-sm-12">
-            <a ><i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#payment-modal"></i></a>
-             <center><font size="5">Rakesh</font></center><br>
-             <div class="col-xs-5 col-sm-5 col-sm-offset-1 col-xs-offset-1"><font size="3">Unpaid: ₹ 56666</font></div>
-            <div class="col-xs-5 col-sm-5 col-sm-offset-1 col-xs-offset-1"><font size="3">Due: ₹ 5666</font></div>
+            <a ><i class="fa fa-pencil pull-right editpayment" data-sellerid="{{sl.seller.seller_id}}"></i></a>
+             <center><font size="5">{{sl.seller.nameOfSeller}}</font></center><br>
+             <div class="col-xs-5 col-sm-5 col-sm-offset-1 col-xs-offset-1"><font size="3">Unpaid: ₹ {{sl.total}}</font></div>
+            <div class="col-xs-5 col-sm-5 col-sm-offset-1 col-xs-offset-1"><font size="3">Due: ₹ {{sl.due}}</font></div>
             </div>
           </div>
           <div class="row">
@@ -20,6 +21,7 @@
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
+        {% endfor %}
        
     </div>
     </section>
@@ -27,14 +29,27 @@
          <div class="modal-dialog">
          <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" >&#10006;</button>
             <div class="loginmodal-container2 loginmodal-container" id="invoice-detail-container" style="max-width:1000px;max-height:none;">
-            <form>
-              <input type="hidden" id="paymentvendorid">
-              <input type="text" class="input-circle" name="newqty" value="10.0" style="border:none;  border-bottom:solid grey 1px;width:84px"><button class="btn-primary btn" style="border-radius:none" type="submit">update</button>
+            <div class="row">
+            <div class="col-md-12 col-xs-12">
+            <form method="post" action="/data/change/payment/">
+              <input type="hidden" name="sellerid" id="paymentsellerid">
+              {%csrf_token%}
+              <input type="text" name="amount"  style="border:none;  border-bottom:solid grey 1px;width:84px" required><button class="btn-primary btn" style="border-radius:none" type="submit">update</button>
             </form>
+            </div>
+            </div>
             </div>
          </div>
       </div>
    
       {% endblock %}
       {% block script %}
+      <script>
+      $('body').on('click','.editpayment',function(event){
+        sellerid = $(this).attr('data-sellerid')
+        $('#paymentsellerid').val(sellerid)
+        console.log(sellerid)
+        $('#payment-modal').modal('toggle')
+      })
+      </script>
       {% endblock %}

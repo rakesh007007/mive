@@ -813,4 +813,33 @@ def dummyprodnewvendor(request):
 		miveuser.save()
 	return HttpResponse('yomoso')
 def payment(request):
-	return TemplateResponse(request,'adminr/dummy/payment.html',{})
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	basics = basicinfo(request)
+	miveuser = basics['miveuser']
+	dummyvendors = miveuser.dummyvendors
+	sellerids =dummyvendors.values_list('seller__seller_id',flat=True)
+	alll=[]
+	for t in sellerids:
+		seller = Seller.objects.get(seller_id=t)
+		orders = Order.objects.filter(user=miveuser).filter(payment='unpaid').filter(seller=t)
+		subt = orders.aggregate(subtotal = Sum('subtotal'))
+		due = dummyvendors.filter(seller=seller)[0].due
+		total = subt['subtotal']
+		r ={}
+		r['seller']=seller
+		r['total']=total
+		r['due']=due
+		alll.append(r)
+	return TemplateResponse(request,'adminr/dummy/payment.html',{'list':alll,'basics':basics})
+def makepayment(request):
+	if(checklogin(request)==False):
+		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
+	basics = basicinfo(request)
+	miveuser = basics['miveuser']
+	sellerId = int(request.POST['sellerid'])
+	amount = float(request.POST['amount'])
+	dummyvendor = miveuser.dummyvendors.filter(seller__seller_id=sellerId)[0]
+	dummyvendor.due=amount
+	dummyvendor.save()
+	return redirect('/payment?notify=yes&type=notice&title=Payment&description=Your due has been added succesfully')
