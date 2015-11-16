@@ -158,7 +158,7 @@ class Product(models.Model):
 	qualityRemarks = models.TextField(null=True,blank=True,default='Custom Product')
 	grade = models.CharField(max_length=200,choices=grades,default='',blank=True,null=True)
 	status = models.FloatField(blank=True,null=True,default=1)
-	seller = models.ForeignKey(Seller,blank=True,null=True)
+	seller = models.ForeignKey(Seller,blank=True,null=True,default=1)
 	isPerishable = models.NullBooleanField(blank=True,null=True,default=False)
 	related_products = models.ManyToManyField("self", blank=True,null=True)
 	objects = models.Manager()
