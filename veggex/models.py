@@ -183,6 +183,7 @@ class DummyVendor(models.Model):
 	dummyvendor_id = models.AutoField(primary_key=True)
 	seller = models.ForeignKey(Seller,blank=False,null=False)
 	products = models.ManyToManyField(Product,blank=True)
+	due = models.FloatField(null=True,blank=True,default=0.0)
 	def dummyvendorId(self):
 		return self.dummyvendor_id
 	def __unicode__(self):
