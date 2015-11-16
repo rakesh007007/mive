@@ -245,7 +245,7 @@ class User(models.Model):
     description = models.TextField(default='Not available')
     password = models.CharField(max_length=300, blank=False, null=False)
     gpsLocation = models.CharField(max_length=300,blank=True,null=True)
-    profilePhoto = models.ImageField(blank=True,null=True)
+    profilePhoto = models.ImageField(blank=False,null=False,default='./No_image_available.png')
     address = models.ForeignKey(Address, blank=True, null=True)
     cart =models.ForeignKey(Cart,blank=True,null=True)
     dummycart =models.ForeignKey(Dummycart,blank=True,null=True)
@@ -275,7 +275,9 @@ class User(models.Model):
     		self.cart=ct
     		self.dummycart = dct
     		self.password = make_password(self.password)
-    		super(User,self).save(self, *args, **kwargs)
+	    	super(User,self).save(*args, **kwargs)
+        else:
+	    	super(User,self).save(*args,**kwargs)
 class CustomCategoryProducts(models.Model):
 	uid=models.AutoField(primary_key=True)
 	user = models.ForeignKey(User,blank=False,null=False)
