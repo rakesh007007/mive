@@ -812,3 +812,5 @@ def dummyprodnewvendor(request):
 		miveuser.dummyvendors.add(neww)
 		miveuser.save()
 	return HttpResponse('yomoso')
+def payment(request):
+	return TemplateResponse(request,'adminr/dummy/payment.html',{})
