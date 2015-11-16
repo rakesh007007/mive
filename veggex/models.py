@@ -3,6 +3,8 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from mive import settings
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 
 # Create your models here.
 institutionTypeChoices = (
@@ -245,8 +247,8 @@ class User(models.Model):
     gpsLocation = models.CharField(max_length=300,blank=True,null=True)
     profilePhoto = models.ImageField(blank=True,null=True)
     address = models.ForeignKey(Address, blank=True, null=True)
-    cart =models.ForeignKey(Cart,blank=False,null=False)
-    dummycart =models.ForeignKey(Dummycart,blank=False)
+    cart =models.ForeignKey(Cart,blank=True,null=True)
+    dummycart =models.ForeignKey(Dummycart,blank=True,null=True)
     owner = models.ForeignKey(Owner,blank=True, null=True)
     categories = models.ManyToManyField(CategoryVendor,blank=True,default=[39,])
     dummyvendors = models.ManyToManyField(DummyVendor,blank=True)
@@ -264,6 +266,16 @@ class User(models.Model):
 
     def __unicode__(self):
     	return str(self.nameOfInstitution)
+    def save(self, *args, **kwargs):
+    	if not self.pk:
+    		ct = Cart()
+    		ct.save()
+    		dct = Dummycart()
+    		dct.save()
+    		self.cart=ct
+    		self.dummycart = dct
+    		self.password = make_password(self.password)
+    		super(User,self).save(self, *args, **kwargs)
 class CustomCategoryProducts(models.Model):
 	uid=models.AutoField(primary_key=True)
 	user = models.ForeignKey(User,blank=False,null=False)
