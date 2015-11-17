@@ -155,7 +155,6 @@ class Product(models.Model):
 	unit = models.CharField(max_length=100,default='Kg')
 	priceType = models.CharField(max_length=300,choices=priceType, default='custom rates')
 	pricePerUnit = models.FloatField(blank=False,null=False,default=0)
-	coverphoto = models.ImageField(blank=True,null=True,default='./No_image_available.png')
 	coverphoto2 = StdImageField(blank=True,null=True,default='./No_image_available.png',variations={'thumbnail': (50, 50)})
 	origin = models.CharField(max_length=300,null=True,blank=True,default='')
 	maxAvailableUnits=models.FloatField(null=True,blank=True,default=100000)
