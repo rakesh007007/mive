@@ -38,7 +38,7 @@
    </div>
    <div class="col-md-6">
       <center>
-         <img class="img img-circle" style="height:200px; width:200px;"src="{{product.coverphoto.url}}"><br>
+         <img class="img img-circle" style="height:200px; width:200px;"src="{{product.coverphoto.thumbnail.url}}"><br>
          <h4>{{product.name}}</h4>
          <h6>Rate: {{product.pricePerUnit}}/{{product.unit}}</h6>
          <form id="productdetailsubmit-{{product.product_id}}" method="post" action="addtocart">
@@ -59,7 +59,7 @@
 {%for pd in product.related_products.all%}
       <center>
       <div class="col-md-2">
-      <img src="/{{pd.coverphoto.url}}" style="height:80px;width:80px" class="img img-responsive">
+      <img src="/{{pd.coverphoto.thumbnail.url}}" style="height:80px;width:80px" class="img img-responsive">
                               <a href="#" onclick="return false;" data-toggle="modal" data-productid="{{pd.product_id}}" class="login-modal3-button price-text-color" style="font-size: 14px;color: #219FD1;">
                                  {{pd.name}}
                               </a>
