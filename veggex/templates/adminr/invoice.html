@@ -1,3 +1,4 @@
+{%load rak%}
 <style>
 	.item .thumb {
 	width: 25%;
@@ -95,7 +96,7 @@
               <td>{{item.qtyInUnits}} {{item.product.unit}}</td>
               <td>{{item.product.name}}</td>
               <td>{{item.product.description}}</td>
-              <td>₹ {% widthratio item.qtyInUnits 1 item.pricePerUnit %}</td>
+              <td>₹ {% multiply item.qtyInUnits item.pricePerUnit %}</td>
             </tr>
             {%endfor%}
             </tbody>
