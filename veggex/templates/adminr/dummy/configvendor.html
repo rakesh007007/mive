@@ -22,7 +22,7 @@
        {% for product in products.all %}
       <div class="col-md-4 col-sm-12 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}" class="login-modal2-button" src="/{{product.coverphoto.url}}" style="width:70px;height:70px" class="img img-resposive"></i></span>
+            <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}" class="login-modal2-button" src="/{{product.coverphoto.thumbnail.url}}" style="width:70px;height:70px" class="img img-resposive"></i></span>
 
             <div class="info-box-content">
               <div class="col-xs-12 col-md-12 col-lg-12">
@@ -75,7 +75,7 @@
       {% for product in allProducts %}
       <div class="col-md-4 col-sm-12 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}" class="login-modal2-button" src="/{{product.coverphoto.url}}" style="width:70px;height:70px" class="img img-resposive"></i></span>
+            <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}" class="login-modal2-button" src="/{{product.coverphoto.thumbnail.url}}" style="width:70px;height:70px" class="img img-resposive"></i></span>
 
             <div class="info-box-content">
               <div class="col-xs-12 col-md-12 col-lg-12">

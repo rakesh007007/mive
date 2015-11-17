@@ -16,7 +16,7 @@
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                     <div class="productinfo text-center">
-                                        <img src="{{product.coverphoto.url}}" alt=""  width="50" height="200" />
+                                        <img src="{{product.coverphoto.thumbnail.url}}" alt=""  width="50" height="200" />
                                         <h2>{{product.name}}</h2>
                                         {%if product.priceType = 'custom rates'%}
                                         <span>Rate: </span><b>{{product.pricePerUnit}}</b><span> per <b>{{product.unit}}<b></span><br>
