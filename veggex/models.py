@@ -167,7 +167,7 @@ class Product(models.Model):
 	objects = models.Manager()
 	rak = Product2Manager()
 	def coverphotourl(self):
-		return self.coverphoto.url
+		return self.coverphoto.thumbnail.url
 	def productId(self):
 		return self.product.product_id
 	def __unicode__(self):
