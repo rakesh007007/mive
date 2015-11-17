@@ -2,6 +2,13 @@ from base import *
 from veggex.serializers import *
 from django.views.decorators.csrf import csrf_exempt
 import csv
+def temp(request):
+	pds = Product.objects.all()
+	for pd in pds:
+		t = pd.coverphoto
+		pd.coverphoto2 = t
+		pd.save()
+	return HttpResponse('yo')
 def giveajaxdummycart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')

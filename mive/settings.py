@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'veggex',
     'rest_framework',
     'rest_framework.authtoken',
+    'stdimage',
     'django.contrib.humanize',
 
 )
