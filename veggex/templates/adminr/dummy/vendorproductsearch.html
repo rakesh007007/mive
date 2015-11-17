@@ -1,3 +1,4 @@
+{%load rak%}
 {% if products|length = 0 %}
 <center><h3>No products for this selection</h3></center>
 {% endif%}
@@ -10,7 +11,7 @@
                   <div class="row">
                      <center>
                         <div  class="col-md-12 col-sm-12 col-xs-12 col-md-offset-0 col-xs-offset-0 col-sm-offset-0">
-                           <span data-toggle="tooltip" title="{{product.name}}" >{{product.name|slice:":14"}}</span><br>
+                           <span data-toggle="tooltip" title="{{product.name}}" >{{product.name|raktr}}</span><br>
                         </div>
                      </center>
                   </div>
