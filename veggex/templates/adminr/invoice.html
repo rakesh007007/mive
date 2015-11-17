@@ -85,7 +85,7 @@
             <tr>
               <th>Qty</th>
               <th>Product</th>
-              <th>Description</th>
+              <th>Rate</th>
               <th>Subtotal</th>
             </tr>
             {% endif %}
@@ -95,7 +95,7 @@
             <tr>
               <td>{{item.qtyInUnits}} {{item.product.unit}}</td>
               <td>{{item.product.name}}</td>
-              <td>{{item.product.description}}</td>
+              <td>{{item.pricePerUnit}}/{{item.product.unit}}</td>
               <td>₹ {% multiply item.qtyInUnits item.pricePerUnit %}</td>
             </tr>
             {%endfor%}
