@@ -5,7 +5,7 @@
 {% for product in products %}
         <div class="col-md-4 col-sm-12 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}" class="login-modal2-button" src="/{{product.coverphoto.url}}"></i></span>
+            <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}" class="login-modal2-button" src="/{{product.coverphoto.url}}" style="width:70px;height:70px" class="img img-resposive"></i></span>
 
             <div class="info-box-content">
               <div class="col-xs-12 col-md-12 col-lg-12">
@@ -13,7 +13,7 @@
                     <div class="col-md-6 col-sm-5 col-xs-5 col-md-offset-0 col-xs-offset-1 col-sm-offset-1">
                        <div class="row">
                      <div class="col-md-12 col-xs-12">
-                      <span >{{product.name}}</span>
+                      <span data-toggle="tooltip" title="{{product.name}}" >{{product.name|slice:":18"}}</span>
                       </div>
                       </div>
                       <div class="row">
