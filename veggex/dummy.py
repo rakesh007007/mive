@@ -346,6 +346,41 @@ def dummyordercategory(request):
 		return redirect(strr)
 @csrf_exempt
 @transaction.atomic
+def editcsrfreq(request):
+	miveuserId = request.POST['userId']
+	user = User.objects.get(user_id=int(miveuserId))
+	miveuser=user
+	msg = request.POST['orderMsg']
+	files = request.FILES.getlist('image')
+	if 'flag' in request.POST:
+		flag = request.POST['flag']
+	else:
+		flag=''
+	if 'paid' in request.POST:
+		paid = request.POST['paid']
+	else:
+		paid=''
+	orderId = request.POST['orderId']
+	orderId = int(orderId)
+	order = Order.objects.get(order_id=orderId)
+	if msg!='':
+		order.orderMsg = msg
+	if flag=='on':
+		order.flag=True
+	if paid =='on':
+	    order.payment = 'paid'
+	if len(files)!=0:
+		for afile in files:
+		 	d = Invoiceimage()
+		 	d.image = afile
+		 	d.save()
+		 	order.invoices.add(d)
+		 	order.save()
+	order.save()
+	order_id=order.order_id
+	return HttpResponse(str({"status":"success","orderId":str(order_id)}),content_type='application/json')
+@csrf_exempt
+@transaction.atomic
 def csrfreq(request):	
 
 	miveuserId = request.POST['userId']
@@ -358,6 +393,8 @@ def csrfreq(request):
 	total = request.POST['total']
 	payment = request.POST['payment']
 	deliveryTime = request.POST['deliveryTime']
+	print 'yoo'
+	print deliveryTime
 	payment_mode = 'COD'
 	dummycart = miveuser.dummycart
 	dummyvendor = DummyVendor.objects.filter(user=miveuser).get(seller__seller_id=int(sellerId))
