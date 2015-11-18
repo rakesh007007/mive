@@ -362,7 +362,7 @@ def csrfreq(request):
 	dummycart = miveuser.dummycart
 	dummyvendor = DummyVendor.objects.filter(user=miveuser).get(seller__seller_id=int(sellerId))
 	items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller)
-	if (invoiceonly in request.POST):
+	if ('invoiceonly' in request.POST):
 		totalprice = int(total)
 		order = Order()
 		order.user = user

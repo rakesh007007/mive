@@ -1,0 +1,19 @@
+<div class="signup-form"><!--sign up form-->
+						<h2>Add a new product</h2>
+						<form type="post" method="post" action="http://127.0.0.1:8000/api/temp/makeorderdummy/" enctype="multipart/form-data">
+					    {% csrf_token %}
+					    <h4>Add Your userId:</h4>
+					    <br><span>userid:</span><input name="userId" value="" type="text">
+					    <br><span>Dummycartid:</span><input name="dummycartId" value="" type="text">
+                        <br><span>sellerid:</span><input name="sellerId" value="" type="text">
+                        <input name="payment" value="paid" type="text">
+                        <input name="total" value="50" type="text">
+                        <input name="invoiceonly" value="50" type="text">
+                        <input autofocus placeholder="Deliver date" id="datetime" name="deliveryTime" type="date" class="form-control">
+                        <br><span>ordermsg:</span><textarea rows="4" cols="50" name="orderMsg" ></textarea>
+					     <br><span>select images:</span><input id = "image" name="image"type="file" multiple>
+					    <input value="add" type="submit" >
+					        
+					    </form>
+
+					</div>
