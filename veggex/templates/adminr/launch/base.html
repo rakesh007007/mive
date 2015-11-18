@@ -206,7 +206,6 @@
                 {%endfor%}
                 </ul>
               </li>
-              <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
@@ -253,7 +252,7 @@
         <li class="treeview">
           <a href="/seeOrder" class="loader">
             <i class="fa fa-pie-chart"></i>
-            <span>Previous orders</span>
+            <span>Previous Orders</span>
           </a>
         </li>
         <li class="treeview">
@@ -420,7 +419,7 @@
                </div>
                <div class="col-md-4 col-lg-4 col-xs-12">
                <br>
-                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query(optional)"></textarea> 
                      <input type="hidden" name="csrfmiddlewaretoken" value="XxYq2vc6MzqqLBPH86mIQeEfObTCXVCc">
                </div>
                <div class="col-md-1 col-lg-1 col-xs-6 ol-md-offset-0 col-lg-offset-0">
@@ -447,7 +446,7 @@
                      <input autofocus placeholder="Deliver date"  name="deliveryTime"  class="form-control date"  id="date2" type="date" required style="z-index:10000">
                </div>
                <div class="col-md-4 col-lg-4 col-xs-12">
-                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query"></textarea> 
+                     <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Add Comment if any query(optional)"></textarea> 
                </div>
                <div class="col-md-2 col-lg-2 col-xs-6 ol-md-offset-0 col-lg-offset-0">
                <input id = "image" name="image" value="" type="file" multiple>
@@ -577,6 +576,35 @@ $( document ).ajaxStop(function() {
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- AdminLTE for demo purposes -->
 <script src="/rstatic/admin/dist/js/pnotify.custom.min.js"></script>
+<script type="text/javascript">
+  function round(value, precision, mode) {
+  var m, f, isHalf, sgn; // helper variables
+  precision |= 0; // making sure precision is integer
+  m = Math.pow(10, precision);
+  value *= m;
+  sgn = (value > 0) | -(value < 0); // sign of the number
+  isHalf = value % 1 === 0.5 * sgn;
+  f = Math.floor(value);
+
+  if (isHalf) {
+    switch (mode) {
+      case 'PHP_ROUND_HALF_DOWN':
+        value = f + (sgn < 0); // rounds .5 toward zero
+        break;
+      case 'PHP_ROUND_HALF_EVEN':
+        value = f + (f % 2 * sgn); // rouds .5 towards the next even integer
+        break;
+      case 'PHP_ROUND_HALF_ODD':
+        value = f + !(f % 2); // rounds .5 towards the next odd integer
+        break;
+      default:
+        value = f + (sgn > 0); // rounds .5 away from zero
+    }
+  }
+
+  return (isHalf ? value : Math.round(value)) / m;
+}
+</script>>
 <script type="text/javascript">
          $(document).ready(function(){
           var stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
@@ -723,6 +751,9 @@ $('body').on('click','.itemdelete',function(event){
         })
 
         }
+        else{
+          mivenotify('notice','No changes','No changes to make')
+        }
       })
       </script>
       <script>
@@ -745,7 +776,7 @@ $('body').on('click','.itemdelete',function(event){
      iddefault = '#itemdefault-'+idd
      price = $(idprice).val()
    
-     $(idtotal).val(price*qty)
+     $(idtotal).val(round(price*qty,12))
      pdid = idd
      qty=qty
       if (itemselected.indexOf(parseFloat(pdid))>-1){
@@ -775,7 +806,7 @@ $('body').on('click','.itemdelete',function(event){
      iddefault = '#itemdefault-'+idd
      qty = $(idqty).val()
    
-     $(idtotal).val(price*qty)
+     $(idtotal).val(round(price*qty,12))
      pdid = idd
      qty=qty
       if (itemselected.indexOf(parseFloat(pdid))>-1){
@@ -810,7 +841,7 @@ $('body').on('click','.itemdelete',function(event){
       return 1
      }
    
-     $(idprice).val(totalprice/qty)
+     $(idprice).val(round(totalprice/qty,12))
      pdid = idd
      qty=qty
       if (itemselected.indexOf(parseFloat(pdid))>-1){
