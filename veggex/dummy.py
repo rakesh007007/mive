@@ -827,7 +827,7 @@ def newdummyprodnewvendor(request):
 	allProducts =full['allProducts']
 	categ = full['categ']
 	products = full['products']
-	return TemplateResponse(request,'adminr/dummy/ajaxaddedproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request,'adminr/dummy/ajaxaddedproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'seller':seller,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyprodnewvendor(request):
 	if(checklogin(request)==False):
@@ -900,4 +900,4 @@ def makepayment(request):
 	dummyvendor = miveuser.dummyvendors.filter(seller__seller_id=sellerId)[0]
 	dummyvendor.due=amount
 	dummyvendor.save()
-	return redirect('/payment?notify=yes&type=notice&title=Payment&description=Your due has been added succesfully')
+	return redirect('/payment?notify=yes&type=notice&title=Payment&description=Your due amount has been added succesfully')
