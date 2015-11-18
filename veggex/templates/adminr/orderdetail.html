@@ -52,7 +52,6 @@
           Date: {{order.deliveryTime}}<br>
           {% if order.payment = 'unpaid' %}
           Payment status:Unpaid<br>
-          Make Paid? <input type="checkbox" id="makepaid" data-order="{{order.order_id}}">
           {% else %}
           Payment status:Paid<br>
           {% endif %}
