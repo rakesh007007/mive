@@ -880,6 +880,12 @@ $('#date1').val(today)
 $('#date2').val(today)
 $('#date3').val(today)
 </script>
+<script type="text/javascript">
+  $('body').on('focus','input',function(event){
+    t = $(this)
+    t.val('')
+  })
+</script>
       {% block script%}
       {% endblock %}
 </body>

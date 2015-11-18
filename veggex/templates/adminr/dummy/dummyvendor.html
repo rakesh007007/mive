@@ -202,7 +202,7 @@ selected=[]
      iddefault = '#default-'+idd
      price = $(idprice).val()
    
-     $(idtotal).val(price*qty)
+     $(idtotal).val(round(price*qty,12))
      pdid = idd
      qty=qty
       if (selected.indexOf(parseFloat(pdid))>-1){
@@ -232,7 +232,7 @@ selected=[]
      iddefault = '#default-'+idd
      qty = $(idqty).val()
    
-     $(idtotal).val(price*qty)
+     $(idtotal).val(round(price*qty,12))
      pdid = idd
      qty=qty
       if (selected.indexOf(parseFloat(pdid))>-1){
@@ -267,7 +267,7 @@ selected=[]
       return 1
      }
 
-     $(idprice).val(totalprice/qty)
+     $(idprice).val(round(totalprice/qty,12))
      pdid = idd
      qty=qty
       if (selected.indexOf(parseFloat(pdid))>-1){
