@@ -121,6 +121,7 @@ urlpatterns = [
     url(r'^data/prod-newvendor', dummy.dummyprodnewvendor),
     url(r'^newproductnewvendor', views.newprodnewvendor),
     url(r'^data/newproductnewvendor', dummy.dummynewprodnewvendor),
+    url(r'^invoice/print', views.invoiceforprint),
     url(r'^invoice', views.invoice),
     url(r'^makepaid', views.makepaid),
     url(r'^search/dummyvendor', search.vendor),
