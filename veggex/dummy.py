@@ -661,12 +661,13 @@ def dummyajaxremovefromuser(request):
 		categ = DummyVendor.objects.get(dummyvendor_id = dummyvendorId)
 		categ.products.remove(product)
 		categ.save()
-	full=dummyajaxaddedreload(request)
-	allProducts =full['allProducts']
-	products = full['products']
-	categ = full['categ']
-	basics= basicinfo(request)
-	return TemplateResponse(request,'adminr/dummy/ajaxrestproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+		product.delete()
+		full=dummyajaxaddedreload(request)
+		allProducts =full['allProducts']
+		products = full['products']
+		categ = full['categ']
+		basics= basicinfo(request)
+		return TemplateResponse(request,'adminr/dummy/ajaxrestproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummydelvendoruser(request):
 	if(checklogin(request)==False):

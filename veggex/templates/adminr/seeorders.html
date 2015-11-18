@@ -5,7 +5,7 @@
 {% endblock %}
 {% block  content %}
 {% load humanize %}
- <section class="content">
+ <section class="content uselessforprint">
  <form id="bigb">
 <div class="row">
 <div class="col-md-3 col-md-offset-1 " style="position:relative">
@@ -126,15 +126,28 @@
           </div>
           </div>
     </section>
-<div class="modal fade" id="invoice-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96;">
-         <div class="modal-dialog" style="width:100%">
+<div class="modal fade divtoprint" id="invoice-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96;">
+         <div class="modal-dialog divtoprint" style="width:100%">
          <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" >&#10006;</button>
-            <div class="loginmodal-container2 loginmodal-container" id="invoice-detail-container" style="max-width:1000px;max-height:none;">
+            <div class="loginmodal-container2 loginmodal-container divtoprint" id="invoice-detail-container" style="max-width:1000px;max-height:none;">
             </div>
          </div>
       </div>
 {%endblock%}
 {% block script%}
+<script type="text/javascript">
+  function printDiv(divName) {
+    $('.unprintable').remove()
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+</script>
 <script>
   $('body').on('click touchstart','#fatu',function(event){
   })
