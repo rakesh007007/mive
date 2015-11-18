@@ -161,6 +161,17 @@ Make order dummy
            "invoiceony":"true" #only if invoiceonly
            "sellerId":"{sellerId}"
            "image": {images of invoic might be multiple}
+Edit order dummy
+   end point */api/temp/editorderdummy/
+   POST
+   content type : 'multipart/form-data'
+   body:
+           "userId":"{userId}",
+           "orderId" :"{orderId}",
+           "orderMsg" :"{cartId}",
+           "flag":"{on if you want to flag else put whatever you want}",
+           "paid":"{on if you want to mark as paid else put whatever you want}"
+           "image": {images of invoic might be multiple}
 Sees orde with filters
    end point */api/seeorders/
    POST

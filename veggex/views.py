@@ -767,18 +767,19 @@ def seeOrder(request):
 	else:
 		miveuserId = request.session['miveuser']
 		miveuser = User.objects.get(user_id=int(miveuserId))
-		cart = miveuser.cart
-		cartItems = Cartitem.objects.filter(cart=cart)
-		totalItems = len(cartItems)
-		categories = Category.objects.all()
-		mobile = request.session['mobile']
+		localtz = pytz.timezone('Asia/Kolkata')
+		aaj = date.today()
+		days =60
+		beforedays = date.today() - timedelta(days=int(days))
+		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
+		timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
 		user =miveuser
 		basics = basicinfo(request)
-		orders = Order.objects.filter(user=user)
+		orders = Order.objects.filter(user=miveuser).filter(deliveryTime__gt=timebeforedays).order_by('-deliveryTime')
 		total = orders.aggregate(total=Sum('subtotal'))
 		total = total['total']
 		sellers=Seller.objects.filter(seller_id__in=orders.values('seller'))
-		return TemplateResponse(request, 'adminr/seeorders.html',{'basics':basics,'total':total,'cartItems':cartItems,'totalItems':totalItems,'cart':cart,'orders':orders,'miveuser':miveuser,'categories':categories,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'adminr/seeorders.html',{'basics':basics,'total':total,'orders':orders,'miveuser':miveuser,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def orderfilter(request):
 	if ('loggedin' not in request.session):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -797,22 +798,22 @@ def orderfilter(request):
 			sortby = request.POST['sortby']
 			basics= basicinfo(request)
 			beforedays = date.today() - timedelta(days=int(days))
-			timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
-			timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
+			timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=None)
+			timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=None)
 			if payment=='all':
-				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
+				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays)
 			else:
-				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(payment=payment).filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
+				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(payment=payment).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays)
+			total = orders.aggregate(total=Sum('subtotal'))
+			total = total['total']
 			if (sortby=='date'):
-				orders=orders.order_by('-timeOfCreate')
+				orders=orders.order_by('-deliveryTime')
 			elif (sortby=='subtotal'):
 				orders=orders.order_by('-subtotal')
 			elif (sortby=='status'):
-				orders=orders.order_by('-status')
+				orders=orders.order_by('-payment')
 			else:
 				orders=orders.order_by('-seller__nameOfSeller')
-			total = orders.aggregate(total=Sum('subtotal'))
-			total = total['total']
 			return TemplateResponse(request,'adminr/orderfilter.html',{'basics':basics,'total':total,'orders':orders})
 		except Exception,e:
 			return HttpResponse(e,status=500)

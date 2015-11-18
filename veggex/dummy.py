@@ -346,99 +346,155 @@ def dummyordercategory(request):
 		return redirect(strr)
 @csrf_exempt
 @transaction.atomic
-def csrfreq(request):	
-
+def editcsrfreq(request):
 	miveuserId = request.POST['userId']
 	user = User.objects.get(user_id=int(miveuserId))
 	miveuser=user
-	sellerId = request.POST['sellerId']
-	images=request.FILES.getlist('image')
-	dummycartId = request.POST['dummycartId']
-	orderMsg = request.POST['orderMsg']
-	total = request.POST['total']
-	payment = request.POST['payment']
-	deliveryTime = request.POST['deliveryTime']
-	payment_mode = 'COD'
-	dummycart = miveuser.dummycart
-	dummyvendor = DummyVendor.objects.filter(user=miveuser).get(seller__seller_id=int(sellerId))
-	items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller)
-	if ('invoiceonly' in request.POST):
-		totalprice = int(total)
-		order = Order()
-		order.user = user
-		order.seller = dummyvendor.seller
-		order.payment_mode = payment_mode
-		order.subtotal=totalprice
-		order.status = 'PLACED'
-		order.orderType='dummy'
-		order.orderMsg = orderMsg
-		order.deliveryTime = deliveryTime
-		order.save()
-		for afile in request.FILES.getlist('image'):
-			print '>>>>>>>check'
-			print afile
-		 	d = Invoiceimage()
-		 	d.image = afile
-		 	d.save()
-		 	order.invoices.add(d)
-		 	order.save()
-		order_id = order.order_id
+	msg = request.POST['orderMsg']
+	files = request.FILES.getlist('image')
+	if 'flag' in request.POST:
+		flag = request.POST['flag']
 	else:
-		totalprice=getTotal(items)
-		order = Order()
-		order.user = user
-		order.seller = dummyvendor.seller
-		order.payment_mode = payment_mode
-		order.subtotal=totalprice
-		order.status = 'PLACED'
-		order.orderType='dummy'
-		order.orderMsg = orderMsg
-		order.deliveryTime = deliveryTime
-		order.save()
-		for afile in request.FILES.getlist('image'):
-			print '>>>>>>>check'
-			print afile
+		flag=''
+	if 'paid' in request.POST:
+		paid = request.POST['paid']
+	else:
+		paid=''
+	orderId = request.POST['orderId']
+	orderId = int(orderId)
+	order = Order.objects.get(order_id=orderId)
+	if msg!='':
+		order.orderMsg = msg
+	if flag=='on':
+		order.flag=True
+	if paid =='on':
+	    order.payment = 'paid'
+	if len(files)!=0:
+		for afile in files:
 		 	d = Invoiceimage()
 		 	d.image = afile
 		 	d.save()
 		 	order.invoices.add(d)
 		 	order.save()
-		order_id =order.order_id 
-		for itemn in items:
-			rak = Orderitem()
-			rak.product = itemn.product
-			stock = Currentstock.objects.filter(product=itemn.product).filter(user=user)
-			if(len(stock)>0):
-				currStock = stock[0]
-				currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
-				currStock.save()
-			else:
-				currStock = Currentstock()
-				currStock.product = itemn.product
-				currStock.user = user
-				currStock.remainingstock=itemn.qtyInUnits
-				currStock.save()
-			rak.unit=itemn.product.unit
-			rak.qtyInUnits = itemn.qtyInUnits
-			rak.pricePerUnit = itemn.pricePerUnit
-			miveuser=user
-			rak.priceType = itemn.product.priceType
-			rak.order = order
-			rak.save()
-			#fullMsgSender(userId,'Purchase','you have just orderds this shit')
-		Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller).delete()
-		dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
-		miveuser.save()
-		dummycart.save()
-	n = Notification()
-	n.title='Order Recieved'
-	n.body='Your order has been recieved succesfully with orderId:'+str(order_id)
-	n.link = 'orderDetail?orderId='+str(order_id)
-	n.save()
-	miveuser.notifications.add(n)
-	miveuser.save()
-	strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID:'+str(order_id)
+	order.save()
+	order_id=order.order_id
 	return HttpResponse(str({"status":"success","orderId":str(order_id)}),content_type='application/json')
+@csrf_exempt
+@transaction.atomic
+def csrfreq(request):	
+	try:
+		miveuserId = request.POST['userId']
+		user = User.objects.get(user_id=int(miveuserId))
+		miveuser=user
+		sellerId = request.POST['sellerId']
+		images=request.FILES.getlist('image')
+		dummycartId = request.POST['dummycartId']
+		orderMsg = request.POST['orderMsg']
+		total = request.POST['total']
+		payment = request.POST['payment']
+		deliveryTime = request.POST['deliveryTime']
+		print 'yoo'
+		print deliveryTime
+		print 'seller'
+		print sellerId
+		print 'image'
+		print images
+		print 'dummy'
+		print dummycartId
+		print 'orderMsg'
+		print orderMsg
+		print 'total'
+		print total
+		print 'payment'
+		print payment
+		payment_mode = 'COD'
+		dummycart = miveuser.dummycart
+		dummyvendor = DummyVendor.objects.filter(user=miveuser).get(seller__seller_id=int(sellerId))
+		items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller)
+		if ('invoiceonly' in request.POST):
+			totalprice = int(total)
+			print 'check2'
+			order = Order()
+			order.user = user
+			order.seller = dummyvendor.seller
+			order.payment_mode = payment_mode
+			order.subtotal=totalprice
+			order.status = 'PLACED'
+			order.orderType='dummy'
+			order.orderMsg = orderMsg
+			order.deliveryTime = deliveryTime
+			print 'check3'
+			order.save()
+			print 'check6'
+			for afile in request.FILES.getlist('image'):
+				print '>>>>>>>check'
+				print afile
+			 	d = Invoiceimage()
+			 	d.image = afile
+			 	d.save()
+			 	order.invoices.add(d)
+			 	order.save()
+			order_id = order.order_id
+			print 'check7'
+		else:
+			totalprice=getTotal(items)
+			print 'check4'
+			order = Order()
+			order.user = user
+			order.seller = dummyvendor.seller
+			order.payment_mode = payment_mode
+			order.subtotal=totalprice
+			order.status = 'PLACED'
+			order.orderType='dummy'
+			order.orderMsg = orderMsg
+			order.deliveryTime = deliveryTime
+			order.save()
+			for afile in request.FILES.getlist('image'):
+				print '>>>>>>>check'
+				print afile
+			 	d = Invoiceimage()
+			 	d.image = afile
+			 	d.save()
+			 	order.invoices.add(d)
+			 	order.save()
+			order_id =order.order_id 
+			for itemn in items:
+				rak = Orderitem()
+				rak.product = itemn.product
+				stock = Currentstock.objects.filter(product=itemn.product).filter(user=user)
+				if(len(stock)>0):
+					currStock = stock[0]
+					currStock.remainingstock= currStock.remainingstock+itemn.qtyInUnits
+					currStock.save()
+				else:
+					currStock = Currentstock()
+					currStock.product = itemn.product
+					currStock.user = user
+					currStock.remainingstock=itemn.qtyInUnits
+					currStock.save()
+				rak.unit=itemn.product.unit
+				rak.qtyInUnits = itemn.qtyInUnits
+				rak.pricePerUnit = itemn.pricePerUnit
+				miveuser=user
+				rak.priceType = itemn.product.priceType
+				rak.order = order
+				rak.save()
+				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
+			Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller).delete()
+			dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
+			miveuser.save()
+			dummycart.save()
+		n = Notification()
+		n.title='Order Recieved'
+		n.body='Your order has been recieved succesfully with orderId:'+str(order_id)
+		n.link = 'orderDetail?orderId='+str(order_id)
+		n.save()
+		miveuser.notifications.add(n)
+		miveuser.save()
+		strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID:'+str(order_id)
+		return HttpResponse(str({"status":"success","orderId":str(order_id)}),content_type='application/json')
+	except Exception,e:
+		return HttpResponse(e)
 def dummyvendors(request):
 	if(checklogin(request)==False):
 		return redirect('/login')

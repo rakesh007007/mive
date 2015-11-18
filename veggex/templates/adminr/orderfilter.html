@@ -25,7 +25,7 @@
                 <tr>
                   <td  style="text-transform: capitalize;"><center>{{order.seller.nameOfSeller}}</center></td>
                   <td >
-                    <center>{{order.deliveryTime|date:"d/m"}}</center>
+                    <center><span class="hidden">{{order.deliveryTime|date:"y/m/d"}}</span>{{order.deliveryTime|date:"d/m"}}</center>
                   </td>
                   <td style="text-transform: capitalize;" >
 
@@ -44,7 +44,7 @@
                    <td>
                     <center>
                     {% if order.flag = True %}
-                    <span class="label label-danger">flag</span>
+                    <span class="label label-danger">Flag</span>
                     {% endif %}
                     <a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="success" style=""><i class="fa fa-book"></i></span></span></a></center>
                   </td>
