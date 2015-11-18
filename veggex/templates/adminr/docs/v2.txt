@@ -154,10 +154,11 @@ Make order dummy
    body:
            "userId":"{userId}",
            "dummycartId" :"{cartId}",
-           "deliveryTime" :"{cartId}",
+           "deliveryTime" :"{deliveryTime}",
            "orderMsg" :"{cartId}",
            "payment":"{payment}",
            "total":"{total}"
+           "invoiceony":"true" #only if invoiceonly
            "sellerId":"{sellerId}"
            "image": {images of invoic might be multiple}
 Sees orde with filters
