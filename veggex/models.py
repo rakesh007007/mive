@@ -247,7 +247,7 @@ class User(models.Model):
     description = models.TextField(default='Not available')
     password = models.CharField(max_length=300, blank=False, null=False)
     gpsLocation = models.CharField(max_length=300,blank=True,null=True)
-    profilePhoto = models.ImageField(blank=False,null=False,default='./No_image_available.png')
+    profilePhoto = models.ImageField(blank=False,null=False,default='./profile.gif')
     address = models.ForeignKey(Address, blank=True, null=True)
     cart =models.ForeignKey(Cart,blank=True,null=True)
     dummycart =models.ForeignKey(Dummycart,blank=True,null=True)
