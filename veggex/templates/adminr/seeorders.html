@@ -10,7 +10,7 @@
 <div class="row">
 <div class="col-md-3 col-md-offset-1 " style="position:relative">
        <div class="form-group" style="text-transform: capitalize;">
-                <label>Select sellers</label>
+                <label>Select Seller(s)</label>
                 <select class="form-control select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;" name="sellers" id="sellerselect">
                  {%for sel in sellers%}
                   <option selected value="{{sel.seller_id}}" style="text-transform: capitalize;">{{sel.nameOfSeller}}</option>
@@ -25,19 +25,19 @@
            <div class="form-group">
            <div class="col-sm-12" id="fatu">
                Select time range
-                <input id="range_4" type="text" name="date" value="7;200">
+                <input id="range_4" type="text" name="date" value="0;60">
                 {%csrf_token%}
               </div>
 
               <!-- /.input group -->
             </div>
          </div>
-         <div class="col-md-3 col-xs-6 col-sm-6">
+         <div class="col-md-3 col-xs-6 col-sm-6 hidden" style="diplay:off">
          Sort by
-         <select name="sortby" class="form-control select2" style="width: 100%;" id="sortby">
-    <option selected="selected" value="date">Date</option>
+         <select name="sortby" class="form-control" style="width: 100%;" id="sortby">
+    <option  value="date">Date</option>
     <option  value="subtotal">Subtotal</option>
-    <option  value="status">Status</option>
+    <option selected="selected"  value="payment">Payment</option>
     <option  value="seller">Seller</option>
     </select>
          </div>
@@ -48,14 +48,10 @@
                       <input type="radio" name="rak" value="paid">
                       Paid
                     </label>
-                  </div>
-                  <div class="checkbox">
                     <label>
                       <input type="radio" name="rak" value="all" checked>
                       All
                     </label>
-                  </div>
-                  <div class="checkbox">
                     <label>
                       <input type="radio" name="rak" value="unpaid">
                       Unpaid
@@ -94,7 +90,7 @@
                 <tr>
                   <td  style="text-transform: capitalize;"><center>{{order.seller.nameOfSeller}}</center></td>
                   <td >
-                    <center>{{order.deliveryTime|date:"d/m"}}</center>
+                    <center><span class="hidden">{{order.deliveryTime|date:"y/m/d"}}</span>{{order.deliveryTime|date:"d/m"}}</center>
                   </td>
                   <td style="text-transform: capitalize;" >
 
@@ -113,7 +109,7 @@
                    <td>
                     <center>
                     {% if order.flag = True %}
-                    <span class="label label-danger">flag</span>
+                    <span class="label label-danger">Flag</span>
                     {% endif %}
                     <a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="success" style=""><i class="fa fa-book"></i></span></span></a></center>
                   </td>
@@ -214,10 +210,10 @@
 
     /* ION SLIDER */
     $("#range_4").ionRangeSlider({
-      min: 1,
-      max: 200,
-      from: 100,
-      to: 200,
+      min: 0,
+      max: 60,
+      from: 60,
+      to: 60,
       type: "single",
       step: 1,
       postfix: "days",
@@ -353,10 +349,10 @@ $('body').on('change','#makepaid',function(event){
 <script>
   $(function () {
     $('#example2').DataTable({
+      "order": [[ 1, "desc" ]],
       "paging": true,
-      "lengthChange": false,
+      "lengthChange": true,
       "searching": false,
-      "ordering": true,
       "info": true,
       "autoWidth": false
     });

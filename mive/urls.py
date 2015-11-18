@@ -33,7 +33,6 @@ urlpatterns = [
     url(r'^login', views.login),
     url(r'^subscribe', views.subscribe),
     url(r'^tryy', views.tryy),
-    url(r'^temp', views.temp),
     url(r'^csrfreq', dummy.csrfreq),
     url(r'^docs/v1', views.docs),
     url(r'^docs/v2', views.docsv2),

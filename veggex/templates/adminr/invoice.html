@@ -43,7 +43,7 @@
       <!-- info row -->
       <div class="row invoice-info">
         <div class="col-sm-4 col-xs-6 invoice-col">
-          From
+          To
           <address>
             <strong>{{basics.miveuser.nameOfOwner}}</strong><br>
             {{basics.miveuser.address.area}}, {{basics.miveuser.addresscity}}<br>
@@ -53,7 +53,7 @@
         </div>
         <!-- /.col -->
         <div class="col-sm-4 col-xs-6 invoice-col">
-          To
+          From
           <address>
             <strong>{{order.seller.nameOfSeller}}</strong><br>
             {{order.seller.address.area}}, {{order.seller.address.city}}<br>
@@ -62,14 +62,14 @@
           </address>
         </div>
         <!-- /.col -->
-        <div class="col-sm-4 col-xs-6 invoice-col">
+        <div class="col-sm-4 col-xs-6 invoice-col" style="text-transform: capitalize;">
           Invoice #{{order.order_id}}<br>
-          Date {{order.deliveryTime}}<br>
+          Date: {{order.deliveryTime}}<br>
           {% if order.payment = 'unpaid' %}
-          Payment status:{{order.payment}}<br>
+          Payment status:Unpaid<br>
           Make Paid? <input type="checkbox" id="makepaid" data-order="{{order.order_id}}">
           {% else %}
-          Payment status:{{order.payment}}<br>
+          Payment status: Paid<br>
           {% endif %}
         </div>
         <!-- /.col -->
@@ -83,8 +83,8 @@
             <thead>
             {% if orderItems|length != 0 %}
             <tr>
+            <th>Product</th>
               <th>Qty</th>
-              <th>Product</th>
               <th>Rate</th>
               <th>Subtotal</th>
             </tr>
@@ -93,8 +93,8 @@
             <tbody>
             {%for item in orderItems%}
             <tr>
+            <td>{{item.product.name}}</td>
               <td>{{item.qtyInUnits}} {{item.product.unit}}</td>
-              <td>{{item.product.name}}</td>
               <td>{{item.pricePerUnit}}/{{item.product.unit}}</td>
               <td>₹ {% multiply item.qtyInUnits item.pricePerUnit %}</td>
             </tr>
