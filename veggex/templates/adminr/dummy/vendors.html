@@ -19,15 +19,14 @@
           {%else %}
             <div class="box-header with-border">
               <h3 class="box-title">Current Vendors</h3>
-               <button class="btn btn-primary pull-right addvendor" data-categoryvendorid="{{pd.categoryvendor_id}}" >Add a new vendor</button>
+               <button class="btn btn-primary pull-right addvendor" data-categoryvendorid="{{pd.categoryvendor_id}}" >Add new vendor</button>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-bordered">
                 <tr>
-                  <th><center>Name</center></th>
+                  <th><center>Name of the seller</center></th>
                   <th class="hidden-xs hidden-sm"><center>Supplies</center></th>
-                  <th class="hidden-xs hidden-sm"><center>Rating</center></th>
                   <th ><center>Delete</center></th>
                   <th ><center>Config</center></th>
                 </tr>
@@ -35,10 +34,7 @@
                 <tr>
                   <td><center>{{sel.seller.nameOfSeller}}</center></td>
                   <td class="hidden-xs hidden-sm">
-                    <center >{{sel.seller.categories}}</center>
-                  </td>
-                  <td class="hidden-xs hidden-sm">
-                    <center>{{sel.seller.rating}}</center>
+                    <center  style="text-transform: capitalize;">{{sel.seller.categories}}</center>
                   </td>
                   <td><center>
                       <a class="btn btn-danger loader" href="/data/delvendoruser?id={{sel.dummyvendor_id}}">Delete</a>
@@ -69,38 +65,46 @@
             <div class="loginmodal-container2 loginmodal-container" id="order-detail-container" style="max-width:none;max-height:none;">
                <form method="post" action="/data/newvendor">
               <input type="hidden" name="userid" value="{{basics.miveuser.user_id}}">
-              <div class="col-md-6">
-              {%csrf_token%}
-              Name*:<input  placeholder="enter name" id="name" name="name" type="text" class="form-control">
-              </div>
               <div class="row">
               <div class="col-md-6">
-              Mobile* :<input  placeholder="enter mobile number" id="datetime" name="mobile" type="number" min="0" class="form-control" required>
-              </div>
-              </div>
-              <div class="col-md-6">
-              Email Id:<input  placeholder="enter email Id" name="email" type="email" class="form-control">
+              {%csrf_token%}
+              Name*:<input style="height:30px"  placeholder="Enter name" id="name" name="name" type="text" class="form-control">
               </div>
               <div class="col-md-6">
-              supplier of :<input  placeholder="dummy names" name="ctext" type="text" class="form-control">
+              Mobile*:<input style="height:30px"  placeholder="Enter mobile number" id="datetime" name="mobile" type="number" min="0" class="form-control" required>
+              </div>
+              </div>
+              <div class="row">
+
+              <div class="col-md-6">
+              Email ID:<input style="height:30px" placeholder="Enter email ID" name="email" type="email" class="form-control">
               </div>
               <div class="col-md-6">
-              Area<input  placeholder="area" name="area" type="text" class="form-control">
+              Area:<input style="height:30px" placeholder="Area" name="area" type="text" class="form-control">
+              </div></div>
+              <div class="row">
+
+              <div class="col-md-6">
+              City:<input style="height:30px" placeholder="City" name="city" type="text" class="form-control">
               </div>
               <div class="col-md-6">
-              City<input  placeholder="city" name="city" type="text" class="form-control">
+              State:<input style="height:30px" placeholder="State" name="state" type="text" class="form-control">
+              </div></div>
+              <div class="row">
+              <div class="col-md-6">
+                     Pincode: <input style="height:30px" placeholder="Pincode" id="datetime" name="pincode" type="number" min="0" class="form-control">
               </div>
               <div class="col-md-6">
-              State<input  placeholder="state" name="state" type="text" class="form-control">
+              supplier of:<input  placeholder="Category" name="ctext" type="text" class="form-control">
               </div>
-              <div class="col-md-6">
-                     Pincode: <input  placeholder="pincode" id="datetime" name="pincode" type="number" min="0" class="form-control">
               </div>
+              <div class="row">
               <div class="col-md-6 col-md-offset-4">
+                  <br>
                   <button type="submit" id="add" class="btn btn-success btn-lg">
                   Add Vendor
                   </button>
-              </div>
+              </div></div>
                </form>
             </div>
          </div>
