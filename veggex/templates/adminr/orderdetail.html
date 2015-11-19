@@ -28,30 +28,30 @@
       <!-- info row -->
       <div class="row invoice-info">
         <div class="col-sm-4 col-xs-6 invoice-col">
-          To
+          To:
           <address>
             <strong>{{basics.miveuser.nameOfOwner}}</strong><br>
             {{basics.miveuser.address.area}}, {{basics.miveuser.addresscity}}<br>
             {{basics.miveuser.address.pincode}}<br>
-            {{basics.miveuser.mobileNo}}<br>
+            Mobile: {{basics.miveuser.mobileNo}}<br>
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 col-xs-6 invoice-col">
-          From
+          From:
           <address>
             <strong>{{order.seller.nameOfSeller}}</strong><br>
             {{order.seller.address.area}}, {{order.seller.address.city}}<br>
              {{order.seller.address.pincode}}<br>
-            Phone: {{order.seller.mobileNo}}<br>
+            Mobile: {{order.seller.mobileNo}}<br>
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 col-xs-6 invoice-col">
-          Invoice #{{order.order_id}}<br>
+          Invoice # {{order.order_id}}<br>
           Date: {{order.deliveryTime}}<br>
           {% if order.payment = 'unpaid' %}
-          Payment status:Unpaid<br>
+          Payment status: Unpaid<br>
           {% else %}
           Payment status:Paid<br>
           {% endif %}
@@ -67,20 +67,20 @@
             <thead>
             {% if orderItems|length != 0 %}
             <tr>
-              <th>Product</th>
-              <th>Qty</th>
-              <th>Rate</th>
-              <th>Subtotal</th>
+              <th><center>Product</center></th>
+              <th></center>Qty</center></th>
+              <th></center>Rate</center></th>
+              <th></center>Subtotal</center></th>
             </tr>
             {% endif %}
             </thead>
             <tbody>
             {%for item in orderItems%}
             <tr>
-            <td>{{item.product.name}}</td>
-              <td>{{item.qtyInUnits}} {{item.product.unit}}</td>
-              <td>{{item.pricePerUnit}}/{{item.product.unit}}</td>
-              <td>₹ {% multiply item.qtyInUnits item.pricePerUnit %}</td>
+            <td></center></center>{{item.product.name}}</center></center></td>
+              <td></center>{{item.qtyInUnits}} {{item.product.unit}}</center></td>
+              <td></center>₹ {{item.pricePerUnit}}/{{item.product.unit}}</center></td>
+              <td></center>₹ {% multiply item.qtyInUnits item.pricePerUnit %}</center></td>
             </tr>
             {%endfor%}
             </tbody>
