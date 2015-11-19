@@ -8,17 +8,17 @@
 </section>
 <div class="row">
         <center>
-          <a href="/data/vendor/pdreference?sellerId={{seller.seller_id}}" class="btn btn-success btn-bg">Add new Products</a>
+          <a href="/data/vendor/pdreference?sellerId={{seller.seller_id}}" class="btn btn-success btn-bg">Add new products</a>
         </center>
       </div>
 <section class="content" id="wholereload">
    <div class="row" id="addedproductreload">
       <ol class="breadcrumb">
-         <li class="active">Already added products</li>
+         <li class="active">Existing products:</li>
       </ol>
       <center>{% if products.all|length = 0 %}
-      <span>No added products</span>
-      <span>Kindly click on 'Add new product(s)' to add products</span>
+      <span>No added products.</span>
+      <span>Kindly click on 'Add new products' to add products.</span>
       {% endif %}</center>
        {% for product in products.all %}
       <div class="col-md-4 col-sm-12 col-xs-12">
@@ -117,7 +117,7 @@
                       console.log(data)
                     },
                     error:function(data){console.log(data)
-                    mivenotify('error','Item add','Error ocuured while processing your request')
+                    mivenotify('error','Item add','Error occured while processing your request.')
                     console.log(data)
                     }
                   });
@@ -140,10 +140,9 @@
      
         event.preventDefault();
         {% if basics.miveuser = 'none' %}
-        mivenotify('error','Login required','please login to add products to cart',600)
+        mivenotify('error','Login required','Please login into your account to add items. .',600)
         console.log('user not loggedin')
         $('#login-modal').modal('toggle')
-        mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
         return
         {% else %}
          rak = $(this).attr('data-miveproduct')
@@ -152,20 +151,6 @@
          form = $(formid)
          $(removeid).remove()
          //$(rak).submit()
-         mivenotify('success','Item added','Item has been added to list',600)
-         $.ajax({
-                type: "POST",
-                url: '/data/ajaxaddtouser',
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data)
-                {
-                  $('#addedproductreload').html(data)
-                },
-                error:function(data){
-                  console.log(data)
-                mivenotify('error','Item add','Error occured while adding product')
-                }
-              });
         {%endif %}
      });
 </script>
@@ -175,10 +160,9 @@
         console.log('clicked here mah nigga')
         event.preventDefault();
         {% if basics.miveuser = 'none' %}
-        mivenotify('error','Login required','please login to add products to cart',600)
+        mivenotify('error','Login required','Please login into your account to add items.',600)
         console.log('user not loggedin')
         $('#login-modal').modal('toggle')
-        mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
         return
         {% else %}
         idd = $(this).attr('data-miveproduct')
@@ -190,20 +174,6 @@
          $(removeid).remove()
          $('#login-modal2').modal('toggle')
          //$(rak).submit()
-         mivenotify('success','Item added','Item has been added to list',600)
-         $.ajax({
-                type: "POST",
-                url: '/data/ajaxaddtouser',
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data)
-                {
-                   $('#addedproductreload').html(data)
-                },
-                error:function(data){console.log(data)
-                mivenotify('error','Item add','Error ocuured while processing your request')
-                console.log(data)
-                }
-              });
         {%endif %}
      });
 </script>
@@ -213,10 +183,9 @@ window.sellerId='{{dummyvendor.seller.seller_id}}'
      
         event.preventDefault();
         {% if basics.miveuser = 'none' %}
-        mivenotify('error','Login required','please login to add products to cart',600)
+        mivenotify('error','Login required','Please login into your account to add items.',600)
         console.log('user not loggedin')
         $('#login-modal').modal('toggle')
-        mivenotify('notice','Sign Up','If you want to register please contact at info@mive.in')
         return
         {% else %}
          rak = $(this).attr('data-productid')
@@ -225,7 +194,7 @@ window.sellerId='{{dummyvendor.seller.seller_id}}'
          form = $(formid)
          $(removeid).remove()
          //$(rak).submit()
-         mivenotify('success','Item removed','Item has been removed from list',600)
+         mivenotify('success','Item removed','Item has been removed from the list.',800)
          $.ajax({
                 type: "POST",
                 url: '/data/ajaxremovefromuser',
@@ -236,7 +205,7 @@ window.sellerId='{{dummyvendor.seller.seller_id}}'
                 },
                 error:function(data){
                   console.log(data)
-                mivenotify('error','Item remove error','Error occured while removing product')
+                mivenotify('error','Item not removed','Error occured while removing the product.')
                 }
               });
         {%endif %}
@@ -267,21 +236,6 @@ window.sellerId='{{dummyvendor.seller.seller_id}}'
         }
         console.log(nvtotalbox)
 
-      })
-      $('body').on('click','.inboxadd',function(request){
-        console.log('len',nvtotalbox.length)
-        if (nvtotalbox.length!=0){
-           p=JSON.stringify(nvtotalbox)
-        t= $.post( "/new/data/ajaxaddtouser", { "dt": p,"sellerId":sellerId},function(data){
-          $('#wholereload').html(data)
-          mivenotify('success','Items aadded','Items has been succesfully added to list')
-          nvtotalbox=[]
-                      } );
-        t.fail(function(data){
-          console.log(data)
-        })
-
-        }
       })
       </script>
 {%endblock%}
