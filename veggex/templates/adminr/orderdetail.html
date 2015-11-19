@@ -68,19 +68,19 @@
             {% if orderItems|length != 0 %}
             <tr>
               <th><center>Product</center></th>
-              <th></center>Qty</center></th>
-              <th></center>Rate</center></th>
-              <th></center>Subtotal</center></th>
+              <th><center>Qty</center></th>
+              <th><center>Rate</center></th>
+              <th><center>Subtotal</center></th>
             </tr>
             {% endif %}
             </thead>
             <tbody>
             {%for item in orderItems%}
             <tr>
-            <td></center></center>{{item.product.name}}</center></center></td>
-              <td></center>{{item.qtyInUnits}} {{item.product.unit}}</center></td>
-              <td></center>₹ {{item.pricePerUnit}}/{{item.product.unit}}</center></td>
-              <td></center>₹ {% multiply item.qtyInUnits item.pricePerUnit %}</center></td>
+            <td><center>{{item.product.name}}</center></td>
+              <td><center>{{item.qtyInUnits}} {{item.product.unit}}</center></td>
+              <td><center>₹ {{item.pricePerUnit}}/{{item.product.unit}}</center></td>
+              <td><center>₹ {% multiply item.qtyInUnits item.pricePerUnit %}</center></td>
             </tr>
             {%endfor%}
             </tbody>
@@ -106,8 +106,8 @@
           <div class="table-responsive">
             <table class="table">
               <tr>
-                <th style="width:50%">Total:</th>
-                <td>₹{{order.subtotal}}</td>
+                <th style="width:50%"></th>
+                <td><b>Total: ₹ {{order.subtotal}}</b></td>
               </tr>
             </table>
           </div>
