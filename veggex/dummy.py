@@ -66,12 +66,15 @@ def dummynormalproductfilter(request):
 		basics = basicinfo(request)
 		miveuser=basics['miveuser']
 		categoryfilter = request.POST['categoryfilter']
+		sellerId = str(request.POST['sellerId'])
+		dummyVendor = miveuser.dummyvendors.filter(seller__seller_id=sellerId)[0]
+		slpds = Product.objects.filter(seller__seller_id=sellerId).values_list('name')
 		if int(categoryfilter)==0:
-			products = Product.objects.all()
+			products = Product.objects.exclude(name__in=slpds)
 			return TemplateResponse(request,'adminr/dummy/normalproductfilter.html',{'products':products})
 		else:
 			category = Category.objects.get(category_id=int(categoryfilter))
-			products = Product.objects.filter(category=category)
+			products = Product.objects.filter(category=category).exclude(name__in=slpds)
 			return TemplateResponse(request,'adminr/dummy/normalproductfilter.html',{'products':products})
 def dummyVendorView(request):
 	if(checklogin(request)==False):
@@ -901,4 +904,4 @@ def makepayment(request):
 	dummyvendor = miveuser.dummyvendors.filter(seller__seller_id=sellerId)[0]
 	dummyvendor.due=amount
 	dummyvendor.save()
-	return redirect('/payment?notify=yes&type=notice&title=Payment&description=Your due amount has been added succesfully')
+	return redirect('/payment?notify=yes&type=notice&title=Payment&description=Your due amount has been changed succesfully.')

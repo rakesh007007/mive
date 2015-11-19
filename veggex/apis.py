@@ -354,19 +354,17 @@ class ApiSeeOrder(APIView):
 		for js in sellers:
 			d.append(int(js['sellerId']))
 		sellers=d
-		print sellers
-		print 'hiiiiiiii'
 		payment=request.data['payment']
 		sortby = request.data['sortby']
 		beforedays = date.today() - timedelta(days=int(days))
 		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
 		timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
 		if payment=='all':
-			orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(timeOfCreate__gt=timebeforedays)
+			orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays)
 		else:
-			orders = Order.objects.filter(user=miveuser).filter(seller__seller_id__in=sellers).filter(payment=payment).filter(timeOfCreate__gt=timebeforedays)
+			orders = Order.objects.filter(user=miveuser).filter(seller__seller_id__in=sellers).filter(payment=payment).filter(deliveryTime__gt=timebeforedays)
 		if (sortby=='date'):
-			orders=orders.order_by('-timeOfCreate')
+			orders=orders.order_by('-deliveryTime')
 		elif (sortby=='subtotal'):
 			orders=orders.order_by('-subtotal')
 		elif (sortby=='status'):
