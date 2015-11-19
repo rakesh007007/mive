@@ -9,7 +9,7 @@
  <form id="bigb">
 <div class="row">
 <div class="col-md-3 col-md-offset-1 " style="position:relative">
-       <div class="form-group" style="text-transform: capitalize;">
+       <div class="form-group" style="">
                 <label>Select Seller(s)</label>
                 <select class="form-control select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;" name="sellers" id="sellerselect">
                  {%for sel in sellers%}
@@ -223,7 +223,7 @@
       to: 60,
       type: "single",
       step: 1,
-      postfix: "Days",
+      postfix: "days",
       hideMinMax: true,
       hideFromTo: false,
       onFinish: function (data) {
