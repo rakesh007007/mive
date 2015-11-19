@@ -128,7 +128,8 @@
          </div>
       </div>
       <div  style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Add selected products to seller's list." class="inboxadd" z-index="100000000000000">
-         <button  class="btn btn-success" >Submit</button>
+         <button  class="btn btn-success" id="submithide" >Submit</button>
+         <a href="/data/vendor/pdreference?sellerId={{seller.seller_id}}"><button id="plusshow"   class="btn btn-circle" style="background:#13c0ba;color:#ffffff;padding: 0px 0px;display:none"><center><span style="padding-left:0;margin-left:0"><i class="fa fa-plus"></i></span></center></button></a>
       </div>
 {%endblock%}
 {% block script%}
@@ -225,6 +226,8 @@
          
           mivenotify('success','Items added','Items has been succesfully added to the list.')
           nvtotalbox=[]
+          $('#submithide').css('display','none')
+          $('#plusshow').css('display','block')
                       } );
         t.fail(function(data){
           console.log(data)

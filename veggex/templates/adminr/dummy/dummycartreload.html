@@ -27,7 +27,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="number" min="0" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="border:none; text-align:center;  border-bottom:solid grey 1px;width:14px" id="itemqty-{{item.dummycartitem_id}}" min="1">{{item.product.unit}}
+                    <input type="number" min="0" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="border:none; text-align:center;  border-bottom:solid grey 1px;width:14px" id="itemqty-{{item.dummycartitem_id}}" min="1">&nbsp;{{item.product.unit}}
 
                     </center>
                     </form>
