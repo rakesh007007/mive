@@ -22,12 +22,12 @@
                 </tr>
                 {%for item in pd.items%}
                 <tr>
-                  <td><center>{{item.product.name}}</center></td>
+                  <td><center><div style="margin-top:10px"><span>{{item.product.name}}</span></div></center></td>
                   <td>
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="number" min="0" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:14px" id="itemqty-{{item.dummycartitem_id}}" min="1">
+                    <input type="number" min="0" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="border:none; text-align:center;  border-bottom:solid grey 1px;width:14px" id="itemqty-{{item.dummycartitem_id}}" min="1">
 
                     </center>
                     </form>
@@ -36,7 +36,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="number" min="0" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px" id="itemprice-{{item.dummycartitem_id}}">
+                    <input type="number" min="0" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px; text-align:center" id="itemprice-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
@@ -46,12 +46,12 @@
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.dummycartitem_id}}">
-                    <input type="number" min="0" class="input-circle dummytotalprice" name="newqty" value="{% multiply item.qtyInUnits item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px" id="itemtotal-{{item.dummycartitem_id}}">
+                    <input type="number" min="0" class="input-circle dummytotalprice" name="newqty" value="{% multiply item.qtyInUnits item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px; text-align:center" id="itemtotal-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
                   </td>
-                  <td><center><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span href="/data/removeItemPost?itemId={{item.dummycartitem_id}}" style="color:green" class="itemdelete" data-itemid="{{item.dummycartitem_id}}"><i class="fa fa-trash-o"></i></span></a></center></td>
+                  <td><center><div style="margin-top:10px"><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span href="/data/removeItemPost?itemId={{item.dummycartitem_id}}" style="color:green" class="itemdelete" data-itemid="{{item.dummycartitem_id}}"><i class="fa fa-trash-o"></i></span></a></div></center></td>
                 </tr>
                 {% endfor%}
               </table>
