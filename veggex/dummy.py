@@ -691,6 +691,7 @@ def dummynewvendor(request):
 	name =request.POST['name']
 	mobile =request.POST['mobile']
 	print request.POST
+	ad =Address()
 	if 'ctext' in request.POST:
 		if request.POST['ctext']!='':
 			ctext = request.POST['ctext']
@@ -706,28 +707,27 @@ def dummynewvendor(request):
 		area=''
 	else:
 		area =request.POST['area']
+		ad.area=area
 	if request.POST['city']=='':
 		city=''
 	else:
 		city =request.POST['city']
+		ad.city=city
 	if request.POST['state']=='':
 		state=''
 	else:
 		state =request.POST['state']
+		ad.state=state
 	if request.POST['pincode']=='':
 		pincode=1
 	else:
 		pincode =int(request.POST['pincode'])
+		ad.pincode=pincode
 	seller = Seller()
 	seller.nameOfSeller=name
 	seller.mailId = email
 	seller.mobileNo=mobile
 	seller.categories=ctext
-	ad =Address()
-	ad.area=area
-	ad.city =city
-	ad.state = state
-	ad.pincode = pincode
 	ad.save()
 	seller.address = ad
 	seller.save()

@@ -94,10 +94,10 @@ class Message(models.Model):
 		return self.notification_id
 class Address(models.Model):
 	address_id = models.AutoField(primary_key=True)
-	area=models.CharField(max_length=300, null=False)
-	city =models.CharField(max_length=300, null=False)
-	state = models.CharField(max_length=300, null=False)
-	pincode=models.FloatField(null=False)
+	area=models.CharField(max_length=300, null=True,blank=True,default='')
+	city =models.CharField(max_length=300, null=True,blank=True, default='')
+	state = models.CharField(max_length=300, null=True,blank=True,default='')
+	pincode=models.FloatField(null=True,blank=True)
 	def __unicode__(self):
 		return str(self.address_id)
 	def addressId(self):

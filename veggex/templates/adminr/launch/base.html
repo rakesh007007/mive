@@ -173,7 +173,7 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <a href="/main" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
 
@@ -183,7 +183,7 @@
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
             <a  id="basedatacart" >
-              <i data-toggle="modal" class="fa fa-shopping-cart" style="text:20px; font-size:20px"></i>
+              <i data-toggle="modal" class="fa fa-shopping-cart"></i>
               <span class="label label-danger"></i></span>
             </a>
           </li>
@@ -360,7 +360,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="number" min="0" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="border:none; text-align:center;  border-bottom:solid grey 1px;width:14px" id="itemqty-{{item.dummycartitem_id}}" min="1">
+                    <input type="number" min="0" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="border:none; text-align:center;  border-bottom:solid grey 1px;width:14px" id="itemqty-{{item.dummycartitem_id}}" min="1">{{item.product.unit}}
 
                     </center>
                     </form>
@@ -369,7 +369,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="number" min="0" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px; text-align:center" id="itemprice-{{item.dummycartitem_id}}">
+                    <input type="number" min="0" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px; text-align:center" id="itemprice-{{item.dummycartitem_id}}">/{{item.product.unit}}
                     
                     </center>
                     </form>
@@ -414,7 +414,7 @@
               <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
               <input type="hidden" name="categoryvendorid" id="orderplaceid" value="{{pd.categoryvendor_id}}">
                <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1">
-                     <input autofocus placeholder="Deliver date" id="date1" name="deliveryTime" type="date" class="form-control date" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
+                     <input placeholder="Deliver date" id="date1" name="deliveryTime" type="date" class="form-control date" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
 
                </div>
                <div class="col-md-4 col-lg-4 col-xs-12">
@@ -443,7 +443,7 @@
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
               <div class="row">
                <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
-                     <input autofocus placeholder="Deliver date"  name="deliveryTime"  class="form-control date"  id="date2" type="date" required style="z-index:10000">
+                     <input placeholder="Deliver date"  name="deliveryTime"  class="form-control date"  id="date2" type="date" required style="z-index:10000">
                </div>
                <div class="col-md-6 col-lg-6 col-xs-12">
                      <textarea id="orderMsg" name="orderMsg" type="text" class="form-control" placeholder="Comments (optional)"></textarea> 
@@ -478,7 +478,7 @@
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid2" value="{{pd.dummyvendor_id}}">
               <div class="row">
                <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
-                     <input autofocus placeholder="Deliver date" id="date3" name="deliveryTime" type="date" class="form-control date" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
+                     <input placeholder="Deliver date" id="date3" name="deliveryTime" type="date" class="form-control date" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
                </div>
                <div class="col-md-6 col-lg-6 col-xs-12 ol-md-offset-0 col-lg-offset-0">
                <br>
