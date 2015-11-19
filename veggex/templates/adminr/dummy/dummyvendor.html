@@ -201,7 +201,9 @@ selected=[]
      idtotal = '#total-'+idd
      iddefault = '#default-'+idd
      price = $(idprice).val()
-   
+     if(price==''){
+      return 1
+     }
      $(idtotal).val(round(price*qty,12))
      pdid = idd
      qty=qty
@@ -231,6 +233,9 @@ selected=[]
      idqty = '#qty-'+idd
      iddefault = '#default-'+idd
      qty = $(idqty).val()
+     if(qty==''){
+      return 1
+     }
    
      $(idtotal).val(round(price*qty,12))
      pdid = idd
@@ -261,6 +266,9 @@ selected=[]
      idqty = '#qty-'+idd
      iddefault = '#default-'+idd
      qty = $(idqty).val()
+     if(qty==''){
+      return 1
+     }
      if (qty==0){
       pp=0
       $(idprice).val(pp)
