@@ -207,16 +207,16 @@ selected=[]
      $(idtotal).val(round(price*qty,12))
      pdid = idd
      qty=qty
-      if (selected.indexOf(parseFloat(pdid))>-1){
-          index = selected.indexOf(parseFloat(pdid))
-          obj = {"productId":parseFloat(pdid),"qty":qty,"priceperunit":price}
+      if (selected.indexOf(parseInt(pdid))>-1){
+          index = selected.indexOf(parseInt(pdid))
+          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
           totalbox[index]=obj
 
         }
         else{
           obj = {"productId":pdid,"qty":qty,"priceperunit":price}
           totalbox.push(obj)
-          selected.push(parseFloat(pdid))
+          selected.push(parseInt(pdid))
 
         }
         console.log(totalbox)
@@ -240,16 +240,16 @@ selected=[]
      $(idtotal).val(round(price*qty,12))
      pdid = idd
      qty=qty
-      if (selected.indexOf(parseFloat(pdid))>-1){
-          index = selected.indexOf(parseFloat(pdid))
-          obj = {"productId":parseFloat(pdid),"qty":qty,"priceperunit":price}
+      if (selected.indexOf(parseInt(pdid))>-1){
+          index = selected.indexOf(parseInt(pdid))
+          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
           totalbox[index]=obj
 
         }
         else{
           obj = {"productId":pdid,"qty":qty,"priceperunit":price}
           totalbox.push(obj)
-          selected.push(parseFloat(pdid))
+          selected.push(parseInt(pdid))
 
         }
         console.log(totalbox)
@@ -278,16 +278,16 @@ selected=[]
      $(idprice).val(round(totalprice/qty,12))
      pdid = idd
      qty=qty
-      if (selected.indexOf(parseFloat(pdid))>-1){
-          index = selected.indexOf(parseFloat(pdid))
-          obj = {"productId":parseFloat(pdid),"qty":qty,"priceperunit":totalprice/qty}
+      if (selected.indexOf(parseInt(pdid))>-1){
+          index = selected.indexOf(parseInt(pdid))
+          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
           totalbox[index]=obj
 
         }
         else{
           obj = {"productId":pdid,"qty":qty,"priceperunit":totalprice/qty}
           totalbox.push(obj)
-          selected.push(parseFloat(pdid))
+          selected.push(parseInt(pdid))
 
         }
         console.log(totalbox)
