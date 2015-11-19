@@ -69,12 +69,13 @@ def dummynormalproductfilter(request):
 		sellerId = str(request.POST['sellerId'])
 		dummyVendor = miveuser.dummyvendors.filter(seller__seller_id=sellerId)[0]
 		slpds = Product.objects.filter(seller__seller_id=sellerId).values_list('name')
+		dirs = Seller.objects.filter(directory=True).values_list('name')
 		if int(categoryfilter)==0:
-			products = Product.objects.exclude(name__in=slpds)
+			products = Product.objects.filter(name__in=slpds).exclude(name__in=slpds)
 			return TemplateResponse(request,'adminr/dummy/normalproductfilter.html',{'products':products})
 		else:
 			category = Category.objects.get(category_id=int(categoryfilter))
-			products = Product.objects.filter(category=category).exclude(name__in=slpds)
+			products = Product.objects.filter(category=category).filter(name__in=slpds).exclude(name__in=slpds)
 			return TemplateResponse(request,'adminr/dummy/normalproductfilter.html',{'products':products})
 def dummyVendorView(request):
 	if(checklogin(request)==False):
