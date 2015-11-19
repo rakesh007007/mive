@@ -214,7 +214,7 @@ selected=[]
 
         }
         else{
-          obj = {"productId":pdid,"qty":qty,"priceperunit":price}
+          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
           totalbox.push(obj)
           selected.push(parseInt(pdid))
 
@@ -247,7 +247,7 @@ selected=[]
 
         }
         else{
-          obj = {"productId":pdid,"qty":qty,"priceperunit":price}
+          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
           totalbox.push(obj)
           selected.push(parseInt(pdid))
 
@@ -285,7 +285,7 @@ selected=[]
 
         }
         else{
-          obj = {"productId":pdid,"qty":qty,"priceperunit":totalprice/qty}
+          obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
           totalbox.push(obj)
           selected.push(parseInt(pdid))
 
