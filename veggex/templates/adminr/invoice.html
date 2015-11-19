@@ -61,8 +61,10 @@
           From:
           <address>
             <strong>{{order.seller.nameOfSeller}}</strong><br>
-            {{order.seller.address.area}}, {{order.seller.address.city}}<br>
+            {%if order.seller.address.area != '' %}{{order.seller.address.area}},{%endif %} {%if order.seller.address.city != '' %}{{order.seller.address.city}}{%endif %}<br>
+             {%if order.seller.address.pincode != None %}
              {{order.seller.address.pincode}}<br>
+             {%endif %}
             Mobile: {{order.seller.mobileNo}}<br>
           </address>
         </div>

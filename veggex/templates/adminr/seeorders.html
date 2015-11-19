@@ -8,7 +8,7 @@
  <section class="content uselessforprint" >
  <form id="bigb">
 <div class="row" style="margin-bottom:0px;padding-bottom:0px">
-<div class="col-md-4 col-md-offset-1 " style="position:relative">
+<div class="col-md-4 col-md-offset-1 " style="position:relative" >
        <div class="form-group" style="">
                 <label>Select Seller(s)</label>
                 <select class="form-control select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;" name="sellers" id="sellerselect">
@@ -56,7 +56,7 @@
               </div>
        </div>
       </div>
-</div><br>
+</div>
 </form>
       <div class="row">
         <div class="col-xs-12" style="position:relative;margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px">
@@ -140,6 +140,9 @@
      window.print();
 
      document.body.innerHTML = originalContents;
+     $('#invoice-modal').modal('toggle');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
 }
 </script>
 <script>
