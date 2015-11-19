@@ -1,5 +1,6 @@
   {% extends 'adminr/launch/base.html' %}
   {% block content %}
+  {%load rak %}
   <section class="content-header">
     </section>
     <section class="content">
@@ -9,11 +10,11 @@
           <div class="info-box" >
           <div class="row">
             <div class="col-xs-12 col-sm-12">
-            <a ><i class="fa fa-pencil pull-right editpayment" data-sellerid="{{sl.seller.seller_id}}"></i></a>
              <center><font size="5">{{sl.seller.nameOfSeller}}</font></center><br>
-             <div class="col-xs-5 col-sm-5 col-sm-offset-1 col-xs-offset-1"><font size="3">Unpaid: ₹ {{sl.total}}</font></div>
-            <div class="col-xs-5 col-sm-5 col-sm-offset-1 col-xs-offset-1"><font size="3">Due: ₹ {{sl.due}}</font></div>
-            </div>
+             <center><div class="col-xs-12 col-sm-12"><font size="2">Current Balance: ₹ {{sl.total}}</font></div>
+            <div class="col-xs-12 col-sm-12"><font size="2">Prev. Outstanding: ₹ {{sl.due}} &nbsp;  <a ><i class="fa fa-pencil editpayment" data-sellerid="{{sl.seller.seller_id}}" data-sellername="{{sl.seller.nameOfSeller}}"></i></a></font></div>
+            <div class="col-xs-12 col-sm-12"><font size="2">Total Outstanding: ₹ {% pluss sl.total sl.due %}</font></div></center>
+          </div>
           </div>
           <div class="row">
           </div>
@@ -27,15 +28,16 @@
     </section>
     <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;opacity:0.96;">
          <div class="modal-dialog">
-         <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" >&#10006;</button>
-            <div class="loginmodal-container2 loginmodal-container" id="invoice-detail-container" style="max-width:1000px;max-height:none;">
-            <div class="row">
-            <div class="col-md-12 col-xs-12">
+            <div class="loginmodal-container2 loginmodal-container" id="invoice-detail-container" style="max-width:250px;max-height:none;padding-top:10px;margin-top:10px">
+            <div class="row" style="padding-top:5px;margin-top:5px">
+            <div class="col-md-12 col-xs-12" style="padding-top:5px;margin-top:5px">
+            <center><h3 style="padding-top:5px;margin-top:5px" id="sellername_payment"></h3></center>
+            <center><span>Enter the outstanding amount:</span>
             <form method="post" action="/data/change/payment/">
               <input type="hidden" name="sellerid" id="paymentsellerid">
               {%csrf_token%}
-              <input type="text" name="amount"  style="border:none;  border-bottom:solid grey 1px;width:84px" required><button class="btn-primary btn" style="border-radius:none" type="submit">update</button>
-            </form>
+              <input type="text" name="amount"  style="border:none;  border-bottom:solid grey 1px;width:84px" required>&nbsp;&nbsp;&nbsp;<button class="btn-primary btn" style="border-radius:none" type="submit">Update</button>
+            </form></center>
             </div>
             </div>
             </div>
@@ -47,7 +49,9 @@
       <script>
       $('body').on('click','.editpayment',function(event){
         sellerid = $(this).attr('data-sellerid')
+        sellername = $(this).attr('data-sellername')
         $('#paymentsellerid').val(sellerid)
+        $('#sellername_payment').html(sellername)
         console.log(sellerid)
         $('#payment-modal').modal('toggle')
       })

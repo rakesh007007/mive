@@ -691,6 +691,13 @@ def dummynewvendor(request):
 	name =request.POST['name']
 	mobile =request.POST['mobile']
 	print request.POST
+	if 'ctext' in request.POST:
+		if request.POST['ctext']!='':
+			ctext = request.POST['ctext']
+		else:
+			ctext='All'
+	else:
+		ctext='All'
 	if request.POST['email']=='':
 		email=''
 	else:
@@ -715,6 +722,7 @@ def dummynewvendor(request):
 	seller.nameOfSeller=name
 	seller.mailId = email
 	seller.mobileNo=mobile
+	seller.categories=ctext
 	ad =Address()
 	ad.area=area
 	ad.city =city

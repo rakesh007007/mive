@@ -10,3 +10,6 @@ def raktr(valuev):
 		return valuev[:12]+'..'
 	else:
 		return valuev
+@register.simple_tag()
+def pluss(total,due):
+	return total+due
