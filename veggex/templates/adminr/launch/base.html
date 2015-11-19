@@ -779,16 +779,16 @@ $('body').on('click','.itemdelete',function(event){
      $(idtotal).val(round(price*qty,12))
      pdid = idd
      qty=qty
-      if (itemselected.indexOf(parseFloat(pdid))>-1){
-          index = itemselected.indexOf(parseFloat(pdid))
-          obj = {"dummyitemid":parseFloat(pdid),"qty":qty,"priceperunit":price}
+      if (itemselected.indexOf(parseInt(pdid))>-1){
+          index = itemselected.indexOf(parseInt(pdid))
+          obj = {"dummyitemid":parseInt(pdid),"qty":qty,"priceperunit":price}
           itemtotalbox[index]=obj
 
         }
         else{
-          obj = {"dummyitemid":pdid,"qty":qty,"priceperunit":price}
+          obj = {"dummyitemid":parseInt(pdid),"qty":qty,"priceperunit":price}
           itemtotalbox.push(obj)
-          itemselected.push(parseFloat(pdid))
+          itemselected.push(parseInt(pdid))
 
         }
         console.log(itemtotalbox)
@@ -809,16 +809,16 @@ $('body').on('click','.itemdelete',function(event){
      $(idtotal).val(round(price*qty,12))
      pdid = idd
      qty=qty
-      if (itemselected.indexOf(parseFloat(pdid))>-1){
-          index = itemselected.indexOf(parseFloat(pdid))
-          obj = {"dummyitemid":parseFloat(pdid),"qty":qty,"priceperunit":price}
+      if (itemselected.indexOf(parseInt(pdid))>-1){
+          index = itemselected.indexOf(parseInt(pdid))
+          obj = {"dummyitemid":parseInt(pdid),"qty":qty,"priceperunit":price}
           itemtotalbox[index]=obj
 
         }
         else{
-          obj = {"dummyitemid":pdid,"qty":qty,"priceperunit":price}
+          obj = {"dummyitemid":parseInt(pdid),"qty":qty,"priceperunit":price}
           itemtotalbox.push(obj)
-          itemselected.push(parseFloat(pdid))
+          itemselected.push(parseInt(pdid))
 
         }
         console.log(itemtotalbox)
@@ -844,16 +844,16 @@ $('body').on('click','.itemdelete',function(event){
      $(idprice).val(round(totalprice/qty,12))
      pdid = idd
      qty=qty
-      if (itemselected.indexOf(parseFloat(pdid))>-1){
-          index = itemselected.indexOf(parseFloat(pdid))
-          obj = {"dummyitemid":parseFloat(pdid),"qty":qty,"priceperunit":totalprice/qty}
+      if (itemselected.indexOf(parseInt(pdid))>-1){
+          index = itemselected.indexOf(parseInt(pdid))
+          obj = {"dummyitemid":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
           itemtotalbox[index]=obj
 
         }
         else{
-          obj = {"dummyitemid":pdid,"qty":qty,"priceperunit":totalprice/qty}
+          obj = {"dummyitemid":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
           itemtotalbox.push(obj)
-          itemselected.push(parseFloat(pdid))
+          itemselected.push(parseInt(pdid))
 
         }
         console.log(itemtotalbox)
