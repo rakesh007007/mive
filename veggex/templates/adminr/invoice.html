@@ -19,8 +19,8 @@
 }
 </style>
 <div class="row divtoprint" >
-<button class="btn btn-success pull-left" data-orderid="{{order.order_id}}" id="previnvoice"><i class="fa fa-angle-double-left"> prev </i></button>
-<button class="btn btn-success pull-right" data-orderid="{{order.order_id}}" id="nextinvoice"><i class="fa fa-angle-double-right">next</i></button>
+<button class="btn btn-success pull-left" data-orderid="{{order.order_id}}" id="previnvoice"><i class="fa fa-angle-double-left"> Prev </i></button>
+<button class="btn btn-success pull-right" data-orderid="{{order.order_id}}" id="nextinvoice"><i class="fa fa-angle-double-right">Next</i></button>
 <center><span>Order Id: {{order.order_id}}</span></center>
 </div>
 {% load humanize %}
@@ -48,31 +48,31 @@
       <!-- info row -->
       <div class="row invoice-info">
         <div class="col-sm-4 col-xs-6 invoice-col">
-          To
+          To:
           <address>
             <strong>{{basics.miveuser.nameOfOwner}}</strong><br>
             {{basics.miveuser.address.area}}, {{basics.miveuser.addresscity}}<br>
             {{basics.miveuser.address.pincode}}<br>
-            {{basics.miveuser.mobileNo}}<br>
+            Mobile: {{basics.miveuser.mobileNo}}<br>
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 col-xs-6 invoice-col">
-          From
+          From:
           <address>
             <strong>{{order.seller.nameOfSeller}}</strong><br>
             {{order.seller.address.area}}, {{order.seller.address.city}}<br>
              {{order.seller.address.pincode}}<br>
-            Phone: {{order.seller.mobileNo}}<br>
+            Mobile: {{order.seller.mobileNo}}<br>
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 col-xs-6 invoice-col" style="text-transform: capitalize;">
-          Invoice #{{order.order_id}}<br>
+          Invoice # {{order.order_id}}<br>
           Date: {{order.deliveryTime}}<br>
           {% if order.payment = 'unpaid' %}
-          Payment status:Unpaid<br>
-          <span class="unprintable">Make Paid? <input type="checkbox" id="makepaid" data-order="{{order.order_id}}"><span>
+          Payment status: Unpaid<br>
+          <span class="unprintable">Mark Paid? <input type="checkbox" id="makepaid" data-order="{{order.order_id}}"><span>
           {% else %}
           Payment status: Paid<br>
           {% endif %}
@@ -88,20 +88,20 @@
             <thead>
             {% if orderItems|length != 0 %}
             <tr>
-            <th>Product</th>
-              <th>Qty</th>
-              <th>Rate</th>
-              <th>Subtotal</th>
+            <th><center>Product</center></th>
+              <th><center>Qty</center></th>
+              <th><center>Rate</center></th>
+              <th><center>Subtotal</center></th>
             </tr>
             {% endif %}
             </thead>
             <tbody>
             {%for item in orderItems%}
             <tr>
-            <td>{{item.product.name}}</td>
-              <td>{{item.qtyInUnits}} {{item.product.unit}}</td>
-              <td>{{item.pricePerUnit}}/{{item.product.unit}}</td>
-              <td>₹ {% multiply item.qtyInUnits item.pricePerUnit %}</td>
+            <td><center>{{item.product.name}}</center></td>
+              <td><center>{{item.qtyInUnits}} {{item.product.unit}}</center></td>
+              <td><center>₹{{item.pricePerUnit}}/{{item.product.unit}}</center></td>
+              <td><center>₹ {% multiply item.qtyInUnits item.pricePerUnit %}</center></td>
             </tr>
             {%endfor%}
             </tbody>
@@ -127,8 +127,8 @@
           <div class="table-responsive">
             <table class="table">
               <tr>
-                <th style="width:50%">Total:</th>
-                <td>₹{{order.subtotal}}</td>
+                <th style="width:50%"></th>
+                <td>Total: ₹ {{order.subtotal}}</td>
               </tr>
             </table>
           </div>
