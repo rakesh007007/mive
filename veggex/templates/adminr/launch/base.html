@@ -369,7 +369,7 @@
                     <center>
                     <form method="post" action="/data/editqty">
                     {%csrf_token%}
-                    <input type="number" min="0" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px; text-align:center" id="itemprice-{{item.dummycartitem_id}}">/{{item.product.unit}}
+                    <input type="number" min="0" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px; text-align:center" id="itemprice-{{item.dummycartitem_id}}">
                     
                     </center>
                     </form>
