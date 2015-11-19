@@ -20,8 +20,8 @@
 </style>
 <div class="row divtoprint" >
 <button class="btn btn-success pull-left" data-orderid="{{order.order_id}}" id="previnvoice"><i class="fa fa-angle-double-left"> Prev </i></button>
-<button class="btn btn-success pull-right" data-orderid="{{order.order_id}}" id="nextinvoice"><i class="fa fa-angle-double-right">Next</i></button>
-<center><span>Order Id: {{order.order_id}}</span></center>
+<button class="btn btn-success pull-right" data-orderid="{{order.order_id}}" id="nextinvoice">Next<i class="fa fa-angle-double-right"></i></button>
+<center><span>Order ID: {{order.order_id}}</span></center>
 </div>
 {% load humanize %}
 <div class="row" >
@@ -100,7 +100,7 @@
             <tr>
             <td><center>{{item.product.name}}</center></td>
               <td><center>{{item.qtyInUnits}} {{item.product.unit}}</center></td>
-              <td><center>₹{{item.pricePerUnit}}/{{item.product.unit}}</center></td>
+              <td><center>₹ {{item.pricePerUnit}}/{{item.product.unit}}</center></td>
               <td><center>₹ {% multiply item.qtyInUnits item.pricePerUnit %}</center></td>
             </tr>
             {%endfor%}
@@ -128,7 +128,7 @@
             <table class="table">
               <tr>
                 <th style="width:50%"></th>
-                <td>Total: ₹ {{order.subtotal}}</td>
+                <td><b>Total: ₹ {{order.subtotal}}</b></td>
               </tr>
             </table>
           </div>
