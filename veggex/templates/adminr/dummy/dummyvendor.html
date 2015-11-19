@@ -8,41 +8,42 @@
    </h1>
 </section>
 <section class="content">
-<div class="row">
-<center>
-<div class="col-md-10 col-md-offset-1">
-<button class="btn btn-primary btn-lg orderdata2" data-dummyvendorid="{{dmv.dummyvendor_id}}" >Add Invoice only</button><br><br>
-</div>
-</div>
-</center>
+   <div class="row">
+      <center>
+         <div class="col-md-10 col-md-offset-1">
+            <button class="btn btn-primary btn-lg orderdata2" data-dummyvendorid="{{dmv.dummyvendor_id}}" >Add Invoice only</button><br><br>
+         </div>
+   </div>
+   </center>
    <!-- Info boxes -->
    <div class="row">
       <div class="col-md-4 col-xs-8 col-sm-8 col-md-offset-1 col-xs-offset-2 col-sm-offset-2">
-      <form action="/search/dummyvendor" class="productsearchform" type="post">
-        <div class="input-group margin">
-                <input type="hidden" value="{{seller.seller_id}}" name="sellerId">
-                {%csrf_token%}
-                <input  name="stext" type="text" class="form-control" placeholder="Search Products" required>
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info productsearch">Go!</button>
-                    </span>
-              </div>
-      </form>
+         <form action="/search/dummyvendor" class="productsearchform" type="post">
+            <div class="input-group margin">
+               <input type="hidden" value="{{seller.seller_id}}" name="sellerId">
+               {%csrf_token%}
+               <input  name="stext" type="text" class="form-control" placeholder="Search Products" required>
+               <span class="input-group-btn">
+               <button type="submit" class="btn btn-info productsearch">Go!</button>
+               </span>
+            </div>
+         </form>
       </div>
-       <div class="col-md-3 col-xs-8 col-sm-8 col-md-offset-3 col-xs-offset-2 col-sm-offset-2">
-        <form id="categoryselect" >
-         <select name="categoryfilter" class="form-control select2" style="width: 100%;" id="categoryfilter">
-        }
-    <option selected="selected" value="0">All</option>
-    {% for categ in categories%}
-    <option value="{{categ.category_id}}">{{categ.name}}</option>
-    {% endfor %}
-    </select>
-    <input type="hidden" name="dummyvendorid" value="{{dmv.dummyvendor_id}}">
-    {% csrf_token %}
-    </form>
-       </div>
-      </div><br>
+      <div class="col-md-3 col-xs-8 col-sm-8 col-md-offset-3 col-xs-offset-2 col-sm-offset-2">
+         <form id="categoryselect" >
+            <select name="categoryfilter" class="form-control select2" style="width: 100%;" id="categoryfilter">
+               }
+               <option selected="selected" value="0">All</option>
+               {% for categ in categories%}
+               <option value="{{categ.category_id}}">{{categ.name}}</option>
+               {% endfor %}
+            </select>
+            <input type="hidden" name="dummyvendorid" value="{{dmv.dummyvendor_id}}">
+            {% csrf_token %}
+         </form>
+      </div>
+   </div>
+   <br>
    <div class="row" id="productreload" style="width:100%;padding-left:0px; margin-left:0px;padding-right:0px; margin-right:0px">
       {% for product in products.all %}
       <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:4px; margin-left:2ppx;padding-right:0px; margin-right:0px">
@@ -89,8 +90,8 @@
       {% endfor %}
    </div>
    <div  style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Add selected products to list for this user?" class="inboxadd" z-index="100000000000000">
-         <button  class="btn btn-success" >Submit</button>
-      </div>
+      <button  class="btn btn-success" >Submit</button>
+   </div>
 </section>
 {% endblock %}
 {% block script %}
@@ -131,7 +132,7 @@
                   
                 },
                 error:function(data){
-                mivenotify('error','Item add','Error ocuured while processing your request')
+                mivenotify('error','Item add','Error occured while processing your request')
                 }
               });
         {%endif %}
@@ -167,7 +168,7 @@
    
                 },
                 error:function(data){
-                mivenotify('error','Item add','Error ocuured while processing your request')
+                mivenotify('error','Item add','Error occured while processing your request')
                 }
               });
         {%endif %}
@@ -184,8 +185,8 @@
    })
 </script>
 <script>
-totalbox=[]
-selected=[]
+   totalbox=[]
+   selected=[]
 </script>
 <script>
    $('body').on('change','.inputproductqty',function(){
@@ -211,13 +212,13 @@ selected=[]
           index = selected.indexOf(parseInt(pdid))
           obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
           totalbox[index]=obj
-
+   
         }
         else{
           obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
           totalbox.push(obj)
           selected.push(parseInt(pdid))
-
+   
         }
         console.log(totalbox)
    })
@@ -244,13 +245,13 @@ selected=[]
           index = selected.indexOf(parseInt(pdid))
           obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
           totalbox[index]=obj
-
+   
         }
         else{
           obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":price}
           totalbox.push(obj)
           selected.push(parseInt(pdid))
-
+   
         }
         console.log(totalbox)
    })
@@ -274,7 +275,7 @@ selected=[]
       $(idprice).val(pp)
       return 1
      }
-
+   
      $(idprice).val(round(totalprice/qty,12))
      pdid = idd
      qty=qty
@@ -282,82 +283,82 @@ selected=[]
           index = selected.indexOf(parseInt(pdid))
           obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
           totalbox[index]=obj
-
+   
         }
         else{
           obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
           totalbox.push(obj)
           selected.push(parseInt(pdid))
-
+   
         }
         console.log(totalbox)
    })
    
 </script>
 <script type="text/javascript">
-  $('body').on('click','.inboxadd',function(request){
-        console.log('len',totalbox.length)
-        if (totalbox.length!=0){
-           p=JSON.stringify(totalbox)
-           $('#data-detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
-        t= $.post( "/new/ajaxaddtodummycartd", { "dt": p},function(data){
-          $('#data-detail-container').html(data)
-          mivenotify('success','Items aadded','Items has been succesfully added to cart')
-          totalbox=[]
-          $('#data-cart-modal').modal('toggle')
-                      } );
-        t.fail(function(data) {
-    alert( "error" );
-
-console.log(data)    
-  })
-
-        }
-      else{
-        mivenotify('warning','Select items first','No items selected! Select few items first')
-      }
-      })
+   $('body').on('click','.inboxadd',function(request){
+         console.log('len',totalbox.length)
+         if (totalbox.length!=0){
+            p=JSON.stringify(totalbox)
+            $('#data-detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+         t= $.post( "/new/ajaxaddtodummycartd", { "dt": p},function(data){
+           $('#data-detail-container').html(data)
+           mivenotify('success','Items aadded','Items has been succesfully added to cart')
+           totalbox=[]
+           $('#data-cart-modal').modal('toggle')
+                       } );
+         t.fail(function(data) {
+     alert( "error" );
+   
+   console.log(data)    
+   })
+   
+         }
+       else{
+         mivenotify('warning','Select items first','No items selected! Select few items first')
+       }
+       })
 </script>
 <script>
-      $('body').on('change','#categoryfilter',function(event){
-        event.preventDefault();
-        form = $('#categoryselect')
-        $('#productreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
-        $.ajax({
-                    type: "POST",
-                    url: '/data/product/filter',
-                    data: form.serialize(), // serializes the form's elements.
-                    success: function(data)
-                    {
-                      $('#productreload').html(data)
-                      
-
-                    },
-                    error:function(data){
-                    mivenotify('error','Error occured','Error ocuured while processing your request')
-                    }
-                  });
-      })
-      </script>
-      <script>
-      $('body').on('submit','.productsearchform',function(event){
-        event.preventDefault();
-        form = $(this)
-        $('#productreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
-        $.ajax({
-                    type: "POST",
-                    url: '/search/dummyvendor',
-                    data: form.serialize(), // serializes the form's elements.
-                    success: function(data)
-                    {
-                      $('#productreload').html(data)
-                      
-
-                    },
-                    error:function(data){
-                    mivenotify('error','Error occured','Error ocuured while processing your request')
-                    }
-                  });
-      })
-      </script>
+   $('body').on('change','#categoryfilter',function(event){
+     event.preventDefault();
+     form = $('#categoryselect')
+     $('#productreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+     $.ajax({
+                 type: "POST",
+                 url: '/data/product/filter',
+                 data: form.serialize(), // serializes the form's elements.
+                 success: function(data)
+                 {
+                   $('#productreload').html(data)
+                   
+   
+                 },
+                 error:function(data){
+                 mivenotify('error','Error occured','Error occured while processing your request')
+                 }
+               });
+   })
+</script>
+<script>
+   $('body').on('submit','.productsearchform',function(event){
+     event.preventDefault();
+     form = $(this)
+     $('#productreload').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
+     $.ajax({
+                 type: "POST",
+                 url: '/search/dummyvendor',
+                 data: form.serialize(), // serializes the form's elements.
+                 success: function(data)
+                 {
+                   $('#productreload').html(data)
+                   
+   
+                 },
+                 error:function(data){
+                 mivenotify('error','Error occured','Error occured while processing your request')
+                 }
+               });
+   })
+</script>
 {% endblock %}
