@@ -793,8 +793,13 @@ def orderfilter(request):
 			localtz = pytz.timezone('Asia/Kolkata')
 			aaj = date.today()
 			days =request.POST['date']
+			print 'yoooooooo'
+			print days
+			print 'payment'
 			sellers = request.POST.getlist('sellers')
 			payment=request.POST['rak']
+			print payment
+			print 'end'
 			sortby = request.POST['sortby']
 			basics= basicinfo(request)
 			beforedays = date.today() - timedelta(days=int(days))
@@ -804,6 +809,9 @@ def orderfilter(request):
 				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays)
 			else:
 				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(payment=payment).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays)
+			print 'yahoo'
+			print orders
+			print len(orders)
 			total = orders.aggregate(total=Sum('subtotal'))
 			total = total['total']
 			if (sortby=='date'):
