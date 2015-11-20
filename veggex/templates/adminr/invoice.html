@@ -54,9 +54,9 @@
             {% if basics.miveuser.address.area != 'None' and basics.miveuser.address.area != '' %}
             {{basics.miveuser.address.area}},
             {%endif%}
-            {% if basics.miveuser.address.city != 'None' and basics.miveuser.address.area != '' %}
+            {% if basics.miveuser.address.city != 'None' and basics.miveuser.address.city != '' %}
              {{basics.miveuser.address.city}}<br>{%endif%}
-            {% if basics.miveuser.address.pincode != 'None' and basics.miveuser.address.area != '' %}
+            {% if basics.miveuser.address.pincode != 'None' and basics.miveuser.address.pincode != '' %}
             {{basics.miveuser.address.pincode}}<br>{%endif%}
             Mobile: {{basics.miveuser.mobileNo}}<br>
           </address>
@@ -69,7 +69,7 @@
             {% if order.seller.address.area != 'None' and order.seller.address.area != '' %}
             {{order.seller.address.area}},{%endif%}
             {% if order.seller.address.city != 'None' and order.seller.address.city != '' %} {{order.seller.address.city}}<br>{%endif%}
-            {% if order.seller.address.area != 'None' and order.seller.address.area != '' %} {{order.seller.address.pincode}}<br>{%endif%}
+            {% if order.seller.address.pincode != 'None' and order.seller.address.pincode != '' %} {{order.seller.address.pincode}}<br>{%endif%}
             Mobile: {{order.seller.mobileNo}}<br>
           </address>
         </div>
