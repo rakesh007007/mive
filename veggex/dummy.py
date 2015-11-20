@@ -371,12 +371,12 @@ def dummyordercategory(request):
 				dummycart.save()
 			n = Notification()
 			n.title='Order Recieved'
-			n.body='Your order has been recieved succesfully with orderId:'+str(order_id)
+			n.body='Your order has been received successfully with OrderId:'+str(order_id)
 			n.link = 'orderDetail?orderId='+str(order_id)
 			n.save()
 			miveuser.notifications.add(n)
 			miveuser.save()
-		strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID: '+str(order_id)+'.'
+		strr = '/main?notify=yes&description=Order has been added successfully.&title=OrderID: '+str(order_id)+'.'
 		return redirect(strr)
 @csrf_exempt
 @transaction.atomic
