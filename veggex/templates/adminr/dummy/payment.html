@@ -6,16 +6,16 @@
     <section class="content">
     <div class="row">
     {%for sl in list %}
-            <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="col-md-6 col-sm-12 col-xs-12">
           <div class="info-box" >
           <div class="row">
           <center><font size="4">{{sl.seller.nameOfSeller}}</font></center>
-            <div class="col-xs-7 col-sm-7 col-md-7 col-xl-7 col-xs-offset-1 col-sm-offset1">
+            <div class="col-xs-7 col-sm-7 col-md-7 col-xl-7">
              <div class="col-xs-12 col-sm-12"><font size="3">Current Balance:</font></div>
             <div class="col-xs-12 col-sm-12"><font size="3" class="pull-left">Prev. Outstanding:</font></div>
             <div class="col-xs-12 col-sm-12"><font class="pull-left" size="3">Total Outstanding:</font></div>
           </div>
-          <div class="col-xs-4 col-sm-4 col-md-7 col-xl-7">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-xl-5">
              <div class="col-xs-12 col-sm-12"><font size="3" class="pull-left"> ₹ {{sl.total}}</font></div>
              <div class="col-xs-12 col-sm-12"><font size="3" class="pull-left"> ₹ {{sl.due}} &nbsp;  <a ><i class="fa fa-pencil editpayment" data-sellerid="{{sl.seller.seller_id}}" data-sellername="{{sl.seller.nameOfSeller}}"></i></a></font></div>
              <div class="col-xs-12 col-sm-12"><font size="3" class="pull-left"> ₹ {% pluss sl.total sl.due %}</font></div>
