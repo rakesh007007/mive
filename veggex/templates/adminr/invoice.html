@@ -170,14 +170,14 @@
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
               <div class="row">
                <div class="col-md-6 col-lg-6 col-xs-6 ol-md-offset-0 col-lg-offset-0">
-               <center>Add more invoices <input id = "image" name="image" value="" type="file" multiple></center>
+               Add more invoice<br><input id = "image" name="image" value="" type="file">
                </div>
                <div class="col-md-6 col-lg-6 col-xs-12">
                      <center><textarea id="orderMsg" name="orderMsg" value="{{order.orderMsg}}" type="text" class="form-control" placeholder="Comments (optional)">{{order.orderMsg}}</textarea> </center>
                </div>
                {% if order.flag = False %}
                <div class="col-md-6 col-lg-6 col-xs-12">
-               <center><br>Flag this Order <input type="checkbox"  name="flag" data-order="{{order.order_id}}"></center>
+               <br>Flag this Order <input type="checkbox"  name="flag" data-order="{{order.order_id}}">
                 </div>
                 {%endif%}
                 {% if order.payment != "paid" %}
