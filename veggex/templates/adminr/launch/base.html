@@ -784,7 +784,7 @@ $('body').on('click','.itemdelete',function(event){
      idd = $(this).attr('data-itemid')
      qty = $(this).val()
      if (qty<=0 || isNaN(parseFloat(qty))){
-          mivenotify('error','Invalid quantity','quantity is incorrect kindly correct it')
+          mivenotify('error','Invalid quantity','Please enter a correct value.')
           return 1
         }
      console.log('qty',qty)
@@ -814,7 +814,7 @@ $('body').on('click','.itemdelete',function(event){
      idd = $(this).attr('data-itemid')
      price = $(this).val()
      if (price<0 || isNaN(parseFloat(price))){
-          mivenotify('error','Invalid price','price is incorrect kindly correct it')
+          mivenotify('error','Invalid price','Please enter a correct value.')
           return 1
         }
      idprice = '#itemprice-'+idd
@@ -844,7 +844,7 @@ $('body').on('click','.itemdelete',function(event){
      idd = $(this).attr('data-itemid')
      totalprice = $(this).val()
      if (totalprice<0 || isNaN(parseFloat(totalprice))){
-          mivenotify('error','Invalid total','total is incorrect kindly correct it')
+          mivenotify('error','Invalid total','Please enter a correct value.')
           return 1
         }
      idprice = '#itemprice-'+idd
