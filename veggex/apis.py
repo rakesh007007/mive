@@ -339,7 +339,7 @@ class ApiUpdateDummyCart(APIView):
 					item.pricePerUnit = pricePerUnit
 					item.save()
 					dummycart.save()
-			return Response([{"status":"success"}])
+			return Response({"status":"success"})
 		except Exception,e:
 			return Response(e)
 class ApiSeeOrder(APIView):
