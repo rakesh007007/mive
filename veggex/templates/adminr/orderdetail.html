@@ -46,12 +46,12 @@
           From:
           <address>
             <strong>{{order.seller.nameOfSeller}}</strong><br>
-            {% if order.seller.address.area != 'None' and order.seller.address.area != '' %}
+            {% if order.seller.address.area != None and order.seller.address.area != '' %}
             {{order.seller.address.area}},{%endif%}
-            {% if order.seller.address.city != 'None' and order.seller.address.city != '' %} {{order.seller.address.city}}<br>{%endif%}
-            {% if order.seller.address.area != 'None' and order.seller.address.area != '' %} {{order.seller.address.pincode}}<br>{%endif%}
+            {% if order.seller.address.city != None and order.seller.address.city != '' %} {{order.seller.address.city}}<br>{%endif%}
+            {% if order.seller.address.pincode != None and order.seller.address.pincode != '' %} {{order.seller.address.pincode}}<br>{%endif%}
             Mobile: {{order.seller.mobileNo}}<br>
-          </address>
+            </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 col-xs-6 invoice-col">
