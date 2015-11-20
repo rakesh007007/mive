@@ -329,7 +329,7 @@ class ApiUpdateDummyCart(APIView):
 				if(qty==0):
 					acitem_before=Dummycartitem.objects.get(dummycartitem_id=itemId)
 					dummycart.dummycartTotal = dummycart.dummycartTotal-acitem_before.qtyInUnits*acitem_before.pricePerUnit+qty*pricePerUnit
-					cart.save()
+					dummycart.save()
 					Dummycartitem.objects.get(dummycartitem_id=itemId).delete()
 				else:
 					item = Dummycartitem.objects.get(dummycartitem_id=itemId)
@@ -339,7 +339,7 @@ class ApiUpdateDummyCart(APIView):
 					item.pricePerUnit = pricePerUnit
 					item.save()
 					dummycart.save()
-			return Response([{"status":"success"}])
+			return Response({"status":"success"})
 		except Exception,e:
 			return Response(e)
 class ApiSeeOrder(APIView):
