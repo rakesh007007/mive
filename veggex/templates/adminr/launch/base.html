@@ -779,7 +779,7 @@ $('body').on('click','.itemdelete',function(event){
       })
       </script>
 <script>
-   $('body').on('input :not(focus)','.dummyinputproductqty',function(){
+   $('body').on('change','.dummyinputproductqty',function(){
      console.log('tintu')
      idd = $(this).attr('data-itemid')
      qty = $(this).val()
@@ -810,7 +810,7 @@ $('body').on('click','.itemdelete',function(event){
         }
         console.log(itemtotalbox)
    })
-   $('body').on('input :not(focus)','.dummypriceperunit',function(){
+   $('body').on('change','.dummypriceperunit',function(){
      idd = $(this).attr('data-itemid')
      price = $(this).val()
      if (price<0 || isNaN(parseFloat(price))){
@@ -840,7 +840,7 @@ $('body').on('click','.itemdelete',function(event){
         }
         console.log(itemtotalbox)
    })
-   $('body').on('input :not(focus)','.dummytotalprice',function(){
+   $('body').on('change','.dummytotalprice',function(){
      idd = $(this).attr('data-itemid')
      totalprice = $(this).val()
      if (totalprice<0 || isNaN(parseFloat(totalprice))){
@@ -897,13 +897,6 @@ $('#date1').val(today)
 $('#date2').val(today)
 $('#date').val(today)
 $('#date3').val(today)
-</script>
-<script type="text/javascript">
-  $('body').on('focus','input',function(event){
-    event.stopImmediatePropagation();
-    t = $(this)
-    t.val('')
-  })
 </script>
 <script>
   Array.prototype.clean = function(deleteValue) {

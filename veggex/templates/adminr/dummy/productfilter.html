@@ -3,7 +3,7 @@
 <center><h3>No products for this selection</h3></center>
 {% endif%}
 {% for product in products.all %}
-     <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:4px; margin-left:2ppx;padding-right:0px; margin-right:0px">
+    <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:4px; margin-left:2ppx;padding-right:0px; margin-right:0px">
          <div class="info-box" style="width:100%;padding-left:0px; margin-left:0px;padding-right:0px; margin-right:0px">
             <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}"  src="/{{product.coverphoto.thumbnail.url}}" style="width:70px;height:70px" class="img img-resposive"></i></span>
             <div class="info-box-content" >
@@ -11,7 +11,7 @@
                   <div class="row">
                      <center>
                         <div  class="col-md-12 col-sm-12 col-xs-12 col-md-offset-0 col-xs-offset-0 col-sm-offset-0">
-                           <b><span data-toggle="tooltip" title="{{product.name}}" >{{product.name|raktr}}</span></b><br>
+                           <b><span title="{{product.name}}" >{{product.name}}</span></b><br>
                         </div>
                      </center>
                   </div>

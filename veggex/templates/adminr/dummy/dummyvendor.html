@@ -16,7 +16,7 @@
    </center>
    <!-- Info boxes -->
    <div class="row">
-      <div class="col-md-4 col-xs-8 col-sm-8 col-md-offset-1 col-xs-offset-2 col-sm-offset-2">
+      <div class="col-md-4 col-xs-8 col-sm-8 col-md-offset-1 col-xs-offset-2 col-sm-offset-2" style="display:none">
          <form action="/search/dummyvendor" class="productsearchform" type="post">
             <div class="input-group margin">
                <input type="hidden" value="{{seller.seller_id}}" name="sellerId">
@@ -53,7 +53,7 @@
                   <div class="row">
                      <center>
                         <div  class="col-md-12 col-sm-12 col-xs-12 col-md-offset-0 col-xs-offset-0 col-sm-offset-0">
-                           <b><span data-toggle="tooltip" title="{{product.name}}" >{{product.name|raktr}}</span></b><br>
+                           <b><span title="{{product.name}}" >{{product.name}}</span></b><br>
                         </div>
                      </center>
                   </div>
@@ -188,7 +188,7 @@
    selected=[]
 </script>
 <script>
-   $('body').on('input :not(focus)','.inputproductqty',function(){
+   $('body').on('change','.inputproductqty',function(){
      console.log('tintu')
      idd = $(this).attr('data-productid')
      qty = $(this).val()
@@ -221,7 +221,7 @@
         }
         console.log(totalbox)
    })
-   $('body').on('input :not(focus)','.priceperunit',function(){
+   $('body').on('change','.priceperunit',function(){
      idd = $(this).attr('data-productid')
      price = $(this).val()
      if (price<0 || isNaN(parseFloat(price))){
@@ -254,7 +254,7 @@
         }
         console.log(totalbox)
    })
-   $('body').on('input :not(focus)','.totalprice',function(){
+   $('body').on('change','.totalprice',function(){
      idd = $(this).attr('data-productid')
      totalprice = $(this).val()
      if (totalprice<0 || isNaN(parseFloat(totalprice))){
