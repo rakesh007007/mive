@@ -17,7 +17,7 @@
                   <th><center>Name</center></th>
                   <th><center>Qty</center></th>
                   <th><center>Rate </center></th>
-                  <th><center>Total </center></th>
+                  <th><center>Total (₹) </center></th>
                   <th><center></center></th>
                 </tr>
                 {%for item in pd.items%}
@@ -51,7 +51,7 @@
                     </center>
                     </form>
                   </td>
-                  <td><center><div style="margin-top:10px"><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span href="/data/removeItemPost?itemId={{item.dummycartitem_id}}" style="color:green" class="itemdelete" data-itemid="{{item.dummycartitem_id}}"><i class="fa fa-trash-o"></i></span></a></div></center></td>
+                  <td><center><div style="margin-top:10px"><a href="/data/removeItemPost?itemId={{item.dummycartitem_id}}"><span href="/data/removeItemPost?itemId={{item.dummycartitem_id}}" class="itemdelete" data-itemid="{{item.dummycartitem_id}}" style="font-size:20px"><i class="fa fa-trash-o"></i></span></a></div></center></td>
                 </tr>
                 {% endfor%}
               </table>
