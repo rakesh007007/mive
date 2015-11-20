@@ -188,7 +188,7 @@
    selected=[]
 </script>
 <script>
-   $('body').on('change','.inputproductqty',function(){
+   $('body').on('input :not(focus)','.inputproductqty',function(){
      console.log('tintu')
      idd = $(this).attr('data-productid')
      qty = $(this).val()
@@ -221,7 +221,7 @@
         }
         console.log(totalbox)
    })
-   $('body').on('change','.priceperunit',function(){
+   $('body').on('input :not(focus)','.priceperunit',function(){
      idd = $(this).attr('data-productid')
      price = $(this).val()
      if (price<0 || isNaN(parseFloat(price))){
@@ -254,7 +254,7 @@
         }
         console.log(totalbox)
    })
-   $('body').on('change','.totalprice',function(){
+   $('body').on('input :not(focus)','.totalprice',function(){
      idd = $(this).attr('data-productid')
      totalprice = $(this).val()
      if (totalprice<0 || isNaN(parseFloat(totalprice))){
@@ -281,8 +281,8 @@
       if (selected.indexOf(parseInt(pdid))>-1){
           index = selected.indexOf(parseInt(pdid))
           obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
-          print 'obj'
-          print obj
+          console.log('obj')
+          console.log(obj)
           totalbox[index]=obj
    
         }
@@ -299,6 +299,7 @@
 <script type="text/javascript">
    $('body').on('click','.inboxadd',function(request){
          console.log('len',totalbox.length)
+         totalbox.clean(undefined)
          if (totalbox.length!=0){
             p=JSON.stringify(totalbox)
             console.log('p')

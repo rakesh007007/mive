@@ -884,9 +884,21 @@ $('#date3').val(today)
 </script>
 <script type="text/javascript">
   $('body').on('focus','input',function(event){
+    event.stopImmediatePropagation();
     t = $(this)
     t.val('')
   })
+</script>
+<script>
+  Array.prototype.clean = function(deleteValue) {
+  for (var i = 0; i < this.length; i++) {
+    if (this[i] == deleteValue) {         
+      this.splice(i, 1);
+      i--;
+    }
+  }
+  return this;
+};
 </script>
       {% block script%}
       {% endblock %}
