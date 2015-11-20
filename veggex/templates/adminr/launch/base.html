@@ -192,7 +192,7 @@
               <i class="fa fa-bell-o" style="font-size:22px"></i>
               <span class="label label-warning">{{basics.notifications|length}}</span>
             </a>
-            <ul class="dropdown-menu" style="width: 480px">
+            <ul class="dropdown-menu">
             {%if basics.notifications|length = 0 %}
             <li class="header">You have no new notifications.</li>
             {%elif basics.notifications|length = 1 %}
