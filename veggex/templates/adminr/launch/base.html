@@ -763,7 +763,7 @@ $('body').on('click','.itemdelete',function(event){
       })
       </script>
 <script>
-   $('body').on('change','.dummyinputproductqty',function(){
+   $('body').on('input :not(focus)','.dummyinputproductqty',function(){
      console.log('tintu')
      idd = $(this).attr('data-itemid')
      qty = $(this).val()
@@ -794,7 +794,7 @@ $('body').on('click','.itemdelete',function(event){
         }
         console.log(itemtotalbox)
    })
-   $('body').on('change','.dummypriceperunit',function(){
+   $('body').on('input :not(focus)','.dummypriceperunit',function(){
      idd = $(this).attr('data-itemid')
      price = $(this).val()
      if (price<0 || isNaN(parseFloat(price))){
@@ -824,7 +824,7 @@ $('body').on('click','.itemdelete',function(event){
         }
         console.log(itemtotalbox)
    })
-   $('body').on('change','.dummytotalprice',function(){
+   $('body').on('input :not(focus)','.dummytotalprice',function(){
      idd = $(this).attr('data-itemid')
      totalprice = $(this).val()
      if (totalprice<0 || isNaN(parseFloat(totalprice))){
