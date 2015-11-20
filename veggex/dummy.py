@@ -306,7 +306,7 @@ def dummyordercategory(request):
 		order.user = user
 		order.seller = dummyvendor.seller
 		order.payment_mode = payment_mode
-		if str(total)!='' and 'invoiceonly' in request.POST:
+		if str(total)!='' and str(request.POST['invoiceonly'])=='yes':
 			order.subtotal=float(total)
 			order.status = 'PLACED'
 			order.orderType='dummy'
