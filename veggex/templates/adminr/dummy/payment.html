@@ -9,8 +9,8 @@
             <div class="col-md-4 col-sm-12 col-xs-12">
           <div class="info-box" >
           <div class="row">
-          <center><font size="4"><p>{{sl.seller.nameOfSeller}}</p></font></center>
-            <div class="col-xs-6 col-sm-6 col-md-7 col-xl-7" style="padding-right:0px;margin-right:0px">
+          <center><font size="4"><b>{{sl.seller.nameOfSeller}}</b></font></center>
+            <center><div class="col-xs-6 col-sm-6 col-md-7 col-xl-7" style="padding-right:0px;margin-right:0px">
              <div class="col-xs-12 col-sm-12"><font size="3" class="pull-right">Current Balance:</font></div>
             <div class="col-xs-12 col-sm-12"><font size="3" class="pull-right">Prev. Outstanding:</font></div>
             <div class="col-xs-12 col-sm-12"><font class="pull-right" size="3">Total Outstanding:</font></div>
@@ -19,7 +19,7 @@
              <div class="col-xs-12 col-sm-12"><font size="3" class="pull-left"> ₹ {{sl.total}}</font></div>
              <div class="col-xs-12 col-sm-12"><font size="3" class="pull-left"> ₹ {{sl.due}} &nbsp;  <a ><i class="fa fa-pencil editpayment" data-sellerid="{{sl.seller.seller_id}}" data-sellername="{{sl.seller.nameOfSeller}}"></i></a></font></div>
              <div class="col-xs-12 col-sm-12"><font size="3" class="pull-left"> ₹ {% pluss sl.total sl.due %}</font></div>
-          </div>
+          </div></center>
           </div>
           <div class="row">
           </div>
