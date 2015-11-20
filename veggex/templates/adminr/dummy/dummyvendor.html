@@ -193,7 +193,7 @@
      idd = $(this).attr('data-productid')
      qty = $(this).val()
      if (qty<=0 || isNaN(parseFloat(qty))){
-          mivenotify('error','Invalid quantity','quantity is incorrect kindly correct it')
+          mivenotify('error','Invalid quantity','Please enter a correct value.')
           return 1
         }
      console.log('qty',qty)
@@ -225,7 +225,7 @@
      idd = $(this).attr('data-productid')
      price = $(this).val()
      if (price<0 || isNaN(parseFloat(price))){
-          mivenotify('error','Invalid price','price is incorrect kindly correct it')
+          mivenotify('error','Invalid price','Please enter a correct value.')
           return 1
         }
      idprice = '#price-'+idd
@@ -258,7 +258,7 @@
      idd = $(this).attr('data-productid')
      totalprice = $(this).val()
      if (totalprice<0 || isNaN(parseFloat(totalprice))){
-          mivenotify('error','Invalid total','total is incorrect kindly correct it')
+          mivenotify('error','Invalid total','Please enter a correct value.')
           return 1
         }
      idprice = '#price-'+idd
