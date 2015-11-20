@@ -4,7 +4,6 @@
 <section class="content-header">
    <h1>
       {{seller.nameOfSeller}} 
-      <small>Add products to invoice</small>
    </h1>
 </section>
 <section class="content">
@@ -54,7 +53,7 @@
                   <div class="row">
                      <center>
                         <div  class="col-md-12 col-sm-12 col-xs-12 col-md-offset-0 col-xs-offset-0 col-sm-offset-0">
-                           <span data-toggle="tooltip" title="{{product.name}}" >{{product.name|raktr}}</span><br>
+                           <b><span data-toggle="tooltip" title="{{product.name}}" >{{product.name|raktr}}</span></b><br>
                         </div>
                      </center>
                   </div>
@@ -282,6 +281,8 @@
       if (selected.indexOf(parseInt(pdid))>-1){
           index = selected.indexOf(parseInt(pdid))
           obj = {"productId":parseInt(pdid),"qty":qty,"priceperunit":totalprice/qty}
+          print 'obj'
+          print obj
           totalbox[index]=obj
    
         }
@@ -300,10 +301,12 @@
          console.log('len',totalbox.length)
          if (totalbox.length!=0){
             p=JSON.stringify(totalbox)
+            console.log('p')
+            console.log(p)
             $('#data-detail-container').html("<center><img src='/rstatic/new/images/282.GIF'></center>")
          t= $.post( "/new/ajaxaddtodummycartd", { "dt": p},function(data){
            $('#data-detail-container').html(data)
-           mivenotify('success','Items aadded','Items has been succesfully added to cart')
+           mivenotify('success','Items aadded','Items has been succesfully added to cart.')
            totalbox=[]
            $('#data-cart-modal').modal('toggle')
                        } );
