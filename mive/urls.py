@@ -146,6 +146,7 @@ urlpatterns = [
     url('^api/seeorders/$', apis.ApiSeeOrder.as_view()),
     url('^api/seedummycart/$', apis.ApiSeeDummyCart.as_view()),
     url('^api/updatecart/$', apis.ApiUpdateCart.as_view()),
+    url('^api/updatedummycart/$', apis.ApiUpdateDummyCart.as_view()),
     url('^api/makeorder/$', apis.ApiMakeOrder.as_view()),
     url('^api/makeorderdummy/$', apis.ApiMakeOrderDummy.as_view()),
     url('^api/temp/makeorderdummy/$', dummy.csrfreq),

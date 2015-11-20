@@ -187,7 +187,7 @@
               <span class="label label-danger"></i></span>
             </a>
           </li>
-          <li class="dropdown notifications-menu" data-toggle="tooltip" data-placement="left" title="Notification" >
+          <li class="dropdown notifications-menu" data-toggle="tooltip" data-placement="left" title="Notifications" >
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o" style="font-size:22px"></i>
               <span class="label label-warning">{{basics.notifications|length}}</span>
@@ -454,11 +454,19 @@
                <input id = "image" name="image" value="" type="file">
                </div>
                </div>
+               <div class="row">
+               <div class="col-md-6 col-lg-6 col-xs-12">
+               <center><br>Flag this order <input type="checkbox"  name="flag" data-order="{{order.order_id}}"></center>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                <center><br>Mark as paid <input type="checkbox"  name="paid" data-order="{{order.order_id}}"></center>
+                </div>
+               </div>
                <br>
                <br>
                <div class="row">
                <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
-               <button type="submit" id="checkout" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="left" title="Add selected products to current invoice.">
+               <button type="submit" id="checkout" class="btn btn-success btn-lg">
                   Checkout
                   </button>
                 </div>
@@ -494,11 +502,19 @@
                <input id = "image" name="image" value="" type="file">
                </div>
                </div>
+               <div class="row">
+               <div class="col-md-6 col-lg-6 col-xs-12">
+               <center><br>Flag this order <input type="checkbox"  name="flag" data-order="{{order.order_id}}" value="on"></center>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                <center><br>Mark as paid <input type="checkbox"  name="paid" data-order="{{order.order_id}}" value="on"></center>
+                </div>
+               </div>
                <br>
                <br>
                <div class="row">
                <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
-               <button  data-toggle="tooltip" data-placement="left" title="Add current invoice." type="submit" id="checkout" class="btn btn-success btn-lg">
+               <button   type="submit" id="checkout" class="btn btn-success btn-lg">
                   Checkout
                   </button>
                 </div>

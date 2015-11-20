@@ -286,6 +286,20 @@ def dummyordercategory(request):
 			return HttpResponse('provide subtotal or invoice atleast')
 		totalprice=float(getTotal(items))
 		order = Order()
+		if 'flag' in request.POST:
+				flag = request.POST['flag']
+				print 'yessss flag'
+		else:
+			flag=''
+		if 'paid' in request.POST:
+			paid = request.POST['paid']
+			print 'yessss paid'
+		else:
+			paid=''
+		if flag=='on':
+			order.flag=True
+		if paid =='on':
+			order.payment = 'paid'
 		order.user = user
 		order.seller = dummyvendor.seller
 		order.payment_mode = payment_mode
