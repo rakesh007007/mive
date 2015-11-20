@@ -373,13 +373,13 @@ def dummyordercategory(request):
 				dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
 				miveuser.save()
 				dummycart.save()
-			n = Notification()
-			n.title='Order Recieved'
-			n.body='Your order has been received successfully with OrderId:'+str(order_id)
-			n.link = 'orderDetail?orderId='+str(order_id)
-			n.save()
-			miveuser.notifications.add(n)
-			miveuser.save()
+		n = Notification()
+		n.title='Order Recieved'
+		n.body='Your order has been received successfully with OrderId:'+str(order_id)
+		n.link = 'orderDetail?orderId='+str(order_id)
+		n.save()
+		miveuser.notifications.add(n)
+		miveuser.save()
 		strr = '/main?notify=yes&description=Order has been added successfully.&title=OrderID: '+str(order_id)
 		return redirect(strr)
 @csrf_exempt
