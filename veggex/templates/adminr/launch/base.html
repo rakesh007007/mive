@@ -195,7 +195,7 @@
             <ul class="dropdown-menu">
             {%if basics.notifications|length = 0 %}
             <li class="header">You have no new notifications.</li>
-            %if basics.notifications|length = 1 %}
+            {%elif basics.notifications|length = 1 %}
             <li class="header">You have 1 new notification.</li>
             {%else %}
             <li class="header">You have {{basics.notifications|length}} new notifications.</li>
@@ -487,7 +487,7 @@
          <button class="btn-lg btn btn-flat" data-dismiss="modal" style="background:#FFFFFF" >&#10006;</button>
             <div class="loginmodal-container2 loginmodal-container" id="order-detail-container-invoice-only" style="max-width:none;max-height:none;" enctype="multipart/form-data">
                <form id="orderdata2" action="/data/ordercategory" style="display:inline;" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="invoiceonly" value="0">
+                <input type="hidden" name="invoiceonly" value="yes">
               <input type="hidden" name="cartid" value="{{basics.miveuser.cart.cart_id}}">
               {% csrf_token %}
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid2" value="{{pd.dummyvendor_id}}">

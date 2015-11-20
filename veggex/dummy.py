@@ -312,7 +312,11 @@ def dummyordercategory(request):
 		order.user = user
 		order.seller = dummyvendor.seller
 		order.payment_mode = payment_mode
+		print 'totallllllllllllll0'
+		print total
 		if str(total)!='' and str(request.POST['invoiceonly'])=='yes':
+			print 'totalllllllll'
+			print total
 			order.subtotal=float(total)
 			order.status = 'PLACED'
 			order.orderType='dummy'
@@ -445,7 +449,7 @@ def csrfreq(request):
 		dummycart = miveuser.dummycart
 		dummyvendor = DummyVendor.objects.filter(user=miveuser).get(seller__seller_id=int(sellerId))
 		items = Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller)
-		if ('invoiceonly' in request.POST):
+		if (str(request.POST['invoiceonly'])=='yes'):
 			totalprice = int(total)
 			print 'check2'
 			order = Order()
