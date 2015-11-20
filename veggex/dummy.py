@@ -380,7 +380,7 @@ def dummyordercategory(request):
 			n.save()
 			miveuser.notifications.add(n)
 			miveuser.save()
-		strr = '/main?notify=yes&description=Order has been added successfully.&title=OrderID: '+str(order_id)+'.'
+		strr = '/main?notify=yes&description=Order has been added successfully.&title=OrderID: '+str(order_id)
 		return redirect(strr)
 @csrf_exempt
 @transaction.atomic
