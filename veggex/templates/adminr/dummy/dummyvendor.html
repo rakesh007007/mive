@@ -48,9 +48,9 @@
       <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:4px; margin-left:2ppx;padding-right:0px; margin-right:0px">
          <div class="info-box" style="width:100%;padding-left:0px; margin-left:0px;padding-right:0px; margin-right:0px">
             <span class="info-box-icon" style="background:none"><img data-productid="{{product.product_id}}"  src="/{{product.coverphoto.thumbnail.url}}" style="width:70px;height:70px" class="img img-resposive"></i></span>
-            <div class="info-box-content" >
-               <div class="col-xs-12 col-md-12 col-lg-12">
-                  <div class="row">
+            <div class="info-box-content"  >
+               <div class="col-xs-12 col-md-12 col-lg-12" style="margin-left:0px;padding-left:0px;padding-right:0px;margin-right:0px">
+                  <div class="row" style="margin-left:0px;padding-left:0px;padding-right:0px;margin-right:0px">
                      <center>
                         <div  class="col-md-12 col-sm-12 col-xs-12 col-md-offset-0 col-xs-offset-0 col-sm-offset-0">
                            <b><span title="{{product.name}}" >{{product.name}}</span></b><br>
@@ -60,21 +60,21 @@
                   <div class="row" style="margin-left:0px;padding-left:0px;padding-right:0px;margin-right:0px">
                      <div class="col-md-4 col-sm-4 col-xs-4" style="margin-left:0px;padding-left:0px;padding-right:0px;margin-right:0px">
                         <center>
-                           Qty<input data-mobile="yes" type="number" min="0" class="form-control text-center input-circle inputproductqty"  name="qty" style="border:none;  border-bottom:solid grey 1px;width:full;font-size:10px" data-productid="{{product.product_id}}" id="qty-{{product.product_id}}">
+                           Qty<input data-mobile="yes" type="number" min="0" class="form-control text-center input-circle inputproductqty"  name="qty" style="border:none;  border-bottom:solid grey 1px;width:full;font-size:10px;padding: 0px 0px;" data-productid="{{product.product_id}}" id="qty-{{product.product_id}}">
                            {%csrf_token%}
                            <input type="hidden" name="productId" value="{{product.product_id}}">
                         </center>
                      </div>
                      <div class="col-md-4 col-sm-4 col-xs-4" style="margin-left:0px;padding-left:0px;padding-right:0px;margin-right:0px">
                         <center>
-                           Rate/{{product.unit}}<input data-mobile="yes"  type="number" min="0" class="form-control text-center input-circle priceperunit" value="{{product.pricePerUnit}}" name="qty" style="border:none;  border-bottom:solid grey 1px;width:35px;font-size:10px" data-productid="{{product.product_id}}" id="price-{{product.product_id}}">
+                           Rate/{{product.unit}}<input data-mobile="yes"  type="number" min="0" class="form-control text-center input-circle priceperunit" value="{{product.pricePerUnit}}" name="qty" style="border:none;  border-bottom:solid grey 1px;width:35px;font-size:10px;padding: 0px 0px;" data-productid="{{product.product_id}}" id="price-{{product.product_id}}">
                            {%csrf_token%}
                            <input type="hidden" name="productId" value="{{product.product_id}}">
                         </center>
                      </div>
                      <div class="col-md-4 col-sm-4 col-xs-4"style="margin-left:0px;padding-left:0px;padding-right:0px;margin-right:0px">
                         <center>
-                           Total<input data-mobile="yes"  type="number" min="0" class="form-control text-center input-circle totalprice" name="qty" style="border:none;  border-bottom:solid grey 1px;width:35px;font-size:10px" data-productid="{{product.product_id}}" id="total-{{product.product_id}}">
+                           Total<input data-mobile="yes"  type="number" min="0" class="form-control text-center input-circle totalprice" name="qty" style="border:none;  border-bottom:solid grey 1px;width:95px;font-size:10px;padding: 0px 0px;" data-productid="{{product.product_id}}" id="total-{{product.product_id}}">
                            {%csrf_token%}
                            <input type="hidden" name="productId" value="{{product.product_id}}">
                         </center>
