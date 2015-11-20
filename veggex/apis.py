@@ -323,17 +323,20 @@ class ApiUpdateDummyCart(APIView):
 			for i in range(0,len(items)):
 				qty=items[str(i+1)]['qty']
 				qty = int(qty)
+				pricePerUnit = items[str(i+1)]['pricePerUnit']
+				pricePerUnit = int(pricePerUnit)
 				itemId=items[str(i+1)]['itemId']
 				if(qty==0):
 					acitem_before=Dummycartitem.objects.get(dummycartitem_id=itemId)
-					dummycart.dummycartTotal = dummycart.dummycartTotal-acitem_before.qtyInUnits*acitem_before.pricePerUnit
+					dummycart.dummycartTotal = dummycart.dummycartTotal-acitem_before.qtyInUnits*acitem_before.pricePerUnit+qty*pricePerUnit
 					cart.save()
 					Dummycartitem.objects.get(dummycartitem_id=itemId).delete()
 				else:
 					item = Dummycartitem.objects.get(dummycartitem_id=itemId)
 					oldqty =item.qtyInUnits 
 					item.qtyInUnits = qty
-					dummycart.dummycartTotal = dummycart.dummycartTotal+qty*item.pricePerUnit - oldqty*item.pricePerUnit
+					dummycart.dummycartTotal = dummycart.dummycartTotal+qty*pricePerUnit - oldqty*item.pricePerUnit
+					item.pricePerUnit = pricePerUnit
 					item.save()
 					dummycart.save()
 			return Response([{"status":"success"}])

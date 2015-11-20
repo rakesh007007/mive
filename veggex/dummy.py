@@ -132,12 +132,19 @@ def newajaxaddtodummycart(request):
 		return redirect('/login')
 	else:
 		dt = request.POST
+		print 'dtttttttttttttt'
+		print dt
 		basics = basicinfo(request)
 		productdetails = json.loads(dt['dt'])
 		miveuser = basics['miveuser']
 		dummycart = miveuser.dummycart
 		total=0
 		for it in productdetails:
+			print 'yoittttt'
+			print it
+			if it is None:
+				print 'yola'
+				continue
 			pdid = (it['productId'])
 			qty = float(it['qty'])
 			pricePerUnit = float(it['priceperunit'])
@@ -346,7 +353,7 @@ def dummyordercategory(request):
 			n.save()
 			miveuser.notifications.add(n)
 			miveuser.save()
-		strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID:'+str(order_id)
+		strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID: '+str(order_id)+'.'
 		return redirect(strr)
 @csrf_exempt
 @transaction.atomic
@@ -495,7 +502,7 @@ def csrfreq(request):
 		n.save()
 		miveuser.notifications.add(n)
 		miveuser.save()
-		strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID:'+str(order_id)
+		strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID:'+str(order_id)+'.'
 		return HttpResponse(str({"status":"success","orderId":str(order_id)}),content_type='application/json')
 	except Exception,e:
 		return HttpResponse(e)

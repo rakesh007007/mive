@@ -174,22 +174,22 @@
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
       <a href="/main" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only" style="font-size:22px">Toggle navigation</span>
       </a>
 
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
+      <div class="navbar-custom-menu" style="height:1px">
+        <ul class="nav navbar-nav" >
           <!-- Messages: style can be found in dropdown.less-->
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
-            <a  id="basedatacart" >
-              <i data-toggle="modal" class="fa fa-shopping-cart"></i>
+            <a  id="basedatacart" data-toggle="tooltip" data-placement="left" title="Cart" >
+              <i data-toggle="modal"  class="fa fa-shopping-cart" style="font-size:22px"></i>
               <span class="label label-danger"></i></span>
             </a>
           </li>
-          <li class="dropdown notifications-menu">
+          <li class="dropdown notifications-menu" data-toggle="tooltip" data-placement="left" title="Notification" >
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
+              <i class="fa fa-bell-o" style="font-size:22px"></i>
               <span class="label label-warning">{{basics.notifications|length}}</span>
             </a>
             <ul class="dropdown-menu">
@@ -458,7 +458,7 @@
                <br>
                <div class="row">
                <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
-               <button type="submit" id="checkout" class="btn btn-success btn-lg">
+               <button type="submit" id="checkout" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="left" title="Add selected products to current invoice.">
                   Checkout
                   </button>
                 </div>
@@ -477,12 +477,11 @@
               {% csrf_token %}
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid2" value="{{pd.dummyvendor_id}}">
               <div class="row">
-               <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
-                     <input placeholder="Deliver date" id="date3" name="deliveryTime" type="date" class="form-control date" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
+               <div  class="col-md-6 col-lg-6 col-xs-12 col-sm-12 col-md-offset-0 col-lg-offset-0">
+                     <input style="height:40px" placeholder="Deliver date" id="date3" name="deliveryTime" type="date" class="form-control date" data-date='{"startView": 2, "openOnMouseFocus": true}' required>
                </div>
                <div class="col-md-6 col-lg-6 col-xs-12 ol-md-offset-0 col-lg-offset-0">
-               <br>
-               <input id = "total" name="total" class="form-control" value="" placeholder="Order total" type="number" required min="0">
+               <input style="height:40px" id = "total" name="total" class="form-control" value="" placeholder="Order total" type="number" required min="0">
                </div>
                </div>
                <br>
@@ -499,7 +498,7 @@
                <br>
                <div class="row">
                <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
-               <button type="submit" id="checkout" class="btn btn-success btn-lg">
+               <button  data-toggle="tooltip" data-placement="left" title="Add current invoice." type="submit" id="checkout" class="btn btn-success btn-lg">
                   Checkout
                   </button>
                 </div>
@@ -754,7 +753,7 @@ $('body').on('click','.itemdelete',function(event){
 
         }
         else{
-          mivenotify('notice','No changes','No changes to make')
+          mivenotify('notice','No change','No information has been changed.')
         }
       })
       </script>
@@ -764,7 +763,7 @@ $('body').on('click','.itemdelete',function(event){
       })
       </script>
 <script>
-   $('body').on('change','.dummyinputproductqty',function(){
+   $('body').on('input :not(focus)','.dummyinputproductqty',function(){
      console.log('tintu')
      idd = $(this).attr('data-itemid')
      qty = $(this).val()
@@ -795,7 +794,7 @@ $('body').on('click','.itemdelete',function(event){
         }
         console.log(itemtotalbox)
    })
-   $('body').on('change','.dummypriceperunit',function(){
+   $('body').on('input :not(focus)','.dummypriceperunit',function(){
      idd = $(this).attr('data-itemid')
      price = $(this).val()
      if (price<0 || isNaN(parseFloat(price))){
@@ -825,7 +824,7 @@ $('body').on('click','.itemdelete',function(event){
         }
         console.log(itemtotalbox)
    })
-   $('body').on('change','.dummytotalprice',function(){
+   $('body').on('input :not(focus)','.dummytotalprice',function(){
      idd = $(this).attr('data-itemid')
      totalprice = $(this).val()
      if (totalprice<0 || isNaN(parseFloat(totalprice))){
@@ -885,9 +884,21 @@ $('#date3').val(today)
 </script>
 <script type="text/javascript">
   $('body').on('focus','input',function(event){
+    event.stopImmediatePropagation();
     t = $(this)
     t.val('')
   })
+</script>
+<script>
+  Array.prototype.clean = function(deleteValue) {
+  for (var i = 0; i < this.length; i++) {
+    if (this[i] == deleteValue) {         
+      this.splice(i, 1);
+      i--;
+    }
+  }
+  return this;
+};
 </script>
       {% block script%}
       {% endblock %}

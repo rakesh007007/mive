@@ -127,9 +127,9 @@
             </div>
          </div>
       </div>
-      <div  style="position:fixed;bottom:10px;right:5px;" data-toggle="tooltip" data-placement="left" title="Add selected products to seller's list." class="inboxadd" z-index="100000000000000">
-         <button  class="btn btn-success" id="submithide" >Submit</button>
-         <a href="/data/vendor/pdreference?sellerId={{seller.seller_id}}"><button id="plusshow"   class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff;padding: 0px 0px;display:none"><center><span style="padding-left:0;margin-left:0"><i class="fa fa-plus" style="font-size:20px"></i></span></center></button></a>
+      <div  style="position:fixed;bottom:10px;right:5px;"  class="inboxadd" z-index="100000000000000">
+         <button data-toggle="tooltip" data-placement="left" title="Add selected products to seller's list."  class="btn btn-success" id="submithide" >Submit</button>
+         <a  data-toggle="tooltip" data-placement="left" title="Add more products to the list." href="/data/vendor/pdreference?sellerId={{seller.seller_id}}"><button id="plusshow"   class="btn btn-circle-big" style="background:#13c0ba;color:#ffffff;padding: 0px 0px;display:none"><center><span style="padding-left:0;margin-left:0"><i class="fa fa-plus" style="font-size:20px"></i></span></center></button></a>
       </div>
 {%endblock%}
 {% block script%}
