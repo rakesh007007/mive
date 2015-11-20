@@ -97,7 +97,7 @@ class Address(models.Model):
 	area=models.CharField(max_length=300, null=True,blank=True,default='')
 	city =models.CharField(max_length=300, null=True,blank=True, default='')
 	state = models.CharField(max_length=300, null=True,blank=True,default='')
-	pincode=models.FloatField(null=True,blank=True)
+	pincode=models.IntegerField(null=True,blank=True)
 	def __unicode__(self):
 		return str(self.address_id)
 	def addressId(self):
