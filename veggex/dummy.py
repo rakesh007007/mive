@@ -87,8 +87,9 @@ def dummyVendorView(request):
 		dummyVendorId = int(dummyVendorId)
 		dummyVendor = DummyVendor.objects.get(dummyvendor_id=dummyVendorId)
 		seller = dummyVendor.seller
-		categories = Category.objects.all()
 		products = dummyVendor.products
+		cats = products.values_list('category__category_id')
+		categories = Category.objects.filter(category_id__in=cats)
 		return TemplateResponse(request,'adminr/dummy/dummyvendor.html',{'categories':categories,'dmv':dummyVendor,'basics':basics,'products':products,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
 def dummyproductdetail(request):
 	productId = request.GET['productId']
