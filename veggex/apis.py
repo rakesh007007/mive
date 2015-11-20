@@ -303,7 +303,7 @@ class ApiUpdateCart(APIView):
 					cart.cartTotal = cart.cartTotal+qty*item.pricePerUnit - oldqty*item.pricePerUnit
 					item.save()
 					cart.save()
-			return Response([{"status":"success"}])
+			return Response({"status":"success"})
 		except Exception,e:
 			return Response(e)
 class ApiUpdateDummyCart(APIView):
