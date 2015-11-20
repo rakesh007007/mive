@@ -51,8 +51,13 @@
           To:
           <address>
             <strong>{{basics.miveuser.nameOfOwner}}</strong><br>
-            {{basics.miveuser.address.area}}, {{basics.miveuser.addresscity}}<br>
-            {{basics.miveuser.address.pincode}}<br>
+            {% if basics.miveuser.address.area != 'None' and basics.miveuser.address.area != '' %}
+            {{basics.miveuser.address.area}},
+            {%endif%}
+            {% if basics.miveuser.address.city != 'None' and basics.miveuser.address.area != '' %}
+             {{basics.miveuser.address.city}}<br>{%endif%}
+            {% if basics.miveuser.address.pincode != 'None' and basics.miveuser.address.area != '' %}
+            {{basics.miveuser.address.pincode}}<br>{%endif%}
             Mobile: {{basics.miveuser.mobileNo}}<br>
           </address>
         </div>
@@ -61,16 +66,16 @@
           From:
           <address>
             <strong>{{order.seller.nameOfSeller}}</strong><br>
-            {%if order.seller.address.area != '' %}{{order.seller.address.area}},{%endif %} {%if order.seller.address.city != '' %}{{order.seller.address.city}}{%endif %}<br>
-             {%if order.seller.address.pincode != None %}
-             {{order.seller.address.pincode}}<br>
-             {%endif %}
+            {% if order.seller.address.area != 'None' and order.seller.address.area != '' %}
+            {{order.seller.address.area}},{%endif%}
+            {% if order.seller.address.city != 'None' and order.seller.address.city != '' %} {{order.seller.address.city}}<br>{%endif%}
+            {% if order.seller.address.area != 'None' and order.seller.address.area != '' %} {{order.seller.address.pincode}}<br>{%endif%}
             Mobile: {{order.seller.mobileNo}}<br>
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 col-xs-6 invoice-col" style="text-transform: capitalize;">
-          Order # {{order.order_id}}<br>
+          Order ID: {{order.order_id}}<br>
           Date: {{order.deliveryTime}}<br>
           {% if order.payment = 'unpaid' %}
           Payment status: Unpaid<br>
@@ -168,16 +173,16 @@
                <center>Add more invoices <input id = "image" name="image" value="" type="file" multiple></center>
                </div>
                <div class="col-md-6 col-lg-6 col-xs-12">
-                     <center><textarea id="orderMsg" name="orderMsg" value="{{order.orderMsg}}" type="text" class="form-control" placeholder="Add Comment if any">{{order.orderMsg}}</textarea> </center>
+                     <center><textarea id="orderMsg" name="orderMsg" value="{{order.orderMsg}}" type="text" class="form-control" placeholder="Comments (optional)">{{order.orderMsg}}</textarea> </center>
                </div>
                {% if order.flag = False %}
                <div class="col-md-6 col-lg-6 col-xs-12">
-               <center><br>Flag this order <input type="checkbox"  name="flag" data-order="{{order.order_id}}"></center>
+               <center><br>Flag this Order <input type="checkbox"  name="flag" data-order="{{order.order_id}}"></center>
                 </div>
                 {%endif%}
                 {% if order.payment != "paid" %}
                 <div class="col-md-6 col-lg-6 col-xs-12">
-                <center><br>Mark as paid <input type="checkbox"  name="paid" data-order="{{order.order_id}}"></center>
+                <center><br>Mark as Paid <input type="checkbox"  name="paid" data-order="{{order.order_id}}"></center>
                 </div>
                 {%endif%}
                </div>

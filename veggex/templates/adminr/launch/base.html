@@ -193,7 +193,12 @@
               <span class="label label-warning">{{basics.notifications|length}}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have {{basics.notifications|length}} new notification</li>
+            {%if basics.notifications|length = 0 %}
+            <li class="header">You have no new notification</li>
+            {%else %}
+            <li class="header">You have {{basics.notifications|length}} new notification</li>
+              
+              {%endif%}
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -456,10 +461,10 @@
                </div>
                <div class="row">
                <div class="col-md-6 col-lg-6 col-xs-6">
-               <center><br>Flag this order <input type="checkbox"  name="flag" data-order="{{order.order_id}}"></center>
+               <center><br>Flag this Order <input type="checkbox"  name="flag" data-order="{{order.order_id}}"></center>
                 </div>
                 <div class="col-md-6 col-lg-6 col-xs-6">
-                <center><br>Mark as paid <input type="checkbox"  name="paid" data-order="{{order.order_id}}"></center>
+                <center><br>Mark as Paid <input type="checkbox"  name="paid" data-order="{{order.order_id}}"></center>
                 </div>
                </div>
                <br>
@@ -504,10 +509,10 @@
                </div>
                <div class="row">
                <div class="col-md-6 col-lg-6 col-xs-6">
-               <center><br>Flag this order <input type="checkbox"  name="flag" data-order="{{order.order_id}}" value="on"></center>
+               <center><br>Flag this Order <input type="checkbox"  name="flag" data-order="{{order.order_id}}" value="on"></center>
                 </div>
                 <div class="col-md-6 col-lg-6 col-xs-6">
-                <center><br>Mark as paid <input type="checkbox"  name="paid" data-order="{{order.order_id}}" value="on"></center>
+                <center><br>Mark as Paid <input type="checkbox"  name="paid" data-order="{{order.order_id}}" value="on"></center>
                 </div>
                </div>
                <br>

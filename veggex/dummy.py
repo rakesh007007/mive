@@ -152,12 +152,18 @@ def newajaxaddtodummycart(request):
 			if qty<=0 or pricePerUnit<0:
 				continue
 			pd = Product.objects.get(product_id=pdid)
-			ct = Dummycartitem.objects.filter(dummycart=dummycart).filter(product=pd).filter(pricePerUnit=pricePerUnit).count()
+			ct = Dummycartitem.objects.filter(dummycart=dummycart).filter(product=pd).count()
 			if ct>0:
-				oldit = Dummycartitem.objects.filter(dummycart=dummycart).filter(product=pd).filter(pricePerUnit=pricePerUnit)[0]
-				total = total+pricePerUnit*qty
-				oldit.qtyInUnits = oldit.qtyInUnits+qty
-				oldit.save()
+				oldit = Dummycartitem.objects.filter(dummycart=dummycart).filter(product=pd)[0]
+				if oldit.pricePerUnit == pricePerUnit:
+					total = total+pricePerUnit*qty
+					oldit.qtyInUnits = oldit.qtyInUnits+qty
+					oldit.save()
+				else:
+					total = total+pricePerUnit*qty-oldit.qtyInUnits*oldit.pricePerUnit
+					oldit.pricePerUnit = pricePerUnit
+					oldit.qtyInUnits = qty
+					oldit.save()
 			else:
 				total = total+pricePerUnit*qty
 				item = Dummycartitem()
