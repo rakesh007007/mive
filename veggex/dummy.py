@@ -722,7 +722,9 @@ def dummynewvendor(request):
 	miveuser = basics['miveuser']
 	name =request.POST['name']
 	mobile =request.POST['mobile']
-	print request.POST
+	oldvendors = basics.dummyvendors.filter(seller__nameOfSeller=str(name)).filter(seller__mobileNo=int(mobileNo)).count()
+	if(oldvendors>0):
+		return HttpResponse('Vendor with same mobile number and name already exists')
 	if 'ctext' in request.POST:
 		if request.POST['ctext']!='':
 			ctext = request.POST['ctext']
@@ -739,9 +741,6 @@ def dummynewvendor(request):
 	else:
 		area =request.POST['area']
 		ad.area=area
-	oldvendors = basics.vendors.filter(seller__nameOfSeller=str(name)).filter('seller__mobileNo'=int(mobileNo)).count()
-	if(oldvendors>0):
-		return HttpResponse('Vendor with same mobile number and name already exists')
 	ad =Address()
 	if request.POST['city']=='':
 		city=''
