@@ -6,6 +6,10 @@
     </section>
     <section class="content">
     <div class="row">
+       {% if list|length = 0 %}
+         <div style="padding-left:18px">
+          <h3>Currently you do not have any outstanding amount.</h3></div>
+         {%endif%}
     {%for sl in list %}
             <div class="col-md-4 col-sm-12 col-xs-12">
           <div class="info-box" >
