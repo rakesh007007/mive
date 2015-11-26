@@ -12,7 +12,7 @@ def raktr(valuev):
 		return valuev
 @register.filter
 def raktrhigh(valuev):
-	if len(valuev)>25:
+	if len(valuev)>30:
 		return valuev[:23]+'..'
 	else:
 		return valuev
