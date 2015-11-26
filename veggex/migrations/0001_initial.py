@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django.utils.timezone
+import stdimage.models
 
 
 class Migration(migrations.Migration):
@@ -23,10 +24,10 @@ class Migration(migrations.Migration):
             name='Address',
             fields=[
                 ('address_id', models.AutoField(serialize=False, primary_key=True)),
-                ('area', models.CharField(max_length=300)),
-                ('city', models.CharField(max_length=300)),
-                ('state', models.CharField(max_length=300)),
-                ('pincode', models.FloatField()),
+                ('area', models.CharField(default=b'', max_length=300, null=True, blank=True)),
+                ('city', models.CharField(default=b'', max_length=300, null=True, blank=True)),
+                ('state', models.CharField(default=b'', max_length=300, null=True, blank=True)),
+                ('pincode', models.IntegerField(null=True, blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -143,6 +144,7 @@ class Migration(migrations.Migration):
             name='DummyVendor',
             fields=[
                 ('dummyvendor_id', models.AutoField(serialize=False, primary_key=True)),
+                ('due', models.FloatField(default=0.0, null=True, blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -239,10 +241,10 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=300)),
                 ('description', models.TextField(default=b'not available', null=True, blank=True)),
                 ('popularityIndex', models.FloatField(default=1, null=True, blank=True)),
-                ('unit', models.CharField(default=b'unit', max_length=100)),
+                ('unit', models.CharField(default=b'Kg', max_length=100)),
                 ('priceType', models.CharField(default=b'custom rates', max_length=300, choices=[(b'as per mandi rates', b'as per mandi rates'), (b'custom rates', b'custom rates')])),
                 ('pricePerUnit', models.FloatField(default=0)),
-                ('coverphoto', models.ImageField(default=b'./No_image_available.png', null=True, upload_to=b'', blank=True)),
+                ('coverphoto', stdimage.models.StdImageField(default=b'./No_image_available.png', null=True, upload_to=b'', blank=True)),
                 ('origin', models.CharField(default=b'', max_length=300, null=True, blank=True)),
                 ('maxAvailableUnits', models.FloatField(default=100000, null=True, blank=True)),
                 ('qualityRemarks', models.TextField(default=b'Custom Product', null=True, blank=True)),
@@ -329,12 +331,12 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(default=b'Not available')),
                 ('password', models.CharField(max_length=300)),
                 ('gpsLocation', models.CharField(max_length=300, null=True, blank=True)),
-                ('profilePhoto', models.ImageField(null=True, upload_to=b'', blank=True)),
+                ('profilePhoto', models.ImageField(default=b'./profile.gif', upload_to=b'')),
                 ('creditlimit', models.FloatField(default=10000, null=True, blank=True)),
                 ('address', models.ForeignKey(blank=True, to='veggex.Address', null=True)),
-                ('cart', models.ForeignKey(to='veggex.Cart')),
+                ('cart', models.ForeignKey(blank=True, to='veggex.Cart', null=True)),
                 ('categories', models.ManyToManyField(default=[39], to='veggex.CategoryVendor', blank=True)),
-                ('dummycart', models.ForeignKey(to='veggex.Dummycart')),
+                ('dummycart', models.ForeignKey(blank=True, to='veggex.Dummycart', null=True)),
                 ('dummyvendors', models.ManyToManyField(to='veggex.DummyVendor', blank=True)),
                 ('message', models.ManyToManyField(to='veggex.Message', blank=True)),
                 ('notifications', models.ManyToManyField(to='veggex.Notification', blank=True)),
@@ -359,7 +361,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='product',
             name='seller',
-            field=models.ForeignKey(blank=True, to='veggex.Seller', null=True),
+            field=models.ForeignKey(default=1, blank=True, to='veggex.Seller', null=True),
         ),
         migrations.AddField(
             model_name='orderitem',
