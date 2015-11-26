@@ -13,7 +13,7 @@ def raktr(valuev):
 @register.filter
 def raktrhigh(valuev):
 	if len(valuev)>30:
-		return valuev[:23]+'..'
+		return valuev[:27]+'..'
 	else:
 		return valuev
 @register.simple_tag()
