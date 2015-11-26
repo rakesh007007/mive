@@ -11,9 +11,9 @@
 <div class="col-md-4 col-md-offset-1 " style="position:relative" >
        <div class="form-group" style="">
                 <label>Selected seller(s)</label>
-                <select class="form-control select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;" name="sellers" id="sellerselect">
+                <select class="form-control select2" multiple="multiple" data-placeholder="None" style="width: 100%;" name="sellers" id="sellerselect">
                  {%for sel in sellers%}
-                  <option selected value="{{sel.seller_id}}" style="text-transform: capitalize;">{{sel.nameOfSeller}}</option>
+                  <option selected value="{{sel.seller_id}}">{{sel.nameOfSeller}}</option>
                   {%endfor%}
                  }
                 </select>
@@ -63,7 +63,11 @@
           <div class="box" id="targetreload" style="position:relative;margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px">
             <div class="box-header">
               <h3 class="box-title pull-left">Previous Orders</h3>
-              <h3 class="box-title pull-right">Grand Total: ₹ {{total|intcomma}}</h3>
+              {% if total = None %}
+              <h3 class="box-title pull-right">Grand Total: ₹ 0.0</h3>
+              {% else %}
+               <h3 class="box-title pull-right">Grand Total: ₹ {{total|intcomma}}</h3>
+              {%endif %}
             </div>
             <!-- /.box-header -->
             <div class="box-body"  style="position:relative;margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px">
@@ -103,7 +107,7 @@
                    <td>
                     <center>
                     {% if order.flag = True %}
-                    <span class="label label-danger">Flag</span>
+                    <span class="label label-danger">Flagged</span>
                     {% endif %}
                     <a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="success" style=""><i class="fa fa-book"></i></span></span></a></center>
                   </td>
@@ -367,5 +371,51 @@ $('body').on('change','#makepaid',function(event){
       "autoWidth": false
     });
   });
+</script>
+<script>
+$('body').on('submit','#editorder',function(event){
+  orderMsg = $('#check_orderMsg').val()==''
+  file = $('#check_file').val()==''
+  if( $('#check_flag').length )         // use this if you are using id to check
+{
+     // it exists
+
+     flag = $('#check_flag').is(':checked')==false
+
+}
+else{
+  flag=true
+}
+if( $('#check_unflag').length )         // use this if you are using id to check
+{
+     // it exists
+
+     flag = $('#check_unflag').is(':checked')==false
+
+}
+else{
+  unflag=true
+}
+if( $('#check_paid').length )         // use this if you are using id to check
+{
+     // it exists
+
+     paid = $('#check_paid').is(':checked')==false
+
+}
+else{
+  paid=true
+}
+console.log('orderMsg',orderMsg)
+console.log('file',file)
+console.log('flag',flag)
+console.log('unflag',unflag)
+console.log('paid',paid)
+
+  if(orderMsg==true && file==true && flag==true && unflag==true && paid==true){
+    mivenotify('error','Order not updated','No changes has been made.')
+    event.preventDefault()
+  }
+})
 </script>
 {% endblock %}

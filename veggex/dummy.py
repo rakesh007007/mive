@@ -375,12 +375,12 @@ def dummyordercategory(request):
 				dummycart.save()
 		n = Notification()
 		n.title='Order Recieved'
-		n.body='Your order with Order Id: '+str(order_id)+ ' has been created.'
+		n.body='Your order with '+str(order.seller.nameOfSeller)+' of amount '+str(order.subtotal)+ ' has been created.'
 		n.link = 'orderDetail?orderId='+str(order_id)
 		n.save()
 		miveuser.notifications.add(n)
 		miveuser.save()
-		strr = '/main?notify=yes&description=Your order with Order Id: '+str(order_id)+ ' has been created.'
+		strr = '/main?notify=ye&title=Order Recieved&description=Your order with '+str(order.seller.nameOfSeller)+' of amount '+str(order.subtotal)+ ' has been created.'
 		return redirect(strr)
 @csrf_exempt
 @transaction.atomic
@@ -522,13 +522,13 @@ def csrfreq(request):
 			dummycart.save()
 		n = Notification()
 		n.title='Order Recieved'
-		n.body='Your order has been recieved succesfully with orderId:'+str(order_id)
+		n.body='Your order with '+str(order.seller.nameOfSeller)+' of amount '+str(order.subtotal)+'has been created.'
 		n.link = 'orderDetail?orderId='+str(order_id)
 		n.save()
 		miveuser.notifications.add(n)
 		miveuser.save()
-		strr = '/main?notify=yes&description=Order has been added succesfully&title=OrderID:'+str(order_id)+'.'
-		return HttpResponse(str({"status":"success","orderId":str(order_id)}),content_type='application/json')
+		strr = '/main?notify=yes&title=Order Recieved&description=Order has been added succesfully&title=OrderID: '+str(order_id)+'.'
+		return HttpResponse(str({"status":"success","orderID":str(order_id)}),content_type='application/json')
 	except Exception,e:
 		return HttpResponse(e)
 def dummyvendors(request):
