@@ -775,7 +775,7 @@ def seeOrder(request):
 		timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
 		user =miveuser
 		basics = basicinfo(request)
-		orders = Order.objects.filter(user=miveuser).filter(deliveryTime__gt=timebeforedays).order_by('-deliveryTime','-timeOfCreate')
+		orders = Order.objects.order_by('-deliveryTime','-timeOfCreate').filter(user=miveuser).filter(deliveryTime__gt=timebeforedays)
 		total = orders.aggregate(total=Sum('subtotal'))
 		total = total['total']
 		sellers=Seller.objects.filter(seller_id__in=orders.values('seller'))
