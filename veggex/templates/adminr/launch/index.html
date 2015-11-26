@@ -1,14 +1,14 @@
   {% extends 'adminr/launch/base.html' %}
   {% block content %}
   {%load rak%}
-    <section class="content" style="padding-top:0px">
-    <div class="row" style="margin-top:0px;padding-top:0px">
+    <section class="content">
+    <div class="row">
        
           <!-- small box -->
 
          {% if basics.dummyvendor.all|length = 0 %}
-         <center style="margin-top:0px;padding-top:0px"> <h3>No vendors added</h3>
-          <p>Please configure your vendors <a href="/data/vendors">Add now</a></p></center> 
+         <center style="margin-top:0px;padding-top:0px"> <h3>No vendors</h3>
+          <p>Please add your vendors.</p></center> 
          {%endif%}
         {%for categ in basics.dummyvendor.all%}
         <div class="col-lg-4 col-xs-12 col-sm-12">

@@ -715,13 +715,13 @@ def dummydelvendoruser(request):
 		DummyVendor.objects.get(dummyvendor_id=id).delete()
 		return redirect('/data/vendors')
 @transaction.atomic
-def dummyne(request):
+def dummynewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
 	basics = basicinfo(request)
 	miveuser = basics['miveuser']
 	name =request.POST['name']
-	mobile =request.POS
+	mobile =request.POST['mobile']
 	oldvendors = basics['miveuser'].dummyvendors.filter(seller__nameOfSeller=str(name)).filter(seller__mobileNo=int(mobile)).count()
 	if(oldvendors>0):
 		return HttpResponse('Vendor with same mobile number and name already exists')
