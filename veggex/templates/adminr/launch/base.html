@@ -202,7 +202,7 @@ window.onbeforeunload = function() {
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation" style="max-height: 50px;vertical-align:middle">
       <!-- Sidebar toggle button-->
-      <a href="/main" class="sidebar-toggle" style="font-size:22px;z-index:1000;padding-top:10px" data-toggle="offcanvas" role="button">
+      <a href="/main" class="sidebar-toggle" style="font-size:22px;z-index:1000;padding-top:10px" data-toggle="offcanvas" role="button" onMouseOver="this.style.background='none'">
         <span class="sr-only">Toggle navigation</span>
       </a>
 
@@ -211,13 +211,13 @@ window.onbeforeunload = function() {
           <!-- Messages: style can be found in dropdown.less-->
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
-            <a  id="basedatacart" data-toggle="tooltip" data-placement="left" title="Cart" >
-              <i data-toggle="modal"  class="fa fa-shopping-cart" style="font-size:22px"></i>
+            <a  id="basedatacart" data-toggle="tooltip" data-placement="left" title="Cart" onMouseOver="this.style.background='none'"  >
+              <i data-toggle="modal"  class="fa fa-shopping-cart" style="font-size:22px" ></i>
               <span class="label label-danger"></i></span>
             </a>
           </li>
           <li class="dropdown notifications-menu" data-toggle="tooltip" data-placement="left" title="Notifications" >
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" onMouseOver="this.style.background='none'">
               <i class="fa fa-bell-o" style="font-size:22px"></i>
               <span class="label label-warning">{{basics.notifications|length}}</span>
             </a>
