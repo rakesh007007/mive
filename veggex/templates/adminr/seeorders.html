@@ -106,10 +106,11 @@
                   </td>
                    <td>
                     <center>
+                    <a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="success" style=""><i class="fa fa-book"></i></span></span></a>
                     {% if order.flag = True %}
                     <span class="label label-danger">Flagged</span>
                     {% endif %}
-                    <a data-orderid="{{order.order_id}}" href="#" onclick="return false" ><span data-orderid="{{order.order_id}}" class="invoice-detail" ><span class="success" style=""><i class="fa fa-book"></i></span></span></a></center>
+                  </center>
                   </td>
                 </tr>
                 {% endfor%}
