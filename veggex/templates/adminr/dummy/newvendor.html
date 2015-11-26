@@ -1,11 +1,6 @@
 {% extends 'adminr/launch/base.html' %}
 {% block  content %}
 {%load rak%}
-<section class="content-header">
-   <center><h1>
-      {{seller.nameOfSeller}} 
-   </h1></center>
-</section>
 
 <section class="content" id="wholereload">
 {% if new = 1%}
@@ -21,7 +16,11 @@
          </div>
       </div>
       {% endif %}
-         <center><button class="btn btn-warning new-product-button">Add new product</button></center>
+         <center>
+          <h1>
+      {{seller.nameOfSeller}} 
+   </h1><br>
+          <button class="btn btn-warning new-product-button">Add new product</button></center>
        <div class="row">
        <div class="col-md-4 col-xs-10 col-sm-10 col-md-offset-4 col-xs-offset-1 col-sm-offset-1">
         Filter:

@@ -1,13 +1,11 @@
 {% extends 'adminr/launch/base.html' %}
 {% block  content %}
 {%load rak%}
-<section class="content-header">
-   <h1>
-      {{seller.nameOfSeller}}
-   </h1>
-</section>
 <div class="row">
         <center>
+          <h1>
+      {{seller.nameOfSeller}}
+   </h1><br>
           <a href="/data/vendor/pdreference?sellerId={{seller.seller_id}}" class="btn btn-success btn-bg">Add new products</a>
         </center>
       </div>
