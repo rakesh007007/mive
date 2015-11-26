@@ -739,7 +739,9 @@ def dummynewvendor(request):
 	else:
 		area =request.POST['area']
 		ad.area=area
-	oldvendors = basics.
+	oldvendors = basics.vendors.filter(seller__nameOfSeller=str(name)).filter('seller__mobileNo'=int(mobileNo)).count()
+	if(oldvendors>0):
+		return HttpResponse('Vendor with same mobile number and name already exists')
 	ad =Address()
 	if request.POST['city']=='':
 		city=''
