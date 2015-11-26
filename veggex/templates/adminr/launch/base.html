@@ -217,7 +217,7 @@ window.onbeforeunload = function() {
             </a>
           </li>
           <li class="dropdown notifications-menu" data-toggle="tooltip" data-placement="left" title="Notifications" >
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" onMouseOver="this.style.background='none'">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" onMouseOver="this.style.background='none'" onhover="this.style.background='none'">
               <i class="fa fa-bell-o" style="font-size:22px"></i>
               <span class="label label-warning">{{basics.notifications|length}}</span>
             </a>
@@ -708,7 +708,7 @@ $( document ).ajaxStop(function() {
                             document.cookie="notification_displayed=yes";
 
                         }
-                        if(check != null){
+                        if(check != null && getCookie('notification_displayed')=='yes'){
                           document.cookie="notification_displayed=yes";
                         }
                         else{
