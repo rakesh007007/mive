@@ -1,4 +1,5 @@
 from django import template
+import humanize
 register = template.Library()
 @register.simple_tag()
 def multiply(qty, unit_price, *args, **kwargs):
@@ -19,3 +20,6 @@ def raktrhigh(valuev):
 @register.simple_tag()
 def pluss(total,due):
 	return total+due
+@register.simple_tag()
+def plusshumanize(total,due):
+	return humanize.intcomma(total+due)
