@@ -169,19 +169,23 @@
               <input type="hidden" name="dummyvendorid" id="dataorderplaceid" value="{{pd.dummyvendor_id}}">
               <div class="row">
                <div class="col-md-6 col-lg-6 col-xs-6 ol-md-offset-0 col-lg-offset-0">
-               Add more invoice<br><input id = "image" name="image" value="" type="file">
+               Add another invoice<br><input name="image" value="" type="file" id="check_file">
                </div>
                <div class="col-md-6 col-lg-6 col-xs-12">
-                     <center><textarea id="orderMsg" name="orderMsg" value="{{order.orderMsg}}" type="text" class="form-control" placeholder="Comments (optional)">{{order.orderMsg}}</textarea> </center>
+                     <center><textarea id="check_orderMsg" name="orderMsg" value="{{order.orderMsg}}" type="text" class="form-control" placeholder="Comments (optional)">{{order.orderMsg}}</textarea> </center>
                </div>
                {% if order.flag = False %}
                <div class="col-md-6 col-lg-6 col-xs-12">
-               <br>Flag this Order <input type="checkbox"  name="flag" data-order="{{order.order_id}}">
+               <br>Flag this Order <input type="checkbox" id="check_flag"  name="flag" data-order="{{order.order_id}}">
+                </div>
+                {% else %}
+                <div class="col-md-6 col-lg-6 col-xs-12">
+               <br>Unflag this Order <input type="checkbox" id="check_unflag"  name="unflag" data-order="{{order.order_id}}">
                 </div>
                 {%endif%}
                 {% if order.payment != "paid" %}
                 <div class="col-md-6 col-lg-6 col-xs-12">
-                <center><br>Mark as Paid <input type="checkbox"  name="paid" data-order="{{order.order_id}}"></center>
+                <center><br>Mark as Paid <input type="checkbox" id="check_paid" name="paid" data-order="{{order.order_id}}"></center>
                 </div>
                 {%endif%}
                </div>

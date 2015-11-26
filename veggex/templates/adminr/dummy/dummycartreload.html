@@ -21,11 +21,11 @@
                   <th><center></center></th>
                 </tr>
                 {%for item in pd.items%}
-               <tr>
+                <tr>
                   <td><center><div style="margin-top:10px"><span>{{item.product.name}}</span></div></center></td>
                   <td>
                     <center>
-                    <form method="post" action="/data/editqty">
+                    <form method="post" action="/data/editqty" class="stopsubmit">
                     {%csrf_token%}
                     <input type="number" min="0" class="input-circle dummyinputproductqty" name="newqty" value="{{item.qtyInUnits}}" data-itemid="{{item.dummycartitem_id}}" style="border:none; text-align:center;  border-bottom:solid grey 1px;width:14px;padding: 0px 0px;" id="itemqty-{{item.dummycartitem_id}}" min="1">&nbsp;{{item.product.unit}}
 
@@ -34,7 +34,7 @@
                   </td>
                   <td>
                     <center>
-                    <form method="post" action="/data/editqty">
+                    <form method="post" action="/data/editqty" class="stopsubmit">
                     {%csrf_token%}
                     <input type="number" min="0" class="input-circle dummypriceperunit" name="newqty" value="{{item.pricePerUnit }}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px; text-align:center;padding: 0px 0px;" id="itemprice-{{item.dummycartitem_id}}">
                     
@@ -43,7 +43,7 @@
                   </td>
                   <td>
                     <center>
-                    <form method="post" action="/data/editqty">
+                    <form method="post" action="/data/editqty" class="stopsubmit">
                     {%csrf_token%}
                     <input type="hidden" name="itemid" value="{{item.dummycartitem_id}}">
                     <input type="number" min="0" class="input-circle dummytotalprice" name="newqty" value="{% multiply item.qtyInUnits item.pricePerUnit %}" data-itemid="{{item.dummycartitem_id}}" style="border:none;  border-bottom:solid grey 1px;width:30px; text-align:center;padding: 0px 0px;" id="itemtotal-{{item.dummycartitem_id}}">

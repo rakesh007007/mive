@@ -1020,6 +1020,10 @@ def editorder(request):
 			flag = request.POST['flag']
 		else:
 			flag=''
+		if 'unflag' in request.POST:
+			unflag = request.POST['unflag']
+		else:
+			unflag=''
 		if 'paid' in request.POST:
 			paid = request.POST['paid']
 		else:
@@ -1031,6 +1035,8 @@ def editorder(request):
 			order.orderMsg = msg
 		if flag=='on':
 			order.flag=True
+		if unflag=='on':
+			order.flag=False
 		if paid =='on':
 		    order.payment = 'paid'
 		if len(files)!=0:
@@ -1041,7 +1047,7 @@ def editorder(request):
 			 	order.invoices.add(d)
 			 	order.save()
 		order.save()	
-		strr = '/main?notify=yes&description=Order has been updated succesfully&title=OrderID:'+str(orderId)
+		strr = '/main?notify=yes&description=Order has been updated succesfully&title=OrderID: '+str(orderId)
 		return redirect(strr)
 	except Exception,e:
 		return HttpResponse(e)
