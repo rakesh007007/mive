@@ -188,11 +188,11 @@ def logPost(request):
 			miveuser = u[0]
 			strraw={"mobile":mobile,"password":password}
 			#return HttpResponse(str(strraw))
-			return redirect('/new?notify=yes&type=success&title=Logged In&description=You have been logged in')
+			return redirect('/new?notify=yes&type=success&title=Logged in&description=You have been succesfully logged in.')
 		else:
 			return redirect('/login?notify=yes&type=error&title=LogIn&description=Login has been failed please try with proper credentials')
 	except:
-		return redirect('/login?notify=yes&type=notice&title=LogIn&description=Looks like you are not registered please contact info@mive.in')
+		return redirect('/login?notify=yes&type=notice&title=Login failed&description=Looks like you are not registered please contact info@mive.in')
 def logout(request):
 	 if('loggedin' in request.session):
 		 del request.session['loggedin']
