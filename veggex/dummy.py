@@ -431,20 +431,6 @@ def csrfreq(request):
 		total = request.POST['total']
 		payment = request.POST['payment']
 		deliveryTime = request.POST['deliveryTime']
-		print 'yoo'
-		print deliveryTime
-		print 'seller'
-		print sellerId
-		print 'image'
-		print images
-		print 'dummy'
-		print dummycartId
-		print 'orderMsg'
-		print orderMsg
-		print 'total'
-		print total
-		print 'payment'
-		print payment
 		payment_mode = 'COD'
 		dummycart = miveuser.dummycart
 		dummyvendor = DummyVendor.objects.filter(user=miveuser).get(seller__seller_id=int(sellerId))
@@ -520,6 +506,18 @@ def csrfreq(request):
 				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
 			Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller).delete()
 			dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
+			if 'flag' in request.POST:
+				flag = request.POST['flag']
+			else:
+				flag=''
+			if 'paid' in request.POST:
+				paid = request.POST['paid']
+			else:
+				paid=''
+			if flag=='on':
+				order.flag=True
+			if paid =='on':
+			    order.payment = 'paid'
 			miveuser.save()
 			dummycart.save()
 		n = Notification()
@@ -725,7 +723,6 @@ def dummynewvendor(request):
 	name =request.POST['name']
 	mobile =request.POST['mobile']
 	print request.POST
-	ad =Address()
 	if 'ctext' in request.POST:
 		if request.POST['ctext']!='':
 			ctext = request.POST['ctext']
@@ -742,6 +739,8 @@ def dummynewvendor(request):
 	else:
 		area =request.POST['area']
 		ad.area=area
+	oldvendors = basics.
+	ad =Address()
 	if request.POST['city']=='':
 		city=''
 	else:
