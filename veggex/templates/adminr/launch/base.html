@@ -661,7 +661,7 @@ $( document ).ajaxStop(function() {
 
          }
          check = $.urlParam('notify')
-                        if(check != null){
+                        if(check != null && getCookie('notification_displayed')=='no'){
                            title =$.urlParam('title')
                            if(title != null){
                               title = title.split('%20').join(' ')
@@ -676,10 +676,13 @@ $( document ).ajaxStop(function() {
                            console.log('type',title)
                            mivenotify(type,title,description,2000)
                            console.log('yesnotifica')
+                            document.cookie="notification_displayed=yes";
 
                         }
                         else{
                            console.log('pp')
+                           document.cookie="notification_displayed=no";
+                           
                         }
          });
       </script>

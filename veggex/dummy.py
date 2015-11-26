@@ -773,6 +773,19 @@ def dummynewvendor(request):
 	sellerids= Seller.objects.filter(directory=True).values('seller_id')
 	products = Product.rak.filter(seller__seller_id__in=sellerids)
 	categories = Category.objects.all()
+	return redirect('/data/vendor/redirect/pdreference?sellerId='+str(seller.seller_id))
+@transaction.atomic
+def sellerredirectpdreference(request):
+	sellerId = request.GET['sellerId']
+	basics = basicinfo(request)
+	seller = Seller.objects.get(seller_id=sellerId)
+	miveuser = basics['miveuser']
+	dummyvendor = DummyVendor.objects.filter(seller=seller).filter(user=miveuser)
+	alpds = dummyvendor[0].products.values_list('product_id',flat=True)
+	sellerids= Seller.objects.filter(directory=True).values('seller_id')
+	slpds = Product.objects.filter(seller=seller).values_list('name')
+	products = Product.rak.filter(seller__seller_id__in=sellerids).exclude(name__in=slpds).exclude(seller=seller)
+	categories = Category.objects.all()
 	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'categories':categories,'seller':seller,'basics':basics,'products':products,'new':1})
 @transaction.atomic
 def sellerpdreference(request):
@@ -837,10 +850,13 @@ def newdummyprodnewvendor(request):
 	sellerId =int(dt['sellerId']) 
 	miveuser = basics['miveuser']
 	seller = Seller.objects.get(seller_id=sellerId)
+	oldpds = Product.objects.filter(seller=seller).values_list('product_id',flat=True)
 	for pdd in productdetails:
 		pdid = int(pdd['productId'])
 		pricePerUnit = (pdd['price'])
 		baseproduct = Product.rak.get(product_id=pdid)
+		if(baseproduct.product_id in oldpds):
+			pass
 		product = Product()
 		product.seller = seller
 		product.pricePerUnit = int(pricePerUnit)

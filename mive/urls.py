@@ -64,6 +64,7 @@ urlpatterns = [
     url(r'^configvendor0', views.configvendorlist),
     url(r'^data/configvendor0', dummy.dummyconfigvendorlist),
     url(r'^configvendor', views.configvendor),
+    url(r'^data/vendor/redirect/pdreference', dummy.sellerredirectpdreference),
     url(r'^data/vendor/pdreference', dummy.sellerpdreference),
     url(r'^data/configvendor', dummy.dummyconfigvendor),
     url(r'^vendors', views.vendors),

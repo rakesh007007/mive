@@ -221,16 +221,18 @@
         console.log('len',nvtotalbox.length)
         if (nvtotalbox.length!=0){
            p=JSON.stringify(nvtotalbox)
+          fbox = nvtotalbox
+          nvtotalbox=[]
         t= $.post( "/new/data/prod-newvendor", { "dt": p,"sellerId":sellerId},function(data){
           $('#wholereload').html(data)
          
           mivenotify('success','Items added','Items has been succesfully added to the list.')
-          nvtotalbox=[]
           $('#submithide').css('display','none')
           $('#plusshow').css('display','block')
                       } );
         t.fail(function(data){
           console.log(data)
+          nvtotalbox=fbox
         })
 
         }
