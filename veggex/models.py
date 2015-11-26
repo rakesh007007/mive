@@ -344,7 +344,7 @@ class Order(models.Model):
 	invoices = models.ManyToManyField(Invoiceimage,blank=True)
 	orderType = models.CharField(max_length=240,blank=False,null=False,choices=orderTypes,default='real')
 	class Meta:	
-		ordering = ['-timeOfCreate']
+		ordering = ['-deliveryTime','-timeOfCreate']
 	def orderId(self):
 		return self.order_id
 	def __unicode__(self):
