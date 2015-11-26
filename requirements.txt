@@ -14,3 +14,4 @@ pafy
 django-debug-toolbar
 MySQL-Python
 pytz
+humanize
