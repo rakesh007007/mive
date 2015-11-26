@@ -49,6 +49,23 @@
       margin: 0; 
     }
   </style>
+  <script>
+  window.onpageshow = function(evt) {
+    // If persisted then it is in the page cache, force a reload of the page.
+    if (evt.persisted) {
+        document.body.style.display = "none";
+        location.reload();
+    }
+};
+if (window.name == "reloader") {
+            window.name = "";
+            location.reload();
+        }
+
+window.onbeforeunload = function() {
+                window.name = "reloader"; 
+            }
+  </script>
   <style>
   .datepicker {z-index: 1151 !important;}
   @import url(http://fonts.googleapis.com/css?family=Roboto);
