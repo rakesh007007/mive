@@ -549,7 +549,7 @@ class ApiSeeDummyCart(APIView):
 						t.append(jsitem)
 					jsitems =t
 					pd = {'dummyvendor_id':dummyvendor_id,'seller':jsseller.data,'items':jsitems}
-					if seller.seller_id==sellerId:
+					if seller.seller_id==int(sellerId):
 						allProducts.insert(0,pd)
 					else:
 						allProducts.append(pd)
