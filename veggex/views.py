@@ -796,7 +796,13 @@ def orderfilter(request):
 			print 'yoooooooo'
 			print days
 			print 'payment'
-			sellers = request.POST.getlist('sellers')
+			if 'sellers' in request.POST:
+				sellers = request.POST.getlist('sellers')
+				if len(sellers)==0:
+					return HttpResponse('no sellers selected')
+			else:
+				sellers=[]
+
 			payment=request.POST['rak']
 			print payment
 			print 'end'
