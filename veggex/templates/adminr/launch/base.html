@@ -211,12 +211,12 @@ window.onbeforeunload = function() {
           <!-- Messages: style can be found in dropdown.less-->
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
-            <a  id="basedatacart" data-toggle="tooltip" data-placement="left" title="Cart" onMouseOver="this.style.background='none'"  >
+            <a  id="basedatacart" onMouseOver="this.style.background='none'"  >
               <i data-toggle="modal"  class="fa fa-shopping-cart" style="font-size:22px" ></i>
               <span class="label label-danger"></i></span>
             </a>
           </li>
-          <li class="dropdown notifications-menu" data-toggle="tooltip" data-placement="left" title="Notifications" >
+          <li class="dropdown notifications-menu" >
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" onMouseOver="this.style.background='none'" onhover="this.style.background='none'">
               <i class="fa fa-bell-o" style="font-size:22px"></i>
               <span class="label label-warning">{{basics.notifications|length}}</span>
