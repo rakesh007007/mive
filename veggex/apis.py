@@ -525,6 +525,10 @@ class ApiSeeDummyCart(APIView):
 	def get(self,request,format=None):
 		try:
 			userId = request.GET['userId']
+			if 'sellerId' in request.GET:
+				sellerId=request.GET['sellerId']
+			else:
+				sellerId=0
 			miveuser=User.objects.get(user_id = userId)
 			dummycart=miveuser.dummycart
 			dummycartItems=Dummycartitem.objects.filter(dummycart=dummycart)
@@ -545,7 +549,10 @@ class ApiSeeDummyCart(APIView):
 						t.append(jsitem)
 					jsitems =t
 					pd = {'dummyvendor_id':dummyvendor_id,'seller':jsseller.data,'items':jsitems}
-					allProducts.append(pd)
+					if seller.seller_id==sellerId:
+						allProducts.insert(0,pd)
+					else:
+						allProducts.append(pd)
 				else:
 					pass
 			return HttpResponse(JSONRenderer().render(allProducts),content_type='application/json')
