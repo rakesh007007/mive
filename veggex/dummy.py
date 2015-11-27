@@ -42,7 +42,7 @@ def dummymain(request):
 		d= 0
 		for p in stockwastage:
 			d= d+ p.stock.product.pricePerUnit*p.wastage
-		return TemplateResponse(request, 'admof INR/dummy/index.html',{'wastage':d,'norders':norders,'rorders':rorders,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'adminr/dummy/index.html',{'wastage':d,'norders':norders,'rorders':rorders,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 def dummyproductfilter(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -54,11 +54,11 @@ def dummyproductfilter(request):
 		dummyVendor = DummyVendor.objects.get(dummyvendor_id=dummyvendorid)
 		if int(categoryfilter)==0:
 			products = dummyVendor.products.all()
-			return TemplateResponse(request,'admof INR/dummy/productfilter.html',{'products':products})
+			return TemplateResponse(request,'adminr/dummy/productfilter.html',{'products':products})
 		else:
 			category = Category.objects.get(category_id=int(categoryfilter))
 			products = dummyVendor.products.filter(category=category)
-			return TemplateResponse(request,'admof INR/dummy/productfilter.html',{'products':products})
+			return TemplateResponse(request,'adminr/dummy/productfilter.html',{'products':products})
 def dummynormalproductfilter(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -72,11 +72,11 @@ def dummynormalproductfilter(request):
 		dirs = Seller.objects.filter(directory=True).values_list('seller_id')
 		if int(categoryfilter)==0:
 			products = Product.objects.filter(seller_id__in=dirs).exclude(name__in=slpds)
-			return TemplateResponse(request,'admof INR/dummy/normalproductfilter.html',{'products':products})
+			return TemplateResponse(request,'adminr/dummy/normalproductfilter.html',{'products':products})
 		else:
 			category = Category.objects.get(category_id=int(categoryfilter))
 			products = Product.objects.filter(category=category).filter(seller_id__in=dirs).exclude(name__in=slpds)
-			return TemplateResponse(request,'admof INR/dummy/normalproductfilter.html',{'products':products})
+			return TemplateResponse(request,'adminr/dummy/normalproductfilter.html',{'products':products})
 def dummyVendorView(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -90,11 +90,11 @@ def dummyVendorView(request):
 		products = dummyVendor.products
 		cats = products.values_list('category__category_id')
 		categories = Category.objects.filter(category_id__in=cats)
-		return TemplateResponse(request,'admof INR/dummy/dummyvendor.html',{'categories':categories,'dmv':dummyVendor,'basics':basics,'products':products,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/dummy/dummyvendor.html',{'categories':categories,'dmv':dummyVendor,'basics':basics,'products':products,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
 def dummyproductdetail(request):
 	productId = request.GET['productId']
 	product = Product.rak.get(product_id=productId)
-	return TemplateResponse(request, 'admof INR/dummy/product.html',{'product':product,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'adminr/dummy/product.html',{'product':product,'csrf_token':get_or_create_csrf_token(request)})
 @csrf_exempt
 @transaction.atomic
 def ajaxdummycartupdate(request):
@@ -125,7 +125,7 @@ def ajaxdummycartupdate(request):
 		dummycart.dummycartTotal = dummycart.dummycartTotal+total
 		dummycart.save()
 		allProducts = giveajaxdummycart(request)
-		return TemplateResponse(request, 'admof INR/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'adminr/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 @csrf_exempt
 @transaction.atomic
 def newajaxaddtodummycart(request):
@@ -175,7 +175,7 @@ def newajaxaddtodummycart(request):
 		dummycart.dummycartTotal = dummycart.dummycartTotal+total
 		dummycart.save()
 		allProducts = giveajaxdummycart(request)
-		return TemplateResponse(request, 'admof INR/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request, 'adminr/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyajaxaddtocart(request):
 	if(checklogin(request)==False):
@@ -210,7 +210,7 @@ def dummyajaxaddtocart(request):
 		dummycart.save()
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
-	return TemplateResponse(request, 'admof INR/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'adminr/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 def dummycart(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -236,7 +236,7 @@ def dummycart(request):
 		else:
 			pass
 	print allProducts
-	return TemplateResponse(request, 'admof INR/dummy/cart.html',{'allProducts':allProducts,'shippingCost':shippingCost,'cartItems':cartItems,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'adminr/dummy/cart.html',{'allProducts':allProducts,'shippingCost':shippingCost,'cartItems':cartItems,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyremoveItemPost(request):
 	if(checklogin(request)==False):
@@ -251,7 +251,7 @@ def dummyremoveItemPost(request):
 	basics = basicinfo(request)
 	allProducts = giveajaxcart(request)
 	allProducts = giveajaxdummycart(request)
-	return TemplateResponse(request, 'admof INR/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'adminr/dummy/dummycartreload.html',{'allProducts':allProducts,'basics':basics,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyeditqty(request):
 	if(checklogin(request)==False):
@@ -539,7 +539,7 @@ def dummyvendors(request):
 		currentsellers = basics['dummyvendor'].values('seller_id')
 		sellers = Seller.rak.exclude(seller_id__in=currentsellers)
 		categories = Category.objects.all()
-		return TemplateResponse(request,'admof INR/dummy/vendors.html',{'basics':basics,'categories':categories,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/dummy/vendors.html',{'basics':basics,'categories':categories,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 def dummyaddvendors(request):
 	if(checklogin(request)==False):
 		return redirect('/login')
@@ -548,12 +548,12 @@ def dummyaddvendors(request):
 		sellerId = request.GET['id']
 		seller  = Seller.rak.get(seller_id = sellerId)
 		products = Product.rak.filter(status =1).filter(seller= seller)
-		return TemplateResponse(request,'admof INR/dummy/addvendors.html',{'basics':basics,'products':products,'seller':seller})
+		return TemplateResponse(request,'adminr/dummy/addvendors.html',{'basics':basics,'products':products,'seller':seller})
 def dummyuserproduct(request):
 	productId = request.GET['productId']
 	product = Product.rak.get(product_id=productId)
 	seller = product.seller
-	return TemplateResponse(request, 'admof INR/dummy/userproduct.html',{'product':product,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request, 'adminr/dummy/userproduct.html',{'product':product,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
 @csrf_exempt
 def dummyajaxaddedreload(request):
 	if(checklogin(request)==False):
@@ -616,7 +616,7 @@ def newdummyajaxaddtouser(request):
 		allProducts =full['allProducts']
 		categ = full['categ']
 		products = full['products']
-		return TemplateResponse(request,'admof INR/dummy/ajaxaddedproductreload.html',{'seller':seller,'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/dummy/ajaxaddedproductreload.html',{'seller':seller,'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 
 @transaction.atomic
 def dummyajaxaddtouser(request):
@@ -649,7 +649,7 @@ def dummyajaxaddtouser(request):
 	allProducts =full['allProducts']
 	categ = full['categ']
 	products = full['products']
-	return TemplateResponse(request,'admof INR/dummy/ajaxaddedproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request,'adminr/dummy/ajaxaddedproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyconfigvendorlist(request):
 	if(checklogin(request)==False):
@@ -659,7 +659,7 @@ def dummyconfigvendorlist(request):
 		currentsellers = basics['dummyvendor'].values('seller_id')
 		print currentsellers
 		sellers = Seller.rak.exclude(seller_id__in=currentsellers)
-		return TemplateResponse(request,'admof INR/data/configvendorlist.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/data/configvendorlist.html',{'basics':basics,'sellers':sellers,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyconfigvendor(request):
 	if(checklogin(request)==False):
@@ -685,7 +685,7 @@ def dummyconfigvendor(request):
 			products = []
 			t = []
 		allProducts = Product.rak.filter(seller=seller).exclude(product_id__in=t)
-		return TemplateResponse(request,'admof INR/dummy/configvendor.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/dummy/configvendor.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'seller':seller,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyajaxremovefromuser(request):
 	if(checklogin(request)==False):
@@ -703,7 +703,7 @@ def dummyajaxremovefromuser(request):
 		products = full['products']
 		categ = full['categ']
 		basics= basicinfo(request)
-		return TemplateResponse(request,'admof INR/dummy/ajaxrestproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+		return TemplateResponse(request,'adminr/dummy/ajaxrestproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummydelvendoruser(request):
 	if(checklogin(request)==False):
@@ -786,7 +786,7 @@ def sellerredirectpdreference(request):
 	slpds = Product.objects.filter(seller=seller).values_list('name')
 	products = Product.rak.filter(seller__seller_id__in=sellerids).exclude(name__in=slpds).exclude(seller=seller)
 	categories = Category.objects.all()
-	return TemplateResponse(request,'admof INR/dummy/newvendor.html',{'categories':categories,'seller':seller,'basics':basics,'products':products,'new':1})
+	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'categories':categories,'seller':seller,'basics':basics,'products':products,'new':1})
 @transaction.atomic
 def sellerpdreference(request):
 	sellerId = request.GET['sellerId']
@@ -799,7 +799,7 @@ def sellerpdreference(request):
 	slpds = Product.objects.filter(seller=seller).values_list('name')
 	products = Product.rak.filter(seller__seller_id__in=sellerids).exclude(name__in=slpds).exclude(seller=seller)
 	categories = Category.objects.all()
-	return TemplateResponse(request,'admof INR/dummy/newvendor.html',{'categories':categories,'seller':seller,'basics':basics,'products':products,'new':0})
+	return TemplateResponse(request,'adminr/dummy/newvendor.html',{'categories':categories,'seller':seller,'basics':basics,'products':products,'new':0})
 def dummynewprodnewvendor(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
@@ -890,7 +890,7 @@ def newdummyprodnewvendor(request):
 	allProducts =full['allProducts']
 	categ = full['categ']
 	products = full['products']
-	return TemplateResponse(request,'admof INR/dummy/ajaxaddedproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'seller':seller,'products':products,'csrf_token':get_or_create_csrf_token(request)})
+	return TemplateResponse(request,'adminr/dummy/ajaxaddedproductreload.html',{'dummyvendor':categ[0],'allProducts':allProducts,'basics':basics,'seller':seller,'products':products,'csrf_token':get_or_create_csrf_token(request)})
 @transaction.atomic
 def dummyprodnewvendor(request):
 	if(checklogin(request)==False):
@@ -952,7 +952,7 @@ def payment(request):
 		r['total']=total
 		r['due']=due
 		alll.append(r)
-	return TemplateResponse(request,'admof INR/dummy/payment.html',{'list':alll,'basics':basics})
+	return TemplateResponse(request,'adminr/dummy/payment.html',{'list':alll,'basics':basics})
 def makepayment(request):
 	if(checklogin(request)==False):
 		return redirect('/main?notify=yes&type=notice&title=Log In&description=Please login to continue')
