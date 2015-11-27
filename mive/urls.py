@@ -143,6 +143,8 @@ urlpatterns = [
     url('^api/addtocart/$', apis.ApiAddToCart.as_view()),
     url('^api/addtodummycart/$', apis.ApiAddToDummyCart.as_view()),
     url('^api/seecart/$', apis.ApiSeeCart.as_view()),
+    url('^api/payment/$', apis.ApiPayment.as_view()),
+    url('^api/markpaid/$', apis.ApiMarkPaid.as_view()),
     url('^api/prices/$', apis.ApiSeePrices.as_view()),
     url('^api/seeorders/$', apis.ApiSeeOrder.as_view()),
     url('^api/seedummycart/$', apis.ApiSeeDummyCart.as_view()),

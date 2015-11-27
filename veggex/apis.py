@@ -363,17 +363,17 @@ class ApiSeeOrder(APIView):
 		timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=localtz)
 		timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=localtz)
 		if payment=='all':
-			orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays)
+			orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays).order_by('-deliveryTime','-timeOfCreate')
 		else:
-			orders = Order.objects.filter(user=miveuser).filter(seller__seller_id__in=sellers).filter(payment=payment).filter(deliveryTime__gt=timebeforedays)
+			orders = Order.objects.filter(user=miveuser).filter(seller__seller_id__in=sellers).filter(payment=payment).filter(deliveryTime__gt=timebeforedays).order_by('-deliveryTime','-timeOfCreate')
 		if (sortby=='date'):
-			orders=orders.order_by('-deliveryTime')
+			orders=orders..order_by('-deliveryTime','-timeOfCreate')
 		elif (sortby=='subtotal'):
-			orders=orders.order_by('-subtotal')
+			orders=orders.order_by('-subtotal','-timeOfCreate')
 		elif (sortby=='status'):
-			orders=orders.order_by('-status')
+			orders=orders.order_by('-status','-timeOfCreate')
 		else:
-			orders=orders.order_by('-seller__nameOfSeller')
+			orders=orders.order_by('-seller__nameOfSeller','-timeOfCreate')
 		print orders
 		l=[]
 		for p in orders:
@@ -446,12 +446,50 @@ class ApiSeePrices(APIView):
 		else:
 			uniqueitems = sorted(uniqueitems, key=lambda k: k['sign'])
 		return HttpResponse(JSONRenderer().render(uniqueitems),content_type='application/json')
+class ApiMarkPaid(APIView):
+	def get(self,request,format=None):
+		userId = request.GET['userId']
+		miveuser = User.objects.get(user_id=userId)
+		orderId = int(request.GET['orderId'])
+		order= Order.objects.filter(user=miveuser).get(order_id=orderId)
+		order.payment='paid'
+		order.save()
+		orderItems = Orderitem.objects.filter(order=order)
+		invoices = order.invoices
+		return HttpResponse('{"status":"success"}',content_type='application/json')
+class ApiPayment(APIView):
+	def get(self,request,format=None):
+		userId = request.GET['userId']
+		miveuser = User.objects.get(user_id=userId)
+		dummyvendors = miveuser.dummyvendors
+		sellerids =dummyvendors.values_list('seller__seller_id',flat=True)
+		alll=[]
+		for t in sellerids:
+			seller = Seller.objects.get(seller_id=t)
+			orders = Order.objects.filter(user=miveuser).filter(payment='unpaid').filter(seller=t)
+			subt = orders.aggregate(subtotal = Sum('subtotal'))
+			due = dummyvendors.filter(seller=seller)[0].due
+			total = subt['subtotal']
+			if orders.count()==0:
+				total=0.0
+			r ={}
+			r['seller']= SellerSerializer(seller,context={'request': request}).data
+			r['prevoutstanding']=total
+			r['currentbalance']=due
+			r['totaloutstanding']=total*due
+			alll.append(r)
+		return HttpResponse(JSONRenderer().render(alll),content_type='application/json')
+
 class ApiSeeCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)
 	def get(self,request,format=None):
 		try:
 			userId = request.GET['userId']
+			if 'sellerId' in request.GET:
+				sellerId=request.GET['sellerId']
+			else:
+				sellerId=0
 			miveuser=User.objects.get(user_id = userId)
 			cart=miveuser.cart
 			cartItems=Cartitem.objects.filter(cart=cart)
@@ -472,7 +510,10 @@ class ApiSeeCart(APIView):
 						t.append(jsitem)
 					jsitems =t
 					pd = {'categoryvendor_id':categoryvendor_id,'seller':jsseller.data,'items':jsitems}
-					allProducts.append(pd)
+					if seller.seller_id==sellerId:
+						allProducts.insert(0,pd)
+					else:
+						allProducts.append(pd)
 				else:
 					pass
 			return HttpResponse(JSONRenderer().render(allProducts),content_type='application/json')

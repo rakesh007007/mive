@@ -806,22 +806,14 @@ def orderfilter(request):
 			timeaaj = datetime.combine(aaj, datetime.max.time()).replace(tzinfo=None)
 			timebeforedays = datetime.combine(beforedays, datetime.max.time()).replace(tzinfo=None)
 			if payment=='all':
-				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays)
+				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays).order_by('-deliveryTime','-timeOfCreate')
 			else:
-				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(payment=payment).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays)
+				orders = Order.objects.filter(seller__seller_id__in=sellers).filter(payment=payment).filter(user=miveuser).filter(deliveryTime__gt=timebeforedays).order_by('-deliveryTime','-timeOfCreate')
 			print 'yahoo'
 			print orders
 			print len(orders)
 			total = orders.aggregate(total=Sum('subtotal'))
 			total = total['total']
-			if (sortby=='date'):
-				orders=orders.order_by('-deliveryTime')
-			elif (sortby=='subtotal'):
-				orders=orders.order_by('-subtotal')
-			elif (sortby=='status'):
-				orders=orders.order_by('-payment')
-			else:
-				orders=orders.order_by('-seller__nameOfSeller')
 			return TemplateResponse(request,'adminr/orderfilter.html',{'basics':basics,'total':total,'orders':orders})
 		except Exception,e:
 			return HttpResponse(e,status=500)
