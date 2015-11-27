@@ -44,7 +44,13 @@ add wastage
          "stockId":"{stockId}".
 
 See cart of user
-    end point */api/seecart/?cartId={cartId}
+    end point */api/seecart/?cartId={cartId}&
+    GET
+payments of user 
+    endpoint */api/payment/?userId={{userId}}
+    GET
+mark order as paid
+    endpoint */api/markpaid/?userId={{userId}}&orderId={{orderId}}
     GET
 See dummycart of user
     end point */api/seedummycart/?dummycartId={dummycartId}
