@@ -4,8 +4,8 @@
          <li class="active">Existing products:</li>
       </ol>
       <center>{% if products.all|length = 0 %}
-      <span>No added products</span>
-      <span>Kindly click on '+' to add products</span>
+      <span>No added products.</span>
+      <span>Kindly click on '+' to add products.</span>
       {% endif %}</center>
        {% for product in products.all %}
       <div class="col-md-3 col-sm-12 col-xs-12">
