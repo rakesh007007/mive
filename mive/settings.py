@@ -30,9 +30,9 @@ PASSWORD_HASHERS = (
 SECRET_KEY = 'va_4758j-3tmbov(q_@0ppw-kemp&!ibclzf%&gje6*xa3++rz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
