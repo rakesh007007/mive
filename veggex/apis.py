@@ -367,7 +367,7 @@ class ApiSeeOrder(APIView):
 		else:
 			orders = Order.objects.filter(user=miveuser).filter(seller__seller_id__in=sellers).filter(payment=payment).filter(deliveryTime__gt=timebeforedays).order_by('-deliveryTime','-timeOfCreate')
 		if (sortby=='date'):
-			orders=orders..order_by('-deliveryTime','-timeOfCreate')
+			orders=orders.order_by('-deliveryTime','-timeOfCreate')
 		elif (sortby=='subtotal'):
 			orders=orders.order_by('-subtotal','-timeOfCreate')
 		elif (sortby=='status'):
