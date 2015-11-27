@@ -375,12 +375,12 @@ def dummyordercategory(request):
 				dummycart.save()
 		n = Notification()
 		n.title='Order Recieved'
-		n.body='Your order with '+str(order.seller.nameOfSeller)+' of amount '+str(order.subtotal)+ ' has been created.'
+		n.body='Your order with '+str(order.seller.nameOfSeller)+' ₹ '+str(order.subtotal)+ ' has been created.'
 		n.link = 'orderDetail?orderId='+str(order_id)
 		n.save()
 		miveuser.notifications.add(n)
 		miveuser.save()
-		strr = '/main?notify=ye&title=Order Recieved&description=Your order with '+str(order.seller.nameOfSeller)+' of amount '+str(order.subtotal)+ ' has been created.'
+		strr = '/main?notify=ye&title=Order Recieved&description=Your order with '+str(order.seller.nameOfSeller)+' ₹ '+str(order.subtotal)+ ' has been created.'
 		return redirect(strr)
 @csrf_exempt
 @transaction.atomic
@@ -522,7 +522,7 @@ def csrfreq(request):
 			dummycart.save()
 		n = Notification()
 		n.title='Order Recieved'
-		n.body='Your order with '+str(order.seller.nameOfSeller)+' of amount '+str(order.subtotal)+'has been created.'
+		n.body='Your order with '+str(order.seller.nameOfSeller)+' ₹ '+str(order.subtotal)+'has been created.'
 		n.link = 'orderDetail?orderId='+str(order_id)
 		n.save()
 		miveuser.notifications.add(n)
