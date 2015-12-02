@@ -506,20 +506,21 @@ def csrfreq(request):
 				#fullMsgSender(userId,'Purchase','you have just orderds this shit')
 			Dummycartitem.objects.filter(dummycart = dummycart).filter(product__seller=dummyvendor.seller).delete()
 			dummycart.dummycartTotal=dummycart.dummycartTotal - totalprice
-			if 'flag' in request.POST:
-				flag = request.POST['flag']
-			else:
-				flag=''
-			if 'paid' in request.POST:
-				paid = request.POST['paid']
-			else:
-				paid=''
-			if flag=='on':
-				order.flag=True
-			if paid =='on':
-			    order.payment = 'paid'
-			miveuser.save()
-			dummycart.save()
+		if 'flag' in request.POST:
+			flag = request.POST['flag']
+		else:
+			flag=''
+		if 'paid' in request.POST:
+			paid = request.POST['paid']
+		else:
+			paid=''
+		if flag=='on':
+			order.flag=True
+		if paid =='on':
+		    order.payment = 'paid'
+	    order.save()
+		miveuser.save()
+		dummycart.save()
 		n = Notification()
 		n.title='Order Recieved'
 		n.body='Your order with '+str(order.seller.nameOfSeller)+' of INR '+str(order.subtotal)+'has been created.'
