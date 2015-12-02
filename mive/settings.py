@@ -54,11 +54,7 @@ INSTALLED_APPS = (
 
 )
 EMAIL_HOST = 'smtp-relay.sendinblue.com'
-<<<<<<< HEAD
 EMAIL_HOST_USER ='info@mive.in'
-=======
-EMAIL_HOST_USER = 'info@mive.in'
->>>>>>> origin
 EMAIL_HOST_PASSWORD = 'ztQ0qSJUfMAn83Vh'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
