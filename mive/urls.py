@@ -50,7 +50,7 @@ urlpatterns = [
     url(r'^data/normalproduct/filter', dummy.dummynormalproductfilter),
     url(r'^data/editqty', dummy.dummyeditqty),
     url(r'^logout', views.logout),
-    url(r'^main2', views.main),
+    url(r'^main', views.main),
     url(r'^categoryvendor', views.categoryVendorView),
     url(r'^data/categoryvendor', dummy.dummyVendorView),
     url(r'^addtocart', views.addtocart),
