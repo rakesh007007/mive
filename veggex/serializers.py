@@ -16,10 +16,6 @@ class OrdersOfUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order
         fields=('order_id','seller','user','deliveryTime','timeOfCreate','timeOfUpdate','payment_mode','subtotal','status')
-class ItemsOfOrderSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Orderitem
-        fields = ('orderitem_id','order','unit','qtyInUnits','priceType','priceAtThatTime','product')
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
@@ -77,6 +73,11 @@ class CartitemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Cartitem
         fields=('cartitem_id','cart','qtyInUnits','product','pricePerUnit')
+class ItemsOfOrderSerializer(serializers.HyperlinkedModelSerializer):
+    product = ProductSerializer()
+    class Meta:
+        model = Orderitem
+        fields = ('orderitem_id','order','unit','qtyInUnits','priceType','pricePerUnit','product')
 class InvoiceimageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Invoiceimage
@@ -91,7 +92,7 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
     invoices = InvoiceimageSerializer(many=True)
     class Meta:
         model = Order
-        fields = ('order_id','invoices','seller','subtotal','payment','deliveryTime')
+        fields = ('order_id','invoices','seller','subtotal','payment','deliveryTime','flag')
 class OrderitemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Orderitem
