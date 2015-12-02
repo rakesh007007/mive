@@ -53,9 +53,9 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
 )
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ry197089@gmail.com'
-EMAIL_HOST_PASSWORD = 'yadav@iitd'
+EMAIL_HOST = 'smtp-relay.sendinblue.com'
+EMAIL_HOST_USER ='info@mive.in'
+EMAIL_HOST_PASSWORD = 'ztQ0qSJUfMAn83Vh'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
