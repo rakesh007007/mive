@@ -185,6 +185,21 @@ class ApiAddToConsumption(APIView):
 			return Response({"result":"success"})
 		except Exception,e:
 			return Response({"result":"error"})
+class EditOutstanding(APIView):
+	@transaction.atomic
+	def post(self, request, format=None):
+		try:
+			data =request.data
+			userId = data['userId']
+			sellerId=data['sellerId']
+			amount = data['amount']
+			miveuser = User.objects.get(user_id=userId)
+			dummyvendor = miveuser.dummyvendors.filter(seller__seller_id=sellerId)[0]
+			dummyvendor.due=amount
+			dummyvendor.save()
+			return Response({"status":"success"})
+		except Exception,e:
+			return Response(e,status_code=500)
 class ApiAddToCart(APIView):
 	#authentication_classes = (TokenAuthentication,)
 	#permission_classes = (IsAuthenticated,)

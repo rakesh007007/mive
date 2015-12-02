@@ -168,6 +168,15 @@ Make order dummy
            "invoiceony":"true" #only if invoiceonly
            "sellerId":"{sellerId}"
            "image": {images of invoic might be multiple}
+           "flag":{'on' if you want to flag},
+           "paid":{'on' if you want to mark it as paid}
+Edit outstanding
+   end point */api/editoutstanding
+   POST
+   body:
+       "userId":"{userId}",
+       "sellerId":"{sellerId}",
+       "amount":"{new amount}"
 Edit order dummy
    end point */api/temp/editorderdummy/
    POST
@@ -177,6 +186,7 @@ Edit order dummy
            "orderId" :"{orderId}",
            "orderMsg" :"{cartId}",
            "flag":"{on if you want to flag else put whatever you want}",
+           "unflag":{on if you want to unflag it},   #use only one out of flag and unflag
            "paid":"{on if you want to mark as paid else put whatever you want}"
            "image": {images of invoic might be multiple}
 Sees orde with filters
