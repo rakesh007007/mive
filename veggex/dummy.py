@@ -522,9 +522,9 @@ def csrfreq(request):
 			paid=''
 		if flag=='on':
 			order.flag=True
+		order.save()
 		if paid =='on':
 		    order.payment = 'paid'
-	    order.save()
 		miveuser.save()
 		dummycart.save()
 		n = Notification()
