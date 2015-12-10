@@ -303,6 +303,66 @@ window.onbeforeunload = function() {
             <span>Payment history</span>
           </a>
         </li>
+        <li class="treeview">
+          <a href="/stats/prices">
+            <i class="fa fa-search-minus"></i>
+            <span>Price Intelligence</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/data/vendors">
+            <i class="fa fa-user-plus"></i>
+            <span>Manage Vendors</span>
+          </a>
+        </li>
+         <li>
+          <a href="/stocks">
+            <i class="fa fa-th"></i> <span>Inventory management</span>
+            <small class="label pull-right bg-green">new</small>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/stats/order">
+            <i class="fa fa-pie-chart"></i>
+            <span>Statistics</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/stats/order"><i class="fa fa-circle-o"></i>Order Statistics </a></li>
+            <li>
+            {%with basics.categoryvendor.all|first as ting%}
+            <a href="/stats/seller?id=0"><i class="fa fa-circle-o"></i> Vendor Statistics</a>
+{%endwith%}
+            </li>
+            <li>
+            <a href="/stats/product?id=0"><i class="fa fa-circle-o"></i> Product Statistics</a>
+            </li>
+            <li><a href="/stats/consumption?id=0"><i class="fa fa-circle-o"></i>Consumption Statistics</a></li>
+            <li><a href="/stats/wastage?id=0"><i class="fa fa-circle-o"></i>Wastage Statistics</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="pages/widgets.html" onclick="return false" class="notif">
+            <i class="fa fa-inr"></i> <span>Payments</span>
+            <small class="label pull-right bg-green">new</small>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Integrations</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#" onclick="return false" class="notif"><i class="fa fa-circle-o"></i>Quickbooks</a></li>
+            <li><a href="#" onclick="return false" class="notif"><i class="fa fa-circle-o"></i>Zomato base</a></li>
+            <li><a href="#" onclick="return false" class="notif"><i class="fa fa-circle-o"></i>Open apis</a></li>
+=          </ul>
+        </li>
+        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Help</span></a></li>
+        <li class="header">Connet with mive</li>
+        <li><a href="#"><i class="fa fa-facebook text-red"></i> <span>facebook</span></a></li>
+        <li><a href="#"><i class="fa fa-linkedin text-yellow"></i> <span>linkedin</span></a></li>
+        <li><a href="#"><i class="fa fa-twitter text-aqua"></i> <span>twitter</span></a></li>
         
       </ul>
     </section>

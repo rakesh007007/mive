@@ -210,7 +210,7 @@ class Migration(migrations.Migration):
                 ('invoices', models.ManyToManyField(to='veggex.Invoiceimage', blank=True)),
             ],
             options={
-                'ordering': ['-timeOfCreate'],
+                'ordering': ['-deliveryTime', '-timeOfCreate'],
             },
         ),
         migrations.CreateModel(
